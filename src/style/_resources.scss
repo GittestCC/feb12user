@@ -1,0 +1,50 @@
+.resources.content {
+  margin-top: 0;
+  .cards {
+    display: flex;
+    justify-content: space-evenly;
+    @include abovetablet {
+      justify-content: space-between;
+    }
+    flex-wrap: wrap;
+  }
+}
+
+.resource-card {
+  height: 220px;
+  width: 300px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include tablet {
+    width: 310px;
+    margin-bottom: 20px;
+  }
+  border-radius: 12px;
+  &.news {
+    background: #61D5EF;
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  }
+  &.press {
+    background: #83A7F3;
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  }
+  &.info {
+    background: #A295EE;
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  }
+  .icon {
+    background-size: contain;
+    height: 80px;
+    width: 80px;
+    margin-bottom: $margin-base*2;
+  }
+  h4:not(.bold) {
+    font-weight: normal;
+  }
+  h4{
+    color: #FFFFFF;
+  }
+}

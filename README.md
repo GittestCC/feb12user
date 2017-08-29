@@ -1,3 +1,13 @@
 # kintohub.com
 
-The default repro for Kintohub.com! This is gonne be one hell of a project.
+The default repo for Kintohub.com! This is gonna be one hell of a project.
+😎
+
+## Setup
+- `nvm use` only when the node version is updated
+- `npm install`
+- `npm start`
+
+
+## Start
+- `npm start`

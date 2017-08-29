@@ -1,0 +1,62 @@
+a.link-button{
+  box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  border-radius: 12px;
+  height: 120px;
+  margin-bottom: $margin-base*3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &.kinto-purple {
+    background: rgba(162,149,238,1);
+  }
+  &.kinto-blue {
+    background: rgba(131,167,243,1);
+  }
+  &.kinto-green {
+    background: rgba(77,208,183,1);
+  }
+  .text{
+    text-align: center;
+  }
+  .link-button-inner {
+    .icon {
+      display: none;
+    }
+    h4 {
+      color: #ffffff;
+      font-weight: normal;
+      &.larger.bold{
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+  @include abovetablet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 20px;
+    h4:nth-child(1) {
+      margin-bottom: 2px;
+      font-size: 20px;
+    }
+    h4:nth-child(2) {
+      margin-bottom: 0;
+    }
+    .icon-wrapper {
+      display: block;
+      .faqs {
+        @include backgroundImage('../images/icon-frequently-asked-questions.svg', 80px, 80px);
+      }
+      .slack {
+        @include backgroundImage('../images/icon-slack-community.svg', 80px, 80px);
+      }
+      .press {
+        @include backgroundImage('../images/icon-press-kit.svg', 80px, 80px);
+      }
+    }
+  }
+}

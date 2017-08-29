@@ -1,0 +1,106 @@
+.blog-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include abovetablet {
+    justify-content: space-between;
+  }
+}
+
+.avatar {
+  &.laura {
+    @include backgroundImage('%PUBLIC_URL%/images/team-small-laura-ambrose.png', 40px, 40px);
+  }
+  &.raven {
+    @include backgroundImage('%PUBLIC_URL%/images/team-small-raven-yu.png', 40px, 40px);
+  }
+  &.nadeem {
+    @include backgroundImage('%PUBLIC_URL%/images/team-small-nadeem-khedr.png', 40px, 40px);
+  }
+  &.joseph {
+    @include backgroundImage('%PUBLIC_URL%/images/team-small-joseph-cooper.png', 40px, 40px);
+  }
+  &.francois {
+    @include backgroundImage('%PUBLIC_URL%/images/team-small-francois-courtin.png', 40px, 40px);
+  }
+  border-radius: 20px;
+  display: inline-block;
+  float: right;
+}
+
+.card-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.blog-card {
+  display: inline-block;
+  margin: 10px;
+  @include tablet {
+    margin: 0 0 12px 0;
+  }
+  @include desktop {
+    margin: 0 0 20px 0;
+  }
+  padding: $margin-base*2;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  border-radius: 12px;
+  min-width: 300px;
+  @include tablet {
+    max-width: $tablet-card-2;
+  }
+  @include desktop {
+    max-width: $desktop-card-3;
+  }
+  .title {
+    display: flex;
+    .vertical-line{
+      display: inline-block;
+      border-radius: 2px;
+      &.development{
+        border: solid 2px $blog-dev;
+      }
+      &.exec{
+        border: solid 2px $blog-exec;
+      }
+      &.design{
+        border: solid 2px $blog-design;
+      }
+    }
+    h3{
+      margin: 0 0 0 16px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    margin-bottom: $margin-base*3;
+  }
+  .name-date-and-department{
+    font-size: 16px;
+    display: inline-block;
+    .date {
+      color: $h5-blog-date;
+    }
+    .name{
+      font-weight: bold;
+      color: rgba(85,111,125,1);
+    }
+    font-family: $base-font;
+    .department {
+      font-weight: bold;
+      h4{
+        margin: 8px 0 0 0;
+      }
+      &.development h4{
+        color: $blog-dev-text;
+      }
+      &.design h4{
+        color: $blog-design-text;
+      }
+      &.exec h4{
+        color: $blog-exec-text;
+      }
+    }
+  }
+}

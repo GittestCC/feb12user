@@ -1,0 +1,83 @@
+.main-navigation {
+  width: 100%;
+  background: $main-background;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  box-shadow: 0 1px 0 0 rgba(87,148,182,0.10), 0 2px 6px 0 rgba(43,108,172,0.10);
+  margin-bottom: $margin-base*6;
+  @include abovetablet {
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navigation-links {
+    display:none;
+  }
+
+  .hidden { display: none; }
+
+  .mobile-menu-toggle{
+    @include backgroundImage('../images/icon-menu.svg', 20px, 20px);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    @include abovetablet {
+      display: none;
+    }
+  }
+
+  .mobile-navigation-logo{
+    @include backgroundImage('../images/logo-full-color.svg', 54px, 30px);
+    margin: 20px auto;
+    @include abovetablet {
+      display: none;
+    }
+  }
+
+  .mobile-navigation-logo, .mobile-menu-toggle, .navigation-logo {
+    z-index: 150;
+  }
+
+  .mobile-menu {
+    padding-top: 60px;
+    background-color: $light-blue-background;
+    position: absolute;
+    top:60px;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 60px 40px 20px;
+    .button {
+      margin-bottom: 40px;
+      max-width: 240px;
+    }
+    @include abovetablet {
+      display: none;
+    }
+  }
+
+  @include abovetablet {
+    .navigation-logo {
+      @include backgroundImage('../images/logo-full-color-horizontal.svg', 200px, 30px);
+      margin: 0 0 0 $margin-base*4;
+      float: left;
+    }
+    .navigation-links {
+      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ul {
+        list-style: none;
+        margin-right: $margin-base*4;
+        li {
+          margin-left: $margin-base*4;
+          margin-top: $margin-base;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

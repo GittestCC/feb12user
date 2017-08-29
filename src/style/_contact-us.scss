@@ -1,0 +1,92 @@
+.map.content{
+  max-width: 100%;
+  @include tablet {
+    max-width: $tablet-content-width;
+  }
+  @include desktop{
+    max-width: $content-width;
+    margin-top: 0;
+  }
+  margin: 60px auto 0;
+  padding: 60px 10px 0;
+  @include abovetablet {
+    padding: 60px 0 0;
+  }
+    .map {
+    @include backgroundImage('../images/contact-us-map.png', 100%, 420px);
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background-size: cover;
+    background-position: center;
+  }
+}
+.contact-form-wrapper {
+  textarea {
+    height: 100px;
+  }
+}
+
+.button.default {
+  margin-bottom: $margin-base*1.5;
+}
+
+@include abovetablet {
+  h5.center {
+    text-align: left;
+  }
+  .email-field, .full-width-field {
+    margin-bottom: 0;
+    textarea {
+      margin-bottom: $margin-base*2;
+    }
+  }
+}
+
+@include desktop {
+  .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    .contact-form-wrapper, .link-button-wrapper {
+      width: 48%;
+      .link-button {
+        height: 120px;
+      }
+
+    }
+    .link-button-wrapper{
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 476px;
+      justify-content: space-between;
+    }
+  }
+}
+
+.content.address {
+  margin-top: 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  h5 {
+    color: rgba(162,176,189,1);
+    font-weight: normal;
+    &.bold {
+      font-weight: bold;
+    }
+  }
+}
+
+.contact-us {
+  h1,
+  footer .content {
+    padding-top: 0;
+  }
+  h3.center{
+    margin-bottom: $margin-base*3;
+  }
+  @include desktop {
+    h3 {
+      margin-bottom: $margin-base*5;
+    }
+  }
+}

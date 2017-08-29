@@ -1,0 +1,66 @@
+.notify-form {
+  max-width: 460px;
+  margin: 0 auto 60px;
+  @include desktop {
+    display: inline-block;
+  }
+}
+
+.names-field, .field-container {
+  display: flex;
+  justify-content: space-between;
+  .name-field, .field{
+    width: 48%;
+    min-width: 140px;
+    display: inline-block;
+    &:first-child{
+      margin-right: 20px;
+    }
+  }
+}
+
+.email-field, .full-width-field{
+  margin-bottom: $margin-base;
+  @include abovetablet {
+    margin-bottom: $margin-base*3;
+  }
+}
+
+label{
+  height: 24px;
+  font-family: $base-font;
+  text-transform: uppercase;
+  color: $input-label;
+}
+
+input, textarea, select{
+  @include placeholder($input);
+  color: $input-entered;
+  @include inputStandard;
+  width: 100%;
+}
+
+h5.byline{
+  font-weight: normal;
+  font-family: $base-font;
+  font-size: 14px;
+  color: rgba(162,176,189,1);
+  letter-spacing: 0;
+  line-height: 20px;
+  &.bold{
+    font-weight: bold;
+  }
+}
+// }
+
+.button {
+  @include buttonDefault;
+  width: 100%;
+  padding-top: 0;
+  height: 50px;
+  line-height: 50px;
+}
+
+form {
+  margin-bottom: $margin-base*4;
+}

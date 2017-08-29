@@ -1,0 +1,77 @@
+{
+  "coFounders": {
+    "title": "The Co-founders",
+    "staff": [
+      {
+        "name": "Joseph Cooper",
+        "title": "CEO and Co-founder",
+        "byline": "Bsc Computer Science, mobile gaming exec & coffee lover",
+        "image": "/images/team-joseph-cooper@2x.png"
+      },
+      {
+        "name": "Francois Courtin",
+        "title": "COO and Co-founder",
+        "byline": "Bsc Computer Science, mobile gaming exec & coffee lover",
+        "image": "/images/team-francois-courtin@2x.png"
+      }
+    ]
+  },
+  "team": {
+    "title": "The Team",
+    "staff": [
+      {
+        "name": "Nadim Khedr",
+        "title": "Lead Front End Engineering",
+        "byline": "Nadeem's byline will go hereeeee",
+        "image": "/images/team-nadeem-khedr@2x.png"
+      },
+      {
+        "name": "Laura Ambrose",
+        "title": "Front End Engineering",
+        "byline": "Mother of two floofs and general badass",
+        "image": "/images/team-laura-ambrose@2x.png"
+      },
+      {
+        "name": "Guillaume Dury",
+        "title": "DevOps Engineering",
+        "byline": "Guillaume's byline will go heerrerererere yo",
+        "image": "/images/team-guillaume-dury@2x.png"
+      },
+      {
+        "name": "Raven Yu",
+        "title": "Product Design",
+        "byline": "Aspiring Model",
+        "image": "/images/team-raven-yu@2x.png"
+      }
+    ]
+  },
+  "advisors": {
+    "title": "The Advisors",
+    "staff": [
+      {
+        "name": "Vishal Biyani",
+        "title": "infastructure",
+        "byline": "13+ years experience",
+        "image": "/images/team-vishal-biyani@2x.png"
+      },
+      {
+        "name": "Kevin Willock",
+        "title": "Network Security",
+        "byline": "20+ years experience",
+        "image": "/images/team-kevin-willock@2x.png"
+      },
+      {
+        "name": "Keith Loose",
+        "title": "Fullstack Tech",
+        "byline": "20+ years experience",
+        "image": "/images/team-keith-loose@2x.png"
+      },
+      {
+        "name": "Yves Sepulchre",
+        "title": "UI / UX",
+        "byline": "10+ years experience",
+        "image": "/images/team-yves-sepulchre@2x.png"
+      }
+    ]
+  }
+}

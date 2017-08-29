@@ -1,0 +1,26 @@
+.job-openings {
+  padding: 40px;
+  .content {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .title-with-lines {
+    margin-bottom: 40px;
+  }
+  .job-announcements {
+    h4{
+      font-weight: normal;
+      @include abovetablet {
+        span{
+          font-weight: bold;
+        }
+      }
+    }
+    padding: 40px 20px;
+    height: 140px;
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    border-radius: 12px;
+  }
+}

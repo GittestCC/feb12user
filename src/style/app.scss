@@ -1,0 +1,59 @@
+// Include references to all scss files here //
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700|Raleway:600');
+
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+@import 'header';
+@import 'title-with-lines';
+@import 'log-in-page';
+@import 'forms';
+@import 'buttons';
+@import 'the-egg.scss';
+@import 'blog-gallery';
+@import 'staff-card';
+@import 'about-us';
+@import 'job-openings';
+@import 'resources';
+@import 'contact-us';
+@import 'link-button';
+@import 'footer';
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  margin:0;
+}
+
+.content {
+  max-width: $content-width;
+  @include tablet {
+    max-width: $tablet-content-width;
+  }
+  margin: 60px auto 0;
+  padding: 60px 10px 0;
+  @include abovetablet {
+    padding: 60px 0 0;
+  }
+}
+
+.bg-light-blue {
+  background-color: $light-blue-background;
+}
+
+.unstyled-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  li a{
+    text-decoration: none;
+  }
+}
+
+textarea, input, button { outline: none; }
+
+a { text-decoration: none; }

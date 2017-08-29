@@ -1,0 +1,48 @@
+import React from 'react';
+import NavBar from '../ui/NavBar';
+import Footer from '../ui/Footer';
+import StaffCard from './aboutUs/StaffCard';
+import JobOpenings from './aboutUs/JobOpenings';
+import Resources from './aboutUs/Resources';
+import MeetTheRebels from './aboutUs/MeetTheRebels';
+import TitleWithLines from '../ui/TitleWithLines';
+import StaffData from '../../staff-data.json';
+
+const AboutUs = () =>
+  <div>
+    <NavBar />
+    <MeetTheRebels />
+    <div className="content about-us">
+      <TitleWithLines text={StaffData.coFounders.title} />
+
+      <div className="the-co-founders card-container three">
+        {StaffData.coFounders.staff.map((staff, index) =>
+          <StaffCard
+            key={index}
+            image={`${process.env.PUBLIC_URL}${staff.image}`}
+            name={staff.name}
+            title={staff.title}
+            byline={staff.byline}
+          />
+        )}
+      </div>
+
+      <TitleWithLines text={StaffData.team.title} />
+      <div className="the-team card-container four">
+        {StaffData.team.staff.map((staff, index) =>
+          <StaffCard
+            key={index}
+            image={staff.image}
+            name={staff.name}
+            title={staff.title}
+            byline={staff.byline}
+          />
+        )}
+      </div>
+    </div>
+    <JobOpenings />
+    <Resources />
+    <Footer />
+  </div>;
+
+export default AboutUs;

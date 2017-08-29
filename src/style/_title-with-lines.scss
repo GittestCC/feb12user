@@ -1,0 +1,19 @@
+.title-with-lines {
+  margin-bottom: $margin-base*4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .line {
+    border: solid 1px $h2-follow-our-journey;
+    border-radius: 2px;
+    width: 33.3%;
+    height: 0;
+  }
+  h2{
+    color: $h2-follow-our-journey;
+    text-align: center;
+    white-space: nowrap;
+    margin-left: $margin-base*2;
+    margin-right: $margin-base*2;
+  }
+}
