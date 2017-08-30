@@ -9,19 +9,22 @@
 
 .avatar {
   &.laura {
-    @include backgroundImage('%PUBLIC_URL%/images/team-small-laura-ambrose.png', 40px, 40px);
+    @include backgroundImage('/images/team-small-laura-ambrose.png', 40px, 40px);
   }
   &.raven {
-    @include backgroundImage('%PUBLIC_URL%/images/team-small-raven-yu.png', 40px, 40px);
+    @include backgroundImage('/images/team-small-raven-yu.png', 40px, 40px);
   }
   &.nadeem {
-    @include backgroundImage('%PUBLIC_URL%/images/team-small-nadeem-khedr.png', 40px, 40px);
+    @include backgroundImage('/images/team-small-nadeem-khedr.png', 40px, 40px);
   }
   &.joseph {
-    @include backgroundImage('%PUBLIC_URL%/images/team-small-joseph-cooper.png', 40px, 40px);
+    @include backgroundImage('/images/team-small-joseph-cooper.png', 40px, 40px);
   }
   &.francois {
-    @include backgroundImage('%PUBLIC_URL%/images/team-small-francois-courtin.png', 40px, 40px);
+    @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   border-radius: 20px;
   display: inline-block;

@@ -1,12 +1,12 @@
-import React from 'react';
-import NavBar from '../ui/NavBar';
-import NotifyMe from './home/NotifyMe';
-import Egg from './home/Egg';
-import BlogGallery from '../ui/BlogGallery';
-import TitleWithLines from '../ui/TitleWithLines';
-import Footer from '../ui/Footer';
+import React from 'react'
+import NavBar from '../ui/NavBar'
+import NotifyMe from './home/NotifyMe'
+import Egg from './home/Egg'
+import BlogGallery from '../ui/BlogGallery'
+import TitleWithLines from '../ui/TitleWithLines'
+import Footer from '../ui/Footer'
 
-const App = () =>
+const App = () => (
   <div className="app">
     <NavBar />
     <div className="content section bg-white landing">
@@ -22,17 +22,18 @@ const App = () =>
         </h3>
       </div>
     </div>
-    <div className="content notify-me-and-Egg">
+    <div className="content notify-me-and-egg">
       <NotifyMe />
       <Egg />
     </div>
     <div className="section bg-light-blue">
       <div className="content">
-        <TitleWithLines text='Follow our journey' />
+        <TitleWithLines text="Follow our journey" />
         <BlogGallery />
       </div>
     </div>
     <Footer />
-  </div>;
+  </div>
+)
 
-export default App;
+export default App

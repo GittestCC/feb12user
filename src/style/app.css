@@ -428,40 +428,43 @@ form {
   display: inline-block;
   float: right; }
   .avatar.laura {
-    background-image: url("%PUBLIC_URL%/images/team-small-laura-ambrose.png");
+    background-image: url("/images/team-small-laura-ambrose.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
     height: 40px; }
   .avatar.raven {
-    background-image: url("%PUBLIC_URL%/images/team-small-raven-yu.png");
+    background-image: url("/images/team-small-raven-yu.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
     height: 40px; }
   .avatar.nadeem {
-    background-image: url("%PUBLIC_URL%/images/team-small-nadeem-khedr.png");
+    background-image: url("/images/team-small-nadeem-khedr.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
     height: 40px; }
   .avatar.joseph {
-    background-image: url("%PUBLIC_URL%/images/team-small-joseph-cooper.png");
+    background-image: url("/images/team-small-joseph-cooper.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
     height: 40px; }
   .avatar.francois {
-    background-image: url("%PUBLIC_URL%/images/team-small-francois-courtin.png");
+    background-image: url("/images/team-francois-courtin.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
-    height: 40px; }
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; }
 
 .card-content {
   display: flex;
