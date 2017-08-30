@@ -3,11 +3,15 @@
 The default repo for Kintohub.com! This is gonna be one hell of a project.
 😎
 
-## Setup
-- `nvm use` only when the node version is updated
-- `npm install`
-- `npm start`
 
+- [Contribution guidelines for this project](./CONTRIBUTION.md)
+
+## First time setup
+- install [`nvm`](https://github.com/creationix/nvm)
+- `nvm use`
+
+## Setup
+- `npm install`
 
 ## Start
 - `npm start`
