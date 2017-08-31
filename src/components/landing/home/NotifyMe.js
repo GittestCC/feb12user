@@ -1,33 +1,74 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-const NotifyMe = () =>
-  <div className="notify-form">
-    <div className="names-field">
-      <div className="name-field">
-        <label htmlFor="firstName">First Name</label>
-        <input type="text" name="name" id="firstName" placeholder="Jonathon" />
-      </div>
-      <div className="name-field">
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="name" id="lastName" placeholder="Snow" />
-      </div>
-    </div>
-    <div className="email-field">
-      <label htmlFor="emailAddress">Email</label>
-      <input
-        type="email"
-        name="name"
-        id="emailAddress"
-        placeholder="jonathon@thewall.com"
-      />
-    </div>
-    <div className="button default">Notify Me</div>
-    <h5 className="byline bold">
-      We’ll send you cool updates and notify you when we offically launch.{' '}
-    </h5>
-    <h5 className="byline">
-      Pinky promise there won’t be any spam. Unsubscribe at any time.
-    </h5>
-  </div>;
+class NotifyMe extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    emailAddress: ''
+  }
 
-export default NotifyMe;
+  handleInputChange = event => {
+    const { value, name } = event.target
+
+    this.setState({
+      [name]: value
+    })
+    console.log('form data ', this.state)
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.props.notifyUs} className="notify-form">
+        <div className="names-field">
+          <div className="name-field">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              name="name"
+              id="firstName"
+              placeholder="Jonathon"
+              onChange={this.handleInputChange}
+              value={this.state.firstName}
+              required
+            />
+          </div>
+          <div className="name-field">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              name="name"
+              id="lastName"
+              placeholder="Snow"
+              onChange={this.handleInputChange}
+              value={this.state.lastName}
+              required
+            />
+          </div>
+        </div>
+        <div className="email-field">
+          <label htmlFor="emailAddress">Email</label>
+          <input
+            type="email"
+            name="name"
+            id="emailAddress"
+            placeholder="jonathon@thewall.com"
+            onChange={this.handleInputChange}
+            value={this.state.emailAddress}
+            required
+          />
+        </div>
+        <button className="button default" type="submit">
+          Notify Me
+        </button>
+        <h5 className="byline bold">
+          We’ll send you cool updates and notify you when we offically launch.{' '}
+        </h5>
+        <h5 className="byline">
+          Pinky promise there won’t be any spam. Unsubscribe at any time.
+        </h5>
+      </form>
+    )
+  }
+}
+
+export default NotifyMe

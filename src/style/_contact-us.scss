@@ -29,6 +29,7 @@
   margin-bottom: $margin-base*1.5;
 }
 
+/* TODO uncomment when when contact us from is added
 @include abovetablet {
   h5.center {
     text-align: left;
@@ -40,14 +41,18 @@
     }
   }
 }
+*/
 
+.top-section {
+  margin-top: $margin-base*3;
+}
 @include desktop {
   .top-section {
     display: flex;
     justify-content: space-between;
     align-items:flex-start;
     .contact-form-wrapper, .link-button-wrapper {
-      width: 48%;
+      width: 100%;
       .link-button {
         height: 120px;
       }
@@ -80,9 +85,6 @@
   h1,
   footer .content {
     padding-top: 0;
-  }
-  h3.center{
-    margin-bottom: $margin-base*3;
   }
   @include desktop {
     h3 {

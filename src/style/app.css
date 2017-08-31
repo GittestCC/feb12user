@@ -753,13 +753,21 @@ form {
 .button.default {
   margin-bottom: 15px; }
 
-@media (min-width: 768px) {
+/* TODO uncomment when when contact us from is added
+@include abovetablet {
   h5.center {
-    text-align: left; }
+    text-align: left;
+  }
   .email-field, .full-width-field {
-    margin-bottom: 0; }
-    .email-field textarea, .full-width-field textarea {
-      margin-bottom: 20px; } }
+    margin-bottom: 0;
+    textarea {
+      margin-bottom: $margin-base*2;
+    }
+  }
+}
+*/
+.top-section {
+  margin-top: 30px; }
 
 @media (min-width: 1440px) {
   .top-section {
@@ -767,7 +775,7 @@ form {
     justify-content: space-between;
     align-items: flex-start; }
     .top-section .contact-form-wrapper, .top-section .link-button-wrapper {
-      width: 48%; }
+      width: 100%; }
       .top-section .contact-form-wrapper .link-button, .top-section .link-button-wrapper .link-button {
         height: 120px; }
     .top-section .link-button-wrapper {
@@ -790,9 +798,6 @@ form {
 .contact-us h1,
 .contact-us footer .content {
   padding-top: 0; }
-
-.contact-us h3.center {
-  margin-bottom: 30px; }
 
 @media (min-width: 1440px) {
   .contact-us h3 {

@@ -1,6 +1,5 @@
 import React from 'react'
 import NavBar from '../ui/NavBar'
-import NotifyMe from './home/NotifyMe'
 import Egg from './home/Egg'
 import BlogGallery from '../ui/BlogGallery'
 import TitleWithLines from '../ui/TitleWithLines'
@@ -23,7 +22,7 @@ const App = () => (
       </div>
     </div>
     <div className="content notify-me-and-egg">
-      <NotifyMe />
+      {/* <NotifyMe /> */}
       <Egg />
     </div>
     <div className="section bg-light-blue">

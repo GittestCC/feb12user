@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import immutableCheckMiddleWare from 'redux-immutable-state-invariant'
-import createSagaMiddleware from 'redux-saga'
+import thunk from 'redux-thunk'
 
 import rootReducer from '../reducers'
-import sagas from '../sagas'
 
 const middleware = []
-const sagaMiddleware = createSagaMiddleware()
-middleware.push(sagaMiddleware)
+middleware.push(thunk)
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(immutableCheckMiddleWare())
@@ -20,8 +18,5 @@ if (process.env.NODE_ENV === 'development') {
   middleware.push(loggerMiddleware)
 }
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore)
-export default function configureStore() {
-  const store = createStoreWithMiddleware(rootReducer)
-  sagaMiddleware.run(sagas)
-  return store
-}
+
+export default () => createStoreWithMiddleware(rootReducer)

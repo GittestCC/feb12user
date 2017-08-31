@@ -1,21 +1,25 @@
-import React from 'react';
-import NavBar from '../ui/NavBar';
-import Footer from '../ui/Footer';
-import ContactForm from './contactUs/ContactForm';
-import LinkButton from './contactUs/LinkButton';
+import React from 'react'
+import NavBar from '../ui/NavBar'
+import Footer from '../ui/Footer'
+import LinkButton from './contactUs/LinkButton'
 
-const ContactUs = () =>
+const ContactUs = () => (
   <div className="contact-us">
     <NavBar />
 
     <div className="content">
       <h1 className="center">Get in touch.</h1>
       <h3 className="center">Contact us for support and inquiries</h3>
+      <h3 className="center">
+        <b>support@kintohub.com</b>
+      </h3>
 
       <div className="top-section">
-        <div className="contact-form-wrapper">
-          <ContactForm />
-        </div>
+        {/* TODO add when contact form is working
+          <div className="contact-form-wrapper">
+            <ContactForm />
+          </div>
+        */}
 
         <div className="link-button-wrapper">
           <LinkButton
@@ -54,6 +58,7 @@ const ContactUs = () =>
       </h5>
     </div>
     <Footer />
-  </div>;
+  </div>
+)
 
-export default ContactUs;
+export default ContactUs
