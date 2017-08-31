@@ -14,7 +14,7 @@ $card-tablet-width: 200px;
     padding-top: 14px;
     &:before {
       content:"";
-      background: rgba(237,243,253,1);
+      background: $kinto-tinted-grayscale-2;
       position: absolute;
       top: 0;
       left: ($card-width - 60px)/2;
@@ -36,8 +36,8 @@ $card-tablet-width: 200px;
   display: inline-block;
   img{
     width: 100%;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background: $kinto-white;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
     border-radius: 50%;
     margin-bottom: $margin-base*2;
   }

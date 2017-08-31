@@ -47,8 +47,8 @@
     margin: 0 0 20px 0;
   }
   padding: $margin-base*2;
-  background: #FFFFFF;
-  box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  background: $kinto-white;
+  box-shadow: 0 2px 4px 0 transparentize($kinto-tinted-grayscale-7, 0.90), 0 10px 40px 0 transparentize($kinto-tinted-grayscale-7, 0.90);
   border-radius: 12px;
   min-width: 300px;
   @include tablet {
@@ -63,13 +63,13 @@
       display: inline-block;
       border-radius: 2px;
       &.development{
-        border: solid 2px $blog-dev;
+        border: solid 2px $kinto-green-light;
       }
       &.exec{
-        border: solid 2px $blog-exec;
+        border: solid 2px $kinto-purple-light;
       }
       &.design{
-        border: solid 2px $blog-design;
+        border: solid 2px $kinto-orange-light;
       }
     }
     h3{
@@ -83,11 +83,11 @@
     font-size: 16px;
     display: inline-block;
     .date {
-      color: $h5-blog-date;
+      color: $kinto-grayscale-6;
     }
     .name{
       font-weight: bold;
-      color: rgba(85,111,125,1);
+      color: $kinto-grayscale-7;
     }
     font-family: $base-font;
     .department {
@@ -96,13 +96,13 @@
         margin: 8px 0 0 0;
       }
       &.development h4{
-        color: $blog-dev-text;
+        color: $kinto-green-dark;
       }
       &.design h4{
-        color: $blog-design-text;
+        color: $kinto-orange-dark;
       }
       &.exec h4{
-        color: $blog-exec-text;
+        color: $kinto-purple-dark;
       }
     }
   }

@@ -15,7 +15,7 @@ const AboutUs = () => (
     <div className="content about-us">
       <TitleWithLines text={StaffData.coFounders.title} />
 
-      <div className="the-co-founders card-container three">
+      <div className="the-co-founders card-container two">
         {StaffData.coFounders.staff.map((staff, index) => (
           <StaffCard
             key={index}
@@ -42,7 +42,7 @@ const AboutUs = () => (
     </div>
     <JobOpenings />
     <Resources />
-    <Footer />
+    <Footer footerColor="bg-light-blue" />
   </div>
 )
 

@@ -51,7 +51,7 @@ class NotifyMe extends Component {
             type="email"
             name="name"
             id="emailAddress"
-            placeholder="jonathon@thewall.com"
+            placeholder="jsnow@thewall.com"
             onChange={this.handleInputChange}
             value={this.state.emailAddress}
             required
@@ -61,10 +61,11 @@ class NotifyMe extends Component {
           Notify Me
         </button>
         <h5 className="byline bold">
-          We’ll send you cool updates and notify you when we offically launch.{' '}
+          We'll stick to sending you cool updates & notifying you when we
+          officially launch
         </h5>
         <h5 className="byline">
-          Pinky promise there won’t be any spam. Unsubscribe at any time.
+          No Spam - pinky promise. Unsubscribe at anytime.
         </h5>
       </form>
     )

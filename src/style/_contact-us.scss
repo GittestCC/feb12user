@@ -1,20 +1,16 @@
 .map.content{
   max-width: 100%;
-  @include tablet {
-    max-width: $tablet-content-width;
-  }
+  padding: 0;
   @include desktop{
     max-width: $content-width;
     margin-top: 0;
   }
-  margin: 60px auto 0;
-  padding: 60px 10px 0;
   @include abovetablet {
     padding: 60px 0 0;
   }
     .map {
     @include backgroundImage('../images/contact-us-map.png', 100%, 420px);
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
     background-size: cover;
     background-position: center;
   }
@@ -46,6 +42,11 @@
 .top-section {
   margin-top: $margin-base*3;
 }
+@include abovetablet {
+  .link-button-inner {
+    text-align: left;
+  }
+}
 @include desktop {
   .top-section {
     display: flex;
@@ -56,7 +57,6 @@
       .link-button {
         height: 120px;
       }
-
     }
     .link-button-wrapper{
       padding-top: 20px;
@@ -73,7 +73,7 @@
   padding-top: 60px;
   padding-bottom: 60px;
   h5 {
-    color: rgba(162,176,189,1);
+    color: $kinto-grayscale-6;
     font-weight: normal;
     &.bold {
       font-weight: bold;

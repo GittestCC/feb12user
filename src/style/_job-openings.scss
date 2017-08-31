@@ -17,10 +17,10 @@
       }
     }
     padding: 40px 20px;
-    height: 140px;
+    min-height: 140px;
     text-align: center;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background: $kinto-white;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
     border-radius: 12px;
   }
 }

@@ -96,11 +96,39 @@
   }
 }
 
+.content.notify-me-and-egg {
+  margin:0;
+  padding:0;
+  @include abovetablet {
+    padding: 60px 0 0;
+    margin: 60px auto 0;
+  }
+
+}
+
+.scroll-for-more {
+  display:none;
+}
+
 @include desktop {
   .notify-me-and-egg {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    .scroll-for-more {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 50px;
+      h6{
+        text-transform: uppercase;
+        margin-bottom: 0;
+        margin-right: 14px;
+      }
+      img {
+        animation: up-and-down 1s ease-in-out infinite alternate;
+      }
+    }
   }
   .the-egg {
     width: 50%;
@@ -114,4 +142,12 @@
       left: -16%;
     }
   }
+}
+
+@keyframes up-and-down {
+  0% { transform: translateY(-20%); }
+  20% { transform: translateY(5%); }
+  50% { transform: translateY(-5%); }
+  80% { transform: translateY(0%); }
+  100% { transform: translateY(-20%); }
 }

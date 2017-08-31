@@ -7,9 +7,12 @@ const ContactUs = () => (
   <div className="contact-us">
     <NavBar />
 
-    <div className="content">
+    <div className="content smaller-tablet">
       <h1 className="center">Get in touch.</h1>
-      <h3 className="center">Contact us for support and inquiries</h3>
+      <h3 className="center">
+        Want to know more about the upcoming microservice revolution? Drop us a
+        line.
+      </h3>
       <h3 className="center">
         <b>support@kintohub.com</b>
       </h3>
@@ -21,7 +24,7 @@ const ContactUs = () => (
           </div>
         */}
 
-        <div className="link-button-wrapper">
+        {/* <div className="link-button-wrapper">
           <LinkButton
             link="https://www.google.com"
             title="FAQs"
@@ -43,7 +46,7 @@ const ContactUs = () => (
             color="kinto-green"
             icon="press"
           />
-        </div>
+        </div> */}
       </div>
     </div>
 
@@ -51,7 +54,7 @@ const ContactUs = () => (
       <div className="map" />
     </div>
 
-    <div className="content address">
+    <div className="content address smaller-tablet">
       <h5 className="bold center">KintoHub Headquarters</h5>
       <h5 className="center">
         7/F, Yat Chau Building, 262 Des Voeux Road Central, Hong Kong

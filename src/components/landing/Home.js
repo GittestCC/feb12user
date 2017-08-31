@@ -3,6 +3,7 @@ import NavBar from '../ui/NavBar'
 import Egg from './home/Egg'
 import BlogGallery from '../ui/BlogGallery'
 import TitleWithLines from '../ui/TitleWithLines'
+import scrollArrow from '../../images/icon-scroll-down-arrow.svg'
 import Footer from '../ui/Footer'
 
 const App = () => (
@@ -13,8 +14,8 @@ const App = () => (
         <h1>The One Stop Shop for Microservices</h1>
 
         <h3>
-          KintoHub is a development platform that transforms you into a
-          full-stack unicorn ninja that people can’t stop talking about.
+          Kintohub is a platform humbly aiming to make developers' lives easier
+          on planet Earth - propulsing microservices in a magic cloud.
         </h3>
         <h3>
           <strong>Coming soon to a keyboard near you.</strong>
@@ -24,6 +25,10 @@ const App = () => (
     <div className="content notify-me-and-egg">
       {/* <NotifyMe /> */}
       <Egg />
+      <div className="scroll-for-more">
+        <h6>Scroll down for more</h6>
+        <img src={scrollArrow} alt="" />
+      </div>
     </div>
     <div className="section bg-light-blue">
       <div className="content">
@@ -31,7 +36,7 @@ const App = () => (
         <BlogGallery />
       </div>
     </div>
-    <Footer />
+    <Footer footerColor="bg-light-blue" />
   </div>
 )
 

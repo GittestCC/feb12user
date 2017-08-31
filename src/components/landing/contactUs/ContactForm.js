@@ -57,7 +57,7 @@ class ContactForm extends Component {
             type="email"
             name="emailAddress"
             id="emailAddress"
-            placeholder="jonathon@thewall.com"
+            placeholder="jsnow@thewall.com"
             onChange={this.handleInputChange}
             value={this.state.emailAddress}
             required

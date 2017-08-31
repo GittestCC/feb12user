@@ -1,5 +1,125 @@
+.log-in-page, .sign-up-page {
+  background-image: linear-gradient(-180deg, rgba(159,221,242,1) 10%, rgba($kinto-white, 0) 30%);
+  @include abovetablet {
+    background-image: url('/images/background@2x.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+.log-in-and-sign-up-wrapper {
+  margin-top: 40px;
+  @include abovetablet {
+    margin-top: 50px;
+  }
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    div.log-in-form {
+      margin: 0px 20px 0;
+    }
+    .sign-up-form {
+      margin: 0px 20px 0;
+      form{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .log-in-form, .sign-up-form{
+    @include desktop {
+      max-width: 440px;
+    }
+    button{
+      height: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      &.default{
+        margin-bottom: $margin-base;
+      }
+      &.dark {
+        margin-bottom: $margin-base;
+      }
+    }
+
+    h2{
+      margin-top: 0;
+      text-align: center;
+      @include abovetablet {
+        text-align: left;
+      }
+      color: $kinto-tinted-grayscale-8;
+    }
+    background-color: $kinto-white;
+    padding: 40px 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+    .title-with-lines {
+      margin-bottom: 0;
+        h2 {
+        text-transform: uppercase;
+        color: $kinto-grayscale-6;
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+      .line {
+        border: solid 1px $kinto-tinted-grayscale-1;
+      }
+    }
+    .checkbox-message {
+      text-transform: none;
+    }
+    a.forgot-password {
+      margin-top: $margin-base;
+      display: inline-block;
+      width:100%;
+      text-align: right;
+      font-size: 14px;
+      @include abovetablet {
+        font-size: 12px;
+      }
+    }
+    .byline {
+      font-size: 14px;
+      h6 {
+        font-weight: normal;
+      }
+      a {
+        font-size: 14px;
+      }
+      @include abovetablet {
+        font-size: 12px;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .log-in-form {
+    margin-bottom: $margin-base*4;
+  }
+}
+
+.sign-up-page {
+  .log-in-and-sign-up-wrapper {
+    .sign-up-form {
+      margin-bottom: $margin-base*4;
+    }
+    @include desktop {
+      .sign-up-form {
+        margin-bottom: 0;
+      }
+    }
+    .log-in-form {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .front-page {
-  margin-bottom: 100px;
+  @include desktop {
+    margin-bottom: 100px;
+  }
   h1, h3{
     text-align: center;
     text-transform: none;

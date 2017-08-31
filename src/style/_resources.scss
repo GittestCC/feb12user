@@ -13,27 +13,31 @@
 .resource-card {
   height: 220px;
   width: 300px;
-  margin-bottom: 20px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   @include tablet {
     width: 310px;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
+  }
+  @include desktop {
+    width: 300px;
+    margin: 0 0 20px 0;
   }
   border-radius: 12px;
   &.news {
-    background: #61D5EF;
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background: $kinto-blue-light;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   }
   &.press {
-    background: #83A7F3;
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background: $kinto-lapis-light;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   }
   &.info {
-    background: #A295EE;
-    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background: $kinto-purple-light;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   }
   .icon {
     background-size: contain;
@@ -45,6 +49,6 @@
     font-weight: normal;
   }
   h4{
-    color: #FFFFFF;
+    color: $kinto-white;
   }
 }

@@ -5,13 +5,13 @@
       {
         "name": "Joseph Cooper",
         "title": "CEO and Co-founder",
-        "byline": "Bsc Computer Science, mobile gaming exec & coffee lover",
+        "byline": "{ Live, love and code }",
         "image": "/images/team-joseph-cooper@2x.png"
       },
       {
         "name": "Francois Courtin",
         "title": "COO and Co-founder",
-        "byline": "Bsc Computer Science, mobile gaming exec & coffee lover",
+        "byline": "Friendly French Prod (20 games, 1 daughter). Book Nerd, Travel Proof, Word Wizard.",
         "image": "/images/team-francois-courtin@2x.png"
       }
     ]
@@ -22,7 +22,7 @@
       {
         "name": "Nadim Khedr",
         "title": "Lead Front End Engineering",
-        "byline": "Nadeem's byline will go hereeeee",
+        "byline": "Front End Pharaoh & Gentle Giant.",
         "image": "/images/team-nadeem-khedr@2x.png"
       },
       {
@@ -34,13 +34,13 @@
       {
         "name": "Guillaume Dury",
         "title": "DevOps Engineering",
-        "byline": "Guillaume's byline will go heerrerererere yo",
+        "byline": "'When I was a child I was a Jedi'",
         "image": "/images/team-guillaume-dury@2x.png"
       },
       {
         "name": "Raven Yu",
         "title": "Product Design",
-        "byline": "Aspiring Model",
+        "byline": "Undercover Pop Star & Aspiring Model",
         "image": "/images/team-raven-yu@2x.png"
       }
     ]

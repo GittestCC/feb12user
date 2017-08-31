@@ -1,5 +1,5 @@
 a.link-button{
-  box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+  box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   border-radius: 12px;
   height: 120px;
   margin-bottom: $margin-base*3;
@@ -8,13 +8,13 @@ a.link-button{
   align-items: center;
   justify-content: center;
   &.kinto-purple {
-    background: rgba(162,149,238,1);
+    background: $kinto-purple-light;
   }
   &.kinto-blue {
-    background: rgba(131,167,243,1);
+    background: $kinto-lapis-light;
   }
   &.kinto-green {
-    background: rgba(77,208,183,1);
+    background: $kinto-turquoise-light;
   }
   .text{
     text-align: center;
@@ -24,7 +24,7 @@ a.link-button{
       display: none;
     }
     h4 {
-      color: #ffffff;
+      color: $kinto-white;
       font-weight: normal;
       &.larger.bold{
         font-size: 20px;

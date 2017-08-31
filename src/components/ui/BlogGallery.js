@@ -1,83 +1,89 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 
-const BlogGallery = () =>
+const BlogGallery = () => (
   <div className="blog-gallery">
-    <div className="blog-card">
-      <div className="title">
-        <div className="vertical-line development" />
-        <h3>Laying the Groundwork for a Robust Service</h3>
-      </div>
-      <div className="card-content">
-        <div className="name-date-and-department">
-          <div className="name">Laura Ambrose</div>
-          <div className="date">
-            {moment(new Date()).format('Do MMMM[,] YYYY')}
-          </div>
-
-          <div className="department development">
-            <h4>Development</h4>
-          </div>
+    <a href="https://blog.kintohub.com/become-a-fan-of-the-people-you-hire-6aee7314fde5">
+      <div className="blog-card">
+        <div className="title">
+          <div className="vertical-line exec" />
+          <h3>Become a FAN of the people you hire - KintoHub</h3>
         </div>
-        <div className="avatar laura" />
+        <div className="card-content">
+          <div className="name-date-and-department">
+            <div className="name">Joseph Cooper</div>
+            <div className="date">
+              {moment(new Date()).format('Do MMMM[,] YYYY')}
+            </div>
+
+            <div className="department exec">
+              <h4>Executive Team</h4>
+            </div>
+          </div>
+          <div className="avatar joseph" />
+        </div>
       </div>
-    </div>
-    <div className="blog-card">
+    </a>
+
+    {/* <div className="blog-card">
       <div className="title">
         <div className="vertical-line design" />
         <h3>Laying the Groundwork for a Robust Service</h3>
       </div>
       <div className="card-content">
         <div className="name-date-and-department">
-          <div className="name">Raven Yu</div>
-          <div className="date">
-            {moment(new Date()).format('Do MMMM[,] YYYY')}
-          </div>
-          <div className="department design">
-            <h4>Design</h4>
-          </div>
+      <div className="name">Raven Yu</div>
+      <div className="date">
+      {moment(new Date()).format('Do MMMM[,] YYYY')}
+      </div>
+      <div className="department design">
+      <h4>Design</h4>
+      </div>
         </div>
         <div className="avatar raven" />
       </div>
-    </div>
-    <div className="blog-card">
+      </div>
+
+      <div className="blog-card">
       <div className="title">
         <div className="vertical-line exec" />
         <h3>Laying the Groundwork for a Robust Service</h3>
       </div>
       <div className="card-content">
         <div className="name-date-and-department">
-          <div className="name">Francois Courtin</div>
-          <div className="date">
-            {moment(new Date()).format('Do MMMM[,] YYYY')}
-          </div>
+      <div className="name">Francois Courtin</div>
+      <div className="date">
+      {moment(new Date()).format('Do MMMM[,] YYYY')}
+      </div>
 
-          <div className="department exec">
-            <h4>Executive Team</h4>
-          </div>
+      <div className="department exec">
+      <h4>Executive Team</h4>
+      </div>
         </div>
         <div className="avatar francois" />
       </div>
-    </div>
-    <div className="blog-card">
+      </div>
+
+      <div className="blog-card">
       <div className="title">
         <div className="vertical-line development" />
         <h3>Laying the Groundwork for a Robust Service</h3>
       </div>
       <div className="card-content">
         <div className="name-date-and-department">
-          <div className="name">Nadeem Khedr</div>
-          <div className="date">
-            {moment(new Date()).format('Do MMMM[,] YYYY')}
-          </div>
+      <div className="name">Nadeem Khedr</div>
+      <div className="date">
+      {moment(new Date()).format('Do MMMM[,] YYYY')}
+      </div>
 
-          <div className="department development">
-            <h4>Development</h4>
-          </div>
+      <div className="department development">
+      <h4>Development</h4>
+      </div>
         </div>
         <div className="avatar nadeem" />
       </div>
-    </div>
-  </div>;
+    </div> */}
+  </div>
+)
 
-export default BlogGallery;
+export default BlogGallery

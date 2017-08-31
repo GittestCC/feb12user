@@ -35,7 +35,7 @@ label{
 
 input, textarea, select{
   @include placeholder($input);
-  color: $input-entered;
+  color: $kinto-tinted-grayscale-7;
   @include inputStandard;
   width: 100%;
 }
@@ -44,14 +44,13 @@ h5.byline{
   font-weight: normal;
   font-family: $base-font;
   font-size: 14px;
-  color: rgba(162,176,189,1);
+  color: $kinto-grayscale-6;
   letter-spacing: 0;
   line-height: 20px;
   &.bold{
     font-weight: bold;
   }
 }
-// }
 
 .button {
   @include buttonDefault;
@@ -59,8 +58,103 @@ h5.byline{
   padding-top: 0;
   height: 50px;
   line-height: 50px;
+  border: none;
+  display: block;
+  &:hover {
+    color: $kinto-tinted-grayscale-10;
+  }
+  &.dark {
+    @include buttonSecondaryDark;
+    line-height: 50px;
+    img {
+      position: relative;
+      top: 8px;
+      margin-right: 10px;
+    }
+    @include desktop {
+      padding-bottom: 10px;
+    }
+  }
+  .disabled {
+
+  }
+  .submitted {
+    @include buttonSubmitted;
+  }
+  &.secondary {
+    @include buttonSecondary;
+  }
+}
+
+.checkbox{
+  width: 30px;
+  height: 30px;
+  margin: 0 20px 20px 0;
+  background-image: linear-gradient(0deg, $ui-button-secondary-regular-top 0%, $ui-button-secondary-regular-bottom 100%);
+  box-shadow: inset 0 2px 0 0 rgba($kinto-black,0.10);
+  display: inline-block;
+  border: none;
+  -webkit-appearance: listbox;
+  float: left;
+  &:hover {
+    background-image: linear-gradient(0deg, $ui-button-secondary-hover-top 0%, $ui-button-secondary-hover-bottom 100%);
+    &.checked{
+      @include backgroundImage("/images/checkbox-large-checked-hover.svg", 30px, 30px);
+    }
+    @include desktop {
+      &.checked {
+        @include backgroundImage("/images/checkbox-large-checked-hover.svg", 20px, 20px);
+      }
+    }
+  }
+  @include abovetablet {
+    width: 20px;
+    height: 20px;
+  }
+  &:focus {
+    border: none;
+  }
+  &.checked{
+    @include backgroundImage("/images/checkbox-large-checked-regular.svg", 30px, 30px);
+    @include desktop {
+      @include backgroundImage("/images/checkbox-large-checked-regular.svg", 20px, 20px);
+    }
+  }
+}
+
+.checkbox-message {
+  display: inline-block;
+  margin-bottom: $margin-base*2;
+  line-height: 30px;
+  height: 30px;
+  float: left;
+  @include abovetablet {
+    height: 20px;
+    line-height: 20px;
+  }
+  h6 {
+    margin-top:3px;
+    font-size: 14px;
+  }
+}
+
+.input-with-image-wrapper{
+  position: relative;
+  .show-password{
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    @include backgroundImage("/images/icon-entry-masked.svg", 20px, 10px);
+    &.checked {
+      @include backgroundImage("/images/icon-entry-visible.svg", 20px, 10px);
+    }
+  }
 }
 
 form {
   margin-bottom: $margin-base*4;
+}
+
+.line.divider {
+  @include dividerLine($kinto-tinted-grayscale-2);
 }

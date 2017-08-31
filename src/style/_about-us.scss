@@ -15,6 +15,12 @@
     .staff-card {
       margin-bottom: $margin-base*5;
     }
+    &.two {
+      justify-content: space-evenly;
+      .staff-card {
+        margin:0 0 $margin-base*8 0;
+      }
+    }
     &.three{
       @include tablet {
         justify-content: space-between;
@@ -50,13 +56,26 @@
     height: 100%;
     position: fixed;
     top: -24%;
-    transition: all 1s linear;
+    transition: all 0.1s linear;
     @include abovetablet {
       top: -18%;
     }
     z-index: -1;
     &.faded {
       opacity: .4;
+    }
+  }
+  .fixed-header {
+    position: fixed;
+    transition: all 0.2s linear;
+    @include tablet {
+      width: $tablet-content-width;
+    }
+    @include desktop {
+      width: $content-width;
+    }
+    &.faded {
+      opacity: 0;
     }
   }
   h1, h3 {
@@ -67,9 +86,10 @@
     margin-top: 0;
   }
   .text-with-image {
-    margin-top: 90px;
+    margin-top: 230px;
+    z-index: 1;
     @include tablet {
-      margin-top: 250px;
+      margin-top: 370px;
       display: flex;
       flex-direction: column;
     }
@@ -91,13 +111,13 @@
     }
     .text {
       padding: 40px;
-      background-color: rgba(12,75,93,1);
+      background-color: $kinto-tinted-grayscale-9;
       display: flex;
       align-items: center;
       border-radius: 12px;
       h4{
         text-align: center;
-        color: #ffffff;
+        color: $kinto-white;
       }
       @include tablet {
         border-radius: 0 0 12px 12px;

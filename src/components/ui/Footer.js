@@ -1,34 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import facebookIcon from '../../images/footer-socials-facebook.svg';
-import twitterIcon from '../../images/footer-socials-twitter.svg';
-import githubIcon from '../../images/footer-socials-github.svg';
-import linkedinIcon from '../../images/footer-socials-linkedin.svg';
-import angellistIcon from '../../images/footer-socials-angellist.svg';
-import greyKintoLogo from '../../images/logo-grey-single-color.svg';
+import React from 'react'
+import { Link } from 'react-router-dom'
+// import facebookIcon from '../../images/footer-socials-facebook.svg'
+import twitterIcon from '../../images/footer-socials-twitter.svg'
+import githubIcon from '../../images/footer-socials-github.svg'
+import linkedinIcon from '../../images/footer-socials-linkedin.svg'
+// import angellistIcon from '../../images/footer-socials-angellist.svg'
+import greyKintoLogo from '../../images/logo-grey-single-color.svg'
 
-const Footer = () =>
-  <footer className="bg-light-blue" style={{ minHeight: '140px' }}>
+const Footer = ({ footerColor }) => (
+  <footer className={footerColor} style={{ minHeight: '140px' }}>
     <div className="content">
       <div className="line" />
       <div className="footer">
         <div className="left">
           <ul className="unstyled-list">
-            <li className="list-item">
+            {/* <li className="list-item">
               <Link to={'/about-us'}>Service Status</Link>
-            </li>
+            </li> */}
             <li className="list-item">
-              <Link to={'/about-us'}>Contact Us</Link>
+              <Link to={'/contact-us'}>Contact Us</Link>
             </li>
-            <li className="list-item">
+            {/* <li className="list-item">
               <Link to={'/about-us'}>Privacy Policy</Link>
-            </li>
-            <li className="list-item">
+            </li> */}
+            {/* <li className="list-item">
               <Link to={'/about-us'}>Terms and Conditions</Link>
-            </li>
-            <li className="list-item">
+            </li> */}
+            {/* <li className="list-item">
               <Link to={'/about-us'}>Site Map</Link>
-            </li>
+            </li> */}
           </ul>
 
           <h6 className="byline">
@@ -39,37 +39,40 @@ const Footer = () =>
         <div className="right">
           <ul className="social-icons unstyled-list">
             <li className="social-icon">
-              <Link to={'/about-us'}>
+              <a href="https://twitter.com/kintohub">
                 <img src={twitterIcon} alt="" />
-              </Link>
+              </a>
             </li>
-            <li className="social-icon">
+            {/* <li className="social-icon">
               <Link to={'/about-us'}>
                 <img src={facebookIcon} alt="" />
               </Link>
-            </li>
+            </li> */}
             <li className="social-icon">
-              <Link to={'/about-us'}>
+              <a href="https://github.com/kintohub">
                 <img src={githubIcon} alt="" />
-              </Link>
+              </a>
             </li>
             <li className="social-icon">
-              <Link to={'/about-us'}>
+              <a href="https://www.linkedin.com/company/13376177/">
                 <img src={linkedinIcon} alt="" />
-              </Link>
+              </a>
             </li>
-            <li className="social-icon">
+            {/* <li className="social-icon">
               <Link to={'/about-us'}>
                 <img src={angellistIcon} alt="" />
               </Link>
-            </li>
+            </li> */}
           </ul>
 
-          <div className="footer-logo">
-            <img src={greyKintoLogo} alt="" />
-          </div>
+          <Link to={'/'}>
+            <div className="footer-logo">
+              <img src={greyKintoLogo} alt="" />
+            </div>
+          </Link>
         </div>
       </div>
     </div>
-  </footer>;
-export default Footer;
+  </footer>
+)
+export default Footer

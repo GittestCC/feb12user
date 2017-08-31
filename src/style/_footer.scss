@@ -3,7 +3,7 @@ footer {
     .footer {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       padding-bottom: 66px;
       .left{
         display: flex;
@@ -22,11 +22,13 @@ footer {
       }
       .right {
         display: flex;
+        align-items: baseline;
         .social-icons {
           margin-right: $margin-base*2;
         }
         .footer-logo{
           padding-bottom: 0;
+          height: 30px;
         }
       }
     }
@@ -36,17 +38,19 @@ footer {
     margin-top: 0;
   }
   .line {
-    @include dividerLine(rgba(237,243,253,1));
+    @include dividerLine($kinto-tinted-grayscale-2);
   }
   .unstyled-list{
     margin-bottom: $margin-base*2;
-    text-align: center;
+    // text-align: center;
     .list-item {
       text-align: center;
       a{
-        color: $h2-follow-our-journey;
+        color: $kinto-tinted-grayscale-6;
         font-weight: bold;
-        // hover color TBA - ask Raven later
+        &:hover {
+          color: $text-link-focus;
+        }
       }
       @include tablet {
         display: inline-block;
@@ -68,7 +72,14 @@ footer {
       height: 30px;
       width: 30px;
       display: inline-block;
-      margin: 5px;
+      transition: all 0.1s linear;
+      margin: 0 5px;
+      &:hover {
+        opacity: 0.8;
+      }
+      &:active {
+        filter: brightness(80%);
+      }
     }
   }
   .footer-logo {
@@ -76,8 +87,15 @@ footer {
     padding-bottom: $margin-base*9;
     width: 54px;
     text-align: center;
+    transition: all 0.1s linear;
     img {
       margin: 0;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      filter: brightness(80%);
     }
   }
 }
