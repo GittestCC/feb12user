@@ -18,17 +18,20 @@ class NotifyMe extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.notifyUs} className="notify-form">
+      <form
+        action="//kintohub.us16.list-manage.com/subscribe/post?u=7bdeb03a2507e86ff35f49d01&id=96f27c293a"
+        method="post"
+        name="mc-embedded-subscribe-form"
+        className="notify-form"
+      >
         <div className="names-field">
           <div className="name-field">
             <label htmlFor="firstName">First Name</label>
             <input
               type="text"
-              name="name"
+              name="FNAME"
               id="firstName"
               placeholder="Jonathon"
-              onChange={this.handleInputChange}
-              value={this.state.firstName}
               required
             />
           </div>
@@ -36,11 +39,9 @@ class NotifyMe extends Component {
             <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
-              name="name"
+              name="LNAME"
               id="lastName"
               placeholder="Snow"
-              onChange={this.handleInputChange}
-              value={this.state.lastName}
               required
             />
           </div>
@@ -49,11 +50,9 @@ class NotifyMe extends Component {
           <label htmlFor="emailAddress">Email</label>
           <input
             type="email"
-            name="name"
+            name="EMAIL"
             id="emailAddress"
             placeholder="jsnow@thewall.com"
-            onChange={this.handleInputChange}
-            value={this.state.emailAddress}
             required
           />
         </div>

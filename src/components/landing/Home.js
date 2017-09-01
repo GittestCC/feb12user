@@ -5,6 +5,7 @@ import BlogGallery from '../ui/BlogGallery'
 import TitleWithLines from '../ui/TitleWithLines'
 import scrollArrow from '../../images/icon-scroll-down-arrow.svg'
 import Footer from '../ui/Footer'
+import NotifyMe from './home/NotifyMe'
 
 const App = () => (
   <div className="app">
@@ -23,7 +24,7 @@ const App = () => (
       </div>
     </div>
     <div className="content notify-me-and-egg">
-      {/* <NotifyMe /> */}
+      <NotifyMe />
       <Egg />
       <div className="scroll-for-more">
         <h6>Scroll down for more</h6>

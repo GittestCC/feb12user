@@ -39,7 +39,11 @@ const Footer = ({ footerColor }) => (
         <div className="right">
           <ul className="social-icons unstyled-list">
             <li className="social-icon">
-              <a href="https://twitter.com/kintohub">
+              <a
+                href="https://twitter.com/kintohub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={twitterIcon} alt="" />
               </a>
             </li>
@@ -49,12 +53,20 @@ const Footer = ({ footerColor }) => (
               </Link>
             </li> */}
             <li className="social-icon">
-              <a href="https://github.com/kintohub">
+              <a
+                href="https://github.com/kintohub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={githubIcon} alt="" />
               </a>
             </li>
             <li className="social-icon">
-              <a href="https://www.linkedin.com/company/13376177/">
+              <a
+                href="https://www.linkedin.com/company/13376177/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={linkedinIcon} alt="" />
               </a>
             </li>

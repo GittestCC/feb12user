@@ -3,7 +3,11 @@ import moment from 'moment'
 
 const BlogGallery = () => (
   <div className="blog-gallery">
-    <a href="https://blog.kintohub.com/become-a-fan-of-the-people-you-hire-6aee7314fde5">
+    <a
+      href="https://blog.kintohub.com/become-a-fan-of-the-people-you-hire-6aee7314fde5"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <div className="blog-card">
         <div className="title">
           <div className="vertical-line exec" />

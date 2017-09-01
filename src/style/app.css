@@ -688,7 +688,8 @@ form {
 
 .content.notify-me-and-egg {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  position: relative; }
   @media (min-width: 768px) {
     .content.notify-me-and-egg {
       padding: 60px 0 0;
@@ -704,9 +705,8 @@ form {
     justify-content: flex-end; }
     .notify-me-and-egg .scroll-for-more {
       display: flex;
-      align-items: center;
       position: absolute;
-      bottom: 50px; }
+      bottom: 0; }
       .notify-me-and-egg .scroll-for-more h6 {
         text-transform: uppercase;
         margin-bottom: 0;
