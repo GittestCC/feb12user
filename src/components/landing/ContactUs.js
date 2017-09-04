@@ -1,7 +1,6 @@
 import React from 'react'
 import NavBar from '../ui/NavBar'
 import Footer from '../ui/Footer'
-import LinkButton from './contactUs/LinkButton'
 
 const ContactUs = () => (
   <div className="contact-us">
@@ -18,13 +17,11 @@ const ContactUs = () => (
       </h3>
 
       <div className="top-section">
-        {/* TODO add when contact form is working
-          <div className="contact-form-wrapper">
-            <ContactForm />
-          </div>
-        */}
+        <div className="contact-form-wrapper">
+          {/* <ContactFormContainer /> */}
+        </div>
 
-        {/* <div className="link-button-wrapper">
+        {/* TODO <div className="link-button-wrapper">
           <LinkButton
             link="https://www.google.com"
             title="FAQs"

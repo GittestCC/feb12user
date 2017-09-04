@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default props => {
-  console.log(props.externalLink)
   if (props.externalLink) {
     return (
       <a href={props.externalLink} target="_blank">

@@ -39,7 +39,6 @@ const Email = {
     var b = Email.createCORSRequest('GET', a)
     ;(b.onload = function() {
       var a = b.responseText
-      console.log(a)
     }),
       b.send()
   },

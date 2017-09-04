@@ -31,12 +31,9 @@ class LogInForm extends Component {
     return (
       <div className="log-in-form">
         <h2>Log In</h2>
-        <Button
-          buttonType="dark"
-          type="submit"
-          text="Log In with GitHub"
-          image={githubIcon}
-        />
+        <Button buttonType="dark" type="submit" image={githubIcon}>
+          Log In with GitHub
+        </Button>
         <TitleWithLines text="or" />
         <form action="submit">
           <label htmlFor="userName">Username / Email</label>
@@ -73,7 +70,9 @@ class LogInForm extends Component {
             value={this.state.checked}
             text="Keep me logged in for two weeks"
           />
-          <Button buttonType="secondary" type="submit" text="Log In" />
+          <Button buttonType="secondary" type="submit">
+            Log In
+          </Button>
           {/* <a href="#" className="forgot-password">
             Forgot Password?
           </a> */}

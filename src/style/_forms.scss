@@ -33,11 +33,21 @@ label{
   color: $input-label;
 }
 
-input, textarea, select{
+input, textarea, select {
   @include placeholder($input);
   color: $kinto-tinted-grayscale-7;
   @include inputStandard;
   width: 100%;
+  &.error {
+    border: 2px solid $input-error !important;
+  }
+}
+
+.error-message {
+  color: $kinto-white;
+  background-color: $kinto-coral;
+  border-radius: 4px;
+  padding: $margin-base;
 }
 
 h5.byline{
@@ -78,7 +88,7 @@ h5.byline{
   .disabled {
 
   }
-  .submitted {
+  &.submitted {
     @include buttonSubmitted;
   }
   &.secondary {

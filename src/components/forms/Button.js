@@ -5,11 +5,12 @@ const Button = ({
   isSubmitted,
   type,
   image,
-  text,
   onClick,
-  disabled
+  disabled,
+  children
 }) => {
   type = type || 'submit'
+  buttonType = buttonType || 'default'
 
   const buttonHandler = e => {
     if (onClick && !isSubmitted && !disabled) {
@@ -28,7 +29,7 @@ const Button = ({
       onClick={buttonHandler}
     >
       {image ? <img src={image} alt="" /> : ''}
-      {text}
+      {children}
     </button>
   )
 }

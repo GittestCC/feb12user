@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import immutableCheckMiddleWare from 'redux-immutable-state-invariant'
 import thunk from 'redux-thunk'
@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   const loggerMiddleware = createLogger({ collapsed: true })
   middleware.push(loggerMiddleware)
 }
-const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore)
 
-export default () => createStoreWithMiddleware(rootReducer)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+export default () =>
+  createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)))

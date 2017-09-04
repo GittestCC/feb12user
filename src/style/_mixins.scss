@@ -74,25 +74,6 @@
   @include placeholder($input);
 }
 
-@mixin inputError(){
-  height: 50px;
-  width: 220px;
-  font-family: $base-font;
-  font-size: 18px;
-  color: $kinto-tinted-grayscale-7;
-  @include abovetablet {
-    font-size: 16px;
-  }
-  letter-spacing: 0;
-  line-height: 24px;
-  margin-bottom: $margin-base;
-  padding-left: $margin-base*2;
-  background: $kinto-white;
-  border: 2px solid $input-error;
-  border-radius: 4px;
-  @include placeholder($input);
-}
-
 @mixin inputDisabled(){
   height: 50px;
   width: 220px;

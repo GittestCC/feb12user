@@ -61,7 +61,9 @@ class SignUpForm extends Component {
           <div className="byline">
             <h6>Requires 8 characters, at least 1 number and 1 letter</h6>
           </div>
-          <Button buttonType="button default" type="submit" text="Sign Up" />
+          <Button buttonType="default" type="submit">
+            Sign Up
+          </Button>
           {/* <div className="byline">
             <h6>
               By clicking "Sign Up" you agree to our{' '}

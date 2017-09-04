@@ -1,4 +1,4 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+src/style/app.css
 
 # dependencies
 /node_modules

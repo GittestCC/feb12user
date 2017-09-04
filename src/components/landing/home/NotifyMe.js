@@ -13,7 +13,6 @@ class NotifyMe extends Component {
     this.setState({
       [name]: value
     })
-    console.log('form data ', this.state)
   }
 
   render() {

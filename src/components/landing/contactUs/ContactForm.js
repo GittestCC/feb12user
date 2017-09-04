@@ -1,96 +1,78 @@
 import React, { Component } from 'react'
-import Email from '../../../lib/smtp'
+import { Field, reduxForm } from 'redux-form'
+import FieldValidation from '../../forms/FieldValidation'
+import Button from '../../forms/Button'
+import { required, email } from '../../../helpers/validators'
 
 class ContactForm extends Component {
   state = {
-    firstName: '',
-    lastName: '',
-    emailAddress: '',
-    messageType: '',
-    message: ''
+    isSubmitted: false
   }
 
-  handleInputChange = event => {
-    const { value, name } = event.target
-    this.setState({ [name]: value })
-  }
-
-  sendMessage = e => {
-    e.preventDefault()
-    Email.send('sender@text.com', 'reciver@test.com', 'subject', 'body', {
-      token: process.env.REACT_APP_SMTP_KEY
-    })
+  onSubmit = e => {
+    const result = this.props.handleSubmit(e)
+    if (this.props.valid) {
+      result.then(() => {
+        this.setState({ isSubmitted: true })
+      })
+    }
   }
 
   render() {
     return (
-      <form onSubmit={this.sendMessage}>
+      <form onSubmit={this.onSubmit}>
         <div className="names-field">
           <div className="name-field">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
+            <Field
               name="firstName"
-              id="firstName"
+              label="First Name"
               placeholder="Jonathon"
-              onChange={this.handleInputChange}
-              value={this.state.firstName}
-              required
+              component={FieldValidation}
+              validate={required}
+              type="text"
             />
           </div>
           <div className="name-field">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
+            <Field
               name="lastName"
-              id="lastName"
+              label="Last Name"
               placeholder="Snow"
-              onChange={this.handleInputChange}
-              value={this.state.lastName}
-              required
+              component={FieldValidation}
+              validate={required}
+              type="text"
             />
           </div>
         </div>
         <div className="email-field">
-          <label htmlFor="emailAddress">Email</label>
-          <input
-            type="email"
+          <Field
             name="emailAddress"
-            id="emailAddress"
+            label="Email"
             placeholder="jsnow@thewall.com"
-            onChange={this.handleInputChange}
-            value={this.state.emailAddress}
-            required
+            component={FieldValidation}
+            validate={[required, email]}
+            type="email"
           />
         </div>
         <div className="full-width-field">
           <label htmlFor="messageType">Message type</label>
-          <select
-            name="messageType"
-            id="messageType"
-            onChange={this.handleInputChange}
-            value={this.state.messageType}
-            required
-          >
+          <Field name="messageType" component={FieldValidation} type="select">
             <option value="General Enquiry">General Enquiry</option>
             <option value="Request Early Access">Request Early Access</option>
-          </select>
+          </Field>
         </div>
         <div className="full-width-field">
-          <label htmlFor="message">Message</label>
-          <textarea
+          <Field
             name="message"
-            id="message"
+            label="Message"
             placeholder="Please enter your message"
-            onChange={this.handleInputChange}
-            value={this.state.message}
-            required
+            component={FieldValidation}
+            validate={required}
+            type="textarea"
           />
         </div>
-        <button type="submit" className="button default">
+        <Button type="submit" isSubmitted={this.state.isSubmitted}>
           Send Message
-        </button>
-
+        </Button>
         <h5 className="byline bold center ">
           We’ll send you cool updates and notify you when we offically launch.
         </h5>
@@ -102,4 +84,4 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm
+export default reduxForm({ form: 'contactUs' })(ContactForm)
