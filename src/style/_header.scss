@@ -11,6 +11,9 @@
     display: block;
     display: flex;
     justify-content: space-between;
+    &.navbar {
+      justify-content: flex-start;
+    }
     align-items: center;
   }
   .navigation-links {
@@ -18,7 +21,12 @@
   }
 
   .mobile-menu-toggle{
-    @include backgroundImage('../images/icon-menu.svg', 20px, 20px);
+    &.hamburger {
+      @include backgroundImage('../images/icon-menu.svg', 20px, 20px);
+    }
+    &.cross {
+      @include backgroundImage('/images/icon-menu-close.svg', 20px, 20px);
+    }
     position: absolute;
     top: 20px;
     left: 20px;

@@ -3,101 +3,94 @@ import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
   state = {
-    hideNav: true
+    showSearch: false,
+    isIconHidden: false
   }
 
-  openCloseMobileNav = () => {
-    this.setState({ hideNav: !this.state.hideNav })
+  displaySearchBar = () => {
+    this.setState({ showSearch: !this.state.showSearch })
+  }
+
+  toggleInnerIcon = () => {
+    this.setState({ isIconHidden: !this.state.isIconHidden })
   }
 
   render() {
     return (
-      <nav className="main-navigation">
-        <div className="mobile-menu-toggle" onClick={this.openCloseMobileNav} />
+      <div className="navbar main-navigation">
+        <div
+          className={`mobile-menu-toggle ${this.props.isSideBarShownMobile
+            ? 'cross'
+            : 'hamburger'}`}
+          onClick={this.props.toggleNavHandler}
+        />
 
         <Link to={'/'}>
-          <div className="navigation-logo" />
+          <div
+            className={`mobile-navigation-logo ${this.props.isSideBarShownMobile
+              ? 'show'
+              : ''}`}
+          />
         </Link>
-        <Link to={'/'}>
-          <div className="mobile-navigation-logo" />
-        </Link>
-        <ul
-          className={`mobile-menu unstyled-list ${this.state.hideNav
-            ? 'hidden'
-            : ''}`}
+
+        <div
+          className={`left ${this.props.isSideBarShownMobile
+            ? 'hide'
+            : ''} ${this.state.showSearch ? 'hide-search' : ''}`}
         >
-          <li>
-            <a
-              href="https://medium.com/kintohub"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h5>Blog</h5>
-            </a>
-          </li>
-          <li>
-            <Link to={'/about-us'}>
-              <h5>About Us</h5>
-            </Link>
-          </li>
-          <li>
-            <Link to={'/contact-us'}>
-              <h5>Contact Us</h5>
-            </Link>
-          </li>
-          {/* <li>
-            <Link to={'/log-in'} className="button secondary">
-              Log In
-            </Link>
-            </li>
-            <li>
-            <Link to={'/sign-up'} className="button default">
-              Sign Up
-            </Link>
-          </li> */}
-        </ul>
+          <Link className="navigation-logo" to={'/'} />
 
-        <div className="navigation-links">
-          <ul className="unstyled-list">
-            <li>
-              <a
-                href="https://medium.com/kintohub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h5>Blog</h5>
-              </a>
-            </li>
-            <li>
-              <Link to={'/about-us'}>
-                <h5>About Us</h5>
-              </Link>
-            </li>
-            <li>
-              <Link to={'/contact-us'}>
-                <h5>Contact Us</h5>
-              </Link>
-            </li>
-            {/* <li>
-              <Link
-                to={'/log-in'}
-                className="button secondary navigation-button"
-              >
-                Log In
-              </Link>
-              </li>
-              <li>
-              <Link
-                to={'/sign-up'}
-                className="button default navigation-button"
-              >
-                {' '}
-                Sign Up
-              </Link>
-            </li> */}
-          </ul>
+          {this.props.isDashboard ? (
+            <div className="dashboard-buttons-wrapper">
+              <Link className="on-dashboard" to={'/'} />
+              <Link className="go-to-market" to={'/'} />
+              <div className="responsive-on dashboard" />
+              <div className="responsive-go to-market" />
+            </div>
+          ) : (
+            <div className="market-buttons-wrapper">
+              <Link className="on-market" to={'/'} />
+              <Link className="go-to-dashboard" to={'/'} />
+              <div className="responsive-on market" />
+              <div className="responsive-go to-dashboard" />
+            </div>
+          )}
         </div>
-      </nav>
+        <div
+          className={`right ${this.props.isSideBarShownMobile ? 'hide' : ''}`}
+        >
+          <div
+            className={`search-icon ${this.state.showSearch ? '' : 'show'}`}
+            onClick={this.displaySearchBar}
+          />
+          <div className={`search ${this.state.showSearch ? 'show' : ''}`}>
+            <input
+              type="text"
+              placeholder="Search"
+              onFocus={this.toggleInnerIcon}
+              onBlur={this.toggleInnerIcon}
+            />
+            <div
+              className={`inner-search-icon ${this.state.isIconHidden
+                ? 'hide'
+                : ''}`}
+            />
+            <div className="close-search" onClick={this.displaySearchBar} />
+          </div>
+          <div
+            className={`notifications ${this.state.showSearch
+              ? 'hide-search'
+              : ''}`}
+          />
+          <div
+            className={`user-avatar ${this.state.showSearch
+              ? 'hide-search'
+              : ''}`}
+          >
+            <h3>LA</h3>
+          </div>
+        </div>
+      </div>
     )
   }
 }

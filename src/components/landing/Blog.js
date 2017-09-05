@@ -1,14 +1,15 @@
-import React from 'react';
-import NavBar from '../ui/NavBar';
-import Footer from '../ui/Footer';
+import React from 'react'
+import LandingNavBar from '../ui/LandingNavBar'
+import Footer from '../ui/Footer'
 
-const Blog = () =>
+const Blog = () => (
   <div className="blog-page">
-    <NavBar />
+    <LandingNavBar />
     <div className="content">
       <h1>This is the Blog page</h1>
     </div>
     <Footer />
-  </div>;
+  </div>
+)
 
-export default Blog;
+export default Blog

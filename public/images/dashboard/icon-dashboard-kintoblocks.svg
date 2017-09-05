@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-dashboard-microservices</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-1">
+            <stop stop-color="#B9D5EC" offset="0%"></stop>
+            <stop stop-color="#98B4CD" offset="100%"></stop>
+        </linearGradient>
+        <path d="M10.25,0.721687836 L16.410254,4.27831216 L16.410254,4.27831216 C17.1837567,4.72489415 17.660254,5.5502117 17.660254,6.44337567 L17.660254,13.5566243 L17.660254,13.5566243 C17.660254,14.4497883 17.1837567,15.2751058 16.410254,15.7216878 L10.25,19.2783122 L10.25,19.2783122 C9.47649731,19.7248942 8.52350269,19.7248942 7.75,19.2783122 L1.58974596,15.7216878 L1.58974596,15.7216878 C0.81624327,15.2751058 0.339745962,14.4497883 0.339745962,13.5566243 L0.339745962,6.44337567 L0.339745962,6.44337567 C0.339745962,5.5502117 0.81624327,4.72489415 1.58974596,4.27831216 L7.75,0.721687836 L7.75,0.721687836 C8.52350269,0.275105849 9.47649731,0.275105849 10.25,0.721687836 Z" id="path-2"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="desktop/sidebar/home" transform="translate(-50.000000, -250.000000)">
+            <g id="desktop/sidebar/analytics">
+                <g id="icon-dashboard-kintoblocks" transform="translate(60.000000, 260.000000) scale(-1, 1) translate(-60.000000, -260.000000) translate(51.000000, 250.000000)">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="Polygon" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                    <path d="M-1,4 L8.37390276,9.39936799 L8.37390276,9.39936799 C8.76127231,9.62249285 9,10.035498 9,10.4825325 L9,20 L-1,20 L-1,4 Z" id="Rectangle-5" fill="#CBE3F9" mask="url(#mask-3)"></path>
+                    <polygon id="Rectangle-5-Copy" fill="#B9D5EC" mask="url(#mask-3)" points="-1 15.52 9 9.76 9 20 -1 20"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

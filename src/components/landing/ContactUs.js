@@ -1,10 +1,10 @@
 import React from 'react'
-import NavBar from '../ui/NavBar'
+import LandingNavBar from '../ui/LandingNavBar'
 import Footer from '../ui/Footer'
 
 const ContactUs = () => (
   <div className="contact-us">
-    <NavBar />
+    <LandingNavBar />
 
     <div className="content smaller-tablet">
       <h1 className="center">Get in touch.</h1>

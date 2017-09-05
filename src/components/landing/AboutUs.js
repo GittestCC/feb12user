@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../ui/NavBar'
+import LandingNavBar from '../ui/LandingNavBar'
 import Footer from '../ui/Footer'
 import StaffCard from './aboutUs/StaffCard'
 import JobOpenings from './aboutUs/JobOpenings'
@@ -10,7 +10,7 @@ import StaffData from '../../constants/staffData.json'
 
 const AboutUs = () => (
   <div>
-    <NavBar />
+    <LandingNavBar />
     <MeetTheRebels />
     <div className="content about-us">
       <TitleWithLines text={StaffData.coFounders.title} />

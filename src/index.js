@@ -10,6 +10,7 @@ import AboutUs from './components/landing/AboutUs'
 import ContactUs from './components/landing/ContactUs'
 import Blog from './components/landing/Blog'
 import LogIn from './components/LogIn'
+import Layout from './components/Layout'
 import './style/app.css'
 
 const store = configureStore()
@@ -26,6 +27,7 @@ ReactDOM.render(
         <Route path="/blog" component={Blog} />
         <Route path="/log-in" component={LogIn} />
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/dashboard" component={Layout} />
       </div>
     </Router>
   </Provider>,

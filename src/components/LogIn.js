@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar from './ui/NavBar'
+import LandingNavBar from './ui/LandingNavBar'
 import Footer from './ui/Footer'
 import LogInForm from './logIn/LogInForm'
 import SignUpForm from './logIn/SignUpForm'
 
 const LogIn = ({ flip }) => (
   <div className={`${flip ? 'sign-up-page' : 'log-in-page'}`}>
-    <NavBar />
+    <LandingNavBar />
     <div className="content">
       <h1 className="center">The one-stop-shop for microservices</h1>
       <h3 className="center">

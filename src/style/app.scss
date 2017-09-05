@@ -18,6 +18,9 @@
 @import 'contact-us';
 @import 'link-button';
 @import 'footer';
+@import './dashboard/sidebar';
+@import './dashboard/dashboard-navbar';
+@import './dashboard/layout';
 
 * {
   box-sizing: border-box;

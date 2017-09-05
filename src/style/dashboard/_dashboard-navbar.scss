@@ -1,0 +1,289 @@
+.navbar {
+  .navigation-logo {
+    display: none;
+    &.menu-open {
+      display: block;
+    }
+  }
+
+  &.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .user-avatar {
+    @include backgroundImage('/images/dashboard/avatar-color-1.jpg', 40px, 40px);
+    min-width: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 40px;
+    color: $kinto-tinted-grayscale-11;
+    h3 {
+      margin: 0;
+      font-weight: bold;
+    }
+}
+
+  .mobile-navigation-logo {
+    @include backgroundImage('../images/logo-full-color-horizontal.svg', 200px, 30px);
+    display: none;
+    &.show {
+      display: block;
+    }
+    @include desktop {
+      display:  none;
+      &.show {
+        display: none;
+      }
+    }
+  }
+
+  .search {
+    display:none;
+    &.show {
+      width: 100%;
+      display: block;
+      position: relative;
+    }
+    input {
+      padding-left: 45px;
+      &:focus {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .notifications.hide, .user-avatar.hide{
+    display: none;
+  }
+
+
+  .left.hide, .right.hide {
+    display: none;
+  }
+
+  @include desktop {
+    .left.hide, .right.hide, .notifications.hide, .user-avatar.hide {
+      display: flex;
+    }
+  }
+
+  @include abovetablet {
+    .search, .search.show {
+      display: block;
+    }
+  }
+
+  .hide-search, .left.hide-search {
+    display: none;
+    @include abovetablet {
+      display: flex;
+    }
+  }
+
+  .search-icon {
+    display: none;
+    &.show {
+      @include backgroundImage('/images/dashboard/icon-nav-search.svg', 40px, 40px);
+      min-width: 40px;
+      height: 40px;
+      display:block;
+    }
+    @include abovetablet {
+      display: none;
+      &.show {
+        display: none;
+      }
+    }
+  }
+
+  .close-search {
+    @include backgroundImage('/images/dashboard/icon-searchfield-close.svg', 40px, 40px);
+    position: absolute;
+    top: 1px;
+    right: 6px;
+  }
+  @include abovetablet {
+    .close-search {
+      display: none;
+    }
+  }
+
+  .inner-search-icon {
+    @include backgroundImage('/images/dashboard/icon-searchfield-search.svg', 40px, 40px);
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .inner-search-icon {
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    &.hide {
+      display: none;
+    }
+  }
+
+  .on-dashboard {
+    display:none;
+  }
+
+  .responsive-on {
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: contain;
+    top: 0;
+    left: 0px;
+    position: relative;
+    display: inline-block;
+    &.dashboard {
+      background-image: url('/images/dashboard/icon-nav-dashboard.svg');
+    }
+    &.market {
+      background-image: url('/images/dashboard/icon-nav-market.svg');
+    }
+  }
+  .responsive-go {
+      &.to-market {
+      @include backgroundImage('/images/dashboard/icon-nav-switch-to-market-glyph.svg', 40px, 40px);
+      min-width: 40px;
+      height: 40px;
+      margin-left: 15px;
+    }
+    &.to-dashboard {
+      @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard-glyph.svg', 40px, 40px);
+      min-width: 80px;
+      height: 40px;
+      margin-left: 15px;
+    }
+  }
+
+
+@include tablet {
+  .search {
+    display:block;
+  }
+  .search-icon {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: block;
+    // margin-left: 30px;
+    margin-right: 25px;
+  }
+  .responsive-on {
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: contain;
+    top: 0;
+    left: 0px;
+    position: relative;
+    display: inline-block;
+    margin-left: 30px;
+    &.dashboard {
+      background-image: url('/images/dashboard/icon-nav-dashboard.svg');
+    }
+    &.market {
+      background-image: url('/images/dashboard/icon-nav-market.svg');
+    }
+  }
+  .responsive-go.to-market {
+    @include backgroundImage('/images/dashboard/icon-nav-switch-to-market.svg', 80px, 40px);
+    min-width: 80px;
+    height: 40px;
+    margin-left: 15px;
+  }
+  .on-dashboard, .on-market, .go-to-desktop, .go-to-market {
+    display: none;
+  }
+}
+  .notifications {
+    border-radius: 20px;
+    @include backgroundImage('/images/dashboard/icon-nav-notifications.svg', 40px, 40px);
+    height: 40px;
+    min-width: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+  }
+
+  @include desktop {
+    .responsive-on, .responsive-go {
+      display: none;
+    }
+    .navigation-logo {
+      display: block;
+      width: 320px;
+      margin-left: 0;
+      border-right: solid 2px $kinto-tinted-grayscale-3;
+    }
+    .on-dashboard, .on-market {
+      margin-left: 30px;
+      margin-right: 17px;
+      margin-bottom: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: inline-block;
+    }
+    .on-dashboard {
+      background-image: url('/images/dashboard/icon-nav-dashboard-full.svg');
+      width: 160px;
+      height: 40px;
+    }
+    .on-market {
+      background-image: url('/images/dashboard/icon-nav-market-full.svg');
+      width: 120px;
+      height: 40px;
+    }
+    .go-to-market {
+      @include backgroundImage('/images/dashboard/icon-nav-switch-to-market-full.svg', 120px, 40px);
+      display: inline-block;
+    }
+    .go-to-dashboard {
+      @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard-full.svg', 160px, 40px);
+      display: inline-block;
+    }
+  }
+
+  .dashboard-buttons-wrapper, .market-buttons-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .right, .left {
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+  .right {
+    right:0;
+    .search, .notifications, .user-avatar {
+      margin-right: 10px;
+      @include tablet {
+        margin-right: 30px;
+      }
+    }
+    .search input{
+    height: 40px;
+    width: 240px;
+    margin-bottom: 0;
+    background-color: $kinto-tinted-grayscale-1;
+    }
+    .search.show input {
+      width: 100%;
+    }
+  }
+  .left {
+    left: 75px;
+    @include desktop {
+      left:0;
+    }
+  }
+}

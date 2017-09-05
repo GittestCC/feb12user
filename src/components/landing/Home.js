@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../ui/NavBar'
+import LandingNavBar from '../ui/LandingNavBar'
 import Egg from './home/Egg'
 import BlogGallery from '../ui/BlogGallery'
 import TitleWithLines from '../ui/TitleWithLines'
@@ -9,7 +9,7 @@ import NotifyMe from './home/NotifyMe'
 
 const App = () => (
   <div className="app">
-    <NavBar />
+    <LandingNavBar />
     <div className="content section bg-white landing">
       <div className="front-page">
         <h1>The One Stop Shop for Microservices</h1>

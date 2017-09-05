@@ -1,0 +1,89 @@
+.sidebar {
+  left: -320px;
+  &.show {
+    left: 0px;
+  }
+  width: 320px;
+  padding: 0 30px;
+  position: absolute;
+  height: 100vh;
+  background-color: $kinto-tinted-grayscale-2;
+  transition: all .2s ease-in-out;
+  li {
+    &.sidebar-item {
+      padding-left: 20px;
+    }
+    &.sidebar-section {
+      margin-top: 50px;
+    }
+    position: relative;
+    h4{
+      height: 40px;
+      line-height: 40px;
+      margin: 0;
+      padding-left: 30px;
+      &:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-position: center;
+        top: 0;
+        left: 20px;
+        margin-top: 10px;
+        position: absolute;
+        display: inline-block;
+      }
+      &.home:before {
+        background-image: url('/images/dashboard/icon-dashboard-home.svg');
+      }
+      &.analytics:before {
+        background-image: url('/images/dashboard/icon-dashboard-analytics.svg');
+      }
+      &.applications:before {
+        background-image: url('/images/dashboard/icon-dashboard-applications.svg');
+      }
+      &.billing:before {
+        background-image: url('/images/dashboard/icon-dashboard-billing.svg');
+      }
+      &.hosting:before {
+        background-image: url('/images/dashboard/icon-dashboard-hosting.svg');
+      }
+      &.kintoblocks:before {
+        background-image: url('/images/dashboard/icon-dashboard-kintoblocks.svg');
+      }
+      &.sales-data:before {
+        background-image: url('/images/dashboard/icon-dashboard-sales-data.svg');
+      }
+      &.services:before {
+        background-image: url('/images/dashboard/icon-dashboard-services.svg');
+      }
+      &.settings:before {
+        background-image: url('/images/dashboard/icon-dashboard-settings.svg');
+      }
+      &.kintoblocks img {
+        position: absolute;
+        right: 20px;
+        border-radius: 20px;
+        top: 10px;
+      }
+    }
+    .selected {
+      background-image: url('/images/dashboard/sidebar-highlight.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      // box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7, 0.2), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7, 0.2);
+      background-color: transparent;
+      h4 {
+        color: $kinto-white;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .sidebar, .sidebar.show {
+    display: block;
+    left: 0px;
+  }
+}
