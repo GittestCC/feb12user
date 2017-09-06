@@ -16,49 +16,52 @@ class NavBar extends Component {
   }
 
   render() {
+    const { isDashboard, isSideBarShownMobile, toggleNavHandler } = this.props
     return (
       <div className="navbar main-navigation">
         <div
-          className={`mobile-menu-toggle ${this.props.isSideBarShownMobile
+          className={`mobile-menu-toggle ${isSideBarShownMobile
             ? 'cross'
             : 'hamburger'}`}
-          onClick={this.props.toggleNavHandler}
+          onClick={toggleNavHandler}
         />
 
         <Link to={'/'}>
           <div
-            className={`mobile-navigation-logo ${this.props.isSideBarShownMobile
+            className={`mobile-navigation-logo ${isSideBarShownMobile
               ? 'show'
               : ''}`}
           />
         </Link>
 
         <div
-          className={`left ${this.props.isSideBarShownMobile
-            ? 'hide'
-            : ''} ${this.state.showSearch ? 'hide-search' : ''}`}
+          className={`left ${isSideBarShownMobile ? 'hide' : ''} ${this.state
+            .showSearch
+            ? 'hide-search'
+            : ''}`}
         >
           <Link className="navigation-logo" to={'/'} />
 
-          {this.props.isDashboard ? (
+          {isDashboard ? (
             <div className="dashboard-buttons-wrapper">
-              <Link className="on-dashboard" to={'/'} />
-              <Link className="go-to-market" to={'/'} />
-              <div className="responsive-on dashboard" />
-              <div className="responsive-go to-market" />
+              <Link className="on-dashboard" to={'/app/dashboard'} />
+              <Link className="go-to-market" to={'/app/market'} />
+              <Link className="responsive-on dashboard" to={'/app/dashboard'} />
+              <Link className="responsive-go to-market" to={'/app/market'} />
             </div>
           ) : (
             <div className="market-buttons-wrapper">
-              <Link className="on-market" to={'/'} />
-              <Link className="go-to-dashboard" to={'/'} />
-              <div className="responsive-on market" />
-              <div className="responsive-go to-dashboard" />
+              <Link className="on-market" to={'/app/market'} />
+              <Link className="go-to-dashboard" to={'/app/dashboard'} />
+              <Link className="responsive-on market" to={'/app/market'} />
+              <Link
+                className="responsive-go to-dashboard"
+                to={'/app/dashboard'}
+              />
             </div>
           )}
         </div>
-        <div
-          className={`right ${this.props.isSideBarShownMobile ? 'hide' : ''}`}
-        >
+        <div className={`right ${isSideBarShownMobile ? 'hide' : ''}`}>
           <div
             className={`search-icon ${this.state.showSearch ? '' : 'show'}`}
             onClick={this.displaySearchBar}

@@ -199,6 +199,12 @@
     height: 40px;
     margin-left: 15px;
   }
+  .responsive-go.to-dashboard {
+    @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard.svg', 80px, 40px);
+    min-width: 80px;
+    height: 40px;
+    margin-left: 15px;
+  }
   .on-dashboard, .on-market, .go-to-desktop, .go-to-market {
     display: none;
   }

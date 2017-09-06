@@ -12,6 +12,14 @@
   li {
     &.sidebar-item {
       padding-left: 20px;
+      .item-sub-add {
+        display: none;
+      }
+      &:hover, &.selected {
+        .item-sub-add {
+          display: block;
+        }
+      }
     }
     &.sidebar-section {
       margin-top: 50px;
