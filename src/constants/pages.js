@@ -1,8 +1,8 @@
 // all pages that either have save button or they are in the sidebar
 const pages = {
   dashboardBlocksList: 'DASHBOARD_BLOCKS_LIST',
-  dashboardBlocksAdd: 'DASHBOARD_BLOCKS_ADD',
-  dashboardBlocksView: 'DASHBOARD_BLOCKS_VIEW',
+  dashboardBlockCreate: 'DASHBOARD_BLOCK_CREATE',
+  dashboardBlockView: 'DASHBOARD_BLOCK_VIEW',
   dashboardHome: 'DASHBAORD_HOME',
   dashboardApplications: 'DASHBOARD_APPLICATIONS',
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
@@ -40,19 +40,19 @@ export const dashboardSidebar = [
     title: 'Kintoblocks',
     className: 'kintoblocks',
     url: '/app/dashboard/kintoblocks/list',
-    addUrl: '/app/dashboard/kintoblocks/add',
+    addUrl: '/app/dashboard/kintoblocks/create',
     children: [
       {
         key: pages.dashboardBlocksList,
         url: '/app/dashboard/kintoblocks/list'
       },
       {
-        key: pages.dashboardBlocksView,
+        key: pages.dashboardBlockView,
         url: '/app/dashboard/kintoblocks/:id/versions/:version'
       },
       {
-        key: pages.dashboardBlocksAdd,
-        url: '/app/dashboard/kintoblocks/add'
+        key: pages.dashboardBlockCreate,
+        url: '/app/dashboard/kintoblocks/create'
       }
     ],
     group: 1

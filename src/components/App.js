@@ -3,6 +3,7 @@ import { Route, Prompt } from 'react-router-dom'
 
 import NavBarContainer from '../containers/app/NavBarContainer'
 import SideBarContainer from '../containers/app/SideBarContainer'
+import GlobalSaveBarContainer from '../containers/app/GlobalSaveBarContainer'
 
 import Dashboard from './Dashboard'
 import Market from './Market'
@@ -45,6 +46,8 @@ class App extends Component {
         <SideBarContainer
           isSideBarShownMobile={this.state.isSideBarShownMobile}
         />
+
+        <GlobalSaveBarContainer />
 
         <div className="layout-inner">
           <Route

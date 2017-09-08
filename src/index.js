@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Route } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
@@ -15,10 +15,13 @@ import LogIn from './components/LogIn'
 import ScrollToTop from './components/ScrollToTop'
 
 import AppContainer from './containers/AppContainer'
+import AuthContainer from './containers/AuthContainer'
 import './style/app.css'
 
 const history = createHistory()
 const store = configureStore(history)
+
+const isLoggedIn = store.getState().auth.token
 
 const SignUp = () => <LogIn flip={true} />
 
@@ -27,13 +30,20 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <ScrollToTop>
         <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/about-us" component={AboutUs} />
-          <Route path="/contact-us" component={ContactUs} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/log-in" component={LogIn} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/app" component={AppContainer} />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (isLoggedIn ? <Redirect to="/app" /> : <Home />)}
+            />
+            <Route path="/about-us" component={AboutUs} />
+            <Route path="/contact-us" component={ContactUs} />
+            <Route path="/blog" component={Blog} />
+            <Route path="/log-in" component={LogIn} />
+            <Route path="/sign-up" component={SignUp} />
+            <Route path="/app" component={AppContainer} />
+          </Switch>
+          <Route component={AuthContainer} />
         </div>
       </ScrollToTop>
     </ConnectedRouter>

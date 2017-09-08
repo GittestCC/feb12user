@@ -1,6 +1,7 @@
 import { actionTypes } from 'redux-form'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { getActivePageKey } from '../helpers/pageHelper'
+import { FORM_SUBMITTED } from '../actions/pageOptions'
 
 export default function pageOptions(state = {}, action) {
   switch (action.type) {
@@ -18,6 +19,11 @@ export default function pageOptions(state = {}, action) {
         canSave: false,
         activePage,
         isDashboard
+      }
+    case FORM_SUBMITTED:
+      return {
+        ...state,
+        canSave: false
       }
     default:
       return state

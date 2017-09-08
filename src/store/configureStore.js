@@ -3,6 +3,7 @@ import { createLogger } from 'redux-logger'
 import immutableCheckMiddleWare from 'redux-immutable-state-invariant'
 import thunk from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
+import getInitialState from './getInitialState'
 
 import rootReducer from '../reducers'
 
@@ -22,4 +23,5 @@ const applyedMiddleware = history => {
   return composeEnhancers(applyMiddleware(...middleware))
 }
 
-export default history => createStore(rootReducer, applyedMiddleware(history))
+export default history =>
+  createStore(rootReducer, getInitialState(), applyedMiddleware(history))

@@ -49,6 +49,9 @@ input, textarea, select {
   border-radius: 4px;
   padding: $margin-base;
 }
+.error-message-form {
+  margin-bottom: $margin-base*2;
+}
 
 h5.byline{
   font-weight: normal;
@@ -167,4 +170,26 @@ form {
 
 .line.divider {
   @include dividerLine($kinto-tinted-grayscale-2);
+}
+
+.global-save-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  background: $kinto-tinted-grayscale-8;
+  position: fixed;
+  bottom: 0;
+  height: 0;
+  text-align: right;
+  width: 100%;
+  transition: height 0.1s linear;
+  z-index: 1;
+  &.show {
+    height: 60px;
+  }
+  .button {
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 40px;
+    width: auto;
+  }
 }

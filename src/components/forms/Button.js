@@ -7,6 +7,7 @@ const Button = ({
   image,
   onClick,
   disabled,
+  form,
   children
 }) => {
   type = type || 'submit'
@@ -27,6 +28,7 @@ const Button = ({
       type={type}
       className={`button ${buttonType} ${disabled ? 'disabled' : ''}`}
       onClick={buttonHandler}
+      form={form}
     >
       {image ? <img src={image} alt="" /> : ''}
       {children}
