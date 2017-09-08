@@ -1,0 +1,220 @@
+.my-kintoblocks {
+  // width: $dashboard-content-width;
+  margin: 0 auto;
+  .button {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    margin: 0;
+  }
+  .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    h2 {
+      display: inline-block;
+    }
+  }
+  .kintoblock-list {
+    width: 100%;
+    width: 100%;
+    display: inherit;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(1, auto [col-start]);
+    @media (min-width: 560px) and (max-width: 829px) {
+      grid-template-columns: repeat(2, auto [col-start]);
+    }
+    @media (min-width: 830px) and (max-width: 1023px) {
+      grid-template-columns: repeat(3, auto [col-start]);
+    }
+    @media (min-width: 1024px) and (max-width: 1170px) {
+      grid-template-columns: repeat(2, auto [col-start]);
+    }
+    @media (min-width: 1171px) and (max-width: 1440px) {
+      grid-template-columns: repeat(3, auto [col-start]);
+    }
+    @media (min-width: 1441px) and (max-width: 1800px){
+      grid-template-columns: repeat(4, auto [col-start]);
+    }
+    @media (min-width: 1801px){
+      grid-template-columns: repeat(5, auto [col-start]);
+    }
+    grid-gap: 20px;
+    justify-content: stretch;
+    align-content: stretch;
+    .kintoblock {
+      background-color: $kinto-white;
+      padding: 20px;
+      justify-self: stretch;
+      min-width: 250px;
+      min-height: 170px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+      .text {
+        h3 {
+          width: 210px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: bold;
+          // on hover full text to be shown
+        }
+        .version{
+          font-weight: normal;
+          color: $kinto-tinted-grayscale-7;
+          margin-bottom: 36px;
+        }
+      }
+      .icons {
+        display: flex;
+        justify-content: space-between;
+        bottom: 20px;
+        width: 85%;
+        position: absolute;
+        .applications {
+          .application {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 4px solid #FFFFFF;
+            position: absolute;
+            &:nth-child(1){
+              margin-left: 20px;
+            }
+          }
+        }
+        .menu {
+          background-color: $kinto-tinted-grayscale-1;
+          border-radius: 20px;
+          height: 40px;
+          width: 40px;
+          @include backgroundImage('/images/icon-more-actions.svg', 40px, 40px);
+        }
+      }
+      &.create {
+        .add-new {
+          .inner {
+            @include backgroundImage('/images/icon-new-blue-large.svg', 40px, 40px);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+          }
+          .pulsate {
+            animation: pulsate 1s linear infinite alternate;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+          }
+        }
+        border-top: solid 10px $kinto-tinted-grayscale-6;
+        .text {
+          margin-bottom: 60px;
+        }
+        .icons .applications .application {
+          margin-left: 0;
+          background-color:$kinto-tinted-grayscale-1;
+        }
+        .application {
+          position: absolute;
+          bottom: 0px;
+          left: 0;
+        }
+      }
+      &.purple {
+        border-top: solid 10px $kinto-purple-light;
+        .icons .applications .application {
+          background-color:$kinto-purple-light;
+          background-image: linear-gradient(-180deg, $kinto-purple-light 0%, $kinto-purple 100%);
+
+        }
+      }
+      &.lapis {
+        border-top: solid 10px $kinto-lapis-light;
+        .icons .applications .application {
+          background-color:$kinto-lapis-light;
+          background-image: linear-gradient(-180deg, $kinto-lapis-light 0%, $kinto-lapis 100%);
+
+        }
+      }
+      &.blue {
+        border-top: solid 10px $kinto-blue-light;
+        .icons .applications .application {
+          background-color:$kinto-blue-light;
+          background-image: linear-gradient(-180deg, $kinto-blue-light 0%, $kinto-blue 100%);
+
+        }
+      }
+      &.coral {
+        border-top: solid 10px $kinto-coral-light;
+        .icons .applications .application {
+          background-color:$kinto-coral-light;
+          background-image: linear-gradient(-180deg, $kinto-coral-light 0%, $kinto-coral 100%);
+
+        }
+      }
+      &.orange {
+        border-top: solid 10px $kinto-orange-light;
+        .icons .applications .application {
+          background-color:$kinto-orange-light;
+          background-image: linear-gradient(-180deg, $kinto-orange-light 0%, $kinto-orange 100%);
+
+        }
+      }
+      &.yellow {
+        border-top: solid 10px $kinto-yellow-light;
+        .icons .applications .application {
+          background-color:$kinto-yellow-light;
+          background-image: linear-gradient(-180deg, $kinto-yellow-light 0%, $kinto-yellow 100%);
+
+        }
+      }
+      &.green {
+        border-top: solid 10px $kinto-green-light;
+        .icons .applications .application {
+          background-color:$kinto-green-light;
+          background-image: linear-gradient(-180deg, $kinto-green-light 0%, $kinto-green 100%);
+
+        }
+      }
+      &.turquoise {
+        border-top: solid 10px $kinto-turquoise-light;
+        .icons .applications .application {
+          background-color:$kinto-turquoise-light;
+          background-image: linear-gradient(-180deg, $kinto-turquoise-light 0%, $kinto-turquoise 100%);
+
+        }
+      }
+      &.gray {
+        border-top: solid 10px $kinto-tinted-grayscale-6;
+        .icons .applications .application {
+          background-color:$kinto-tinted-grayscale-6;
+          background-image: linear-gradient(-180deg, $kinto-tinted-grayscale-6 0%, $kinto-tinted-grayscale-8 100%);
+        }
+      }
+    }
+  }
+}
+
+.breadcrumbs {
+  color: $kinto-tinted-grayscale-9;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    background-color: rgba($kinto-blue-light, 0.1);
+  }
+  100% {
+    transform: scale(1.2);
+    background-color: rgba($kinto-blue-light, 0.4);
+  }
+}

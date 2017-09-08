@@ -21,6 +21,8 @@
 @import './dashboard/sidebar';
 @import './dashboard/dashboard-navbar';
 @import './dashboard/layout';
+@import './dashboard/list-kintoblocks';
+@import './dashboard/create-kintoblock';
 
 * {
   box-sizing: border-box;
@@ -31,6 +33,14 @@
 
 body{
   margin:0;
+}
+
+.app {
+  background-color: $kinto-tinted-grayscale-1;
+}
+
+.kintoblocks-master-container {
+  min-height: 100vh;
 }
 
 .content {

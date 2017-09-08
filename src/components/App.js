@@ -32,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Prompt
           when={this.props.blockNavigate}
           message={() => 'Changes you made may not be saved'}

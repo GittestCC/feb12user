@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-new-blue-large</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1440---dashboard---kintoblocks" transform="translate(-540.000000, -320.000000)">
+            <g id="content" transform="translate(320.000000, 0.000000)">
+                <g id="content-box" transform="translate(30.000000, 200.000000)">
+                    <g id="card-1-copy-9">
+                        <g id="icon-new-blue-large" transform="translate(190.000000, 120.000000)">
+                            <circle id="Oval-10" fill="#53D9EB" cx="20" cy="20" r="20"></circle>
+                            <path d="M19,19 L11,19 L11,19 C10.4477153,19 10,19.4477153 10,20 C10,20.5522847 10.4477153,21 11,21 L19,21 L19,29 C19,29.5522847 19.4477153,30 20,30 C20.5522847,30 21,29.5522847 21,29 L21,21 L29,21 C29.5522847,21 30,20.5522847 30,20 C30,19.4477153 29.5522847,19 29,19 L21,19 L21,11 C21,10.4477153 20.5522847,10 20,10 C19.4477153,10 19,10.4477153 19,11 L19,11 L19,19 Z" id="Combined-Shape" fill="#0C4B5D"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
