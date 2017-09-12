@@ -14,7 +14,7 @@ const ContactUs = () => (
         line.
       </h3>
       <h3 className="center">
-        <b>support@kintohub.com</b>
+        <b>info@kintohub.com</b>
       </h3>
 
       <div className="top-section">

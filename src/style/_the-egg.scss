@@ -98,10 +98,11 @@
 
 .content.notify-me-and-egg {
   margin:0;
-  padding:0;
+  padding-left:10px;
+  padding-right:10px;
   position: relative;
   @include abovetablet {
-    padding: 60px 0 0;
+    padding: 0;
     margin: 60px auto 0;
   }
 
@@ -124,6 +125,7 @@
         text-transform: uppercase;
         margin-bottom: 0;
         margin-right: 14px;
+        line-height: 40px;
       }
       img {
         animation: up-and-down 1s ease-in-out infinite alternate;

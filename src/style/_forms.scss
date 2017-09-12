@@ -1,6 +1,6 @@
 .notify-form {
   max-width: 460px;
-  margin: 0 auto 60px;
+  margin: 0 auto;
   @include desktop {
     display: inline-block;
   }
@@ -76,6 +76,7 @@ h5.byline{
   line-height: 50px;
   border: none;
   display: block;
+  font-weight: bold;
   &:hover {
     color: $kinto-tinted-grayscale-10;
   }

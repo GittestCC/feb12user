@@ -128,7 +128,9 @@
       }
       @media (min-width: 768px) and (max-width: 890px){
         ul {
-          margin-right: 0;
+          // margin-right: 0;
+          // fix while buttonns gone
+          margin-right: 40px;
           li a.default.navigation-button {
             display: none;
           }

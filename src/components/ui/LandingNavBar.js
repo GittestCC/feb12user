@@ -91,7 +91,6 @@ class LandingNavBar extends Component {
                 to={'/sign-up'}
                 className="button default navigation-button"
               >
-                {' '}
                 Sign Up
               </Link>
             </li> */}

@@ -17,7 +17,7 @@ const Resources = () => (
         />
         <ResourceCard
           download="true"
-          externalLink="/downloads/Press Kit.zip"
+          externalLink="/downloads/Press-Kit.zip"
           type="press"
           icon={require('../../../images/icon-press-kit.svg')}
           title="Press Kit"

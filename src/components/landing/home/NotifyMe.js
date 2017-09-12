@@ -30,7 +30,7 @@ class NotifyMe extends Component {
               type="text"
               name="FNAME"
               id="firstName"
-              placeholder="Jonathon"
+              placeholder="Jonathan"
               required
             />
           </div>
@@ -59,8 +59,7 @@ class NotifyMe extends Component {
           Notify Me
         </button>
         <h5 className="byline bold">
-          We'll stick to sending you cool updates & notifying you when we
-          officially launch
+          We'll stick to cool updates & notifying you when we officially launch
         </h5>
         <h5 className="byline">
           No Spam - pinky promise. Unsubscribe at anytime.

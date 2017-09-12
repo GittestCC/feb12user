@@ -117,6 +117,9 @@
 }
 
 .front-page {
+  h1{
+    text-transform: none;
+  }
   @include desktop {
     margin-bottom: 100px;
   }
@@ -126,5 +129,6 @@
   }
   h1{
     margin-bottom: $margin-base*3;
+    text-transform: none;
   }
 }

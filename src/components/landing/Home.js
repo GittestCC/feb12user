@@ -12,11 +12,11 @@ const App = () => (
     <LandingNavBar />
     <div className="content section bg-white landing">
       <div className="front-page">
-        <h1>The One Stop Shop for Microservices</h1>
+        <h1>The one stop shop for microservices.</h1>
 
         <h3>
           Kintohub is a platform humbly aiming to make developers' lives easier
-          on planet Earth - propulsing microservices in a magic cloud.
+          on planet Earth - riding microservices on a magic cloud.
         </h3>
         <h3>
           <strong>Coming soon to a keyboard near you.</strong>
