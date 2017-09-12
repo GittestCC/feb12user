@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import KintoBlockCreateForm from './kintoblockCreate/KintoBlockCreateForm'
+import KintoBlockCreateForm from './kintoBlockCreate/KintoBlockCreateForm'
 
 class KintoblockCreate extends Component {
   render() {

@@ -165,7 +165,7 @@ h5.byline{
   position: relative;
   .show-password{
     position: absolute;
-    top: 20px;
+    top: 16px;
     right: 16px;
     @include backgroundImage("/images/icon-entry-masked.svg", 20px, 10px);
     &.checked {

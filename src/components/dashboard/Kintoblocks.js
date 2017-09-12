@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import KintoblockList from './kintoblocks/KintoblockList'
-import KintoblockCreate from './kintoblocks/KintoblockCreate'
-import KintoBlockManage from './kintoblocks/KintoBlockManage'
+import KintoblockList from './kintoBlocks/KintoblockList'
+import KintoblockCreate from './kintoBlocks/KintoblockCreate'
+import KintoBlockManage from './kintoBlocks/KintoBlockManage'
 
 const Kintoblocks = ({ match }) => (
   <div className="kintoblocks-master-container">
