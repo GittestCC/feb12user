@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import FieldValidation from '../../../forms/FieldValidation'
 import Toggle from '../../../forms/Toggle'
 import { required } from '../../../../helpers/validators'
-import Slider, { Range } from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 class KintoBlockCreateForm extends Component {

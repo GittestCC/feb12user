@@ -41,6 +41,9 @@ input, textarea, select {
   &.error {
     border: 2px solid $input-error !important;
   }
+  &.disabled {
+    @include inputDisabled;
+  }
 }
 
 .error-message {

@@ -50,7 +50,7 @@ const FieldValidation = props => {
   }
 
   return (
-    <div>
+    <div className="field-wrapper">
       <label htmlFor={input.name}>{label}</label>
       <div>
         {inputEl}

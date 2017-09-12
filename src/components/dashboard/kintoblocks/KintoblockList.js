@@ -19,7 +19,11 @@ class KintoblockList extends Component {
   render() {
     return (
       <div className="my-kintoblocks">
-        <div className="breadcrumbs">KintoBlocks</div>
+        <div className="breadcrumbs">
+          <a href="list" className="disabled">
+            KintoBlocks
+          </a>
+        </div>
 
         <div className="page-title">
           <h2>My KintoBlocks</h2>

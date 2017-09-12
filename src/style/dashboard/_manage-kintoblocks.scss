@@ -1,0 +1,197 @@
+.kintoblock-manage {
+  .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    h2 {
+      display: flex;
+      align-items: center;
+    }
+    .status {
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+      color: $kinto-white;
+      padding: 0 4px;
+      height: 20px;
+      line-height: 20px;
+      margin: 0 0 0 14px;
+      &.draft {
+        background-color: $kinto-purple;
+      }
+    }
+    .button {
+      display: inline-block;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+  .form-container {
+    width: 100%;
+    display: inherit;
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    justify-content: stretch;
+    align-content: stretch;
+    min-width: 520px;
+    margin-bottom: 40px;
+    h3 {
+      color: $kinto-grayscale-8;
+    }
+    h5 {
+      font-weight: normal;
+    }
+    @media (min-width: 1440px) {
+      grid-template-columns: repeat(2, auto [col-start]);
+    }
+    @media (min-width: 1440px) {
+      min-height: 500px;
+      margin-bottom: 0;
+    }
+    .form-wrapper {
+      margin-bottom: 40px;
+      min-width: 520px;
+      h5 {
+        min-height: 45px;
+      }
+      &.versioning, &.dependencies, &.availibility{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        label, input {
+          width: 100%;
+        }
+        .form-body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      &.dependencies {
+        .form-body {
+          .service, .search{
+            margin-bottom: 0;
+          }
+          .service {
+            margin-top: 30px;
+          }
+        }
+      }
+      &.custom-paramaters {
+        @media (min-width: 1440px) {
+          grid-column-start: 2;
+          grid-row-start: 2;
+          grid-row-end: span 3;
+        }
+        .form-body {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: column;
+          .row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            &.added input{
+              @include placeholder($kinto-tinted-grayscale-7)
+            }
+          }
+          .field-wrapper {
+            width: 45%;
+            input {
+              margin-bottom: 0;
+            }
+          }
+          .icon{
+            cursor: pointer;
+            &.add {
+              @include backgroundImage('/images/icon-blue-new.svg', 20px, 20px);
+            }
+            &.delete {
+              @include backgroundImage('/images/icon-red-delete.svg', 20px, 20px);
+            }
+          }
+        }
+      }
+      .hardware-requirements{
+        @media (min-width: 1440px) {
+          grid-column-start: 1;
+          grid-row-start: 3;
+        }
+      }
+      .expand {
+        border-radius: 12px 12px 0 0;
+        background-color: $kinto-white;
+        padding: 18px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all .2s linear;
+        h4, h6 {
+          margin:0;
+        }
+        .right {
+          display: flex;
+          align-items: center;
+          h6 {
+            margin-right: 10px;
+            font-weight: normal;
+          }
+        }
+        .icon {
+          @include backgroundImage('/images/icon-gray-expand-collapse.svg', 20px, 20px)
+          display: inline-block;
+          transform: rotate(-180deg);
+          transition: all .2s linear;
+        }
+        &.collapse {
+          border-radius: 12px;
+          .right .icon {
+            transform: rotate(0deg);
+          }
+        }
+      }
+      .hardware-requirements-wrapper {
+        box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+        border-radius: 12px;
+        .line {
+          width: 100%;
+          border-bottom: solid 1px $kinto-tinted-grayscale-2;
+        }
+      }
+      .form-body {
+        width: 100%;
+        min-height: 230px;
+        box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+        border-radius: 12px;
+        .radio .field-wrapper {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          input {
+            width: 20px;
+            margin-right: 20px;
+            margin-bottom: 0;
+          }
+          label {
+            text-transform: none;
+          }
+        }
+        &.hardware {
+          border-radius: 0 0 12px 12px;
+          box-shadow: none;
+        }
+        background-color: $kinto-white;
+        padding: 40px;
+      }
+    }
+  }
+}

@@ -90,7 +90,7 @@ class NavBar extends Component {
               ? 'hide-search'
               : ''}`}
           >
-            <h3>LA</h3>
+            <h4>LA</h4>
           </div>
         </div>
       </div>

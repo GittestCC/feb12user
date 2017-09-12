@@ -1,4 +1,5 @@
 .navbar {
+  z-index: 3;
   .navigation-logo {
     display: none;
     &.menu-open {
@@ -22,7 +23,7 @@
     justify-content: center;
     line-height: 40px;
     color: $kinto-tinted-grayscale-11;
-    h3 {
+    h4 {
       margin: 0;
       font-weight: bold;
     }
@@ -88,9 +89,9 @@
   .search-icon {
     display: none;
     &.show {
-      @include backgroundImage('/images/dashboard/icon-nav-search.svg', 40px, 40px);
-      min-width: 40px;
-      height: 40px;
+      @include backgroundImage('/images/dashboard/icon-nav-search.svg', 30px, 30px);
+      min-width: 30px;
+      height: 30px;
       display:block;
     }
     @include abovetablet {
@@ -102,9 +103,9 @@
   }
 
   .close-search {
-    @include backgroundImage('/images/dashboard/icon-searchfield-close.svg', 40px, 40px);
+    @include backgroundImage('/images/dashboard/icon-searchfield-close.svg', 30px, 30px);
     position: absolute;
-    top: 1px;
+    top: 3px;
     right: 6px;
   }
   @include abovetablet {
@@ -114,14 +115,14 @@
   }
 
   .inner-search-icon {
-    @include backgroundImage('/images/dashboard/icon-searchfield-search.svg', 40px, 40px);
-    min-width: 40px;
-    height: 40px;
+    @include backgroundImage('/images/dashboard/icon-searchfield-search.svg', 30px, 30px);
+    min-width: 30px;
+    height: 30px;
   }
 
   .inner-search-icon {
     position: absolute;
-    top: 2px;
+    top: 5px;
     left: 6px;
     &.hide {
       display: none;
@@ -211,9 +212,9 @@
 }
   .notifications {
     border-radius: 20px;
-    @include backgroundImage('/images/dashboard/icon-nav-notifications.svg', 40px, 40px);
-    height: 40px;
-    min-width: 40px;
+    @include backgroundImage('/images/dashboard/icon-nav-notifications.svg', 30px, 30px);
+    height: 30px;
+    min-width: 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -226,8 +227,9 @@
     }
     .navigation-logo {
       display: block;
-      width: 320px;
-      margin-left: 0;
+      width: 290px;
+      margin-left: 30px;
+      background-position: left;
       border-right: solid 2px $kinto-tinted-grayscale-3;
     }
     .on-dashboard, .on-market {

@@ -59,6 +59,7 @@
   font-size: 18px;
   @include abovetablet {
     font-size: 16px;
+    height: 40px;
   }
   color: $kinto-tinted-grayscale-7;
   letter-spacing: 0;
@@ -81,6 +82,7 @@
   font-size: 18px;
   @include abovetablet {
     font-size: 16px;
+    height: 40px;
   }
   color: $kinto-tinted-grayscale-6;
   letter-spacing: 0;
@@ -89,7 +91,11 @@
   padding-left: $margin-base*2;
   background: $kinto-tinted-grayscale-1;
   border-radius: 4px;
+  border: none;
   @include placeholder($input);
+  &:focus {
+    border: none;
+  }
 }
 
 @mixin buttonBase(){

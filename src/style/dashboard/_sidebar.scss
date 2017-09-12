@@ -1,4 +1,5 @@
 .sidebar {
+  z-index: 2;
   left: -320px;
   &.show {
     left: 0px;
