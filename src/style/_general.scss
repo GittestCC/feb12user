@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $base-font;
+}
+
+body {
+  margin: 0;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.kintoblocks-master-container {
+  min-height: 100vh;
+}
+
+.content {
+  max-width: $content-width;
+  margin: 60px auto 0;
+  padding: 60px 10px 0;
+
+  @include tablet {
+    max-width: $tablet-content-width;
+
+    &.smaller-tablet {
+      max-width: $smaller-tablet-content-width;
+    }
+  }
+
+
+  @include abovetablet {
+    padding: 60px 0 0;
+  }
+}
+
+.bg-light-blue {
+  background-color: $kinto-tinted-grayscale-1;
+}
+
+.unstyled-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  li a {
+    text-decoration: none;
+  }
+}
+
+textarea, input, button {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}

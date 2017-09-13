@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import KintoBlockCreateForm from './kintoBlockCreate/KintoBlockCreateForm'
+import KintoBlockCreateFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateFormContainer'
 
 class KintoblockCreate extends Component {
   render() {
@@ -19,7 +19,7 @@ class KintoblockCreate extends Component {
           </div>
           <div className="icon" />
         </div>
-        <KintoBlockCreateForm />
+        <KintoBlockCreateFormContainer />
       </div>
     )
   }

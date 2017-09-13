@@ -1,11 +1,12 @@
 import React from 'react'
+import Tooltip from 'rc-tooltip'
 
 /**
  * a custom field used with redux form used to output a field with validation messages
  * used mainly when there is a `validate` option passed to `Field`
  */
 const FieldValidation = props => {
-  const { input, placeholder, label, type } = props
+  const { input, placeholder, label, type, help } = props
   const { touched, submitFailed, error } = props.meta
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
@@ -52,6 +53,11 @@ const FieldValidation = props => {
   return (
     <div className="field-wrapper">
       <label htmlFor={input.name}>{label}</label>
+      {help && (
+        <Tooltip placement="top" overlay={help} trigger="click">
+          <span className="tooltip" />
+        </Tooltip>
+      )}
       <div>
         {inputEl}
         {hasError && <div className="error-message">{error}</div>}

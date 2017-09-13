@@ -1,19 +1,18 @@
 import React from 'react'
+import Tooltip from 'rc-tooltip'
 
-const Toggle = ({ checkedClass, name, id, toggle, value, text }) => (
+const Toggle = ({ input, id, label, help }) => (
   <label className="switch">
-    <input
-      type="checkbox"
-      // className={ checkedClass }
-      name={name}
-      id={id}
-      // onChange={toggle}
-      // value={value}
-    />
-    <span className="slider" />
-    <label className="toggle-message" htmlFor={id}>
-      <h6>{text}</h6>
-    </label>
+    <input {...input} type="checkbox" id={id || input.name} />
+    <span className="toggle-slider" />
+    <h6 className="toggle-message">
+      {label}
+      {help && (
+        <Tooltip placement="top" overlay={help} trigger="click">
+          <span className="tooltip" />
+        </Tooltip>
+      )}
+    </h6>
   </label>
 )
 

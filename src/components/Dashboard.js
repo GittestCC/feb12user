@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Kintoblocks from './dashboard/Kintoblocks'
+import KintoBlocks from './dashboard/KintoBlocks'
 
 const Dashboard = ({ match }) => (
   <div>
-    <Route path={`${match.url}/kintoblocks`} component={Kintoblocks} />
+    <Route path={`${match.url}/kintoBlocks`} component={KintoBlocks} />
   </div>
 )
 

@@ -1,0 +1,18 @@
+.text-highlight {
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: inline-block;
+  color: white;
+  padding: 0 4px;
+  height: 20px;
+  line-height: 20px;
+  &.purple {
+    background-color: $kinto-purple;
+  }
+  &.orange {
+    background-color: $kinto-orange;
+  }
+  &.green {
+    background-color: $kinto-green;
+  }
+}

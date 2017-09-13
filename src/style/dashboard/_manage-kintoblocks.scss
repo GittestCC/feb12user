@@ -9,17 +9,7 @@
       align-items: center;
     }
     .status {
-      border-radius: 4px;
-      text-transform: uppercase;
-      display: inline-block;
-      color: $kinto-white;
-      padding: 0 4px;
-      height: 20px;
-      line-height: 20px;
       margin: 0 0 0 14px;
-      &.draft {
-        background-color: $kinto-purple;
-      }
     }
     .button {
       display: inline-block;

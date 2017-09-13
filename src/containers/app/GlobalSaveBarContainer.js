@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { submit } from 'redux-form'
 import GlobalSaveBar from '../../components/app/GlobalSaveBar'
 import forms from '../../constants/forms'
 
@@ -12,9 +13,18 @@ function mapStateToProps(state) {
   form = form || {}
   return {
     isShown,
-    formId: form.formId,
+    formName: form.formName,
     submitLabel: form.submitLabel
   }
 }
 
-export default connect(mapStateToProps)(GlobalSaveBar)
+function mergeProps(stateProps, dispatchProps) {
+  return {
+    ...stateProps,
+    onSubmit: () => {
+      dispatchProps.submit(stateProps.formName)
+    }
+  }
+}
+
+export default connect(mapStateToProps, { submit }, mergeProps)(GlobalSaveBar)

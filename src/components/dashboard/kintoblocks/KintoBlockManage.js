@@ -13,12 +13,12 @@ class KintoBlockManage extends Component {
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
-              <a href="#">Awesome KintoBlock</a>
+              <a href="">Awesome KintoBlock</a>
               <img src="/images/icon-breadcrumb.svg" alt="" />
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
-              <a href="#">1.0.3</a>
+              <a href="">1.0.3</a>
               <img src="/images/icon-breadcrumb.svg" alt="" />
             </li>
           </ul>
@@ -26,7 +26,8 @@ class KintoBlockManage extends Component {
 
         <div className="page-title">
           <h2>
-            Awesome KintoBlock <div className="status h6 draft">draft</div>
+            Awesome KintoBlock{' '}
+            <div className="text-highlight purple status h6">draft</div>
           </h2>
           <Link to="create" className="button secondary">
             Create New Kintoblock

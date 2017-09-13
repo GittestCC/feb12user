@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from '../forms'
 
-const GlobalSaveBar = ({ isShown, formId, submitLabel }) => (
+const GlobalSaveBar = ({ isShown, submitLabel, onSubmit }) => (
   <div className={`global-save-bar ${isShown ? 'show' : ''}`}>
-    <Button form={formId}>{submitLabel}</Button>
+    <Button onClick={onSubmit}>{submitLabel}</Button>
   </div>
 )
 

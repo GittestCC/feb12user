@@ -37,7 +37,7 @@ export const dashboardSidebar = [
     group: 1
   },
   {
-    title: 'Kintoblocks',
+    title: 'KintoBlocks',
     className: 'kintoblocks',
     url: '/app/dashboard/kintoblocks/list',
     addUrl: '/app/dashboard/kintoblocks/create',
