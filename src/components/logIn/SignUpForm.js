@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password } from '../forms'
-import { required, email } from '../../helpers/validators'
+import { required, email, password } from '../../helpers/validators'
 
 const SignUpForm = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit} className="sign-up-form">
@@ -31,19 +31,19 @@ const SignUpForm = ({ handleSubmit }) => (
         id="signUpPassword"
         placeholder="Create a password"
         component={Password}
-        validate={required}
+        validate={[required, password]}
       />
       <div className="byline">
         <h6>Requires 8 characters, at least 1 number and 1 letter</h6>
       </div>
       <Button type="submit">Sign Up</Button>
       {/* <div className="byline">
-            <h6>
-              By clicking "Sign Up" you agree to our{' '}
-              <a href="#">Terms of Service</a> and{' '}
-              <a href="#">Privacy Policy</a>.
-            </h6>
-          </div> */}
+        <h6>
+        By clicking "Sign Up" you agree to our{' '}
+        <a href="#">Terms of Service</a> and{' '}
+        <a href="#">Privacy Policy</a>.
+        </h6>
+      </div> */}
     </div>
   </form>
 )

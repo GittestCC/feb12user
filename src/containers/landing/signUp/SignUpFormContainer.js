@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import SignUpForm from '../../../components/logIn/SignUpForm'
-import { signUp } from '../../../actions/landing'
+import { signUp } from '../../../actions/auth'
 
 function mapDispatchToProps(dispatch, { onSuccess }) {
   return {

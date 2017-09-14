@@ -1,17 +1,15 @@
 import React from 'react'
 
-const CheckBox = ({ checkedClass, name, id, toggle, value, text }) => (
-  <div>
+const CheckBox = ({ input, id, label }) => (
+  <div className="checked-field-wrapper">
     <input
-      className={checkedClass}
+      {...input}
+      className={`checkbox ${input.value ? 'checked' : ''}`}
       type="checkbox"
-      name={name}
-      id={id}
-      onChange={toggle}
-      value={value}
+      id={id || input.name}
     />
     <label className="checkbox-message" htmlFor={id}>
-      <h6>{text}</h6>
+      <h6>{label}</h6>
     </label>
   </div>
 )

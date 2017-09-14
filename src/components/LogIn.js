@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import LandingNavBar from './ui/LandingNavBar'
 import Footer from './ui/Footer'
-import LogInForm from './logIn/LogInForm'
 import SignUpFormContainer from '../containers/landing/signUp/SignUpFormContainer'
+import LogInFormContainer from '../containers/landing/logIn/LogInFormContainer'
 
 class LogIn extends Component {
   state = {
@@ -51,11 +51,11 @@ class LogIn extends Component {
             {flip ? (
               <div className="log-in-and-sign-up-wrapper">
                 <SignUpFormContainer onSuccess={this.registeredSuccessfully} />
-                <LogInForm />
+                <LogInFormContainer />
               </div>
             ) : (
               <div className="log-in-and-sign-up-wrapper">
-                <LogInForm />
+                <LogInFormContainer />
                 <SignUpFormContainer onSuccess={this.registeredSuccessfully} />
               </div>
             )}

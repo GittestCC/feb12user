@@ -13,6 +13,8 @@ import ContactUs from './components/landing/ContactUs'
 import Blog from './components/landing/Blog'
 import LogIn from './components/LogIn'
 import ScrollToTop from './components/ScrollToTop'
+import ForgotPassword from './components/ForgotPassword'
+import CreateNewPassword from './components/CreateNewPassword'
 
 import AppContainer from './containers/AppContainer'
 import AuthContainer from './containers/AuthContainer'
@@ -41,6 +43,8 @@ ReactDOM.render(
             <Route path="/blog" component={Blog} />
             <Route path="/log-in" component={LogIn} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/create-new-password" component={CreateNewPassword} />
             <Route path="/app" component={AppContainer} />
           </Switch>
           <Route component={AuthContainer} />

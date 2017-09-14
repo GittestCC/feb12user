@@ -1,4 +1,4 @@
-.log-in-page, .sign-up-page {
+.log-in-page, .sign-up-page, .forgot-password-page, .create-new-password-page {
   background-image: linear-gradient(-180deg, rgba(159,221,242,1) 10%, rgba($kinto-white, 0) 30%);
   @include abovetablet {
     background-image: url('/images/background@2x.jpg');
@@ -28,7 +28,7 @@
   }
   .log-in-form, .sign-up-form{
     @include desktop {
-      max-width: 440px;
+      width: 440px;
     }
     button{
       height: 50px;
@@ -102,6 +102,9 @@
 
 .sign-up-page {
   .log-in-and-sign-up-wrapper {
+    .error-message {
+      margin-bottom: 10px;
+    }
     .sign-up-form {
       margin-bottom: $margin-base*4;
     }
@@ -133,7 +136,7 @@
   }
 }
 
-.sign-up-confirmation {
+.sign-up-confirmation, .forgot-password-confirmation {
   .icon{
     @include backgroundImage('/images/icon-email-large.svg', 80px, 80px);
     height: 80px;

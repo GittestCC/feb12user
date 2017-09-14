@@ -12,7 +12,13 @@ class Password extends Component {
   }
 
   render() {
-    const { input, id, label } = this.props
+    const { input, id, label, placeholder } = this.props
+    const { touched, submitFailed, error } = this.props.meta
+    const hasError = (touched || submitFailed) && error
+    let className = input.className || ''
+    if (hasError) {
+      className += 'error'
+    }
 
     return (
       <div className="password-field-wrapper">
@@ -22,13 +28,15 @@ class Password extends Component {
             {...input}
             type={`${this.state.isVisible ? 'text' : 'password'}`}
             id={id || input.name}
-            placeholder={input.placeholder}
+            placeholder={placeholder}
+            className={className}
           />
           <div
             className={`show-password ${this.state.isVisible ? 'visible' : ''}`}
             onClick={this.togglePasswordView}
           />
         </div>
+        {hasError && <div className="error-message">{error}</div>}
       </div>
     )
   }
