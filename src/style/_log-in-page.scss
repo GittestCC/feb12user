@@ -2,7 +2,7 @@
   background-image: linear-gradient(-180deg, rgba(159,221,242,1) 10%, rgba($kinto-white, 0) 30%);
   @include abovetablet {
     background-image: url('/images/background@2x.jpg');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
@@ -16,8 +16,11 @@
   @include desktop {
     display: flex;
     justify-content: space-between;
-    div.log-in-form {
+    .log-in-form {
       margin: 0px 20px 0;
+      form{
+        margin-bottom: 0;
+      }
     }
     .sign-up-form {
       margin: 0px 20px 0;
