@@ -19,6 +19,72 @@ export const fetchKintoBlocks = () => dispatch => {
           minor: 1,
           revision: 0,
           state: 'PENDING'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
+        },
+        {
+          major: 1,
+          minor: 0,
+          revision: 0,
+          state: 'DRAFT'
         }
       ]
     },
@@ -31,7 +97,7 @@ export const fetchKintoBlocks = () => dispatch => {
           major: 0,
           minor: 1,
           revision: 0,
-          state: 'APPROVED'
+          state: 'PUBLISHED'
         }
       ]
     },

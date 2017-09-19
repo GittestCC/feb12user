@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import CreateNewPasswordFormContainer from '../containers/landing/createNewPassword/CreateNewPasswordFormContainer'
 import Footer from './ui/Footer'
 import LandingNavBar from './ui/LandingNavBar'

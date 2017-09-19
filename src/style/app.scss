@@ -2,11 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700|Raleway:600');
 @import '~rc-slider/assets/index.css';
 @import '~rc-tooltip/assets/bootstrap.css';
+
 @import 'variables';
 @import 'mixins';
 @import 'fonts';
+
 @import 'general';
 @import 'header';
+
+@import 'components/dropdown';
 @import 'title-with-lines';
 @import 'log-in-page';
 @import 'forgot-password-page';

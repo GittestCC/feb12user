@@ -38,7 +38,11 @@ class KintoBlocksList extends Component {
           </Link>
 
           {this.props.kintoBlocks.map((kintoBlock, i) => (
-            <KintoBlockCardContainer kintoBlock={kintoBlock} key={i} />
+            <KintoBlockCardContainer
+              kintoBlock={kintoBlock}
+              key={i}
+              index={i}
+            />
           ))}
         </div>
       </div>

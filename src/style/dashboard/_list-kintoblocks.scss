@@ -1,19 +1,20 @@
 .my-kintoblocks {
   // width: $dashboard-content-width;
   margin: 0 auto;
-  .button {
-    display: inline-block;
-    width: 200px;
-    height: 40px;
-    line-height: 40px;
-    font-weight: bold;
-    margin: 0;
-  }
+
   .page-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+    .button {
+      display: inline-block;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: bold;
+      margin: 0;
+    }
     h2 {
       display: inline-block;
     }
@@ -37,10 +38,10 @@
     @media (min-width: 1171px) and (max-width: 1440px) {
       grid-template-columns: repeat(3, auto [col-start]);
     }
-    @media (min-width: 1441px) and (max-width: 1800px){
+    @media (min-width: 1441px) and (max-width: 1800px) {
       grid-template-columns: repeat(4, auto [col-start]);
     }
-    @media (min-width: 1801px){
+    @media (min-width: 1801px) {
       grid-template-columns: repeat(5, auto [col-start]);
     }
     grid-gap: 20px;
@@ -54,7 +55,8 @@
       min-height: 170px;
       border-radius: 12px;
       position: relative;
-      box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+      box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7, 0.1),
+        0 10px 40px 0 rgba($kinto-tinted-grayscale-7, 0.1);
       .text {
         h3 {
           width: 210px;
@@ -65,7 +67,7 @@
           margin-bottom: 5px;
           // on hover full text to be shown
         }
-        .version{
+        .version {
           font-weight: normal;
           color: $kinto-tinted-grayscale-7;
           margin: 0;
@@ -85,19 +87,27 @@
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            border: 4px solid #FFFFFF;
+            border: 4px solid #ffffff;
             position: absolute;
-            &:nth-child(1){
+            &:nth-child(1) {
               margin-left: 20px;
             }
           }
         }
         .menu {
           background-color: $kinto-tinted-grayscale-1;
+          border: 0;
           border-radius: 20px;
           height: 40px;
           width: 40px;
           @include backgroundImage('/images/icon-more-actions.svg', 40px, 40px);
+        }
+        .menu-hidden {
+          position: absolute;
+          right: 20px;
+          .dropdown-button {
+            display: none;
+          }
         }
       }
       &.create {
@@ -125,7 +135,7 @@
         }
         .icons .applications .application {
           margin-left: 0;
-          background-color:$kinto-tinted-grayscale-1;
+          background-color: $kinto-tinted-grayscale-1;
         }
         .application {
           position: absolute;
@@ -136,72 +146,100 @@
       &.purple {
         border-top: solid 10px $kinto-purple-light;
         .icons .applications .application {
-          background-color:$kinto-purple-light;
-          background-image: linear-gradient(-180deg, $kinto-purple-light 0%, $kinto-purple 100%);
-
+          background-color: $kinto-purple-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-purple-light 0%,
+            $kinto-purple 100%
+          );
         }
       }
       &.lapis {
         border-top: solid 10px $kinto-lapis-light;
         .icons .applications .application {
-          background-color:$kinto-lapis-light;
-          background-image: linear-gradient(-180deg, $kinto-lapis-light 0%, $kinto-lapis 100%);
-
+          background-color: $kinto-lapis-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-lapis-light 0%,
+            $kinto-lapis 100%
+          );
         }
       }
       &.blue {
         border-top: solid 10px $kinto-blue-light;
         .icons .applications .application {
-          background-color:$kinto-blue-light;
-          background-image: linear-gradient(-180deg, $kinto-blue-light 0%, $kinto-blue 100%);
-
+          background-color: $kinto-blue-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-blue-light 0%,
+            $kinto-blue 100%
+          );
         }
       }
       &.coral {
         border-top: solid 10px $kinto-coral-light;
         .icons .applications .application {
-          background-color:$kinto-coral-light;
-          background-image: linear-gradient(-180deg, $kinto-coral-light 0%, $kinto-coral 100%);
-
+          background-color: $kinto-coral-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-coral-light 0%,
+            $kinto-coral 100%
+          );
         }
       }
       &.orange {
         border-top: solid 10px $kinto-orange-light;
         .icons .applications .application {
-          background-color:$kinto-orange-light;
-          background-image: linear-gradient(-180deg, $kinto-orange-light 0%, $kinto-orange 100%);
-
+          background-color: $kinto-orange-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-orange-light 0%,
+            $kinto-orange 100%
+          );
         }
       }
       &.yellow {
         border-top: solid 10px $kinto-yellow-light;
         .icons .applications .application {
-          background-color:$kinto-yellow-light;
-          background-image: linear-gradient(-180deg, $kinto-yellow-light 0%, $kinto-yellow 100%);
-
+          background-color: $kinto-yellow-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-yellow-light 0%,
+            $kinto-yellow 100%
+          );
         }
       }
       &.green {
         border-top: solid 10px $kinto-green-light;
         .icons .applications .application {
-          background-color:$kinto-green-light;
-          background-image: linear-gradient(-180deg, $kinto-green-light 0%, $kinto-green 100%);
-
+          background-color: $kinto-green-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-green-light 0%,
+            $kinto-green 100%
+          );
         }
       }
       &.turquoise {
         border-top: solid 10px $kinto-turquoise-light;
         .icons .applications .application {
-          background-color:$kinto-turquoise-light;
-          background-image: linear-gradient(-180deg, $kinto-turquoise-light 0%, $kinto-turquoise 100%);
-
+          background-color: $kinto-turquoise-light;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-turquoise-light 0%,
+            $kinto-turquoise 100%
+          );
         }
       }
       &.gray {
         border-top: solid 10px $kinto-tinted-grayscale-6;
         .icons .applications .application {
-          background-color:$kinto-tinted-grayscale-6;
-          background-image: linear-gradient(-180deg, $kinto-tinted-grayscale-6 0%, $kinto-tinted-grayscale-8 100%);
+          background-color: $kinto-tinted-grayscale-6;
+          background-image: linear-gradient(
+            -180deg,
+            $kinto-tinted-grayscale-6 0%,
+            $kinto-tinted-grayscale-8 100%
+          );
         }
       }
     }
