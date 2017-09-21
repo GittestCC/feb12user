@@ -1,0 +1,9 @@
+.my-kintoapps {
+  @extend .my-kintoblocks;
+  .kintoapp-list {
+    @extend .kintoblock-list;
+    .kintoapp {
+      @extend .kintoblock;
+    }
+  }
+}

@@ -48,7 +48,7 @@
       &.analytics:before {
         background-image: url('/images/dashboard/icon-dashboard-analytics.svg');
       }
-      &.applications:before {
+      &.kintoapps:before {
         background-image: url('/images/dashboard/icon-dashboard-applications.svg');
       }
       &.billing:before {
@@ -69,7 +69,7 @@
       &.settings:before {
         background-image: url('/images/dashboard/icon-dashboard-settings.svg');
       }
-      &.kintoblocks img {
+      &.kintoblocks img, &.kintoapps img, &.services img {
         position: absolute;
         right: 20px;
         border-radius: 20px;

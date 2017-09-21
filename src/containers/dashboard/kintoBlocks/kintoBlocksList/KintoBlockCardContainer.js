@@ -26,6 +26,7 @@ function mapStateToProps(state, { kintoBlock, index }) {
     versions,
     latestVersion: versions[0],
     isLatestVersionPending: latestVersion.state === 'PENDING',
+    dropdownDependencyId: `dep-id-${index}`,
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`
   }

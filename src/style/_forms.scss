@@ -24,7 +24,7 @@
 
 .email-field, .full-width-field {
   margin-bottom: $margin-base;
-
+  
   @include abovetablet {
     margin-bottom: $margin-base * 3;
   }

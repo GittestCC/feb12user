@@ -26,7 +26,9 @@ class DropDown extends Component {
     if (nextProps.isShown && !this.state.isShown) {
       this.setState({ isShown: true, noClose: true })
       setTimeout(() => {
-        this.filterInput.focus()
+        if (this.filterInput) {
+          this.filterInput.focus()
+        }
       })
     }
   }

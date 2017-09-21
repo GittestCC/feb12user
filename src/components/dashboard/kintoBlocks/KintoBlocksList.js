@@ -24,7 +24,8 @@ class KintoBlocksList extends Component {
         <div className="kintoblock-list">
           <Link to="create" className="kintoblock create">
             <div className="text">
-              <h3>Create New Kintoblock</h3>
+              <img src="/images/icon-generic-kintoblock.svg" alt="" />
+              <h3>Create New KintoBlock</h3>
             </div>
             <div className="icons">
               <div className="applications">

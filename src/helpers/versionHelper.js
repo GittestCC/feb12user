@@ -11,9 +11,12 @@ export const getVersionStateClassName = state => {
     case 'DRAFT':
       return 'purple'
     default:
-      throw new Error('unkown version state')
+      throw new Error('unknown version state')
   }
 }
 
 export const getManageUrlForKintoBlock = (kintoBlock, version) =>
   `/app/dashboard/kintoblocks/${kintoBlock.id}/versions/${getVersion(version)}`
+
+export const getManageUrlForKintoApp = (kintoApp, version) =>
+  `/app/dashboard/kintoapps/${kintoApp.id}/versions/${getVersion(version)}`

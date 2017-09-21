@@ -3,8 +3,12 @@ const pages = {
   dashboardBlocksList: 'DASHBOARD_BLOCKS_LIST',
   dashboardBlockCreate: 'DASHBOARD_BLOCK_CREATE',
   dashboardBlockView: 'DASHBOARD_BLOCK_VIEW',
-  dashboardHome: 'DASHBAORD_HOME',
-  dashboardApplications: 'DASHBOARD_APPLICATIONS',
+  dashboardHome: 'DASHBOARD_HOME',
+
+  dashboardKintoAppsList: 'DASHBOARD_KINTO_APPS_LIST',
+  dashboardKintoAppsCreate: 'DASHBOARD_KINTO_APPS_CREATE',
+  dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
+
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
   dashboardSalesdata: 'DASHBOARD_SALESDATA',
   dashboardServices: 'DASHBOARD_SERVICES',
@@ -23,10 +27,24 @@ export const dashboardSidebar = [
     group: 1
   },
   {
-    key: pages.dashboardApplications,
     title: 'Applications',
-    className: 'applications',
-    url: '/app/dashboard/applications',
+    className: 'kintoapps',
+    url: '/app/dashboard/kintoApps/list',
+    addUrl: '/app/dashboard/kintoApps/create',
+    children: [
+      {
+        key: pages.dashboardKintoAppsList,
+        url: '/app/dashboard/kintoApps/list'
+      },
+      {
+        key: pages.dashboardKintoAppsManage,
+        url: '/app/dashboard/kintoApps/:id/versions/:version'
+      },
+      {
+        key: pages.dashboardKintoAppsCreate,
+        url: '/app/dashboard/kintoApps/create'
+      }
+    ],
     group: 1
   },
   {
