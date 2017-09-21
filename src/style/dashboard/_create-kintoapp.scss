@@ -1,0 +1,89 @@
+.what-is-a-kintoapp {
+  @extend .what-is-a-kintoblock;
+}
+
+a.disabled {
+  color: $kinto-tinted-grayscale-6;
+  cursor: default;
+  &:hover {
+    color: $kinto-tinted-grayscale-6 !important;
+  }
+}
+
+.kintoapp-create.form-container {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  justify-content: stretch;
+  align-content: stretch;
+  @media (min-width: 1440px) {
+    grid-template-columns: auto [col-start];
+  }
+  .basic-info .form-body {
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .field-wrapper {
+      width: 49%;
+      input {
+        min-width: 480px;
+        width: 100%;
+      }
+    }
+  }
+  .form-wrapper {
+    margin-bottom: 40px;
+    h3 {
+      color: $kinto-tinted-grayscale-8;
+    }
+    h5 {
+      font-weight: normal;
+    }
+    &.clients {
+      .form-body {
+        display: flex;
+        justify-content: space-between;
+        .button {
+          width: 49%;
+        }
+      }
+    }
+    &.blocks-and-services {
+      .no-blocks-or-services {
+        background-color: $kinto-tinted-grayscale-1;
+        height: 170px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0 30px;
+        .icons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 6px;
+          .kinto-block {
+            @include backgroundImage('/images/icon-generic-kintoblock.svg', 80px, 80px)
+            margin: 10px;
+          }
+          .service{
+            @include backgroundImage('/images/icon-generic-service.svg', 80px, 80px)
+            margin: 10px;
+          }
+        }
+        .text {
+          color: $kinto-tinted-grayscale-6;
+          font-size: 14px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .form-body {
+    background-color: $kinto-white;
+    padding: 36px 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+  }
+}

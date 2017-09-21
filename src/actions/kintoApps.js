@@ -122,7 +122,7 @@ export const fetchKintoApps = callback => dispatch => {
   })
 }
 
-export const kintoAppsCreate = data => dispatch => {
+export const kintoAppCreate = data => dispatch => {
   return Promise.resolve('success').then(() => {
     dispatch(formSubmitted())
     dispatch(push('/app/dashboard/kintoapps/list'))

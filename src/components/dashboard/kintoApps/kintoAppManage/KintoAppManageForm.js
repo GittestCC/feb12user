@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const KintoAppManageForm = () => {
   return <h1>Kinto App Manage Form</h1>
