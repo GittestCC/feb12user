@@ -6,7 +6,7 @@ import Tooltip from 'rc-tooltip'
  * used mainly when there is a `validate` option passed to `Field`
  */
 const FieldValidation = props => {
-  const { input, placeholder, label, type, help } = props
+  const { input, placeholder, label, type, help, close } = props
   const { touched, submitFailed, error } = props.meta
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
@@ -58,8 +58,9 @@ const FieldValidation = props => {
           <span className="tooltip" />
         </Tooltip>
       )}
-      <div>
+      <div className="field-input-wrapper">
         {inputEl}
+        {close && <img src="/images/icon-red-delete.svg" alt="" />}
         {hasError && <div className="error-message">{error}</div>}
       </div>
     </div>

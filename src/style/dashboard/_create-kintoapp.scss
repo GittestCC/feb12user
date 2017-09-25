@@ -10,6 +10,10 @@ a.disabled {
   }
 }
 
+.form-body {
+  margin-top: 20px;
+}
+
 .kintoapp-create.form-container {
   display: grid;
   grid-template-rows: auto;
@@ -42,14 +46,253 @@ a.disabled {
     }
     &.clients {
       .form-body {
-        display: flex;
-        justify-content: space-between;
-        .button {
-          width: 49%;
+        .top {
+          .line {
+            border-bottom: solid 2px $kinto-tinted-grayscale-2;
+            margin: 10px 0 16px;
+          }
+        }
+        .bottom {
+          display: flex;
+          justify-content: space-between;
+          .button {
+            width: 49%;
+            margin: 0;
+          }
         }
       }
     }
     &.blocks-and-services {
+      .blocks-or-services{
+        padding: 10px 0;
+        background-color: $kinto-tinted-grayscale-1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        .block {
+          .delete-block {
+            @include backgroundImage('/images/icon-red-delete.svg', 15px, 15px);
+            position: absolute;
+            top: -7px;
+            left: -7px;
+          }
+          position: relative;
+          margin: 10px 20px;
+          background-color: $kinto-white;
+          box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+          border-radius: 4px;
+          .icon-text-and-version {
+            padding: 20px;
+            position: relative;
+            min-height: 140px;
+            .text {
+              min-width: 600px;
+              margin-left: 100px;
+              display: inline-block;
+              .name {
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 6px;
+              }
+              .description {
+                font-weight: normal;
+                color: $kinto-tinted-grayscale-7;
+                line-height: 16px;
+                font-size: 12px;
+              }
+            }
+            .main-icon{
+              max-width: 80px;
+              position: absolute;
+              &.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-1.svg', 80px, 80px);
+              }
+              &.service {
+                @include backgroundImage('/images/icon-generic-service-1.svg', 80px, 80px);
+              }
+            }
+            .version {
+              position: absolute;
+              right:20px;
+              top: 20px;
+              width: 130px;
+            }
+          }
+          .expand {
+            background-color: $kinto-tinted-grayscale-1;
+            min-height: 80px;
+            width: 100%;
+            padding-left: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .expand-close-indicator{
+              display: flex;
+              align-items: center;
+              margin-right: 20px;
+              h6{
+                margin: 0;
+              }
+              .expand-close {
+                @include backgroundImage('/images/icon-gray-expand-collapse.svg', 20px, 20px)
+                margin-left: 10px;
+              }
+            }
+            .icons {
+              display: flex;
+              width: 160px;
+              height: 40px;
+              position: relative;
+              .number {
+                background-color: $kinto-white;
+                border-radius: 20px;
+                height: 40px;
+                width: 40px;
+                line-height: 40px;
+                text-align: center;
+                vertical-align: middle;
+                font-weight: normal;
+                font-size: 12px;
+                margin-left: 120px;
+              }
+              .icon {
+                &.service {
+                  @include backgroundImage('/images/icon-generic-service-small-border-1.svg', 40px, 40px);
+                }
+                &.kintoblock {
+                  @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 40px, 40px);
+                }
+                position: absolute;
+                left: 0;
+                &:nth-child(1){
+                  &.kintoblock {
+                    @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 40px, 40px);
+                  }
+                  &.service {
+                    @include backgroundImage('/images/icon-generic-service-small-border-1.svg', 40px, 40px);
+                  }
+                  left: 0px;
+                  z-index: 3;
+                }
+                &:nth-child(2){
+                  &.kintoblock {
+                    @include backgroundImage('/images/icon-generic-kintoblock-small-border-2.svg', 40px, 40px);
+                  }
+                  &.service {
+                    @include backgroundImage('/images/icon-generic-service-small-border-2.svg', 40px, 40px);
+                  }
+                  left: 20px;
+                  z-index: 2;
+                }
+                &:nth-child(3){
+                  &.kintoblock {
+                    @include backgroundImage('/images/icon-generic-kintoblock-small-border-3.svg', 40px, 40px);
+                  }
+                  &.service {
+                    @include backgroundImage('/images/icon-generic-service-small-border-3.svg', 40px, 40px);
+                  }
+                  z-index: 1;
+                  left: 40px;
+                }
+                &:nth-child(4){
+                  &.kintoblock {
+                    @include backgroundImage('/images/icon-generic-kintoblock-small-border-4.svg', 40px, 40px);
+                  }
+                  &.service {
+                    @include backgroundImage('/images/icon-generic-service-small-border-4.svg', 40px, 40px);
+                  }
+                  left: 60px;
+                }
+              }
+            }
+          }
+          .extra-information {
+            padding-left: 120px;
+            .row:nth-child(1n){
+              .icon.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-1.svg', 40px, 40px)
+                display: inline-block;
+              }
+              .icon.service {
+                @include backgroundImage('/images/icon-generic-service-small-1.svg', 40px, 40px)
+                display: inline-block;
+              }
+            }
+            .row:nth-child(2n){
+              .icon.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-2.svg', 40px, 40px)
+                display: inline-block;
+              }
+              .icon.service {
+                @include backgroundImage('/images/icon-generic-service-small-2.svg', 40px, 40px)
+                display: inline-block;
+              }
+            }
+            .row:nth-child(3n){
+              .icon.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-3.svg', 40px, 40px)
+                display: inline-block;
+              }
+              .icon.service {
+                @include backgroundImage('/images/icon-generic-service-small-3.svg', 40px, 40px)
+                display: inline-block;
+              }
+            }
+            .row:nth-child(4n){
+              .icon.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-4.svg', 40px, 40px)
+                display: inline-block;
+              }
+              .icon.service {
+                @include backgroundImage('/images/icon-generic-service-small-4.svg', 40px, 40px)
+                display: inline-block;
+              }
+            }
+            .row:nth-child(5n){
+              .icon.kintoblock {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-5.svg', 40px, 40px)
+                display: inline-block;
+              }
+              .icon.service {
+                @include backgroundImage('/images/icon-generic-service-small-5.svg', 40px, 40px)
+                display: inline-block;
+              }
+            }
+            .row:last-child {
+              border-bottom: none;
+            }
+            .row {
+              padding: 20px 20px 20px 0;
+              border-bottom: solid 2px $kinto-tinted-grayscale-2;
+              .icon {
+                @include backgroundImage('/images/icon-generic-kintoblock.svg', 40px, 40px)
+                display: inline-block;
+                margin-right: 12px;
+              }
+              .text {
+                display: inline-block;
+                h3{
+                  margin-bottom: 6px;
+                  font-weight: bold;
+                  font-size: 16px;
+                }
+                h6 {
+                  margin: 0;
+                  font-weight: normal;
+                  color: $kinto-tinted-grayscale-7;
+                  line-height: 16px;
+                  font-size: 12px;
+                  max-width: 800px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+              }
+            }
+          }
+        }
+      }
       .no-blocks-or-services {
         background-color: $kinto-tinted-grayscale-1;
         height: 170px;
@@ -85,5 +328,22 @@ a.disabled {
     padding: 36px 40px;
     border-radius: 12px;
     box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+  }
+  .combine-buttons{
+    margin: 40px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: 49%;
+      position: relative;
+      margin: 0;
+      img {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
   }
 }

@@ -24,7 +24,7 @@
 
 .email-field, .full-width-field {
   margin-bottom: $margin-base;
-  
+
   @include abovetablet {
     margin-bottom: $margin-base * 3;
   }
@@ -200,6 +200,19 @@ h5.byline {
   }
 }
 
+.field-wrapper {
+  .field-input-wrapper {
+    display: flex;
+    align-items: center;
+    input {
+      margin-right: 20px;
+    }
+    img {
+      margin-bottom: 10px;
+    }
+  }
+}
+
 form {
   margin-bottom: $margin-base * 4;
 }
@@ -298,7 +311,7 @@ form {
 }
 
 .tooltip {
-  @include backgroundImage('/images/icon-hint-large.svg', 14px, 14px);
+  @include backgroundImage('/images/icon-hint-tooltip.svg', 14px, 14px);
   display: inline-block;
   margin-left: 10px;
 }
