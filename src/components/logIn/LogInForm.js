@@ -2,7 +2,7 @@ import React from 'react'
 import TitleWithLines from '../ui/TitleWithLines'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password, CheckBox } from '../forms'
-import { required } from '../../helpers/validators'
+import { required } from '../../helpers/forms/validators'
 import githubIcon from '../../images/footer-socials-github.svg'
 
 const LogInForm = ({ handleSubmit }) => (

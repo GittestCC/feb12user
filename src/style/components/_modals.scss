@@ -1,0 +1,58 @@
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.kh-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: $kinto-white;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  border-radius: 12px;
+  outline: none;
+  width: 480px;
+  box-shadow: 0 2px 4px 0 rgba(66, 118, 146, 0.2), 0 10px 40px 0 rgba(66, 118, 146, 0.2);
+  form {
+    margin-bottom: 0;
+  }
+}
+
+.kh-overlay {
+  z-index: 3;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: $kinto-white-transparent;
+}
+
+.kh-modal-title {
+  background: $kinto-tinted-grayscale-8;
+  line-height: 24px;
+  font-size: 16px;
+  color: $kinto-white;
+  padding: 18px;
+}
+
+.kh-modal-body {
+  padding: 10px 30px 30px 30px;
+  .full-width-field {
+    margin-bottom: 10px;
+  }
+}
+
+.kh-modal-actions {
+  display: flex;
+  margin-top: 20px;
+  button.button {
+    margin: 0 10px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

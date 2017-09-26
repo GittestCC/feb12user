@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import FieldValidation from '../../forms/FieldValidation'
 import Button from '../../forms/Button'
-import { required, email } from '../../../helpers/validators'
+import { required, email } from '../../../helpers/forms/validators'
 
 class ContactForm extends Component {
   state = {

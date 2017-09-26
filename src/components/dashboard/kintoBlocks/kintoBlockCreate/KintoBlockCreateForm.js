@@ -5,8 +5,11 @@ import {
   required,
   isBetween64,
   isBetween1000
-} from '../../../../helpers/validators'
-import { lessThanFormat, allowFalse } from '../../../../helpers/formatters'
+} from '../../../../helpers/forms/validators'
+import {
+  lessThanFormat,
+  allowFalse
+} from '../../../../helpers/forms/formatters'
 
 const KintoBlockCreateForm = ({
   isDedicatedCPU,

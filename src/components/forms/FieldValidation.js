@@ -11,7 +11,7 @@ const FieldValidation = props => {
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
   if (hasError) {
-    className += 'error'
+    className += ' error'
   }
 
   let inputEl

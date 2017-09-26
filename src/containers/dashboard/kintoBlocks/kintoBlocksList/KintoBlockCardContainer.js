@@ -1,21 +1,13 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import KintoBlockCard from '../../../../components/dashboard/kintoBlocks/kintoBlocksList/KintoBlockCard'
-import {
-  getVersion,
-  getVersionStateClassName,
-  getManageUrlForKintoBlock
-} from '../../../../helpers/versionHelper'
+import { getVersionSelectItem } from '../../../../helpers/versionHelper'
 
 function mapStateToProps(state, { kintoBlock, index }) {
   const latestVersion = kintoBlock.versions[0]
   const versions = kintoBlock.versions.map(v => {
     const isFirst = kintoBlock.versions.indexOf(v) === 0
-    let result = {
-      text: getVersion(v),
-      tag: v.state,
-      className: getVersionStateClassName(v.state),
-      url: getManageUrlForKintoBlock(kintoBlock, v)
-    }
+    let result = getVersionSelectItem(v, kintoBlock.id)
     if (isFirst) {
       result.active = true
     }
@@ -32,4 +24,21 @@ function mapStateToProps(state, { kintoBlock, index }) {
   }
 }
 
-export default connect(mapStateToProps)(KintoBlockCard)
+function mapDispatchToProps(dispatch, { onVersionCreate, kintoBlock }) {
+  return {
+    onVersionCreate: () => onVersionCreate(kintoBlock),
+    push: url => dispatch(push(url))
+  }
+}
+
+function mergeProps(stateProps, dispatchProps) {
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    goToLatest: () => dispatchProps.push(stateProps.latestVersion.url)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  KintoBlockCard
+)

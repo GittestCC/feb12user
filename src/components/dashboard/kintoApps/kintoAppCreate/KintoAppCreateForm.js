@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, CheckBox } from '../../../forms'
-import { required } from '../../../../helpers/validators'
+import { required } from '../../../../helpers/forms/validators'
 
 const KintoAppCreateForm = ({ handleSubmit }) => {
   const addedBlocksServices = [

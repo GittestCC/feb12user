@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password } from '../forms'
-import { required, email, password } from '../../helpers/validators'
+import { required, email, password } from '../../helpers/forms/validators'
 
 const SignUpForm = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit} className="sign-up-form">

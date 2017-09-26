@@ -67,7 +67,7 @@ class KintoAppCard extends Component {
               className="menu-hidden dependency-dropdown"
               id={dropdownDependencyId}
               isShown={this.state.areDependenciesShown}
-              onClick={this.hideDependencyDropdown}
+              onHide={this.hideDependencyDropdown}
             >
               <button className="title">
                 <h4>Components (14)</h4>
@@ -109,6 +109,7 @@ class KintoAppCard extends Component {
               className="menu-hidden"
               id={dropdownVersionId}
               isShown={this.state.isVerShown}
+              onHide={this.hideVersionDropdown}
               list={versions}
               component={TagItem}
               filterField="text"

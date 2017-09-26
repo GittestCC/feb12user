@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Button, Password } from '../forms'
-import { required, password } from '../../helpers/validators'
+import { required, password } from '../../helpers/forms/validators'
 
 const validate = values => {
   const errors = {}

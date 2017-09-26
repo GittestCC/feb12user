@@ -24,6 +24,10 @@
   min-width: 200px;
   border-radius: 8px;
 
+  &.short {
+    top: 30px;
+  }
+
   &.isShown {
     display: block;
   }
@@ -36,6 +40,7 @@
     margin-top: 5px;
     height: 1px;
   }
+
   a, button {
     font-size: 14px;
     font-weight: bold;
@@ -50,31 +55,40 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
+
     &.title {
       flex-direction: column;
       padding: 5px 0;
     }
+
     h4, h5 {
       color: $kinto-white;
       text-align: center;
       margin: 0;
       margin-left: 20px;
     }
+
     .dependency {
       &.application {
         background-size: contain;
         display: inline-block;
-        @include backgroundImage('/images/icon-generic-application-small-border-2.svg', 40px, 40px);
+
+        @include backgroundImage("/images/icon-generic-application-small-border-2.svg", 40px, 40px);
       }
+
       &.kintoblock-dep {
         background-size: contain;
-        @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 40px, 40px);
+
+        @include backgroundImage("/images/icon-generic-kintoblock-small-border-1.svg", 40px, 40px);
       }
+
       &.service {
         background-size: contain;
-        @include backgroundImage('/images/icon-generic-service-small-border-2.svg', 40px, 40px);
+
+        @include backgroundImage("/images/icon-generic-service-small-border-2.svg", 40px, 40px);
       }
     }
+
     &:hover {
       background: $kinto-blue-hover;
     }
@@ -146,4 +160,8 @@
 .dropdown-content-items-scroll {
   position: relative;
   overflow: hidden;
+}
+
+.margin-right.dropdown {
+  margin-right: 14px;
 }

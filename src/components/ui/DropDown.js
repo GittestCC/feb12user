@@ -40,24 +40,41 @@ class DropDown extends Component {
     }
     if (this.props.id) {
       const selector = `#${this.props.id}`
-      if (document.querySelector(selector).contains(e.target)) {
+      if (
+        document.querySelector(selector).contains(e.target) &&
+        !e.target.matches('.dropdown-content-items button')
+      ) {
         return
       }
     } else if (e.target.matches('.dropdown-button')) {
       return
     }
+
     if (this.state.isShown) {
       this.setState({ isShown: false, filterText: null })
+      if (this.props.onHide) {
+        this.props.onHide()
+      }
       if (this.filterInput) {
         this.filterInput.value = ''
       }
     }
   }
 
-  onToggle = () => {
-    this.setState(previousState => ({
-      isShown: !previousState.isShown
-    }))
+  actionHandler = () => {
+    this.props.actionHandler()
+    this.onToggle(false)
+  }
+
+  onToggle = flag => {
+    let toggledState = !this.state.isShown
+    if (typeof flag === 'boolean') {
+      toggledState = flag
+    }
+    this.setState({ isShown: toggledState })
+    if (!toggledState && this.props.onHide) {
+      this.props.onHide()
+    }
   }
 
   onUpdateFilter = e => {
@@ -82,11 +99,11 @@ class DropDown extends Component {
       id,
       dropdownText,
       dropdownClass,
+      dropdownContentClass,
       className,
       children,
       type,
       actionText,
-      actionHandler,
       history
     } = this.props
     const ItemComponent = this.props.component
@@ -105,7 +122,11 @@ class DropDown extends Component {
         >
           {dropdownText}
         </button>
-        <div className={`dropdown-content ${isShown ? 'isShown' : ''}`}>
+        <div
+          className={`dropdown-content ${isShown
+            ? 'isShown'
+            : ''} ${dropdownContentClass || ''}`}
+        >
           {isFilter && (
             <div className="dropdown-content-filter">
               <input
@@ -151,7 +172,7 @@ class DropDown extends Component {
 
           {isFilter && (
             <div className="dropdown-content-action">
-              <Button buttonType="dark" onClick={actionHandler}>
+              <Button buttonType="dark" onClick={this.actionHandler}>
                 {actionText}
               </Button>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button } from '../forms'
-import { required } from '../../helpers/validators'
+import { required } from '../../helpers/forms/validators'
 
 const ForgotPasswordForm = ({ handleSubmit }) => (
   <div className="content forgot-password-wrapper">

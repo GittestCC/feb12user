@@ -23,7 +23,9 @@ class KintoBlockCard extends Component {
       latestVersion,
       dropdownId,
       dropdownVersionId,
-      versions
+      versions,
+      onVersionCreate,
+      goToLatest
     } = this.props
     return (
       <Link to={latestVersion.url} className={`kintoblock ${kintoBlock.color}`}>
@@ -57,25 +59,23 @@ class KintoBlockCard extends Component {
               <div className="dependency kintoblock-dep" />
             </div>
             <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-              <button>Create New Version</button>
-              <button>Edit {latestVersion.text}</button>
+              <button onClick={onVersionCreate}>Create New Version</button>
+              <button onClick={goToLatest}>Edit {latestVersion.text}</button>
               <button onClick={this.showVersionDropdown}>
                 View Other Versions
               </button>
-              <button>Rename</button>
             </DropDown>
             <DropDown
               type="filter"
               className="menu-hidden"
               id={dropdownVersionId}
               isShown={this.state.isVerShown}
+              onHide={this.hideVersionDropdown}
               list={versions}
               component={TagItem}
               filterField="text"
               actionText="Create New Version"
-              actionHandler={() => {
-                console.log('create new version')
-              }}
+              actionHandler={onVersionCreate}
             />
           </div>
         </div>

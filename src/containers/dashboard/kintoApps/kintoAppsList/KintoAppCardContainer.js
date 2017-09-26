@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import KintoAppCard from '../../../../components/dashboard/kintoApps/kintoAppsList/KintoAppCard'
 
 import {
-  getVersion,
+  getVersionAsText,
   getVersionStateClassName,
   getManageUrlForKintoApp
 } from '../../../../helpers/versionHelper'
@@ -12,9 +12,9 @@ function mapStateToProps(state, { kintoApp, index }) {
   const versions = kintoApp.versions.map(v => {
     const isFirst = kintoApp.versions.indexOf(v) === 0
     let result = {
-      text: getVersion(v),
+      text: getVersionAsText(v),
       tag: v.state,
-      className: getVersionStateClassName(v.state),
+      className: getVersionStateClassName(v),
       url: getManageUrlForKintoApp(kintoApp, v)
     }
     if (isFirst) {
@@ -28,7 +28,8 @@ function mapStateToProps(state, { kintoApp, index }) {
     latestVersion: versions[0],
     isLatestVersionPending: latestVersion.state === 'PENDING',
     dropdownId: `id-${index}`,
-    dropdownVersionId: `idv-${index}`
+    dropdownVersionId: `idv-${index}`,
+    dropdownDependencyId: `idd-${index}`
   }
 }
 

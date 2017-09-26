@@ -9,35 +9,3 @@
   }
 }
 
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  a {
-    color: $kinto-tinted-grayscale-9;
-    margin-right: 14px;
-    font-weight: 600;
-    &:hover {
-      color: #1ec4e9;
-    }
-    &.disabled {
-      &:hover {
-        color: $kinto-tinted-grayscale-9;
-      }
-    }
-  }
-  ul {
-    display: flex;
-    width: 100%;
-    justify-content: start;
-    li {
-      line-height: 20px;
-      height: 20px;
-      display: inline-block;
-      display: flex;
-      align-items: center;
-      img {
-        margin-right: 14px;
-      }
-    }
-  }
-}
