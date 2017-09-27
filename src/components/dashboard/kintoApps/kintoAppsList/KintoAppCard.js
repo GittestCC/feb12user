@@ -39,7 +39,7 @@ class KintoAppCard extends Component {
 
     return (
       <Link
-        to={`/app/dashboard/kintoapps/${kintoApp.id}/versions/${latestVersion}`}
+        to={`/app/dashboard/kintoapps/${kintoApp.id}/versions/${latestVersion.text}`}
         className={`kintoapp ${kintoApp.color}`}
       >
         <div className="top">
@@ -115,7 +115,7 @@ class KintoAppCard extends Component {
               filterField="text"
               actionText="Create New Version"
               actionHandler={() => {
-                console.log('create new version')
+                console.log('create new kinto app version')
               }}
             />
           </div>

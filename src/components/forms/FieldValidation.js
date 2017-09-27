@@ -58,7 +58,7 @@ const FieldValidation = props => {
           <span className="tooltip" />
         </Tooltip>
       )}
-      <div className="field-input-wrapper">
+      <div className={`field-input-wrapper ${close ? 'with-close' : ''}`}>
         {inputEl}
         {close && <img src="/images/icon-red-delete.svg" alt="" />}
         {hasError && <div className="error-message">{error}</div>}

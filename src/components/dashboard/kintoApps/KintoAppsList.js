@@ -5,11 +5,7 @@ import KintoAppCardContainer from '../../../containers/dashboard/kintoApps/kinto
 
 class KintoAppsList extends Component {
   componentDidMount() {
-    this.props.fetchKintoApps(data => {
-      if (data.length === 0) {
-        this.props.push('/app/dashboard/kintoapps/create')
-      }
-    })
+    this.props.fetchKintoApps()
   }
 
   render() {

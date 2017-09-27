@@ -1,22 +1,13 @@
 import { connect } from 'react-redux'
 import KintoAppCard from '../../../../components/dashboard/kintoApps/kintoAppsList/KintoAppCard'
 
-import {
-  getVersionAsText,
-  getVersionStateClassName,
-  getManageUrlForKintoApp
-} from '../../../../helpers/versionHelper'
+import { getVersionSelectItem } from '../../../../helpers/versionHelper'
 
 function mapStateToProps(state, { kintoApp, index }) {
   const latestVersion = kintoApp.versions[0]
   const versions = kintoApp.versions.map(v => {
     const isFirst = kintoApp.versions.indexOf(v) === 0
-    let result = {
-      text: getVersionAsText(v),
-      tag: v.state,
-      className: getVersionStateClassName(v),
-      url: getManageUrlForKintoApp(kintoApp, v)
-    }
+    let result = getVersionSelectItem(v, kintoApp.id)
     if (isFirst) {
       result.active = true
     }

@@ -1,9 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { FieldValidation, Button, CheckBox } from '../../../forms'
-import { required } from '../../../../helpers/forms/validators'
+import { FieldValidation, Button, CheckBox } from '../../forms'
+import { required } from '../../../helpers/forms/validators'
 
-const KintoAppCreateForm = ({ handleSubmit }) => {
+const KintoAppForm = ({
+  handleSubmit,
+  initialValues,
+  version,
+  submitFormLabel
+}) => {
   const addedBlocksServices = [
     {
       id: '1',
@@ -136,10 +141,9 @@ const KintoAppCreateForm = ({ handleSubmit }) => {
       <div className="form-wrapper basic-info">
         <h3>Basic Info</h3>
         <h5>Give your baby a name, and a version number.</h5>
-
         <div className="form-body">
           <Field
-            name="kintoAppName"
+            name="name"
             label="application name"
             placeholder="Enter a name for your application"
             component={FieldValidation}
@@ -150,9 +154,9 @@ const KintoAppCreateForm = ({ handleSubmit }) => {
             <label htmlFor="versionNumber">Version number</label>
             <input
               type="text"
-              name="versionNumber"
+              name="version"
               className="disabled"
-              value="1.0.0"
+              value={version || ''}
               disabled
             />
           </div>
@@ -300,4 +304,6 @@ const KintoAppCreateForm = ({ handleSubmit }) => {
   )
 }
 
-export default reduxForm({ form: 'kintoAppCreateForm' })(KintoAppCreateForm)
+export default reduxForm({ form: 'kintoAppForm', enableReinitialize: true })(
+  KintoAppForm
+)
