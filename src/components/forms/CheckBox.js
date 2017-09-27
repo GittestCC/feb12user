@@ -8,7 +8,7 @@ const CheckBox = ({ input, id, label }) => (
       type="checkbox"
       id={id || input.name}
     />
-    <label className="checkbox-message" htmlFor={id}>
+    <label className="checkbox-message" htmlFor={id || input.name}>
       <h6>{label}</h6>
     </label>
   </div>

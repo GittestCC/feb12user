@@ -1,14 +1,20 @@
-import { setToken as localStorageSetToken } from '../helpers/authHelper'
+import axios from 'axios'
 import { push } from 'react-router-redux'
-export const TOKEN_UPDATE = 'TOKEN_UPDATE'
+import { SubmissionError } from 'redux-form'
+import { setToken as localStorageSetToken } from '../helpers/authHelper'
+
+export const TOKEN_UPDATE_FROM_LOCAL_STORAGE = 'TOKEN_UPDATE'
 export const LOGOUT = 'LOGOUT'
 
-export const setToken = token => dispatch => {
+export const setToken = token => {
   localStorageSetToken(token)
-  dispatch({ type: TOKEN_UPDATE, token })
+  return { type: TOKEN_UPDATE_FROM_LOCAL_STORAGE }
 }
 
-export const logout = () => ({ type: LOGOUT })
+export const logout = () => {
+  localStorageSetToken(null)
+  return { type: LOGOUT }
+}
 
 export const forgotPassword = (data, callback) => () => {
   // TODO Ajax party hurr!
@@ -24,16 +30,40 @@ export const createNewPassword = data => dispatch => {
   })
 }
 
-export const signUp = (data, callback) => () => {
-  // TODO more AJAX!
-  return Promise.resolve(' sign up success ').then(() => {
-    return callback(data.emailAddress)
+export const validatePassword = (email, token) => () => {
+  return axios.put('/auth/validate', {
+    email,
+    token
   })
 }
 
-export const logIn = (data, callback) => dispatch => {
-  // TODO more AJAX for log in!
-  return Promise.resolve(' log in success ').then(() => {
-    dispatch(push('/'))
-  })
+export const signUp = (data, callback) => dispatch => {
+  return axios.post('/auth/register', data).then(
+    result => {
+      //TODO use proper email validation
+      return dispatch(
+        validatePassword(data.email, result.debugVerificationToken)
+      ).then(() => {
+        return callback(data.emailAddress)
+      })
+    },
+    err => {
+      if (err.errors) {
+        throw new SubmissionError(err.errors)
+      }
+    }
+  )
+}
+
+export const logIn = data => dispatch => {
+  return axios.put('/auth/login', data).then(
+    () => {
+      dispatch(push('/app'))
+    },
+    err => {
+      if (err.errors) {
+        throw new SubmissionError(err.errors)
+      }
+    }
+  )
 }

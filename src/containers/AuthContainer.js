@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Auth from '../components/Auth'
-import { setToken } from '../actions/auth'
+import { setToken, logout } from '../actions/auth'
 
 function mapStateToProps(state) {
   return {
@@ -11,5 +11,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   navigateTo: push,
-  setToken
+  setToken,
+  logout
 })(Auth)

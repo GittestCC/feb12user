@@ -66,9 +66,6 @@
         height: 40px;
         line-height: 40px;
         font-weight: bold;
-
-        // hide while log in page is not finished
-        display: none;
       }
     }
     @include abovetablet {
@@ -119,17 +116,13 @@
               max-width: 120px;
               margin: 0;
               font-weight: bold;
-
-              // hide while log in doesnt work
-              display: none;
             }
           }
         }
       }
       @media (min-width: 768px) and (max-width: 890px){
         ul {
-          // margin-right: 0;
-          // fix while buttonns gone
+          margin-right: 0;
           margin-right: 40px;
           li a.default.navigation-button {
             display: none;

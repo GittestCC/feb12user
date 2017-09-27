@@ -100,6 +100,7 @@ class DropDown extends Component {
       dropdownText,
       dropdownClass,
       dropdownContentClass,
+      direction,
       className,
       children,
       type,
@@ -112,7 +113,9 @@ class DropDown extends Component {
     return (
       <div
         onClick={this.onPreventDefault}
-        className={`dropdown ${filterClass} ${className || ''}`}
+        className={`dropdown ${filterClass} ${className || ''} ${direction
+          ? `dropdown-${direction}`
+          : ''}`}
         id={id}
       >
         <button

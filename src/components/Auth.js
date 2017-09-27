@@ -4,6 +4,7 @@ import axios from 'axios'
 class Auth extends Component {
   constructor(props) {
     super(props)
+    axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL
     axios.interceptors.request.use(config => {
       if (this.props.token) {
         config.headers.Authorization = `Bearer ${this.props.token}`
@@ -12,16 +13,28 @@ class Auth extends Component {
     })
     axios.interceptors.response.use(
       response => {
-        // TODO update the token if there is a new one
-        return response
+        const token = response.headers['grpc-metadata-authorization']
+        const data = response.data || {}
+        if (token) {
+          this.props.setToken(token)
+        }
+        if (data.errors) {
+          if (data.errors.error) {
+            data.errors._error = data.errors.error
+            delete data.errors.error
+          }
+          return Promise.reject(data)
+        }
+        return data
       },
       error => {
         // Do something with response error
         if (error.response.status === 401) {
-          this.props.setToken(null)
+          // remove token info
+          this.props.logout()
           this.props.navigateTo('/login')
         }
-        // Trow errr again (may be need for some other catch)
+        // Throw errr again (may be need for some other catch)
         return Promise.reject(error)
       }
     )

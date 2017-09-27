@@ -8,6 +8,7 @@ The default repo for Kintohub.com! This is gonna be one hell of a project.
 ## First time setup
 - install [`nvm`](https://github.com/creationix/nvm)
 - `nvm use`
+- create `.env` file (it is ignored) and setup all the env vars in it, you can check/duplicate `~/.env.sample`
 
 ## Commands
 

@@ -1,33 +1,20 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import App from '../components/App'
+import { isAuthenticated } from '../helpers/authHelper'
 
 function mapStateToProps(state) {
-  const { canSave } = state.pageOptions
+  const isLoggedIn = isAuthenticated(state.auth)
   return {
-    blockNavigate: canSave,
-    token: state.auth.token
+    blockNavigate: state.pageOptions.canSave,
+    isLoggedIn
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    checkAuth: isLoggedIn => {
-      if (!isLoggedIn) {
-        dispatch(push('/login'))
-      }
-    }
+    goToLogin: () => dispatch(push('/log-in'))
   }
 }
 
-function mergeProps(stateProps, dispatchProps, ownProps) {
-  return {
-    ...stateProps,
-    ...ownProps,
-    checkAuth() {
-      dispatchProps.checkAuth(stateProps.token)
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

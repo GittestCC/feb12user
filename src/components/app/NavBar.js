@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import DropDown from '../ui/DropDown'
 
 class NavBar extends Component {
   state = {
@@ -16,7 +17,12 @@ class NavBar extends Component {
   }
 
   render() {
-    const { isDashboard, isSideBarShownMobile, toggleNavHandler } = this.props
+    const {
+      isDashboard,
+      isSideBarShownMobile,
+      toggleNavHandler,
+      initials
+    } = this.props
     return (
       <div className="navbar main-navigation">
         <div
@@ -85,12 +91,15 @@ class NavBar extends Component {
               ? 'hide-search'
               : ''}`}
           />
-          <div
-            className={`user-avatar ${this.state.showSearch
-              ? 'hide-search'
-              : ''}`}
-          >
-            <h4>LA</h4>
+          <div className={this.state.showSearch ? 'hide-search' : ''}>
+            <DropDown
+              type="simple"
+              direction="left"
+              dropdownClass="user-avatar uppercase"
+              dropdownText={initials}
+            >
+              <button onClick={this.props.logout}>Logout</button>
+            </DropDown>
           </div>
         </div>
       </div>

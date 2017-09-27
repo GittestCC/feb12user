@@ -45,16 +45,16 @@ class LandingNavBar extends Component {
               <h5>Contact Us</h5>
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link to={'/log-in'} className="button secondary">
               Log In
             </Link>
-            </li>
-            <li>
+          </li>
+          <li>
             <Link to={'/sign-up'} className="button default">
               Sign Up
             </Link>
-          </li> */}
+          </li>
         </ul>
 
         <div className="navigation-links">
@@ -78,22 +78,22 @@ class LandingNavBar extends Component {
                 <h5>Contact Us</h5>
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link
                 to={'/log-in'}
                 className="button secondary navigation-button"
               >
                 Log In
               </Link>
-              </li>
-              <li>
+            </li>
+            <li>
               <Link
                 to={'/sign-up'}
                 className="button default navigation-button"
               >
                 Sign Up
               </Link>
-            </li> */}
+            </li>
           </ul>
         </div>
       </nav>

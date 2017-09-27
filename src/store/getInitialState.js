@@ -1,6 +1,6 @@
-import { getToken } from '../helpers/authHelper'
+import { getTokenInfoFromLocalStorage } from '../helpers/authHelper'
 export default () => ({
   auth: {
-    token: getToken()
+    ...getTokenInfoFromLocalStorage()
   }
 })

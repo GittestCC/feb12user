@@ -36,8 +36,10 @@ ReactDOM.render(
             <Route
               exact
               path="/"
-              render={() => (isLoggedIn ? <Redirect to="/app" /> : <Home />)}
+              render={() =>
+                isLoggedIn ? <Redirect to="/app" /> : <Redirect to="/home" />}
             />
+            <Route path="/home" component={Home} />
             <Route path="/about-us" component={AboutUs} />
             <Route path="/contact-us" component={ContactUs} />
             <Route path="/blog" component={Blog} />
@@ -46,6 +48,7 @@ ReactDOM.render(
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/create-new-password" component={CreateNewPassword} />
             <Route path="/app" component={AppContainer} />
+            <Redirect to="/" />
           </Switch>
           <Route component={AuthContainer} />
         </div>

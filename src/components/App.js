@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Prompt } from 'react-router-dom'
+import { Route, Prompt, Switch, Redirect } from 'react-router-dom'
 
 import NavBarContainer from '../containers/app/NavBarContainer'
 import SideBarContainer from '../containers/app/SideBarContainer'
@@ -15,6 +15,11 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('beforeunload', this.onUnload)
+    if (!this.props.isLoggedIn) this.props.goToLogin()
+  }
+
+  componentWillReceiveProps() {
+    if (!this.props.isLoggedIn) this.props.goToLogin()
   }
 
   toggleNav = () => {
@@ -50,11 +55,14 @@ class App extends Component {
         <GlobalSaveBarContainer />
 
         <div className="layout-inner">
-          <Route
-            path={`${this.props.match.url}/dashboard`}
-            component={Dashboard}
-          />
-          <Route path={`${this.props.match.url}/market`} component={Market} />
+          <Switch>
+            <Route
+              path={`${this.props.match.url}/dashboard`}
+              component={Dashboard}
+            />
+            <Route path={`${this.props.match.url}/market`} component={Market} />
+            <Redirect to={`${this.props.match.url}/dashboard`} />
+          </Switch>
         </div>
       </div>
     )

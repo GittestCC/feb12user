@@ -1,11 +1,18 @@
 import React from 'react'
-import TitleWithLines from '../ui/TitleWithLines'
 import { Field, reduxForm } from 'redux-form'
-import { FieldValidation, Button, Password, CheckBox } from '../forms'
+import { Link } from 'react-router-dom'
+import TitleWithLines from '../ui/TitleWithLines'
+import {
+  FieldValidation,
+  Button,
+  Password,
+  CheckBox,
+  FormError
+} from '../forms'
 import { required } from '../../helpers/forms/validators'
 import githubIcon from '../../images/footer-socials-github.svg'
 
-const LogInForm = ({ handleSubmit }) => (
+const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
   <form onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
     <Button buttonType="dark" type="submit" image={githubIcon}>
@@ -21,7 +28,7 @@ const LogInForm = ({ handleSubmit }) => (
     />
     <Field
       label="password"
-      name="logInPassword"
+      name="password"
       placeholder="Enter a password"
       component={Password}
       validate={required}
@@ -31,12 +38,17 @@ const LogInForm = ({ handleSubmit }) => (
       label="Keep me logged in for two weeks"
       component={CheckBox}
     />
-    <Button buttonType="secondary" type="submit">
+    <FormError error={error} />
+    <Button
+      buttonType="secondary"
+      type="submit"
+      disabled={pristine || submitting}
+    >
       Log In
     </Button>
-    <a href="forgot-password" className="forgot-password">
+    <Link to="/forgot-password" className="forgot-password">
       Forgot Password?
-    </a>
+    </Link>
   </form>
 )
 

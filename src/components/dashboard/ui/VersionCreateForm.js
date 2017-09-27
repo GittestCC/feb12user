@@ -17,6 +17,8 @@ class VersionCreateForm extends Component {
       handleSubmit,
       onClose,
       baseVersions,
+      submitting,
+      pristine,
       error
     } = this.props
     return (
@@ -45,7 +47,11 @@ class VersionCreateForm extends Component {
           <Button onClick={onClose} type="button" buttonType="secondary">
             Cancel
           </Button>
-          <Button type="submit" buttonType="dark">
+          <Button
+            type="submit"
+            buttonType="dark"
+            disabled={submitting || pristine}
+          >
             {submitLabel}
           </Button>
         </div>
