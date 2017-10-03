@@ -68,7 +68,5 @@ export const findInArrayByText = (versions, text) => {
 export const getManageUrlForKintoBlock = (id, version) =>
   `/app/dashboard/kintoblocks/${id}/versions/${getVersionAsText(version)}`
 
-export const getManageUrlForKintoApp = (kintoApp, version) =>
-  `/app/dashboard/kintoapps/${kintoApp.id}/versions/${getVersionAsText(
-    version
-  )}`
+export const getManageUrlForKintoApp = (id, version) =>
+  `/app/dashboard/kintoapps/${id}/versions/${getVersionAsText(version)}`

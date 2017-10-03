@@ -36,7 +36,7 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
   }
 
   const appData = {
-    id: 1,
+    id: id,
     name: 'Single App All Alone',
     color: 'lapis',
     version: textToObject(ver),
@@ -70,7 +70,7 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
 export const fetchKintoApps = () => dispatch => {
   const testData = [
     {
-      id: 1,
+      id: '1',
       name: 'Special Snowflake KintoApp',
       color: 'lapis',
       versions: [
@@ -95,7 +95,7 @@ export const fetchKintoApps = () => dispatch => {
       ]
     },
     {
-      id: 2,
+      id: '2',
       name: "Your Mum's KintoApp",
       color: 'blue',
       versions: [
@@ -108,7 +108,7 @@ export const fetchKintoApps = () => dispatch => {
       ]
     },
     {
-      id: 3,
+      id: '3',
       name: 'Sausages!',
       color: 'gray',
       versions: [
@@ -133,7 +133,7 @@ export const fetchKintoApps = () => dispatch => {
       ]
     },
     {
-      id: 4,
+      id: '4',
       name: 'No Country for KintoApps',
       color: 'purple',
       versions: [
@@ -146,7 +146,7 @@ export const fetchKintoApps = () => dispatch => {
       ]
     },
     {
-      id: 5,
+      id: '5',
       name: 'I has KintoApp',
       color: 'green',
       versions: [
@@ -159,7 +159,7 @@ export const fetchKintoApps = () => dispatch => {
       ]
     },
     {
-      id: 6,
+      id: '6',
       name: 'Such App Much Kinto',
       color: 'orange',
       versions: [

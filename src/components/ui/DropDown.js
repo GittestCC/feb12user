@@ -89,7 +89,9 @@ class DropDown extends Component {
     const filter = this.state.filterText
     return this.props.list.filter(item => {
       if (!filter) return true
-      return item[this.props.filterField].startsWith(filter)
+      return item[this.props.filterField]
+        .toUpperCase()
+        .startsWith(filter.toUpperCase())
     })
   }
 

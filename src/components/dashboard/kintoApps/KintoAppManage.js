@@ -15,13 +15,20 @@ class KintoAppManage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApp(this.props.ver)
+    this.props.fetchKintoApps().then(() => {
+      this.props.fetchKintoApp(this.props.id, this.props.ver)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.ver !== nextProps.ver) {
-      this.props.fetchKintoApp(nextProps.ver)
+    const { id, ver } = nextProps
+    if (this.props.ver !== ver || this.props.id !== id) {
+      this.props.fetchKintoApp(id, ver)
     }
+  }
+
+  goToCreatePage = () => {
+    this.props.push('/app/dashboard/kintoapps/create')
   }
 
   onVersionModalClose = () => {
@@ -33,7 +40,13 @@ class KintoAppManage extends Component {
   }
 
   render() {
-    const { kintoApp, version, versionSelectItems } = this.props
+    const {
+      kintoApp,
+      version,
+      versionSelectItems,
+      kintoApps,
+      breadcrumbSelectItems
+    } = this.props
     return (
       <div className="kinto-app-manage">
         <div className="breadcrumbs">
@@ -44,7 +57,18 @@ class KintoAppManage extends Component {
             </li>
             <li>
               <a href="">{kintoApp.name}</a>
-              <span className="breadcrumb-icon" />
+              <DropDown
+                type="filter"
+                dropdownClass="breadcrumb-icon"
+                id="application-dropdown"
+                list={breadcrumbSelectItems}
+                component={TagItem}
+                filterField="text"
+                actionText="Create New Application"
+                actionHandler={this.goToCreatePage}
+                dropdownContentClass="short"
+                className="margin-right"
+              />
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
@@ -64,7 +88,6 @@ class KintoAppManage extends Component {
             </li>
           </ul>
         </div>
-
         <div className="page-title">
           <h2>
             {kintoApp.name}
