@@ -44,7 +44,6 @@ class KintoAppManage extends Component {
       kintoApp,
       version,
       versionSelectItems,
-      kintoApps,
       breadcrumbSelectItems
     } = this.props
     return (
@@ -109,7 +108,7 @@ class KintoAppManage extends Component {
         </div>
 
         <KintoAppManageFormContainer
-          kintoApp={this.props.kintoApp}
+          kintoApp={kintoApp}
           version={this.props.ver}
         />
 

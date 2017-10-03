@@ -8,7 +8,8 @@ import {
 
 const defaultState = {
   byId: {},
-  allIds: []
+  allIds: [],
+  dependencyStore: {}
 }
 
 const kintoAppsReducer = (state = defaultState, action) => {

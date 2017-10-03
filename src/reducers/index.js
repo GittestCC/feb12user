@@ -5,6 +5,7 @@ import pageOptions from './pageOptions'
 import kintoBlocks from './kintoBlocks'
 import kintoApps from './kintoApps'
 import auth from './auth'
+import kintoBlocksDependenciesCache from './kintoBlocksDependenciesCache'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   pageOptions,
   kintoBlocks,
   kintoApps,
-  auth
+  auth,
+  kintoBlocksDependenciesCache
 })
 export default rootReducer

@@ -13,9 +13,15 @@ export const FETCH_KINTO_BLOCKS = 'FETCH_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
 export const CREATE_VERSION_KINTO_BLOCK = 'CREATE_VERSION_KINTO_BLOCK'
+export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
+  'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
 
 export const kintoBlocksFetch = () => ({ type: FETCH_KINTO_BLOCKS })
 export const kintoBlocksReceive = data => ({ type: RECEIVE_KINTO_BLOCKS, data })
+export const kintoBlockReceiveDependencies = data => ({
+  type: RECEIVE_KINTO_BLOCK_DEPENDENCIES,
+  data
+})
 
 export const kintoBlockReceive = (id, data) => ({
   type: RECEIVE_KINTO_BLOCK,
