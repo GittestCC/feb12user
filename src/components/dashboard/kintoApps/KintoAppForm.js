@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm, FormSection } from 'redux-form'
 import { FieldValidation, Button, CheckBox } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
 import DependencyManagement from '../../forms/DependencyManagement'
@@ -86,20 +86,35 @@ const KintoAppForm = ({
         <h3>Protocols</h3>
         <h5>Choose a communication protocol.</h5>
 
-        <div className="form-body">
-          <Field label="gRPC" name="gRPC" id="gRPC" component={CheckBox} />
-          <Field
-            label="RESTFUL"
-            name="RESTFUL"
-            id="RESTFUL"
-            component={CheckBox}
-          />
-        </div>
+        <FormSection name="protocolInputs">
+          <div className="form-body">
+            <Field label="gRPC" name="gRPC" id="gRPC" component={CheckBox} />
+            <Field
+              label="restful"
+              name="restful"
+              id="restful"
+              component={CheckBox}
+            />
+          </div>
+        </FormSection>
       </div>
     </form>
   )
 }
 
-export default reduxForm({ form: 'kintoAppForm', enableReinitialize: true })(
-  KintoAppForm
-)
+const validate = values => {
+  let errors = {}
+  const protocolInputs = values.protocolInputs || {}
+  if (!protocolInputs.restful && !protocolInputs.gRPC) {
+    errors.protocolInputs = {
+      restful: 'You should at least pick one protocol'
+    }
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'kintoAppForm',
+  enableReinitialize: true,
+  validate
+})(KintoAppForm)
