@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Field, Fields, reduxForm, FormSection } from 'redux-form'
-import { Button, FieldValidation, VersionInputs, FormError } from '../../forms'
+import { getVersionAsText, textToObject } from '../../../helpers/versionHelper'
 import { required } from '../../../helpers/forms/validators'
 import { number } from '../../../helpers/forms/parsers'
+import { Button, VersionInputs, FormError } from '../../forms'
 
 class VersionCreateForm extends Component {
   componentDidMount() {
     this.props.initialize({
-      baseVersion: this.props.baseVersions[0]
+      baseVersion: textToObject(this.props.baseVersions[0])
     })
   }
 
@@ -25,7 +26,12 @@ class VersionCreateForm extends Component {
       <form onSubmit={handleSubmit}>
         <div className="full-width-field">
           <label htmlFor="baseVersion">Base Version</label>
-          <Field name="baseVersion" component={FieldValidation} type="select">
+          <Field
+            name="baseVersion"
+            component="select"
+            parse={textToObject}
+            format={getVersionAsText}
+          >
             {baseVersions.map((v, index) => (
               <option key={index} value={v}>
                 {v}

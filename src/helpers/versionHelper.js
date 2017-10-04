@@ -1,8 +1,18 @@
 import isNumber from 'lodash/isNumber'
+import isObject from 'lodash/isNumber'
+
+const normalizeVersionObject = v => ({
+  major: v.major || 0,
+  minor: v.minor || 0,
+  revision: v.revision || 0
+})
 
 export const getVersionAsText = v => {
+  if (isObject(v)) {
+    v = normalizeVersionObject(v)
+  }
   if (!v || !isNumber(v.major) || !isNumber(v.minor) || !isNumber(v.revision)) {
-    return null
+    return undefined
   }
   return `${v.major}.${v.minor}.${v.revision}`
 }
@@ -50,12 +60,17 @@ export const textToObject = v => {
  * then do equality between two version
  */
 export const isVersionEqual = (a, b) => {
+  if (!a || !b) {
+    return false
+  }
   if (typeof a === 'string') {
     a = textToObject(a)
   }
   if (typeof b === 'string') {
     b = textToObject(b)
   }
+  a = normalizeVersionObject(a)
+  b = normalizeVersionObject(b)
   return a.major === b.major && a.minor === b.minor && a.revision === b.revision
 }
 
