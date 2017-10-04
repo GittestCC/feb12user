@@ -61,3 +61,9 @@ a {
 .uppercase {
   text-transform: uppercase;
 }
+
+.hide-text {
+  line-height: 0;
+  font-size: 0;
+  color: transparent;
+}

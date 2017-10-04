@@ -7,7 +7,7 @@ import {
 import DropDown from '../../ui/DropDown'
 import TagItem from '../ui/TagItem'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
-import KintoAppManageFormContainer from '../../../containers/dashboard/kintoApps/kintoAppManage/KintoAppManageFormContainer.js'
+import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
 
 class KintoAppManage extends Component {
   state = {
@@ -107,10 +107,7 @@ class KintoAppManage extends Component {
           </button>
         </div>
 
-        <KintoAppManageFormContainer
-          kintoApp={kintoApp}
-          version={this.props.ver}
-        />
+        <KintoAppFormContainer kintoApp={kintoApp} version={this.props.ver} />
 
         <VersionCreateModalContainer
           id={kintoApp.id}

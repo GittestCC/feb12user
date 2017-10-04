@@ -7,6 +7,8 @@ import forms from '../constants/forms'
 export default function pageOptions(state = {}, action) {
   switch (action.type) {
     case actionTypes.CHANGE:
+    case actionTypes.ARRAY_REMOVE:
+    case actionTypes.ARRAY_PUSH:
       if (
         forms[state.activePage] &&
         forms[state.activePage].formName === action.meta.form

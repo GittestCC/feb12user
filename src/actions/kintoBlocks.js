@@ -18,9 +18,11 @@ export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
 
 export const kintoBlocksFetch = () => ({ type: FETCH_KINTO_BLOCKS })
 export const kintoBlocksReceive = data => ({ type: RECEIVE_KINTO_BLOCKS, data })
+
 export const kintoBlockReceiveDependencies = data => ({
   type: RECEIVE_KINTO_BLOCK_DEPENDENCIES,
-  data
+  data: data.data,
+  metadata: data.metadata
 })
 
 export const kintoBlockReceive = (id, data) => ({
@@ -345,5 +347,67 @@ export const createVersionKintoBlock = (id, data) => dispatch => {
     }
     dispatch(kintoBlockCreateVersion(id, result))
     dispatch(push(getManageUrlForKintoBlock(id, data.versionData)))
+  })
+}
+
+export const searchKintoBlocks = q => () => {
+  // const url = `/kintoblocks/search?name=${q}&limit=10`
+  const result = [
+    {
+      id: '7',
+      name: 'cool kintoblock',
+      type: 'KINTOBLOCK',
+      version: '0.1.2'
+    },
+    {
+      id: '8',
+      name: 'cool service 1',
+      type: 'SERVICE',
+      version: '0.1.2'
+    }
+  ]
+  return Promise.resolve(result).then(r => {
+    return {
+      options: r.map(k => ({
+        ...k,
+        label: k.name
+      }))
+    }
+  })
+}
+
+export const fetchKintoBlockDependenciesData = (id, ver) => dispatch => {
+  //const url = `/kintoblocks/${id}/versions/${ver}/dependencydata`
+  const testData = {
+    data: {
+      id: id,
+      version: textToObject(ver)
+    },
+    metadata: {
+      dependencies: {
+        '7': {
+          name: 'cool kintoblock',
+          type: 'KINTOBLOCK',
+          description: 'Coolzor!!',
+          versions: [
+            { major: 0, minor: 1, revision: 0 },
+            { major: 0, minor: 1, revision: 2 }
+          ]
+        },
+        '8': {
+          name: 'cool service 1',
+          type: 'SERVICE',
+          description: 'cool service',
+          versions: [
+            { major: 0, minor: 1, revision: 0 },
+            { major: 0, minor: 1, revision: 2 }
+          ]
+        }
+      }
+    }
+  }
+  return Promise.resolve(testData).then(result => {
+    dispatch(kintoBlockReceiveDependencies(result))
+    return result.data
   })
 }

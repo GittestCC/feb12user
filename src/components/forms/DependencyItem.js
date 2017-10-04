@@ -8,12 +8,21 @@ import {
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
 
 class DependencyItem extends Component {
+  onRemoveItem = () => {
+    this.props.fields.remove(this.props.index)
+  }
+
   render() {
     const { field, data, appDependenciesInfo } = this.props
     const block = appDependenciesInfo[data.id]
+    if (!block) {
+      return null
+    }
     return (
       <div className="block">
-        <div className="delete-block" />
+        <a onClick={this.onRemoveItem} className="delete-block hide-text">
+          delete
+        </a>
         <div className="icon-text-and-version">
           <div className={`main-icon ${getClassNameForType(block.type)}`} />
           <div className="text">

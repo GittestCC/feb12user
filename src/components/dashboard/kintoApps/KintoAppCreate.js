@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import KintoAppCreateFormContainer from '../../../containers/dashboard/kintoApps/kintoAppCreate/KintoAppCreateFormContainer.js'
+import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer.js'
 
 class KintoAppCreate extends Component {
   render() {
@@ -34,7 +34,7 @@ class KintoAppCreate extends Component {
           <div className="icon" />
         </div>
 
-        <KintoAppCreateFormContainer />
+        <KintoAppFormContainer version="0.1.0" isCreate={true} />
       </div>
     )
   }

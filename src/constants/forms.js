@@ -8,5 +8,9 @@ export default {
   [pages.dashboardKintoAppsManage]: {
     submitLabel: 'Edit Application',
     formName: 'kintoAppForm'
+  },
+  [pages.dashboardKintoAppsCreate]: {
+    submitLabel: 'Create New Application',
+    formName: 'kintoAppForm'
   }
 }

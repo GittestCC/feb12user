@@ -4,7 +4,13 @@ import { FieldValidation, Button, CheckBox } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
 import DependencyManagement from '../../forms/DependencyManagement'
 
-const KintoAppForm = ({ handleSubmit, version, appDependenciesInfo }) => {
+const KintoAppForm = ({
+  handleSubmit,
+  version,
+  appDependenciesInfo,
+  searchKintoBlocks,
+  fetchKintoBlockDependenciesData
+}) => {
   return (
     <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
       <div className="form-wrapper basic-info">
@@ -42,6 +48,8 @@ const KintoAppForm = ({ handleSubmit, version, appDependenciesInfo }) => {
           component={DependencyManagement}
           appDependenciesInfo={appDependenciesInfo}
           searchUrl="/kintoblocks/search"
+          onSearchKintoBlocks={searchKintoBlocks}
+          fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
         />
       </div>
 
@@ -64,8 +72,12 @@ const KintoAppForm = ({ handleSubmit, version, appDependenciesInfo }) => {
             <div className="line" />
           </div>
           <div className="bottom">
-            <Button buttonType="secondary">Create New Client</Button>
-            <Button buttonType="secondary">Use Existing Client</Button>
+            <Button type="button" buttonType="secondary">
+              Create New Client
+            </Button>
+            <Button type="button" buttonType="secondary">
+              Use Existing Client
+            </Button>
           </div>
         </div>
       </div>

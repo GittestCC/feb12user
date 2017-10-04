@@ -1,17 +1,41 @@
 import React from 'react'
+import Select from 'react-select'
+
 import DependencyItem from './DependencyItem'
 
-const DependencyManagement = ({ fields, appDependenciesInfo }) => {
+const DependencyManagement = ({
+  fields,
+  appDependenciesInfo,
+  onSearchKintoBlocks,
+  fetchKintoBlockDependenciesData
+}) => {
+  const onSelectKintoBlock = selectedItem => {
+    fetchKintoBlockDependenciesData(
+      selectedItem.id,
+      selectedItem.version
+    ).then(data => {
+      setTimeout(() => {
+        fields.push(data)
+      })
+    })
+  }
+
   return (
     <div className="form-body">
-      <input type="search" placeholder="Search KintoBlocks or services" />
+      <Select.Async
+        placeholder="Search KintoBlocks or services"
+        loadOptions={onSearchKintoBlocks}
+        onChange={onSelectKintoBlock}
+      />
 
       {fields.length ? (
         <div className="blocks-or-services">
           {fields.map((field, key, fields) => (
             <DependencyItem
               key={key}
+              index={key}
               field={field}
+              fields={fields}
               appDependenciesInfo={appDependenciesInfo}
               data={fields.get(key)}
             />

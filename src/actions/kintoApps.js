@@ -1,6 +1,4 @@
 import { formSubmitted } from './pageOptions'
-import { push } from 'react-router-redux'
-
 import { isVersionEqual } from '../helpers/versionHelper'
 import { isRecent } from '../helpers/dateHelper'
 
@@ -173,7 +171,6 @@ export const fetchKintoApps = () => dispatch => {
       }
     }
   }
-
   dispatch(kintoAppsFetch())
   return Promise.resolve(testData).then(data => {
     dispatch(kintoAppsReceive(data))
@@ -183,13 +180,12 @@ export const fetchKintoApps = () => dispatch => {
   })
 }
 
-export const kintoAppCreate = data => dispatch => {
-  return Promise.resolve('success').then(() => {
-    dispatch(formSubmitted())
-    dispatch(push('/app/dashboard/kintoapps/list'))
-  })
+export const createKintoApp = data => dispatch => {
+  dispatch(formSubmitted())
+  console.log('kintoapp created', data)
 }
 
-export const updateKintoApp = data => dispatch => {
-  console.log('Form submitted', data)
+export const updateKintoApp = (id, ver, data) => dispatch => {
+  dispatch(formSubmitted())
+  console.log('kintoapp updated', id, ver, data)
 }

@@ -4,13 +4,13 @@ import { getDependencyInfo } from '../helpers/kintoBlocksHelper'
 
 export const getAppDependenciesFactory = () => {
   return createSelector(
-    (state, id) => state.kintoApps.byId[id],
+    (_, appDependencies) => appDependencies,
     state => state.kintoBlocksDependenciesCache,
-    (kintoApp, dependenciesCache) => {
-      if (!kintoApp || !kintoApp.appDependencies) {
+    (appDependencies, dependenciesCache) => {
+      if (!appDependencies || !appDependencies.length) {
         return []
       }
-      const result = kintoApp.appDependencies.map(d => {
+      const result = appDependencies.map(d => {
         return getDependencyInfo(d, dependenciesCache)
       })
       return keyBy(result, 'id')
