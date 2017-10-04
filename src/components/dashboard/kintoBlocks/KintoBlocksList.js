@@ -87,6 +87,7 @@ class KintoBlocksList extends Component {
           isOpen={isVersionModalOpen}
           onClose={this.onVersionModalClose}
           disableCloseOnSubmit={true}
+          isKintoBlock={true}
         />
       </div>
     )

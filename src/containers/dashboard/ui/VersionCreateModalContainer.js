@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 import { createVersionKintoBlock } from '../../../actions/kintoBlocks'
+import { createVersionKintoApp } from '../../../actions/kintoApps'
 import { getVersionAsText } from '../../../helpers/versionHelper'
 import VersionCreateModalContainer from '../../../components/dashboard/ui/VersionCreateModal'
 
@@ -8,7 +9,7 @@ const selector = formValueSelector('versionCreate')
 
 function mapStateToProps(state, { isOpen, title, baseVersions }) {
   let submitLabel = 'Create'
-  const versionText = getVersionAsText(selector(state, 'versionData'))
+  const versionText = getVersionAsText(selector(state, 'version'))
   if (versionText) {
     submitLabel += ` ${versionText}`
   }
@@ -27,8 +28,12 @@ function mapDispatchToProps(
   return {
     onClose,
     onSubmit: data => {
-      return dispatch(createVersionKintoBlock(id, data)).then(() => {
+      const action = isKintoBlock
+        ? createVersionKintoBlock
+        : createVersionKintoApp
+      return dispatch(action(id, data)).then(r => {
         if (!disableCloseOnSubmit) onClose()
+        return r
       })
     }
   }

@@ -33,7 +33,8 @@ export const getClassNameForType = type => {
     case 'SERVICE':
       return 'service'
     default:
-      throw new Error('Invalid kintoblock type for classname')
+      // TODO throw new Error('Invalid kintoblock type for classname')
+      return ''
   }
 }
 

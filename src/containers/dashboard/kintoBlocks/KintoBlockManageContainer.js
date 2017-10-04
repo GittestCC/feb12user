@@ -1,18 +1,30 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-import { fetchKintoBlock } from '../../../actions/kintoBlocks'
+import { fetchKintoBlock, fetchKintoBlocks } from '../../../actions/kintoBlocks'
+import { getAllKintoBlocks } from '../../../selectors/kintoBlocks'
 import {
   findInArrayByText,
   asTextList,
   getVersionSelectItem,
   isVersionEqual
 } from '../../../helpers/versionHelper'
+import { getBreadcrumbSelectItem } from '../../../helpers/breadcrumbHelper'
 import KintoBlockManage from '../../../components/dashboard/kintoBlocks/KintoBlockManage'
 
 function mapStateToProps(state, { match }) {
   const { id, ver } = match.params
   const kintoBlock = state.kintoBlocks.byId[id] || {}
+  const kintoBlocks = getAllKintoBlocks(state)
   let versionSelectItems = []
+  let breadcrumbSelectItems = []
+
+  if (kintoBlocks.length) {
+    breadcrumbSelectItems = kintoBlocks.map(k =>
+      getBreadcrumbSelectItem(k, id, false)
+    )
+  }
+
   if (kintoBlock.versions) {
     versionSelectItems = kintoBlock.versions.map(v => {
       let result = getVersionSelectItem(v, id)
@@ -23,18 +35,19 @@ function mapStateToProps(state, { match }) {
     })
   }
   return {
+    id,
     ver,
     kintoBlock,
     version: findInArrayByText(kintoBlock.versions, ver),
     baseVersions: asTextList(kintoBlock.versions),
-    versionSelectItems
+    versionSelectItems,
+    breadcrumbSelectItems,
+    KintoBlocks: getAllKintoBlocks(state)
   }
 }
 
-function mapDispatchToProps(dispatch, { match }) {
-  return {
-    fetchKintoBlock: ver => dispatch(fetchKintoBlock(match.params.id, ver))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(KintoBlockManage)
+export default connect(mapStateToProps, {
+  fetchKintoBlock,
+  fetchKintoBlocks,
+  push
+})(KintoBlockManage)

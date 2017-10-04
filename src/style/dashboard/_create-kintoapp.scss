@@ -10,7 +10,7 @@ a.disabled {
   }
 }
 
-.form-body {
+.form-body:not(.hardware) {
   margin-top: 20px;
 }
 

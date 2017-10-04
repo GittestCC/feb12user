@@ -9,12 +9,14 @@ class KintoAppCreate extends Component {
         <div className="breadcrumbs">
           <ul className="unstyled-list">
             <li>
-              <Link to="list">Applications</Link>
+              <Link to="create" className="disabled">
+                Applications
+              </Link>
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
               <a href="" className="disabled">
-                Awesome Application
+                Create New Application
               </a>
             </li>
           </ul>

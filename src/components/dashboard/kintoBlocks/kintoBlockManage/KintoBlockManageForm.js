@@ -57,7 +57,7 @@ class KintoBlockManageForm extends Component {
               type="text"
               name="versionNumber"
               className="disabled"
-              value="1.0.1"
+              value={this.props.ver}
               disabled
             />
 
@@ -104,20 +104,20 @@ class KintoBlockManageForm extends Component {
           <div className="form-body">
             <div className="radio">
               <Field
-                name="sausages"
+                name="private"
                 type="radio"
                 component={FieldValidation}
                 label="Private (only I can use it)"
-                value="private party"
+                value="private"
               />
             </div>
             <div className="radio">
               <Field
-                name="sausages"
+                name="public"
                 type="radio"
                 component={FieldValidation}
                 label="Public (anyone can get it in the KintoHub Market)"
-                value="street party"
+                value="public"
               />
             </div>
           </div>

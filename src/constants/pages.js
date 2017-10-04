@@ -2,7 +2,7 @@
 const pages = {
   dashboardBlocksList: 'DASHBOARD_BLOCKS_LIST',
   dashboardBlockCreate: 'DASHBOARD_BLOCK_CREATE',
-  dashboardBlockView: 'DASHBOARD_BLOCK_VIEW',
+  dashboardBlockManage: 'DASHBOARD_BLOCK_VIEW',
   dashboardHome: 'DASHBOARD_HOME',
 
   dashboardKintoAppsList: 'DASHBOARD_KINTO_APPS_LIST',
@@ -65,7 +65,7 @@ export const dashboardSidebar = [
         url: '/app/dashboard/kintoblocks/list'
       },
       {
-        key: pages.dashboardBlockView,
+        key: pages.dashboardBlockManage,
         url: '/app/dashboard/kintoblocks/:id/versions/:version'
       },
       {

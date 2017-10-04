@@ -1,5 +1,5 @@
 import isNumber from 'lodash/isNumber'
-import isObject from 'lodash/isNumber'
+import isObject from 'lodash/isObject'
 
 const normalizeVersionObject = v => ({
   major: v.major || 0,
@@ -14,7 +14,7 @@ export const getVersionAsText = v => {
   if (!v || !isNumber(v.major) || !isNumber(v.minor) || !isNumber(v.revision)) {
     return undefined
   }
-  return `${v.major}.${v.minor}.${v.revision}`
+  return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
 }
 
 export const asTextList = (versions = []) => versions.map(getVersionAsText)
@@ -78,6 +78,7 @@ export const findInArrayByText = (versions, text) => {
   if (!versions) return null
   const version = textToObject(text)
   return versions.find(v => isVersionEqual(v, version))
+  // return versions.find(version)
 }
 
 export const getManageUrlForKintoBlock = (id, version) =>

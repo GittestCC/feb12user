@@ -21,7 +21,7 @@ const KintoBlockCreateForm = ({
 
         <div className="form-body">
           <Field
-            name="kintoBlockName"
+            name="name"
             label="KintoBlock Name"
             placeholder="Enter a name for your KintoBlock"
             component={FieldValidation}
@@ -43,7 +43,7 @@ const KintoBlockCreateForm = ({
             <option value="ruby">Ruby Starter Pack</option>
           </Field>
           <Field
-            name="repository"
+            name="repositoryName"
             label="repository"
             placeholder="Enter a name for yout repository"
             component={FieldValidation}

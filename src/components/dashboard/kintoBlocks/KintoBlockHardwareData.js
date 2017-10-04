@@ -7,10 +7,11 @@ import {
   isBetween1000
 } from '../../../helpers/forms/validators'
 import { lessThanFormat, allowFalse } from '../../../helpers/forms/formatters'
+import { number } from '../../../helpers/forms/parsers'
 
 class KintoBlockHardwareData extends FormSection {
   static defaultProps = {
-    name: 'versionData'
+    name: 'hardwareData'
   }
 
   render() {
@@ -36,7 +37,8 @@ class KintoBlockHardwareData extends FormSection {
           <div className="memory">
             <div className="input-container">
               <Field
-                name="memoryLimits"
+                name="memLimit"
+                parse={number}
                 label="Memory Limits"
                 placeholder="64 - 262144 MB"
                 component={FieldValidation}
@@ -48,7 +50,8 @@ class KintoBlockHardwareData extends FormSection {
             </div>
             <div className="input-container">
               <Field
-                name="memoryRequests"
+                name="memRequests"
+                parse={number}
                 label="Memory Requests"
                 placeholder="64 - 262144 MB"
                 component={FieldValidation}
@@ -64,7 +67,7 @@ class KintoBlockHardwareData extends FormSection {
             <div className="toggle-wrapper">
               <Field
                 onChange={resetCPUHandler}
-                name="toggleCPU"
+                name="dedicatedCpu"
                 label="Dedicated CPUs"
                 component={Toggle}
                 normalize={allowFalse}
@@ -76,8 +79,9 @@ class KintoBlockHardwareData extends FormSection {
               <div className="limits-requests">
                 <div className="input-container">
                   <Field
-                    name="cpuLimits"
+                    name="maxCpu"
                     label="CPU Limits"
+                    parse={number}
                     component={FieldValidation}
                     validate={required}
                     type="select"
@@ -93,8 +97,9 @@ class KintoBlockHardwareData extends FormSection {
                 </div>
                 <div className="input-container">
                   <Field
-                    name="cpuRequests"
+                    name="minCpu"
                     label="CPU Requests"
+                    parse={number}
                     placeholder="1 - 1000 m"
                     component={FieldValidation}
                     validate={required}
@@ -114,8 +119,9 @@ class KintoBlockHardwareData extends FormSection {
               <div className="limits-requests">
                 <div className="input-container">
                   <Field
-                    name="cpuLimits"
+                    name="maxCpu"
                     label="CPU Limits"
+                    parse={number}
                     placeholder="1 - 1000 m"
                     component={FieldValidation}
                     validate={[required, isBetween1000]}
@@ -126,8 +132,9 @@ class KintoBlockHardwareData extends FormSection {
                 </div>
                 <div className="input-container">
                   <Field
-                    name="cpuRequests"
+                    name="minCpu"
                     label="CPU Requests"
+                    parse={number}
                     placeholder="1 - 1000 m"
                     component={FieldValidation}
                     validate={[required, isBetween1000]}

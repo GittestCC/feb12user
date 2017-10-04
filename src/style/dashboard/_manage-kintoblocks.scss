@@ -162,6 +162,8 @@
         min-height: 230px;
         box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
         border-radius: 12px;
+        background-color: $kinto-white;
+        padding: 40px;
         .radio .field-wrapper {
           display: flex;
           flex-direction: row-reverse;
@@ -179,8 +181,9 @@
           border-radius: 0 0 12px 12px;
           box-shadow: none;
         }
-        background-color: $kinto-white;
-        padding: 40px;
+        .line {
+          margin: 15px 0 25px;
+        }
       }
     }
   }

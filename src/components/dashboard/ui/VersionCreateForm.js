@@ -39,7 +39,7 @@ class VersionCreateForm extends Component {
             ))}
           </Field>
         </div>
-        <FormSection name="versionData">
+        <FormSection name="version">
           <Fields
             names={['major', 'minor', 'revision']}
             parse={number}
@@ -67,12 +67,12 @@ class VersionCreateForm extends Component {
 }
 
 const validate = values => {
-  let versionData = values.versionData || {}
+  let version = values.version || {}
   let errors = {}
-  errors.major = required(versionData.major)
-  errors.minor = required(versionData.minor)
-  errors.revision = required(versionData.revision)
-  return { versionData: errors }
+  errors.major = required(version.major)
+  errors.minor = required(version.minor)
+  errors.revision = required(version.revision)
+  return { version: errors }
 }
 
 export default reduxForm({ form: 'versionCreate', validate })(VersionCreateForm)

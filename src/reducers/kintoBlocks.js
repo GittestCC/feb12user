@@ -25,9 +25,9 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         isFetching: false,
         byId: {
           ...state.byId,
-          ...keyBy(action.data, 'id')
+          ...keyBy(action.data.blocks, 'id')
         },
-        allIds: [...action.data.map(k => k.id)]
+        allIds: [...action.data.blocks.map(k => k.id)]
       }
     case CREATE_VERSION_KINTO_BLOCK:
     case RECEIVE_KINTO_BLOCK:

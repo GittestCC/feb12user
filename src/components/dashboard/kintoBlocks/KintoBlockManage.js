@@ -15,13 +15,19 @@ class KintoBlockManage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoBlock(this.props.ver)
+    this.props.fetchKintoBlocks().then(() => {
+      this.props.fetchKintoBlock(this.props.id, this.props.ver)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ver !== nextProps.ver) {
-      this.props.fetchKintoBlock(nextProps.ver)
+      this.props.fetchKintoBlock(nextProps.id, nextProps.ver)
     }
+  }
+
+  goToCreatePage = () => {
+    this.props.push('/app/dashboard/kintoblocks/create')
   }
 
   onVersionModalClose = () => {
@@ -33,7 +39,12 @@ class KintoBlockManage extends Component {
   }
 
   render() {
-    const { kintoBlock, version, versionSelectItems } = this.props
+    const {
+      kintoBlock,
+      version,
+      versionSelectItems,
+      breadcrumbSelectItems
+    } = this.props
     return (
       <div className="kintoblock-manage">
         <div className="breadcrumbs">
@@ -44,7 +55,18 @@ class KintoBlockManage extends Component {
             </li>
             <li>
               <a href="">{kintoBlock.name}</a>
-              <span className="breadcrumb-icon" />
+              <DropDown
+                type="filter"
+                dropdownClass="breadcrumb-icon"
+                id="application-dropdown"
+                list={breadcrumbSelectItems}
+                component={TagItem}
+                filterField="text"
+                actionText="Create New Kintoblock"
+                actionHandler={this.goToCreatePage}
+                dropdownContentClass="short"
+                className="margin-right"
+              />
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
@@ -85,7 +107,7 @@ class KintoBlockManage extends Component {
           </button>
         </div>
 
-        <KintoBlockManageForm />
+        <KintoBlockManageForm kintoBlock={kintoBlock} ver={this.props.ver} />
 
         <VersionCreateModalContainer
           id={kintoBlock.id}
@@ -93,6 +115,7 @@ class KintoBlockManage extends Component {
           baseVersions={this.props.baseVersions}
           isOpen={this.state.isVersionModalOpen}
           onClose={this.onVersionModalClose}
+          isKintoBlock={true}
         />
       </div>
     )

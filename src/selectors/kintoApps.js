@@ -23,7 +23,7 @@ export const getAllKintoApps = createSelector(
   state => state.kintoBlocksDependenciesCache,
   (kintoApps = [], dependenciesCache) => {
     return kintoApps.map(app => {
-      const dependencies = app.appDependencies
+      const dependencies = app.appDependencies || []
       return {
         ...app,
         dependencies: dependencies.map(d => {

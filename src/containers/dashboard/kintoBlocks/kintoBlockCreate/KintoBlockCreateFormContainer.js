@@ -7,7 +7,7 @@ const formName = 'kintoBlockCreateForm'
 const selector = formValueSelector(formName)
 function mapStateToProps(state) {
   return {
-    isDedicatedCPU: selector(state, 'versionData.toggleCPU')
+    isDedicatedCPU: selector(state, 'hardwareData.dedicatedCpu')
   }
 }
 
@@ -15,13 +15,13 @@ function mapDispatchToProps(dispatch) {
   return {
     onSubmit: data => dispatch(kintoBlockCreate(data)),
     resetCPUHandler: () => {
-      dispatch(change('kintoBlockCreateForm', 'versionData.cpuLimits', null))
-      dispatch(change('kintoBlockCreateForm', 'versionData.cpuRequests', null))
+      dispatch(change('kintoBlockCreateForm', 'hardwareData.minCpu', null))
+      dispatch(change('kintoBlockCreateForm', 'hardwareData.maxCpu', null))
       dispatch(
         untouch(
           'kintoBlockCreateForm',
-          'versionData.cpuLimits',
-          'versionData.cpuRequests'
+          'hardwareData.minCpu',
+          'hardwareData.maxCpu'
         )
       )
     }

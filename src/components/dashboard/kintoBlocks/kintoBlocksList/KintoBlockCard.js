@@ -28,17 +28,24 @@ class KintoBlockCard extends Component {
       goToLatest
     } = this.props
     return (
-      <Link to={latestVersion.url} className={`kintoblock ${kintoBlock.color}`}>
+      <Link
+        to={latestVersion.url}
+        className={`kintoblock ${kintoBlock.color || 'lapis'}`}
+      >
         <div className="top">
           <div className="text">
             <div className="left">
-              <img src={`/images/app-icon-${kintoBlock.id}.png`} alt="" />
+              <img
+                src={`/images/app-icon-${Math.floor(Math.random() * 6) +
+                  1}.png`}
+                alt=""
+              />
             </div>
             <div className="right">
               <h4 className="version">{latestVersion.text}</h4>
             </div>
             <div className="name-and-tag">
-              <h3>{kintoBlock.name}</h3>
+              <h3 className="name">{kintoBlock.name}</h3>
 
               {isLatestVersionPending && (
                 <div className={`text-highlight ${latestVersion.className}`}>
@@ -52,11 +59,11 @@ class KintoBlockCard extends Component {
         <div className="bottom">
           <div className="icons">
             <div className="applications">
-              <div className="dependency number">+4</div>
-              <div className="dependency service" />
-              <div className="dependency application" />
-              <div className="dependency service" />
-              <div className="dependency kintoblock-dep" />
+              {/* <div className="dependency number">+4</div>
+                <div className="dependency service" />
+                <div className="dependency application" />
+                <div className="dependency service" />
+              <div className="dependency kintoblock-dep" /> */}
             </div>
             <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
               <button onClick={onVersionCreate}>Create New Version</button>
