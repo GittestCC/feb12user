@@ -21,7 +21,7 @@ const DependencyManagement = ({
   }
 
   return (
-    <div className="form-body">
+    <div className="form-body dependency-management">
       <Select.Async
         placeholder="Search KintoBlocks or services"
         loadOptions={onSearchKintoBlocks}

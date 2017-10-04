@@ -323,12 +323,46 @@ a.disabled {
       }
     }
   }
+  
   .form-body {
     background-color: $kinto-white;
     padding: 36px 40px;
     border-radius: 12px;
     box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   }
+
+  .dependency-management  {
+    .Select {
+      &.is-focused {
+        .Select-control{
+          height: 40px;
+          border: 2px solid $input-focus;
+        }
+      }
+      .Select-placeholder {
+        color: $input;
+      }
+      &.is-open {
+        .Select-placeholder {
+          display: none;
+        }
+      }
+      .Select-input input {
+        height: 100%;
+        padding: 0;
+      }
+      .Select-control {
+        color: $kinto-tinted-grayscale-7;
+        letter-spacing: 0;
+        line-height: 24px;
+        padding-left: $margin-base*2;
+        background: $kinto-white;
+        border: 2px solid $input;
+        border-radius: 4px;
+      }
+    }
+  }
+
   .combine-buttons{
     margin: 40px 0 20px;
     display: flex;
