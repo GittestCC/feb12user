@@ -1,14 +1,46 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import { asTextList } from '../../../helpers/versionHelper'
+import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoAppCardContainer from '../../../containers/dashboard/kintoApps/kintoAppsList/KintoAppCardContainer'
 
 class KintoAppsList extends Component {
+  state = {
+    isVersionModalOpen: false,
+    versionKintoAppId: null,
+    versionKintoAppName: null,
+    versionBaseVersionsList: []
+  }
+
+  onVersionModalOpen = kintoApp => {
+    this.setState({
+      isVersionModalOpen: true,
+      versionKintoAppId: kintoApp.id,
+      versionKintoAppName: kintoApp.name,
+      versionBaseVersionsList: asTextList(kintoApp.versions)
+    })
+  }
+
+  onVersionModalClose = () => {
+    this.setState({
+      isVersionModalOpen: false,
+      versionKintoAppId: null,
+      versionKintoAppName: null,
+      versionBaseVersionsList: []
+    })
+  }
+
   componentDidMount() {
     this.props.fetchKintoApps()
   }
 
   render() {
+    const {
+      isVersionModalOpen,
+      versionKintoAppId,
+      versionKintoAppName,
+      versionBaseVersionsList
+    } = this.state
     return (
       <div className="my-kintoapps">
         <div className="breadcrumbs">
@@ -42,9 +74,22 @@ class KintoAppsList extends Component {
             </div>
           </Link>
           {this.props.kintoApps.map((kintoApp, i) => (
-            <KintoAppCardContainer kintoApp={kintoApp} key={i} index={i} />
+            <KintoAppCardContainer
+              kintoApp={kintoApp}
+              key={i}
+              index={i}
+              onVersionCreate={this.onVersionModalOpen}
+            />
           ))}
         </div>
+        <VersionCreateModalContainer
+          id={versionKintoAppId}
+          title={versionKintoAppName}
+          baseVersions={versionBaseVersionsList}
+          isOpen={isVersionModalOpen}
+          onClose={this.onVersionModalClose}
+          disableCloseOnSubmit={true}
+        />
       </div>
     )
   }

@@ -29,20 +29,20 @@ export const dashboardSidebar = [
   {
     title: 'Applications',
     className: 'kintoapps',
-    url: '/app/dashboard/kintoApps/list',
-    addUrl: '/app/dashboard/kintoApps/create',
+    url: '/app/dashboard/kintoapps/list',
+    addUrl: '/app/dashboard/kintoapps/create',
     children: [
       {
         key: pages.dashboardKintoAppsList,
-        url: '/app/dashboard/kintoApps/list'
+        url: '/app/dashboard/kintoapps/list'
       },
       {
         key: pages.dashboardKintoAppsManage,
-        url: '/app/dashboard/kintoApps/:id/versions/:version'
+        url: '/app/dashboard/kintoapps/:id/versions/:version'
       },
       {
         key: pages.dashboardKintoAppsCreate,
-        url: '/app/dashboard/kintoApps/create'
+        url: '/app/dashboard/kintoapps/create'
       }
     ],
     group: 1

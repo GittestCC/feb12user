@@ -5,8 +5,8 @@ import KintoApps from './dashboard/KintoApps'
 
 const Dashboard = ({ match }) => (
   <div>
-    <Route path={`${match.url}/kintoBlocks`} component={KintoBlocks} />
-    <Route path={`${match.url}/kintoApps`} component={KintoApps} />
+    <Route path={`${match.url}/kintoblocks`} component={KintoBlocks} />
+    <Route path={`${match.url}/kintoapps`} component={KintoApps} />
   </div>
 )
 

@@ -34,7 +34,9 @@ class KintoAppCard extends Component {
       dropdownDependencyId,
       dropdownId,
       dropdownVersionId,
-      versions
+      versions,
+      onVersionCreate,
+      goToLatest
     } = this.props
 
     return (
@@ -98,8 +100,8 @@ class KintoAppCard extends Component {
               <div className="dependency service" />
             </div>
             <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-              <button>Create New Version</button>
-              <button>Edit {latestVersion.text}</button>
+              <button onClick={onVersionCreate}>Create New Version</button>
+              <button onClick={goToLatest}>Edit {latestVersion.text}</button>
               <button onClick={this.showVersionDropdown}>
                 View Other Versions
               </button>
@@ -114,9 +116,7 @@ class KintoAppCard extends Component {
               component={TagItem}
               filterField="text"
               actionText="Create New Version"
-              actionHandler={() => {
-                console.log('create new kinto app version')
-              }}
+              actionHandler={onVersionCreate}
             />
           </div>
         </div>
