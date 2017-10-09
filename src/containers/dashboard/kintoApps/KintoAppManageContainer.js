@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { reset } from 'redux-form'
 import { fetchKintoApp, fetchKintoApps } from '../../../actions/kintoApps'
 import { getAllKintoApps } from '../../../selectors/kintoApps'
 import { push } from 'react-router-redux'
@@ -49,7 +50,8 @@ function mapDispatchToProps(dispatch, { match }) {
   return {
     fetchKintoApp: (id, ver) => dispatch(fetchKintoApp(id, ver)),
     fetchKintoApps: () => dispatch(fetchKintoApps()),
-    push: url => dispatch(push(url))
+    goToCreatePage: () => dispatch(push('/app/dashboard/kintoapps/create')),
+    resetForm: () => dispatch(reset('kintoAppForm'))
   }
 }
 

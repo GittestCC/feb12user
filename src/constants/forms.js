@@ -6,11 +6,11 @@ export default {
     formName: 'kintoBlockCreateForm' // must match redux form name
   },
   [pages.dashboardBlockManage]: {
-    submitLabel: 'Create New KintoBlock Version',
-    formName: 'kintoBlockCreateForm' // must match redux form name
+    submitLabel: 'Save Changes',
+    formName: 'kintoBlockManageForm'
   },
   [pages.dashboardKintoAppsManage]: {
-    submitLabel: 'Edit Application',
+    submitLabel: 'Save Changes',
     formName: 'kintoAppForm'
   },
   [pages.dashboardKintoAppsCreate]: {

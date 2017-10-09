@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { reset } from 'redux-form'
 
 import { fetchKintoBlock, fetchKintoBlocks } from '../../../actions/kintoBlocks'
 import { getAllKintoBlocks } from '../../../selectors/kintoBlocks'
@@ -46,8 +47,13 @@ function mapStateToProps(state, { match }) {
   }
 }
 
-export default connect(mapStateToProps, {
-  fetchKintoBlock,
-  fetchKintoBlocks,
-  push
-})(KintoBlockManage)
+function mapDispatchToProps(dispatch, { match }) {
+  return {
+    fetchKintoBlock: (id, ver) => dispatch(fetchKintoBlock(id, ver)),
+    fetchKintoBlocks: () => dispatch(fetchKintoBlocks()),
+    goToCreatePage: () => dispatch(push('/app/dashboard/kintoblocks/create')),
+    resetForm: () => dispatch(reset('kintoBlockManageForm'))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(KintoBlockManage)

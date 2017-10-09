@@ -260,4 +260,4 @@ class KintoBlockManageForm extends Component {
     )
   }
 }
-export default reduxForm({ form: 'kintoBlockCreateForm' })(KintoBlockManageForm)
+export default reduxForm({ form: 'kintoBlockManageForm' })(KintoBlockManageForm)

@@ -23,12 +23,9 @@ class KintoAppManage extends Component {
   componentWillReceiveProps(nextProps) {
     const { id, ver } = nextProps
     if (this.props.ver !== ver || this.props.id !== id) {
+      this.props.resetForm()
       this.props.fetchKintoApp(id, ver)
     }
-  }
-
-  goToCreatePage = () => {
-    this.props.push('/app/dashboard/kintoapps/create')
   }
 
   onVersionModalClose = () => {
@@ -44,7 +41,8 @@ class KintoAppManage extends Component {
       kintoApp,
       version,
       versionSelectItems,
-      breadcrumbSelectItems
+      breadcrumbSelectItems,
+      goToCreatePage
     } = this.props
     return (
       <div className="kinto-app-manage">
@@ -64,7 +62,7 @@ class KintoAppManage extends Component {
                 component={TagItem}
                 filterField="text"
                 actionText="Create New Application"
-                actionHandler={this.goToCreatePage}
+                actionHandler={goToCreatePage}
                 dropdownContentClass="short"
                 className="margin-right"
               />

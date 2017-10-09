@@ -21,13 +21,11 @@ class KintoBlockManage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.ver !== nextProps.ver) {
-      this.props.fetchKintoBlock(nextProps.id, nextProps.ver)
+    const { id, ver } = nextProps
+    if (this.props.ver !== ver || this.props.id !== id) {
+      this.props.resetForm()
+      this.props.fetchKintoBlock(id, ver)
     }
-  }
-
-  goToCreatePage = () => {
-    this.props.push('/app/dashboard/kintoblocks/create')
   }
 
   onVersionModalClose = () => {
@@ -43,7 +41,8 @@ class KintoBlockManage extends Component {
       kintoBlock,
       version,
       versionSelectItems,
-      breadcrumbSelectItems
+      breadcrumbSelectItems,
+      goToCreatePage
     } = this.props
     return (
       <div className="kintoblock-manage">
@@ -63,7 +62,7 @@ class KintoBlockManage extends Component {
                 component={TagItem}
                 filterField="text"
                 actionText="Create New Kintoblock"
-                actionHandler={this.goToCreatePage}
+                actionHandler={goToCreatePage}
                 dropdownContentClass="short"
                 className="margin-right"
               />
