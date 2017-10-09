@@ -13,7 +13,7 @@ const CheckBox = ({ input, id, label, meta }) => {
       <div className="checked-field-wrapper">
         <input
           {...input}
-          className={`checkbox ${input.value ? 'checked' : ''}`}
+          className={`checkbox ${input.value ? 'checked' : ''} ${className}`}
           type="checkbox"
           id={id || input.name}
         />

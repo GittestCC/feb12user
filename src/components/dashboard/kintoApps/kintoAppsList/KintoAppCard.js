@@ -42,12 +42,16 @@ class KintoAppCard extends Component {
     return (
       <Link
         to={`/app/dashboard/kintoapps/${kintoApp.id}/versions/${latestVersion.text}`}
-        className={`kintoapp ${kintoApp.color}`}
+        className="kintoapp coral"
       >
         <div className="top">
           <div className="text">
             <div className="left">
-              <img src={`/images/app-icon-${kintoApp.id}.png`} alt="" />
+              <img
+                src={`/images/app-icon-${Math.floor(Math.random() * 6) +
+                  1}.png`}
+                alt=""
+              />
             </div>
             <div className="right">
               <h4 className="version">{latestVersion.text}</h4>
@@ -72,32 +76,33 @@ class KintoAppCard extends Component {
               onHide={this.hideDependencyDropdown}
             >
               <button className="title">
-                <h4>Components (14)</h4>
+                <h4>Components ({kintoApp.dependencies.length})</h4>
               </button>
+
               <div className="line" />
-              <button>
-                <div className="dependency service" />
-                <h5>Service</h5>
-              </button>
-              <button>
-                <div className="dependency kintoblock-dep" />{' '}
-                <h5>KintoBlock</h5>
-              </button>
-              <button>
-                <div className="dependency application" />
-                <h5>Application</h5>
-              </button>
-              <button>
-                <div className="dependency service" />
-                <h5>Service!</h5>
-              </button>
+
+              {kintoApp.dependencies.map((k, index) => (
+                <button key={index}>
+                  <div className={`dependency ${k.type.toLowerCase()}-dep`} />
+                  <h5>{k.name}</h5>
+                </button>
+              ))}
             </DropDown>
             <div className="applications" onClick={this.showDependencyDropdown}>
-              <div className="dependency number">+10</div>
-              <div className="dependency application" />
-              <div className="dependency application" />
-              <div className="dependency kintoblock-dep" />
-              <div className="dependency service" />
+              {kintoApp.dependencies
+                .slice(0, 4)
+                .map((d, i) => (
+                  <div
+                    key={i}
+                    className={`dependency ${d.type.toLowerCase()}-dep`}
+                  />
+                ))}
+
+              {kintoApp.dependencies.length > 4 && (
+                <div className="dependency number">
+                  +{kintoApp.dependencies.length - 4}
+                </div>
+              )}
             </div>
             <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
               <button onClick={onVersionCreate}>Create New Version</button>

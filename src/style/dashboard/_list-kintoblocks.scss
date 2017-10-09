@@ -116,60 +116,65 @@
         position: absolute;
         .applications {
           .dependency {
-            width: 48px;
-            height: 48px;
+            min-width: 48px;
+            min-height: 48px;
             border-radius: 12px;
             position: absolute;
-            &.service{
-              background-image: url('/images/icon-generic-service-small-border-2.svg');
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: contain;
+            left: 0;
+            &.service-dep {
+              @include backgroundImage('/images/icon-generic-service-small-border-1.svg', 48px, 48px);
             }
-            &.kintoblock-dep{
-              background-image: url('/images/icon-generic-kintoblock-small-border-1.svg');
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: contain;
+            &.kintoblock-dep {
+              @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 48px, 48px);
+            }
+            &:nth-child(1){
+              &.kintoblock-dep {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 48px, 48px);
+              }
+              &.service-dep{
+                @include backgroundImage('/images/icon-generic-service-small-border-1.svg', 48px, 48px);
+              }
+              left: 0px;
+              z-index: 3;
+            }
+            &:nth-child(2){
+              &.kintoblock-dep {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-border-2.svg', 48px, 48px);
+              }
+              &.service-dep{
+                @include backgroundImage('/images/icon-generic-service-small-border-2.svg', 48px, 48px);
+              }
+              left: 20px;
+              z-index: 2;
+            }
+            &:nth-child(3){
+              &.kintoblock-dep {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-border-3.svg', 48px, 48px);
+              }
+              &.service-dep{
+                @include backgroundImage('/images/icon-generic-service-small-border-3.svg', 48px, 48px);
+              }
+              z-index: 1;
+              left: 40px;
+            }
+            &:nth-child(4){
+              &.kintoblock-dep {
+                @include backgroundImage('/images/icon-generic-kintoblock-small-border-4.svg', 48px, 48px);
+              }
+              &.service-dep{
+                @include backgroundImage('/images/icon-generic-service-small-border-4.svg', 48px, 48px);
+              }
+              left: 60px;
             }
             &.number {
-              background-color: $kinto-white;
-              border-radius: 20px;
-              height: 40px;
-              width: 40px;
+              min-width: 40px;
+              min-height: 40px;
               line-height: 40px;
               text-align: center;
-              vertical-align: middle;
-              font-weight: normal;
-              font-size: 12px;
-              margin-top: 4px;
-            }
-            &.application {
-              background-image: url('/images/icon-generic-application-small-border-4.svg');
-              &:nth-child(2) {
-                background-image: url('/images/icon-generic-application-small-border-2.svg');
-              }
-              &:nth-child(3) {
-                background-image: url('/images/icon-generic-application-small-border-3.svg');
-              }
-              &:nth-child(4) {
-                background-image: url('/images/icon-generic-application-small-border-4.svg');
-              }
-            }
-            &:nth-child(5) {
-              margin-left: 0px;
-            }
-            &:nth-child(4) {
-              margin-left: 20px;
-            }
-            &:nth-child(3) {
-              margin-left: 40px;
-            }
-            &:nth-child(2) {
-              margin-left: 60px;
-            }
-            &.number {
+              background-color: $kinto-white;
+              border-radius: 20px;
               margin-left: 120px;
+              margin-top: 4px;
             }
           }
         }
