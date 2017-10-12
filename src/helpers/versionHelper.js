@@ -1,10 +1,11 @@
 import isNumber from 'lodash/isNumber'
 import isObject from 'lodash/isObject'
 
-const normalizeVersionObject = v => ({
+export const normalizeVersionObject = v => ({
   major: v.major || 0,
   minor: v.minor || 0,
-  revision: v.revision || 0
+  revision: v.revision || 0,
+  build: v.build || 0
 })
 
 export const getVersionAsText = v => {
@@ -86,3 +87,6 @@ export const getManageUrlForKintoBlock = (id, version) =>
 
 export const getManageUrlForKintoApp = (id, version) =>
   `/app/dashboard/kintoapps/${id}/versions/${getVersionAsText(version)}`
+
+export const getUrlForAppEnvironment = id =>
+  `/app/dashboard/kintoapps/${id}/environments`

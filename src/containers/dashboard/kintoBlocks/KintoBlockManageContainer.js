@@ -17,12 +17,13 @@ function mapStateToProps(state, { match }) {
   const { id, ver } = match.params
   const kintoBlock = state.kintoBlocks.byId[id] || {}
   const kintoBlocks = getAllKintoBlocks(state)
+  const block = 'block'
   let versionSelectItems = []
   let breadcrumbSelectItems = []
 
   if (kintoBlocks.length) {
     breadcrumbSelectItems = kintoBlocks.map(k =>
-      getBreadcrumbSelectItem(k, id, false)
+      getBreadcrumbSelectItem(k, id, block)
     )
   }
 

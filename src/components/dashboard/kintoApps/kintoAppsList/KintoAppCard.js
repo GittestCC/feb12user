@@ -36,7 +36,8 @@ class KintoAppCard extends Component {
       dropdownVersionId,
       versions,
       onVersionCreate,
-      goToLatest
+      goToLatest,
+      goToEnvironment
     } = this.props
 
     return (
@@ -110,6 +111,11 @@ class KintoAppCard extends Component {
               <button onClick={this.showVersionDropdown}>
                 View Other Versions
               </button>
+              <div className="dropdown line" />
+              <button onClick={goToEnvironment}>View Environments</button>
+              <div className="dropdown line" />
+              <button>Delete {latestVersion.text}</button>
+              <button>Delete Application</button>
             </DropDown>
             <DropDown
               type="filter"

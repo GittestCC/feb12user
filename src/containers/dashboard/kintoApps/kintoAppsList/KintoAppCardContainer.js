@@ -27,7 +27,9 @@ function mapStateToProps(state, { kintoApp, index }) {
 function mapDispatchToProps(dispatch, { onVersionCreate, kintoApp }) {
   return {
     onVersionCreate: () => onVersionCreate(kintoApp),
-    push: url => dispatch(push(url))
+    push: url => dispatch(push(url)),
+    goToEnvironment: () =>
+      dispatch(push(`/app/dashboard/kintoapps/${kintoApp.id}/environments`))
   }
 }
 

@@ -1,0 +1,125 @@
+.kintoapp-environments-list {
+  .breadcrumbs {
+    h5 {
+      font-weight: 600;
+      margin: 0;
+      font-size: 16px;
+      color: $kinto-tinted-grayscale-9;
+    }
+  }
+  .page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button, .button{
+      width: 220px;
+      height: 40px;
+      line-height: 40px;
+      margin: 0;
+    }
+  }
+
+  h5 {
+    margin-bottom: 25px;
+    font-weight: normal;
+    color: $kinto-tinted-grayscale-7;
+  }
+  .environment-card {
+    background: $kinto-white;
+    margin-bottom: 20px;
+    padding: 16px 40px;
+    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7, 0.1),
+      0 10px 40px 0 rgba($kinto-tinted-grayscale-7, 0.1);
+    border-radius: 12px;
+    button, .button{
+      width: 220px;
+      height: 40px;
+      line-height: 40px;
+      margin: 0;
+    }
+    .status {
+      &.testing {
+        background-color: $kinto-orange;
+      }
+      &.success {
+        background-color: $kinto-green;
+      }
+      &.failed {
+        background-color: $kinto-coral;
+      }
+      &.shutdown {
+        background-color: $kinto-purple;
+      }
+      text-transform: uppercase;
+      color: $kinto-white;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      height: 20px;
+      border-radius: 4px;
+      margin-right: 10px;
+      padding: 2px 4px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h3 {
+        text-transform: uppercase;
+        display: inline-block;
+        font-weight: bold;
+      }
+      .hamburger {
+        @include backgroundImage('/images/icon-reorder.svg', 15px, 15px);
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .expand {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        h6 {
+          margin-bottom: 0;
+        }
+        .chevron {
+          @include backgroundImage('/images/icon-gray-expand-collapse.svg', 15px, 15px);
+          display: inline-block;
+          margin-left: 10px;
+        }
+      }
+    }
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .left {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        .upper {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .status, .version, h4 {
+            display: inline-block;
+            margin-bottom: 0;
+          }
+        }
+        .lower {
+          .date {
+            color: $kinto-tinted-grayscale-6;
+            font-size: 14px;
+            line-height: 24px;
+          }
+        }
+      }
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        .secondary {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

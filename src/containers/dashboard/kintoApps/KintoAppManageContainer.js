@@ -16,12 +16,13 @@ function mapStateToProps(state, { match }) {
   const { id, ver } = match.params
   const kintoApp = state.kintoApps.byId[id] || {}
   const kintoApps = getAllKintoApps(state)
+  const app = 'app'
   let versionSelectItems = []
   let breadcrumbSelectItems = []
 
   if (kintoApps.length) {
     breadcrumbSelectItems = kintoApps.map(k =>
-      getBreadcrumbSelectItem(k, id, true)
+      getBreadcrumbSelectItem(k, id, app)
     )
   }
 
@@ -34,6 +35,7 @@ function mapStateToProps(state, { match }) {
       return result
     })
   }
+
   return {
     id,
     ver,
@@ -42,7 +44,7 @@ function mapStateToProps(state, { match }) {
     baseVersions: asTextList(kintoApp.versions),
     versionSelectItems,
     breadcrumbSelectItems,
-    kintoApps: getAllKintoApps(state)
+    kintoApps
   }
 }
 

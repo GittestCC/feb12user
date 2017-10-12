@@ -3,7 +3,8 @@ import keyBy from 'lodash/keyBy'
 import {
   FETCH_KINTO_APPS,
   RECEIVE_KINTO_APPS,
-  RECEIVE_KINTO_APP
+  RECEIVE_KINTO_APP,
+  RECIEVE_KINTO_APP_ENVIRONMENTS
 } from '../actions/kintoApps'
 
 const defaultState = {
@@ -40,6 +41,18 @@ const kintoAppsReducer = (state = defaultState, action) => {
           ...keyBy(action.data, 'id')
         },
         allIds: [...action.data.map(k => k.id)]
+      }
+    case RECIEVE_KINTO_APP_ENVIRONMENTS:
+      return {
+        ...state,
+        isFetching: false,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            environments: action.data
+          }
+        }
       }
     default:
       return state

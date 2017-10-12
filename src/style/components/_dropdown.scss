@@ -54,13 +54,16 @@
   }
 }
 
-
 .dropdown-content-items {
   .line {
     width: 100%;
     border: solid 1px $kinto-tinted-grayscale-7;
     margin-top: 5px;
     height: 1px;
+    &.dropdown {
+      margin: 15px 30px;
+      width: 140px;
+    }
   }
 
   a, button {

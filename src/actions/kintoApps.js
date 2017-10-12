@@ -14,6 +14,7 @@ export const FETCH_KINTO_APPS = 'FETCH_KINTO_APPS'
 export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
 export const CREATE_VERSION_KINTO_APP = 'CREATE_VERSION_KINTO_APP'
+export const RECIEVE_KINTO_APP_ENVIRONMENTS = 'RECIEVE_KINTO_APP_ENVIRONMENTS'
 
 export const kintoAppCreateVersion = (id, data) => ({
   type: CREATE_VERSION_KINTO_APP,
@@ -34,6 +35,12 @@ export const kintoAppReceive = (id, data) => ({
   id,
   data: data.data,
   metadata: data.metadata
+})
+
+export const kintoAppEnvironmentsReceive = (id, data) => ({
+  type: RECIEVE_KINTO_APP_ENVIRONMENTS,
+  id,
+  data: data.data
 })
 
 export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
@@ -86,5 +93,16 @@ export const updateKintoApp = (id, ver, data) => dispatch => {
   return axios.put(`/kintoapps/${id}/versions/${ver}`, data).then(result => {
     dispatch(formSubmitted())
     dispatch(push(`/app/dashboard/kintoapps/${id}/versions/${ver}`))
+  })
+}
+
+export const getKintoAppEnvironments = id => dispatch => {
+  dispatch(kintoAppsFetch())
+  return axios.get(`/kintoapps/${id}/environments`).then(result => {
+    if (isEmpty(result.data)) {
+      dispatch(push('/app/dashboard/kintoapps/list'))
+    } else {
+      dispatch(kintoAppEnvironmentsReceive(id, result))
+    }
   })
 }
