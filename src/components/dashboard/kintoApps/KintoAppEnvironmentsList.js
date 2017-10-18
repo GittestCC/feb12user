@@ -4,10 +4,30 @@ import DropDown from '../../ui/DropDown'
 import TagItem from '../ui/TagItem'
 import { getVersionAsText } from '../../../helpers/versionHelper'
 import KintoAppEnvironmentCard from './kintoAppEnvironmentsList/KintoAppEnvironmentCard'
+import KintoAppEnvironmentListModalContainer from '../../../containers/dashboard/ui/KintoAppEnvironmentListModalContainer'
+import { SortableContainer } from 'react-sortable-hoc'
+
+const SortableList = SortableContainer(({ environments, buttonAction }) => {
+  return (
+    <div className="environments-list">
+      {environments.map((environment, index) => (
+        <KintoAppEnvironmentCard
+          environment={environment}
+          key={`card-${index}`}
+          index={index}
+          buttonAction={buttonAction}
+        />
+      ))}
+    </div>
+  )
+})
 
 class KintoAppEnvironmentsList extends Component {
   state = {
-    isCreateModalOpen: false
+    isModalOpen: false,
+    modalType: '',
+    title: '',
+    environment: {}
   }
 
   componentDidMount() {
@@ -19,23 +39,36 @@ class KintoAppEnvironmentsList extends Component {
   componentWillReceiveProps(nextProps) {
     const { id } = nextProps
     if (this.props.id !== id) {
-      this.props.fetchKintoApps().then(() => {
-        this.props.getKintoAppEnvironments(this.props.id)
-      })
+      this.props.getKintoAppEnvironments(id)
     }
   }
 
-  onCreateModalOpen = () => {
-    this.setState({ isCreateModalOpen: true })
+  onModalOpen = (type, title) => {
+    this.setState({
+      modalType: type,
+      title: title,
+      isModalOpen: true
+    })
   }
 
-  onCreateModalClose = () => {
-    this.setState({ isCreateModalOpen: false })
+  onModalClose = () => {
+    this.setState({ isModalOpen: false })
+  }
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.props.reorderEnvironments(this.props.id, oldIndex, newIndex)
+  }
+
+  onCardButtonClick = (action, modalType, title, environment) => {
+    this.setState({
+      isModalOpen: true,
+      modalType: modalType,
+      environment: environment
+    })
   }
 
   render() {
     const {
-      kintoApps,
       environments,
       kintoApp,
       breadcrumbSelectItems,
@@ -79,17 +112,29 @@ class KintoAppEnvironmentsList extends Component {
 
         <div className="page-title">
           <h2>Environments</h2>
-          <button onClick={this.onCreateModalOpen} className="button secondary">
+          <button
+            onClick={() => this.onModalOpen('add', 'Add New Environment')}
+            className="button secondary"
+          >
             Add New Environment
           </button>
         </div>
         <h5>Drag to reorder</h5>
 
-        <div className="environments-list">
-          {environments.map((environment, index) => (
-            <KintoAppEnvironmentCard environment={environment} key={index} />
-          ))}
-        </div>
+        <SortableList
+          environments={environments}
+          onSortEnd={this.onSortEnd}
+          buttonAction={this.onCardButtonClick}
+          useDragHandle={true}
+        />
+
+        <KintoAppEnvironmentListModalContainer
+          isOpen={this.state.isModalOpen}
+          onClose={this.onModalClose}
+          modalType={this.state.modalType}
+          environment={this.state.environment}
+          kintoApp={kintoApp}
+        />
       </div>
     )
   }

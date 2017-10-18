@@ -1,3 +1,4 @@
+
 .kintoapp-environments-list {
   .breadcrumbs {
     h5 {
@@ -24,14 +25,16 @@
     font-weight: normal;
     color: $kinto-tinted-grayscale-7;
   }
-  .environment-card {
+}
+
+.environment-card {
     background: $kinto-white;
     margin-bottom: 20px;
     padding: 16px 40px;
     box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7, 0.1),
       0 10px 40px 0 rgba($kinto-tinted-grayscale-7, 0.1);
     border-radius: 12px;
-    button, .button{
+    .button{
       width: 220px;
       height: 40px;
       line-height: 40px;
@@ -116,10 +119,15 @@
       .right {
         display: flex;
         justify-content: flex-end;
+        .dropdown-button.menu {
+          @include backgroundImage('/images/icon-more-actions.svg', 40px, 40px)
+          margin-left: 20px;
+          border: none;
+          background-color: transparent;
+        }
         .secondary {
           margin-right: 20px;
         }
       }
     }
   }
-}

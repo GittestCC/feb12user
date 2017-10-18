@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import {
   fetchKintoApps,
-  getKintoAppEnvironments
+  getKintoAppEnvironments,
+  reorderEnvironments
 } from '../../../actions/kintoApps'
 import { getAllKintoApps } from '../../../selectors/kintoApps'
-import { findInArrayByText } from '../../../helpers/versionHelper'
 import KintoAppEnvironmentsList from '../../../components/dashboard/kintoApps/KintoAppEnvironmentsList'
 import { getBreadcrumbSelectItem } from '../../../helpers/breadcrumbHelper'
 
@@ -38,7 +38,9 @@ function mapDispatchToProps(dispatch, { match }) {
   return {
     fetchKintoApps: () => dispatch(fetchKintoApps()),
     getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
-    goToCreatePage: () => dispatch(push('/app/dashboard/kintoapps/create'))
+    goToCreatePage: () => dispatch(push('/app/dashboard/kintoapps/create')),
+    reorderEnvironments: (id, oldIndex, newIndex) =>
+      dispatch(reorderEnvironments(id, oldIndex, newIndex))
   }
 }
 

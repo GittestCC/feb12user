@@ -15,7 +15,11 @@ export const getVersionAsText = v => {
   if (!v || !isNumber(v.major) || !isNumber(v.minor) || !isNumber(v.revision)) {
     return undefined
   }
-  return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
+  if (!v || !v.build) {
+    return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
+  }
+
+  return `${v.major || 0}.${v.minor || 0}.${v.revision || 0} (${v.build || 0})`
 }
 
 export const asTextList = (versions = []) => versions.map(getVersionAsText)
@@ -44,14 +48,19 @@ export const getVersionSelectItem = (version, id, isKintoApp) => ({
 })
 
 export const textToObject = v => {
-  const regex = /(\d+)\.(\d+)\.(\d+)/
+  const regex = /(\d+)\.(\d+)\.(\d+)\.?\s?(\d+)?(?:\((\d+)\))?/
   const match = regex.exec(v)
   if (!match) return null
-  return {
+  let result = {
     major: parseInt(match[1], 10),
     minor: parseInt(match[2], 10),
     revision: parseInt(match[3], 10)
   }
+  const build = match[4] || match[5]
+  if (build) {
+    result.build = parseInt(build, 10)
+  }
+  return result
 }
 
 /**

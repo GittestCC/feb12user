@@ -67,3 +67,9 @@ a {
   font-size: 0;
   color: transparent;
 }
+
+// override browser default color and border
+button.dropdown-button.menu, button.dropdown-button {
+  border: none;
+  background-color: transparent !important;
+}

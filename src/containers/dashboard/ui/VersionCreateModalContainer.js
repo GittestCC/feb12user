@@ -3,7 +3,7 @@ import { formValueSelector } from 'redux-form'
 import { createVersionKintoBlock } from '../../../actions/kintoBlocks'
 import { createVersionKintoApp } from '../../../actions/kintoApps'
 import { getVersionAsText } from '../../../helpers/versionHelper'
-import VersionCreateModalContainer from '../../../components/dashboard/ui/VersionCreateModal'
+import VersionCreateModal from '../../../components/dashboard/ui/VersionCreateModal'
 
 const selector = formValueSelector('versionCreate')
 
@@ -33,7 +33,7 @@ function mapDispatchToProps(
         : createVersionKintoApp
       return dispatch(action(id, data)).then(r => {
         if (!disableCloseOnSubmit) onClose()
-        return r
+        return
       })
     }
   }
