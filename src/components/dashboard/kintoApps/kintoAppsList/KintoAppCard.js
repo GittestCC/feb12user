@@ -41,10 +41,7 @@ class KintoAppCard extends Component {
     } = this.props
 
     return (
-      <Link
-        to={`/app/dashboard/kintoapps/${kintoApp.id}/versions/${latestVersion.text}`}
-        className="kintoapp coral"
-      >
+      <Link to={latestVersion.url} className="kintoapp coral">
         <div className="top">
           <div className="text">
             <div className="left">

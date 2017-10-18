@@ -3,7 +3,6 @@ import {
   RECEIVE_KINTO_BLOCK_DEPENDENCIES
 } from '../actions/kintoBlocks'
 import { RECEIVE_KINTO_APP, RECEIVE_KINTO_APPS } from '../actions/kintoApps'
-import { isDependencySimple } from '../helpers/kintoBlocksHelper'
 
 const kintoBlocksDependenciesCacheReducer = (state = {}, action) => {
   switch (action.type) {

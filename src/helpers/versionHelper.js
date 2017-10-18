@@ -8,7 +8,7 @@ export const normalizeVersionObject = v => ({
   build: v.build || 0
 })
 
-export const getVersionAsText = v => {
+export const getVersionAsText = (v, isDottedBuild) => {
   if (isObject(v)) {
     v = normalizeVersionObject(v)
   }
@@ -18,8 +18,12 @@ export const getVersionAsText = v => {
   if (!v || !v.build) {
     return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
   }
-
-  return `${v.major || 0}.${v.minor || 0}.${v.revision || 0} (${v.build || 0})`
+  let base = `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
+  if (isDottedBuild) {
+    return `${base}.${v.build || 0}`
+  } else {
+    return `${base} (${v.build || 0})`
+  }
 }
 
 export const asTextList = (versions = []) => versions.map(getVersionAsText)
@@ -92,10 +96,10 @@ export const findInArrayByText = (versions, text) => {
 }
 
 export const getManageUrlForKintoBlock = (id, version) =>
-  `/app/dashboard/kintoblocks/${id}/versions/${getVersionAsText(version)}`
+  `/app/dashboard/kintoblocks/${id}/versions/${getVersionAsText(version, true)}`
 
 export const getManageUrlForKintoApp = (id, version) =>
-  `/app/dashboard/kintoapps/${id}/versions/${getVersionAsText(version)}`
+  `/app/dashboard/kintoapps/${id}/versions/${getVersionAsText(version, true)}`
 
 export const getUrlForAppEnvironment = id =>
   `/app/dashboard/kintoapps/${id}/environments`

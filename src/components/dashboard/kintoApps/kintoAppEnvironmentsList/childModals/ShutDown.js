@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form'
 
 const ShutDown = ({ onClose, handleSubmit, shutDownEnvironment, kintoApp }) => {
   const EnvironmentShutDown = result => {
-    console.log('cancel')
     // shutDownEnvironment()
     onClose()
   }

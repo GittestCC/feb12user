@@ -8,7 +8,6 @@ import {
 
 function mapStateToProps(state, { dependencies, name }) {
   const getDependencies = getDependenciesFactory()
-  console.log('whattt', dependencies)
   const dependenciesInfo = getDependencies(state, dependencies)
   return {
     name,
