@@ -39,6 +39,4 @@ function mapDispatchToProps(
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  VersionCreateModalContainer
-)
+export default connect(mapStateToProps, mapDispatchToProps)(VersionCreateModal)

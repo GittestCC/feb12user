@@ -84,7 +84,11 @@ class KintoAppCard extends Component {
 
               {kintoApp.dependencies.map((k, index) => (
                 <button key={index}>
-                  <div className={`dependency ${k.type.toLowerCase()}-dep`} />
+                  <div
+                    className={`dependency ${k.type
+                      ? k.type.toLowerCase()
+                      : ''}-dep`}
+                  />
                   <h5>{k.name}</h5>
                 </button>
               ))}
@@ -95,7 +99,9 @@ class KintoAppCard extends Component {
                 .map((d, i) => (
                   <div
                     key={i}
-                    className={`dependency ${d.type.toLowerCase()}-dep`}
+                    className={`dependency ${d.type
+                      ? d.type.toLowerCase()
+                      : ''}-dep`}
                   />
                 ))}
 

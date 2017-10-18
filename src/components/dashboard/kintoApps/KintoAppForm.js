@@ -1,16 +1,10 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm, FormSection } from 'redux-form'
+import { Field, reduxForm, FormSection } from 'redux-form'
 import { FieldValidation, Button, CheckBox } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
-import DependencyManagement from '../../forms/DependencyManagement'
+import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 
-const KintoAppForm = ({
-  handleSubmit,
-  version,
-  appDependenciesInfo,
-  searchKintoBlocks,
-  fetchKintoBlockDependenciesData
-}) => {
+const KintoAppForm = ({ handleSubmit, version, appDependencies }) => {
   return (
     <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
       <div className="form-wrapper basic-info">
@@ -38,21 +32,11 @@ const KintoAppForm = ({
         </div>
       </div>
       <div className="form-wrapper blocks-and-services">
-        <h3>KintoBlocks & Services</h3>
-        <h5>
-          Choose the build and give your baby a number so they don’t get mixed
-          up in a sea of babies.
-        </h5>
-        <FieldArray
+        <ManageDependenciesFieldContainer
           name="appDependencies"
-          component={DependencyManagement}
-          appDependenciesInfo={appDependenciesInfo}
-          searchUrl="/kintoblocks/search"
-          onSearchKintoBlocks={searchKintoBlocks}
-          fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
+          dependencies={appDependencies}
         />
       </div>
-
       <div className="form-wrapper clients">
         <h3>Clients</h3>
         <h5>Give your baby a name, and a version number</h5>

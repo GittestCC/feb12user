@@ -4,6 +4,7 @@ import Slider from 'rc-slider'
 import FieldValidation from '../../../forms/FieldValidation'
 import Toggle from '../../../forms/Toggle'
 import { required } from '../../../../helpers/forms/validators'
+import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 
 class KintoBlockManageForm extends Component {
   state = {
@@ -44,54 +45,52 @@ class KintoBlockManageForm extends Component {
 
   render() {
     return (
-      <form action="" className="kintoblock-manage form-container">
-        <div className="form-wrapper versioning">
+      <form
+        className="kintoblock-manage form-container"
+        onSubmit={this.props.handleSubmit}
+      >
+        <div className="form-wrapper versioning full-row">
           <h3>Versioning</h3>
           <h5>
             Choose the build and give your baby a number so they don’t get mixed
             up in a sea of babies.
           </h5>
-          <div className="form-body version">
-            <label htmlFor="versionNumber">Version Number</label>
-            <input
-              type="text"
-              name="versionNumber"
-              className="disabled"
-              value={this.props.ver}
-              disabled
-            />
 
-            <label htmlFor="buildNumber">Build</label>
-            <input
-              type="text"
-              name="buildNumber"
-              className="disabled"
-              value=""
-              placeholder="No available build found"
-              disabled
-            />
+          <div className="form-body">
+            <div className="field-wrapper">
+              <label htmlFor="versionNumber">Version number</label>
+              <div className="field-input-wrapper">
+                <input
+                  type="text"
+                  name="version"
+                  className="disabled"
+                  value={'0.1.0'}
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div className="field-wrapper">
+              <label htmlFor="buildNumber">Build</label>
+              <div className="field-input-wrapper">
+                <input
+                  type="text"
+                  name="buildNumber"
+                  className="disabled"
+                  value=""
+                  placeholder="No available build found"
+                  disabled
+                />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="form-wrapper dependencies">
-          <h3>Dependencies</h3>
-          <h5>
-            What toys do your baby like? Experts say the more toys you give
-            them, the faster they develop new skills.
-          </h5>
-          <div className="form-body">
-            <input
-              type="text"
-              className="search"
-              placeholder="Search dependencies"
-            />
-            <input
-              type="text"
-              className="disabled service"
-              placeholder="No service added"
-              disabled
-            />
-          </div>
+        <div className="form-wrapper blocks-and-services full-row">
+          <ManageDependenciesFieldContainer
+            name="dependencies"
+            dependencies={this.props.dependencies}
+          />
         </div>
 
         <div className="form-wrapper availibility">
@@ -260,4 +259,7 @@ class KintoBlockManageForm extends Component {
     )
   }
 }
-export default reduxForm({ form: 'kintoBlockManageForm' })(KintoBlockManageForm)
+export default reduxForm({
+  form: 'kintoBlockManageForm',
+  enableReinitialize: true
+})(KintoBlockManageForm)

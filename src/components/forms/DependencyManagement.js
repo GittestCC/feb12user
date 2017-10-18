@@ -14,36 +14,42 @@ class DependencyManagement extends Component {
   render() {
     const { fields, appDependenciesInfo, onSearchKintoBlocks } = this.props
     return (
-      <div className="form-body dependency-management">
-        <Select.Async
-          placeholder="Search KintoBlocks or services"
-          loadOptions={onSearchKintoBlocks}
-          onChange={this.onSelectKintoBlock}
-        />
+      <div>
+        <h3>KintoBlocks & Services</h3>
+        <h5>
+          Choose the build and give your baby a number so they don’t get mixed
+          up in a sea of babies.
+        </h5>
+        <div className="form-body dependency-management">
+          <Select.Async
+            placeholder="Search KintoBlocks or services"
+            loadOptions={onSearchKintoBlocks}
+            onChange={this.onSelectKintoBlock}
+          />
 
-        {fields.length ? (
-          <div className="blocks-or-services">
-            {fields.map((field, key, fields) => (
-              <DependencyItem
-                key={key}
-                index={key}
-                field={field}
-                fields={fields}
-                appDependenciesInfo={appDependenciesInfo}
-                data={fields.get(key)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="no-blocks-or-services">
-            <div className="icons">
-              <div className="kinto-block" />
-              <div className="service" />
+          {fields.length ? (
+            <div className="blocks-or-services">
+              {fields.map((field, key, fields) => (
+                <DependencyItem
+                  key={key}
+                  index={key}
+                  field={field}
+                  fields={fields}
+                  appDependenciesInfo={appDependenciesInfo}
+                  data={fields.get(key)}
+                />
+              ))}
             </div>
-            <div className="text">No KintoBlocks or services added</div>
-          </div>
-        )}
-        {/*
+          ) : (
+            <div className="no-blocks-or-services">
+              <div className="icons">
+                <div className="kinto-block" />
+                <div className="service" />
+              </div>
+              <div className="text">No KintoBlocks or services added</div>
+            </div>
+          )}
+          {/*
           <div className="combine-buttons">
           <Button buttonType="secondary" image="/images/icon-split-glyph.svg">
           Split All Duplicate Instances
@@ -53,6 +59,7 @@ class DependencyManagement extends Component {
           </Button>
           </div>
           */}
+        </div>
       </div>
     )
   }

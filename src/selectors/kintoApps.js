@@ -1,22 +1,5 @@
 import { createSelector } from 'reselect'
-import keyBy from 'lodash/keyBy'
 import { getDependencyInfo } from '../helpers/kintoBlocksHelper'
-
-export const getAppDependenciesFactory = () => {
-  return createSelector(
-    (_, appDependencies) => appDependencies,
-    state => state.kintoBlocksDependenciesCache,
-    (appDependencies, dependenciesCache) => {
-      if (!appDependencies || !appDependencies.length) {
-        return []
-      }
-      const result = appDependencies.map(d => {
-        return getDependencyInfo(d, dependenciesCache)
-      })
-      return keyBy(result, 'id')
-    }
-  )
-}
 
 export const getAllKintoApps = createSelector(
   state => state.kintoApps.allIds.map(a => state.kintoApps.byId[a]),

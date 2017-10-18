@@ -5,7 +5,7 @@ export const isDependencySimple = dependency => {
 }
 
 export const getDependencyInfo = (dependency, dependenciesCache, isSimple) => {
-  const dependencyMeta = dependenciesCache[dependency.id]
+  const dependencyMeta = dependenciesCache[dependency.blockId]
   if (!dependencyMeta) {
     return {
       ...dependency,
@@ -44,7 +44,7 @@ function findAssociatedDependencies(version, dependencies, cache) {
     .map(d => {
       return {
         id: d.id,
-        ...cache[d.id]
+        ...cache[d.blockId]
       }
     })
 }

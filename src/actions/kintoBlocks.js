@@ -16,6 +16,13 @@ export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
 export const CREATE_VERSION_KINTO_BLOCK = 'CREATE_VERSION_KINTO_BLOCK'
 export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
   'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
+export const UPDATE_KINTO_BLOCK = 'UPDATE_KINTO_BLOCK'
+
+export const kintoBlockUpdate = (id, data) => ({
+  type: UPDATE_KINTO_BLOCK,
+  id,
+  data
+})
 
 export const kintoBlocksFetch = () => ({ type: FETCH_KINTO_BLOCKS })
 export const kintoBlocksReceive = data => ({
@@ -29,11 +36,16 @@ export const kintoBlockReceiveDependencies = data => ({
   metadata: data.metadata
 })
 
-export const kintoBlockReceive = (id, data) => ({
-  type: RECEIVE_KINTO_BLOCK,
-  id,
-  data
-})
+export const kintoBlockReceive = (id, data) => {
+  const { metadata } = data
+  delete data.metadata
+  return {
+    type: RECEIVE_KINTO_BLOCK,
+    id,
+    data,
+    metadata
+  }
+}
 
 export const kintoBlockCreateVersion = (id, data) => ({
   type: CREATE_VERSION_KINTO_BLOCK,
@@ -78,6 +90,17 @@ export const kintoBlockCreate = data => dispatch => {
   })
 }
 
+export const updateKintoBlock = (id, ver, data) => dispatch => {
+  return axios.put(`/kintoblocks/${id}/versions/${ver}`, data).then(result => {
+    if (result.errors) {
+      throw new SubmissionError(result.errors)
+    }
+    dispatch(formSubmitted())
+    // TODO: make sure the server returns the updated object
+    dispatch(kintoBlockUpdate(id, data))
+  })
+}
+
 export const createVersionKintoBlock = (id, data) => dispatch => {
   return axios.post(`/kintoblocks/${id}/versions`, data).then(result => {
     if (result.errors) {
@@ -104,6 +127,9 @@ export const fetchKintoBlockDependenciesData = (id, ver) => dispatch => {
     .get(`/kintoblocks/${id}/versions/${ver}/dependencydata`)
     .then(result => {
       dispatch(kintoBlockReceiveDependencies(result))
-      return result.data
+      return {
+        blockId: result.data.id,
+        version: result.data.version
+      }
     })
 }

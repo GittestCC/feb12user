@@ -7,7 +7,7 @@ import {
 import DropDown from '../../ui/DropDown'
 import TagItem from '../ui/TagItem'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
-import KintoBlockManageForm from './kintoBlockManage/KintoBlockManageForm'
+import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
 
 class KintoBlockManage extends Component {
   state = {
@@ -53,7 +53,7 @@ class KintoBlockManage extends Component {
               <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
             </li>
             <li>
-              <a href="">{kintoBlock.name}</a>
+              <a>{kintoBlock.name}</a>
               <DropDown
                 type="filter"
                 dropdownClass="breadcrumb-icon"
@@ -106,7 +106,10 @@ class KintoBlockManage extends Component {
           </button>
         </div>
 
-        <KintoBlockManageForm kintoBlock={kintoBlock} ver={this.props.ver} />
+        <KintoBlockManageFormContainer
+          kintoBlock={kintoBlock}
+          ver={this.props.ver}
+        />
 
         <VersionCreateModalContainer
           id={kintoBlock.id}

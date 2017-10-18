@@ -5,11 +5,9 @@ import {
   searchKintoBlocks,
   fetchKintoBlockDependenciesData
 } from '../../../actions/kintoBlocks'
-import { getAppDependenciesFactory } from '../../../selectors/kintoApps'
 import KintoAppForm from '../../../components/dashboard/kintoApps/KintoAppForm'
 
 function mapStateToProps(state, { kintoApp, version }) {
-  const getAppDependencies = getAppDependenciesFactory()
   const formSelector = formValueSelector('kintoAppForm')
   const appDependencies = formSelector(state, 'appDependencies')
   kintoApp = kintoApp || {}
@@ -19,7 +17,7 @@ function mapStateToProps(state, { kintoApp, version }) {
       appDependencies: kintoApp.appDependencies
     },
     version,
-    appDependenciesInfo: getAppDependencies(state, appDependencies)
+    appDependencies
   }
 }
 

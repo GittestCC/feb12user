@@ -4,7 +4,8 @@ import {
   FETCH_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK,
-  CREATE_VERSION_KINTO_BLOCK
+  CREATE_VERSION_KINTO_BLOCK,
+  UPDATE_KINTO_BLOCK
 } from '../actions/kintoBlocks'
 
 const defaultState = {
@@ -42,6 +43,18 @@ const kintoBlocksReducer = (state = defaultState, action) => {
           }
         }
       }
+    case UPDATE_KINTO_BLOCK:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            ...action.data
+          }
+        }
+      }
+
     default:
       return state
   }
