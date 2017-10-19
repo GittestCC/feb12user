@@ -72,7 +72,7 @@
           padding-top: 20px;
         }
         .repeat {
-          margin-left: 4px;
+          margin-left: 8px;
           position: relative;
           border-left: solid 4px $kinto-tinted-grayscale-5;
           &:first-child {
@@ -101,7 +101,10 @@
             }
           }
           &:only-child {
-            border-left: solid 4px $kinto-tinted-grayscale-5;
+            border-left: solid 4px transparent;
+            &:after {
+              background-color: transparent;
+            }
           }
           &:not(:first-child){
             // background-color: $kinto-tinted-grayscale-1;
