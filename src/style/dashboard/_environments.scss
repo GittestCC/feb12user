@@ -163,7 +163,7 @@
             padding: 2px 4px;
             color: $kinto-white;
 
-            &.testing {
+            &.testing, &.processing {
               border-color: $kinto-orange;
               color: $kinto-orange;
             &.status {
