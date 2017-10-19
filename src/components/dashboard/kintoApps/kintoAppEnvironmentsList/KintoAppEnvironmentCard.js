@@ -106,8 +106,10 @@ class KintoAppEnvironmentCard extends Component {
           </h3>
           {environment.releases && (
             <div onClick={this.toggleExpand} className="expand">
-              <h6>Expand</h6>
-              <span className="chevron" />
+              <h6>{this.state.isExpanded ? 'Collapse' : 'Expand'}</h6>
+              <span
+                className={`chevron ${this.state.isExpanded ? 'expanded' : ''}`}
+              />
             </div>
           )}
         </div>
