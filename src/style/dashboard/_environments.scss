@@ -234,9 +234,11 @@
         margin-bottom: 0;
       }
       .hamburger {
-        @include backgroundImage('/images/icon-reorder.svg', 15px, 15px);
+        @include backgroundImage('/images/icon-reorder.svg', 20px, 20px);
         display: inline-block;
         margin-right: 10px;
+        position: relative;
+        top: 4px;
       }
       .expand {
         display: flex;
