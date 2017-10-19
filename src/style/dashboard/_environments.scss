@@ -40,6 +40,165 @@
       line-height: 40px;
       margin: 0;
     }
+    .date {
+      color: $kinto-tinted-grayscale-6;
+      font-size: 14px;
+      line-height: 24px;
+    }
+    &.expanded {
+      padding-bottom: 0;
+      .bottom {
+        position: relative;
+        .left {
+          justify-content: none;
+          width: 100%;
+          .repeat {
+            width: 100%;
+          }
+        }
+      }
+      .expanded-buttons.right {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .upper {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        width: 100%;
+        padding-bottom: 30px;
+        .repeat:not(:first-child) .status-and-build {
+          padding-top: 20px;
+        }
+        .repeat {
+          margin-left: 4px;
+          position: relative;
+          border-left: solid 4px $kinto-tinted-grayscale-5;
+          &:first-child {
+            .circle {
+              position: absolute;
+              top: 00px;
+              left: -12px;
+              height: 20px;
+              width: 20px;
+              border: solid 6px $kinto-grayscale-7;
+              background-color: $kinto-white;
+              border-radius: 10px;
+              z-index: 2;
+            }
+          }
+          &:last-child{
+            border-left: solid 4px transparent;
+            &:after {
+              content: '';
+              height: 30px;
+              width: 4px;
+              background-color: $kinto-tinted-grayscale-5;
+              position: absolute;
+              top: 0;
+              left: -4px;
+            }
+          }
+          &:only-child {
+            border-left: solid 4px $kinto-tinted-grayscale-5;
+          }
+          &:not(:first-child){
+            // background-color: $kinto-tinted-grayscale-1;
+            .circle {
+              z-index: 2;
+              height: 10px;
+              width: 10px;
+              border: none;
+              background-color: $kinto-grayscale-7;
+              border-radius: 10px;
+              position: absolute;
+              top: 20px;
+              left: -7px;
+            }
+          }
+          .view {
+            margin-left: 155px;
+            margin-top: 20px;
+            .logs, .changelog {
+              width: 220px;
+              display: inline;
+              margin-right: 30px;
+              a {
+                color: $kinto-tinted-grayscale-7;
+              }
+            }
+          }
+          .release-button {
+            position: absolute;
+            top: 15px;
+            right: 5px;
+            .button.disabled {
+              color: rgba($kinto-tinted-grayscale-10, 0.3);
+            }
+          }
+        }
+      }
+      .step {
+        margin: 10px 0;
+      }
+      .status-and-build, .step {
+        display: flex;
+        justify-content: left;
+        min-width: 100%;
+        .left {
+          margin-left: 25px;
+          width: 100px;
+          margin-right: 30px;
+          &.no-build {
+            width: auto;
+          }
+          h6 {
+            align-self: left;
+            margin: 0;
+            border: solid 1px black;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 16px;
+            padding: 2px 4px;
+            color: $kinto-white;
+
+            &.testing {
+              border-color: $kinto-orange;
+              color: $kinto-orange;
+            &.status {
+                color: $kinto-white;
+              }
+            }
+            &.success {
+              border-color: $kinto-green;
+              color: $kinto-green;
+            &.status {
+                color: $kinto-white;
+              }
+            }
+            &.failed {
+              border-color: $kinto-coral;
+              color: $kinto-coral;
+              &.status {
+                  color: $kinto-white;
+                }
+            }
+            &.shutdown {
+              border-color: $kinto-purple;
+              color: $kinto-purple;
+              &.status {
+                color: $kinto-white;
+              }
+          }
+          }
+        }
+        .right {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
     .status {
       &.testing {
         background-color: $kinto-orange;
@@ -67,10 +226,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
       h3 {
         text-transform: uppercase;
         display: inline-block;
         font-weight: bold;
+        margin-bottom: 0;
       }
       .hamburger {
         @include backgroundImage('/images/icon-reorder.svg', 15px, 15px);
@@ -93,12 +254,15 @@
     }
     .bottom {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       .left {
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
+        .expanded .upper {
+          align-items: left;
+        }
         .upper {
           display: flex;
           justify-content: flex-start;
@@ -106,13 +270,6 @@
           .status, .version, h4 {
             display: inline-block;
             margin-bottom: 0;
-          }
-        }
-        .lower {
-          .date {
-            color: $kinto-tinted-grayscale-6;
-            font-size: 14px;
-            line-height: 24px;
           }
         }
       }
@@ -128,6 +285,11 @@
         .secondary {
           margin-right: 20px;
         }
+      }
+    }
+    .no-releases {
+      h4{
+        text-transform: none;
       }
     }
   }

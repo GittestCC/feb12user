@@ -7,20 +7,23 @@ import KintoAppEnvironmentCard from './kintoAppEnvironmentsList/KintoAppEnvironm
 import KintoAppEnvironmentListModalContainer from '../../../containers/dashboard/ui/KintoAppEnvironmentListModalContainer'
 import { SortableContainer } from 'react-sortable-hoc'
 
-const SortableList = SortableContainer(({ environments, buttonAction }) => {
-  return (
-    <div className="environments-list">
-      {environments.map((environment, index) => (
-        <KintoAppEnvironmentCard
-          environment={environment}
-          key={`card-${index}`}
-          index={index}
-          buttonAction={buttonAction}
-        />
-      ))}
-    </div>
-  )
-})
+const SortableList = SortableContainer(
+  ({ environments, buttonAction, sortIndex }) => {
+    return (
+      <div className="environments-list">
+        {environments.map((environment, index) => (
+          <KintoAppEnvironmentCard
+            environment={environment}
+            key={`card-${index}`}
+            index={index}
+            sortIndex={index}
+            buttonAction={buttonAction}
+          />
+        ))}
+      </div>
+    )
+  }
+)
 
 class KintoAppEnvironmentsList extends Component {
   state = {
