@@ -15,6 +15,8 @@ export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
 export const CREATE_VERSION_KINTO_APP = 'CREATE_VERSION_KINTO_APP'
 export const RECIEVE_KINTO_APP_ENVIRONMENTS = 'RECIEVE_KINTO_APP_ENVIRONMENTS'
+export const RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG =
+  'RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG'
 export const NEW_ENVIRONMENT_RECEIVE = 'NEW_ENVIRONMENT_RECEIVE'
 export const KINTO_APP_ENVIRONMENT_UPDATE = 'KINTO_APP_ENVIRONMENT_UPDATE'
 export const KINTO_APP_ENVIRONMENT_LIST_REORDER =
@@ -44,7 +46,14 @@ export const kintoAppReceive = (id, data) => ({
 export const kintoAppEnvironmentsReceive = (id, data) => ({
   type: RECIEVE_KINTO_APP_ENVIRONMENTS,
   id,
-  data: data.data
+  data
+})
+export const kintoAppDependenciesConfigReceive = (id, ver, envId, data) => ({
+  type: RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG,
+  id,
+  envId,
+  ver,
+  data
 })
 
 export const kintoAppEnvironmentListReorder = (id, oldIndex, newIndex) => ({
@@ -76,7 +85,7 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
     kintoApp.lastFetch &&
     isRecent(kintoApp.lastFetch)
   ) {
-    return
+    return Promise.resolve()
   }
   dispatch(kintoAppsFetch())
   return axios.get(`/kintoapps/${id}/versions/${ver}`).then(data => {
@@ -93,6 +102,14 @@ export const fetchKintoApps = () => dispatch => {
       dispatch(kintoAppsReceive(result))
     }
   })
+}
+
+export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
+  return axios
+    .get(`/kintoapps/${id}/versions/${ver}/config/${envId}`)
+    .then(data => {
+      dispatch(kintoAppDependenciesConfigReceive(id, ver, envId, data.data))
+    })
 }
 
 export const createVersionKintoApp = (id, data) => dispatch => {
@@ -117,6 +134,22 @@ export const updateKintoApp = (id, ver, data) => dispatch => {
     dispatch(formSubmitted())
     dispatch(push(`/app/dashboard/kintoapps/${id}/versions/${ver}`))
   })
+}
+
+export const updateAppDependenciesConfigData = (
+  id,
+  ver,
+  env,
+  data
+) => dispatch => {
+  return axios
+    .put(`/kintoapps/${id}/versions/${ver}/config/${env}`, data)
+    .then(result => {
+      if (result.errors) {
+        throw new SubmissionError(result.errors)
+      }
+      dispatch(formSubmitted())
+    })
 }
 
 export const getKintoAppEnvironments = id => dispatch => {

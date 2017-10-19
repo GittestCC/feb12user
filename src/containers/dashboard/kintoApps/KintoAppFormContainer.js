@@ -16,8 +16,9 @@ function mapStateToProps(state, { kintoApp, version }) {
       name: kintoApp.name,
       appDependencies: kintoApp.appDependencies
     },
-    version,
-    appDependencies
+    appDependencies,
+    id: kintoApp.id,
+    version
   }
 }
 

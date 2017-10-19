@@ -9,6 +9,8 @@ const pages = {
   dashboardKintoAppsCreate: 'DASHBOARD_KINTO_APPS_CREATE',
   dashboardKintoAppEnvironments: 'DASHBOARD_KINTO_APP_ENVIRONMENTS',
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
+  dashboardKintoAppDependenciesConfig:
+    'DASHBOARD_KINTO_APP_DEPENDENCIES_CONFIG',
 
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
   dashboardSalesdata: 'DASHBOARD_SALESDATA',
@@ -48,6 +50,10 @@ export const dashboardSidebar = [
       {
         key: pages.dashboardKintoAppEnvironments,
         url: '/app/dashboard/kintoapps/:id/environments'
+      },
+      {
+        key: pages.dashboardKintoAppDependenciesConfig,
+        url: '/app/dashboard/kintoapps/:id/versions/:version/config/:env'
       }
     ],
     group: 1

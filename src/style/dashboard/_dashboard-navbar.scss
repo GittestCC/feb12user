@@ -48,12 +48,6 @@
       display: block;
       position: relative;
     }
-    input {
-      padding-left: 45px;
-      &:focus {
-        padding-left: 20px;
-      }
-    }
   }
 
   .notifications.hide, .user-avatar.hide{
@@ -108,21 +102,6 @@
   }
   @include abovetablet {
     .close-search {
-      display: none;
-    }
-  }
-
-  .inner-search-icon {
-    @include backgroundImage('/images/dashboard/icon-searchfield-search.svg', 30px, 30px);
-    min-width: 30px;
-    height: 30px;
-  }
-
-  .inner-search-icon {
-    position: absolute;
-    top: 5px;
-    left: 6px;
-    &.hide {
       display: none;
     }
   }

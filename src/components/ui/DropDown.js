@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 
+import { filterArray } from '../../helpers/arrayHelper'
 import { Button } from '../forms'
 
 class DropDown extends Component {
@@ -86,13 +87,11 @@ class DropDown extends Component {
   }
 
   getFilteredList() {
-    const filter = this.state.filterText
-    return this.props.list.filter(item => {
-      if (!filter) return true
-      return item[this.props.filterField]
-        .toUpperCase()
-        .startsWith(filter.toUpperCase())
-    })
+    return filterArray(
+      this.props.list,
+      this.props.filterField,
+      this.state.filterText
+    )
   }
 
   render() {

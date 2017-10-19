@@ -4,7 +4,7 @@ import { FieldValidation, Button, CheckBox } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 
-const KintoAppForm = ({ handleSubmit, version, appDependencies }) => {
+const KintoAppForm = ({ id, handleSubmit, version, appDependencies }) => {
   return (
     <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
       <div className="form-wrapper basic-info">
@@ -25,7 +25,7 @@ const KintoAppForm = ({ handleSubmit, version, appDependencies }) => {
               type="text"
               name="version"
               className="disabled"
-              value={version || ''}
+              value={version}
               disabled
             />
           </div>
@@ -35,6 +35,8 @@ const KintoAppForm = ({ handleSubmit, version, appDependencies }) => {
         <ManageDependenciesFieldContainer
           name="appDependencies"
           dependencies={appDependencies}
+          id={id}
+          version={version}
         />
       </div>
       <div className="form-wrapper clients">

@@ -16,5 +16,9 @@ export default {
   [pages.dashboardKintoAppsCreate]: {
     submitLabel: 'Create New Application',
     formName: 'kintoAppForm'
+  },
+  [pages.dashboardKintoAppDependenciesConfig]: {
+    submitLabel: 'Save Changes',
+    formName: 'kintoAppConfigForm'
   }
 }

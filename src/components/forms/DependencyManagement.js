@@ -12,7 +12,13 @@ class DependencyManagement extends Component {
   }
 
   render() {
-    const { fields, appDependenciesInfo, onSearchKintoBlocks } = this.props
+    const {
+      id,
+      version,
+      fields,
+      appDependenciesInfo,
+      onSearchKintoBlocks
+    } = this.props
     return (
       <div>
         <h3>KintoBlocks & Services</h3>
@@ -31,6 +37,8 @@ class DependencyManagement extends Component {
             <div className="blocks-or-services">
               {fields.map((field, key, fields) => (
                 <DependencyItem
+                  id={id}
+                  version={version}
                   key={key}
                   index={key}
                   field={field}

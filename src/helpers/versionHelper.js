@@ -103,3 +103,6 @@ export const getManageUrlForKintoApp = (id, version) =>
 
 export const getUrlForAppEnvironment = id =>
   `/app/dashboard/kintoapps/${id}/environments`
+
+export const getUrlForAppConfigDependencies = (id, version, env) =>
+  `/app/dashboard/kintoapps/${id}/versions/${version}/config/${env}`

@@ -68,6 +68,9 @@ a {
   color: transparent;
 }
 
+.hide {
+  display: none;
+}
 // override browser default color and border
 button.dropdown-button.menu, button.dropdown-button {
   border: none;

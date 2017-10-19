@@ -79,3 +79,26 @@
     margin-bottom: 16px
   }
 }
+
+.hardware-data-form {
+  .memory, .limits-requests{
+    .input-container {
+      width: 49%;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @media (min-width: 540px) {
+      flex-wrap: nowrap;
+    }
+    input {
+      width: 100%;
+      min-width: 210px;
+    }
+  }
+  .line {
+    width: 100%;
+    border-bottom: solid 1px $kinto-tinted-grayscale-2;
+    margin: 18px 0;
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FormSection, reduxForm } from 'redux-form'
 import { FieldValidation, FormError } from '../../../forms'
 import { required } from '../../../../helpers/forms/validators'
 import KintoBlockHardwareData from '../KintoBlockHardwareData'
@@ -53,10 +53,12 @@ const KintoBlockCreateForm = ({
           />
         </div>
       </div>
-      <KintoBlockHardwareData
-        isDedicatedCPU={isDedicatedCPU}
-        resetCPUHandler={resetCPUHandler}
-      />
+      <FormSection name="hardwareData">
+        <KintoBlockHardwareData
+          isDedicatedCPU={isDedicatedCPU}
+          resetCPUHandler={resetCPUHandler}
+        />
+      </FormSection>
       <FormError error={error} />
     </form>
   )

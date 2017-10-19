@@ -1,5 +1,5 @@
-import React from 'react'
-import { Field, FormSection } from 'redux-form'
+import React, { Component } from 'react'
+import { Field } from 'redux-form'
 import { FieldValidation, Toggle, Slider } from '../../forms'
 import {
   required,
@@ -9,11 +9,7 @@ import {
 import { lessThanFormat, allowFalse } from '../../../helpers/forms/formatters'
 import { number } from '../../../helpers/forms/parsers'
 
-class KintoBlockHardwareData extends FormSection {
-  static defaultProps = {
-    name: 'hardwareData'
-  }
-
+class KintoBlockHardwareData extends Component {
   render() {
     const { isDedicatedCPU, resetCPUHandler } = this.props
     const selectNumberOfCores = [1, 2, 4, 8, 16, 32, 64, 128]

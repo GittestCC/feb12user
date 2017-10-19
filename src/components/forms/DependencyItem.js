@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
 import {
   asTextList,
@@ -13,7 +14,7 @@ class DependencyItem extends Component {
   }
 
   render() {
-    const { field, data, appDependenciesInfo } = this.props
+    const { version, field, data, appDependenciesInfo } = this.props
     const block = appDependenciesInfo[data.dependencyId]
     if (!block) {
       return null
@@ -42,6 +43,7 @@ class DependencyItem extends Component {
                 </option>
               ))}
             </Field>
+            <Link className="pen-edit" to={`${version}/config/0`} />
           </div>
         </div>
 

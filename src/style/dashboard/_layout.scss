@@ -1,11 +1,11 @@
 .layout-inner {
-  margin: 60px 0 0 0;
-  padding: 10px;
+  margin: 30px 0 0 0;
+  padding: 40px 10px 10px 10px;
   background-color: $kinto-tinted-grayscale-1;
   min-height: 95vh;
   @include desktop {
-    margin: 60px 0 0 320px;
-    padding: 30px;
+    margin: 30px 0 0 320px;
+    padding: 60px 30px 0 30px;
   }
 }
 

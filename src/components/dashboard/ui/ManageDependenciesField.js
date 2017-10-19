@@ -6,7 +6,9 @@ const ManageDependenciesField = ({
   name,
   dependenciesInfo,
   searchKintoBlocks,
-  fetchKintoBlockDependenciesData
+  fetchKintoBlockDependenciesData,
+  id,
+  version
 }) => (
   <FieldArray
     name={name}
@@ -14,6 +16,8 @@ const ManageDependenciesField = ({
     appDependenciesInfo={dependenciesInfo}
     onSearchKintoBlocks={searchKintoBlocks}
     fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
+    id={id}
+    version={version}
   />
 )
 

@@ -6,6 +6,7 @@ import {
   RECEIVE_KINTO_APPS,
   RECEIVE_KINTO_APP,
   RECIEVE_KINTO_APP_ENVIRONMENTS,
+  RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG,
   KINTO_APP_ENVIRONMENT_LIST_REORDER,
   NEW_ENVIRONMENT_RECEIVE,
   KINTO_APP_ENVIRONMENT_UPDATE
@@ -55,6 +56,21 @@ const kintoAppsReducer = (state = defaultState, action) => {
           [action.id]: {
             ...state.byId[action.id],
             environments: action.data
+          }
+        }
+      }
+    case RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            dependenciesConfig: {
+              envId: action.envId,
+              version: action.ver,
+              data: action.data
+            }
           }
         }
       }

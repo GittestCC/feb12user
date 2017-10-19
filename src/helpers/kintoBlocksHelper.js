@@ -38,12 +38,31 @@ export const getClassNameForType = type => {
   }
 }
 
+export const findDependency = (dependencies = [], dependencyId) => {
+  let foundDependency = null
+  dependencies.forEach(d => {
+    if (foundDependency) {
+      return
+    }
+    if (d.dependencyId === dependencyId) {
+      foundDependency = d
+      return
+    }
+    const children = d.dependencies || []
+    const child = children.find(d => d.dependencyId === dependencyId)
+    if (child) {
+      foundDependency = child
+    }
+  })
+  return foundDependency
+}
+
 function findAssociatedDependencies(version, dependencies, cache) {
   return dependencies
     .filter(d => d.residesIn.some(rv => isVersionEqual(rv, version)))
     .map(d => {
       return {
-        id: d.id,
+        ...d,
         ...cache[d.blockId]
       }
     })

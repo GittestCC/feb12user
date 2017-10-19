@@ -20,4 +20,10 @@
       margin: 0;
     }
   }
+  .pen-edit {
+    @include backgroundImage('/images/icon-gray-edit-double.svg', 40px, 40px);
+    display: block;
+    border-radius: 50%;
+    background-color: $kinto-grayscale-2;
+  }
 }
