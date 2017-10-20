@@ -36,16 +36,16 @@ class DependencyManagement extends Component {
 
           <div className="dependency-management-buttons">
             <div className="button-group">
-              <Link to={version} className="button secondary">
+              <Link to="" className="button secondary">
                 Split All Duplicate Instances
               </Link>
-              <Link to={version} className="icon split-instances" />
+              <Link to="" className="icon split-instances" />
             </div>
             <div className="button-group">
-              <Link to={version} className="button secondary">
+              <Link to="" className="button secondary">
                 Combine All Duplicate Instances
               </Link>
-              <Link to={version} className="icon combine-instances" />
+              <Link to="" className="icon combine-instances" />
             </div>
             <div className="button-group">
               <Link to={`${version}/config/0`} className="button secondary">
