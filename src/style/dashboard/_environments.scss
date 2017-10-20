@@ -203,7 +203,7 @@
       }
     }
     .status {
-      &.testing {
+      &.testing, &.processing {
         background-color: $kinto-orange;
       }
       &.success {
