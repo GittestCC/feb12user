@@ -12,7 +12,7 @@ import {
 } from '../../../../../helpers/forms/formatters'
 import { number } from '../../../../../helpers/forms/parsers'
 
-const KintoAppConfigHardwareItem = ({ field, info, data }) => {
+const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
   const selectNumberOfCores = [1, 2, 4, 8, 16, 32, 64, 128]
   const sliderMarks = {
     50: '50%',
@@ -58,6 +58,7 @@ const KintoAppConfigHardwareItem = ({ field, info, data }) => {
         <div className="cpu">
           <div className="toggle-wrapper">
             <Field
+              onChange={() => resetCPUHandler(field)}
               name={`${field}.hardwareData.dedicatedCpu`}
               label="Dedicated CPUs"
               component={Toggle}
@@ -66,76 +67,81 @@ const KintoAppConfigHardwareItem = ({ field, info, data }) => {
             />
           </div>
 
-          {data.hardwareData.dedicatedCpu ? (
-            <div className="limits-requests">
-              <div className="input-container">
-                <Field
-                  name={`${field}.hardwareData.maxCpu`}
-                  label="CPU Limits"
-                  parse={number}
-                  component={FieldValidation}
-                  validate={required}
-                  type="select"
-                  help="Starter pack is the programming language you would like to use for this project"
-                >
-                  <option>Number of cores</option>
-                  {selectNumberOfCores.map((c, i) => (
-                    <option value={c} key={i}>
-                      {c}
-                    </option>
-                  ))}
-                </Field>
-              </div>
-              <div className="input-container">
-                <Field
-                  name={`${field}.hardwareData.minCpu`}
-                  label="CPU Requests"
-                  parse={number}
-                  placeholder="1 - 1000 m"
-                  component={FieldValidation}
-                  validate={required}
-                  type="select"
-                  help="Starter pack is the programming language you would like to use for this project"
-                >
-                  <option>Number of cores</option>
-                  {selectNumberOfCores.map((c, i) => (
-                    <option value={c} key={i}>
-                      {c}
-                    </option>
-                  ))}
-                </Field>
-              </div>
+          <div
+            className={`limits-requests ${data.hardwareData.dedicatedCpu
+              ? ''
+              : 'hide-important'}`}
+          >
+            <div className="input-container">
+              <Field
+                name={`${field}.hardwareData.maxCpu`}
+                label="CPU Limits"
+                parse={number}
+                component={FieldValidation}
+                validate={required}
+                type="select"
+                help="Starter pack is the programming language you would like to use for this project"
+              >
+                <option>Number of cores</option>
+                {selectNumberOfCores.map((c, i) => (
+                  <option value={c} key={i}>
+                    {c}
+                  </option>
+                ))}
+              </Field>
             </div>
-          ) : (
-            <div className="limits-requests">
-              <div className="input-container">
-                <Field
-                  name={`${field}.hardwareData.maxCpu`}
-                  label="CPU Limits"
-                  parse={number}
-                  placeholder="1 - 1000 m"
-                  component={FieldValidation}
-                  validate={[required, isBetween1000]}
-                  normalize={lessThanFormat(1000)}
-                  type="number"
-                  help="Starter pack is the programming language you would like to use for this project"
-                />
-              </div>
-              <div className="input-container">
-                <Field
-                  name={`${field}.hardwareData.minCpu`}
-                  label="CPU Requests"
-                  parse={number}
-                  placeholder="1 - 1000 m"
-                  component={FieldValidation}
-                  validate={[required, isBetween1000]}
-                  normalize={lessThanFormat(1000)}
-                  type="number"
-                  help="Starter pack is the programming language you would like to use for this project"
-                />
-              </div>
+            <div className="input-container">
+              <Field
+                name={`${field}.hardwareData.minCpu`}
+                label="CPU Requests"
+                parse={number}
+                placeholder="1 - 1000 m"
+                component={FieldValidation}
+                validate={required}
+                type="select"
+                help="Starter pack is the programming language you would like to use for this project"
+              >
+                <option>Number of cores</option>
+                {selectNumberOfCores.map((c, i) => (
+                  <option value={c} key={i}>
+                    {c}
+                  </option>
+                ))}
+              </Field>
             </div>
-          )}
+          </div>
+          <div
+            className={`limits-requests ${data.hardwareData.dedicatedCpu
+              ? 'hide-important'
+              : ''}`}
+          >
+            <div className="input-container">
+              <Field
+                name={`${field}.hardwareData.maxCpu`}
+                label="CPU Limits"
+                parse={number}
+                placeholder="1 - 1000 m"
+                component={FieldValidation}
+                validate={[required, isBetween1000]}
+                normalize={lessThanFormat(1000)}
+                type="number"
+                help="Starter pack is the programming language you would like to use for this project"
+              />
+            </div>
+            <div className="input-container">
+              <Field
+                name={`${field}.hardwareData.minCpu`}
+                label="CPU Requests"
+                parse={number}
+                placeholder="1 - 1000 m"
+                component={FieldValidation}
+                validate={[required, isBetween1000]}
+                normalize={lessThanFormat(1000)}
+                type="number"
+                help="Starter pack is the programming language you would like to use for this project"
+              />
+            </div>
+          </div>
         </div>
         <div className="line" />
         <div className="scaling">

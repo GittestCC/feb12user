@@ -7,19 +7,21 @@ const KintoAppConfigForm = ({
   activeTab,
   handleSubmit,
   allDependenciesInfo,
-  shownDependenciesIds
+  shownDependenciesIds,
+  resetCPUHandler
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div className={activeTab !== 'params' ? 'hide' : ''}>
+      <div className={activeTab !== 'params' ? 'hide' : null}>
         <KintoAppConfigParams />
       </div>
-      <div className={activeTab !== 'hardware' ? 'hide' : ''}>
+      <div className={activeTab !== 'hardware' ? 'hide' : null}>
         <FieldArray
           name="data"
           component={KintoAppConfigHardware}
           allDependenciesInfo={allDependenciesInfo}
           shownDependenciesIds={shownDependenciesIds}
+          resetCPUHandler={resetCPUHandler}
         />
       </div>
     </form>

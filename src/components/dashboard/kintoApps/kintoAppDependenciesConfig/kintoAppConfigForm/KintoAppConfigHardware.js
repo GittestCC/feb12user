@@ -12,7 +12,8 @@ function getContainerClass(shownDependenciesIds, fields, key) {
 const KintoAppConfigHardware = ({
   fields,
   allDependenciesInfo,
-  shownDependenciesIds
+  shownDependenciesIds,
+  resetCPUHandler
 }) => {
   return (
     <div className="ka-config-hardware">
@@ -42,6 +43,7 @@ const KintoAppConfigHardware = ({
                   fields.get(key).dependencyId
                 )}
                 data={fields.get(key)}
+                resetCPUHandler={resetCPUHandler}
               />
             </div>
           ))}

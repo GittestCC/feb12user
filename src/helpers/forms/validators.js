@@ -1,5 +1,5 @@
 export const required = value => {
-  if (typeof value === 'number') {
+  if (typeof value === 'number' && !isNaN(value)) {
     return undefined
   }
   return value ? undefined : 'Required'

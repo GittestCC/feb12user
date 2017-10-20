@@ -3,21 +3,21 @@ import { FieldArray } from 'redux-form'
 import DependencyManagement from '../../forms/DependencyManagement'
 
 const ManageDependenciesField = ({
+  id,
+  version,
   name,
   dependenciesInfo,
   searchKintoBlocks,
-  fetchKintoBlockDependenciesData,
-  id,
-  version
+  fetchKintoBlockDependenciesData
 }) => (
   <FieldArray
+    id={id}
+    version={version}
     name={name}
     component={DependencyManagement}
     appDependenciesInfo={dependenciesInfo}
     onSearchKintoBlocks={searchKintoBlocks}
     fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
-    id={id}
-    version={version}
   />
 )
 
