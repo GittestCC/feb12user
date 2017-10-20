@@ -13,7 +13,7 @@ export const getDependenciesFactory = () => {
       const result = dependencies.map(d => {
         return getDependencyInfo(d, dependenciesCache)
       })
-      return keyBy(result, 'dependencyId')
+      return keyBy(result, 'blockId')
     }
   )
 }

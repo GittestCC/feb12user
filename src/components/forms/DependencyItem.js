@@ -15,7 +15,7 @@ class DependencyItem extends Component {
 
   render() {
     const { version, field, data, appDependenciesInfo } = this.props
-    const block = appDependenciesInfo[data.dependencyId]
+    const block = appDependenciesInfo[data.blockId]
     if (!block) {
       return null
     }
