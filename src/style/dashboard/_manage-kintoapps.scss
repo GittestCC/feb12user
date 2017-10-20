@@ -26,4 +26,33 @@
     border-radius: 50%;
     background-color: $kinto-grayscale-2;
   }
+  .dependency-management-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 20px 0;
+    .button-group {
+      width: 32%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .icon {
+        display: inline-block;
+        margin-top: 20px;
+        &.split-instances {
+          @include backgroundImage('/images/icon-split.svg', 40px, 40px)
+        }
+        &.combine-instances {
+          @include backgroundImage('/images/icon-combine.svg', 40px, 40px)
+        }
+        &.edit-blocks-and-services {
+          @include backgroundImage('/images/icon-gray-edit-double.svg', 40px, 40px)
+        }
+      }
+      .button {
+        line-height: 40px;
+        height: 40px;
+      }
+    }
+  }
 }

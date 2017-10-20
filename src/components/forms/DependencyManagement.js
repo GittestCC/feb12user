@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import { Link } from 'react-router-dom'
 
 import DependencyItem from './DependencyItem'
 class DependencyManagement extends Component {
@@ -33,40 +34,56 @@ class DependencyManagement extends Component {
             onChange={this.onSelectKintoBlock}
           />
 
-          {fields.length ? (
-            <div className="blocks-or-services">
-              {fields.map((field, key, fields) => (
-                <DependencyItem
-                  id={id}
-                  version={version}
-                  key={key}
-                  index={key}
-                  field={field}
-                  fields={fields}
-                  appDependenciesInfo={appDependenciesInfo}
-                  data={fields.get(key)}
-                />
-              ))}
+          <div className="dependency-management-buttons">
+            <div className="button-group">
+              <Link to={version} className="button secondary">
+                Split All Duplicate Instances
+              </Link>
+              <Link to={version} className="icon split-instances" />
             </div>
-          ) : (
-            <div className="no-blocks-or-services">
-              <div className="icons">
-                <div className="kinto-block" />
-                <div className="service" />
-              </div>
-              <div className="text">No KintoBlocks or services added</div>
+            <div className="button-group">
+              <Link to={version} className="button secondary">
+                Combine All Duplicate Instances
+              </Link>
+              <Link to={version} className="icon combine-instances" />
             </div>
-          )}
-          {/*
-          <div className="combine-buttons">
-          <Button buttonType="secondary" image="/images/icon-split-glyph.svg">
-          Split All Duplicate Instances
-          </Button>
-          <Button buttonType="secondary" image="/images/icon-combine-glyph.svg">
-          Combine All Duplicate Instances
-          </Button>
+            <div className="button-group">
+              <Link to={`${version}/config/0`} className="button secondary">
+                Edit KintoBlocks & Services
+              </Link>
+              <Link
+                to={`${version}/config/0`}
+                className="icon edit-blocks-and-services"
+              />
+            </div>
           </div>
-          */}
+
+          <div>
+            {fields.length ? (
+              <div className="blocks-or-services">
+                {fields.map((field, key, fields) => (
+                  <DependencyItem
+                    id={id}
+                    version={version}
+                    key={key}
+                    index={key}
+                    field={field}
+                    fields={fields}
+                    appDependenciesInfo={appDependenciesInfo}
+                    data={fields.get(key)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="no-blocks-or-services">
+                <div className="icons">
+                  <div className="kinto-block" />
+                  <div className="service" />
+                </div>
+                <div className="text">No KintoBlocks or services added</div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     )

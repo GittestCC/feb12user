@@ -19,7 +19,7 @@ function mapStateToProps(state, { match }) {
     : []
   let breadcrumbSelectItems = []
 
-  kintoApps.length
+  breadcrumbSelectItems = kintoApps.length
     ? (breadcrumbSelectItems = kintoApps.map(k =>
         getBreadcrumbSelectItem(k, id, env)
       ))
