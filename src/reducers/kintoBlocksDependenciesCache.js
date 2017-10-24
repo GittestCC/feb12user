@@ -20,7 +20,6 @@ const kintoBlocksDependenciesCacheReducer = (state = {}, action) => {
           ...newState[d],
           ...dependencies[d]
         }
-        newState[d] = dependencies[d]
       })
       return newState
     default:
