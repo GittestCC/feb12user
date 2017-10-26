@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch, { toggleNav }) {
     logout: () => {
       dispatch(logout())
       // physical refresh
-      window.location.href = '/'
+      window.location.href = '/log-in'
     }
   }
 }

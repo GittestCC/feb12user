@@ -18,6 +18,7 @@ h2, .h2 {
   line-height: 32px;
   font-family: 'Raleway', sans-serif;
   color: $kinto-tinted-grayscale-10;
+  font-weight: 600;
   @include abovetablet {
     font-size: 28px;
   }

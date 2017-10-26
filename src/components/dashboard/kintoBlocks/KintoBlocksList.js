@@ -50,7 +50,7 @@ class KintoBlocksList extends Component {
         <div className="page-title">
           <h2>My KintoBlocks</h2>
           <Link to="create" className="button default">
-            Create New Kintoblock
+            Create New KintoBlock
           </Link>
         </div>
 

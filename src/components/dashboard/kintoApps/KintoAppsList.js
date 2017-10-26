@@ -45,7 +45,7 @@ class KintoAppsList extends Component {
       <div className="my-kintoapps">
         <div className="breadcrumbs">
           <a href="list" className="disabled">
-            KintoApps
+            Applications
           </a>
         </div>
 
@@ -60,7 +60,7 @@ class KintoAppsList extends Component {
           <Link to="create" className="kintoapp create">
             <div className="text">
               <img src="/images/icon-generic-application.svg" alt="" />
-              <h3>Create New KintoApp</h3>
+              <h3>Create New Application</h3>
             </div>
             <div className="icons">
               <div className="applications">

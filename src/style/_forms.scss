@@ -90,10 +90,16 @@ h5.byline {
   padding-top: 0;
   height: 50px;
   line-height: 50px;
+  font-size: 16px;
   border: none;
   display: block;
   font-weight: bold;
   cursor: pointer;
+  @include abovetablet {
+    height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+  }
   &:hover {
     color: $kinto-tinted-grayscale-10;
   }
@@ -275,6 +281,7 @@ form {
   .button {
     height: 40px;
     line-height: 40px;
+    font-size: 14px;
     margin: 10px 40px;
     width: auto;
   }
