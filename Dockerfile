@@ -7,9 +7,15 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY package-lock.json /usr/src/app/
 
+ENV CI=true
+
 RUN npm install
 
 COPY . /usr/src/app
+
+RUN npm test
+
+RUN npm run lint
 
 RUN npm run build
 
