@@ -38,8 +38,7 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         byId: {
           ...state.byId,
           [action.id]: {
-            ...action.data,
-            lastFetch: new Date()
+            ...action.data
           }
         }
       }

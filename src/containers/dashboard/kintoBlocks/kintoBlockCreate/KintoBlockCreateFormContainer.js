@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { formValueSelector, change, untouch } from 'redux-form'
-import { kintoBlockCreate } from '../../../../actions/kintoBlocks'
+import { createKintoBlock } from '../../../../actions/kintoBlocks'
 import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateForm'
 
 const formName = 'kintoBlockCreateForm'
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: data => dispatch(kintoBlockCreate(data)),
+    onSubmit: data => dispatch(createKintoBlock(data)),
     resetCPUHandler: () => {
       dispatch(change('kintoBlockCreateForm', 'hardwareData.minCpu', null))
       dispatch(change('kintoBlockCreateForm', 'hardwareData.maxCpu', null))

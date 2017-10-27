@@ -79,11 +79,12 @@ export const fetchKintoBlock = (id, ver) => (dispatch, getState) => {
   dispatch(kintoBlocksFetch())
   return axios.get(`/kintoblocks/${id}/versions/${ver}`).then(data => {
     data.name = data.metadata.dependencies[data.id].name
+    data.lastFetch = new Date()
     return dispatch(kintoBlockReceive(id, data))
   })
 }
 
-export const kintoBlockCreate = data => dispatch => {
+export const createKintoBlock = data => dispatch => {
   return axios.post('/kintoblocks/create', data).then(() => {
     dispatch(formSubmitted())
     dispatch(push('/app/dashboard/kintoblocks/list'))
@@ -97,7 +98,7 @@ export const updateKintoBlock = (id, ver, data) => dispatch => {
     }
     dispatch(formSubmitted())
     // TODO: make sure the server returns the updated object
-    dispatch(kintoBlockUpdate(id, data))
+    dispatch(kintoBlockUpdate(id, result))
   })
 }
 

@@ -1,15 +1,26 @@
 import axios from 'axios'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
-import { setToken as localStorageSetToken } from '../helpers/authHelper'
+import {
+  setToken as localStorageSetToken,
+  getTokenInfoFromLocalStorage
+} from '../helpers/authHelper'
 
-export const TOKEN_UPDATE_FROM_LOCAL_STORAGE = 'TOKEN_UPDATE'
+export const TOKEN_UPDATE_INFO = 'TOKEN_UPDATE_INFO'
 export const LOGOUT = 'LOGOUT'
 
-export const setToken = token => {
-  localStorageSetToken(token)
-  return { type: TOKEN_UPDATE_FROM_LOCAL_STORAGE }
+export const setToken = token => dispatch => {
+  const isSuccess = localStorageSetToken(token)
+  if (isSuccess) {
+    const data = getTokenInfoFromLocalStorage()
+    dispatch(tokenUpdateInfo(data))
+  }
 }
+
+export const tokenUpdateInfo = data => ({
+  type: TOKEN_UPDATE_INFO,
+  data
+})
 
 export const logout = () => {
   localStorageSetToken(null)

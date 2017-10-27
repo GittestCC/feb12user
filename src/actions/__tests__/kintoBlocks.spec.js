@@ -2,14 +2,27 @@ import moxios from 'moxios'
 import thunk from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import { CALL_HISTORY_METHOD } from 'react-router-redux'
+import MockDate from 'mockdate'
 import * as actions from '../kintoBlocks'
+import { FORM_SUBMITTED } from '../pageOptions'
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 
+const now = new Date()
+
+let secondAgo = new Date(now.getTime())
+secondAgo.setSeconds(secondAgo.getSeconds() - 1)
+
 describe('KintoBlocks actions', () => {
-  beforeEach(() => moxios.install())
-  afterEach(() => moxios.uninstall())
+  beforeEach(() => {
+    moxios.install()
+    MockDate.set(now.getTime())
+  })
+  afterEach(() => {
+    moxios.uninstall()
+    MockDate.reset()
+  })
 
   it('kintoBlockReceive extracts metadata', () => {
     const result = actions.kintoBlockReceive(1, {
@@ -76,7 +89,7 @@ describe('KintoBlocks actions', () => {
     ])
   })
 
-  it('fetchKintoBlock process metadata for name and send it in the receive action', async () => {
+  it('fetchKintoBlock process metadata for name and add lastFetch to send in the receive action', async () => {
     const TEST_NAME = 'Test KintoBlock'
     const metadata = {
       dependencies: {
@@ -105,15 +118,14 @@ describe('KintoBlocks actions', () => {
         data: {
           id: '1',
           name: TEST_NAME,
-          otherInfo: 'otherInfo'
+          otherInfo: 'otherInfo',
+          lastFetch: now
         }
       }
     ])
   })
 
   it('fetchKintoBlock if item was recently fetched nothing is fired', async () => {
-    let secondAgo = new Date()
-    secondAgo.setSeconds(secondAgo.getSeconds() - 1)
     const store = mockStore({
       kintoBlocks: {
         byId: {
@@ -144,8 +156,6 @@ describe('KintoBlocks actions', () => {
         }
       })
     })
-    let secondAgo = new Date()
-    secondAgo.setSeconds(secondAgo.getSeconds() - 1)
     const store = mockStore({
       kintoBlocks: {
         byId: {
@@ -161,6 +171,116 @@ describe('KintoBlocks actions', () => {
     expect(store.getActions().map(t => t.type)).toEqual([
       actions.FETCH_KINTO_BLOCKS,
       actions.RECEIVE_KINTO_BLOCK
+    ])
+  })
+
+  it('createKintoBlock fires a form submitted and redirect if response is a success', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {}
+      })
+    })
+    const store = mockStore()
+    await store.dispatch(actions.createKintoBlock({}))
+    expect(store.getActions().map(a => a.type)).toEqual([
+      FORM_SUBMITTED,
+      CALL_HISTORY_METHOD
+    ])
+  })
+
+  it("updateKintoBlock fires formsubmitted and kintoBlockUpdate actions if response doesn't have an error", async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: { id: '1', name: 'test' }
+      })
+    })
+    const store = mockStore()
+    await store.dispatch(actions.updateKintoBlock('1', {}))
+    expect(store.getActions()).toEqual([
+      {
+        type: FORM_SUBMITTED
+      },
+      {
+        type: actions.UPDATE_KINTO_BLOCK,
+        id: '1',
+        data: {
+          id: '1',
+          name: 'test'
+        }
+      }
+    ])
+  })
+
+  it('updateKintoBlock throws if result has errors', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: { errors: 'error' }
+      })
+    })
+    const store = mockStore()
+    const result = store.dispatch(actions.updateKintoBlock('1', {}))
+    await expect(result).rejects.toEqual({ errors: 'error' })
+  })
+
+  it('createVersionKintoBlock fires a create version and redirect actions on success', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: { data: { id: 1, name: 'test' } }
+      })
+    })
+    const store = mockStore()
+    await store.dispatch(actions.createVersionKintoBlock(1, {}))
+    expect(store.getActions().map(a => a.type)).toEqual([
+      actions.CREATE_VERSION_KINTO_BLOCK,
+      CALL_HISTORY_METHOD
+    ])
+  })
+
+  it('createVersionKintoBlock throws if result has errors', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: { errors: 'error' }
+      })
+    })
+    const store = mockStore()
+    const result = store.dispatch(
+      actions.createVersionKintoBlock('1', { errors: 'error' })
+    )
+    await expect(result).rejects.toEqual({ errors: 'error' })
+  })
+
+  it('fetchKintoBlockDependenciesData fires kintoBlockReceiveDependencies actions and returns processed object', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          data: { id: '1', name: 'test', version: '1.3.1' },
+          metadata: []
+        }
+      })
+    })
+    const store = mockStore()
+    const result = await store.dispatch(
+      actions.fetchKintoBlockDependenciesData('1', '1.3.1')
+    )
+    expect(result).toEqual({ blockId: '1', version: '1.3.1' })
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.RECEIVE_KINTO_BLOCK_DEPENDENCIES,
+        data: { id: '1', name: 'test', version: '1.3.1' },
+        metadata: []
+      }
     ])
   })
 })

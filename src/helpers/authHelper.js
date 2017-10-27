@@ -16,7 +16,14 @@ export const getTokenInfoFromLocalStorage = () => {
 
 export const setToken = token => {
   if (token) {
-    window.localStorage.setItem('kintohub:auth', token)
+    try {
+      jwtDecode(token)
+      window.localStorage.setItem('kintohub:auth', token)
+      return true
+    } catch (e) {
+      console.error('Invalid token ', token)
+      return false
+    }
   } else {
     window.localStorage.removeItem('kintohub:auth')
   }
