@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { Link } from 'react-router-dom'
 
 import DependencyItem from './DependencyItem'
 class DependencyManagement extends Component {
+  static propTypes = {
+    appVersion: PropTypes.string,
+    fields: PropTypes.object.isRequired,
+    appDependenciesInfo: PropTypes.object.isRequired,
+    onSearchKintoBlocks: PropTypes.func.isRequired,
+    fetchKintoBlockDependenciesData: PropTypes.func.isRequired
+  }
+
   onSelectKintoBlock = selectedItem => {
     this.props
       .fetchKintoBlockDependenciesData(selectedItem.id, selectedItem.version)
@@ -14,8 +23,7 @@ class DependencyManagement extends Component {
 
   render() {
     const {
-      id,
-      version,
+      appVersion,
       fields,
       appDependenciesInfo,
       onSearchKintoBlocks
@@ -48,11 +56,11 @@ class DependencyManagement extends Component {
               <Link to="" className="icon combine-instances" />
             </div>
             <div className="button-group">
-              <Link to={`${version}/config/0`} className="button secondary">
+              <Link to={`${appVersion}/config/0`} className="button secondary">
                 Edit KintoBlocks & Services
               </Link>
               <Link
-                to={`${version}/config/0`}
+                to={`${appVersion}/config/0`}
                 className="icon edit-blocks-and-services"
               />
             </div>
@@ -63,8 +71,7 @@ class DependencyManagement extends Component {
               <div className="blocks-or-services">
                 {fields.map((field, key, fields) => (
                   <DependencyItem
-                    id={id}
-                    version={version}
+                    appVersion={appVersion}
                     key={key}
                     index={key}
                     field={field}

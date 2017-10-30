@@ -15,9 +15,9 @@ function mapStateToProps(state, { isSideBarShownMobile }) {
   }
 }
 
-function mapDispatchToProps(dispatch, { toggleNav }) {
+function mapDispatchToProps(dispatch, { toggleNavHandler }) {
   return {
-    toggleNav,
+    toggleNavHandler,
     logout: () => {
       dispatch(logout())
       // physical refresh

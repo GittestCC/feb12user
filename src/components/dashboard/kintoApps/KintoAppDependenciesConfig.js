@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDown from '../../ui/DropDown'
 import TagItem from '../ui/TagItem'
@@ -10,6 +11,21 @@ import KintoAppConfigFormContainer from '../../../containers/dashboard/kintoApps
 import KintoAppConfigSidebar from './kintoAppDependenciesConfig/KintoAppConfigSidebar'
 
 class KintoAppDependenciesConfig extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    ver: PropTypes.string.isRequired,
+    env: PropTypes.string.isRequired,
+    kintoApp: PropTypes.object.isRequired,
+    dependencies: PropTypes.array.isRequired,
+    versionsBreadcrumb: PropTypes.array.isRequired,
+    appSwitchBreadcrumb: PropTypes.array.isRequired,
+    environmentsBreadcrumb: PropTypes.array.isRequired,
+    selectedEnvironmentName: PropTypes.string,
+    fetchKintoApps: PropTypes.func.isRequired,
+    fetchKintoAppDependenciesConfig: PropTypes.func.isRequired,
+    goToCreatePage: PropTypes.func.isRequired
+  }
+
   state = {
     filterText: '',
     activeTab: 'hardware'

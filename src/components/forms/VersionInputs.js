@@ -1,5 +1,6 @@
 import React from 'react'
 
+// TODO need optimization, alot of nested defined functions
 const VersionInputs = fields => {
   const getError = fieldKey => {
     const field = fields[fieldKey]

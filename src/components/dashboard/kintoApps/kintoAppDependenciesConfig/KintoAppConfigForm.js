@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { reduxForm, FieldArray } from 'redux-form'
 import KintoAppConfigParams from './kintoAppConfigForm/KintoAppConfigParams'
 import KintoAppConfigHardware from './kintoAppConfigForm/KintoAppConfigHardware'
@@ -26,6 +27,14 @@ const KintoAppConfigForm = ({
       </div>
     </form>
   )
+}
+
+KintoAppConfigForm.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+  allDependenciesInfo: PropTypes.array.isRequired,
+  shownDependenciesIds: PropTypes.array.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  resetCPUHandler: PropTypes.func.isRequired
 }
 
 export default reduxForm({

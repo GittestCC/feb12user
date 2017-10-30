@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Password extends Component {
+  static propTypes = {
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
+    id: PropTypes.string,
+    placeholder: PropTypes.string
+  }
+
   state = {
     isVisible: false
   }
@@ -12,7 +20,7 @@ class Password extends Component {
   }
 
   render() {
-    const { input, id, label, placeholder } = this.props
+    const { input, id, placeholder } = this.props
     const { touched, submitFailed, error } = this.props.meta
     const hasError = (touched || submitFailed) && error
     let className = input.className || ''

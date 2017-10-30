@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import Slider from 'rc-slider'
 import FieldValidation from '../../../forms/FieldValidation'
@@ -7,6 +8,11 @@ import { required } from '../../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 
 class KintoBlockManageForm extends Component {
+  static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    dependencies: PropTypes.array
+  }
+
   state = {
     expanded: false,
     newCustomParamaterName: '',

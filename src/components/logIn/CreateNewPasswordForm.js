@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { Button, Password } from '../forms'
 import { required, password } from '../../helpers/forms/validators'
@@ -17,7 +18,6 @@ const CreateNewPasswordForm = ({ handleSubmit }) => (
       <h2>Create New Password</h2>
       <div className="line" />
       <Field
-        label="Enter password"
         name="createNewPassword"
         placeholder="Create new password"
         component={Password}
@@ -27,7 +27,6 @@ const CreateNewPasswordForm = ({ handleSubmit }) => (
         <h6>Requires 8 characters, at least 1 number and 1 letter</h6>
       </div>
       <Field
-        label="confirm new password"
         name="createNewPasswordConfirm"
         placeholder="Enter your new password again"
         component={Password}
@@ -37,6 +36,9 @@ const CreateNewPasswordForm = ({ handleSubmit }) => (
     </form>
   </div>
 )
+CreateNewPasswordForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+}
 
 export default reduxForm({ form: 'createNewPassword', validate })(
   CreateNewPasswordForm

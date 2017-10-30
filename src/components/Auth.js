@@ -1,7 +1,15 @@
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 class Auth extends Component {
+  static propTypes = {
+    token: PropTypes.string,
+    setToken: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    navigateTo: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props)
     axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL

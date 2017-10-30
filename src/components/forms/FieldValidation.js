@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Tooltip from 'rc-tooltip'
 
 /**
@@ -65,6 +66,15 @@ const FieldValidation = props => {
       </div>
     </div>
   )
+}
+FieldValidation.PropTypes = {
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  help: PropTypes.string,
+  close: PropTypes.bool
 }
 
 export default FieldValidation

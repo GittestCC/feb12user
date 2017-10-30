@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field, Fields, reduxForm, FormSection } from 'redux-form'
 import { getVersionAsText, textToObject } from '../../../helpers/versionHelper'
 import { required } from '../../../helpers/forms/validators'
@@ -6,6 +7,16 @@ import { number } from '../../../helpers/forms/parsers'
 import { Button, VersionInputs, FormError } from '../../forms'
 
 class VersionCreateForm extends Component {
+  static propTypes = {
+    submitLabel: PropTypes.string.isRequired,
+    baseVersions: PropTypes.array.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    pristine: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    initialize: PropTypes.func.isRequired
+  }
+
   componentDidMount() {
     this.props.initialize({
       baseVersion: textToObject(this.props.baseVersions[0])
@@ -15,11 +26,11 @@ class VersionCreateForm extends Component {
   render() {
     const {
       submitLabel,
-      handleSubmit,
-      onClose,
       baseVersions,
       submitting,
       pristine,
+      handleSubmit,
+      onClose,
       error
     } = this.props
     return (

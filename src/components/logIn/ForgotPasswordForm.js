@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button } from '../forms'
 import { required } from '../../helpers/forms/validators'
@@ -24,5 +25,8 @@ const ForgotPasswordForm = ({ handleSubmit }) => (
     </form>
   </div>
 )
+ForgotPasswordForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+}
 
 export default reduxForm({ form: 'forgotPassword' })(ForgotPasswordForm)

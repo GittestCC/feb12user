@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import LandingNavBar from './ui/LandingNavBar'
 import Footer from './ui/Footer'
 import SignUpFormContainer from '../containers/landing/signUp/SignUpFormContainer'
 import LogInFormContainer from '../containers/landing/logIn/LogInFormContainer'
 
 class LogIn extends Component {
+  static propTypes = {
+    flip: PropTypes.bool
+  }
+
   state = {
     isSignUpSubmitted: false,
     confirmedEmail: null

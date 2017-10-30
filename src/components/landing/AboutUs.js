@@ -42,7 +42,7 @@ const AboutUs = () => (
     </div>
     <JobOpenings />
     <Resources />
-    <Footer footerColor="bg-light-blue" />
+    <Footer className="bg-light-blue" />
   </div>
 )
 

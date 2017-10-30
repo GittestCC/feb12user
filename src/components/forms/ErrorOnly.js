@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * This components shows only the error message part of a field
@@ -10,5 +11,8 @@ const ErrorOnly = ({ meta: { touched, submitFailed, error } }) =>
   ) : (
     false
   )
+ErrorOnly.propTypes = {
+  meta: PropTypes.object
+}
 
 export default ErrorOnly

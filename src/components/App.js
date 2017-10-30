@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Prompt, Switch, Redirect } from 'react-router-dom'
 
 import NavBarContainer from '../containers/app/NavBarContainer'
@@ -9,6 +10,12 @@ import Dashboard from './Dashboard'
 import Market from './Market'
 
 class App extends Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    blockNavigate: PropTypes.bool.isRequired,
+    goToLogin: PropTypes.func.isRequired
+  }
+
   state = {
     isSideBarShownMobile: false
   }

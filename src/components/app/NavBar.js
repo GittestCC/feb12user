@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import DropDown from '../ui/DropDown'
+import PropTypes from 'prop-types'
 
 class NavBar extends Component {
+  static propTypes = {
+    isDashboard: PropTypes.bool.isRequired,
+    isSideBarShownMobile: PropTypes.bool.isRequired,
+    toggleNavHandler: PropTypes.func.isRequired,
+    initials: PropTypes.string.isRequired
+  }
+
   state = {
     showSearch: false,
     isIconHidden: false
@@ -94,7 +102,7 @@ class NavBar extends Component {
           <div className={this.state.showSearch ? 'hide-search' : ''}>
             <DropDown
               type="simple"
-              direction="left"
+              className="direction-left"
               dropdownClass="user-avatar uppercase"
               dropdownText={initials}
             >

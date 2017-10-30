@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { getEnvironmentVersionAndBuild } from '../../../../helpers/environmentHelper'
@@ -7,14 +8,20 @@ import DropDown from '../../../ui/DropDown'
 const DragHandle = SortableHandle(() => <span className="hamburger" />)
 
 class KintoAppEnvironmentCard extends Component {
+  static propTypes = {
+    environment: PropTypes.object.isRequired,
+    sortIndex: PropTypes.number.isRequired,
+    buttonAction: PropTypes.func.isRequired
+  }
+
   state = {
     isExpanded: false
   }
 
   toggleExpand = () => {
-    this.setState(function(prevState, props) {
-      return { isExpanded: !prevState.isExpanded }
-    })
+    this.setState(prevState => ({
+      isExpanded: !prevState.isExpanded
+    }))
   }
 
   render() {

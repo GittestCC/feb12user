@@ -8,7 +8,7 @@ export const getDependenciesFactory = () => {
     state => state.kintoBlocksDependenciesCache,
     (dependencies, dependenciesCache) => {
       if (!dependencies || !dependencies.length) {
-        return []
+        return {}
       }
       const result = dependencies.map(d => {
         return getDependencyInfo(d, dependenciesCache)

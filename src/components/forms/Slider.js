@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Tooltip from 'rc-tooltip'
 import RcSlider from 'rc-slider'
 
@@ -24,6 +25,14 @@ const Slider = props => {
       </div>
     </div>
   )
+}
+Slider.propTypes = {
+  input: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  min: PropTypes.number.isRequired,
+  step: PropTypes.number,
+  marks: PropTypes.array.isRequired,
+  help: PropTypes.string
 }
 
 export default Slider

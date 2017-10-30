@@ -1,13 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Button = ({
   buttonType,
   isSubmitted,
   type,
   image,
-  onClick,
   disabled,
-  form,
+  onClick,
   children
 }) => {
   type = type || 'submit'
@@ -28,12 +28,19 @@ const Button = ({
       type={type}
       className={`button ${buttonType} ${disabled ? 'disabled' : ''}`}
       onClick={buttonHandler}
-      form={form}
     >
       {image ? <img src={image} alt="" /> : ''}
       {children}
     </button>
   )
+}
+Button.propType = {
+  buttonType: PropTypes.string,
+  type: PropTypes.string,
+  isSubmitted: PropTypes.bool,
+  image: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func.isRequired
 }
 
 export default Button

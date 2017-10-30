@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, FormSection, reduxForm } from 'redux-form'
 import { FieldValidation, FormError } from '../../../forms'
 import { required } from '../../../../helpers/forms/validators'
@@ -62,6 +63,11 @@ const KintoBlockCreateForm = ({
       <FormError error={error} />
     </form>
   )
+}
+KintoBlockCreateForm.propTypes = {
+  isDedicatedCPU: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  resetCPUHandler: PropTypes.func.isRequired
 }
 
 export default reduxForm({ form: 'kintoBlockCreateForm' })(KintoBlockCreateForm)

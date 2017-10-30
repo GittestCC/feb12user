@@ -37,7 +37,7 @@ const App = () => (
         <BlogGallery />
       </div>
     </div>
-    <Footer footerColor="bg-light-blue" />
+    <Footer className="bg-light-blue" />
   </div>
 )
 

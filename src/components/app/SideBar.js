@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 class SideBar extends Component {
+  static propTypes = {
+    navigateTo: PropTypes.func.isRequired,
+    isSideBarShownMobile: PropTypes.bool.isRequired,
+    list: PropTypes.array.isRequired
+  }
+
   navigateTo = (e, url) => {
     e.preventDefault()
     this.props.navigateTo(url)

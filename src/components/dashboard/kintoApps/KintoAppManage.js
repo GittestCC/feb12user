@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import {
   getVersionAsText,
@@ -10,6 +11,20 @@ import VersionCreateModalContainer from '../../../containers/dashboard/ui/Versio
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
 
 class KintoAppManage extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    ver: PropTypes.string.isRequired,
+    version: PropTypes.object,
+    kintoApp: PropTypes.object.isRequired,
+    versionSelectItems: PropTypes.array.isRequired,
+    breadcrumbSelectItems: PropTypes.array.isRequired,
+    baseVersions: PropTypes.array.isRequired,
+    fetchKintoApps: PropTypes.func.isRequired,
+    fetchKintoApp: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    goToCreatePage: PropTypes.func.isRequired
+  }
+
   state = {
     isVersionModalOpen: false
   }

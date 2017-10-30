@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { asTextList } from '../../../helpers/versionHelper'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoBlockCardContainer from '../../../containers/dashboard/kintoBlocks/kintoBlocksList/KintoBlockCardContainer'
 
 class KintoBlocksList extends Component {
+  static propTypes = {
+    kintoBlocks: PropTypes.array.isRequired,
+    fetchKintoBlocks: PropTypes.func.isRequired
+  }
+
   state = {
     isVersionModalOpen: false,
     versionKintoBlockId: null,

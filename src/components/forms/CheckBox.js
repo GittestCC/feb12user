@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const CheckBox = ({ input, id, label, meta }) => {
   const { touched, submitFailed, error } = meta
@@ -24,6 +25,12 @@ const CheckBox = ({ input, id, label, meta }) => {
       {hasError && <div className="error-message">{error}</div>}
     </div>
   )
+}
+CheckBox.propType = {
+  input: PropTypes.object,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  meta: PropTypes.object
 }
 
 export default CheckBox

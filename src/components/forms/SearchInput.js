@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class SearchInput extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired
+  }
+
   state = {
     isIconHidden: false
   }
 
   toggleIcon = () => {
-    this.setState(state => {
-      return {
-        isIconHidden: !state.isIconHidden
-      }
-    })
+    this.setState(state => ({
+      isIconHidden: !state.isIconHidden
+    }))
   }
 
   render() {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import VersionCreateForm from './VersionCreateForm'
 
@@ -6,9 +7,9 @@ const VersionCreateModal = ({
   isOpen,
   title,
   submitLabel,
+  baseVersions,
   onClose,
-  onSubmit,
-  baseVersions
+  onSubmit
 }) => {
   return (
     <Modal
@@ -29,6 +30,15 @@ const VersionCreateModal = ({
       </div>
     </Modal>
   )
+}
+
+VersionCreateModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  submitLabel: PropTypes.string.isRequired,
+  baseVersions: PropTypes.array.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default VersionCreateModal

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Tooltip from 'rc-tooltip'
 
 // TODO: checked prop is because of a bug in redux-form
@@ -22,5 +23,11 @@ const Toggle = ({ input, id, label, help }) => (
     </h6>
   </label>
 )
+Toggle.propTypes = {
+  input: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  help: PropTypes.string
+}
 
 export default Toggle

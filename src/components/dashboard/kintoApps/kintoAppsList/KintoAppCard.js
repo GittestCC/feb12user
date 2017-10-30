@@ -1,9 +1,23 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDown from '../../../ui/DropDown'
 import TagItem from '../../ui/TagItem'
 
 class KintoAppCard extends Component {
+  static propTypes = {
+    kintoApp: PropTypes.object.isRequired,
+    isLatestVersionPending: PropTypes.bool.isRequired,
+    latestVersion: PropTypes.object.isRequired,
+    versions: PropTypes.array.isRequired,
+    dropdownId: PropTypes.string.isRequired,
+    dropdownVersionId: PropTypes.string.isRequired,
+    dropdownDependencyId: PropTypes.string.isRequired,
+    onVersionCreate: PropTypes.func.isRequired,
+    goToLatest: PropTypes.func.isRequired,
+    goToEnvironment: PropTypes.func.isRequired
+  }
+
   state = {
     isVerShown: false,
     areDependenciesShown: false
@@ -31,10 +45,10 @@ class KintoAppCard extends Component {
       kintoApp,
       isLatestVersionPending,
       latestVersion,
-      dropdownDependencyId,
+      versions,
       dropdownId,
       dropdownVersionId,
-      versions,
+      dropdownDependencyId,
       onVersionCreate,
       goToLatest,
       goToEnvironment

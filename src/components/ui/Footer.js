@@ -1,14 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-// import facebookIcon from '../../images/footer-socials-facebook.svg'
 import twitterIcon from '../../images/footer-socials-twitter.svg'
 import githubIcon from '../../images/footer-socials-github.svg'
 import linkedinIcon from '../../images/footer-socials-linkedin.svg'
-// import angellistIcon from '../../images/footer-socials-angellist.svg'
 import greyKintoLogo from '../../images/logo-grey-single-color.svg'
 
-const Footer = ({ footerColor }) => (
-  <footer className={footerColor} style={{ minHeight: '140px' }}>
+const Footer = ({ className }) => (
+  <footer className={className} style={{ minHeight: '140px' }}>
     <div className="content">
       <div className="line" />
       <div className="footer">
@@ -87,4 +86,8 @@ const Footer = ({ footerColor }) => (
     </div>
   </footer>
 )
+
+Footer.propTypes = {
+  className: PropTypes.string
+}
 export default Footer

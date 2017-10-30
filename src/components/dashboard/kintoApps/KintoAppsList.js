@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { asTextList } from '../../../helpers/versionHelper'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoAppCardContainer from '../../../containers/dashboard/kintoApps/kintoAppsList/KintoAppCardContainer'
 
 class KintoAppsList extends Component {
+  static propTypes = {
+    fetchKintoApps: PropTypes.func.isRequired,
+    kintoApps: PropTypes.array.isRequired
+  }
+
   state = {
     isVersionModalOpen: false,
     versionKintoAppId: null,
     versionKintoAppName: null,
     versionBaseVersionsList: []
+  }
+
+  componentDidMount() {
+    this.props.fetchKintoApps()
   }
 
   onVersionModalOpen = kintoApp => {
@@ -28,10 +38,6 @@ class KintoAppsList extends Component {
       versionKintoAppName: null,
       versionBaseVersionsList: []
     })
-  }
-
-  componentDidMount() {
-    this.props.fetchKintoApps()
   }
 
   render() {

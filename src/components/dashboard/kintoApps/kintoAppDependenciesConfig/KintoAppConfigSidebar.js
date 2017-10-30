@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import SearchInput from '../../../forms/SearchInput'
@@ -6,6 +7,11 @@ import { getClassNameForType } from '../../../../helpers/kintoBlocksHelper'
 import { getVersionAsText } from '../../../../helpers/versionHelper'
 
 class KintoAppConfigSidebar extends Component {
+  static propTypes = {
+    list: PropTypes.array.isRequired,
+    filter: PropTypes.string
+  }
+
   onChangeFilter = e => {
     this.props.onUpdateFilter(e.target.value)
   }

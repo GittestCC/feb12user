@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
 import {
@@ -9,12 +10,21 @@ import {
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
 
 class DependencyItem extends Component {
+  static propTypes = {
+    appVersion: PropTypes.string,
+    index: PropTypes.number.isRequired,
+    field: PropTypes.string.isRequired,
+    fields: PropTypes.object.isRequired,
+    appDependenciesInfo: PropTypes.object.isRequired,
+    data: PropTypes.object
+  }
+
   onRemoveItem = () => {
     this.props.fields.remove(this.props.index)
   }
 
   render() {
-    const { version, field, data, appDependenciesInfo } = this.props
+    const { appVersion, field, data, appDependenciesInfo } = this.props
     const block = appDependenciesInfo[data.blockId]
     if (!block) {
       return null
@@ -43,7 +53,9 @@ class DependencyItem extends Component {
                 </option>
               ))}
             </Field>
-            <Link className="pen-edit" to={`${version}/config/0`} />
+            {appVersion && (
+              <Link className="pen-edit" to={`${appVersion}/config/0`} />
+            )}
           </div>
         </div>
 

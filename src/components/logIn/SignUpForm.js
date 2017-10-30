@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password, FormError } from '../forms'
 import { required, email, password } from '../../helpers/forms/validators'
@@ -50,5 +51,11 @@ const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
     </div>
   </form>
 )
+SignUpForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  submitting: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool.isRequired
+}
 
 export default reduxForm({ form: 'signUp' })(SignUpForm)

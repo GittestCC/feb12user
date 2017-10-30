@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import KintoAppConfigHardwareItem from './KintoAppConfigHardwareItem'
@@ -51,6 +52,12 @@ const KintoAppConfigHardware = ({
       </IScroll>
     </div>
   )
+}
+KintoAppConfigHardware.propTypes = {
+  fields: PropTypes.object.isRequired,
+  allDependenciesInfo: PropTypes.array.isRequired,
+  shownDependenciesIds: PropTypes.array.isRequired,
+  resetCPUHandler: PropTypes.func.isRequired
 }
 
 export default KintoAppConfigHardware

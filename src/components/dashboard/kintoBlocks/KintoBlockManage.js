@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import {
   getVersionAsText,
@@ -10,6 +11,20 @@ import VersionCreateModalContainer from '../../../containers/dashboard/ui/Versio
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
 
 class KintoBlockManage extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    kintoBlock: PropTypes.object.isRequired,
+    ver: PropTypes.string.isRequired,
+    version: PropTypes.object,
+    baseVersions: PropTypes.array.isRequired,
+    versionSelectItems: PropTypes.array.isRequired,
+    breadcrumbSelectItems: PropTypes.array.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    fetchKintoBlocks: PropTypes.func.isRequired,
+    fetchKintoBlock: PropTypes.func.isRequired,
+    goToCreatePage: PropTypes.func.isRequired
+  }
+
   state = {
     isVersionModalOpen: false
   }
@@ -39,7 +54,9 @@ class KintoBlockManage extends Component {
   render() {
     const {
       kintoBlock,
+      ver,
       version,
+      baseVersions,
       versionSelectItems,
       breadcrumbSelectItems,
       goToCreatePage
@@ -106,15 +123,12 @@ class KintoBlockManage extends Component {
           </button>
         </div>
 
-        <KintoBlockManageFormContainer
-          kintoBlock={kintoBlock}
-          ver={this.props.ver}
-        />
+        <KintoBlockManageFormContainer kintoBlock={kintoBlock} ver={ver} />
 
         <VersionCreateModalContainer
           id={kintoBlock.id}
           title={kintoBlock.name}
-          baseVersions={this.props.baseVersions}
+          baseVersions={baseVersions}
           isOpen={this.state.isVersionModalOpen}
           onClose={this.onVersionModalClose}
           isKintoBlock={true}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import TitleWithLines from '../ui/TitleWithLines'
@@ -51,5 +52,11 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
     </Link>
   </form>
 )
+LogInForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  submitting: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool.isRequired
+}
 
 export default reduxForm({ form: 'logIn' })(LogInForm)

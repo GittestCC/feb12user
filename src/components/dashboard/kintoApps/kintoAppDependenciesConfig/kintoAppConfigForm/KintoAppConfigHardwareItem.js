@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { FieldValidation, Toggle, Slider } from '../../../../forms'
 import {
@@ -158,6 +159,13 @@ const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
       </div>
     </div>
   )
+}
+
+KintoAppConfigHardwareItem.propTypes = {
+  field: PropTypes.string.isRequired,
+  info: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  resetCPUHandler: PropTypes.func.isRequired
 }
 
 export default KintoAppConfigHardwareItem

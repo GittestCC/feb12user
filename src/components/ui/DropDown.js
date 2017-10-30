@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
@@ -7,6 +8,21 @@ import { filterArray } from '../../helpers/arrayHelper'
 import { Button } from '../forms'
 
 class DropDown extends Component {
+  static propTypes = {
+    type: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired,
+    dropdownClass: PropTypes.string,
+    dropdownText: PropTypes.string,
+    dropdownContentClass: PropTypes.string,
+    id: PropTypes.string,
+    list: PropTypes.array,
+    component: PropTypes.func,
+    filterField: PropTypes.string,
+    actionText: PropTypes.string,
+    actionHandler: PropTypes.func,
+    className: PropTypes.string
+  }
+
   state = {
     isShown: false,
     filterText: null,
@@ -101,7 +117,6 @@ class DropDown extends Component {
       dropdownText,
       dropdownClass,
       dropdownContentClass,
-      direction,
       className,
       children,
       type,
@@ -113,11 +128,9 @@ class DropDown extends Component {
     const filterClass = isFilter ? 'dropdown-filter' : ''
     return (
       <div
-        onClick={this.onPreventDefault}
-        className={`dropdown ${filterClass} ${className || ''} ${direction
-          ? `dropdown-${direction}`
-          : ''}`}
         id={id}
+        onClick={this.onPreventDefault}
+        className={`dropdown ${filterClass} ${className || ''}`}
       >
         <button
           type="button"
