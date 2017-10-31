@@ -23,7 +23,7 @@ function mapStateToProps(state, { match }) {
     ? (breadcrumbSelectItems = kintoApps.map(k =>
         getBreadcrumbSelectItem(k, id, env)
       ))
-    : null
+    : []
 
   return {
     id,

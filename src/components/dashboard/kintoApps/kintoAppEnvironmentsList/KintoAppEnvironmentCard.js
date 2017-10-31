@@ -31,7 +31,7 @@ class KintoAppEnvironmentCard extends Component {
     let currentRelease = {}
     let currentStep
 
-    if (environment.releases) {
+    if (environment && environment.releases) {
       currentRelease = environment.releases[environment.releases.length - 1]
       currentStep = currentRelease.steps[currentRelease.steps.length - 1]
       status = currentStep.state
@@ -69,6 +69,7 @@ class KintoAppEnvironmentCard extends Component {
             </button>
           )
         case 'shutdown':
+        case 'processing':
           return (
             <button
               className="button default"
@@ -82,8 +83,7 @@ class KintoAppEnvironmentCard extends Component {
           return (
             <button
               className="button dark"
-              onClick={() =>
-                buttonAction(status, 'testing', 'Cancel Deployment')}
+              onClick={() => buttonAction(status, status, 'Cancel Deployment')}
             >
               Cancel Deployment
             </button>
@@ -92,9 +92,10 @@ class KintoAppEnvironmentCard extends Component {
           return (
             <button
               className="button default"
-              onClick={() => buttonAction(status, 'deploy', 'Deploy')}
+              onClick={() =>
+                buttonAction(status, 'deploy', 'Deploy', environment)}
             >
-              Deploy
+              Cannot Deploy
             </button>
           )
       }

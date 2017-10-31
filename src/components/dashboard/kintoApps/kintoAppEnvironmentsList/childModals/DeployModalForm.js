@@ -14,20 +14,14 @@ class DeployModalForm extends Component {
     })
   }
 
-  render() {
-    const deployEnvironmentAndClose = result => {
-      const id = kintoApp.id
-      deployEnvironment(id, result, environment.name)
-      onClose()
-    }
+  deployEnvironmentAndClose = result => {
+    const id = this.props.kintoApp.id
+    this.props.deployEnvironment(id, result, this.props.environment.name)
+    this.props.onClose()
+  }
 
-    const {
-      onClose,
-      handleSubmit,
-      kintoApp,
-      deployEnvironment,
-      environment
-    } = this.props
+  render() {
+    const { onClose, handleSubmit, kintoApp, environment } = this.props
 
     return (
       <div className="add-new-environment">
@@ -35,7 +29,7 @@ class DeployModalForm extends Component {
           Deploy - {kintoApp.name} {`- ${environment && environment.name}`}
         </div>
         <div className="kh-modal-body">
-          <form onSubmit={handleSubmit(deployEnvironmentAndClose)}>
+          <form onSubmit={handleSubmit(this.deployEnvironmentAndClose)}>
             <div className="full-width-field">
               <Field
                 name="version"
