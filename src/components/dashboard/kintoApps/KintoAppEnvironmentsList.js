@@ -34,9 +34,8 @@ class KintoAppEnvironmentsList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps().then(() => {
-      this.props.getKintoAppEnvironments(this.props.id)
-    })
+    this.props.fetchKintoApps()
+    this.props.getKintoAppEnvironments(this.props.id)
   }
 
   componentWillReceiveProps(nextProps) {

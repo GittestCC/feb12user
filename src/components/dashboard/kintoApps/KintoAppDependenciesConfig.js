@@ -47,9 +47,8 @@ class KintoAppDependenciesConfig extends Component {
 
   componentDidMount() {
     const { id, ver, env } = this.props
-    return this.props.fetchKintoApps().then(() => {
-      this.loadData(id, ver, env)
-    })
+    this.props.fetchKintoApps()
+    this.loadData(id, ver, env)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,9 +58,8 @@ class KintoAppDependenciesConfig extends Component {
   }
 
   loadData = (id, ver, env) => {
-    return this.props.fetchKintoApp(id, ver).then(() => {
-      return this.props.fetchKintoAppDependenciesConfig(id, ver, env)
-    })
+    this.props.fetchKintoApp(id, ver)
+    this.props.fetchKintoAppDependenciesConfig(id, ver, env)
   }
 
   updateFilterText = text => {

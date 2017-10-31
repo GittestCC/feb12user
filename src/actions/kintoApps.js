@@ -90,6 +90,9 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
   }
   dispatch(kintoAppsFetch())
   return axios.get(`/kintoapps/${id}/versions/${ver}`).then(data => {
+    if (data.data) {
+      data.data.lastFetch = new Date()
+    }
     return dispatch(kintoAppReceive(id, data))
   })
 }

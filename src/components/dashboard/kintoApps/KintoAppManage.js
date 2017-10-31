@@ -30,9 +30,8 @@ class KintoAppManage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps().then(() => {
-      this.props.fetchKintoApp(this.props.id, this.props.ver)
-    })
+    this.props.fetchKintoApps()
+    this.props.fetchKintoApp(this.props.id, this.props.ver)
   }
 
   componentWillReceiveProps(nextProps) {

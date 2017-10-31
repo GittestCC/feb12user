@@ -31,7 +31,7 @@ Slider.propTypes = {
   label: PropTypes.string.isRequired,
   min: PropTypes.number.isRequired,
   step: PropTypes.number,
-  marks: PropTypes.array.isRequired,
+  marks: PropTypes.object.isRequired,
   help: PropTypes.string
 }
 

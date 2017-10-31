@@ -14,7 +14,8 @@ const mockStore = {
       id: '2',
       name: 'OriginalStore2'
     }
-  }
+  },
+  allIds: ['1', '2']
 }
 
 describe('kintoApps Reducer', () => {
@@ -57,7 +58,8 @@ describe('kintoApps Reducer', () => {
 
   it('kintoAppsReceive should update the list of KintoApps allIds in the store, and replace what was there', () => {
     const kintoAppsMockState = {
-      allIds: ['666', '777']
+      allIds: ['666', '777'],
+      byId: {}
     }
 
     const sampleResponseData = {
@@ -85,14 +87,41 @@ describe('kintoApps Reducer', () => {
         sausages: true
       }
     }
-
     const newState = reducer(
       mockStore,
       actions.kintoAppReceive('1', sampleSingleResponseData)
     )
-
     expect(newState.byId['1'].name).toBe('SingleApp')
     expect(newState.byId['2'].name).toBe('OriginalStore2')
+  })
+
+  it('kintoAppReceive merges existing kintoApp with the received entity', () => {
+    const oldState = {
+      byId: {
+        '1': {
+          name: 'old app',
+          simple: true
+        }
+      },
+      allIds: ['1']
+    }
+    const newState = reducer(
+      oldState,
+      actions.kintoAppReceive('1', {
+        data: {
+          id: '1',
+          name: 'app',
+          detailed: true
+        }
+      })
+    )
+
+    expect(newState.byId['1']).toEqual({
+      id: '1',
+      name: 'app',
+      simple: true,
+      detailed: true
+    })
   })
 
   it('kintoAppEnvironmentsReceive should set isFetching to false', () => {

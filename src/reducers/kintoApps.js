@@ -1,4 +1,3 @@
-import keyBy from 'lodash/keyBy'
 import { arrayMove } from 'react-sortable-hoc'
 
 import {
@@ -13,9 +12,9 @@ import {
 } from '../actions/kintoApps'
 
 const defaultState = {
+  isFetching: false,
   byId: {},
-  allIds: [],
-  dependencyStore: {}
+  allIds: []
 }
 
 const kintoAppsReducer = (state = defaultState, action) => {
@@ -25,28 +24,39 @@ const kintoAppsReducer = (state = defaultState, action) => {
         ...state,
         isFetching: true
       }
-    case RECEIVE_KINTO_APP:
+    case RECEIVE_KINTO_APP: {
+      const allIds =
+        state.allIds.indexOf(action.id) === -1
+          ? [...state.allIds, action.id]
+          : state.allIds
       return {
-        ...state,
         isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
-            ...action.data,
-            lastFetch: new Date()
+            ...state.byId[action.id],
+            ...action.data
           }
-        }
-      }
-    case RECEIVE_KINTO_APPS:
-      return {
-        ...state,
-        isFetching: false,
-        byId: {
-          ...state.byId,
-          ...keyBy(action.data, 'id')
         },
-        allIds: [...action.data.map(k => k.id)]
+        allIds
       }
+    }
+    case RECEIVE_KINTO_APPS: {
+      let allIds = []
+      let byId = {}
+      action.data.forEach(app => {
+        allIds.push(app.id)
+        byId[app.id] = {
+          ...state.byId[app.id],
+          ...app
+        }
+      })
+      return {
+        isFetching: false,
+        byId,
+        allIds
+      }
+    }
     case RECIEVE_KINTO_APP_ENVIRONMENTS:
       return {
         ...state,

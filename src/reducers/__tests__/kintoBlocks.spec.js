@@ -22,7 +22,7 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.allIds).toEqual(['1', '2'])
   })
 
-  it('receiveKintoBlocks overwrite byId data for received entities', () => {
+  it('receiveKintoBlocks merges byId data for received entities', () => {
     const newState = reducer(
       {
         byId: { '1': { special: 'one' }, '2': { special: 'two' } },
@@ -33,12 +33,14 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual({
       id: '1',
       name: 'first',
-      simple: true
+      simple: true,
+      special: 'one'
     })
     expect(newState.byId['2']).toEqual({
       id: '2',
       name: 'second',
-      simple: true
+      simple: true,
+      special: 'two'
     })
   })
 
@@ -50,10 +52,10 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual(detailedBlock)
   })
 
-  it('receiveKintoBlock overwrites existing kintoblock with the new one', () => {
+  it('receiveKintoBlock merges existing kintoblock with the new one', () => {
     const newState = reducer(
       {
-        byId: keyBy('id', simpleBlocks),
+        byId: keyBy(simpleBlocks, 'id'),
         allIds: ['1', '2']
       },
       actions.kintoBlockReceive('1', detailedBlock)
@@ -61,6 +63,7 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual({
       id: '1',
       name: 'first',
+      simple: true,
       detailed: true
     })
   })

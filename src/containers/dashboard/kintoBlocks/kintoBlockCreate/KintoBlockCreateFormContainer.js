@@ -7,7 +7,7 @@ const formName = 'kintoBlockCreateForm'
 const selector = formValueSelector(formName)
 function mapStateToProps(state) {
   return {
-    isDedicatedCPU: selector(state, 'hardwareData.dedicatedCpu')
+    isDedicatedCPU: selector(state, 'hardwareData.dedicatedCpu') || false
   }
 }
 
