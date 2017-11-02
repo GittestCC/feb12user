@@ -1,5 +1,6 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
+import PropTypes from 'prop-types'
 import { FieldValidation } from '../../../../forms'
 
 const AddNewEnvironmentModalForm = ({
@@ -40,6 +41,13 @@ const AddNewEnvironmentModalForm = ({
       </div>
     </div>
   )
+}
+
+AddNewEnvironmentModalForm.PropTypes = {
+  onClose: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  addNewEnvironment: PropTypes.func.isRequired,
+  kintoApp: PropTypes.object.isRequired
 }
 
 export default reduxForm({ form: 'AddNewEnvironmentModalForm' })(

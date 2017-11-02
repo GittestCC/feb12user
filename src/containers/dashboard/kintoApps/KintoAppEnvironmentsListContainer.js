@@ -3,7 +3,10 @@ import { push } from 'react-router-redux'
 import {
   fetchKintoApps,
   getKintoAppEnvironments,
-  reorderEnvironments
+  reorderEnvironments,
+  addNewEnvironment,
+  deployEnvironment,
+  cancelDeployment
 } from '../../../actions/kintoApps'
 import { getAllKintoApps } from '../../../selectors/kintoApps'
 import KintoAppEnvironmentsList from '../../../components/dashboard/kintoApps/KintoAppEnvironmentsList'
@@ -40,7 +43,11 @@ function mapDispatchToProps(dispatch, { match }) {
     getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
     goToCreatePage: () => dispatch(push('/app/dashboard/kintoapps/create')),
     reorderEnvironments: (id, oldIndex, newIndex) =>
-      dispatch(reorderEnvironments(id, oldIndex, newIndex))
+      dispatch(reorderEnvironments(id, oldIndex, newIndex)),
+    addNewEnvironment: (id, data) => dispatch(addNewEnvironment(id, data)),
+    deployEnvironment: (id, data, name) =>
+      dispatch(deployEnvironment(id, data, name)),
+    cancelDeployment: () => dispatch(cancelDeployment())
   }
 }
 

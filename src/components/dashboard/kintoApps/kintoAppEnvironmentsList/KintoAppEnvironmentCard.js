@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
-import { getEnvironmentVersionAndBuild } from '../../../../helpers/environmentHelper'
+import {
+  getEnvironmentVersionAndBuild,
+  getEnvironmentButtonInfo
+} from '../../../../helpers/environmentHelper'
 import DropDown from '../../../ui/DropDown'
 
 const DragHandle = SortableHandle(() => <span className="hamburger" />)
@@ -31,75 +34,13 @@ class KintoAppEnvironmentCard extends Component {
     let currentRelease = {}
     let currentStep
 
-    if (environment && environment.releases) {
+    if (environment.releases) {
       currentRelease = environment.releases[environment.releases.length - 1]
       currentStep = currentRelease.steps[currentRelease.steps.length - 1]
       status = currentStep.state
     }
 
-    const getButton = status => {
-      if (!status) {
-        return (
-          <button
-            className={`button`}
-            onClick={() => buttonAction('new', 'deploy', 'Deploy', environment)}
-          >
-            Deploy
-          </button>
-        )
-      }
-
-      status = status.toLowerCase()
-
-      switch (status) {
-        case 'failed':
-        case 'success':
-          return (
-            <button
-              className="button default"
-              onClick={() =>
-                buttonAction(
-                  status,
-                  'deploy',
-                  'Deploy Another Version',
-                  environment
-                )}
-            >
-              Deploy Another Version
-            </button>
-          )
-        case 'shutdown':
-        case 'processing':
-          return (
-            <button
-              className="button default"
-              onClick={() =>
-                buttonAction(status, 'deploy', 'Deploy', environment)}
-            >
-              Deploy
-            </button>
-          )
-        case 'testing':
-          return (
-            <button
-              className="button dark"
-              onClick={() => buttonAction(status, status, 'Cancel Deployment')}
-            >
-              Cancel Deployment
-            </button>
-          )
-        default:
-          return (
-            <button
-              className="button default"
-              onClick={() =>
-                buttonAction(status, 'deploy', 'Deploy', environment)}
-            >
-              Cannot Deploy
-            </button>
-          )
-      }
-    }
+    const buttonInfo = getEnvironmentButtonInfo(status)
 
     return (
       <div
@@ -293,7 +234,30 @@ class KintoAppEnvironmentCard extends Component {
           </div>
           <div className="right expanded-buttons">
             <button className="button secondary">Edit</button>
-            {getButton(status)}
+            {status ? (
+              <button
+                className={`button ${buttonInfo.className}`}
+                onClick={() => {
+                  buttonAction(
+                    status.toLowerCase(),
+                    buttonInfo.type,
+                    buttonInfo.title,
+                    environment
+                  )
+                }}
+              >
+                {buttonInfo.title}
+              </button>
+            ) : (
+              <button
+                className="button"
+                onClick={() =>
+                  buttonAction('new', 'deploy', 'Deploy', environment)}
+              >
+                Deploy
+              </button>
+            )}
+
             <DropDown type="simple" dropdownClass="menu" id={`id-${sortIndex}`}>
               <button>Shut Down</button>
               <button>Edit Environment</button>

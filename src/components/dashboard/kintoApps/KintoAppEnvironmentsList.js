@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import DropDown from '../../ui/DropDown'
 import TagItem from '../ui/TagItem'
 import { getVersionAsText } from '../../../helpers/versionHelper'
 import KintoAppEnvironmentCard from './kintoAppEnvironmentsList/KintoAppEnvironmentCard'
-import KintoAppEnvironmentListModalContainer from '../../../containers/dashboard/ui/KintoAppEnvironmentListModalContainer'
+import {
+  AddNewEnvironmentModalForm,
+  DeployModalForm,
+  CancelDeploymentForm,
+  ShutDown
+} from './kintoAppEnvironmentsList/environmentModals'
+import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { SortableContainer } from 'react-sortable-hoc'
 
 const SortableList = SortableContainer(
@@ -25,7 +32,38 @@ const SortableList = SortableContainer(
   }
 )
 
+const getEnvironmentModal = modalType => {
+  switch (modalType) {
+    case 'add':
+      return AddNewEnvironmentModalForm
+    case 'deploy':
+    case 'new':
+      return DeployModalForm
+    case 'testing':
+      return CancelDeploymentForm
+    case 'shutDown':
+      return ShutDown
+    default:
+      return () => 'There is no modal of this type'
+  }
+}
+
 class KintoAppEnvironmentsList extends Component {
+  static propTypes = {
+    fetchKintoApps: PropTypes.func.isRequired,
+    getKintoAppEnvironments: PropTypes.func.isRequired,
+    goToCreatePage: PropTypes.func.isRequired,
+    reorderEnvironments: PropTypes.func.isRequired,
+    addNewEnvironment: PropTypes.func.isRequired,
+    deployEnvironment: PropTypes.func.isRequired,
+    cancelDeployment: PropTypes.func.isRequired,
+    kintoApps: PropTypes.array.isRequired,
+    kintoApp: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired,
+    environments: PropTypes.array.isRequired,
+    breadcrumbSelectItems: PropTypes.array.isRequired
+  }
+
   state = {
     isModalOpen: false,
     modalType: '',
@@ -34,8 +72,9 @@ class KintoAppEnvironmentsList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps()
-    this.props.getKintoAppEnvironments(this.props.id)
+    this.props.fetchKintoApps().then(() => {
+      this.props.getKintoAppEnvironments(this.props.id)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -130,12 +169,20 @@ class KintoAppEnvironmentsList extends Component {
           useDragHandle={true}
         />
 
-        <KintoAppEnvironmentListModalContainer
+        <ComplexModal
+          className="string"
+          component={getEnvironmentModal(this.state.modalType)}
           isOpen={this.state.isModalOpen}
           onClose={this.onModalClose}
-          modalType={this.state.modalType}
-          environment={this.state.environment}
-          kintoApp={kintoApp}
+          data={{
+            environment: this.state.environment,
+            kintoApp: kintoApp
+          }}
+          actions={{
+            addNewEnvironment: this.props.addNewEnvironment,
+            deployEnvironment: this.props.deployEnvironment,
+            cancelDeployment: this.props.cancelDeployment
+          }}
         />
       </div>
     )

@@ -5,7 +5,8 @@ const CancelDeploymentForm = ({
   onClose,
   handleSubmit,
   cancelDeployment,
-  kintoApp
+  kintoApp,
+  environment
 }) => {
   const cancelDeploy = result => {
     // cancelDeployment()

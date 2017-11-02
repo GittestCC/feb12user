@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import PropTypes from 'prop-types'
 import { FieldValidation } from '../../../../forms'
 import {
   textToObject,
@@ -58,6 +59,14 @@ class DeployModalForm extends Component {
       </div>
     )
   }
+}
+
+DeployModalForm.propTypes = {
+  kintoApp: PropTypes.object.isRequired,
+  deployEnvironment: PropTypes.func.isRequired,
+  environment: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({ form: 'DeployModalForm' })(DeployModalForm)

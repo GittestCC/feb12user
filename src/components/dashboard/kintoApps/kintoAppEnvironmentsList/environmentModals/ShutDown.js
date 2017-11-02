@@ -1,7 +1,13 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 
-const ShutDown = ({ onClose, handleSubmit, shutDownEnvironment, kintoApp }) => {
+const ShutDown = ({
+  onClose,
+  handleSubmit,
+  shutDownEnvironment,
+  kintoApp,
+  environment
+}) => {
   const EnvironmentShutDown = result => {
     // shutDownEnvironment()
     onClose()
