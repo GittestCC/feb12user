@@ -1,4 +1,6 @@
 src/style/app.css
+appium.log
+/errorShots
 
 # dependencies
 /node_modules

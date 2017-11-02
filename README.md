@@ -17,4 +17,5 @@ The following command shortcuts are available during development:
 * `npm install`: Installs all NPM dependencies.
 * `npm start`: Starts a local web server at `http://localhost:3000`.
 * `npm test`: Runs unit tests.
+* `npm run test:e2e` Runs all the e2e tests
 * `npm run lint`: Runs linting
