@@ -1,4 +1,5 @@
 import { arrayMove } from 'react-sortable-hoc'
+import { merge } from '../helpers/objectHelper'
 
 import {
   FETCH_KINTO_APPS,
@@ -33,10 +34,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
         isFetching: false,
         byId: {
           ...state.byId,
-          [action.id]: {
-            ...state.byId[action.id],
-            ...action.data
-          }
+          [action.id]: merge(state.byId[action.id], action.data)
         },
         allIds
       }
@@ -46,10 +44,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
       let byId = {}
       action.data.forEach(app => {
         allIds.push(app.id)
-        byId[app.id] = {
-          ...state.byId[app.id],
-          ...app
-        }
+        byId[app.id] = merge(state.byId[app.id], app)
       })
       return {
         isFetching: false,
@@ -63,10 +58,9 @@ const kintoAppsReducer = (state = defaultState, action) => {
         isFetching: false,
         byId: {
           ...state.byId,
-          [action.id]: {
-            ...state.byId[action.id],
-            environments: action.data
-          }
+          [action.id]: merge(state.byId[action.id], {
+            environments: action.data // TODO: remove missing env
+          })
         }
       }
     case RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG:

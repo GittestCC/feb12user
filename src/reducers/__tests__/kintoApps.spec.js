@@ -79,6 +79,38 @@ describe('kintoApps Reducer', () => {
     expect(newState.allIds.length).toBe(1)
   })
 
+  it('kintoAppsReceive merges environments with existing entities', () => {
+    const oldState = {
+      allIds: ['1'],
+      byId: {
+        '1': {
+          id: '1',
+          detailed: true,
+          environments: [{ id: '2', detailed: true }]
+        }
+      }
+    }
+
+    const newState = reducer(
+      oldState,
+      actions.kintoAppsReceive({
+        data: [
+          {
+            id: '1',
+            environments: [{ id: '2', simple: true }]
+          }
+        ]
+      })
+    )
+
+    const stateEnvironment = newState.byId['1'].environments[0]
+    expect(stateEnvironment).toEqual({
+      id: '2',
+      detailed: true,
+      simple: true
+    })
+  })
+
   it('kintoAppReceive should update the correct KintoApp in the byId object, and leave the other items unchanged', () => {
     const sampleSingleResponseData = {
       data: {
