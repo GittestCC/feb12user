@@ -28,7 +28,7 @@ class LogIn extends Component {
         <LandingNavBar />
 
         {this.state.isSignUpSubmitted ? (
-          <div>
+          <div data-test="signupSuccess">
             <div className="cover" />
             <div className="content">
               <div className="sign-up-confirmation">

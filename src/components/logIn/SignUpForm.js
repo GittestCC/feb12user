@@ -5,31 +5,31 @@ import { FieldValidation, Button, Password, FormError } from '../forms'
 import { required, email, password } from '../../helpers/forms/validators'
 
 const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
-  <form onSubmit={handleSubmit} className="sign-up-form">
+  <form data-test="signupForm" onSubmit={handleSubmit} className="sign-up-form">
     <h2>Sign Up</h2>
     <div className="line divider" />
     <div>
       <Field
+        id="signupUsername"
         type="text"
         name="userName"
         label="Username"
-        id="userName"
         placeholder="Enter username"
         component={FieldValidation}
         validate={required}
       />
       <Field
+        id="signupEmail"
         type="email"
         name="email"
         label="email"
-        id="email"
         placeholder="Enter your email address"
         component={FieldValidation}
-        validate={(required, email)}
+        validate={[required, email]}
       />
       <Field
+        id="signupPassword"
         name="password"
-        id="signUpPassword"
         placeholder="Create a password"
         component={Password}
         validate={[required, password]}

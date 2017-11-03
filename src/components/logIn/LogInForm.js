@@ -14,13 +14,14 @@ import { required } from '../../helpers/forms/validators'
 import githubIcon from '../../images/footer-socials-github.svg'
 
 const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
-  <form onSubmit={handleSubmit} className="log-in-form">
+  <form data-test="loginForm" onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
     <Button buttonType="dark" type="submit" image={githubIcon}>
       Log In with GitHub
     </Button>
     <TitleWithLines text="or" />
     <Field
+      id="loginUsername"
       label="username / email"
       name="userName"
       placeholder="Enter username or email"
@@ -28,6 +29,7 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
       validate={required}
     />
     <Field
+      id="loginPassword"
       label="password"
       name="password"
       placeholder="Enter a password"

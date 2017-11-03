@@ -7,7 +7,7 @@ import Tooltip from 'rc-tooltip'
  * used mainly when there is a `validate` option passed to `Field`
  */
 const FieldValidation = props => {
-  const { input, placeholder, label, type, help, close } = props
+  const { input, placeholder, label, type, help, close, id } = props
   const { touched, submitFailed, error } = props.meta
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
@@ -21,7 +21,7 @@ const FieldValidation = props => {
       inputEl = (
         <textarea
           {...input}
-          id={input.name}
+          id={id || input.name}
           placeholder={placeholder}
           className={className}
         />
@@ -31,7 +31,7 @@ const FieldValidation = props => {
       inputEl = (
         <select
           {...input}
-          id={input.name}
+          id={id || input.name}
           placeholder={placeholder}
           className={className}
         >
@@ -43,7 +43,7 @@ const FieldValidation = props => {
       inputEl = (
         <input
           {...input}
-          id={input.name}
+          id={id || input.name}
           type={type}
           placeholder={placeholder}
           className={className}
@@ -52,8 +52,8 @@ const FieldValidation = props => {
   }
 
   return (
-    <div className="field-wrapper">
-      <label htmlFor={input.name}>{label}</label>
+    <div data-test={id || input.name} className="field-wrapper">
+      <label htmlFor={id || input.name}>{label}</label>
       {help && (
         <Tooltip placement="top" overlay={help} trigger="click">
           <span className="tooltip" />
@@ -68,6 +68,7 @@ const FieldValidation = props => {
   )
 }
 FieldValidation.PropTypes = {
+  id: PropTypes.string,
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   placeholder: PropTypes.string,

@@ -29,8 +29,8 @@ class Password extends Component {
     }
 
     return (
-      <div className="password-field-wrapper">
-        <label htmlFor="signUpPassword">Password</label>
+      <div data-test={id || input.name} className="password-field-wrapper">
+        <label htmlFor={id || input.name}>Password</label>
         <div className="input-with-image-wrapper">
           <input
             {...input}
