@@ -314,16 +314,15 @@ describe('kintoApps Reducer', () => {
     expect(newState.byId['20'].environments.length === 3)
   })
 
-  it
-    .skip
-    // 'updateAppEnvironment should update the app environment belonging to a single KintoApp in the store',
-    // () => {
-    //   const newState = reducer(
-    //     environmentMockState,
-    //     actions.updateAppEnvironment('20', environmentsResponse)
-    //   )
-    // TODO: I want to get what the server returns to write this test but the server is broken. going to pause here for now.
-    //   expect(newState.byId['20'].environments[1].name).toBe('PROD')
-    // }
-    ()
+  // it
+  // .skip
+  // // 'updateAppEnvironment should update the app environment belonging to a single KintoApp in the store',
+  // // () => {
+  // //   const newState = reducer(
+  // //     environmentMockState,
+  // //     actions.updateAppEnvironment('20', environmentsResponse)
+  // //   )
+  // // TODO: I want to get what the server returns to write this test but the server is broken. going to pause here for now.
+  // //   expect(newState.byId['20'].environments[1].name).toBe('PROD')
+  // // }
 })
