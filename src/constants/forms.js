@@ -20,5 +20,9 @@ export default {
   [pages.dashboardKintoAppDependenciesConfig]: {
     submitLabel: 'Save Changes',
     formName: 'kintoAppConfigForm'
+  },
+  [pages.dashboardKintoAppEnvironmentEdit]: {
+    submitLabel: 'Save Changes',
+    formName: 'KintoAppEnvironmentForm'
   }
 }

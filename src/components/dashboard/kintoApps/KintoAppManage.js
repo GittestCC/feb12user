@@ -119,7 +119,11 @@ class KintoAppManage extends Component {
           </button>
         </div>
 
-        <KintoAppFormContainer kintoApp={kintoApp} version={this.props.ver} />
+        <KintoAppFormContainer
+          kintoApp={kintoApp}
+          version={this.props.ver}
+          isCreate={false}
+        />
 
         <VersionCreateModalContainer
           id={kintoApp.id}

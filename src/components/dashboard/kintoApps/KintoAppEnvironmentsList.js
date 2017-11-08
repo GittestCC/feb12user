@@ -15,12 +15,13 @@ import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { SortableContainer } from 'react-sortable-hoc'
 
 const SortableList = SortableContainer(
-  ({ environments, buttonAction, sortIndex }) => {
+  ({ environments, buttonAction, sortIndex, kintoApp }) => {
     return (
       <div className="environments-list">
         {environments.map((environment, index) => (
           <KintoAppEnvironmentCard
             environment={environment}
+            kintoApp={kintoApp}
             key={`card-${index}`}
             index={index}
             sortIndex={index}
@@ -165,6 +166,7 @@ class KintoAppEnvironmentsList extends Component {
           environments={environments}
           onSortEnd={this.onSortEnd}
           buttonAction={this.onCardButtonClick}
+          kintoApp={kintoApp}
           useDragHandle={true}
         />
 

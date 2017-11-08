@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
@@ -14,7 +15,8 @@ class KintoAppEnvironmentCard extends Component {
   static propTypes = {
     environment: PropTypes.object.isRequired,
     sortIndex: PropTypes.number.isRequired,
-    buttonAction: PropTypes.func.isRequired
+    buttonAction: PropTypes.func.isRequired,
+    kintoApp: PropTypes.object.isRequired
   }
 
   state = {
@@ -28,7 +30,7 @@ class KintoAppEnvironmentCard extends Component {
   }
 
   render() {
-    const { environment, sortIndex, buttonAction } = this.props
+    const { environment, sortIndex, buttonAction, kintoApp } = this.props
 
     let status = ''
     let currentRelease = {}
@@ -233,7 +235,12 @@ class KintoAppEnvironmentCard extends Component {
             )}
           </div>
           <div className="right expanded-buttons">
-            <button className="button secondary">Edit</button>
+            <Link
+              to={`/app/dashboard/kintoapps/${kintoApp.id}/environment/${environment.id}/edit`}
+              className="button secondary"
+            >
+              Edit
+            </Link>
             {status ? (
               <button
                 className={`button ${buttonInfo.className}`}

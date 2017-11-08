@@ -372,4 +372,21 @@ describe('KintoApps actions', () => {
       actions.KINTO_APP_ENVIRONMENT_LIST_REORDER
     ])
   })
+
+  it('updateAppEnvironment should dispatch an action to update a kintoapp environment', async () => {
+    // TODO add moxios request when the API is connected
+    const store = mockStore({
+      kintoApps: { byId: {} }
+    })
+    await store.dispatch(actions.updateAppEnvironment('1', '1', {}))
+    expect(store.getActions()).toEqual([
+      { type: 'FETCH_KINTO_APPS' },
+      { type: 'FORM_SUBMITTED' },
+      {
+        type: 'KINTO_APP_ENVIRONMENT_UPDATE',
+        id: '1',
+        data: { id: '1' }
+      }
+    ])
+  })
 })

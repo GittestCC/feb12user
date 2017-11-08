@@ -70,7 +70,7 @@ export const newEnvironmentReceive = (id, data) => ({
   data: data.data
 })
 
-export const updateAppEnvironment = (id, result) => ({
+export const appEnvironmentUpdate = (id, result) => ({
   type: KINTO_APP_ENVIRONMENT_UPDATE,
   id,
   data: result.data
@@ -181,8 +181,17 @@ export const deployEnvironment = (id, data, envName) => dispatch => {
     .put(`/kintoapps/${id}/environments/${envName}/deploy`, data)
     .then(result => {
       dispatch(formSubmitted())
-      dispatch(updateAppEnvironment(id, result))
+      dispatch(appEnvironmentUpdate(id, result))
     })
+}
+
+export const updateAppEnvironment = (id, envId, data) => dispatch => {
+  dispatch(kintoAppsFetch())
+  //TODO: Add API call when ready
+  return Promise.resolve({ data: { ...data, id: envId } }).then(result => {
+    dispatch(formSubmitted())
+    dispatch(appEnvironmentUpdate(id, result))
+  })
 }
 
 export const cancelDeployment = id => dispatch => {

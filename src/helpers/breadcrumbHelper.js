@@ -2,8 +2,10 @@ import {
   getVersionAsText,
   getManageUrlForKintoApp,
   getUrlForAppEnvironment,
-  getManageUrlForKintoBlock
+  getManageUrlForKintoBlock,
+  getUrlForAppEditEnvironment
 } from './versionHelper'
+import startCase from 'lodash/startCase'
 
 export const getUrlForDropdown = (type, app) => {
   if (!type) return '/app/dashoard'
@@ -25,5 +27,13 @@ export const getBreadcrumbSelectItem = (app, id, isKintoApp) => {
     version: getVersionAsText(app.versions[0]),
     url: getUrlForDropdown(isKintoApp, app),
     active: app.id === id
+  }
+}
+
+export const getEnvironmentSelectItem = (env, id, envId) => {
+  return {
+    text: startCase(env.name),
+    url: getUrlForAppEditEnvironment(id, env.id),
+    active: env.id === envId
   }
 }

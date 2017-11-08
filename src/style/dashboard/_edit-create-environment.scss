@@ -1,0 +1,17 @@
+.kintoapp-environment-form {
+  @extend .kintoapp-form-container;
+  .field-wrapper:not(.toggle) {
+    margin-bottom: 20px;
+  }
+  .toggle {
+    width: 100%;
+    .toggle-message {
+      margin-top: 5px;
+      overflow: visible;
+      white-space: nowrap;
+      text-transform: none;
+      color: $kinto-tinted-grayscale-7;
+      font-weight: bold;
+    }
+  }
+}

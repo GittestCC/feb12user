@@ -1,4 +1,3 @@
-// all pages that either have save button or they are in the sidebar
 const pages = {
   dashboardBlocksList: 'DASHBOARD_BLOCKS_LIST',
   dashboardBlockCreate: 'DASHBOARD_BLOCK_CREATE',
@@ -8,6 +7,7 @@ const pages = {
   dashboardKintoAppsList: 'DASHBOARD_KINTO_APPS_LIST',
   dashboardKintoAppsCreate: 'DASHBOARD_KINTO_APPS_CREATE',
   dashboardKintoAppEnvironments: 'DASHBOARD_KINTO_APP_ENVIRONMENTS',
+  dashboardKintoAppEnvironmentEdit: 'DASHBOARD_KINTO_APP_ENVIRONMENT_EDIT',
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
   dashboardKintoAppDependenciesConfig:
     'DASHBOARD_KINTO_APP_DEPENDENCIES_CONFIG',
@@ -50,6 +50,10 @@ export const dashboardSidebar = [
       {
         key: pages.dashboardKintoAppEnvironments,
         url: '/app/dashboard/kintoapps/:id/environments'
+      },
+      {
+        key: pages.dashboardKintoAppEnvironmentEdit,
+        url: '/app/dashboard/kintoapps/:id/environment/:envId/edit'
       },
       {
         key: pages.dashboardKintoAppDependenciesConfig,
