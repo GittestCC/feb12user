@@ -6,15 +6,16 @@
     color: $kinto-tinted-grayscale-9;
     margin-right: 14px;
     font-weight: 600;
-
     &:hover {
       color: #1ec4e9;
     }
+  }
 
-    &.disabled {
-      &:hover {
-        color: $kinto-tinted-grayscale-9;
-      }
+  .disabled {
+    color: $kinto-tinted-grayscale-6;
+    cursor: default;
+    &:hover {
+      color: $kinto-tinted-grayscale-6;
     }
   }
 
@@ -22,19 +23,38 @@
     display: flex;
     width: 100%;
     justify-content: start;
+  }
 
-    li {
-      line-height: 20px;
+  li {
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    &:after {
+      content: "";
+      margin-right: 10px;
+      width: 20px;
       height: 20px;
-      display: inline-block;
-      display: flex;
-      align-items: center;
+      background: url(/images/icon-breadcrumb-chevron.svg)
+    }
+    &:last-child:after {
+      background: none;
+    }
 
-      img {
-        margin-right: 14px;
-      }
+    img {
+      margin-right: 14px;
     }
   }
+
+  .list-container {
+    display: flex;
+  }
+  .text-disabled {
+    cursor: default;
+    margin-right: 14px;
+  }
+
 }
 
 .breadcrumb-icon {

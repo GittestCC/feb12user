@@ -26,7 +26,9 @@ export const getVersionAsText = (v, isDottedBuild) => {
   }
 }
 
-export const asTextList = (versions = []) => versions.map(getVersionAsText)
+export const asTextList = (versions = []) => {
+  return versions.map(v => getVersionAsText(v, true))
+}
 
 export const getVersionStateClassName = version => {
   if (!version || !version.state) return ''
@@ -85,7 +87,12 @@ export const isVersionEqual = (a, b) => {
   }
   a = normalizeVersionObject(a)
   b = normalizeVersionObject(b)
-  return a.major === b.major && a.minor === b.minor && a.revision === b.revision
+  return (
+    a.major === b.major &&
+    a.minor === b.minor &&
+    a.revision === b.revision &&
+    a.build === b.build
+  )
 }
 
 export const findInArrayByText = (versions, text) => {

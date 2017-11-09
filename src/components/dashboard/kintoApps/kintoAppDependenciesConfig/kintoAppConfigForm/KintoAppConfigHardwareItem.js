@@ -14,6 +14,7 @@ import {
 import { number } from '../../../../../helpers/forms/parsers'
 
 const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
+  const name = info ? info.name : null
   const selectNumberOfCores = [1, 2, 4, 8, 16, 32, 64, 128]
   const sliderMarks = {
     50: '50%',
@@ -25,7 +26,7 @@ const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
   }
   return (
     <div className="ka-config-hardware-item hardware-data-form">
-      <h3>{info.name}</h3>
+      <h3>{name}</h3>
       <div className="form-body">
         <div className="memory">
           <div className="input-container">
@@ -163,7 +164,7 @@ const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
 
 KintoAppConfigHardwareItem.propTypes = {
   field: PropTypes.string.isRequired,
-  info: PropTypes.object.isRequired,
+  info: PropTypes.object,
   data: PropTypes.object.isRequired,
   resetCPUHandler: PropTypes.func.isRequired
 }

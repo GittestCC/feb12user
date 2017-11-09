@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import DropDown from '../../ui/DropDown'
-import TagItem from '../ui/TagItem'
-import { getVersionAsText } from '../../../helpers/versionHelper'
 import KintoAppEnvironmentCard from './kintoAppEnvironmentsList/KintoAppEnvironmentCard'
 import {
   AddNewEnvironmentModalForm,
@@ -53,16 +49,13 @@ class KintoAppEnvironmentsList extends Component {
   static propTypes = {
     fetchKintoApps: PropTypes.func.isRequired,
     getKintoAppEnvironments: PropTypes.func.isRequired,
-    goToCreatePage: PropTypes.func.isRequired,
     reorderEnvironments: PropTypes.func.isRequired,
     addNewEnvironment: PropTypes.func.isRequired,
     deployEnvironment: PropTypes.func.isRequired,
     cancelDeployment: PropTypes.func.isRequired,
-    kintoApps: PropTypes.array.isRequired,
     kintoApp: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    environments: PropTypes.array.isRequired,
-    breadcrumbSelectItems: PropTypes.array.isRequired
+    environments: PropTypes.array.isRequired
   }
 
   state = {
@@ -109,48 +102,9 @@ class KintoAppEnvironmentsList extends Component {
   }
 
   render() {
-    const {
-      environments,
-      kintoApp,
-      breadcrumbSelectItems,
-      goToCreatePage
-    } = this.props
+    const { environments, kintoApp } = this.props
     return (
       <div className="kintoapp-environments-list">
-        <div className="breadcrumbs">
-          <ul className="unstyled-list">
-            <li>
-              <Link to="/app/dashboard/kintoapps/list">Applications</Link>
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <Link
-                to={`/app/dashboard/kintoapps/${kintoApp.id}/versions/${getVersionAsText(
-                  kintoApp.version
-                )}`}
-              >
-                {kintoApp.name}
-              </Link>
-              <DropDown
-                type="filter"
-                dropdownClass="breadcrumb-icon"
-                id="application-dropdown"
-                list={breadcrumbSelectItems}
-                component={TagItem}
-                filterField="text"
-                actionText="Create New Application"
-                actionHandler={goToCreatePage}
-                dropdownContentClass="short"
-                className="margin-right"
-              />
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <h5>Environments</h5>
-            </li>
-          </ul>
-        </div>
-
         <div className="page-title">
           <h2>Environments</h2>
           <button

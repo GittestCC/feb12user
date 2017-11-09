@@ -1,7 +1,10 @@
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { change } from 'redux-form'
-import pages from '../../constants/pages'
+import { pages } from '../../constants/pages'
 import reducer from '../pageOptions'
+import * as kintoAppActions from '../../actions/kintoApps'
+import * as kintoBlockActions from '../../actions/kintoBlocks'
+import * as pageOptionsActions from '../../actions/pageOptions'
 
 const mockRedirectAction = url => ({
   type: LOCATION_CHANGE,
@@ -33,7 +36,7 @@ describe('PageOptions Reducer', () => {
   it('form change event changes canSave to true when form is inside forms constants and inside the correct active page', () => {
     const changeResult = change('kintoBlockCreateForm', 'field', true)
     const result = reducer(
-      { canSave: false, activePage: pages.dashboardBlockCreate },
+      { canSave: false, activePage: pages.dashboardKintoBlocksCreate },
       changeResult
     )
     expect(result.canSave).toEqual(true)
@@ -42,7 +45,7 @@ describe('PageOptions Reducer', () => {
   it('form change event will not change canSave when form is not inside forms constants', () => {
     const changeResult = change('incorrect', 'field', true)
     const result = reducer(
-      { canSave: false, activePage: pages.dashboardBlockCreate },
+      { canSave: false, activePage: pages.dashboardKintoBlocksCreate },
       changeResult
     )
     expect(result.canSave).toEqual(false)
@@ -55,5 +58,29 @@ describe('PageOptions Reducer', () => {
       changeResult
     )
     expect(result.canSave).toEqual(false)
+  })
+
+  it('kintoapp receive will update the selectedKintoAppId to the received kintoapp id', () => {
+    const result = reducer(
+      { selectedKintoAppId: '1' },
+      kintoAppActions.kintoAppReceive('2', {})
+    )
+    expect(result.selectedKintoAppId).toEqual('2')
+  })
+
+  it('environment select will update the selectedEnvironmentId to the one being selected from the action', () => {
+    const result = reducer(
+      { selectedEnvironmentId: '1' },
+      pageOptionsActions.environmentSelect('3')
+    )
+    expect(result.selectedEnvironmentId).toEqual('3')
+  })
+
+  it('kintoblock receive will update the selectedKintoAppId to the received kintoapp id', () => {
+    const result = reducer(
+      { selectedKintoBlockId: '1' },
+      kintoBlockActions.kintoBlockReceive('4', {})
+    )
+    expect(result.selectedKintoBlockId).toEqual('4')
   })
 })

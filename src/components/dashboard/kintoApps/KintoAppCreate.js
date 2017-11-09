@@ -4,22 +4,6 @@ import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/Kinto
 
 const KintoAppCreate = () => (
   <div className="create-kintoapp">
-    <div className="breadcrumbs">
-      <ul className="unstyled-list">
-        <li>
-          <Link to="create" className="disabled">
-            Applications
-          </Link>
-          <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-        </li>
-        <li>
-          <a href="" className="disabled">
-            Create New Application
-          </a>
-        </li>
-      </ul>
-    </div>
-
     <h2>Create New Application</h2>
     <div className="what-is-a-kintoapp">
       <div className="text">

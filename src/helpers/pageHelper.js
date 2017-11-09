@@ -27,12 +27,12 @@ export const getActivePageKey = (url, isDashboard) => {
 export const getListWithActiveItem = (key, isDashboard) => {
   const list = isDashboard ? dashboardSidebar : marketSidebar
   const listWithActiveItem = list.map(item => {
-    if (item.key === key) {
+    if (key && item.key === key) {
       return { ...item, active: true }
     }
     if (item.children) {
       const isChildActive = item.children.some(c => c.key === key)
-      if (isChildActive) {
+      if (key && isChildActive) {
         return { ...item, active: true }
       }
     }

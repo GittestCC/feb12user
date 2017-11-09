@@ -5,6 +5,7 @@ import { Route, Prompt, Switch, Redirect } from 'react-router-dom'
 import NavBarContainer from '../containers/app/NavBarContainer'
 import SideBarContainer from '../containers/app/SideBarContainer'
 import GlobalSaveBarContainer from '../containers/app/GlobalSaveBarContainer'
+import BreadcrumbContainer from '../containers/app/BreadcrumbContainer'
 
 import Dashboard from './Dashboard'
 import Market from './Market'
@@ -62,6 +63,7 @@ class App extends Component {
         <GlobalSaveBarContainer />
 
         <div className="layout-inner">
+          <BreadcrumbContainer />
           <Switch>
             <Route
               path={`${this.props.match.url}/dashboard`}

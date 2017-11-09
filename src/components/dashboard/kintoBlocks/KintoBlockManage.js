@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import {
-  getVersionAsText,
-  getVersionStateClassName
-} from '../../../helpers/versionHelper'
-import DropDown from '../../ui/DropDown'
-import TagItem from '../ui/TagItem'
+import { getVersionStateClassName } from '../../../helpers/versionHelper'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
 
@@ -17,12 +11,9 @@ class KintoBlockManage extends Component {
     ver: PropTypes.string.isRequired,
     version: PropTypes.object,
     baseVersions: PropTypes.array.isRequired,
-    versionSelectItems: PropTypes.array.isRequired,
-    breadcrumbSelectItems: PropTypes.array.isRequired,
     resetForm: PropTypes.func.isRequired,
     fetchKintoBlocks: PropTypes.func.isRequired,
-    fetchKintoBlock: PropTypes.func.isRequired,
-    goToCreatePage: PropTypes.func.isRequired
+    fetchKintoBlock: PropTypes.func.isRequired
   }
 
   state = {
@@ -52,57 +43,9 @@ class KintoBlockManage extends Component {
   }
 
   render() {
-    const {
-      kintoBlock,
-      ver,
-      version,
-      baseVersions,
-      versionSelectItems,
-      breadcrumbSelectItems,
-      goToCreatePage
-    } = this.props
+    const { kintoBlock, ver, version, baseVersions } = this.props
     return (
       <div className="kintoblock-manage">
-        <div className="breadcrumbs">
-          <ul className="unstyled-list">
-            <li>
-              <Link to="/app/dashboard/kintoblocks/list">KintoBlocks</Link>
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <a>{kintoBlock.name}</a>
-              <DropDown
-                type="filter"
-                dropdownClass="breadcrumb-icon"
-                id="application-dropdown"
-                list={breadcrumbSelectItems}
-                component={TagItem}
-                filterField="text"
-                actionText="Create New Kintoblock"
-                actionHandler={goToCreatePage}
-                dropdownContentClass="short"
-                className="margin-right"
-              />
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <a href="">{getVersionAsText(version)}</a>
-              <DropDown
-                type="filter"
-                dropdownClass="breadcrumb-icon"
-                id="version-dropdown"
-                list={versionSelectItems}
-                component={TagItem}
-                filterField="text"
-                actionText="Create New Version"
-                actionHandler={this.onVersionModalOpen}
-                dropdownContentClass="short"
-                className="margin-right"
-              />
-            </li>
-          </ul>
-        </div>
-
         <div className="page-title">
           <h2>
             {kintoBlock.name}

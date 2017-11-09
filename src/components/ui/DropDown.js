@@ -20,7 +20,8 @@ class DropDown extends Component {
     filterField: PropTypes.string,
     actionText: PropTypes.string,
     actionHandler: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
+    hideAction: PropTypes.bool
   }
 
   state = {
@@ -121,7 +122,8 @@ class DropDown extends Component {
       children,
       type,
       actionText,
-      history
+      history,
+      hideAction
     } = this.props
     const ItemComponent = this.props.component
     const isFilter = type === 'filter'
@@ -187,7 +189,8 @@ class DropDown extends Component {
             </IScroll>
           </div>
 
-          {isFilter && (
+          {isFilter &&
+          !hideAction && (
             <div className="dropdown-content-action">
               <Button buttonType="dark" onClick={this.actionHandler}>
                 {actionText}

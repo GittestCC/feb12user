@@ -1,10 +1,6 @@
 import isObject from 'lodash/isObject'
-import isEmpty from 'lodash/isEmpty'
 
-import {
-  normalizeVersionObject,
-  getUrlForAppConfigDependencies
-} from './versionHelper'
+import { normalizeVersionObject } from './versionHelper'
 
 export const getEnvironmentVersionAndBuild = v => {
   if (!v) {
@@ -22,26 +18,6 @@ export const getEnvironmentVersionAndBuild = v => {
     build: build,
     version: version
   }
-}
-
-export const getEnvironmentSelectList = (envs, id, version, envId) => {
-  if (isEmpty(envs)) {
-    return []
-  }
-  if (envs[0].id !== '0') {
-    envs = [
-      {
-        id: '0',
-        name: 'Environment Defaults'
-      },
-      ...envs
-    ]
-  }
-  return envs.map(e => ({
-    text: e.name,
-    url: getUrlForAppConfigDependencies(id, version, e.id),
-    active: e.id === envId
-  }))
 }
 
 export const getEnvironmentButtonInfo = status => {

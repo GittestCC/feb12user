@@ -1,11 +1,11 @@
-import pages from './pages'
+import { pages } from './pages'
 
 export default {
-  [pages.dashboardBlockCreate]: {
+  [pages.dashboardKintoBlocksCreate]: {
     submitLabel: 'Create New KintoBlock',
     formName: 'kintoBlockCreateForm' // must match redux form name
   },
-  [pages.dashboardBlockManage]: {
+  [pages.dashboardKintoBlocksManage]: {
     submitLabel: 'Save Changes',
     formName: 'kintoBlockManageForm'
   },
@@ -17,11 +17,11 @@ export default {
     submitLabel: 'Create New Application',
     formName: 'kintoAppForm'
   },
-  [pages.dashboardKintoAppDependenciesConfig]: {
+  [pages.dashboardKintoAppsDependenciesConfig]: {
     submitLabel: 'Save Changes',
     formName: 'kintoAppConfigForm'
   },
-  [pages.dashboardKintoAppEnvironmentEdit]: {
+  [pages.dashboardKintoAppsEnvironmentEdit]: {
     submitLabel: 'Save Changes',
     formName: 'KintoAppEnvironmentForm'
   }

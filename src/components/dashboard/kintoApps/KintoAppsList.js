@@ -49,12 +49,6 @@ class KintoAppsList extends Component {
     } = this.state
     return (
       <div className="my-kintoapps">
-        <div className="breadcrumbs">
-          <a href="list" className="disabled">
-            Applications
-          </a>
-        </div>
-
         <div className="page-title">
           <h2>My Applications</h2>
           <Link to="create" className="button default">

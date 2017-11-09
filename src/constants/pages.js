@@ -1,24 +1,47 @@
-const pages = {
-  dashboardBlocksList: 'DASHBOARD_BLOCKS_LIST',
-  dashboardBlockCreate: 'DASHBOARD_BLOCK_CREATE',
-  dashboardBlockManage: 'DASHBOARD_BLOCK_VIEW',
-  dashboardHome: 'DASHBOARD_HOME',
+export const pages = {
+  dashboardKintoBlocksList: 'DASHBOARD_KINTO_BLOCKS_LIST',
+  dashboardKintoBlocksCreate: 'DASHBOARD_KINTO_BLOCKS_CREATE',
+  dashboardKintoBlocksManage: 'DASHBOARD_KINTO_BLOCKS_VIEW',
 
   dashboardKintoAppsList: 'DASHBOARD_KINTO_APPS_LIST',
   dashboardKintoAppsCreate: 'DASHBOARD_KINTO_APPS_CREATE',
-  dashboardKintoAppEnvironments: 'DASHBOARD_KINTO_APP_ENVIRONMENTS',
-  dashboardKintoAppEnvironmentEdit: 'DASHBOARD_KINTO_APP_ENVIRONMENT_EDIT',
+  dashboardKintoAppsEnvironmentEdit: 'DASHBOARD_KINTO_APPS_ENVIRONMENT_EDIT',
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
-  dashboardKintoAppDependenciesConfig:
-    'DASHBOARD_KINTO_APP_DEPENDENCIES_CONFIG',
+  dashboardKintoAppsEnvironments: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS',
+  dashboardKintoAppsDependenciesConfig:
+    'DASHBOARD_KINTO_APPS_DEPENDENCIES_CONFIG',
 
+  dashboardHome: 'DASHBOARD_HOME',
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
   dashboardSalesdata: 'DASHBOARD_SALESDATA',
   dashboardServices: 'DASHBOARD_SERVICES',
-
   dashboardSettings: 'DASHBOARD_SETTINGS',
   dashboardHosting: 'DASHBOARD_HOSTING',
   dashboardBilling: 'DASHBOARD_BILLING'
+}
+
+export const urls = {
+  [pages.dashboardKintoBlocksList]: '/app/dashboard/kintoblocks/list',
+  [pages.dashboardKintoBlocksCreate]: '/app/dashboard/kintoblocks/create',
+  [pages.dashboardKintoBlocksManage]:
+    '/app/dashboard/kintoblocks/:id/versions/:version',
+  [pages.dashboardKintoAppsList]: '/app/dashboard/kintoapps/list',
+  [pages.dashboardKintoAppsCreate]: '/app/dashboard/kintoapps/create',
+  [pages.dashboardKintoAppsManage]:
+    '/app/dashboard/kintoapps/:id/versions/:version',
+  [pages.dashboardKintoAppsEnvironments]:
+    '/app/dashboard/kintoapps/:id/environments',
+  [pages.dashboardKintoAppsEnvironmentEdit]:
+    '/app/dashboard/kintoapps/:id/environment/:envId/edit',
+  [pages.dashboardKintoAppsDependenciesConfig]:
+    '/app/dashboard/kintoapps/:id/versions/:version/config/:envId',
+  [pages.dashboardHome]: '/app/dashboard',
+  [pages.dashboardAnalytics]: '/app/dashboard/analytics',
+  [pages.dashboardSalesdata]: '/app/dashboard/salesdata',
+  [pages.dashboardServices]: '/app/dashboard/services',
+  [pages.dashboardSettings]: '/app/dashboard/settings',
+  [pages.dashboardHosting]: '/app/dashboard/hosting',
+  [pages.dashboardBilling]: '/app/dashboard/billing'
 }
 
 export const dashboardSidebar = [
@@ -26,38 +49,38 @@ export const dashboardSidebar = [
     key: pages.dashboardHome,
     title: 'Home',
     className: 'home',
-    url: '/app/dashboard',
+    url: urls[pages.dashboardHome],
     group: 1
   },
   {
     title: 'Applications',
     className: 'kintoapps',
-    url: '/app/dashboard/kintoapps/list',
-    addUrl: '/app/dashboard/kintoapps/create',
+    url: urls[pages.dashboardKintoAppsList],
+    addUrl: urls[pages.dashboardKintoAppsList],
     children: [
       {
         key: pages.dashboardKintoAppsList,
-        url: '/app/dashboard/kintoapps/list'
-      },
-      {
-        key: pages.dashboardKintoAppsManage,
-        url: '/app/dashboard/kintoapps/:id/versions/:version'
+        url: urls[pages.dashboardKintoAppsList]
       },
       {
         key: pages.dashboardKintoAppsCreate,
-        url: '/app/dashboard/kintoapps/create'
+        url: urls[pages.dashboardKintoAppsCreate]
       },
       {
-        key: pages.dashboardKintoAppEnvironments,
-        url: '/app/dashboard/kintoapps/:id/environments'
+        key: pages.dashboardKintoAppsManage,
+        url: urls[pages.dashboardKintoAppsManage]
       },
       {
-        key: pages.dashboardKintoAppEnvironmentEdit,
-        url: '/app/dashboard/kintoapps/:id/environment/:envId/edit'
+        key: pages.dashboardKintoAppsEnvironments,
+        url: urls[pages.dashboardKintoAppsEnvironments]
       },
       {
-        key: pages.dashboardKintoAppDependenciesConfig,
-        url: '/app/dashboard/kintoapps/:id/versions/:version/config/:env'
+        key: pages.dashboardKintoAppsEnvironmentEdit,
+        url: urls[pages.dashboardKintoAppsEnvironmentEdit]
+      },
+      {
+        key: pages.dashboardKintoAppsDependenciesConfig,
+        url: urls[pages.dashboardKintoAppsDependenciesConfig]
       }
     ],
     group: 1
@@ -66,26 +89,26 @@ export const dashboardSidebar = [
     key: pages.dashboardAnalytics,
     title: 'Analytics',
     className: 'analytics',
-    url: '/app/dashboard/analytics',
+    url: urls[pages.dashboardAnalytics],
     group: 1
   },
   {
     title: 'KintoBlocks',
     className: 'kintoblocks',
-    url: '/app/dashboard/kintoblocks/list',
-    addUrl: '/app/dashboard/kintoblocks/create',
+    url: urls[pages.dashboardKintoBlocksList],
+    addUrl: urls[pages.dashboardKintoBlocksCreate],
     children: [
       {
-        key: pages.dashboardBlocksList,
-        url: '/app/dashboard/kintoblocks/list'
+        key: pages.dashboardKintoBlocksList,
+        url: urls[pages.dashboardKintoBlocksList]
       },
       {
-        key: pages.dashboardBlockManage,
-        url: '/app/dashboard/kintoblocks/:id/versions/:version'
+        key: pages.dashboardKintoBlocksManage,
+        url: urls[pages.dashboardKintoBlocksManage]
       },
       {
-        key: pages.dashboardBlockCreate,
-        url: '/app/dashboard/kintoblocks/create'
+        key: pages.dashboardKintoBlocksCreate,
+        url: urls[pages.dashboardKintoBlocksCreate]
       }
     ],
     group: 1
@@ -94,39 +117,37 @@ export const dashboardSidebar = [
     key: pages.dashboardSalesdata,
     title: 'Sales Data',
     className: 'sales-data',
-    url: '/app/dashboard/salesdata',
+    url: urls[pages.dashboardSalesdata],
     group: 1
   },
   {
     key: pages.dashboardServices,
     title: 'Services',
     className: 'services',
-    url: '/app/dashboard/services',
+    url: urls[pages.dashboardServices],
     group: 1
   },
   {
     key: pages.dashboardSettings,
     title: 'App Settings',
     className: 'settings',
-    url: '/app/dashboard/settings',
+    url: urls[pages.dashboardSettings],
     group: 2
   },
   {
     key: pages.dashboardHosting,
     title: 'Hosting',
     className: 'hosting',
-    url: '/app/dashboard/hosting',
+    url: urls[pages.dashboardHosting],
     group: 2
   },
   {
     key: pages.dashboardBilling,
     title: 'Account Billing',
     className: 'billing',
-    url: '/app/dashboard/billing',
+    url: urls[pages.dashboardBilling],
     group: 2
   }
 ]
 
 export const marketSidebar = []
-
-export default pages

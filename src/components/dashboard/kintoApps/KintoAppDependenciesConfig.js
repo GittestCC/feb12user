@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import DropDown from '../../ui/DropDown'
-import TagItem from '../ui/TagItem'
 import {
   filterArrayAndChildren,
   flattenNestedToIds
@@ -15,15 +12,7 @@ class KintoAppDependenciesConfig extends Component {
     id: PropTypes.string.isRequired,
     ver: PropTypes.string.isRequired,
     env: PropTypes.string.isRequired,
-    kintoApp: PropTypes.object.isRequired,
-    dependencies: PropTypes.array.isRequired,
-    versionsBreadcrumb: PropTypes.array.isRequired,
-    appSwitchBreadcrumb: PropTypes.array.isRequired,
-    environmentsBreadcrumb: PropTypes.array.isRequired,
-    selectedEnvironmentName: PropTypes.string,
-    fetchKintoApps: PropTypes.func.isRequired,
-    fetchKintoAppDependenciesConfig: PropTypes.func.isRequired,
-    goToCreatePage: PropTypes.func.isRequired
+    dependencies: PropTypes.array.isRequired
   }
 
   state = {
@@ -49,11 +38,13 @@ class KintoAppDependenciesConfig extends Component {
     const { id, ver, env } = this.props
     this.props.fetchKintoApps()
     this.loadData(id, ver, env)
+    this.props.environmentSelect(env)
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ver !== nextProps.ver || this.props.env !== nextProps.env) {
       this.loadData(nextProps.id, nextProps.ver, nextProps.env)
+      this.props.environmentSelect(nextProps.env)
     }
   }
 
@@ -75,72 +66,10 @@ class KintoAppDependenciesConfig extends Component {
   }
 
   render() {
-    const {
-      id,
-      ver,
-      env,
-      kintoApp,
-      versionsBreadcrumb,
-      appSwitchBreadcrumb,
-      goToCreatePage,
-      environmentsBreadcrumb,
-      selectedEnvironmentName,
-      dependencies
-    } = this.props
+    const { id, ver, env, dependencies } = this.props
     const filteredDep = this.getFilteredDependencies()
     return (
       <div className="ka-dependencies-page">
-        <div className="breadcrumbs">
-          <ul className="unstyled-list">
-            <li>
-              <Link to="/app/dashboard/kintoapps/list">Applications</Link>
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <a href="">{kintoApp.name}</a>
-              <DropDown
-                type="filter"
-                dropdownClass="breadcrumb-icon"
-                id="application-dropdown"
-                list={appSwitchBreadcrumb}
-                component={TagItem}
-                filterField="text"
-                actionText="Create New Application"
-                actionHandler={goToCreatePage}
-                dropdownContentClass="short"
-                className="margin-right"
-              />
-              <img src="/images/icon-breadcrumb-chevron.svg" alt="" />
-            </li>
-            <li>
-              <a href="">{ver}</a>
-              <DropDown
-                type="filter"
-                dropdownClass="breadcrumb-icon"
-                id="version-dropdown"
-                list={versionsBreadcrumb}
-                component={TagItem}
-                filterField="text"
-                actionText="Create New Version"
-                actionHandler={this.onVersionModalOpen}
-                dropdownContentClass="short"
-                className="margin-right"
-              />
-            </li>
-            <li>
-              <DropDown
-                type="filter"
-                id="env-dropdown"
-                list={environmentsBreadcrumb}
-                component={TagItem}
-                filterField="text"
-                dropdownText={selectedEnvironmentName}
-                dropdownContentClass="short"
-              />
-            </li>
-          </ul>
-        </div>
-
         <div className="ka-config-dependencies">
           <div className="ka-config-header">
             <div className="left-side" />
