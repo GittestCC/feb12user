@@ -44,7 +44,10 @@ const kintoAppsReducer = (state = defaultState, action) => {
       let byId = {}
       action.data.forEach(app => {
         allIds.push(app.id)
-        byId[app.id] = merge(state.byId[app.id], app)
+        byId[app.id] = merge(state.byId[app.id], app, {
+          // if there is already a version saved for that kintoapp we don't want to overwrite that
+          lowPriority: 'version'
+        })
       })
       return {
         isFetching: false,

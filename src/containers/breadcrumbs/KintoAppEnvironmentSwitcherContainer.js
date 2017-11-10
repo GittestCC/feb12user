@@ -38,6 +38,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     hideCreateAction: isDependencyConfig,
     selectedEnvironmentUrl:
       app.id &&
+      selectedEnvironmentId &&
       getUrl(url, {
         id: app.id,
         envId: selectedEnvironmentId,

@@ -31,7 +31,7 @@ function mapStateToProps(state, { type, disabled, url }) {
       url: getUrl(url, {
         id: selectedItem.id,
         version: getVersionAsText(v, true),
-        envId: selectedEnvironmentId
+        envId: selectedEnvironmentId || '0'
       }),
       tag: v.state,
       className: getVersionStateClassName(v),
