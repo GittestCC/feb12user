@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux'
 import pageOptions from './pageOptions'
 import kintoBlocks from './kintoBlocks'
 import kintoApps from './kintoApps'
+import workspaces from './workspaces'
 import auth from './auth'
 import kintoBlocksDependenciesCache from './kintoBlocksDependenciesCache'
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   pageOptions,
   kintoBlocks,
   kintoApps,
+  workspaces,
   auth,
   kintoBlocksDependenciesCache
 })

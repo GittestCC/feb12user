@@ -17,7 +17,10 @@ export const pages = {
   dashboardServices: 'DASHBOARD_SERVICES',
   dashboardSettings: 'DASHBOARD_SETTINGS',
   dashboardHosting: 'DASHBOARD_HOSTING',
-  dashboardBilling: 'DASHBOARD_BILLING'
+  dashboardBilling: 'DASHBOARD_BILLING',
+
+  workspaceCreate: 'WORKSPACE_CREATE',
+  workspaceEdit: 'WORKSPACE_EDIT'
 }
 
 export const urls = {
@@ -41,7 +44,9 @@ export const urls = {
   [pages.dashboardServices]: '/app/dashboard/services',
   [pages.dashboardSettings]: '/app/dashboard/settings',
   [pages.dashboardHosting]: '/app/dashboard/hosting',
-  [pages.dashboardBilling]: '/app/dashboard/billing'
+  [pages.dashboardBilling]: '/app/dashboard/billing',
+  [pages.workspaceCreate]: '/app/workspaces/create',
+  [pages.workspaceEdit]: '/app/workspaces/:id/edit'
 }
 
 export const dashboardSidebar = [

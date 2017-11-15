@@ -1,25 +1,15 @@
 import pathToRegexp from 'path-to-regexp'
-import { dashboardSidebar, marketSidebar } from '../constants/pages'
+import { dashboardSidebar, marketSidebar, urls } from '../constants/pages'
 
 export const getActivePageKey = (url, isDashboard) => {
-  const list = isDashboard ? dashboardSidebar : marketSidebar
-  let key = null
-  list.some(item => {
-    if (item.children) {
-      const matchedSubItem = item.children.find(c => urlMatch(c.url, url))
-      if (matchedSubItem) {
-        key = matchedSubItem.key
-        return true
-      }
+  let matchedPage = null
+  Object.keys(urls).forEach(key => {
+    if (matchedPage) return
+    if (urlMatch(urls[key], url)) {
+      matchedPage = key
     }
-    const matchedItem = urlMatch(item.url, url)
-    if (matchedItem) {
-      key = item.key
-      return true
-    }
-    return false
   })
-  return key
+  return matchedPage
 }
 
 // returns the sidebar list with the active item marked as active

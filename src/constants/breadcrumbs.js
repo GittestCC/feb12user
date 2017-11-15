@@ -102,5 +102,24 @@ export default {
       url: urls[pages.dashboardKintoAppsDependenciesConfig],
       isDependencyConfig: true
     }
+  ],
+  [pages.workspaceCreate]: [
+    {
+      component: 'Link',
+      text: 'Workspaces'
+    },
+    {
+      component: 'Link',
+      text: 'Create New Workspace'
+    }
+  ],
+  [pages.workspaceEdit]: [
+    {
+      component: 'Link',
+      text: 'Workspaces'
+    },
+    {
+      component: 'WorkspaceSwitcherContainer'
+    }
   ]
 }

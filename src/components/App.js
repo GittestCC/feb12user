@@ -8,6 +8,7 @@ import GlobalSaveBarContainer from '../containers/app/GlobalSaveBarContainer'
 import BreadcrumbContainer from '../containers/app/BreadcrumbContainer'
 
 import Dashboard from './Dashboard'
+import Workspaces from './Workspaces'
 import Market from './Market'
 
 class App extends Component {
@@ -68,6 +69,10 @@ class App extends Component {
             <Route
               path={`${this.props.match.url}/dashboard`}
               component={Dashboard}
+            />
+            <Route
+              path={`${this.props.match.url}/workspaces`}
+              component={Workspaces}
             />
             <Route path={`${this.props.match.url}/market`} component={Market} />
             <Redirect to={`${this.props.match.url}/dashboard`} />

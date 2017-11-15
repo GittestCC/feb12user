@@ -6,6 +6,7 @@ import {
   RECEIVE_KINTO_APP,
   RECIEVE_KINTO_APP_ENVIRONMENTS
 } from '../actions/kintoApps'
+import { SELECT_WORKSPACE } from '../actions/workspaces'
 import { RECEIVE_KINTO_BLOCK } from '../actions/kintoBlocks'
 import forms from '../constants/forms'
 
@@ -28,6 +29,11 @@ export default function pageOptions(state = {}, action) {
       return {
         ...state,
         selectedEnvironmentId: action.id
+      }
+    case SELECT_WORKSPACE:
+      return {
+        ...state,
+        selectedEditingWorkspaceId: action.id
       }
     case actionTypes.CHANGE:
     case actionTypes.ARRAY_REMOVE:

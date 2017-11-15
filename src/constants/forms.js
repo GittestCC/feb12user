@@ -24,5 +24,13 @@ export default {
   [pages.dashboardKintoAppsEnvironmentEdit]: {
     submitLabel: 'Save Changes',
     formName: 'KintoAppEnvironmentForm'
+  },
+  [pages.workspaceCreate]: {
+    submitLabel: 'Create New Workspace',
+    formName: 'WorkspaceForm'
+  },
+  [pages.workspaceEdit]: {
+    submitLabel: 'Save Changes',
+    formName: 'WorkspaceForm'
   }
 }

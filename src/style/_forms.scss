@@ -54,10 +54,13 @@ select {
   &.error {
     border: 2px solid $input-error !important;
   }
-  &.disabled {
+  &.disabled, &:disabled {
     @include inputDisabled;
+    width: 100%;
   }
 }
+
+
 
 .error-message {
   color: $kinto-white;

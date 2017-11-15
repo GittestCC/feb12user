@@ -1,0 +1,119 @@
+.create-workspace {
+  .what-is-a-workspace {
+    @extend .what-is-a-kintoblock;
+  }
+}
+
+.workspace-form {
+  @extend .kintoapp-form-container;
+  .add {
+    @include backgroundImage('/images/icon-blue-new.svg', 20px, 20px);
+    margin-left: 10px;
+  }
+  .remove {
+    @include backgroundImage('/images/icon-red-delete.svg', 20px, 20px);
+    margin-left: 10px;
+    &.void {
+      @include backgroundImage('/images/icon-red-delete.svg', 20px, 20px);
+      margin-left: 10px;
+      opacity: 0.4;
+    }
+  }
+  .disabled {
+    width: 100%;
+  }
+  .avatar {
+    height: 40px;
+    width: 40px;
+    background-color: $kinto-tinted-grayscale-2;
+    &.image-1 { @include backgroundImage('/images/team-raven-yu.png', 40px, 40px)}
+    &.image-2 { @include backgroundImage('/images/team-nadeem-khedr.png', 40px, 40px)}
+    &.image-3 { @include backgroundImage('/images/team-joseph-cooper.png', 40px, 40px)}
+    &.image-4 { @include backgroundImage('/images/team-guillaume-dury.png', 40px, 40px)}
+    &.image-5 { @include backgroundImage('/images/team-laura-ambrose.png', 40px, 40px)}
+    &.image-6 { @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px)}
+    border-radius: 20px;
+    position: relative;
+    
+    .admin-star {
+      background-color: $kinto-yellow;
+      border-radius: 10px;
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      @include backgroundImage('/images/icon-status-admin.svg', 20px, 20px)
+    }
+    .owner {
+      background-color: $kinto-yellow;
+      border-radius: 10px;
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      @include backgroundImage('/images/icon-status-owner.svg', 20px, 20px)
+    }
+  }
+  .members-added {
+    display: inline-grid;
+    justify-items: stretch;
+    align-items: center;
+    grid-template-columns: 50px 1fr 1fr 40px;
+    grid-column-gap: 10px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    .field-wrapper {
+      &:first-child{
+        margin-right: 20px;
+      }
+      input, select {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.form-body.members-list {
+  padding: 0;
+  background-color: transparent;
+  .top {
+    background-color: $kinto-white;
+    border-radius: 8px 8px 0 0;
+    padding: 60px 40px 20px;
+    input {
+      margin-bottom: 0;
+    }
+
+  }
+  .bottom{
+    padding: 50px 40px;
+    display: inline-grid;
+    justify-items: stretch;
+    align-items: center;
+    grid-template-columns: 50px 1fr 1fr 40px;
+    grid-column-gap: 10px;
+    background-color: $kinto-tinted-grayscale-1;
+    width: 100%;
+    border-radius: 8px;
+    input {
+      width: 100% !important;
+    }
+    input, select {
+      margin-bottom: 0;
+    }
+    .field-wrapper {
+      &:first-child{
+        margin-right: 20px;
+      }
+      input, select {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.avatar-placeholder {
+  height: 40px;
+  width: 40px;
+  background-color: $kinto-tinted-grayscale-2;
+  border-radius: 20px;
+}

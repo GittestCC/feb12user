@@ -7,7 +7,7 @@ import Tooltip from 'rc-tooltip'
  * used mainly when there is a `validate` option passed to `Field`
  */
 const FieldValidation = props => {
-  const { input, placeholder, label, type, help, close, id } = props
+  const { input, placeholder, label, type, help, close, id, disabled } = props
   const { touched, submitFailed, error } = props.meta
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
@@ -34,6 +34,7 @@ const FieldValidation = props => {
           id={id || input.name}
           placeholder={placeholder}
           className={className}
+          disabled={disabled}
         >
           {props.children}
         </select>
@@ -46,7 +47,8 @@ const FieldValidation = props => {
           id={id || input.name}
           type={type}
           placeholder={placeholder}
-          className={className}
+          className={`${className} ${disabled ? 'disabled' : ''}`}
+          disabled={disabled}
         />
       )
   }
