@@ -6,18 +6,18 @@ export const SELECT_WORKSPACE = 'SELECT_WORKSPACE'
 
 export const workspacesFetch = () => ({ type: FETCH_WORKSPACES })
 
+export const workspaceSelect = id => ({
+  type: SELECT_WORKSPACE,
+  id
+})
+
 export const workspacesReceive = response => ({
   type: RECEIVE_WORKSPACES,
   data: response.data
 })
 
-export const editingWorkspaceSelect = id => ({
-  type: SELECT_WORKSPACE,
-  id
-})
-
 export const fetchWorkspaces = () => dispatch => {
-  const data = {
+  const response = {
     data: [
       {
         id: '1',
@@ -94,7 +94,7 @@ export const fetchWorkspaces = () => dispatch => {
     ]
   }
   dispatch(workspacesFetch())
-  return Promise.resolve(data).then(result => {
+  return Promise.resolve(response).then(result => {
     dispatch(workspacesReceive(result))
   })
 }

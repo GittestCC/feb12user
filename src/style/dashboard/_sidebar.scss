@@ -88,6 +88,14 @@
       }
     }
   }
+
+  .workspaces-select {
+    h3 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-top: 60px;
+    }
+  }
 }
 
 @include desktop {

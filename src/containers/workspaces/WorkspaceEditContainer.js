@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import WorkspaceEdit from '../../components/workspaces/WorkspaceEdit'
-import {
-  fetchWorkspaces,
-  editingWorkspaceSelect
-} from '../../actions/workspaces'
+import { fetchWorkspaces } from '../../actions/workspaces'
+import { workspaceBreadcrumbSelect } from '../../actions/pageOptions'
 
 function mapStateToProps(state, { match }) {
   const id = match.params.id
@@ -17,5 +15,5 @@ function mapStateToProps(state, { match }) {
 
 export default connect(mapStateToProps, {
   fetchWorkspaces,
-  editingWorkspaceSelect
+  workspaceBreadcrumbSelect
 })(WorkspaceEdit)

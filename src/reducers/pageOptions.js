@@ -1,12 +1,15 @@
 import { actionTypes } from 'redux-form'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { getActivePageKey } from '../helpers/pageHelper'
-import { FORM_SUBMITTED, SELECT_ENVIRONMENT } from '../actions/pageOptions'
+import {
+  FORM_SUBMITTED,
+  SELECT_ENVIRONMENT,
+  SELECT_BREADCRUMB_WORKSPACE
+} from '../actions/pageOptions'
 import {
   RECEIVE_KINTO_APP,
   RECIEVE_KINTO_APP_ENVIRONMENTS
 } from '../actions/kintoApps'
-import { SELECT_WORKSPACE } from '../actions/workspaces'
 import { RECEIVE_KINTO_BLOCK } from '../actions/kintoBlocks'
 import forms from '../constants/forms'
 
@@ -30,7 +33,7 @@ export default function pageOptions(state = {}, action) {
         ...state,
         selectedEnvironmentId: action.id
       }
-    case SELECT_WORKSPACE:
+    case SELECT_BREADCRUMB_WORKSPACE:
       return {
         ...state,
         selectedEditingWorkspaceId: action.id

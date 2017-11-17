@@ -4,12 +4,12 @@ import WorkspaceFormContainer from '../../containers/workspaces/WorkspaceFormCon
 class WorkspaceEdit extends Component {
   componentDidMount() {
     this.props.fetchWorkspaces()
-    this.props.editingWorkspaceSelect(this.props.id)
+    this.props.workspaceBreadcrumbSelect(this.props.id)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.id !== this.props.id) {
-      this.props.editingWorkspaceSelect(nextProps.id)
+      this.props.workspaceBreadcrumbSelect(nextProps.id)
     }
   }
 

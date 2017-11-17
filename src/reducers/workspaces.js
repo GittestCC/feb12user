@@ -1,15 +1,23 @@
-import { merge } from '../helpers/objectHelper'
-
-import { FETCH_WORKSPACES, RECEIVE_WORKSPACES } from '../actions/workspaces'
+import {
+  FETCH_WORKSPACES,
+  RECEIVE_WORKSPACES,
+  SELECT_WORKSPACE
+} from '../actions/workspaces'
 
 const defaultState = {
   isFetching: false,
+  selectedWorkspace: null,
   byId: {},
   allIds: []
 }
 
 const workspacesReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case SELECT_WORKSPACE:
+      return {
+        ...state,
+        selectedWorkspace: action.id
+      }
     case FETCH_WORKSPACES:
       return {
         ...state,
@@ -20,9 +28,10 @@ const workspacesReducer = (state = defaultState, action) => {
       let byId = {}
       action.data.forEach(workspace => {
         allIds.push(workspace.id)
-        byId[workspace.id] = merge(state.byId[workspace.id], workspace)
+        byId[workspace.id] = workspace
       })
       return {
+        ...state,
         isFetching: false,
         byId,
         allIds

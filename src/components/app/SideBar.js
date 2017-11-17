@@ -19,6 +19,9 @@ class SideBar extends Component {
       <div
         className={`sidebar ${this.props.isSideBarShownMobile ? 'show' : ''}`}
       >
+        <div className="workspaces-select">
+          <h3 className="uppercase">Workspace</h3>
+        </div>
         <ul className="unstyled-list sidebar-list">
           {this.props.list.map((groupItems, key) => (
             <li className="sidebar-section" key={key}>

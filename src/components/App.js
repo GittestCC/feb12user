@@ -25,6 +25,9 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('beforeunload', this.onUnload)
     if (!this.props.isLoggedIn) this.props.goToLogin()
+    this.props.fetchWorkspaces()
+    //TODO: replace with a real workspace url select
+    this.props.workspaceSelect('1')
   }
 
   componentWillReceiveProps() {
@@ -63,21 +66,26 @@ class App extends Component {
 
         <GlobalSaveBarContainer />
 
-        <div className="layout-inner">
-          <BreadcrumbContainer />
-          <Switch>
-            <Route
-              path={`${this.props.match.url}/dashboard`}
-              component={Dashboard}
-            />
-            <Route
-              path={`${this.props.match.url}/workspaces`}
-              component={Workspaces}
-            />
-            <Route path={`${this.props.match.url}/market`} component={Market} />
-            <Redirect to={`${this.props.match.url}/dashboard`} />
-          </Switch>
-        </div>
+        {!this.props.isLoading ? (
+          <div className="layout-inner">
+            <BreadcrumbContainer />
+            <Switch>
+              <Route
+                path={`${this.props.match.url}/dashboard`}
+                component={Dashboard}
+              />
+              <Route
+                path={`${this.props.match.url}/workspaces`}
+                component={Workspaces}
+              />
+              <Route
+                path={`${this.props.match.url}/market`}
+                component={Market}
+              />
+              <Redirect to={`${this.props.match.url}/dashboard`} />
+            </Switch>
+          </div>
+        ) : null}
       </div>
     )
   }
