@@ -81,13 +81,15 @@ describe('KintoApps actions', () => {
 
   it('fetchKintoAppDependenciesConfig should call a receive action', async () => {
     const result = {
-      data: {
-        id: '1',
-        version: {
-          minor: 1,
-          state: 'DRAFT'
+      data: [
+        {
+          id: '1',
+          version: {
+            minor: 1,
+            state: 'DRAFT'
+          }
         }
-      },
+      ],
       metadata: {
         dependencies: {
           '1': {

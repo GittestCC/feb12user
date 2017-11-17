@@ -9,7 +9,12 @@ import { getVersionAsText } from '../../../../helpers/versionHelper'
 class KintoAppConfigSidebar extends Component {
   static propTypes = {
     list: PropTypes.array.isRequired,
-    filter: PropTypes.string
+    filter: PropTypes.string,
+    onScrollToItem: PropTypes.func.isRequired
+  }
+
+  onScrollToItem = dependencyId => {
+    this.props.onScrollToItem(dependencyId)
   }
 
   onChangeFilter = e => {
@@ -42,7 +47,10 @@ class KintoAppConfigSidebar extends Component {
                 {list &&
                   list.map((item, index) => (
                     <li className="parent" key={index}>
-                      <a className="item">
+                      <a
+                        onClick={() => this.onScrollToItem(item.dependencyId)}
+                        className={`item ${item.active ? 'active' : ''}`}
+                      >
                         <div
                           className={`main-icon ${getClassNameForType(
                             item.type
@@ -59,7 +67,11 @@ class KintoAppConfigSidebar extends Component {
                         {item.dependencies &&
                           item.dependencies.map((d, index) => (
                             <li key={index}>
-                              <a className="item">
+                              <a
+                                onClick={() =>
+                                  this.onScrollToItem(d.dependencyId)}
+                                className={`item ${d.active ? 'active' : ''}`}
+                              >
                                 <div
                                   className={`main-icon ${getClassNameForType(
                                     d.type

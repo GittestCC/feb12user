@@ -25,7 +25,7 @@ const KintoAppConfigHardwareItem = ({ field, info, data, resetCPUHandler }) => {
     100: '100%'
   }
   return (
-    <div className="ka-config-hardware-item hardware-data-form">
+    <div className="ka-config-item ka-config-hardware-item hardware-data-form">
       <h3>{name}</h3>
       <div className="form-body">
         <div className="memory">

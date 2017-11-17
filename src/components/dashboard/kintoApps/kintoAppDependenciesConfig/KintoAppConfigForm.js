@@ -6,15 +6,24 @@ import KintoAppConfigHardware from './kintoAppConfigForm/KintoAppConfigHardware'
 
 const KintoAppConfigForm = ({
   activeTab,
+  itemToScrollTo,
   handleSubmit,
   allDependenciesInfo,
   shownDependenciesIds,
-  resetCPUHandler
+  resetCPUHandler,
+  onChangeActive
 }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={activeTab !== 'params' ? 'hide' : null}>
-        <KintoAppConfigParams />
+        <FieldArray
+          name="data"
+          component={KintoAppConfigParams}
+          allDependenciesInfo={allDependenciesInfo}
+          shownDependenciesIds={shownDependenciesIds}
+          onChangeActive={onChangeActive}
+          itemToScrollTo={itemToScrollTo}
+        />
       </div>
       <div className={activeTab !== 'hardware' ? 'hide' : null}>
         <FieldArray
@@ -23,6 +32,8 @@ const KintoAppConfigForm = ({
           allDependenciesInfo={allDependenciesInfo}
           shownDependenciesIds={shownDependenciesIds}
           resetCPUHandler={resetCPUHandler}
+          onChangeActive={onChangeActive}
+          itemToScrollTo={itemToScrollTo}
         />
       </div>
     </form>
@@ -31,10 +42,12 @@ const KintoAppConfigForm = ({
 
 KintoAppConfigForm.propTypes = {
   activeTab: PropTypes.string.isRequired,
+  itemToScrollTo: PropTypes.string,
   allDependenciesInfo: PropTypes.array.isRequired,
   shownDependenciesIds: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  resetCPUHandler: PropTypes.func.isRequired
+  resetCPUHandler: PropTypes.func.isRequired,
+  onChangeActive: PropTypes.func.isRequired
 }
 
 export default reduxForm({

@@ -17,15 +17,40 @@ class KintoAppDependenciesConfig extends Component {
 
   state = {
     filterText: '',
-    activeTab: 'hardware'
+    activeTab: 'params',
+    activeDependencies: {},
+    itemToScrollTo: null
+  }
+
+  componentDidMount() {
+    const { id, ver, env, filteredDependency } = this.props
+    this.props.fetchKintoApps()
+    this.loadData(id, ver, env)
+    this.props.environmentSelect(env)
+    if (filteredDependency) {
+      this.setState({ filterText: `id:${filteredDependency}` })
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.ver !== nextProps.ver || this.props.env !== nextProps.env) {
+      this.loadData(nextProps.id, nextProps.ver, nextProps.env)
+      this.props.environmentSelect(nextProps.env)
+    }
   }
 
   getFilteredDependencies() {
+    const filter = this.state.filterText
     return filterArrayAndChildren(
       this.props.dependencies,
       'dependencies',
-      'name',
-      this.state.filterText
+      item => {
+        if (filter.startsWith('id:')) {
+          return item['dependencyId'] === filter.substring(3)
+        } else {
+          return item['name'].toUpperCase().includes(filter.toUpperCase())
+        }
+      }
     )
   }
 
@@ -34,18 +59,19 @@ class KintoAppDependenciesConfig extends Component {
     return flattenNestedToIds(filteredDeps, 'dependencies', 'dependencyId')
   }
 
-  componentDidMount() {
-    const { id, ver, env } = this.props
-    this.props.fetchKintoApps()
-    this.loadData(id, ver, env)
-    this.props.environmentSelect(env)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.ver !== nextProps.ver || this.props.env !== nextProps.env) {
-      this.loadData(nextProps.id, nextProps.ver, nextProps.env)
-      this.props.environmentSelect(nextProps.env)
-    }
+  getActiveFilteredDependencies(filteredDependencies) {
+    const { activeDependencies } = this.state
+    return filteredDependencies.map(d => {
+      const dependencies = d.dependencies || []
+      return {
+        ...d,
+        active: activeDependencies[d.dependencyId],
+        dependencies: dependencies.map(cd => ({
+          ...cd,
+          active: activeDependencies[cd.dependencyId]
+        }))
+      }
+    })
   }
 
   loadData = (id, ver, env) => {
@@ -65,9 +91,24 @@ class KintoAppDependenciesConfig extends Component {
     this.setState({ activeTab: 'params' })
   }
 
+  onChangeActive = (dependencyId, isShown) => {
+    this.setState(oldState => ({
+      activeDependencies: {
+        ...oldState.activeDependencies,
+        [dependencyId]: isShown
+      }
+    }))
+  }
+
+  onScrollToItem = dependencyId => {
+    this.setState({
+      itemToScrollTo: `${this.state.activeTab}-${dependencyId}`
+    })
+  }
+
   render() {
     const { id, ver, env, dependencies } = this.props
-    const filteredDep = this.getFilteredDependencies()
+    const filteredDependencies = this.getFilteredDependencies()
     return (
       <div className="ka-dependencies-page">
         <div className="ka-config-dependencies">
@@ -97,9 +138,10 @@ class KintoAppDependenciesConfig extends Component {
           <div className="ka-config-body">
             <div className="left-side">
               <KintoAppConfigSidebar
-                list={filteredDep}
+                list={this.getActiveFilteredDependencies(filteredDependencies)}
                 filter={this.state.filterText}
                 onUpdateFilter={this.updateFilterText}
+                onScrollToItem={this.onScrollToItem}
               />
             </div>
             <div className="right-side">
@@ -108,8 +150,10 @@ class KintoAppDependenciesConfig extends Component {
                 ver={ver}
                 env={env}
                 activeTab={this.state.activeTab}
+                itemToScrollTo={this.state.itemToScrollTo}
                 allDependenciesInfo={dependencies}
                 shownDependenciesIds={this.getShownDependenciesIds()}
+                onChangeActive={this.onChangeActive}
               />
             </div>
           </div>

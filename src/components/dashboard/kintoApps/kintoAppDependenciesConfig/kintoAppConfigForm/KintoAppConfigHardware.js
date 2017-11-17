@@ -1,63 +1,71 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import iscroll from 'iscroll'
-import IScroll from 'react-iscroll'
+import KintoAppConfigScroller from '../KintoAppConfigScroller'
 import KintoAppConfigHardwareItem from './KintoAppConfigHardwareItem'
 import { findDependency } from '../../../../../helpers/kintoBlocksHelper'
 
-function getContainerClass(shownDependenciesIds, fields, key) {
-  return !shownDependenciesIds.some(id => fields.get(key).dependencyId === id)
+function getIsShownClass(shownDependenciesIds, data) {
+  return !shownDependenciesIds.some(id => data.dependencyId === id)
     ? 'hide'
     : ''
 }
-const KintoAppConfigHardware = ({
-  fields,
-  allDependenciesInfo,
-  shownDependenciesIds,
-  resetCPUHandler
-}) => {
-  return (
-    <div className="ka-config-hardware">
-      <IScroll
-        iScroll={iscroll}
-        options={{
-          scrollbars: true,
-          mouseWheel: true,
-          fadeScrollbars: true,
-          shrinkScrollbars: 'scale',
-          interactiveScrollbars: true,
-          disableTouch: true,
-          disablePointer: true,
-          disableMouse: true
-        }}
-      >
-        <div>
-          {fields.map((field, key) => (
-            <div
-              key={key}
-              className={getContainerClass(shownDependenciesIds, fields, key)}
-            >
-              <KintoAppConfigHardwareItem
-                field={field}
-                info={findDependency(
-                  allDependenciesInfo,
-                  fields.get(key).dependencyId
+
+class KintoAppConfigHardware extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    allDependenciesInfo: PropTypes.array.isRequired,
+    itemToScrollTo: PropTypes.string,
+    shownDependenciesIds: PropTypes.array.isRequired,
+    resetCPUHandler: PropTypes.func.isRequired,
+    onChangeActive: PropTypes.func.isRequired
+  }
+
+  onChangeActive = (index, isShown) => {
+    this.props.onChangeActive(
+      this.props.fields.get(index).dependencyId,
+      isShown
+    )
+  }
+
+  render() {
+    const {
+      fields,
+      allDependenciesInfo,
+      itemToScrollTo,
+      shownDependenciesIds,
+      resetCPUHandler
+    } = this.props
+    return (
+      <div className="ka-config-hardware">
+        <KintoAppConfigScroller
+          type="hardware"
+          itemToScrollTo={itemToScrollTo}
+          onChangeActive={this.onChangeActive}
+        >
+          {fields.map((field, key) => {
+            const data = fields.get(key)
+            return (
+              <div
+                key={key}
+                className={getIsShownClass(
+                  shownDependenciesIds,
+                  fields.get(key)
                 )}
-                data={fields.get(key)}
-                resetCPUHandler={resetCPUHandler}
-              />
-            </div>
-          ))}
-        </div>
-      </IScroll>
-    </div>
-  )
-}
-KintoAppConfigHardware.propTypes = {
-  fields: PropTypes.object.isRequired,
-  allDependenciesInfo: PropTypes.array.isRequired,
-  shownDependenciesIds: PropTypes.array.isRequired,
-  resetCPUHandler: PropTypes.func.isRequired
+                data-scroll={`hardware-${data.dependencyId}`}
+              >
+                <KintoAppConfigHardwareItem
+                  field={field}
+                  info={findDependency(allDependenciesInfo, data.dependencyId)}
+                  data={data}
+                  resetCPUHandler={resetCPUHandler}
+                />
+              </div>
+            )
+          })}
+        </KintoAppConfigScroller>
+      </div>
+    )
+  }
 }
 
 export default KintoAppConfigHardware

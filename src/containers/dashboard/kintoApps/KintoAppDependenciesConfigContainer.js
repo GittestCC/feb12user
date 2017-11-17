@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import qs from 'query-string'
+
 import {
   fetchKintoApps,
   fetchKintoApp,
@@ -9,14 +11,17 @@ import { environmentSelect } from '../../../actions/pageOptions'
 import { getKintoAppDependencies } from '../../../selectors/kintoApps'
 import KintoAppDependenciesConfig from '../../../components/dashboard/kintoApps/KintoAppDependenciesConfig'
 
-function mapStateToProps(state, { match }) {
+function mapStateToProps(state, { match, location }) {
+  const query = qs.parse(location.search)
+
   const { id, ver, env } = match.params
   const dependencies = getKintoAppDependencies(state, match.params)
   return {
     dependencies,
     id,
     ver,
-    env
+    env,
+    filteredDependency: query.dependency
   }
 }
 

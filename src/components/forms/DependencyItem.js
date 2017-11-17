@@ -54,7 +54,10 @@ class DependencyItem extends Component {
               ))}
             </Field>
             {appVersion && (
-              <Link className="pen-edit" to={`${appVersion}/config/0`} />
+              <Link
+                className="pen-edit"
+                to={`${appVersion}/config/0?dependency=${data.dependencyId}`}
+              />
             )}
           </div>
         </div>

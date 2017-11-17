@@ -112,6 +112,17 @@ export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
   return axios
     .get(`/kintoapps/${id}/versions/${ver}/config/${envId}`)
     .then(data => {
+      //TODO: remove mock data
+      data.data.forEach(d => {
+        d.params = Array(5)
+          .fill()
+          .map(i => ({
+            key: Math.random()
+              .toString(36)
+              .substring(7),
+            value: 'key'
+          }))
+      })
       dispatch(kintoAppDependenciesConfigReceive(id, ver, envId, data.data))
     })
 }
