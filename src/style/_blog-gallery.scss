@@ -5,31 +5,31 @@
   @include abovetablet {
     justify-content: space-between;
   }
+  .avatar {
+    &.laura {
+      @include backgroundImage('/images/team-small-laura-ambrose.png', 40px, 40px);
+    }
+    &.raven {
+      @include backgroundImage('/images/team-small-raven-yu.png', 40px, 40px);
+    }
+    &.nadeem {
+      @include backgroundImage('/images/team-small-nadeem-khedr.png', 40px, 40px);
+    }
+    &.joseph {
+      @include backgroundImage('/images/team-small-joseph-cooper.png', 40px, 40px);
+    }
+    &.francois {
+      @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    border-radius: 20px;
+    display: inline-block;
+    float: right;
+  }
 }
 
-.avatar {
-  &.laura {
-    @include backgroundImage('/images/team-small-laura-ambrose.png', 40px, 40px);
-  }
-  &.raven {
-    @include backgroundImage('/images/team-small-raven-yu.png', 40px, 40px);
-  }
-  &.nadeem {
-    @include backgroundImage('/images/team-small-nadeem-khedr.png', 40px, 40px);
-  }
-  &.joseph {
-    @include backgroundImage('/images/team-small-joseph-cooper.png', 40px, 40px);
-  }
-  &.francois {
-    @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  border-radius: 20px;
-  display: inline-block;
-  float: right;
-}
 
 .card-content {
   display: flex;

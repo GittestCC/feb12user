@@ -24,10 +24,13 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('beforeunload', this.onUnload)
-    if (!this.props.isLoggedIn) this.props.goToLogin()
-    this.props.fetchWorkspaces()
-    //TODO: replace with a real workspace url select
-    this.props.workspaceSelect('1')
+    if (this.props.isLoggedIn) {
+      this.props.fetchWorkspaces()
+      //TODO: replace with a real workspace url select
+      this.props.workspaceSelect('1')
+    } else {
+      this.props.goToLogin()
+    }
   }
 
   componentWillReceiveProps() {

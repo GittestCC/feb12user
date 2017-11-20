@@ -1,29 +1,68 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { getPageUrl } from '../../helpers/urlHelper'
+import { pages } from '../../constants/pages'
+import MemberListCircles from '../ui/MemberListCircles'
 
 class SideBar extends Component {
   static propTypes = {
-    navigateTo: PropTypes.func.isRequired,
     isSideBarShownMobile: PropTypes.bool.isRequired,
-    list: PropTypes.array.isRequired
+    list: PropTypes.array.isRequired,
+    workspaces: PropTypes.array.isRequired,
+    push: PropTypes.func.isRequired,
+    selectedWorkspaceId: PropTypes.string,
+    selectedWorkspaceMembers: PropTypes.array.isRequired,
+    isCurrentUserAdmin: PropTypes.bool.isRequired //TODO: pass to MemberListCircles as canEdit when we have a real api
   }
 
   navigateTo = (e, url) => {
     e.preventDefault()
-    this.props.navigateTo(url)
+    this.props.push(url)
+  }
+
+  goToWorkspace = e => {
+    this.props.selectWorkspace(e.target.value)
+  }
+
+  goToEditWorkspace = () => {
+    this.props.push(
+      getPageUrl(pages.workspaceEdit, { id: this.props.selectedWorkspaceId })
+    )
   }
 
   render() {
+    const {
+      isSideBarShownMobile,
+      selectedWorkspaceId,
+      selectedWorkspaceMembers,
+      workspaces,
+      list
+    } = this.props
+
     return (
-      <div
-        className={`sidebar ${this.props.isSideBarShownMobile ? 'show' : ''}`}
-      >
+      <div className={`sidebar ${isSideBarShownMobile ? 'show' : ''}`}>
         <div className="workspaces-select">
           <h3 className="uppercase">Workspace</h3>
+          <select
+            onChange={this.goToWorkspace}
+            value={selectedWorkspaceId || ''}
+          >
+            {workspaces.map((workspace, index) => (
+              <option key={index} value={workspace.id}>
+                {workspace.name}
+              </option>
+            ))}
+          </select>
+          <MemberListCircles
+            users={selectedWorkspaceMembers}
+            editAction={this.goToEditWorkspace}
+            canEdit={true}
+            numberOfItemsShown={6}
+          />
         </div>
         <ul className="unstyled-list sidebar-list">
-          {this.props.list.map((groupItems, key) => (
+          {list.map((groupItems, key) => (
             <li className="sidebar-section" key={key}>
               <ul className="sidebar-inner unstyled-list">
                 {groupItems.map((item, key) => (

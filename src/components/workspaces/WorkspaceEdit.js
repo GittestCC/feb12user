@@ -3,7 +3,6 @@ import WorkspaceFormContainer from '../../containers/workspaces/WorkspaceFormCon
 
 class WorkspaceEdit extends Component {
   componentDidMount() {
-    this.props.fetchWorkspaces()
     this.props.workspaceBreadcrumbSelect(this.props.id)
   }
 
