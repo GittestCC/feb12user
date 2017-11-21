@@ -5,6 +5,8 @@ import {
   setToken as localStorageSetToken,
   getTokenInfoFromLocalStorage
 } from '../helpers/authHelper'
+import { getPageUrl } from '../helpers/urlHelper'
+import { pages } from '../constants/pages'
 
 export const TOKEN_UPDATE_INFO = 'TOKEN_UPDATE_INFO'
 export const LOGOUT = 'LOGOUT'
@@ -69,7 +71,7 @@ export const signUp = (data, callback) => dispatch => {
 export const logIn = data => dispatch => {
   return axios.put('/auth/login', data).then(
     () => {
-      dispatch(push('/app'))
+      dispatch(push(getPageUrl(pages.dashboardHome)))
     },
     err => {
       if (err.errors) {

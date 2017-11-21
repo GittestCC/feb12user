@@ -1,20 +1,43 @@
 import { expect } from 'chai'
 import Login from '../page-objects/login.page'
+import Landing from '../page-objects/landing.page'
+import DashboardIndex from '../page-objects/dashboard.index.page'
 
 describe('login form', () => {
+  it('should redirect the user to landing if he is not logged in and is trying to access root', () => {
+    browser.url('/')
+    Landing.navbar.waitForVisible()
+    expect(Landing.getUrl()).to.eql('/home')
+  })
+
   it('should validates inputs and deny access with wrong creds', () => {
     Login.open()
     Login.loginSubmit()
     Login.loginUsernameError.waitForVisible()
     expect(Login.loginUsernameError.getText()).to.eql('Required')
     expect(Login.loginPasswordError.getText()).to.eql('Required')
-    Login.loginUsername.setValue('test')
+    Login.loginUsername.setValue('invalid')
     Login.loginPassword.setValue('password1')
     Login.loginSubmit()
     Login.loginFormError.waitForVisible()
     expect(Login.loginFormError.getText()).to.eql(
       'Invalid username or password.'
     )
+  })
+
+  it('should redirect the user to dashboard after he login successfully', () => {
+    Login.open()
+    Login.loginUsername.setValue(Login.TEST_USERNAME)
+    Login.loginPassword.setValue(Login.TEST_PASSWORD)
+    Login.loginSubmit()
+    DashboardIndex.container.waitForExist()
+    expect(Login.getUrl()).to.eql('/app/dashboard')
+  })
+
+  it('should redirect the user to dashboard home if he is logged in and is trying to access root', () => {
+    browser.url('/')
+    DashboardIndex.container.waitForExist()
+    expect(Login.getUrl()).to.eql('/app/dashboard')
   })
 })
 

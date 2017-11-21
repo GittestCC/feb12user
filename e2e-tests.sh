@@ -11,6 +11,7 @@ serve -p 5001 -s build & NODE_SERVE=$!
 echo "------starting backend server------"
 docker-compose -f $E2E_TEST_SERVER_COMPOSE up -d
 
+./$E2E_TEST_SERVER_FOLDER/populateMongo.sh
 npm run selenium-setup
 echo "------starting selenium server------"
 npm run selenium-start &

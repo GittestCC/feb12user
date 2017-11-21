@@ -12,7 +12,7 @@ class LandingNavBar extends Component {
 
   render() {
     return (
-      <nav className="main-navigation">
+      <nav className="main-navigation" data-test="landing-navbar">
         <div className="mobile-menu-toggle" onClick={this.openCloseMobileNav} />
 
         <Link to={'/'}>

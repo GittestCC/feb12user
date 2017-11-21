@@ -32,7 +32,7 @@ class NavBar extends Component {
       initials
     } = this.props
     return (
-      <div className="navbar main-navigation">
+      <div className="navbar main-navigation" data-test="navbar">
         <div
           className={`mobile-menu-toggle ${isSideBarShownMobile
             ? 'cross'

@@ -41,7 +41,10 @@ class SideBar extends Component {
     } = this.props
 
     return (
-      <div className={`sidebar ${isSideBarShownMobile ? 'show' : ''}`}>
+      <div
+        className={`sidebar ${isSideBarShownMobile ? 'show' : ''}`}
+        data-test="sidebar"
+      >
         <div className="workspaces-select">
           <h3 className="uppercase">Workspace</h3>
           <select
