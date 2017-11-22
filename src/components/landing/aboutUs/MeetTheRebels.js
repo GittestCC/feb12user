@@ -1,21 +1,35 @@
 import React, { Component } from 'react'
-import Waypoint from 'react-waypoint'
 
 class MeetTheRebels extends Component {
   state = {
-    toFade: ''
+    isFaded: true
   }
 
-  adjustBackgroundLeave = ({ currentPosition, waypointTop }) => {
-    this.setState({ toFade: currentPosition === 'above' ? 'faded' : '' })
+  componentDidMount() {
+    window.addEventListener('scroll', this.setRibbonVisibility)
+    this.setRibbonVisibility()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.setRibbonVisibility)
+  }
+
+  setRibbonVisibility = () => {
+    this.setState(state => {
+      const isFaded = window.scrollY > 175
+      if (state.isFaded === isFaded) {
+        return null
+      }
+      return { isFaded }
+    })
   }
 
   render() {
     return (
       <div className="meet-the-rebels">
-        <div className={`ribbons ${this.state.toFade}`} />
+        <div className={`ribbons ${this.state.isFaded ? 'faded' : ''}`} />
         <div className="content">
-          <div className={`fixed-header ${this.state.toFade}`}>
+          <div className={`fixed-header ${this.state.isFaded ? 'faded' : ''}`}>
             <h1>Meet the rebels.</h1>
             <h3>
               Programmers, designers, gamers, tech & animal lovers - all with
@@ -23,25 +37,16 @@ class MeetTheRebels extends Component {
             </h3>
           </div>
 
-          <Waypoint
-            onEnter={this.adjustBackgroundLeave}
-            onLeave={this.adjustBackgroundLeave}
-            topOffset="70%"
-          >
-            <div className="text-with-image">
-              <img
-                src={require('../../../images/about-us-mission.jpg')}
-                alt=""
-              />
-              <div className="text">
-                <h4>
-                  Our mission to build an amazing platform for developers to
-                  buy, combine, and sell feature-blocks of code while optimizing
-                  costs and reliability at scale.
-                </h4>
-              </div>
+          <div className="text-with-image">
+            <img src={require('../../../images/about-us-mission.jpg')} alt="" />
+            <div className="text">
+              <h4>
+                Our mission is to create an amazing platform for developers to
+                build, combine, buy and sell feature-blocks of code while
+                optimizing costs and reliability at scale.
+              </h4>
             </div>
-          </Waypoint>
+          </div>
         </div>
       </div>
     )

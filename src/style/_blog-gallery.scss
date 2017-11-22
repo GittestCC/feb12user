@@ -18,6 +18,9 @@
     &.joseph {
       @include backgroundImage('/images/team-small-joseph-cooper.png', 40px, 40px);
     }
+    &.guillaume {
+      @include backgroundImage('/images/team-small-guillaume-dury.png', 40px, 40px);
+    }
     &.francois {
       @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px);
       background-size: cover;

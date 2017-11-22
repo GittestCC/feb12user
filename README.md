@@ -20,3 +20,35 @@ The following command shortcuts are available during development:
 * `npm test`: Runs unit tests.
 * `npm run test:e2e` Runs all the e2e tests
 * `npm run lint`: Runs linting
+
+
+##FAQ
+
+### How to add a new blog post
+
+you will need to update `./constants/blog` add a new object to `posts` array with the following
+
+```
+{
+  url: 'http://blogurl',
+  title: 'Blog Title',
+  author: 'Author Name',
+  department: 'Department Name', // Ex: Executive Team
+  avatarClass: 'className', // you can use joseph|nadeem|francois|laura|raven|guillaume
+  date: '2017-07-28' // Format: YYYY-MM-DD
+}
+
+```
+
+to add a new avatar, you need to edit `_blog-gallery.scss` and add it under `.blog-gallery`
+
+### How to hide a page/component from production
+
+in `pageHelper` there is a function `isProduction()` defined, you will need to wrap the component with an if to hide it
+
+Ex:
+```
+import {isProduction} from './helpers/pageHelper'
+
+{!isProduction() ? <SecretComponent /> : null }
+```

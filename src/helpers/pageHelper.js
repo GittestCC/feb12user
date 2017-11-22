@@ -39,6 +39,8 @@ export const getListWithActiveItem = (key, isDashboard) => {
   })
 }
 
+export const isProduction = () => process.env.NODE_ENV === 'production'
+
 function urlMatch(urlSchema, url) {
   return !!pathToRegexp(urlSchema).exec(url)
 }

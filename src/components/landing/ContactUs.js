@@ -13,8 +13,8 @@ const ContactUs = () => (
         Want to know more about the upcoming microservice revolution? Drop us a
         line.
       </h3>
-      <h3 className="center">
-        <b>info@kintohub.com</b>
+      <h3 className="center contact-email">
+        <a href="mailto:info@kintohub.com">info@kintohub.com</a>
       </h3>
 
       <div className="top-section">

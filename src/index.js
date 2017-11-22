@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import configureStore from './store/configureStore'
+import { isProduction } from './helpers/pageHelper'
 
 import Home from './components/landing/Home'
 import AboutUs from './components/landing/AboutUs'
@@ -43,11 +44,25 @@ ReactDOM.render(
             <Route path="/about-us" component={AboutUs} />
             <Route path="/contact-us" component={ContactUs} />
             <Route path="/blog" component={Blog} />
-            <Route path="/log-in" component={LogIn} />
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/create-new-password" component={CreateNewPassword} />
             <Route path="/app" component={AppContainer} />
+
+            {!isProduction() ? (
+              [
+                <Route key="1" path="/log-in" component={LogIn} />,
+                <Route key="2" path="/sign-up" component={SignUp} />,
+                <Route
+                  key="3"
+                  path="/forgot-password"
+                  component={ForgotPassword}
+                />,
+                <Route
+                  key="4"
+                  path="/create-new-password"
+                  component={CreateNewPassword}
+                />
+              ]
+            ) : null}
+
             <Redirect to="/" />
           </Switch>
           <Route component={AuthContainer} />
