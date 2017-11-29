@@ -4,6 +4,21 @@
   }
 }
 
+.edit-workspace {
+  .github-connect {
+    display: flex;
+  }
+  .intro {
+    width: 70%;
+    line-height: 20px;
+    color: $kinto-grayscale-7;
+  }
+  .connect-button {
+    width: 30%;
+    padding-left: $margin-base;
+  }
+}
+
 .workspace-form {
   @extend .kintoapp-form-container;
   .add {
@@ -34,7 +49,7 @@
     &.image-6 { @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px)}
     border-radius: 20px;
     position: relative;
-    
+
     .admin-star {
       background-color: $kinto-yellow;
       border-radius: 10px;
@@ -116,4 +131,13 @@
   width: 40px;
   background-color: $kinto-tinted-grayscale-2;
   border-radius: 20px;
+}
+
+
+// TODO: remove after update branch
+.connect-button .icon {
+  display: inline-block;
+  @include backgroundImage('/images/log-in-with-github.svg', 20px, 20px);
+  margin-right: $margin-base;
+  vertical-align: sub;
 }

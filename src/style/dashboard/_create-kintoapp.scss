@@ -67,10 +67,7 @@ a.disabled {
   }
 
   .form-body {
-    background-color: $kinto-white;
-    padding: 36px 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
+    @extend .form-block;
   }
 
   .combine-buttons{
@@ -383,4 +380,11 @@ a.disabled {
       }
     }
   }
+}
+
+.form-block {
+  background-color: $kinto-white;
+  padding: 36px 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
 }

@@ -9,4 +9,11 @@ export const getPageUrl = (page, params) => {
   return getUrl(url, params)
 }
 
+export const githubConnectUrl = workspaceId => {
+  const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID
+  return workspaceId
+    ? `https://github.com/login/oauth/authorize?state=${workspaceId}&client_id=${clientId}`
+    : ''
+}
+
 export const getUrl = (url, params) => pathToRegexp.compile(url)(params)

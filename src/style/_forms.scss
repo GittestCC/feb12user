@@ -84,65 +84,6 @@ h5.byline {
   }
 }
 
-.button {
-  @include buttonDefault;
-
-  width: 100%;
-  padding-top: 0;
-  height: 50px;
-  line-height: 50px;
-  font-size: 16px;
-  border: none;
-  display: block;
-  font-weight: bold;
-  cursor: pointer;
-  @include abovetablet {
-    height: 40px;
-      line-height: 40px;
-      font-size: 14px;
-  }
-  &:hover {
-    color: $kinto-tinted-grayscale-10;
-  }
-
-  &.dark {
-    @include buttonSecondaryDark;
-    &.disabled {
-      color: rgba($kinto-white, 0.3);
-      cursor: default;
-    }
-
-    line-height: 40px;
-
-    img {
-      position: relative;
-      top: 8px;
-      margin-right: 10px;
-    }
-
-    @include desktop {
-      padding-bottom: 10px;
-    }
-  }
-
-  .disabled {
-    color: rgba($kinto-tinted-grayscale-10, 0.3);
-    cursor: default;
-  }
-
-  &.submitted {
-    @include buttonSubmitted;
-  }
-
-  &.secondary {
-    @include buttonSecondary;
-    &.disabled {
-      color: rgba($kinto-tinted-grayscale-10, 0.3);
-      cursor: default;
-    }
-  }
-}
-
 .checkbox {
   width: 30px;
   height: 30px;

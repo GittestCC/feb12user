@@ -9,7 +9,8 @@ The default repo for Kintohub.com! This is gonna be one hell of a project.
 - install [`java run time`](https://www.java.com/en/download/mac_download.jsp) for the e2e tests
 - install [`nvm`](https://github.com/creationix/nvm)
 - `nvm use`
-- create `.env` file (it is ignored) and setup all the env vars in it, you can check/duplicate `~/.env.sample`
+- create `.env` file (it is ignored) and setup all the env vars in it, you can check`~/.env.sample` for reference
+  - you need to create a github OAuth App and add the client id to `.env`
 
 ## Commands
 
