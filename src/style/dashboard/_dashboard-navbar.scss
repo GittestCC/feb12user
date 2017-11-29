@@ -13,7 +13,7 @@
     justify-content: center;
   }
   .user-avatar {
-    @include backgroundImage('/images/dashboard/avatar-color-1.jpg', 40px, 40px);
+    @include backgroundImage('/images/avatar-color-1.jpg', 40px, 40px);
     min-width: 40px;
     border-radius: 20px;
     cursor: pointer;
@@ -81,7 +81,7 @@
   .search-icon {
     display: none;
     &.show {
-      @include backgroundImage('/images/dashboard/icon-nav-search.svg', 30px, 30px);
+      @include backgroundImage('/images/icon-nav-search.svg', 30px, 30px);
       min-width: 30px;
       height: 30px;
       display:block;
@@ -95,7 +95,7 @@
   }
 
   .close-search {
-    @include backgroundImage('/images/dashboard/icon-searchfield-close.svg', 30px, 30px);
+    @include backgroundImage('/images/icon-searchfield-close.svg', 30px, 30px);
     position: absolute;
     top: 3px;
     right: 6px;
@@ -120,21 +120,21 @@
     position: relative;
     display: inline-block;
     &.dashboard {
-      background-image: url('/images/dashboard/icon-nav-dashboard.svg');
+      background-image: url('/images/icon-nav-dashboard.svg');
     }
     &.market {
-      background-image: url('/images/dashboard/icon-nav-market.svg');
+      background-image: url('/images/icon-nav-market.svg');
     }
   }
   .responsive-go {
       &.to-market {
-      @include backgroundImage('/images/dashboard/icon-nav-switch-to-market-glyph.svg', 40px, 40px);
+      @include backgroundImage('/images/icon-nav-switch-to-market-glyph.svg', 40px, 40px);
       min-width: 40px;
       height: 40px;
       margin-left: 15px;
     }
     &.to-dashboard {
-      @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard-glyph.svg', 40px, 40px);
+      @include backgroundImage('/images/icon-nav-switch-to-dashboard-glyph.svg', 40px, 40px);
       min-width: 80px;
       height: 40px;
       margin-left: 15px;
@@ -165,20 +165,20 @@
     display: inline-block;
     margin-left: 30px;
     &.dashboard {
-      background-image: url('/images/dashboard/icon-nav-dashboard.svg');
+      background-image: url('/images/icon-nav-dashboard.svg');
     }
     &.market {
-      background-image: url('/images/dashboard/icon-nav-market.svg');
+      background-image: url('/images/icon-nav-market.svg');
     }
   }
   .responsive-go.to-market {
-    @include backgroundImage('/images/dashboard/icon-nav-switch-to-market.svg', 80px, 40px);
+    @include backgroundImage('/images/icon-nav-switch-to-market.svg', 80px, 40px);
     min-width: 80px;
     height: 40px;
     margin-left: 15px;
   }
   .responsive-go.to-dashboard {
-    @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard.svg', 80px, 40px);
+    @include backgroundImage('/images/icon-nav-switch-to-dashboard.svg', 80px, 40px);
     min-width: 80px;
     height: 40px;
     margin-left: 15px;
@@ -189,7 +189,7 @@
 }
   .notifications {
     border-radius: 20px;
-    @include backgroundImage('/images/dashboard/icon-nav-notifications.svg', 30px, 30px);
+    @include backgroundImage('/images/icon-nav-notifications.svg', 30px, 30px);
     height: 30px;
     min-width: 30px;
     background-repeat: no-repeat;
@@ -219,21 +219,21 @@
       display: inline-block;
     }
     .on-dashboard {
-      background-image: url('/images/dashboard/icon-nav-dashboard-full.svg');
+      background-image: url('/images/icon-nav-dashboard-full.svg');
       width: 160px;
       height: 40px;
     }
     .on-market {
-      background-image: url('/images/dashboard/icon-nav-market-full.svg');
+      background-image: url('/images/icon-nav-market-full.svg');
       width: 120px;
       height: 40px;
     }
     .go-to-market {
-      @include backgroundImage('/images/dashboard/icon-nav-switch-to-market-full.svg', 120px, 40px);
+      @include backgroundImage('/images/icon-nav-switch-to-market-full.svg', 120px, 40px);
       display: inline-block;
     }
     .go-to-dashboard {
-      @include backgroundImage('/images/dashboard/icon-nav-switch-to-dashboard-full.svg', 160px, 40px);
+      @include backgroundImage('/images/icon-nav-switch-to-dashboard-full.svg', 160px, 40px);
       display: inline-block;
     }
   }

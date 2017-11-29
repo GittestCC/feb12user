@@ -80,7 +80,7 @@ class SideBar extends Component {
                           <img
                             className="item-sub-add"
                             src={`${process.env
-                              .PUBLIC_URL}/images/dashboard/icon-blue-new.svg`}
+                              .PUBLIC_URL}/images/icon-blue-new.svg`}
                             alt=""
                             onClick={e => this.navigateTo(e, item.addUrl)}
                           />

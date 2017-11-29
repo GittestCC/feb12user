@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
-import TitleWithLines from '../ui/TitleWithLines'
 import {
   FieldValidation,
   Button,
@@ -11,15 +10,16 @@ import {
   FormError
 } from '../forms'
 import { required } from '../../helpers/forms/validators'
-import githubIcon from '../../images/footer-socials-github.svg'
 
 const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
   <form data-test="loginForm" onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
+    {/*
     <Button buttonType="dark" type="submit" image={githubIcon}>
       Log In with GitHub
     </Button>
     <TitleWithLines text="or" />
+    */}
     <Field
       id="loginUsername"
       label="username / email"

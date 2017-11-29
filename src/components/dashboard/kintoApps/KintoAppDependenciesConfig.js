@@ -123,6 +123,7 @@ class KintoAppDependenciesConfig extends Component {
                   Custom Parameters
                 </a>
               </li>
+              {/*
               <li>
                 <a
                   onClick={this.showHardwareTab}
@@ -133,6 +134,7 @@ class KintoAppDependenciesConfig extends Component {
                   Hardware Requirements
                 </a>
               </li>
+              */}
             </ul>
           </div>
           <div className="ka-config-body">

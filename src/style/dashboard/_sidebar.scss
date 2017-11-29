@@ -43,31 +43,31 @@
         display: inline-block;
       }
       &.home:before {
-        background-image: url('/images/dashboard/icon-dashboard-home.svg');
+        background-image: url('/images/icon-dashboard-home.svg');
       }
       &.analytics:before {
-        background-image: url('/images/dashboard/icon-dashboard-analytics.svg');
+        background-image: url('/images/icon-dashboard-analytics.svg');
       }
       &.kintoapps:before {
-        background-image: url('/images/dashboard/icon-dashboard-applications.svg');
+        background-image: url('/images/icon-dashboard-applications.svg');
       }
       &.billing:before {
-        background-image: url('/images/dashboard/icon-dashboard-billing.svg');
+        background-image: url('/images/icon-dashboard-billing.svg');
       }
       &.hosting:before {
-        background-image: url('/images/dashboard/icon-dashboard-hosting.svg');
+        background-image: url('/images/icon-dashboard-hosting.svg');
       }
       &.kintoblocks:before {
-        background-image: url('/images/dashboard/icon-dashboard-kintoblocks.svg');
+        background-image: url('/images/icon-dashboard-kintoblocks.svg');
       }
       &.sales-data:before {
-        background-image: url('/images/dashboard/icon-dashboard-sales-data.svg');
+        background-image: url('/images/icon-dashboard-sales-data.svg');
       }
       &.services:before {
-        background-image: url('/images/dashboard/icon-dashboard-services.svg');
+        background-image: url('/images/icon-dashboard-services.svg');
       }
       &.settings:before {
-        background-image: url('/images/dashboard/icon-dashboard-settings.svg');
+        background-image: url('/images/icon-dashboard-settings.svg');
       }
       &.kintoblocks img, &.kintoapps img, &.services img {
         position: absolute;
@@ -77,7 +77,7 @@
       }
     }
     .selected {
-      background-image: url('/images/dashboard/sidebar-highlight.svg');
+      background-image: url('/images/sidebar-highlight.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
