@@ -48,7 +48,7 @@ class KintoBlockManage extends Component {
       <div className="kintoblock-manage">
         <div className="page-title">
           <h2>
-            {kintoBlock.name}
+            <span data-test="title">{kintoBlock.name}</span>
             <div
               className={`text-highlight status h6 ${getVersionStateClassName(
                 version

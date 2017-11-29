@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import { Button } from '../forms'
 
 const GlobalSaveBar = ({ isShown, submitLabel, onSubmit }) => (
-  <div className={`global-save-bar ${isShown ? 'show' : ''}`}>
+  <div
+    className={`global-save-bar ${isShown ? 'show' : ''}`}
+    data-test="savebar"
+  >
     <Button onClick={onSubmit}>{submitLabel}</Button>
     <div id="savebar-portal" />
   </div>

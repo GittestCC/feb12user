@@ -52,3 +52,12 @@ import {isProduction} from './helpers/pageHelper'
 
 {!isProduction() ? <SecretComponent /> : null }
 ```
+
+##### Note:
+
+if you wanna compile a build and still show dev UI, you can set the following env variable
+```
+REACT_APP_SHOW_DEV_UI=true
+```
+this is useful for e2e tests & staging
+

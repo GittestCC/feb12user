@@ -50,7 +50,7 @@ describe('KintoBlocks actions', () => {
   })
 
   it('fetchKintoBlocks if result is not empty fire a kintoBlockReceive action', async () => {
-    const result = { blocks: [] }
+    const result = { blocks: [{ data: 'data' }] }
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -62,7 +62,7 @@ describe('KintoBlocks actions', () => {
     await store.dispatch(actions.fetchKintoBlocks())
     expect(store.getActions()).toEqual([
       { type: actions.FETCH_KINTO_BLOCKS },
-      { type: actions.RECEIVE_KINTO_BLOCKS, data: result }
+      { type: actions.RECEIVE_KINTO_BLOCKS, data: [{ data: 'data' }] }
     ])
   })
 

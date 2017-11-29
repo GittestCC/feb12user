@@ -10,6 +10,14 @@ class Page {
     return browser.element('[data-test=navbar]')
   }
 
+  get savebar() {
+    return browser.element('[data-test=savebar]')
+  }
+
+  submitGlobal() {
+    return browser.element('[data-test=savebar] > button').click()
+  }
+
   open(path) {
     browser.url('/' + path)
   }

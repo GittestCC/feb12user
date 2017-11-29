@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
-import Slider from 'rc-slider'
+import { Field, reduxForm, FieldArray } from 'redux-form'
 import FieldValidation from '../../../forms/FieldValidation'
-import Toggle from '../../../forms/Toggle'
-import { required } from '../../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
+import KintoBlockManageParamsField from './KintoBlockManageParamsField'
+import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
 
 class KintoBlockManageForm extends Component {
   static propTypes = {
@@ -45,10 +44,6 @@ class KintoBlockManageForm extends Component {
     this.setState({ customParameters: newArray })
   }
 
-  expandHardware = () => {
-    this.setState({ expanded: !this.state.expanded })
-  }
-
   render() {
     return (
       <form
@@ -62,7 +57,7 @@ class KintoBlockManageForm extends Component {
             up in a sea of babies.
           </h5>
 
-          <div className="form-body">
+          <div className="form-body simple">
             <div className="field-wrapper">
               <label htmlFor="versionNumber">Version number</label>
               <div className="field-input-wrapper">
@@ -99,14 +94,28 @@ class KintoBlockManageForm extends Component {
           />
         </div>
 
+        <div className="form-wrapper custom-paramaters full-row">
+          <h3>Environmental & Custom Parameters</h3>
+          <h5>Something here.</h5>
+
+          <FieldArray
+            name="environmentVariables"
+            component={KintoBlockManageEnvVarsField}
+          />
+          <FieldArray
+            name="configParameters"
+            component={KintoBlockManageParamsField}
+          />
+        </div>
+
         <div className="form-wrapper availibility">
-          <h3>Availbility</h3>
+          <h3>Availability</h3>
           <h5>
             Keep your baby close to you, or share your proud creation with the
             world.
           </h5>
 
-          <div className="form-body">
+          <div className="form-body simple">
             <div className="radio">
               <Field
                 name="private"
@@ -125,140 +134,6 @@ class KintoBlockManageForm extends Component {
                 value="public"
               />
             </div>
-          </div>
-        </div>
-
-        <div className="form-wrapper custom-paramaters">
-          <h3>Custom Parameters</h3>
-          <h5>Something here.</h5>
-
-          <div className="form-body">
-            {this.state.customParameters.map((customParamater, index) => (
-              <div className="row added" key={index}>
-                <Field
-                  name={customParamater.variableValue}
-                  component={FieldValidation}
-                  placeholder={customParamater.variableValue}
-                />
-                <Field
-                  name={customParamater.variableName}
-                  component={FieldValidation}
-                  placeholder={customParamater.variableName}
-                />
-                <div
-                  className="icon delete"
-                  onClick={() => this.removeParamater(index)}
-                />
-              </div>
-            ))}
-            <div className="row">
-              <Field
-                name="customParamaterName"
-                component={FieldValidation}
-                placeholder="Enter custom parameter"
-                onChange={event =>
-                  this.setState({ newCustomParamaterName: event.target.value })}
-                value={this.state.newCustomParamaterName}
-              />
-              <Field
-                name="customParamaterValue"
-                component={FieldValidation}
-                placeholder="Values ( seperate with ',' )"
-                onChange={event =>
-                  this.setState({
-                    newCustomParamaterValue: event.target.value
-                  })}
-                value={this.state.newCustomParamaterValue}
-              />
-              <div className="icon add" onClick={this.addCustomParamater} />
-            </div>
-          </div>
-        </div>
-
-        <div className="form-wrapper hardware-requirements">
-          <h3>Hardware Requirements</h3>
-          <h5>
-            What does this baby need to stay healthy and kicking? You can still
-            modify these settings later.
-          </h5>
-
-          <div className="hardware-requirements-wrapper">
-            <div
-              className={`expand ${this.state.expanded ? '' : 'collapse'} `}
-              onClick={this.expandHardware}
-            >
-              <h4>Hardware Requirements</h4>
-              <div className="right">
-                <h6>{this.state.expanded ? 'Collapse' : 'Expand'}</h6>
-                <div className="icon" />
-              </div>
-            </div>
-
-            {this.state.expanded && (
-              <div>
-                <div className="line" />
-                <div className="form-body hardware">
-                  <div className="memory">
-                    <div className="input-container">
-                      <Field
-                        name="memoryLimits"
-                        label="Memory Limits"
-                        placeholder="64 - 262144 MB"
-                        component={FieldValidation}
-                        validate={required}
-                        type="number"
-                      />
-                    </div>
-                    <div className="input-container">
-                      <Field
-                        name="memoryRequests"
-                        label="Memory Requests"
-                        placeholder="64 - 262144 MB"
-                        component={FieldValidation}
-                        validate={required}
-                        type="number"
-                      />
-                    </div>
-                  </div>
-                  <div className="line" />
-                  <div className="cpu">
-                    <div className="toggle-wrapper">
-                      <Toggle
-                        name="toggleCPU"
-                        id="toggleCPU"
-                        text="Dedicated CPUs"
-                      />
-                    </div>
-                    <div className="limits-requests">
-                      <div className="input-container">
-                        <Field
-                          name="cpuLimits"
-                          label="CPU Limits"
-                          placeholder="1 - 1000 m"
-                          component={FieldValidation}
-                          validate={required}
-                          type="number"
-                        />
-                      </div>
-                      <div className="input-container">
-                        <Field
-                          name="cpuRequests"
-                          label="CPU Requests"
-                          placeholder="1 - 1000 m"
-                          component={FieldValidation}
-                          validate={required}
-                          type="number"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="line" />
-                  <div className="scaling">
-                    <Slider min={50} max={100} step={10} dots={true} />
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </form>

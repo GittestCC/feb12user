@@ -1,0 +1,21 @@
+.icon {
+  border: none;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  &.disabled, &[disabled] {
+    opacity: 0.4;
+    &:hover {
+      cursor: default;
+    }
+  }
+  &.remove {
+    @include backgroundImage('/images/icon-red-delete.svg');
+  }
+  &.add {
+    @include backgroundImage('/images/icon-blue-new.svg');
+  }
+}
+
+

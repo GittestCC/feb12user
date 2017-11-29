@@ -12,7 +12,11 @@ const KintoBlockCreateForm = ({
   error
 }) => {
   return (
-    <form className="kintoblock-create form-container" onSubmit={handleSubmit}>
+    <form
+      className="kintoblock-create form-container"
+      onSubmit={handleSubmit}
+      data-test="kb-create-form"
+    >
       <div className="form-wrapper basic-info">
         <h3>Basic Info</h3>
         <h5>

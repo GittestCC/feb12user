@@ -1,14 +1,16 @@
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
-import isEmpty from 'lodash/isEmpty'
 import axios from 'axios'
+import isEmpty from 'lodash/isEmpty'
 
 import { formSubmitted } from './pageOptions'
+import { pages } from '../constants/pages'
 import {
   getManageUrlForKintoBlock,
   isVersionEqual
 } from '../helpers/versionHelper'
 import { isRecent } from '../helpers/dateHelper'
+import { getPageUrl } from '../helpers/urlHelper'
 
 export const FETCH_KINTO_BLOCKS = 'FETCH_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
@@ -55,10 +57,12 @@ export const kintoBlockCreateVersion = (id, data) => ({
 
 export const fetchKintoBlocks = () => dispatch => {
   dispatch(kintoBlocksFetch())
-  return axios.get('/kintoblocks/all').then(data => {
-    isEmpty(data)
-      ? dispatch(push('/app/dashboard/kintoblocks/create'))
-      : dispatch(kintoBlocksReceive(data))
+  return axios.get('/kintoblocks/all').then(result => {
+    if (isEmpty(result) || isEmpty(result.blocks)) {
+      dispatch(push(getPageUrl(pages.dashboardKintoBlocksCreate)))
+    } else {
+      dispatch(kintoBlocksReceive(result.blocks))
+    }
   })
 }
 

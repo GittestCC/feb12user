@@ -41,7 +41,7 @@ const kintoBlocksReducer = (state = defaultState, action) => {
     case RECEIVE_KINTO_BLOCKS: {
       let allIds = []
       let byId = {}
-      action.data.blocks.forEach(block => {
+      action.data.forEach(block => {
         allIds.push(block.id)
         byId[block.id] = {
           ...state.byId[block.id],

@@ -26,11 +26,7 @@ describe('login form', () => {
   })
 
   it('should redirect the user to dashboard after he login successfully', () => {
-    Login.open()
-    Login.loginUsername.setValue(Login.TEST_USERNAME)
-    Login.loginPassword.setValue(Login.TEST_PASSWORD)
-    Login.loginSubmit()
-    DashboardIndex.container.waitForExist()
+    Login.login()
     expect(Login.getUrl()).to.eql('/app/dashboard')
   })
 

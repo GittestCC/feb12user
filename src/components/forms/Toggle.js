@@ -5,7 +5,7 @@ import Tooltip from 'rc-tooltip'
 // TODO: checked prop is because of a bug in redux-form
 // https://github.com/erikras/redux-form/issues/1372
 const Toggle = ({ input, id, label, help }) => (
-  <label className="switch">
+  <label className="switch" data-test={id || input.name}>
     <input
       {...input}
       type="checkbox"

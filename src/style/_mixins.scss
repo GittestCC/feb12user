@@ -43,7 +43,7 @@
   }
 }
 
-@mixin backgroundImage($url, $width, $height){
+@mixin backgroundImage($url, $width: null, $height: null){
   background-image: url($url);
   background-size: contain;
   background-repeat: no-repeat;

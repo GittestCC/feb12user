@@ -43,6 +43,7 @@ class KintoBlockCard extends Component {
       <Link
         to={latestVersion.url}
         className={`kintoblock ${kintoBlock.color || 'lapis'}`}
+        data-test={`kb-card-${dropdownId}`}
       >
         <div className="top">
           <div className="text">

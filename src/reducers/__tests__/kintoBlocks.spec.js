@@ -17,7 +17,7 @@ describe('KintoBlocks Reducer', () => {
   it('receiveKintoBlocks reset allIds with the new ids', () => {
     const newState = reducer(
       { byId: {}, allIds: ['3', '4'] },
-      actions.kintoBlocksReceive({ blocks: simpleBlocks })
+      actions.kintoBlocksReceive(simpleBlocks)
     )
     expect(newState.allIds).toEqual(['1', '2'])
   })
@@ -28,7 +28,7 @@ describe('KintoBlocks Reducer', () => {
         byId: { '1': { special: 'one' }, '2': { special: 'two' } },
         allIds: ['1', '2']
       },
-      actions.kintoBlocksReceive({ blocks: simpleBlocks })
+      actions.kintoBlocksReceive(simpleBlocks)
     )
     expect(newState.byId['1']).toEqual({
       id: '1',

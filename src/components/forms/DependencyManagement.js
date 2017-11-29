@@ -35,7 +35,7 @@ class DependencyManagement extends Component {
           Choose the build and give your baby a number so they don’t get mixed
           up in a sea of babies.
         </h5>
-        <div className="form-body dependency-management">
+        <div className="form-body simple dependency-management">
           <Select.Async
             placeholder="Search KintoBlocks or services"
             loadOptions={onSearchKintoBlocks}

@@ -56,14 +56,10 @@
         label, input {
           width: 100%;
         }
-        .form-body {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
       }
       &.versioning {
         .form-body {
+          display: flex;
           min-height: 160px;
           flex-direction: row;
           justify-content: space-between;
@@ -79,45 +75,6 @@
           }
           .service {
             margin-top: 30px;
-          }
-        }
-      }
-      &.custom-paramaters {
-        @media (min-width: 1440px) {
-          grid-column-start: 2;
-          grid-row-start: 3;
-          grid-row-end: span 4;
-        }
-        .form-body {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-direction: column;
-          .row {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0;
-            &.added input{
-              @include placeholder($kinto-tinted-grayscale-7)
-            }
-          }
-          .field-wrapper {
-            width: 45%;
-            input {
-              margin-bottom: 0;
-            }
-          }
-          .icon{
-            cursor: pointer;
-            &.add {
-              @include backgroundImage('/images/icon-blue-new.svg', 20px, 20px);
-            }
-            &.delete {
-              @include backgroundImage('/images/icon-red-delete.svg', 20px, 20px);
-            }
           }
         }
       }
@@ -173,7 +130,9 @@
         box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
         border-radius: 12px;
         background-color: $kinto-white;
-        padding: 40px;
+        .title {
+          margin-bottom: 20px;
+        }
         .radio .field-wrapper {
           display: flex;
           flex-direction: row-reverse;
@@ -194,10 +153,61 @@
         .line {
           margin: 15px 0 25px;
         }
+        &.simple {
+          padding: 40px;
+        }
+        .top {
+          background-color: $kinto-white;
+          border-radius: 8px 8px 0 0;
+          padding: 60px 40px 20px;
+        }
+        .bottom {
+          padding: 50px 40px;
+          border-radius: 0 0 8px 8px;
+          background-color: $kinto-tinted-grayscale-1;
+        }
       }
     }
   }
+  .form-body.env .row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 40px;
+    grid-column-gap: 10px;
+  }
+
+  .form-body.custom-params {
+    .row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr 40px;
+      grid-column-gap: 10px;
+    }
+    .toggle-message {
+      margin-top: 7px;
+    }
+    .switch-container {
+      padding-top: 22px;
+    }
+  }
+
+  .icon-column {
+    padding-top: 30px;
+  }
+
   .full-row {
     grid-column: 1 / 3;
   }
+
+  .empty-message {
+    background: $kinto-tinted-grayscale-1;
+    color: $kinto-tinted-grayscale-6;
+    padding: 7px 0 9px 0;
+    text-align: center;
+  }
+
+  .switch {
+    text-transform: none;
+  }
+
 }

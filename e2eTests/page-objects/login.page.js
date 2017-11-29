@@ -1,7 +1,17 @@
 import Page from './page'
+import DashboardIndex from './dashboard.index.page'
+
 class Login extends Page {
   open() {
     super.open('log-in')
+  }
+
+  login() {
+    this.open()
+    this.loginUsername.setValue(this.TEST_USERNAME)
+    this.loginPassword.setValue(this.TEST_PASSWORD)
+    this.loginSubmit()
+    DashboardIndex.container.waitForExist()
   }
 
   get loginUsername() {

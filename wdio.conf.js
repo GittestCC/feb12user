@@ -126,7 +126,7 @@ exports.config = {
   mochaOpts: {
     ui: 'bdd',
     compilers: ['js:babel-register']
-    //TODO browser.debug timeout: 24 * 60 * 60 * 10000
+    // timeout: 24 * 60 * 60 * 10000 // browser.debug()
   }
   //
   // =====
