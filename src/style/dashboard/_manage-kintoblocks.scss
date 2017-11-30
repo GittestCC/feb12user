@@ -119,10 +119,6 @@
       .hardware-requirements-wrapper {
         box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
         border-radius: 12px;
-        .line {
-          width: 100%;
-          border-bottom: solid 1px $kinto-tinted-grayscale-2;
-        }
       }
       .form-body {
         width: 100%;
@@ -208,6 +204,34 @@
 
   .switch {
     text-transform: none;
+  }
+
+  .basic-info {
+    .form-body {
+      padding: 0;
+    }
+    .section {
+      padding: 14px 40px 40px 40px;
+      &:first-child {
+        padding-top: 40px;
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+    border-bottom: 2px solid $kinto-tinted-grayscale-2;
+  }
+
+  .description-field { height: 100px; }
+
+  .section-info {
+    display: flex;
+    .field-wrapper {
+      width: 50%;
+      &:first-child { margin-right: 10px; }
+      &:last-child { margin-left: 10px; }
+    }
   }
 
 }

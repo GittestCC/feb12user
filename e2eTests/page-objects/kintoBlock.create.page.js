@@ -21,26 +21,6 @@ class KintoBlockCreate extends Page {
   get repository() {
     return getInput('repositoryName')
   }
-
-  get memLimit() {
-    return getInput('"hardwareData.memLimit"')
-  }
-
-  get memRequests() {
-    return getInput('"hardwareData.memRequests"')
-  }
-
-  get dedicatedCpu() {
-    return getInput('"hardwareData.dedicatedCpu"')
-  }
-
-  get minCpu() {
-    return getInput('"hardwareData.minCpu"')
-  }
-
-  get maxCpu() {
-    return getInput('"hardwareData.maxCpu"')
-  }
 }
 
 export default new KintoBlockCreate()

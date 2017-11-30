@@ -10,6 +10,8 @@ function mapStateToProps(state, { kintoBlock, ver }) {
 
   return {
     initialValues: {
+      name: kintoBlock.name,
+      shortDescription: kintoBlock.shortDescription,
       dependencies: kintoBlock.dependencies,
       environmentVariables: kintoBlock.environmentVariables,
       configParameters: kintoBlock.configParameters

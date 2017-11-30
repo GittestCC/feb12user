@@ -89,21 +89,14 @@ describe('KintoBlocks actions', () => {
     ])
   })
 
-  it('fetchKintoBlock process metadata for name and add lastFetch to send in the receive action', async () => {
-    const TEST_NAME = 'Test KintoBlock'
-    const metadata = {
-      dependencies: {
-        '1': { name: TEST_NAME }
-      }
-    }
+  it('fetchKintoBlock add lastFetch to send in the receive action', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
         response: {
           id: '1',
-          otherInfo: 'otherInfo',
-          metadata
+          otherInfo: 'otherInfo'
         }
       })
     })
@@ -114,10 +107,8 @@ describe('KintoBlocks actions', () => {
       {
         type: actions.RECEIVE_KINTO_BLOCK,
         id: '1',
-        metadata,
         data: {
           id: '1',
-          name: TEST_NAME,
           otherInfo: 'otherInfo',
           lastFetch: now
         }

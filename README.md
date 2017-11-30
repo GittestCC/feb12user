@@ -23,7 +23,7 @@ The following command shortcuts are available during development:
 * `npm run lint`: Runs linting
 
 
-##FAQ
+## FAQ
 
 ### How to add a new blog post
 

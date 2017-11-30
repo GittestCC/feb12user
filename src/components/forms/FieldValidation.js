@@ -10,7 +10,7 @@ const FieldValidation = props => {
   const { input, placeholder, label, type, help, close, id, disabled } = props
   const { touched, submitFailed, error } = props.meta
   const hasError = (touched || submitFailed) && error
-  let className = input.className || ''
+  let className = props.className || ''
   if (hasError) {
     className += ' error'
   }
@@ -71,6 +71,7 @@ const FieldValidation = props => {
 }
 FieldValidation.PropTypes = {
   id: PropTypes.string,
+  className: PropTypes.string,
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   placeholder: PropTypes.string,

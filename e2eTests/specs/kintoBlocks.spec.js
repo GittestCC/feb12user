@@ -30,10 +30,6 @@ describe('create kintoBlock', () => {
     KintoBlockCreate.name.input.setValue('test name')
     KintoBlockCreate.starterPack.input.selectByIndex(0)
     KintoBlockCreate.repository.input.setValue('repo')
-    KintoBlockCreate.memLimit.input.setValue('65')
-    KintoBlockCreate.memRequests.input.setValue('65')
-    KintoBlockCreate.minCpu.input.setValue('65')
-    KintoBlockCreate.maxCpu.input.setValue('65')
     KintoBlockCreate.submitGlobal()
     KintoBlockList.getCard(0).waitForVisible()
     const name = KintoBlockList.getCard(0)
@@ -77,6 +73,33 @@ describe('manage kintoBlock', () => {
     KintoBlockManage.addEnvKey.setValue('name')
     KintoBlockManage.addEnvValue.setValue('value')
     KintoBlockManage.envInput.element('.bottom .icon-column button').click()
+    expect(
+      KintoBlockManage.getEnvRow(0)
+        .element('[data-test="environmentVariables[0].key"] input')
+        .getValue()
+    ).to.eql('name')
+    expect(
+      KintoBlockManage.getEnvRow(0)
+        .element('[data-test="environmentVariables[0].value"] input')
+        .getValue()
+    ).to.eql('value')
+  })
+
+  it('should display the updated kb data after successfully updating it', () => {
+    KintoBlockManage.name.input.setValue('test name 2')
+    KintoBlockManage.description.input.setValue('test description')
+    KintoBlockManage.submitGlobal()
+    browser.waitUntil(() => {
+      return !KintoBlockManage.savebar.getAttribute('class').includes('show')
+    }, 5000)
+    KintoBlockList.open()
+    KintoBlockList.getCard(0).waitForVisible()
+    KintoBlockList.getCard(0).click()
+    KintoBlockManage.title.waitForVisible()
+    expect(KintoBlockManage.title.getText()).to.eq('test name 2')
+    expect(KintoBlockManage.description.input.getText()).to.eq(
+      'test description'
+    )
     expect(
       KintoBlockManage.getEnvRow(0)
         .element('[data-test="environmentVariables[0].key"] input')

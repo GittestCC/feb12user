@@ -9,47 +9,70 @@ import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
 class KintoBlockManageForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    dependencies: PropTypes.array
-  }
-
-  state = {
-    expanded: false,
-    newCustomParamaterName: '',
-    newCustomParamaterValue: '',
-    customParameters: [
-      {
-        variableName: 'Chance',
-        variableValue: 'The Rapper'
-      }
-    ]
-  }
-
-  addCustomParamater = () => {
-    const newRow = this.state.customParameters.slice()
-    newRow.push({
-      variableName: this.state.newCustomParamaterValue,
-      variableValue: this.state.newCustomParamaterName,
-      id: Math.random()
-    })
-    this.setState({
-      customParameters: newRow,
-      newCustomParamaterName: '',
-      newCustomParamaterValue: ''
-    })
-  }
-
-  removeParamater = index => {
-    const newArray = [...this.state.customParameters]
-    newArray.splice(index, 1)
-    this.setState({ customParameters: newArray })
+    dependencies: PropTypes.array,
+    kintoBlock: PropTypes.object.isRequired
   }
 
   render() {
+    const { kintoBlock, dependencies, handleSubmit, ver } = this.props
     return (
       <form
         className="kintoblock-manage form-container"
-        onSubmit={this.props.handleSubmit}
+        onSubmit={handleSubmit}
       >
+        <div className="form-wrapper full-row basic-info">
+          <h3>Basic Info</h3>
+          <h5>
+            Choose the build and give your baby a number so they don’t get mixed
+            up in a sea of babies.
+          </h5>
+          <div className="form-body">
+            <div className="section">
+              <Field
+                name="name"
+                label="Kintoblock Name"
+                component={FieldValidation}
+                type="input"
+              />
+              <Field
+                className="description-field"
+                name="shortDescription"
+                label="Description"
+                component={FieldValidation}
+                type="textarea"
+              />
+            </div>
+            <div className="line" />
+            <div className="section section-info">
+              <div className="field-wrapper">
+                <label>Language</label>
+                <div className="field-input-wrapper">
+                  <select disabled>
+                    <option>{kintoBlock.language}</option>
+                  </select>
+                </div>
+              </div>
+              <div className="field-wrapper">
+                <label>Protocol</label>
+                <div className="field-input-wrapper">
+                  <select disabled>
+                    <option>{kintoBlock.protocol}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="line" />
+            <div className="section">
+              <div className="field-wrapper">
+                <label>Repository</label>
+                <div className="field-input-wrapper">
+                  <input disabled value={kintoBlock.repositoryName} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="form-wrapper versioning full-row">
           <h3>Versioning</h3>
           <h5>
@@ -65,7 +88,7 @@ class KintoBlockManageForm extends Component {
                   type="text"
                   name="version"
                   className="disabled"
-                  value={'0.1.0'}
+                  value={ver}
                   disabled
                 />
               </div>
@@ -90,7 +113,7 @@ class KintoBlockManageForm extends Component {
         <div className="form-wrapper blocks-and-services full-row">
           <ManageDependenciesFieldContainer
             name="dependencies"
-            dependencies={this.props.dependencies}
+            dependencies={dependencies}
           />
         </div>
 

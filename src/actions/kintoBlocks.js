@@ -82,7 +82,6 @@ export const fetchKintoBlock = (id, ver) => (dispatch, getState) => {
   }
   dispatch(kintoBlocksFetch())
   return axios.get(`/kintoblocks/${id}/versions/${ver}`).then(data => {
-    data.name = data.metadata.dependencies[data.id].name
     data.lastFetch = new Date()
     return dispatch(kintoBlockReceive(id, data))
   })

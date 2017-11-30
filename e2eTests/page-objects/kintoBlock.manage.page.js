@@ -1,5 +1,5 @@
 import Page from './page'
-import { getDataTest } from '../helpers/elementSelector'
+import { getDataTest, getInput } from '../helpers/elementSelector'
 
 class KintoBlockCreate extends Page {
   open(id, ver) {
@@ -8,6 +8,14 @@ class KintoBlockCreate extends Page {
 
   get title() {
     return getDataTest('title')
+  }
+
+  get name() {
+    return getInput('name')
+  }
+
+  get description() {
+    return getInput('shortDescription', 'textarea')
   }
 
   get envInput() {

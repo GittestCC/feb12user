@@ -8,8 +8,9 @@ pipeline {
             withCredentials([string(credentialsId: 'docker_registry', variable: 'SECRET')]) {
             sh '''#!/bin/bash -xe
 echo "doing the build..."
-echo "REACT_APP_SERVER_URL=http://api.dev.kintocloud.com" > .env
-docker login kintocloud.azurecr.io --username kintocloud --password ${SECRET}            
+echo "REACT_APP_SERVER_URL=http://api.dev.kintocloud.com" >> .env
+echo "REACT_APP_SHOW_DEV_UI=true" >> .env
+docker login kintocloud.azurecr.io --username kintocloud --password ${SECRET}
 docker build -t kintocloud.azurecr.io/frontend:dev-${BUILD_NUMBER} .
 GIT_TAG=`git describe --tags ${GIT_COMMIT}`
 if (( ${#GIT_TAG} > 8 ));
@@ -26,7 +27,7 @@ fi'''
           },
           "Slack build started": {
             slackSend(color: '#D3D3D3', message: "Started: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]  from branch ${env.GIT_BRANCH} ")
-            
+
           }
         )
       }
