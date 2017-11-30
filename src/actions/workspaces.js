@@ -25,13 +25,25 @@ export const fetchWorkspaces = () => dispatch => {
         members: [
           {
             permission: 'Admin',
+            username: 'YourConscience',
+            email: 'HelloThere@gmail.com',
+            id: '5a1e17ba3c35a50001384213'
+          },
+          {
+            permission: 'Admin',
             username: 'Sausage Sauvage',
             email: 'Laura@gmail.com',
-            id: '1'
+            id: '5a0be165af2b8e0001faa6de'
           },
           {
             permission: 'Member',
-            username: 'SolidAbs91',
+            username: 'FootballFan',
+            email: 'Jesper@gmail.com',
+            id: '10'
+          },
+          {
+            permission: 'Member',
+            username: 'SolidAbs92',
             email: 'Raven@gmail.com',
             id: '2'
           },
@@ -52,6 +64,24 @@ export const fetchWorkspaces = () => dispatch => {
             username: 'Neferititi',
             email: 'Naedeem@gmail.com',
             id: '5'
+          },
+          {
+            permission: 'Admin',
+            username: 'Banana',
+            email: 'Banana@gmail.com',
+            id: '6'
+          },
+          {
+            permission: 'Member',
+            username: 'Pineapple',
+            email: 'Pineapple@gmail.com',
+            id: '7'
+          },
+          {
+            permission: 'Member',
+            username: 'Oranges',
+            email: 'yourOrange@gmail.com',
+            id: '8'
           }
         ]
       },

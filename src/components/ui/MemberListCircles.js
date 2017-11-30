@@ -7,7 +7,8 @@ const MemberListCircles = ({
   users,
   canEdit,
   editAction,
-  numberOfItemsShown
+  numberOfItemsShown,
+  size
 }) => {
   // the edit circle will take a spot
   if (canEdit) {
@@ -20,20 +21,19 @@ const MemberListCircles = ({
     plusCount = users.length - numberOfItemsShown
   }
   return (
-    <div className="member-list-circles dark">
+    <div className="member-list-circles">
       {users.slice(0, numberOfItemsShown).map((member, index) => (
-        <div className="avatar avatar-text avatar-small uppercase" key={index}>
+        <div className={`avatar text ${size} uppercase`} key={index}>
+          {member.permission === 'Admin' && (
+            <div className="admin-star highlight" />
+          )}
+          {member.permission === 'Owner' && <div className="owner highlight" />}
           {getInitials(member.username)}
         </div>
       ))}
-      {plusCount && (
-        <div className="avatar avatar-small avatar-plus">+{plusCount}</div>
-      )}
+      {plusCount && <div className={`avatar ${size} plus`}>+{plusCount}</div>}
       {canEdit && (
-        <a
-          className="avatar avatar-small avatar-edit hide-text"
-          onClick={editAction}
-        >
+        <a className={`avatar ${size} edit hide-text`} onClick={editAction}>
           edit
         </a>
       )}

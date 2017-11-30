@@ -28,7 +28,7 @@ ComplexModal.propTypes = {
   component: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  actions: PropTypes.object.isRequired,
+  actions: PropTypes.object,
   onClose: PropTypes.func.isRequired
 }
 

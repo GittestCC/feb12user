@@ -5,6 +5,7 @@ import FieldValidation from '../../../forms/FieldValidation'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
 import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
+import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
 class KintoBlockManageForm extends Component {
   static propTypes = {
@@ -20,6 +21,12 @@ class KintoBlockManageForm extends Component {
         className="kintoblock-manage form-container"
         onSubmit={handleSubmit}
       >
+        <div className="form-wrapper workspaces full-row">
+          <WorkspaceToolbarContainer
+            isKintoApp={false}
+            kintoItem={kintoBlock}
+          />
+        </div>
         <div className="form-wrapper full-row basic-info">
           <h3>Basic Info</h3>
           <h5>

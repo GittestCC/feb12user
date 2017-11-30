@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const CheckBox = ({ input, id, label, meta }) => {
+const CheckBox = ({ input, id, label, meta, disabled }) => {
   const { touched, submitFailed, error } = meta
   const hasError = (touched || submitFailed) && error
   let className = input.className || ''
@@ -10,13 +10,14 @@ const CheckBox = ({ input, id, label, meta }) => {
   }
 
   return (
-    <div>
+    <div className="field-wrapper">
       <div className="checked-field-wrapper">
         <input
           {...input}
           className={`checkbox ${input.value ? 'checked' : ''} ${className}`}
           type="checkbox"
           id={id || input.name}
+          disabled={disabled}
         />
         <label className="checkbox-message" htmlFor={id || input.name}>
           <h6>{label}</h6>

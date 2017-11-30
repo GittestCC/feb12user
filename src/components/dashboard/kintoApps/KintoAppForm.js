@@ -4,9 +4,14 @@ import { Field, reduxForm, FormSection } from 'redux-form'
 import { FieldValidation, Button, CheckBox } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
+import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
-const KintoAppForm = ({ handleSubmit, version, appDependencies }) => (
+const KintoAppForm = ({ handleSubmit, version, appDependencies, kintoApp }) => (
   <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
+    <div className="form-wrapper workspaces">
+      <WorkspaceToolbarContainer isKintoApp={true} kintoItem={kintoApp} />
+    </div>
+
     <div className="form-wrapper basic-info">
       <h3>Basic Info</h3>
       <h5>Give your baby a name, and a version number.</h5>
@@ -89,7 +94,8 @@ const KintoAppForm = ({ handleSubmit, version, appDependencies }) => (
 KintoAppForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   version: PropTypes.string.isRequired,
-  appDependencies: PropTypes.array
+  appDependencies: PropTypes.array,
+  kintoApp: PropTypes.object
 }
 
 const validate = values => {

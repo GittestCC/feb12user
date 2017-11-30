@@ -40,6 +40,9 @@ a.disabled {
   }
   .form-wrapper {
     margin-bottom: 40px;
+    &.workspaces {
+      margin-bottom: 0;
+    }
     h3 {
       color: $kinto-tinted-grayscale-8;
     }

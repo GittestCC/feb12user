@@ -92,6 +92,21 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
   return axios.get(`/kintoapps/${id}/versions/${ver}`).then(data => {
     if (data.data) {
       data.data.lastFetch = new Date()
+      // TODO: remove below mock data after API set up
+      data.data.workspaceId = '1'
+      data.data.ownerId = '5a0be165af2b8e0001faa6de'
+      data.data.isPublic = true
+      if (data.data.isPublic === false) {
+        data.data.members = [
+          { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
+          { permission: 'Admin', id: '1' },
+          { permission: 'Editor', id: '2' },
+          { permission: 'Admin', id: '3' },
+          { permission: 'Editor', id: '4' },
+          { permission: 'Editor', id: '5' },
+          { permission: 'Editor', id: '6' }
+        ]
+      }
     }
     return dispatch(kintoAppReceive(id, data))
   })

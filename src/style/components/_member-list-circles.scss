@@ -23,27 +23,77 @@
   font-weight: bold;
   font-size: 16px;
   margin-right: $margin-base;
+  text-transform: uppercase;
+  position: relative;
+  &.other {
+    background-color: $kinto-tinted-grayscale-1;
+  }
+  &.owner{
+    margin-right: 0;
+  }
+  &.text {
+    background: url('/images/avatar-color-1.jpg') center no-repeat;
+    background-size: contain;
+  }
+  &.small {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    font-size: 14px;
+    .highlight {
+      height: 12px;
+      width: 12px;
+      background-color: $kinto-yellow;
+      border-radius: 5px;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+    }
+  }
+  &.edit.small {
+    height: 20px;
+    width: 20px;
+    margin-top: $margin-base/2;
+  }
+  &.edit {
+    background: url('/images/icon-gray-edit-double.svg') center no-repeat;
+    background-size: contain;
+  }
+  &.plus {
+    font-size: 12px;
+    background: $kinto-white;
+  }
+  .highlight {
+    height: 20px;
+    width: 20px;
+    background-color: $kinto-yellow;
+    border-radius: 10px;
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    &.admin-star {
+      @include backgroundImage('/images/icon-status-admin.svg')
+    }
+    &.owner {
+      @include backgroundImage('/images/icon-status-owner.svg')
+    }
+  }
 }
 
-.avatar-small {
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  line-height: 30px;
-  font-size: 14px;
+// individual situations
+.workspaces-select {
+  .member-list-circles {
+    background: $kinto-tinted-grayscale-3;
+    padding: $margin-base 15px;
+  }
 }
 
-.avatar-edit.avatar-small {
-  height: 20px;
-  width: 20px;
-  margin-top: $margin-base/2;
-
-}
-.avatar-edit {
-  background: url('/images/icon-gray-edit-double.svg') center no-repeat;
-  background-size: contain;
-}
-.avatar-plus {
-  font-size: 12px;
-  background: $kinto-white;
+.members {
+  .avatar {
+    &.plus {
+      font-size: 12px;
+      background: $kinto-tinted-grayscale-1;
+    }
+  }
 }

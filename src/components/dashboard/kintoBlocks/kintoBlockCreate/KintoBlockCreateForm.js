@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, FormError } from '../../../forms'
 import { required } from '../../../../helpers/forms/validators'
+import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
 const KintoBlockCreateForm = ({
   isDedicatedCPU,
   handleSubmit,
   resetCPUHandler,
-  error
+  error,
+  isPublic,
+  kintoBlock
 }) => {
   return (
     <form
@@ -16,7 +19,14 @@ const KintoBlockCreateForm = ({
       onSubmit={handleSubmit}
       data-test="kb-create-form"
     >
-      <div className="form-wrapper basic-info">
+      <div className="form-wrapper workspaces full-row">
+        <WorkspaceToolbarContainer
+          isKintoApp={false}
+          isCreate={true}
+          kintoItem={kintoBlock}
+        />
+      </div>
+      <div className="form-wrapper basic-info full-row">
         <h3>Basic Info</h3>
         <h5>
           Give your baby a name, choose which language they will speak, and
@@ -49,7 +59,7 @@ const KintoBlockCreateForm = ({
           <Field
             name="repositoryName"
             label="repository"
-            placeholder="Enter a name for yout repository"
+            placeholder="Enter a name for your repository"
             component={FieldValidation}
             validate={required}
             type="text"
@@ -58,22 +68,20 @@ const KintoBlockCreateForm = ({
         </div>
       </div>
       {/*
-      <FormSection name="hardwareData">
+        <FormSection name="hardwareData">
         <KintoBlockHardwareData
           isDedicatedCPU={isDedicatedCPU}
           resetCPUHandler={resetCPUHandler}
         />
 
-      </FormSection>
+        </FormSection>
           */}
       <FormError error={error} />
     </form>
   )
 }
 KintoBlockCreateForm.propTypes = {
-  isDedicatedCPU: PropTypes.bool.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  resetCPUHandler: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({ form: 'kintoBlockCreateForm' })(KintoBlockCreateForm)

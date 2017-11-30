@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
+import isBoolean from 'lodash/isBoolean'
 import { updateKintoApp, createKintoApp } from '../../../actions/kintoApps'
 import {
   searchKintoBlocks,
@@ -11,14 +12,20 @@ function mapStateToProps(state, { kintoApp, version }) {
   const formSelector = formValueSelector('kintoAppForm')
   const appDependencies = formSelector(state, 'appDependencies')
   kintoApp = kintoApp || {}
+  const isPublicDefault = isBoolean(kintoApp.isPublic)
+    ? kintoApp.isPublic
+    : true
+
   return {
-    initialValues: {
-      name: kintoApp.name,
-      appDependencies: kintoApp.appDependencies
-    },
     appDependencies,
     id: kintoApp.id,
-    version
+    version,
+    initialValues: {
+      name: kintoApp.name,
+      appDependencies: kintoApp.appDependencies,
+      isPublic: isPublicDefault,
+      members: kintoApp.members
+    }
   }
 }
 

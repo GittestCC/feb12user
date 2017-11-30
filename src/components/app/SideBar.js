@@ -62,6 +62,7 @@ class SideBar extends Component {
             editAction={this.goToEditWorkspace}
             canEdit={true}
             numberOfItemsShown={6}
+            size="small"
           />
         </div>
         <ul className="unstyled-list sidebar-list">

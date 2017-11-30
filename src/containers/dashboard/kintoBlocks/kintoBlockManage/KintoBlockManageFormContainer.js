@@ -14,7 +14,9 @@ function mapStateToProps(state, { kintoBlock, ver }) {
       shortDescription: kintoBlock.shortDescription,
       dependencies: kintoBlock.dependencies,
       environmentVariables: kintoBlock.environmentVariables,
-      configParameters: kintoBlock.configParameters
+      configParameters: kintoBlock.configParameters,
+      isPublic: kintoBlock.isPublic,
+      members: kintoBlock.members
     },
     kintoBlock,
     dependencies,

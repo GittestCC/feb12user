@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer.js'
+import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
 
 const KintoAppCreate = () => (
   <div className="create-kintoapp">

@@ -109,8 +109,11 @@ describe('KintoBlocks actions', () => {
         id: '1',
         data: {
           id: '1',
+          isPublic: true,
           otherInfo: 'otherInfo',
-          lastFetch: now
+          lastFetch: now,
+          ownerId: '5a0be165af2b8e0001faa6de',
+          workspaceId: '1'
         }
       }
     ])

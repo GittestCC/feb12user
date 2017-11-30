@@ -5,9 +5,13 @@ import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/k
 
 const formName = 'kintoBlockCreateForm'
 const selector = formValueSelector(formName)
+
 function mapStateToProps(state) {
   return {
-    isDedicatedCPU: selector(state, 'hardwareData.dedicatedCpu') || false
+    isDedicatedCPU: selector(state, 'hardwareData.dedicatedCpu'),
+    initialValues: {
+      isPublic: true
+    }
   }
 }
 

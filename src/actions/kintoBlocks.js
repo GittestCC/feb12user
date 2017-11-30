@@ -83,6 +83,21 @@ export const fetchKintoBlock = (id, ver) => (dispatch, getState) => {
   dispatch(kintoBlocksFetch())
   return axios.get(`/kintoblocks/${id}/versions/${ver}`).then(data => {
     data.lastFetch = new Date()
+    // TODO: remove below mock data after API set up
+    data.workspaceId = '1'
+    data.ownerId = '5a0be165af2b8e0001faa6de'
+    data.isPublic = true
+    if (data.isPublic === false) {
+      data.members = [
+        { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
+        { permission: 'Admin', id: '1' },
+        { permission: 'Editor', id: '2' },
+        { permission: 'Admin', id: '3' },
+        { permission: 'Editor', id: '4' },
+        { permission: 'Editor', id: '5' },
+        { permission: 'Editor', id: '6' }
+      ]
+    }
     return dispatch(kintoBlockReceive(id, data))
   })
 }

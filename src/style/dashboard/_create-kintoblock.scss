@@ -22,21 +22,15 @@
       height: 40px;
     }
     width: 100%;
-    width: 100%;
     display: inherit;
-    display: grid;
-    grid-template-rows: auto;
-    @media (min-width: 1440px) {
-      grid-template-columns: repeat(2, auto [col-start]);
-    }
-    grid-gap: 20px;
-    justify-content: stretch;
-    align-content: stretch;
   .form-wrapper {
     min-width: 520px;
     margin-bottom: 40px;
     @media (min-width: 1440px) {
       min-height: 500px;
+      &.workspaces {
+        min-height: 50px;
+      }
       margin-bottom: 0;
     }
     justify-self: stretch;

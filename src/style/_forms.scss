@@ -107,12 +107,12 @@ h5.byline {
       $ui-button-secondary-hover-bottom 100%
     );
 
-    &.checked {
+    &.checked, &:checked {
       @include backgroundImage('/images/checkbox-large-checked-hover.svg', 30px, 30px);
     }
 
     @include abovetablet {
-      &.checked {
+      &.checked, &:checked {
         @include backgroundImage('/images/checkbox-large-checked-hover.svg', 20px, 20px);
       }
     }
@@ -127,7 +127,7 @@ h5.byline {
     border: none;
   }
 
-  &.checked {
+  &.checked, &:checked {
     @include backgroundImage('/images/checkbox-large-checked-regular.svg', 30px, 30px);
 
     @include abovetablet {
@@ -362,4 +362,8 @@ form {
       background: $kinto-white;
     }
   }
+}
+
+.form-shadow {
+  box-shadow: 0 2px 4px 0 rgba(66, 118, 146, 0.1), 0 10px 40px 0 rgba(66, 118, 146, 0.1);
 }
