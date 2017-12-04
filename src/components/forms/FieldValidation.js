@@ -69,7 +69,7 @@ const FieldValidation = props => {
     </div>
   )
 }
-FieldValidation.PropTypes = {
+FieldValidation.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   input: PropTypes.object.isRequired,

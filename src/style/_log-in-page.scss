@@ -133,6 +133,12 @@
   h1{
     margin-bottom: $margin-base*3;
   }
+
+  @include tablet {
+    .intro {
+      margin-bottom: $margin-base*2;
+    }
+  }
 }
 
 .sign-up-confirmation, .forgot-password-confirmation {

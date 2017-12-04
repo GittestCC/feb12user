@@ -9,7 +9,7 @@ const mockStore = configureStore(middlewares)
 
 describe('workspaces actions', () => {
   it('fetchWorkspaces fires the workspaces fetch function, and the workspaces receive action', async () => {
-    const store = mockStore()
+    const store = mockStore({ auth: { authSession: {} } })
     await store.dispatch(actions.fetchWorkspaces())
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_WORKSPACES,

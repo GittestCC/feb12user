@@ -18,7 +18,6 @@ function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
   const formSelector = formValueSelector(getFormName(isCreate, isKintoApp))
   const currentWorkspace =
     state.workspaces.byId[state.workspaces.selectedWorkspace] || {}
-  const selectedId = state.workspaces.selectedWorkspace
   const currentUser = state.auth.authSession || {}
   const formMembers = formSelector(state, 'members')
   const formIsPublic = formSelector(state, 'isPublic')
@@ -29,9 +28,13 @@ function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
   let members = []
   let allMembers = []
 
-  if (state.workspaces.byId[selectedId]) {
-    state.workspaces.byId[selectedId].members.forEach(member => {
-      if (member.permission === 'Admin' || member.id === kintoItem.ownerId) {
+  if (currentWorkspace.members) {
+    currentWorkspace.members.forEach(member => {
+      if (
+        member.permission === 'Admin' ||
+        member.id === kintoItem.ownerId ||
+        (member.id === currentUser.uid && isCreate)
+      ) {
         let appPermission =
           member.id === kintoItem.ownerId && member.id !== currentUser.uid
             ? 'Owner'

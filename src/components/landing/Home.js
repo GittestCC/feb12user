@@ -18,7 +18,7 @@ const App = () => (
           Kintohub is a platform humbly aiming to make developers' lives easier
           on planet Earth - riding microservices on a magic cloud.
         </h3>
-        <h3>
+        <h3 className="intro">
           <strong>Coming soon to a keyboard near you.</strong>
         </h3>
       </div>

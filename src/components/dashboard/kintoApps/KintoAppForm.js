@@ -6,10 +6,20 @@ import { required } from '../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
-const KintoAppForm = ({ handleSubmit, version, appDependencies, kintoApp }) => (
+const KintoAppForm = ({
+  handleSubmit,
+  version,
+  appDependencies,
+  kintoApp,
+  isCreate
+}) => (
   <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
     <div className="form-wrapper workspaces">
-      <WorkspaceToolbarContainer isKintoApp={true} kintoItem={kintoApp} />
+      <WorkspaceToolbarContainer
+        isKintoApp={true}
+        kintoItem={kintoApp}
+        isCreate={isCreate}
+      />
     </div>
 
     <div className="form-wrapper basic-info">
@@ -95,7 +105,8 @@ KintoAppForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   version: PropTypes.string.isRequired,
   appDependencies: PropTypes.array,
-  kintoApp: PropTypes.object
+  kintoApp: PropTypes.object,
+  isCreate: PropTypes.bool.isRequired
 }
 
 const validate = values => {

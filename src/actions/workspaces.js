@@ -16,7 +16,8 @@ export const workspacesReceive = response => ({
   data: response.data
 })
 
-export const fetchWorkspaces = () => dispatch => {
+export const fetchWorkspaces = () => (dispatch, getState) => {
+  const state = getState()
   const response = {
     data: [
       {
@@ -24,22 +25,10 @@ export const fetchWorkspaces = () => dispatch => {
         name: 'Test Workspace One',
         members: [
           {
-            permission: 'Admin',
-            username: 'YourConscience',
-            email: 'HelloThere@gmail.com',
-            id: '5a1e17ba3c35a50001384213'
-          },
-          {
-            permission: 'Admin',
-            username: 'Sausage Sauvage',
-            email: 'Laura@gmail.com',
-            id: '5a0be165af2b8e0001faa6de'
-          },
-          {
             permission: 'Member',
-            username: 'FootballFan',
-            email: 'Jesper@gmail.com',
-            id: '10'
+            username: 'Super',
+            email: 'super@gmail.com',
+            id: state.auth.authSession.uid
           },
           {
             permission: 'Member',
@@ -90,10 +79,10 @@ export const fetchWorkspaces = () => dispatch => {
         name: 'Test Workspace Two',
         members: [
           {
-            permission: 'Admin',
-            username: 'twoBee',
-            email: '2B@gmail.com',
-            id: '1'
+            permission: 'Member',
+            username: 'Super',
+            email: 'super@gmail.com',
+            id: state.auth.authSession.uid
           },
           {
             permission: 'Member',

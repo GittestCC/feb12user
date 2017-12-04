@@ -6,6 +6,7 @@ import ManageDependenciesFieldContainer from '../../../../containers/dashboard/u
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
 import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
+import { required } from '../../../../helpers/forms/validators'
 
 class KintoBlockManageForm extends Component {
   static propTypes = {
@@ -40,6 +41,7 @@ class KintoBlockManageForm extends Component {
                 label="Kintoblock Name"
                 component={FieldValidation}
                 type="input"
+                validate={required}
               />
               <Field
                 className="description-field"
@@ -47,6 +49,7 @@ class KintoBlockManageForm extends Component {
                 label="Description"
                 component={FieldValidation}
                 type="textarea"
+                validate={required}
               />
             </div>
             <div className="line" />
@@ -73,7 +76,11 @@ class KintoBlockManageForm extends Component {
               <div className="field-wrapper">
                 <label>Repository</label>
                 <div className="field-input-wrapper">
-                  <input disabled value={kintoBlock.repositoryName} />
+                  <input
+                    type="text"
+                    disabled
+                    value={kintoBlock.repositoryName || ''}
+                  />
                 </div>
               </div>
             </div>
