@@ -11,6 +11,7 @@ import KintoAppForm from '../../../components/dashboard/kintoApps/KintoAppForm'
 function mapStateToProps(state, { kintoApp, version, isCreate }) {
   const formSelector = formValueSelector('kintoAppForm')
   const appDependencies = formSelector(state, 'appDependencies')
+  const textareaContents = formSelector(state, 'shortDescription')
   kintoApp = kintoApp || {}
   const isPublicDefault = isBoolean(kintoApp.isPublic)
     ? kintoApp.isPublic
@@ -18,6 +19,7 @@ function mapStateToProps(state, { kintoApp, version, isCreate }) {
 
   return {
     appDependencies,
+    textareaContents,
     id: kintoApp.id,
     version,
     isCreate,

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import FieldValidation from '../../../forms/FieldValidation'
+import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
 import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
-import { required } from '../../../../helpers/forms/validators'
 
 class KintoBlockManageForm extends Component {
   static propTypes = {
@@ -44,12 +44,13 @@ class KintoBlockManageForm extends Component {
                 validate={required}
               />
               <Field
-                className="description-field"
+                characterCount="200"
                 name="shortDescription"
                 label="Description"
+                placeholder="Enter a short description of your KintoBlock"
                 component={FieldValidation}
+                validate={[required, isLessThan200]}
                 type="textarea"
-                validate={required}
               />
             </div>
             <div className="line" />
@@ -57,7 +58,7 @@ class KintoBlockManageForm extends Component {
               <div className="field-wrapper">
                 <label>Language</label>
                 <div className="field-input-wrapper">
-                  <select disabled>
+                  <select data-test="language" name="language" disabled>
                     <option>{kintoBlock.language}</option>
                   </select>
                 </div>
@@ -65,7 +66,7 @@ class KintoBlockManageForm extends Component {
               <div className="field-wrapper">
                 <label>Protocol</label>
                 <div className="field-input-wrapper">
-                  <select disabled>
+                  <select data-test="protocol" name="protocol" disabled>
                     <option>{kintoBlock.protocol}</option>
                   </select>
                 </div>

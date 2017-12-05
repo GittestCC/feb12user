@@ -26,6 +26,8 @@ export const email = value =>
 
 export const isBetween64 = isBetween(64, 262144)
 export const isBetween1000 = isBetween(1, 1000)
+export const isLessThan200 = maxLength(200)
+
 export const password = value =>
   value && !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i.test(value)
     ? 'Password must contain a minimum of eight characters, at least one letter and one number'

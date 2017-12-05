@@ -28,7 +28,9 @@ describe('create kintoBlock', () => {
 
   it('should create a new kb and redirect to list kbs page', () => {
     KintoBlockCreate.name.input.setValue('test name')
-    KintoBlockCreate.starterPack.input.selectByIndex(0)
+    KintoBlockCreate.shortDescription.input.setValue('Nadeems dad')
+    KintoBlockCreate.language.input.selectByIndex(1)
+    KintoBlockCreate.protocol.input.selectByIndex(1)
     KintoBlockCreate.repository.input.setValue('repo')
     KintoBlockCreate.submitGlobal()
     KintoBlockList.getCard(0).waitForVisible()
@@ -40,7 +42,7 @@ describe('create kintoBlock', () => {
 })
 
 describe('manage kintoBlock', () => {
-  it('should redirect to kb manage when clicking on that kintoblock in list', () => {
+  it('should show kb manage when clicking on that kintoblock in list', () => {
     KintoBlockList.open()
     KintoBlockList.getCard(0).waitForVisible()
     const name = KintoBlockList.getCard(0)

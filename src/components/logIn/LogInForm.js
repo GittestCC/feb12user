@@ -15,10 +15,10 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
   <form data-test="loginForm" onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
     {/*
-    <Button buttonType="dark" type="submit" image={githubIcon}>
+      <Button buttonType="dark" type="submit" image={githubIcon}>
       Log In with GitHub
-    </Button>
-    <TitleWithLines text="or" />
+      </Button>
+      <TitleWithLines text="or" />
     */}
     <Field
       id="loginUsername"

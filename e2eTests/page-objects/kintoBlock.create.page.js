@@ -14,8 +14,16 @@ class KintoBlockCreate extends Page {
     return getInput('name')
   }
 
-  get starterPack() {
-    return getInput('starterPack', 'select')
+  get shortDescription() {
+    return getInput('shortDescription', 'textarea')
+  }
+
+  get language() {
+    return getInput('language', 'select')
+  }
+
+  get protocol() {
+    return getInput('protocol', 'select')
   }
 
   get repository() {

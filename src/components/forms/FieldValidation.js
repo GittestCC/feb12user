@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Tooltip from 'rc-tooltip'
 
@@ -6,79 +6,125 @@ import Tooltip from 'rc-tooltip'
  * a custom field used with redux form used to output a field with validation messages
  * used mainly when there is a `validate` option passed to `Field`
  */
-const FieldValidation = props => {
-  const { input, placeholder, label, type, help, close, id, disabled } = props
-  const { touched, submitFailed, error } = props.meta
-  const hasError = (touched || submitFailed) && error
-  let className = props.className || ''
-  if (hasError) {
-    className += ' error'
+
+class FieldValidation extends Component {
+  static propTypes = {
+    id: PropTypes.string,
+    className: PropTypes.string,
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string,
+    type: PropTypes.string,
+    help: PropTypes.string,
+    close: PropTypes.bool
   }
 
-  let inputEl
-  switch (type) {
-    case 'textarea':
-      inputEl = (
-        <textarea
-          {...input}
-          id={id || input.name}
-          placeholder={placeholder}
-          className={className}
-        />
-      )
-      break
-    case 'select':
-      inputEl = (
-        <select
-          {...input}
-          id={id || input.name}
-          placeholder={placeholder}
-          className={className}
-          disabled={disabled}
-        >
-          {props.children}
-        </select>
-      )
-      break
-    default:
-      inputEl = (
-        <input
-          {...input}
-          id={id || input.name}
-          type={type}
-          placeholder={placeholder}
-          className={`${className} ${disabled ? 'disabled' : ''}`}
-          disabled={disabled}
-        />
-      )
+  state = {
+    remainingCharacters: this.props.characterCount,
+    warning: false
   }
 
-  return (
-    <div data-test={id || input.name} className="field-wrapper">
-      <label htmlFor={id || input.name}>{label}</label>
-      {help && (
-        <Tooltip placement="top" overlay={help} trigger="click">
-          <span className="tooltip" />
-        </Tooltip>
-      )}
-      <div className={`field-input-wrapper ${close ? 'with-close' : ''}`}>
-        {inputEl}
-        {close && <img src="/images/icon-red-delete.svg" alt="" />}
-        {hasError && <div className="error-message">{error}</div>}
+  calculateRemainingCharacters = e => {
+    this.props.input.onChange(e)
+    let remainingCharacters = this.props.characterCount - e.target.value.length
+    this.setState({ remainingCharacters: remainingCharacters })
+    if (e.target.value.length > 200) {
+      this.setState({ warning: true })
+    } else {
+      this.setState({ warning: false })
+    }
+  }
+
+  render() {
+    const {
+      input,
+      placeholder,
+      label,
+      type,
+      help,
+      close,
+      id,
+      disabled,
+      characterCount
+    } = this.props
+    const { touched, submitFailed, error } = this.props.meta
+    const hasError = (touched || submitFailed) && error
+    let className = this.props.className || ''
+    if (hasError) {
+      className += ' error'
+    }
+
+    let inputEl
+    switch (type) {
+      case 'textarea':
+        inputEl = (
+          <textarea
+            {...input}
+            id={id || input.name}
+            placeholder={placeholder}
+            className={className}
+            onChange={this.calculateRemainingCharacters}
+          />
+        )
+        break
+      case 'select':
+        inputEl = (
+          <select
+            {...input}
+            id={id || input.name}
+            placeholder={placeholder}
+            className={className}
+            disabled={disabled}
+          >
+            {this.props.children}
+          </select>
+        )
+        break
+      default:
+        inputEl = (
+          <input
+            {...input}
+            id={id || input.name}
+            type={type}
+            placeholder={placeholder}
+            className={`${className} ${disabled ? 'disabled' : ''}`}
+            disabled={disabled}
+          />
+        )
+    }
+
+    return (
+      <div data-test={id || input.name} className="field-wrapper">
+        <div className="label-characters">
+          <label htmlFor={id || input.name}>
+            {label}
+            {help && (
+              <Tooltip placement="top" overlay={help} trigger="click">
+                <span className="tooltip" />
+              </Tooltip>
+            )}{' '}
+          </label>
+
+          {characterCount && (
+            <div
+              className={`characters-remaining ${
+                this.state.warning ? 'over' : ''
+              }`}
+            >
+              {this.state.remainingCharacters}
+            </div>
+          )}
+        </div>
+
+        <div className={`field-input-wrapper ${close ? 'with-close' : ''}`}>
+          {inputEl}
+          {close && <img src="/images/icon-red-delete.svg" alt="" />}
+          {hasError && <div className="error-message">{error}</div>}
+        </div>
       </div>
-    </div>
-  )
-}
-FieldValidation.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
-  placeholder: PropTypes.string,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  help: PropTypes.string,
-  close: PropTypes.bool
+    )
+  }
 }
 
 export default FieldValidation

@@ -1,7 +1,7 @@
 import Page from './page'
 import { getDataTest, getInput } from '../helpers/elementSelector'
 
-class KintoBlockCreate extends Page {
+class KintoBlockManage extends Page {
   open(id, ver) {
     super.open(`app/dashboard/kintoblocks/${id}/versions/${ver}`)
   }
@@ -16,6 +16,18 @@ class KintoBlockCreate extends Page {
 
   get description() {
     return getInput('shortDescription', 'textarea')
+  }
+
+  get language() {
+    return getDataTest('language')
+  }
+
+  get protocol() {
+    return getDataTest('protocol')
+  }
+
+  get repository() {
+    return getInput('repositoryName')
   }
 
   get envInput() {
@@ -41,4 +53,4 @@ class KintoBlockCreate extends Page {
   }
 }
 
-export default new KintoBlockCreate()
+export default new KintoBlockManage()

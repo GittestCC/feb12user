@@ -61,6 +61,23 @@ select {
 
 
 
+.label-characters {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  .characters-remaining {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    color: $kinto-tinted-grayscale-6;
+    font-size: 14px;
+    &.over {
+      color: $kinto-coral;
+    }
+  }
+}
+
 .error-message {
   color: $kinto-white;
   background-color: $kinto-coral;
