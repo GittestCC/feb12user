@@ -226,6 +226,7 @@ form {
   display: flex;
   flex-direction: row-reverse;
   background: $kinto-tinted-grayscale-8;
+  border-left: 320px solid $kinto-tinted-grayscale-9;
   position: fixed;
   bottom: 0;
   height: 0;
@@ -242,7 +243,7 @@ form {
     height: 40px;
     line-height: 40px;
     font-size: 14px;
-    margin: 10px 40px;
+    margin: 10px 30px 10px 0;
     width: auto;
   }
 }

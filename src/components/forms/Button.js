@@ -28,6 +28,7 @@ const Button = ({
       type={type}
       className={`button ${buttonType} ${disabled ? 'disabled' : ''}`}
       onClick={buttonHandler}
+      disabled={!!disabled}
     >
       {image ? <img src={image} alt="" /> : ''}
       {children}

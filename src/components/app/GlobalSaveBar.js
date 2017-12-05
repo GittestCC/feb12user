@@ -2,18 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from '../forms'
 
-const GlobalSaveBar = ({ isShown, submitLabel, onSubmit }) => (
+const GlobalSaveBar = ({
+  canSave,
+  toggleSaveButton,
+  submitLabel,
+  onSubmit,
+  hasForm
+}) => (
   <div
-    className={`global-save-bar ${isShown ? 'show' : ''}`}
+    className={`global-save-bar ${hasForm ? 'show' : ''}`}
     data-test="savebar"
   >
-    <Button onClick={onSubmit}>{submitLabel}</Button>
+    {toggleSaveButton && !canSave ? null : (
+      <Button disabled={!canSave} onClick={onSubmit}>
+        {submitLabel}
+      </Button>
+    )}
+
     <div id="savebar-portal" />
   </div>
 )
 
 GlobalSaveBar.propTypes = {
-  isShown: PropTypes.bool,
+  canSave: PropTypes.bool,
+  toggleSaveButton: PropTypes.bool,
+  hasForm: PropTypes.bool.isRequired,
   submitLable: PropTypes.string,
   onSubmit: PropTypes.func.isRequired
 }

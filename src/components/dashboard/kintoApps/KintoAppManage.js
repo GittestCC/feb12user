@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { getVersionStateClassName } from '../../../helpers/versionHelper'
 import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
+import SaveBarPortal from '../../../components/ui/SaveBarPortal'
 
 class KintoAppManage extends Component {
   static propTypes = {
@@ -78,6 +79,9 @@ class KintoAppManage extends Component {
           isOpen={this.state.isVersionModalOpen}
           onClose={this.onVersionModalClose}
         />
+        <SaveBarPortal>
+          <button className="button default tag-deploy">Tag and Deploy</button>
+        </SaveBarPortal>
       </div>
     )
   }

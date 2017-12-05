@@ -7,11 +7,13 @@ export default {
   },
   [pages.dashboardKintoBlocksManage]: {
     submitLabel: 'Save Changes',
-    formName: 'kintoBlockManageForm'
+    formName: 'kintoBlockManageForm',
+    toggleVisibility: true // whether the button should switch between save and tag and deploy
   },
   [pages.dashboardKintoAppsManage]: {
     submitLabel: 'Save Changes',
-    formName: 'kintoAppForm'
+    formName: 'kintoAppForm',
+    toggleVisibility: true
   },
   [pages.dashboardKintoAppsCreate]: {
     submitLabel: 'Create New Application',

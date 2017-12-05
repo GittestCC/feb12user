@@ -2,17 +2,18 @@ import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 import GlobalSaveBar from '../../components/app/GlobalSaveBar'
 import forms from '../../constants/forms'
+import isEmpty from 'lodash/isEmpty'
 
 function mapStateToProps(state) {
   const { activePage, canSave } = state.pageOptions
-  let form = forms[activePage]
-  let isShown = canSave
-  if (!form) {
-    isShown = false
-  }
-  form = form || {}
+  let form = forms[activePage] || {}
+  const hasForm = !isEmpty(form)
+  let toggleSaveButton = hasForm && form.toggleVisibility
+
   return {
-    isShown,
+    canSave,
+    hasForm,
+    toggleSaveButton,
     formName: form.formName,
     submitLabel: form.submitLabel
   }
