@@ -4,12 +4,13 @@ import Tooltip from 'rc-tooltip'
 
 // TODO: checked prop is because of a bug in redux-form
 // https://github.com/erikras/redux-form/issues/1372
-const Toggle = ({ input, id, label, help }) => (
+const Toggle = ({ input, id, label, help, disabled }) => (
   <label className="switch" data-test={id || input.name}>
     <input
       {...input}
       type="checkbox"
       id={id || input.name}
+      disabled={disabled}
       checked={input.value === true || input.value === 'true'}
     />
     <span className="toggle-slider" />
@@ -27,7 +28,8 @@ Toggle.propTypes = {
   input: PropTypes.object.isRequired,
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
-  help: PropTypes.string
+  help: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default Toggle

@@ -2,7 +2,7 @@ import {
   FETCH_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK,
-  CREATE_VERSION_KINTO_BLOCK,
+  CREATE_TAG_KINTO_BLOCK,
   UPDATE_KINTO_BLOCK
 } from '../actions/kintoBlocks'
 
@@ -19,7 +19,7 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         ...state,
         isFetching: true
       }
-    case CREATE_VERSION_KINTO_BLOCK:
+    case CREATE_TAG_KINTO_BLOCK:
     case RECEIVE_KINTO_BLOCK: {
       const allIds =
         state.allIds.indexOf(action.id) === -1

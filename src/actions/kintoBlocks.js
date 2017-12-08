@@ -2,20 +2,18 @@ import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
+import capitalize from 'lodash/capitalize'
 
 import { formSubmitted } from './pageOptions'
 import { pages } from '../constants/pages'
-import {
-  getManageUrlForKintoBlock,
-  isVersionEqual
-} from '../helpers/versionHelper'
+import { isBranchVersionEqual, getVersionType } from '../helpers/versionHelper'
 import { isRecent } from '../helpers/dateHelper'
 import { getPageUrl } from '../helpers/urlHelper'
 
 export const FETCH_KINTO_BLOCKS = 'FETCH_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
-export const CREATE_VERSION_KINTO_BLOCK = 'CREATE_VERSION_KINTO_BLOCK'
+export const CREATE_TAG_KINTO_BLOCK = 'CREATE_TAG_KINTO_BLOCK'
 export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
   'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
 export const UPDATE_KINTO_BLOCK = 'UPDATE_KINTO_BLOCK'
@@ -27,6 +25,7 @@ export const kintoBlockUpdate = (id, data) => ({
 })
 
 export const kintoBlocksFetch = () => ({ type: FETCH_KINTO_BLOCKS })
+
 export const kintoBlocksReceive = data => ({
   type: RECEIVE_KINTO_BLOCKS,
   data
@@ -49,8 +48,8 @@ export const kintoBlockReceive = (id, data) => {
   }
 }
 
-export const kintoBlockCreateVersion = (id, data) => ({
-  type: CREATE_VERSION_KINTO_BLOCK,
+export const kintoBlockCreateTag = (id, data) => ({
+  type: CREATE_TAG_KINTO_BLOCK,
   id,
   data
 })
@@ -68,38 +67,57 @@ export const fetchKintoBlocks = () => dispatch => {
 
 // checks if the last fetched kintoblock has the same ver and is fetched recently
 // if that is the case, then don't do anything
-export const fetchKintoBlock = (id, ver) => (dispatch, getState) => {
+export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
+  type = capitalize(type)
   const state = getState()
   const kintoBlock = state.kintoBlocks.byId[id]
+  const version = { name: ver, type }
   if (
     kintoBlock &&
     kintoBlock.version &&
-    isVersionEqual(ver, kintoBlock.version) &&
+    isBranchVersionEqual(version, kintoBlock.version) &&
     kintoBlock.lastFetch &&
     isRecent(kintoBlock.lastFetch)
   ) {
     return
   }
   dispatch(kintoBlocksFetch())
-  return axios.get(`/kintoblocks/${id}/versions/${ver}`).then(data => {
-    data.lastFetch = new Date()
-    // TODO: remove below mock data after API set up
-    data.workspaceId = '1'
-    data.ownerId = '5a0be165af2b8e0001faa6de'
-    data.isPublic = true
-    if (data.isPublic === false) {
-      data.members = [
-        { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
-        { permission: 'Admin', id: '1' },
-        { permission: 'Editor', id: '2' },
-        { permission: 'Admin', id: '3' },
-        { permission: 'Editor', id: '4' },
-        { permission: 'Editor', id: '5' },
-        { permission: 'Editor', id: '6' }
-      ]
-    }
-    return dispatch(kintoBlockReceive(id, data))
-  })
+  return axios
+    .get(`/kintoblocks/${id}/versions/${ver}?type=${type}`)
+    .then(data => {
+      data.lastFetch = new Date()
+      // TODO: remove below mock data after API set up
+      data.workspaceId = '1'
+      data.ownerId = state.auth.authSession.uid
+      data.isPublic = true
+      if (data.isPublic === false) {
+        data.members = [
+          { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
+          { permission: 'Admin', id: '1' },
+          { permission: 'Editor', id: '2' },
+          { permission: 'Admin', id: '3' },
+          { permission: 'Editor', id: '4' },
+          { permission: 'Editor', id: '5' },
+          { permission: 'Editor', id: '6' }
+        ]
+      }
+      return dispatch(kintoBlockReceive(id, data))
+    })
+}
+
+export const createKintoBlockTag = (id, ver, data) => dispatch => {
+  return axios
+    .put(`/kintoblocks/${id}/versions/${ver}/tags`, data)
+    .then(response => {
+      const newKintoBlock = response.data
+      dispatch(kintoBlockCreateTag(id, newKintoBlock))
+      const url = getPageUrl(pages.dashboardKintoBlocksManage, {
+        id: id,
+        version: newKintoBlock.version.name,
+        type: getVersionType(newKintoBlock.version)
+      })
+      dispatch(push(url))
+    })
 }
 
 export const createKintoBlock = data => dispatch => {
@@ -109,25 +127,22 @@ export const createKintoBlock = data => dispatch => {
   })
 }
 
-export const updateKintoBlock = (id, ver, data) => dispatch => {
-  return axios.put(`/kintoblocks/${id}/versions/${ver}`, data).then(result => {
-    if (result.errors) {
-      throw new SubmissionError(result.errors)
-    }
-    dispatch(formSubmitted())
-    // TODO: make sure the server returns the updated object
-    dispatch(kintoBlockUpdate(id, result))
-  })
-}
-
-export const createVersionKintoBlock = (id, data) => dispatch => {
-  return axios.post(`/kintoblocks/${id}/versions`, data).then(result => {
-    if (result.errors) {
-      throw new SubmissionError(result.errors)
-    }
-    dispatch(kintoBlockCreateVersion(id, result.newVersion))
-    dispatch(push(getManageUrlForKintoBlock(id, data.version)))
-  })
+export const updateKintoBlock = (id, ver, type, data) => dispatch => {
+  type = capitalize(type)
+  return axios
+    .put(`/kintoblocks/${id}/versions/${ver}?type=${type}`, data)
+    .then(
+      result => {
+        dispatch(formSubmitted())
+        // TODO: make sure the server returns the updated object
+        dispatch(kintoBlockUpdate(id, result))
+      },
+      err => {
+        if (err.errors) {
+          throw new SubmissionError(err.errors)
+        }
+      }
+    )
 }
 
 export const searchKintoBlocks = q => () => {
@@ -141,9 +156,10 @@ export const searchKintoBlocks = q => () => {
   })
 }
 
-export const fetchKintoBlockDependenciesData = (id, ver) => dispatch => {
+export const fetchKintoBlockDependenciesData = (id, ver, type) => dispatch => {
+  type = capitalize(type)
   return axios
-    .get(`/kintoblocks/${id}/versions/${ver}/dependencydata`)
+    .get(`/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`)
     .then(result => {
       dispatch(kintoBlockReceiveDependencies(result))
       return {

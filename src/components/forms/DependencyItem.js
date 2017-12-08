@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
-import {
-  asTextList,
-  getVersionAsText,
-  textToObject
-} from '../../helpers/versionHelper'
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
 
 class DependencyItem extends Component {
@@ -16,24 +11,59 @@ class DependencyItem extends Component {
     field: PropTypes.string.isRequired,
     fields: PropTypes.object.isRequired,
     appDependenciesInfo: PropTypes.object.isRequired,
-    data: PropTypes.object
+    data: PropTypes.object,
+    disabled: PropTypes.bool
   }
 
   onRemoveItem = () => {
     this.props.fields.remove(this.props.index)
   }
 
+  dependencySelectFormat = item => {
+    const block = this.props.appDependenciesInfo[this.props.data.blockId]
+    if (!block) {
+      throw new Error(
+        'Dependency version formatter unable to access dependency info'
+      )
+    }
+    return block.versions.findIndex(
+      b => item.name === b.name && item.type === b.type
+    )
+  }
+
+  dependencySelectParse = index => {
+    const block = this.props.appDependenciesInfo[this.props.data.blockId]
+    if (!block) {
+      throw new Error(
+        'Dependency version parser unable to access dependency info'
+      )
+    }
+    const selectedVersion = block.versions[index]
+    return {
+      name: selectedVersion.name,
+      type: selectedVersion.type
+    }
+  }
+
   render() {
-    const { appVersion, field, data, appDependenciesInfo } = this.props
+    const {
+      appVersion,
+      field,
+      data,
+      appDependenciesInfo,
+      disabled
+    } = this.props
     const block = appDependenciesInfo[data.blockId]
     if (!block) {
       return null
     }
     return (
       <div className="block">
-        <a onClick={this.onRemoveItem} className="delete-block hide-text">
-          delete
-        </a>
+        {!disabled ? (
+          <a onClick={this.onRemoveItem} className="delete-block hide-text">
+            delete
+          </a>
+        ) : null}
         <div className="icon-text-and-version">
           <div className={`main-icon ${getClassNameForType(block.type)}`} />
           <div className="text">
@@ -44,12 +74,13 @@ class DependencyItem extends Component {
             <Field
               name={`${field}.version`}
               component="select"
-              parse={textToObject}
-              format={getVersionAsText}
+              parse={this.dependencySelectParse}
+              format={this.dependencySelectFormat}
+              disabled={disabled}
             >
-              {asTextList(block.versions).map((v, index) => (
-                <option key={index} value={v}>
-                  {v}
+              {block.versions.map((v, index) => (
+                <option key={index} value={index}>
+                  {v.name}
                 </option>
               ))}
             </Field>

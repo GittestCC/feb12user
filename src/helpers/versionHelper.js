@@ -26,6 +26,8 @@ export const getVersionAsText = (v, isDottedBuild) => {
   }
 }
 
+export const getVersionType = v => (v && v.type ? v.type.toLowerCase() : null)
+
 export const asTextList = (versions = []) => {
   return versions.map(v => getVersionAsText(v, true))
 }
@@ -93,6 +95,13 @@ export const isVersionEqual = (a, b) => {
     a.revision === b.revision &&
     a.build === b.build
   )
+}
+
+export const isBranchVersionEqual = (a, b) => {
+  if (!a || !b) {
+    return false
+  }
+  return a.type.toUpperCase() === b.type.toUpperCase() && a.name === b.name
 }
 
 export const findInArrayByText = (versions, text) => {

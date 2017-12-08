@@ -9,7 +9,7 @@ const Kintoblocks = ({ match }) => (
     <Route path={`${match.url}/list`} component={KintoBlocksListContainer} />
     <Route path={`${match.url}/create`} component={KintoBlockCreate} />
     <Route
-      path={`${match.url}/:id/versions/:ver`}
+      path={`${match.url}/:id/versions/:ver/:type`}
       component={KintoBlockManageContainer}
     />
   </div>

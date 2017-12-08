@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { FieldValidation, Toggle } from '../../../forms'
 import { required } from '../../../../helpers/forms/validators'
 import Icon from '../../../ui/Icon'
 
 class KintoBlockManageParamsField extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    disabled: PropTypes.bool
+  }
+
   state = {
     key: '',
     value: '',
@@ -36,7 +42,7 @@ class KintoBlockManageParamsField extends Component {
   }
 
   render() {
-    const { fields } = this.props
+    const { fields, disabled } = this.props
     const { key, value } = this.state
     return (
       <div className="form-body custom-params" data-test="kb-manage-params">
@@ -55,6 +61,7 @@ class KintoBlockManageParamsField extends Component {
                       label="This is required"
                       name={`${field}.required`}
                       component={Toggle}
+                      disabled={disabled}
                     />
                   </div>
                   <Field
@@ -63,15 +70,21 @@ class KintoBlockManageParamsField extends Component {
                     placeholder="Variable Name"
                     component={FieldValidation}
                     validate={required}
+                    disabled={disabled}
                   />
                   <Field
                     label="Recommended Value"
                     name={`${field}.value`}
                     placeholder="Separate by &quot;,&quot;"
                     component={FieldValidation}
+                    disabled={disabled}
                   />
                   <div className="icon-column">
-                    <Icon onClick={() => fields.remove(index)} icon="remove" />
+                    <Icon
+                      onClick={() => fields.remove(index)}
+                      disabled={disabled}
+                      icon="remove"
+                    />
                   </div>
                 </li>
               </ul>
@@ -80,42 +93,44 @@ class KintoBlockManageParamsField extends Component {
             <div className="empty-message">No custom parameters added</div>
           )}
         </div>
-        <div className="bottom row">
-          <div className="switch-container">
-            <label className="switch">
+        {!disabled ? (
+          <div className="bottom row">
+            <div className="switch-container">
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  id="isRequired"
+                  checked={this.state.required}
+                  onChange={this.onToggleRequired}
+                />
+                <span className="toggle-slider" />
+                <h6 className="toggle-message">This is required</h6>
+              </label>
+            </div>
+            <div className="field-wrapper">
+              <label htmlFor="add-key">Name</label>
               <input
-                type="checkbox"
-                id="isRequired"
-                checked={this.state.required}
-                onChange={this.onToggleRequired}
+                data-test="params-add-key"
+                id="add-key"
+                value={key}
+                onChange={this.onChangeKey}
               />
-              <span className="toggle-slider" />
-              <h6 className="toggle-message">This is required</h6>
-            </label>
-          </div>
-          <div className="field-wrapper">
-            <label htmlFor="add-key">Name</label>
-            <input
-              data-test="params-add-key"
-              id="add-key"
-              value={key}
-              onChange={this.onChangeKey}
-            />
-          </div>
-          <div className="field-wrapper">
-            <label htmlFor="add-value">Recommended Value</label>
-            <input
-              data-test="params-add-value"
-              id="add-value"
-              value={value}
-              onChange={this.onChangeValue}
-            />
-          </div>
+            </div>
+            <div className="field-wrapper">
+              <label htmlFor="add-value">Recommended Value</label>
+              <input
+                data-test="params-add-value"
+                id="add-value"
+                value={value}
+                onChange={this.onChangeValue}
+              />
+            </div>
 
-          <div className="icon-column">
-            <Icon onClick={this.onAdd} icon="add" disabled={!key} />
+            <div className="icon-column">
+              <Icon onClick={this.onAdd} icon="add" disabled={!key} />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     )
   }

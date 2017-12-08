@@ -10,12 +10,17 @@ class DependencyManagement extends Component {
     fields: PropTypes.object.isRequired,
     appDependenciesInfo: PropTypes.object.isRequired,
     onSearchKintoBlocks: PropTypes.func.isRequired,
-    fetchKintoBlockDependenciesData: PropTypes.func.isRequired
+    fetchKintoBlockDependenciesData: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
   }
 
   onSelectKintoBlock = selectedItem => {
     this.props
-      .fetchKintoBlockDependenciesData(selectedItem.id, selectedItem.version)
+      .fetchKintoBlockDependenciesData(
+        selectedItem.id,
+        selectedItem.version.name,
+        selectedItem.version.type
+      )
       .then(data => {
         this.props.fields.push(data)
       })
@@ -26,7 +31,8 @@ class DependencyManagement extends Component {
       appVersion,
       fields,
       appDependenciesInfo,
-      onSearchKintoBlocks
+      onSearchKintoBlocks,
+      disabled
     } = this.props
     return (
       <div>
@@ -36,35 +42,42 @@ class DependencyManagement extends Component {
           up in a sea of babies.
         </h5>
         <div className="form-body simple dependency-management">
-          <Select.Async
-            placeholder="Search KintoBlocks or services"
-            loadOptions={onSearchKintoBlocks}
-            onChange={this.onSelectKintoBlock}
-          />
-
-          <div className="dependency-management-buttons">
-            <div className="button-group">
-              <Link to="" className="button secondary">
-                Split All Duplicate Instances
-              </Link>
-              <Link to="" className="icon split-instances" />
-            </div>
-            <div className="button-group">
-              <Link to="" className="button secondary">
-                Combine All Duplicate Instances
-              </Link>
-              <Link to="" className="icon combine-instances" />
-            </div>
-            <div className="button-group">
-              <Link to={`${appVersion}/config/0`} className="button secondary">
-                Edit KintoBlocks & Services
-              </Link>
-              <Link
-                to={`${appVersion}/config/0`}
-                className="icon edit-blocks-and-services"
+          {!disabled ? (
+            <div>
+              <Select.Async
+                placeholder="Search KintoBlocks or services"
+                loadOptions={onSearchKintoBlocks}
+                onChange={this.onSelectKintoBlock}
               />
+
+              <div className="dependency-management-buttons">
+                <div className="button-group">
+                  <Link to="" className="button secondary">
+                    Split All Duplicate Instances
+                  </Link>
+                  <Link to="" className="icon split-instances" />
+                </div>
+                <div className="button-group">
+                  <Link to="" className="button secondary">
+                    Combine All Duplicate Instances
+                  </Link>
+                  <Link to="" className="icon combine-instances" />
+                </div>
+                <div className="button-group">
+                  <Link
+                    to={`${appVersion}/config/0`}
+                    className="button secondary"
+                  >
+                    Edit KintoBlocks & Services
+                  </Link>
+                  <Link
+                    to={`${appVersion}/config/0`}
+                    className="icon edit-blocks-and-services"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <div>
             {fields.length ? (
@@ -78,6 +91,7 @@ class DependencyManagement extends Component {
                     fields={fields}
                     appDependenciesInfo={appDependenciesInfo}
                     data={fields.get(key)}
+                    disabled={disabled}
                   />
                 ))}
               </div>

@@ -27,7 +27,7 @@ export const urls = {
   [pages.dashboardKintoBlocksList]: '/app/dashboard/kintoblocks/list',
   [pages.dashboardKintoBlocksCreate]: '/app/dashboard/kintoblocks/create',
   [pages.dashboardKintoBlocksManage]:
-    '/app/dashboard/kintoblocks/:id/versions/:version',
+    '/app/dashboard/kintoblocks/:id/versions/:version/:type',
   [pages.dashboardKintoAppsList]: '/app/dashboard/kintoapps/list',
   [pages.dashboardKintoAppsCreate]: '/app/dashboard/kintoapps/create',
   [pages.dashboardKintoAppsManage]:

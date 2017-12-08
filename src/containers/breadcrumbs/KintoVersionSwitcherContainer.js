@@ -3,7 +3,8 @@ import {
   isVersionEqual,
   getVersionAsText,
   getVersionStateClassName,
-  asTextList
+  asTextList,
+  getVersionType
 } from '../../helpers/versionHelper'
 import { pages } from '../../constants/pages'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
@@ -27,10 +28,11 @@ function mapStateToProps(state, { type, disabled, url }) {
   let dropdownItems = []
   if (selectedItem.versions) {
     dropdownItems = selectedItem.versions.map(v => ({
-      text: getVersionAsText(v),
+      text: isKintoApp ? getVersionAsText(v) : v.name,
       url: getUrl(url, {
         id: selectedItem.id,
-        version: getVersionAsText(v, true),
+        version: isKintoApp ? getVersionAsText(v, true) : v.name,
+        type: getVersionType(v),
         envId: selectedEnvironmentId || '0'
       }),
       tag: v.state,
@@ -38,15 +40,22 @@ function mapStateToProps(state, { type, disabled, url }) {
       active: isVersionEqual(v, selectedItem.version)
     }))
   }
+
+  const version = selectedItem.version
   return {
     selectedItem,
     dropdownItems,
-    selectedVersion: getVersionAsText(selectedItem.version),
+    selectedVersion: isKintoApp
+      ? getVersionAsText(selectedItem.version)
+      : version && version.name,
     selectedVersionUrl:
       selectedItem.id &&
       getPageUrl(editPage, {
         id: selectedItem.id,
-        version: getVersionAsText(selectedItem.version, true)
+        version: isKintoApp
+          ? getVersionAsText(selectedItem.version, true)
+          : selectedItem.version.name,
+        type: getVersionType(selectedItem.version)
       }),
     baseVersions: asTextList(selectedItem.versions),
     isKintoBlock: !isKintoApp

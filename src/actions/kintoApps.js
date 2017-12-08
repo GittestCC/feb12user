@@ -94,7 +94,7 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
       data.data.lastFetch = new Date()
       // TODO: remove below mock data after API set up
       data.data.workspaceId = '1'
-      data.data.ownerId = '5a0be165af2b8e0001faa6de'
+      data.data.ownerId = state.auth.authSession.uid
       data.data.isPublic = true
       if (data.data.isPublic === false) {
         data.data.members = [

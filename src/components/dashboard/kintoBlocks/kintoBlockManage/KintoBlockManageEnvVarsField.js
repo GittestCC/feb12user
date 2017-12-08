@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { FieldValidation } from '../../../forms'
 import { required } from '../../../../helpers/forms/validators'
 import Icon from '../../../ui/Icon'
 
 class KintoBlockManageEnvVarsField extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    disabled: PropTypes.bool
+  }
+
   state = {
     key: '',
     value: ''
@@ -28,7 +34,7 @@ class KintoBlockManageEnvVarsField extends Component {
   }
 
   render() {
-    const { fields } = this.props
+    const { fields, disabled } = this.props
     const { key, value } = this.state
     return (
       <div className="form-body env" data-test="kb-manage-env">
@@ -48,6 +54,7 @@ class KintoBlockManageEnvVarsField extends Component {
                     placeholder="Variable Name"
                     component={FieldValidation}
                     validate={required}
+                    disabled={disabled}
                   />
                   <div>
                     <Field
@@ -56,10 +63,15 @@ class KintoBlockManageEnvVarsField extends Component {
                       placeholder="Separate by &quot;,&quot;"
                       component={FieldValidation}
                       validate={required}
+                      disabled={disabled}
                     />
                   </div>
                   <div className="icon-column">
-                    <Icon onClick={() => fields.remove(index)} icon="remove" />
+                    <Icon
+                      onClick={() => fields.remove(index)}
+                      icon="remove"
+                      disabled={disabled}
+                    />
                   </div>
                 </li>
               </ul>
@@ -70,30 +82,32 @@ class KintoBlockManageEnvVarsField extends Component {
             </div>
           )}
         </div>
-        <div className="bottom row">
-          <div className="field-wrapper">
-            <label htmlFor="add-key">Name</label>
-            <input
-              data-test="env-add-key"
-              id="add-key"
-              value={key}
-              onChange={this.onChangeKey}
-            />
-          </div>
-          <div className="field-wrapper">
-            <label htmlFor="add-value">Value</label>
-            <input
-              data-test="env-add-value"
-              id="add-value"
-              value={value}
-              onChange={this.onChangeValue}
-            />
-          </div>
+        {!disabled ? (
+          <div className="bottom row">
+            <div className="field-wrapper">
+              <label htmlFor="add-key">Name</label>
+              <input
+                data-test="env-add-key"
+                id="add-key"
+                value={key}
+                onChange={this.onChangeKey}
+              />
+            </div>
+            <div className="field-wrapper">
+              <label htmlFor="add-value">Value</label>
+              <input
+                data-test="env-add-value"
+                id="add-value"
+                value={value}
+                onChange={this.onChangeValue}
+              />
+            </div>
 
-          <div className="icon-column">
-            <Icon onClick={this.onAdd} icon="add" disabled={!key || !value} />
+            <div className="icon-column">
+              <Icon onClick={this.onAdd} icon="add" disabled={!key || !value} />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     )
   }

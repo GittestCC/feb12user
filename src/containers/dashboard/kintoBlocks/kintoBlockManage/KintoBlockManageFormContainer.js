@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 import { updateKintoBlock } from '../../../../actions/kintoBlocks'
+import { TAG } from '../../../../constants/version'
 import KintoBlockManageForm from '../../../../components/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageForm'
 
-function mapStateToProps(state, { kintoBlock, ver }) {
+function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
   const formSelector = formValueSelector('kintoBlockManageForm')
   const dependencies = formSelector(state, 'dependencies')
   kintoBlock = kintoBlock || {}
@@ -20,13 +21,22 @@ function mapStateToProps(state, { kintoBlock, ver }) {
     },
     kintoBlock,
     dependencies,
-    ver
+    isVersionTag: kintoBlock.version && kintoBlock.version.type === TAG,
+    isCreateTagErrorMessageShown
   }
 }
 
-function mapDispatchToProps(dispatch, { kintoBlock, ver }) {
+function mapDispatchToProps(dispatch, { kintoBlock }) {
   return {
-    onSubmit: data => dispatch(updateKintoBlock(kintoBlock.id, ver, data))
+    onSubmit: data =>
+      dispatch(
+        updateKintoBlock(
+          kintoBlock.id,
+          kintoBlock.version.name,
+          kintoBlock.version.type,
+          data
+        )
+      )
   }
 }
 

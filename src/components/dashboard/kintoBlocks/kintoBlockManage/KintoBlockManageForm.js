@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm, FieldArray } from 'redux-form'
-import FieldValidation from '../../../forms/FieldValidation'
+import { FieldValidation, FormError } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
@@ -12,11 +12,21 @@ class KintoBlockManageForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     dependencies: PropTypes.array,
-    kintoBlock: PropTypes.object.isRequired
+    kintoBlock: PropTypes.object.isRequired,
+    isVersionTag: PropTypes.bool,
+    isCreateTagErrorMessageShown: PropTypes.bool.isRequired,
+    error: PropTypes.string
   }
 
   render() {
-    const { kintoBlock, dependencies, handleSubmit, ver } = this.props
+    const {
+      kintoBlock,
+      dependencies,
+      handleSubmit,
+      isVersionTag,
+      isCreateTagErrorMessageShown,
+      error
+    } = this.props
     return (
       <form
         className="kintoblock-manage form-container"
@@ -29,6 +39,8 @@ class KintoBlockManageForm extends Component {
           />
         </div>
         <div className="form-wrapper full-row basic-info">
+          <FormError error={error} />
+
           <h3>Basic Info</h3>
           <h5>
             Choose the build and give your baby a number so they don’t get mixed
@@ -86,49 +98,19 @@ class KintoBlockManageForm extends Component {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="form-wrapper versioning full-row">
-          <h3>Versioning</h3>
-          <h5>
-            Choose the build and give your baby a number so they don’t get mixed
-            up in a sea of babies.
-          </h5>
-
-          <div className="form-body simple">
-            <div className="field-wrapper">
-              <label htmlFor="versionNumber">Version number</label>
-              <div className="field-input-wrapper">
-                <input
-                  type="text"
-                  name="version"
-                  className="disabled"
-                  value={ver}
-                  disabled
-                />
-              </div>
+          {isCreateTagErrorMessageShown ? (
+            <div className="errormessage-form error-message">
+              At least one successful commit must be made on GitHub in order to
+              create a tag.
             </div>
-
-            <div className="field-wrapper">
-              <label htmlFor="buildNumber">Build</label>
-              <div className="field-input-wrapper">
-                <input
-                  type="text"
-                  name="buildNumber"
-                  className="disabled"
-                  value=""
-                  placeholder="No available build found"
-                  disabled
-                />
-              </div>
-            </div>
-          </div>
+          ) : null}
         </div>
 
         <div className="form-wrapper blocks-and-services full-row">
           <ManageDependenciesFieldContainer
             name="dependencies"
             dependencies={dependencies}
+            disabled={isVersionTag}
           />
         </div>
 
@@ -139,10 +121,12 @@ class KintoBlockManageForm extends Component {
           <FieldArray
             name="environmentVariables"
             component={KintoBlockManageEnvVarsField}
+            disabled={isVersionTag}
           />
           <FieldArray
             name="configParameters"
             component={KintoBlockManageParamsField}
+            disabled={isVersionTag}
           />
         </div>
 

@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
+import Modal from 'react-modal'
 
 import configureStore from './store/configureStore'
 import { isProduction } from './helpers/pageHelper'
@@ -28,6 +29,9 @@ const isLoggedIn = store.getState().auth.token
 
 const SignUp = () => <LogIn flip={true} />
 
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(245, 249, 255, 0.9)'
+Modal.defaultStyles.overlay.zIndex = '10'
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -38,7 +42,8 @@ ReactDOM.render(
               exact
               path="/"
               render={() =>
-                isLoggedIn ? <Redirect to="/app" /> : <Redirect to="/home" />}
+                isLoggedIn ? <Redirect to="/app" /> : <Redirect to="/home" />
+              }
             />
             <Route path="/home" component={Home} />
             <Route path="/about-us" component={AboutUs} />
@@ -46,22 +51,22 @@ ReactDOM.render(
             <Route path="/blog" component={Blog} />
             <Route path="/app" component={AppContainer} />
 
-            {!isProduction() ? (
-              [
-                <Route key="1" path="/log-in" component={LogIn} />,
-                <Route key="2" path="/sign-up" component={SignUp} />,
-                <Route
-                  key="3"
-                  path="/forgot-password"
-                  component={ForgotPassword}
-                />,
-                <Route
-                  key="4"
-                  path="/create-new-password"
-                  component={CreateNewPassword}
-                />
-              ]
-            ) : null}
+            {!isProduction()
+              ? [
+                  <Route key="1" path="/log-in" component={LogIn} />,
+                  <Route key="2" path="/sign-up" component={SignUp} />,
+                  <Route
+                    key="3"
+                    path="/forgot-password"
+                    component={ForgotPassword}
+                  />,
+                  <Route
+                    key="4"
+                    path="/create-new-password"
+                    component={CreateNewPassword}
+                  />
+                ]
+              : null}
 
             <Redirect to="/" />
           </Switch>

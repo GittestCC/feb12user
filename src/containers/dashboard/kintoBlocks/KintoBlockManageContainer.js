@@ -1,25 +1,34 @@
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import { fetchKintoBlock, fetchKintoBlocks } from '../../../actions/kintoBlocks'
-import { findInArrayByText, asTextList } from '../../../helpers/versionHelper'
+import { isBranchVersionEqual } from '../../../helpers/versionHelper'
+import { BRANCH } from '../../../constants/version'
 import KintoBlockManage from '../../../components/dashboard/kintoBlocks/KintoBlockManage'
 
 function mapStateToProps(state, { match }) {
-  const { id, ver } = match.params
+  const { id, ver, type } = match.params
   const kintoBlock = state.kintoBlocks.byId[id] || {}
-
+  const { canSave } = state.pageOptions
   return {
     id,
     ver,
+    type,
     kintoBlock,
-    version: findInArrayByText(kintoBlock.versions, ver),
-    baseVersions: asTextList(kintoBlock.versions)
+    canTagCommit:
+      kintoBlock.version && kintoBlock.version.type === BRANCH && !canSave,
+    isVersionMatch: isBranchVersionEqual(kintoBlock.version, {
+      name: ver,
+      type
+    }),
+    hasActiveBuild: !!kintoBlock.activeBuild,
+    canSave
   }
 }
 
-function mapDispatchToProps(dispatch, { match }) {
+function mapDispatchToProps(dispatch) {
   return {
-    fetchKintoBlock: (id, ver) => dispatch(fetchKintoBlock(id, ver)),
+    fetchKintoBlock: (id, ver, type) =>
+      dispatch(fetchKintoBlock(id, ver, type)),
     fetchKintoBlocks: () => dispatch(fetchKintoBlocks()),
     resetForm: () => dispatch(reset('kintoBlockManageForm'))
   }

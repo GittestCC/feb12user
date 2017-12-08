@@ -1,81 +1,106 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getVersionStateClassName } from '../../../helpers/versionHelper'
-import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
+import ComplexModal from '../../dashboard/ui/ComplexModal'
+import { Button } from '../../forms'
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
+import KintoBlockCreateTagModalContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockCreateTagModalContainer'
+import SaveBarPortal from '../../ui/SaveBarPortal'
 
 class KintoBlockManage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    kintoBlock: PropTypes.object.isRequired,
     ver: PropTypes.string.isRequired,
-    version: PropTypes.object,
-    baseVersions: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+    kintoBlock: PropTypes.object.isRequired,
+    canTagCommit: PropTypes.bool,
+    isVersionMatch: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired,
     fetchKintoBlocks: PropTypes.func.isRequired,
-    fetchKintoBlock: PropTypes.func.isRequired
+    fetchKintoBlock: PropTypes.func.isRequired,
+    hasActiveBuild: PropTypes.bool.isRequired
   }
 
   state = {
-    isVersionModalOpen: false
+    isModalOpen: false,
+    isCreateTagErrorMessageShown: false
   }
 
   componentDidMount() {
+    const { id, ver, type } = this.props
     this.props.fetchKintoBlocks().then(() => {
-      this.props.fetchKintoBlock(this.props.id, this.props.ver)
+      this.props.fetchKintoBlock(id, ver, type)
     })
   }
 
   componentWillReceiveProps(nextProps) {
-    const { id, ver } = nextProps
-    if (this.props.ver !== ver || this.props.id !== id) {
+    const { id, ver, type, canSave } = nextProps
+    if (
+      this.props.ver !== ver ||
+      this.props.id !== id ||
+      this.props.type !== type
+    ) {
       this.props.resetForm()
-      this.props.fetchKintoBlock(id, ver)
+      this.props.fetchKintoBlock(id, ver, type)
+      this.setState({ isCreateTagErrorMessageShown: false })
+    }
+
+    console.log('oldsave', this.props.canSave, 'new', canSave)
+    if (
+      !this.props.canSave &&
+      canSave &&
+      this.state.isCreateTagErrorMessageShown
+    ) {
+      this.setState({ isCreateTagErrorMessageShown: false })
     }
   }
 
-  onVersionModalClose = () => {
-    this.setState({ isVersionModalOpen: false })
+  onModalClose = () => {
+    this.setState({ isModalOpen: false })
   }
 
-  onVersionModalOpen = () => {
-    this.setState({ isVersionModalOpen: true })
+  onModalOpen = () => {
+    if (this.props.hasActiveBuild) {
+      this.setState({ isModalOpen: true })
+    } else {
+      this.setState({ isCreateTagErrorMessageShown: true })
+    }
   }
 
   render() {
-    const { kintoBlock, ver, version, baseVersions } = this.props
+    const { kintoBlock, isVersionMatch, canTagCommit } = this.props
+    const { isCreateTagErrorMessageShown } = this.state
+    if (!isVersionMatch) {
+      return null
+    }
     return (
       <div className="kintoblock-manage">
         <div className="page-title">
           <h2>
             <span data-test="title">{kintoBlock.name}</span>
-            <div
-              className={`text-highlight status h6 ${getVersionStateClassName(
-                version
-              )}`}
-            >
-              {version && version.state}
-            </div>
           </h2>
-          <button
-            onClick={this.onVersionModalOpen}
-            type="button"
-            className="button secondary"
-          >
-            Create New Version
-          </button>
         </div>
 
-        <KintoBlockManageFormContainer kintoBlock={kintoBlock} ver={ver} />
-
-        <VersionCreateModalContainer
-          id={kintoBlock.id}
-          title={kintoBlock.name}
-          baseVersions={baseVersions}
-          isOpen={this.state.isVersionModalOpen}
-          onClose={this.onVersionModalClose}
-          isKintoBlock={true}
+        <KintoBlockManageFormContainer
+          kintoBlock={kintoBlock}
+          isCreateTagErrorMessageShown={isCreateTagErrorMessageShown}
         />
+
+        <ComplexModal
+          component={KintoBlockCreateTagModalContainer}
+          isOpen={this.state.isModalOpen}
+          onClose={this.onModalClose}
+          data={{
+            kintoBlock
+          }}
+        />
+
+        <SaveBarPortal>
+          {canTagCommit && (
+            <Button type="button" onClick={this.onModalOpen}>
+              Tag Latest Commit
+            </Button>
+          )}
+        </SaveBarPortal>
       </div>
     )
   }
