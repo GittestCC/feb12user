@@ -14,6 +14,7 @@ class KintoAppManage extends Component {
     baseVersions: PropTypes.array.isRequired,
     fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
+    getKintoAppEnvironments: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired
   }
 

@@ -73,13 +73,16 @@
     border: 0;
     background: $kinto-tinted-grayscale-8;
     color: $kinto-white;
-    padding: 10px 30px;
+    padding: 10px 20px;
     text-decoration: none;
     text-align: left;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     cursor: pointer;
+    &.tag-item-text {
+      background-color: rgba($kinto-blue, 0.2);
+    }
 
     &.title {
       flex-direction: column;
@@ -158,14 +161,18 @@
     font-size: 12px;
   }
 
+
   &.active {
     background: $kinto-blue-dark;
     border-left: 6px solid $kinto-blue;
 
-    .tag-item-text {
+    .tag-item-text, .date, .notes {
       margin-left: -6px;
     }
 
+    .notes {
+      width: 306px;
+    }
     &:hover {
       background: $kinto-blue-dark;
     }
@@ -179,4 +186,46 @@
 
 .margin-right.dropdown {
   margin-right: 14px;
+}
+
+.kinto-app-tag {
+  width: 100%;
+  position: relative;
+  .tag-name-and-environments {
+    display: flex;
+    justify-content: space-between;
+    .environments {
+      display: flex;
+      .extra, .main {
+        background-color: $kinto-grayscale-1;
+        border-radius: 4px;
+        color: $kinto-grayscale-7;
+        padding: 1px 5px;
+      }
+      .extra {
+        margin-left: 5px;
+      }
+    }
+  }
+  .date, .notes {
+    h5 {
+      max-width: 300px;
+      text-align: left;
+      margin-left: 0;
+      color: rgba($kinto-white, 0.4);
+      font-weight: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.kinto-app-tag.draft {
+  postion: relative;
+}
+
+.draft .tag-item-text {
+  color: $kinto-white;
+  font-weight: bold;
 }

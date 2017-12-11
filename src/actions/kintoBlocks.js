@@ -107,7 +107,7 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
 
 export const createKintoBlockTag = (id, ver, data) => dispatch => {
   return axios
-    .put(`/kintoblocks/${id}/versions/${ver}/tags`, data)
+    .post(`/kintoblocks/${id}/versions/${ver}/tags`, data)
     .then(response => {
       const newKintoBlock = response.data
       dispatch(kintoBlockCreateTag(id, newKintoBlock))

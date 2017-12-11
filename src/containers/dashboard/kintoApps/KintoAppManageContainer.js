@@ -1,6 +1,10 @@
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
-import { fetchKintoApp, fetchKintoApps } from '../../../actions/kintoApps'
+import {
+  fetchKintoApp,
+  fetchKintoApps,
+  getKintoAppEnvironments
+} from '../../../actions/kintoApps'
 import { findInArrayByText, asTextList } from '../../../helpers/versionHelper'
 import KintoAppManage from '../../../components/dashboard/kintoApps/KintoAppManage'
 
@@ -21,6 +25,7 @@ function mapDispatchToProps(dispatch, { match }) {
   return {
     fetchKintoApp: (id, ver) => dispatch(fetchKintoApp(id, ver)),
     fetchKintoApps: () => dispatch(fetchKintoApps()),
+    getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
     resetForm: () => dispatch(reset('kintoAppForm'))
   }
 }

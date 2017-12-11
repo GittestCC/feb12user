@@ -54,7 +54,7 @@ export default {
       type: KINTOAPP
     },
     {
-      component: 'KintoVersionSwitcherContainer',
+      component: 'KintoAppTagSelectorContainer',
       url: urls[pages.dashboardKintoAppsManage],
       type: KINTOAPP
     }

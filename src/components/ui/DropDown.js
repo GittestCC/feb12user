@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 
@@ -21,7 +21,9 @@ class DropDown extends Component {
     actionText: PropTypes.string,
     actionHandler: PropTypes.func,
     className: PropTypes.string,
-    hideAction: PropTypes.bool
+    hideAction: PropTypes.bool,
+    hasDraft: PropTypes.bool,
+    draftUrl: PropTypes.string
   }
 
   state = {
@@ -123,7 +125,9 @@ class DropDown extends Component {
       type,
       actionText,
       history,
-      hideAction
+      hideAction,
+      hasDraft,
+      draftUrl
     } = this.props
     const ItemComponent = this.props.component
     const isFilter = type === 'filter'
@@ -142,9 +146,9 @@ class DropDown extends Component {
           {dropdownText}
         </button>
         <div
-          className={`dropdown-content ${isShown
-            ? 'isShown'
-            : ''} ${dropdownContentClass || ''}`}
+          className={`dropdown-content ${
+            isShown ? 'isShown' : ''
+          } ${dropdownContentClass || ''}`}
         >
           {isFilter && (
             <div className="dropdown-content-filter">
@@ -159,9 +163,9 @@ class DropDown extends Component {
           )}
 
           <div
-            className={`dropdown-content-items ${isFilter
-              ? 'dropdown-content-items-scroll'
-              : ''}`}
+            className={`dropdown-content-items ${
+              isFilter ? 'dropdown-content-items-scroll' : ''
+            }`}
           >
             <IScroll
               iScroll={iscroll}
@@ -174,29 +178,34 @@ class DropDown extends Component {
               }}
             >
               <div className="dropdown-scroll-container">
-                {isFilter ? (
-                  this.getFilteredList().map((item, index) => (
-                    <ItemComponent
-                      {...item}
-                      navigateTo={history.push}
-                      key={index}
-                    />
-                  ))
-                ) : (
-                  children
+                {hasDraft && (
+                  <div className="draft">
+                    <Link to={draftUrl || '/'} className="tag-item-text">
+                      Draft
+                    </Link>
+                  </div>
                 )}
+                {isFilter
+                  ? this.getFilteredList().map((item, index) => (
+                      <ItemComponent
+                        {...item}
+                        navigateTo={history.push}
+                        key={index}
+                      />
+                    ))
+                  : children}
               </div>
             </IScroll>
           </div>
 
           {isFilter &&
-          !hideAction && (
-            <div className="dropdown-content-action">
-              <Button buttonType="dark" onClick={this.actionHandler}>
-                {actionText}
-              </Button>
-            </div>
-          )}
+            !hideAction && (
+              <div className="dropdown-content-action">
+                <Button buttonType="dark" onClick={this.actionHandler}>
+                  {actionText}
+                </Button>
+              </div>
+            )}
         </div>
       </div>
     )

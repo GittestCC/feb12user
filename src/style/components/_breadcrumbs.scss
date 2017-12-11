@@ -54,6 +54,7 @@
   .text-disabled {
     cursor: default;
     margin-right: 14px;
+    line-height: 24px;
   }
 
 }
@@ -64,4 +65,28 @@
   width: 20px;
   height: 20px;
   border: none;
+}
+
+
+.draft-icon {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include backgroundImage('/images/label-type-draft.svg', 20px, 20px);
+}
+
+.kintoapp-tag-breadcrumb {
+  position: relative;
+  min-width: 70px;
+  .draft-icon {
+    top: 0;
+    left: 0;
+  }
+  &.draft {
+    .breadcrumb-text {
+      padding-left: 30px;
+    }
+  }
 }
