@@ -18,7 +18,7 @@ const KintoAppCreate = () => (
       <div className="icon" />
     </div>
 
-    <KintoAppFormContainer version="0.1.0" isCreate={true} />
+    <KintoAppFormContainer isCreate={true} />
   </div>
 )
 

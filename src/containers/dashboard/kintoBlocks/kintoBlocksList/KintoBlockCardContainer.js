@@ -32,9 +32,8 @@ function mapStateToProps(state, { kintoBlock, index }) {
   }
 }
 
-function mapDispatchToProps(dispatch, { onVersionCreate, kintoBlock }) {
+function mapDispatchToProps(dispatch) {
   return {
-    onVersionCreate: () => onVersionCreate(kintoBlock),
     push: url => dispatch(push(url))
   }
 }

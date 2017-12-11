@@ -36,6 +36,7 @@ const VersionInputs = fields => {
             {...majorInput}
             type="number"
             className={getFieldClassName('major')}
+            disabled={fields.isTagged}
           />
         </div>
         <div className="dot">.</div>
@@ -47,6 +48,7 @@ const VersionInputs = fields => {
             {...minorInput}
             type="number"
             className={getFieldClassName('minor')}
+            disabled={fields.isTagged}
           />
         </div>
         <div className="dot">.</div>
@@ -58,6 +60,7 @@ const VersionInputs = fields => {
             {...revisionInput}
             type="number"
             className={getFieldClassName('revision')}
+            disabled={fields.isTagged}
           />
         </div>
       </div>

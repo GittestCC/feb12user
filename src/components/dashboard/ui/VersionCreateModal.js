@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-import VersionCreateForm from './VersionCreateForm'
+import TagAndDeployForm from './TagAndDeployForm'
 
 const VersionCreateModal = ({
   isOpen,
@@ -21,7 +21,7 @@ const VersionCreateModal = ({
     >
       <div className="kh-modal-title">{title}</div>
       <div className="kh-modal-body">
-        <VersionCreateForm
+        <TagAndDeployForm
           onClose={onClose}
           onSubmit={onSubmit}
           submitLabel={submitLabel}

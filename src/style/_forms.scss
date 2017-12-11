@@ -59,9 +59,10 @@ select {
   }
 }
 
-textarea.tall {
-  height: 100px;
+textarea, textarea.tall {
+  min-height: 100px;
 }
+
 
 
 .label-characters {
@@ -107,6 +108,9 @@ h5.byline {
 
 .checkbox {
   width: 30px;
+  &:disabled {
+    width: 30px;
+  }
   height: 30px;
   margin: 10px 20px 10px 0;
   background-image: linear-gradient(
@@ -141,6 +145,9 @@ h5.byline {
   @include abovetablet {
     width: 20px;
     height: 20px;
+    &:disabled {
+      width: 20px;
+    }
   }
 
   &:focus {

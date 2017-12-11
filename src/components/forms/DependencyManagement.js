@@ -38,8 +38,12 @@ class DependencyManagement extends Component {
       <div>
         <h3>KintoBlocks & Services</h3>
         <h5>
-          Choose the build and give your baby a number so they don’t get mixed
-          up in a sea of babies.
+          This is where the magic happens: add KintoBlocks and services to
+          deliver the features you need in your client - we make them all work
+          together. Because we know your application is special, you can specify
+          unique configuration parameters for each of the features you are
+          adding. You can also decide to combine or split instances of the same
+          KintoBlock or service to save on costs.
         </h5>
         <div className="form-body simple dependency-management">
           {!disabled ? (

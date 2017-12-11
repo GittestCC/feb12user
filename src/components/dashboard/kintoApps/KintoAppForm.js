@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm, FormSection } from 'redux-form'
-import { FieldValidation, Button, CheckBox } from '../../forms'
-import { required } from '../../../helpers/forms/validators'
+import { Field, reduxForm } from 'redux-form'
+import { FieldValidation, Button } from '../../forms'
+import { required, isLessThan200 } from '../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
@@ -11,7 +11,8 @@ const KintoAppForm = ({
   version,
   appDependencies,
   kintoApp,
-  isCreate
+  isCreate,
+  isTagged
 }) => (
   <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
     <div className="form-wrapper workspaces">
@@ -24,8 +25,12 @@ const KintoAppForm = ({
 
     <div className="form-wrapper basic-info">
       <h3>Basic Info</h3>
-      <h5>Give your baby a name, and a version number.</h5>
-      <div className="form-body">
+      <h5>
+        Choose the name for this application and give a a short description. If
+        you make the application public, they will help other people discover
+        your application.
+      </h5>
+      <div className="form-body full-row">
         <Field
           name="name"
           label="application name"
@@ -34,16 +39,15 @@ const KintoAppForm = ({
           validate={required}
           type="text"
         />
-        <div className="field-wrapper">
-          <label htmlFor="versionNumber">Version number</label>
-          <input
-            type="text"
-            name="version"
-            className="disabled"
-            value={version}
-            disabled
-          />
-        </div>
+        <Field
+          characterCount="200"
+          name="shortDescription"
+          label="Description"
+          placeholder="Enter a short description of your KintoBlock"
+          component={FieldValidation}
+          validate={[required, isLessThan200]}
+          type="textarea"
+        />
       </div>
     </div>
     <div className="form-wrapper blocks-and-services">
@@ -51,11 +55,15 @@ const KintoAppForm = ({
         name="appDependencies"
         dependencies={appDependencies}
         appVersion={version}
+        disabled={isTagged}
       />
     </div>
     <div className="form-wrapper clients">
       <h3>Clients</h3>
-      <h5>Give your baby a name, and a version number</h5>
+      <h5>
+        Create a repository for a new client or use a client you already own to
+        consume your application.
+      </h5>
 
       <div className="form-body">
         <div className="top">
@@ -68,35 +76,19 @@ const KintoAppForm = ({
             close={true}
             placeholder="Enter a name for the repository"
             component={FieldValidation}
+            disabled={isTagged}
           />
           <div className="line" />
         </div>
         <div className="bottom">
-          <Button type="button" buttonType="secondary">
+          <Button type="button" buttonType="secondary" disabled={isTagged}>
             Create New Client
           </Button>
-          <Button type="button" buttonType="secondary">
+          <Button type="button" buttonType="secondary" disabled={isTagged}>
             Use Existing Client
           </Button>
         </div>
       </div>
-    </div>
-
-    <div className="form-wrapper protocols">
-      <h3>Protocols</h3>
-      <h5>Choose a communication protocol.</h5>
-
-      <FormSection name="protocolInputs">
-        <div className="form-body">
-          <Field label="gRPC" name="gRPC" id="gRPC" component={CheckBox} />
-          <Field
-            label="restful"
-            name="restful"
-            id="restful"
-            component={CheckBox}
-          />
-        </div>
-      </FormSection>
     </div>
   </form>
 )
@@ -106,13 +98,14 @@ KintoAppForm.propTypes = {
   version: PropTypes.string.isRequired,
   appDependencies: PropTypes.array,
   kintoApp: PropTypes.object,
-  isCreate: PropTypes.bool.isRequired
+  isCreate: PropTypes.bool.isRequired,
+  isTagged: PropTypes.bool.isRequired
 }
 
-const validate = values => {
+const validate = (values, isTagged) => {
   let errors = {}
   const protocolInputs = values.protocolInputs || {}
-  if (!protocolInputs.restful && !protocolInputs.gRPC) {
+  if (!protocolInputs.restful && !protocolInputs.gRPC && !isTagged) {
     errors.protocolInputs = {
       restful: 'You should at least pick one protocol'
     }

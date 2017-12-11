@@ -1,4 +1,3 @@
-// kintoapp tag selector container
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { pages } from '../../constants/pages'

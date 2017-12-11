@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { asTextList } from '../../../helpers/versionHelper'
-import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoBlockCardContainer from '../../../containers/dashboard/kintoBlocks/kintoBlocksList/KintoBlockCardContainer'
 
 class KintoBlocksList extends Component {
@@ -11,42 +9,11 @@ class KintoBlocksList extends Component {
     fetchKintoBlocks: PropTypes.func.isRequired
   }
 
-  state = {
-    isVersionModalOpen: false,
-    versionKintoBlockId: null,
-    versionKintoBlockName: null,
-    versionBaseVersionsList: []
-  }
-
   componentDidMount() {
     this.props.fetchKintoBlocks()
   }
 
-  onVersionModalClose = () => {
-    this.setState({
-      isVersionModalOpen: false,
-      versionKintoBlockId: null,
-      versionKintoBlockName: null,
-      versionBaseVersionsList: []
-    })
-  }
-
-  onVersionModalOpen = kintoBlock => {
-    this.setState({
-      isVersionModalOpen: true,
-      versionKintoBlockId: kintoBlock.id,
-      versionKintoBlockName: kintoBlock.name,
-      versionBaseVersionsList: asTextList(kintoBlock.versions)
-    })
-  }
-
   render() {
-    const {
-      isVersionModalOpen,
-      versionKintoBlockId,
-      versionKintoBlockName,
-      versionBaseVersionsList
-    } = this.state
     return (
       <div className="my-kintoblocks">
         <div className="page-title">
@@ -78,19 +45,9 @@ class KintoBlocksList extends Component {
               kintoBlock={kintoBlock}
               key={i}
               index={i}
-              onVersionCreate={this.onVersionModalOpen}
             />
           ))}
         </div>
-        <VersionCreateModalContainer
-          id={versionKintoBlockId}
-          title={versionKintoBlockName}
-          baseVersions={versionBaseVersionsList}
-          isOpen={isVersionModalOpen}
-          onClose={this.onVersionModalClose}
-          disableCloseOnSubmit={true}
-          isKintoBlock={true}
-        />
       </div>
     )
   }

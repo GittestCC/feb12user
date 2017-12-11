@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getVersionStateClassName } from '../../../helpers/versionHelper'
-import VersionCreateModalContainer from '../../../containers/dashboard/ui/VersionCreateModalContainer'
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
+import KintoAppTagAndDeployFormContainer from '../../../containers/dashboard/kintoApps/KintoAppTagAndDeployFormContainer'
 import SaveBarPortal from '../../../components/ui/SaveBarPortal'
+import ComplexModal from '../ui/ComplexModal'
 
 class KintoAppManage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     ver: PropTypes.string.isRequired,
+    canSave: PropTypes.bool.isRequired,
     version: PropTypes.object,
     kintoApp: PropTypes.object.isRequired,
     baseVersions: PropTypes.array.isRequired,
     fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
-    getKintoAppEnvironments: PropTypes.func.isRequired,
+    isTagged: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired
   }
 
@@ -25,6 +27,7 @@ class KintoAppManage extends Component {
   componentDidMount() {
     this.props.fetchKintoApps()
     this.props.fetchKintoApp(this.props.id, this.props.ver)
+    this.props.getKintoAppEnvironments(this.props.id) // TODO: Because we will need release information
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,7 +47,7 @@ class KintoAppManage extends Component {
   }
 
   render() {
-    const { kintoApp, version, baseVersions } = this.props
+    const { kintoApp, version, baseVersions, canSave, isTagged } = this.props
     return (
       <div className="kinto-app-manage">
         <div className="page-title">
@@ -58,31 +61,41 @@ class KintoAppManage extends Component {
               {version && version.state}
             </div>
           </h2>
-          <button
-            onClick={this.onVersionModalOpen}
-            type="button"
-            className="button secondary"
-          >
-            Create New Version
-          </button>
         </div>
 
         <KintoAppFormContainer
           kintoApp={kintoApp}
           version={this.props.ver}
           isCreate={false}
+          isTagged={isTagged}
         />
 
-        <VersionCreateModalContainer
-          id={kintoApp.id}
-          title={kintoApp.name}
-          baseVersions={baseVersions}
+        <ComplexModal
+          className="tag-and-deploy-modal"
+          component={KintoAppTagAndDeployFormContainer}
           isOpen={this.state.isVersionModalOpen}
           onClose={this.onVersionModalClose}
+          data={{
+            id: kintoApp.id,
+            title: kintoApp.name,
+            baseVersions: baseVersions,
+            environments: kintoApp.environments,
+            isTagged: isTagged,
+            kintoApp: kintoApp
+          }}
         />
-        <SaveBarPortal>
-          <button className="button default tag-deploy">Tag and Deploy</button>
-        </SaveBarPortal>
+
+        {!canSave && (
+          <SaveBarPortal>
+            <button
+              type="button"
+              onClick={this.onVersionModalOpen}
+              className="button default tag-deploy"
+            >
+              {isTagged ? 'Deploy' : 'Tag and Deploy'}
+            </button>
+          </SaveBarPortal>
+        )}
       </div>
     )
   }
