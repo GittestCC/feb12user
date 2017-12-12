@@ -20,6 +20,7 @@
       margin: 0;
     }
   }
+
   .form-container {
     width: 100%;
     display: inherit;
@@ -218,6 +219,84 @@
     }
   }
 
+  .commits {
+    .label {
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .commit-details {
+      width: 100%;
+      background-color: $kinto-tinted-grayscale-1;
+      padding: 8px 16px;
+      &.no-commit, .no-commit {
+        color: $kinto-tinted-grayscale-6;
+        font-size: 14px;
+        text-align: center;
+        padding-bottom: 9px;
+        display: inline;
+      }
+      &.active {
+        background-color: rgba($kinto-blue, 0.4);
+      }
+      &.first {
+        border-radius: 4px 4px 0 0;
+      }
+      &.last {
+        border-radius: 0 0 4px 4px;
+      }
+      .state-and-time {
+        display: flex;
+        justify-content: space-between;
+        color: $kinto-grayscale-7;
+        font-size: 14px;
+        .build{
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          font-size: 12px;
+          .dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 5px;
+            margin-left: 15px;
+            &.queued {
+              background-color: $kinto-purple;
+            }
+            &.building {
+              background-color: $kinto-yellow;
+            }
+            &.failed {
+              background-color: $kinto-coral;
+            }
+            &.success {
+              background-color: $kinto-green;
+            }
+            &.not_processed {
+              background-color: $kinto-tinted-grayscale-5;
+            }
+          }
+        }
+      }
+      .notes {
+        color: rgba($kinto-grayscale-7, 0.4);
+        font-size: 14px;
+      }
+      &.main {
+        border-radius: 4px;
+        .main-with-icon {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          .commit-icon {
+            @include backgroundImage('/images/icon-type-commit.svg', 20px, 20px);
+            margin-right: 20px;
+          }
+        }
+      }
+
+    }
+  }
+
   .line {
     width: 100%;
     border-bottom: 2px solid $kinto-tinted-grayscale-2;
@@ -233,5 +312,8 @@
       &:last-child { margin-left: 10px; }
     }
   }
+}
 
+.rc-tooltip-inner {
+  font-weight: bold;
 }

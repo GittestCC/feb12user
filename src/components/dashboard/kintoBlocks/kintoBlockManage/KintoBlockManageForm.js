@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm, FieldArray } from 'redux-form'
+import Tooltip from 'rc-tooltip'
 import { FieldValidation, FormError } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
@@ -15,7 +16,10 @@ class KintoBlockManageForm extends Component {
     kintoBlock: PropTypes.object.isRequired,
     isVersionTag: PropTypes.bool,
     isCreateTagErrorMessageShown: PropTypes.bool.isRequired,
-    error: PropTypes.string
+    error: PropTypes.string,
+    indexClass: PropTypes.func.isRequired,
+    commitDate: PropTypes.func.isRequired,
+    commitNo: PropTypes.func.isRequired
   }
 
   render() {
@@ -25,8 +29,14 @@ class KintoBlockManageForm extends Component {
       handleSubmit,
       isVersionTag,
       isCreateTagErrorMessageShown,
-      error
+      error,
+      commitDate,
+      indexClass,
+      commitNo
     } = this.props
+
+    const commitHelp = 'Only a successful commit can be tagged.'
+
     return (
       <form
         className="kintoblock-manage form-container"
@@ -98,12 +108,85 @@ class KintoBlockManageForm extends Component {
               </div>
             </div>
           </div>
-          {isCreateTagErrorMessageShown ? (
-            <div className="errormessage-form error-message">
-              At least one successful commit must be made on GitHub in order to
-              create a tag.
+        </div>
+
+        <div className="form-wrapper full-row commits">
+          <h3>Commits</h3>
+          <h5>
+            The latest successful commit and other recent commits from GitHub.
+          </h5>
+          <div className="form-body simple">
+            <div className="section">
+              <div className="field-input-wrapper">
+                <div className="label">
+                  latest commit
+                  <Tooltip placement="top" overlay={commitHelp} trigger="click">
+                    <span className="tooltip" />
+                  </Tooltip>
+                </div>
+                <div className="commit-details main">
+                  <div className="state-and-time">
+                    <div className="main-with-icon">
+                      <Tooltip placement="top" overlay="Commit" trigger="click">
+                        <div className="commit-icon" />
+                      </Tooltip>
+                      {kintoBlock.activeBuild ? (
+                        <div>
+                          {commitNo(kintoBlock.activeBuild.commitSha)} -{' '}
+                          {commitDate(kintoBlock.activeBuild.commitTimestamp)}
+                          <div className="notes">
+                            {kintoBlock.activeBuild.commitMessage}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="commit-details no-commit">
+                          No successful commit has been made on GitHub
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {isCreateTagErrorMessageShown ? (
+                  <div className="errormessage-form error-message">
+                    At least one successful commit must be made on GitHub in
+                    order to create a tag.
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="field-input-wrapper commit-list">
+                <div className="label">recent commits</div>
+                {kintoBlock.builds ? (
+                  kintoBlock.builds.slice(0, 5).map((b, i) => (
+                    <div
+                      className={`commit-details ${
+                        b.commitSha === kintoBlock.activeBuild.commitSha
+                          ? 'active'
+                          : ''
+                      } ${indexClass(i)}`}
+                      key={i}
+                    >
+                      <div className="state-and-time">
+                        <div>
+                          {commitNo(b.commitSha)} -{' '}
+                          {commitDate(b.commitTimestamp)}
+                        </div>
+                        <div className="build">
+                          {b.state}{' '}
+                          <div className={`dot ${b.state.toLowerCase()}`} />
+                        </div>
+                      </div>
+                      <div className="notes">{b.commitMessage}</div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="commit-details no-commit">
+                    No commit has been made on GitHub
+                  </div>
+                )}
+              </div>
             </div>
-          ) : null}
+          </div>
         </div>
 
         <div className="form-wrapper blocks-and-services full-row">
@@ -116,7 +199,11 @@ class KintoBlockManageForm extends Component {
 
         <div className="form-wrapper custom-paramaters full-row">
           <h3>Environmental & Custom Parameters</h3>
-          <h5>Something here.</h5>
+          <h5>
+            Parameters are variables you decide to expose for your KintoBlock,
+            for which you should set default values. Users can override the
+            recommended values.
+          </h5>
 
           <FieldArray
             name="environmentVariables"
