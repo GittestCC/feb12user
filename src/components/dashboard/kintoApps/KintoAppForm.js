@@ -12,7 +12,7 @@ const KintoAppForm = ({
   appDependencies,
   kintoApp,
   isCreate,
-  isTagged
+  isDraft
 }) => (
   <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
     <div className="form-wrapper workspaces">
@@ -55,7 +55,7 @@ const KintoAppForm = ({
         name="appDependencies"
         dependencies={appDependencies}
         appVersion={version}
-        disabled={isTagged}
+        disabled={!isCreate && !isDraft}
       />
     </div>
   </form>
@@ -67,22 +67,10 @@ KintoAppForm.propTypes = {
   appDependencies: PropTypes.array,
   kintoApp: PropTypes.object,
   isCreate: PropTypes.bool.isRequired,
-  isTagged: PropTypes.bool.isRequired
-}
-
-const validate = (values, isTagged) => {
-  let errors = {}
-  const protocolInputs = values.protocolInputs || {}
-  if (!protocolInputs.restful && !protocolInputs.gRPC && !isTagged) {
-    errors.protocolInputs = {
-      restful: 'You should at least pick one protocol'
-    }
-  }
-  return errors
+  isDraft: PropTypes.bool.isRequired
 }
 
 export default reduxForm({
   form: 'kintoAppForm',
-  enableReinitialize: true,
-  validate
+  enableReinitialize: true
 })(KintoAppForm)

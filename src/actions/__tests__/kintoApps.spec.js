@@ -127,19 +127,6 @@ describe('KintoApps actions', () => {
     ])
   })
 
-  it('createVersionKintoApp should throw an error if there are errors', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: { errors: 'noop' }
-      })
-    })
-    const store = mockStore()
-    const result = store.dispatch(actions.createVersionKintoApp('1', {}))
-    await expect(result).rejects.toEqual({ errors: 'noop' })
-  })
-
   it('createKintoApp should fire a form submitted action and redirect upon success', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
@@ -307,7 +294,7 @@ describe('KintoApps actions', () => {
     ])
   })
 
-  it('deployEnvironment should fire an action to submit a form and update the app environments', async () => {
+  it('deployEnvironment should fire an action to submit a form and update the app environments and redirect the page', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -322,7 +309,8 @@ describe('KintoApps actions', () => {
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
-      actions.KINTO_APP_ENVIRONMENT_UPDATE
+      actions.KINTO_APP_ENVIRONMENT_UPDATE,
+      CALL_HISTORY_METHOD
     ])
   })
 

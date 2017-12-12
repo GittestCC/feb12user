@@ -6,10 +6,14 @@ function mergeStrategyEnchanced(options = {}) {
   return (objValue, srcValue) => {
     // we don't want to merge version objects
     //TODO: we need to find a better way to handle obj merging with different versions
-    if (
+
+    const isSrcVersion =
       isObject(srcValue) &&
       (srcValue.major || srcValue.minor || srcValue.revision)
-    ) {
+    const isObjVersion =
+      isObject(objValue) &&
+      (objValue.major || objValue.minor || objValue.revision)
+    if (isSrcVersion || isObjVersion) {
       // if there is already a version saved and new one is low priority return the old one
       if (options.lowPriority === 'version' && objValue) {
         return objValue

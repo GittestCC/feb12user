@@ -16,7 +16,7 @@ class KintoAppManage extends Component {
     baseVersions: PropTypes.array.isRequired,
     fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
-    isTagged: PropTypes.bool.isRequired,
+    isDraft: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired
   }
 
@@ -27,7 +27,6 @@ class KintoAppManage extends Component {
   componentDidMount() {
     this.props.fetchKintoApps()
     this.props.fetchKintoApp(this.props.id, this.props.ver)
-    this.props.getKintoAppEnvironments(this.props.id) // TODO: Because we will need release information
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +46,17 @@ class KintoAppManage extends Component {
   }
 
   render() {
-    const { kintoApp, version, baseVersions, canSave, isTagged } = this.props
+    const {
+      kintoApp,
+      canSave,
+      version,
+      baseVersions,
+      isDraft,
+      isVersionMatch
+    } = this.props
+    if (!isVersionMatch) {
+      return null
+    }
     return (
       <div className="kinto-app-manage">
         <div className="page-title">
@@ -67,7 +76,7 @@ class KintoAppManage extends Component {
           kintoApp={kintoApp}
           version={this.props.ver}
           isCreate={false}
-          isTagged={isTagged}
+          isDraft={isDraft}
         />
 
         <ComplexModal
@@ -80,7 +89,7 @@ class KintoAppManage extends Component {
             title: kintoApp.name,
             baseVersions: baseVersions,
             environments: kintoApp.environments,
-            isTagged: isTagged,
+            isDraft: isDraft,
             kintoApp: kintoApp
           }}
         />
@@ -92,7 +101,7 @@ class KintoAppManage extends Component {
               onClick={this.onVersionModalOpen}
               className="button default tag-deploy"
             >
-              {isTagged ? 'Deploy' : 'Tag and Deploy'}
+              {isDraft ? 'Tag and Deploy' : 'Deploy'}
             </button>
           </SaveBarPortal>
         )}

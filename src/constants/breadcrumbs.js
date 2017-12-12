@@ -55,8 +55,7 @@ export default {
     },
     {
       component: 'KintoAppTagSelectorContainer',
-      url: urls[pages.dashboardKintoAppsManage],
-      type: KINTOAPP
+      url: urls[pages.dashboardKintoAppsManage]
     }
   ],
   [pages.dashboardKintoAppsEnvironments]: [
@@ -93,9 +92,8 @@ export default {
       type: KINTOAPP
     },
     {
-      component: 'KintoVersionSwitcherContainer',
-      url: urls[pages.dashboardKintoAppsDependenciesConfig],
-      type: KINTOAPP
+      component: 'KintoAppTagSelectorContainer',
+      url: urls[pages.dashboardKintoAppsDependenciesConfig]
     },
     {
       component: 'KintoAppEnvironmentSwitcherContainer',

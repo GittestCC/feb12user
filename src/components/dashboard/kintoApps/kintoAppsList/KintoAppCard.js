@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { getVersionAsText } from '../../../../helpers/versionHelper'
 import DropDown from '../../../ui/DropDown'
-import TagItem from '../../ui/TagItem'
+import KintoAppTagItem from '../../ui/KintoAppTagItem'
 
 class KintoAppCard extends Component {
   static propTypes = {
     kintoApp: PropTypes.object.isRequired,
-    isLatestVersionPending: PropTypes.bool.isRequired,
-    latestVersion: PropTypes.object.isRequired,
-    versions: PropTypes.array.isRequired,
+    tagList: PropTypes.array.isRequired,
+    envVersionsList: PropTypes.array.isRequired,
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
     dropdownDependencyId: PropTypes.string.isRequired,
-    onVersionCreate: PropTypes.func.isRequired,
-    goToLatest: PropTypes.func.isRequired,
+    goToDraft: PropTypes.func.isRequired,
     goToEnvironment: PropTypes.func.isRequired
   }
 
@@ -43,19 +42,16 @@ class KintoAppCard extends Component {
   render() {
     const {
       kintoApp,
-      isLatestVersionPending,
-      latestVersion,
-      versions,
+      tagList,
+      envVersionsList,
       dropdownId,
       dropdownVersionId,
       dropdownDependencyId,
-      onVersionCreate,
-      goToLatest,
+      goToDraft,
       goToEnvironment
     } = this.props
-
     return (
-      <Link to={latestVersion.url} className="kintoapp coral">
+      <Link to={tagList[0].url} className="kintoapp coral">
         <div className="top">
           <div className="text">
             <div className="left">
@@ -66,13 +62,27 @@ class KintoAppCard extends Component {
               />
             </div>
             <div className="right">
-              <h4 className="version">{latestVersion.text}</h4>
+              {envVersionsList.slice(0, 2).map((env, key) => (
+                <div className="env-item" key={key}>
+                  <div className="env-item-ver">
+                    {getVersionAsText(env.version)}
+                  </div>
+                  <div className="env-item-tag">
+                    <div>{env.envName}</div>
+                  </div>
+                </div>
+              ))}
+              {envVersionsList.length > 2 ? (
+                <div className="env-item">
+                  <div className="env-item-ver">-</div>
+                  <div className="env-item-tag">
+                    <div>+{envVersionsList.length - 2}</div>
+                  </div>
+                </div>
+              ) : null}
             </div>
             <div className="name-and-tag">
               <h3 className="name">{kintoApp.name}</h3>
-              {isLatestVersionPending && (
-                <div className="text-highlight orange">PENDING</div>
-              )}
             </div>
           </div>
         </div>
@@ -96,9 +106,9 @@ class KintoAppCard extends Component {
               {kintoApp.dependencies.map((k, index) => (
                 <button key={index}>
                   <div
-                    className={`dependency ${k.type
-                      ? k.type.toLowerCase()
-                      : ''}-dep`}
+                    className={`dependency ${
+                      k.type ? k.type.toLowerCase() : ''
+                    }-dep`}
                   />
                   <h5>{k.name}</h5>
                 </button>
@@ -110,9 +120,9 @@ class KintoAppCard extends Component {
                 .map((d, i) => (
                   <div
                     key={i}
-                    className={`dependency ${d.type
-                      ? d.type.toLowerCase()
-                      : ''}-dep`}
+                    className={`dependency ${
+                      d.type ? d.type.toLowerCase() : ''
+                    }-dep`}
                   />
                 ))}
 
@@ -123,28 +133,27 @@ class KintoAppCard extends Component {
               )}
             </div>
             <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-              <button onClick={onVersionCreate}>Create New Version</button>
-              <button onClick={goToLatest}>Edit {latestVersion.text}</button>
-              <button onClick={this.showVersionDropdown}>
-                View Other Versions
+              <button onClick={goToDraft}>
+                Edit Draft
+                <div className="draft-icon simple" />
               </button>
+
+              <button onClick={this.showVersionDropdown}>View All Tags</button>
               <div className="dropdown line" />
               <button onClick={goToEnvironment}>View Environments</button>
               <div className="dropdown line" />
-              <button>Delete {latestVersion.text}</button>
               <button>Delete Application</button>
             </DropDown>
             <DropDown
+              id={dropdownVersionId}
               type="filter"
               className="menu-hidden"
-              id={dropdownVersionId}
               isShown={this.state.isVerShown}
               onHide={this.hideVersionDropdown}
-              list={versions}
-              component={TagItem}
+              list={tagList}
+              component={KintoAppTagItem}
               filterField="text"
-              actionText="Create New Version"
-              actionHandler={onVersionCreate}
+              hideAction={true}
             />
           </div>
         </div>

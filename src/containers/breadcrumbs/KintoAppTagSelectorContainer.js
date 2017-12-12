@@ -5,8 +5,8 @@ import { getVersionAsText, isVersionEqual } from '../../helpers/versionHelper'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
 import KintoAppTagSelector from '../../components/breadcrumbs/KintoAppTagSelector'
 
-function mapStateToProps(state, { type, disabled, url }) {
-  const { selectedKintoAppId } = state.pageOptions
+function mapStateToProps(state, { url }) {
+  const { selectedKintoAppId, selectedEnvironmentId } = state.pageOptions
   const selectedApp = state.kintoApps.byId[selectedKintoAppId] || {}
   let dropdownItems = []
   let selectedAppVersion = getVersionAsText(selectedApp.version) || ''
@@ -14,21 +14,25 @@ function mapStateToProps(state, { type, disabled, url }) {
     selectedAppVersion && selectedAppVersion === '0.0.0' ? true : false
 
   if (selectedApp.versions) {
-    dropdownItems = selectedApp.versions.map(v => ({
-      text: getVersionAsText(v),
-      url: getUrl(url, {
-        id: selectedApp.id,
-        version: getVersionAsText(v, true)
-      }),
-      releases: v.environments,
-      lastUpdated: moment(v.lastUpdated).format('h:mmA, DD MMM YYYY'),
-      notes:
-        selectedApp.version.notes ||
-        'Here are some notes that are for this version',
-      // TODO: renove mock data when notes from builds are available
-      active: isVersionEqual(v, selectedApp.version),
-      special: getVersionAsText(v) === '0.0.0' ? true : false
-    }))
+    dropdownItems = selectedApp.versions.map(v => {
+      const isDraft = isVersionEqual(v, '0.0.0')
+      return {
+        text: isDraft ? 'Draft' : getVersionAsText(v),
+        url: getUrl(url, {
+          id: selectedApp.id,
+          version: getVersionAsText(v),
+          envId: selectedEnvironmentId || '0'
+        }),
+        releases: v.environments,
+        lastUpdated: moment(v.lastUpdated).format('h:mmA, DD MMM YYYY'),
+        notes:
+          selectedApp.version.notes ||
+          'Here are some notes that are for this version',
+        // TODO: remove mock data when notes from builds are available
+        active: isVersionEqual(v, selectedApp.version),
+        special: isDraft
+      }
+    })
   }
 
   return {

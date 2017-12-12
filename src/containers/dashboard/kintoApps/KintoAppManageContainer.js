@@ -5,26 +5,24 @@ import {
   fetchKintoApps,
   getKintoAppEnvironments
 } from '../../../actions/kintoApps'
-import { findInArrayByText, asTextList } from '../../../helpers/versionHelper'
+import { asTextList, isVersionEqual } from '../../../helpers/versionHelper'
 import KintoAppManage from '../../../components/dashboard/kintoApps/KintoAppManage'
 
 function mapStateToProps(state, { match }) {
-  const { id, ver } = match.params
+  let { id, ver } = match.params
   const kintoApp = state.kintoApps.byId[id] || {}
   const { canSave } = state.pageOptions
-  let isTagged = false
-
-  if (ver !== '0.0.0') {
-    isTagged = true
+  if (ver === 'draft') {
+    ver = '0.0.0'
   }
-
   return {
     id,
     ver,
     kintoApp,
     canSave,
-    isTagged,
-    version: findInArrayByText(kintoApp.versions, ver),
+    version: kintoApp.version,
+    isDraft: isVersionEqual(kintoApp.version, '0.0.0'),
+    isVersionMatch: isVersionEqual(kintoApp.version, ver),
     baseVersions: asTextList(kintoApp.versions)
   }
 }

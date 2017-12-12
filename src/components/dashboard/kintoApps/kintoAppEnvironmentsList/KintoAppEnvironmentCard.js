@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
-import {
-  getEnvironmentVersionAndBuild,
-  getEnvironmentButtonInfo
-} from '../../../../helpers/environmentHelper'
+import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
+import { getVersionAsText } from '../../../../helpers/versionHelper'
 import DropDown from '../../../ui/DropDown'
 
 const DragHandle = SortableHandle(() => <span className="hamburger" />)
@@ -46,9 +44,9 @@ class KintoAppEnvironmentCard extends Component {
 
     return (
       <div
-        className={`environment-card ${this.state.isExpanded
-          ? 'expanded'
-          : ''}`}
+        className={`environment-card ${
+          this.state.isExpanded ? 'expanded' : ''
+        }`}
       >
         <div className="top">
           <h3>
@@ -70,37 +68,39 @@ class KintoAppEnvironmentCard extends Component {
               <div>
                 {' '}
                 <div className="upper">
-                  {environment.releases ? status === 'SHUTDOWN' ? (
-                    <div>
-                      <h4> No build deployed. </h4>
-                    </div>
-                  ) : (
-                    <div>
-                      <h6 className={`status ${status.toLowerCase()}`}>
-                        {status}
-                      </h6>
-                      <h4 className="version">{`${getEnvironmentVersionAndBuild(
-                        currentRelease.version
-                      ).version} (${getEnvironmentVersionAndBuild(
-                        currentRelease.version
-                      ).build})`}</h4>
-                    </div>
+                  {environment.releases ? (
+                    status === 'SHUTDOWN' ? (
+                      <div>
+                        <h4> No build deployed. </h4>
+                      </div>
+                    ) : (
+                      <div>
+                        <h6 className={`status ${status.toLowerCase()}`}>
+                          {status}
+                        </h6>
+                        <h4 className="version">
+                          {getVersionAsText(currentRelease.version)}
+                        </h4>
+                      </div>
+                    )
                   ) : (
                     <h4> No build deployed. </h4>
                   )}
                 </div>
                 <div className="lower">
                   <div className="date">
-                    {environment.releases ? status === 'SHUTDOWN' ? (
-                      <div className="date">
-                        Shut down at{' '}
-                        {moment(currentRelease.completionTime).format(
-                          'hh:mm [on the] Do MMMM[,] YYYY'
-                        )}
-                      </div>
-                    ) : (
-                      moment(currentRelease.completionTime).format(
-                        'Do MMMM[,] YYYY, hh:mm'
+                    {environment.releases ? (
+                      status === 'SHUTDOWN' ? (
+                        <div className="date">
+                          Shut down at{' '}
+                          {moment(currentRelease.completionTime).format(
+                            'hh:mm [on the] Do MMMM[,] YYYY'
+                          )}
+                        </div>
+                      ) : (
+                        moment(currentRelease.completionTime).format(
+                          'Do MMMM[,] YYYY, hh:mm'
+                        )
                       )
                     ) : (
                       <div>
@@ -148,11 +148,9 @@ class KintoAppEnvironmentCard extends Component {
                                 </h6>
                               </div>
                               <div className="right">
-                                <h4 className="version">{`${getEnvironmentVersionAndBuild(
-                                  release.version
-                                ).version} (${getEnvironmentVersionAndBuild(
-                                  release.version
-                                ).build})`}</h4>
+                                <h4 className="version">
+                                  {getVersionAsText(release.version)}
+                                </h4>
                                 <div className="date">
                                   {release.steps ? (
                                     moment(
@@ -236,7 +234,9 @@ class KintoAppEnvironmentCard extends Component {
           </div>
           <div className="right expanded-buttons">
             <Link
-              to={`/app/dashboard/kintoapps/${kintoApp.id}/environment/${environment.id}/edit`}
+              to={`/app/dashboard/kintoapps/${kintoApp.id}/environment/${
+                environment.id
+              }/edit`}
               className="button secondary"
             >
               Edit
@@ -259,7 +259,8 @@ class KintoAppEnvironmentCard extends Component {
               <button
                 className="button"
                 onClick={() =>
-                  buttonAction('new', 'deploy', 'Deploy', environment)}
+                  buttonAction('new', 'deploy', 'Deploy', environment)
+                }
               >
                 Deploy
               </button>

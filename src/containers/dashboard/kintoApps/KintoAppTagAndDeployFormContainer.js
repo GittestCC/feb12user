@@ -1,22 +1,17 @@
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
-import { getVersionAsText, textToObject } from '../../../helpers/versionHelper'
+import { getVersionAsText } from '../../../helpers/versionHelper'
 import TagAndDeployForm from '../../../components/dashboard/ui/TagAndDeployForm'
 import { deployEnvironment } from '../../../actions/kintoApps'
 
 const selector = formValueSelector('versionCreate')
 
-function mapStateToProps(state, { kintoApp, isTagged }) {
+function mapStateToProps(state, { kintoApp, isDraft }) {
   kintoApp = kintoApp || {}
   const versionText = getVersionAsText(selector(state, 'version'))
-  let submitLabel = isTagged ? 'Redeploy' : 'Create'
-  let version = textToObject('0.0.0')
+  let submitLabel = isDraft ? 'Create' : 'Redeploy'
   if (versionText) {
     submitLabel += ` ${versionText}`
-  }
-
-  if (isTagged) {
-    version = textToObject(getVersionAsText(kintoApp.version))
   }
 
   return {
@@ -24,15 +19,12 @@ function mapStateToProps(state, { kintoApp, isTagged }) {
     submitLabel,
     initialValues: {
       environment: kintoApp.environments[0].name,
-      version: version
+      version: kintoApp.version
     }
   }
 }
 
-function mapDispatchToProps(
-  dispatch,
-  { onClose, match, id, disableCloseOnSubmit }
-) {
+function mapDispatchToProps(dispatch, { onClose, id }) {
   return {
     onSubmit: formValues => {
       const envName = formValues.environment
@@ -42,10 +34,7 @@ function mapDispatchToProps(
         createNewVersion: true
       }
 
-      return dispatch(deployEnvironment(id, data, envName)).then(() => {
-        if (!disableCloseOnSubmit) onClose()
-        return
-      })
+      return dispatch(deployEnvironment(id, data, envName)).then(onClose)
     }
   }
 }

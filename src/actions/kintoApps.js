@@ -4,10 +4,9 @@ import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 
 import { formSubmitted } from './pageOptions'
-import {
-  isVersionEqual,
-  getManageUrlForKintoApp
-} from '../helpers/versionHelper'
+import { isVersionEqual } from '../helpers/versionHelper'
+import { getPageUrl } from '../helpers/urlHelper'
+import { pages } from '../constants/pages'
 import { isRecent } from '../helpers/dateHelper'
 
 export const FETCH_KINTO_APPS = 'FETCH_KINTO_APPS'
@@ -137,16 +136,6 @@ export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
     })
 }
 
-export const createVersionKintoApp = (id, data) => dispatch => {
-  return axios.post(`/kintoapps/${id}/versions`, data).then(result => {
-    if (result.errors) {
-      throw new SubmissionError(result.errors)
-    }
-    dispatch(kintoAppCreateVersion(id, result.newVersion))
-    dispatch(push(getManageUrlForKintoApp(id, data.version)))
-  })
-}
-
 export const createKintoApp = data => dispatch => {
   return axios.post('/kintoapps/create', data).then(() => {
     dispatch(formSubmitted())
@@ -203,6 +192,7 @@ export const deployEnvironment = (id, data, envName) => dispatch => {
     .then(result => {
       dispatch(formSubmitted())
       dispatch(appEnvironmentUpdate(id, result))
+      dispatch(push(getPageUrl(pages.dashboardKintoAppsEnvironments, { id })))
     })
 }
 

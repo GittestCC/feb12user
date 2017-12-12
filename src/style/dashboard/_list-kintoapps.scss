@@ -2,8 +2,38 @@
   @extend .my-kintoblocks;
   .kintoapp-list {
     @extend .kintoblock-list;
+
     .kintoapp {
       @extend .kintoblock;
+      .env-item, h3, &hover .env-item {
+        color: $kinto-grayscale-7;
+      }
+    }
+
+    .draft-icon.simple {
+      position: initial;
+    }
+    .env-item {
+      display: flex;
+      font-size: 12px;
+      height: 16px;
+      line-height: 16px;
+      margin-bottom: $margin-base;
+      text-align: center;
+    }
+    .env-item-ver {
+      width: 40px;
+      margin-top: 2px;
+      margin-right: $margin-base;
+      font-weight: normal;
+    }
+    .env-item-tag {
+      width: 40px;
+      background: $kinto-grayscale-1;
+      padding: 2px;
+      div {
+        overflow: hidden;
+      }
     }
   }
 }

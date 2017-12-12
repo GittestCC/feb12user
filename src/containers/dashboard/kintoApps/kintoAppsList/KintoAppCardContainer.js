@@ -1,32 +1,39 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getVersionSelectItem } from '../../../../helpers/versionHelper'
+import {
+  isVersionEqual,
+  getVersionAsText,
+  getEnvVersionsList
+} from '../../../../helpers/versionHelper'
+import { getPageUrl } from '../../../../helpers/urlHelper'
+import { pages } from '../../../../constants/pages'
 import KintoAppCard from '../../../../components/dashboard/kintoApps/kintoAppsList/KintoAppCard'
 
 function mapStateToProps(state, { kintoApp, index }) {
-  const latestVersion = kintoApp.versions[0]
-  const versions = kintoApp.versions.map(v => {
-    const isFirst = kintoApp.versions.indexOf(v) === 0
-    let result = getVersionSelectItem(v, kintoApp.id, true)
-    if (isFirst) {
-      result.active = true
+  const tagList = kintoApp.versions.map(v => {
+    const isDraft = isVersionEqual(v, '0.0.0')
+    return {
+      text: isDraft ? 'Draft' : getVersionAsText(v),
+      special: isDraft,
+      releases: v.environments,
+      url: getPageUrl(pages.dashboardKintoAppsManage, {
+        id: kintoApp.id,
+        version: getVersionAsText(v)
+      })
     }
-    return result
   })
   return {
     kintoApp,
-    versions,
-    latestVersion: versions[0],
-    isLatestVersionPending: latestVersion.state === 'PENDING',
+    tagList,
+    envVersionsList: getEnvVersionsList(kintoApp.versions),
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`,
     dropdownDependencyId: `idd-${index}`
   }
 }
 
-function mapDispatchToProps(dispatch, { onVersionCreate, kintoApp }) {
+function mapDispatchToProps(dispatch, { kintoApp }) {
   return {
-    onVersionCreate: () => onVersionCreate(kintoApp),
     push: url => dispatch(push(url)),
     goToEnvironment: () =>
       dispatch(push(`/app/dashboard/kintoapps/${kintoApp.id}/environments`))
@@ -37,7 +44,7 @@ function mergeProps(stateProps, dispatchProps) {
   return {
     ...stateProps,
     ...dispatchProps,
-    goToLatest: () => dispatchProps.push(stateProps.latestVersion.url)
+    goToDraft: () => dispatchProps.push(stateProps.tagList[0].url)
   }
 }
 

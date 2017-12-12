@@ -8,7 +8,7 @@ import {
 } from '../../../actions/kintoBlocks'
 import KintoAppForm from '../../../components/dashboard/kintoApps/KintoAppForm'
 
-function mapStateToProps(state, { kintoApp, version, isCreate, isTagged }) {
+function mapStateToProps(state, { kintoApp, version, isCreate, isDraft }) {
   const formSelector = formValueSelector('kintoAppForm')
   const appDependencies = formSelector(state, 'appDependencies')
   const textareaContents = formSelector(state, 'shortDescription')
@@ -23,7 +23,7 @@ function mapStateToProps(state, { kintoApp, version, isCreate, isTagged }) {
     id: kintoApp.id,
     version,
     isCreate,
-    isTagged,
+    isDraft,
     initialValues: {
       name: kintoApp.name,
       appDependencies: kintoApp.appDependencies,

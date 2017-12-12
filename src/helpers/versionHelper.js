@@ -46,15 +46,6 @@ export const getVersionStateClassName = version => {
   }
 }
 
-export const getVersionSelectItem = (version, id, isKintoApp) => ({
-  text: getVersionAsText(version),
-  tag: version.state,
-  className: getVersionStateClassName(version),
-  url: isKintoApp
-    ? getManageUrlForKintoApp(id, version)
-    : getManageUrlForKintoBlock(id, version)
-})
-
 export const textToObject = v => {
   const regex = /(\d+)\.(\d+)\.(\d+)\.?\s?(\d+)?(?:\((\d+)\))?/
   const match = regex.exec(v)
@@ -104,18 +95,20 @@ export const isBranchVersionEqual = (a, b) => {
   return a.type.toUpperCase() === b.type.toUpperCase() && a.name === b.name
 }
 
-export const findInArrayByText = (versions, text) => {
-  if (!versions) return null
-  const version = textToObject(text)
-  return versions.find(v => isVersionEqual(v, version))
-  // return versions.find(version)
+export const getEnvVersionsList = versions => {
+  const result = []
+  versions.forEach(v => {
+    if (v.environments) {
+      v.environments.forEach(e => {
+        result.push({
+          envName: e,
+          version: v
+        })
+      })
+    }
+  })
+  return result
 }
-
-export const getManageUrlForKintoBlock = (id, version) =>
-  `/app/dashboard/kintoblocks/${id}/versions/${getVersionAsText(version, true)}`
-
-export const getManageUrlForKintoApp = (id, version) =>
-  `/app/dashboard/kintoapps/${id}/versions/${getVersionAsText(version, true)}`
 
 export const getUrlForAppEnvironment = id =>
   `/app/dashboard/kintoapps/${id}/environments`
