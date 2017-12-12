@@ -47,7 +47,19 @@ export default function pageOptions(state = {}, action) {
       ) {
         return {
           ...state,
-          canSave: true
+          canSave: true,
+          scrollToError: false
+        }
+      }
+      return state
+    case actionTypes.SET_SUBMIT_FAILED:
+      if (
+        forms[state.activePage] &&
+        forms[state.activePage].formName === action.meta.form
+      ) {
+        return {
+          ...state,
+          scrollToError: true
         }
       }
       return state
@@ -58,6 +70,7 @@ export default function pageOptions(state = {}, action) {
       return {
         ...state,
         canSave: false,
+        scrollToError: false,
         activePage,
         isDashboard
       }

@@ -20,6 +20,7 @@ describe('PageOptions Reducer', () => {
     expect(result).toEqual({
       isDashboard: true,
       canSave: false,
+      scrollToError: false,
       activePage: pages.dashboardKintoAppsList
     })
   })
@@ -29,7 +30,21 @@ describe('PageOptions Reducer', () => {
     expect(result).toEqual({
       isDashboard: false,
       canSave: false,
-      activePage: null
+      activePage: null,
+      scrollToError: false
+    })
+  })
+
+  it('location change always sets canSave/scrollToError to false', () => {
+    const result = reducer(
+      { canSave: true, scrollToError: true },
+      mockRedirectAction('/app/dashboard/kintoapps/list')
+    )
+    expect(result).toEqual({
+      isDashboard: true,
+      canSave: false,
+      scrollToError: false,
+      activePage: pages.dashboardKintoAppsList
     })
   })
 

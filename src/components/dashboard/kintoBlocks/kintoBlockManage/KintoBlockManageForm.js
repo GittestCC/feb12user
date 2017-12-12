@@ -73,6 +73,7 @@ class KintoBlockManageForm extends Component {
                 component={FieldValidation}
                 validate={[required, isLessThan200]}
                 type="textarea"
+                className="tall"
               />
             </div>
             <div className="line" />

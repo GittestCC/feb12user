@@ -3,7 +3,7 @@ import { getVersionAsText } from '../../../../helpers/versionHelper'
 import { createKintoBlockTag } from '../../../../actions/kintoBlocks'
 import KintoBlockCreateTagModal from '../../../../components/dashboard/kintoBlocks/kintoBlockManage/KintoBlockCreateTagModal'
 
-function mapDispatchToProps(dispatch, { kintoBlock }) {
+function mapDispatchToProps(dispatch, { kintoBlock, onClose }) {
   return {
     onSubmit: data => {
       const result = {
@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch, { kintoBlock }) {
       }
       dispatch(
         createKintoBlockTag(kintoBlock.id, kintoBlock.version.name, result)
-      )
+      ).then(onClose)
     }
   }
 }

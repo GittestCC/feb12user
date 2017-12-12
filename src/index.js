@@ -17,6 +17,7 @@ import LogIn from './components/LogIn'
 import ScrollToTop from './components/ScrollToTop'
 import ForgotPassword from './components/ForgotPassword'
 import CreateNewPassword from './components/CreateNewPassword'
+import ScrollToErrorOnSubmitContainer from './containers/ScrollToErrorOnSubmitContainer'
 
 import AppContainer from './containers/AppContainer'
 import AuthContainer from './containers/AuthContainer'
@@ -36,6 +37,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ScrollToTop>
+        <ScrollToErrorOnSubmitContainer />
         <div>
           <Switch>
             <Route
