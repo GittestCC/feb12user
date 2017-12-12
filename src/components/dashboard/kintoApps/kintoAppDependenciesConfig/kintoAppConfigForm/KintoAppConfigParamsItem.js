@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
+import { FieldValidation } from '../../../../forms'
 
 function getIsShownClass(visibleParams, key) {
   return !visibleParams.some(p => p.key === key) ? 'hide' : ''
@@ -21,19 +22,22 @@ const KintoAppConfigParamsItem = ({ fields, visibleParams }) => {
                 )}`}
                 key={key}
               >
-                <div className="key">{data.key}</div>
-                <Field name={`${field}.value`} type="text" component="input" />
+                <Field
+                  label={data.key}
+                  name={`${field}.value`}
+                  type="text"
+                  component={FieldValidation}
+                  inputTextOverlay={data.required ? 'Required' : null}
+                />
               </div>
             )
           })}
         </div>
       ) : (
         <div className="msg-empty">
-          {!visibleParams.length ? (
-            'No matching result found'
-          ) : (
-            'No custom parameters added'
-          )}
+          {!visibleParams.length
+            ? 'No matching result found'
+            : 'No custom parameters added'}
         </div>
       )}
     </div>

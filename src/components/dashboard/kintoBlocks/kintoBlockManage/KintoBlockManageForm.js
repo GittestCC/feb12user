@@ -216,35 +216,6 @@ class KintoBlockManageForm extends Component {
             disabled={isVersionTag}
           />
         </div>
-
-        <div className="form-wrapper availibility">
-          <h3>Availability</h3>
-          <h5>
-            Keep your baby close to you, or share your proud creation with the
-            world.
-          </h5>
-
-          <div className="form-body simple">
-            <div className="radio">
-              <Field
-                name="private"
-                type="radio"
-                component={FieldValidation}
-                label="Private (only I can use it)"
-                value="private"
-              />
-            </div>
-            <div className="radio">
-              <Field
-                name="public"
-                type="radio"
-                component={FieldValidation}
-                label="Public (anyone can get it in the KintoHub Market)"
-                value="public"
-              />
-            </div>
-          </div>
-        </div>
       </form>
     )
   }

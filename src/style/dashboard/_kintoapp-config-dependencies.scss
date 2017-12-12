@@ -161,15 +161,24 @@
   }
   .param-row {
     display: flex;
-    .key {
-      width: 50%;
-      color: $kinto-tinted-grayscale-7;
-    }
-    input {
-      width: 50%;
-    }
     &.hide {
       display: none;
+    }
+    .field-wrapper {
+      display: flex;
+      width: 100%;
+      label {
+        color: $kinto-tinted-grayscale-7;
+        width: 100%;
+        text-transform: none;
+      }
+      > div {
+        width: 50%;
+      }
+    }
+
+    .input-text-overlay-wrapper input {
+      padding-right: 80px;
     }
   }
 }

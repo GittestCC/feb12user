@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import { FieldValidation, Button } from '../../forms'
+import { FieldValidation } from '../../forms'
 import { required, isLessThan200 } from '../../../helpers/forms/validators'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
@@ -57,38 +57,6 @@ const KintoAppForm = ({
         appVersion={version}
         disabled={isTagged}
       />
-    </div>
-    <div className="form-wrapper clients">
-      <h3>Clients</h3>
-      <h5>
-        Create a repository for a new client or use a client you already own to
-        consume your application.
-      </h5>
-
-      <div className="form-body">
-        <div className="top">
-          <h4 className="bold">Use Existing Client</h4>
-          <Field
-            help="Choose an existing repository to use for your client"
-            label="REPOSITORY"
-            name="repository"
-            id="repository"
-            close={true}
-            placeholder="Enter a name for the repository"
-            component={FieldValidation}
-            disabled={isTagged}
-          />
-          <div className="line" />
-        </div>
-        <div className="bottom">
-          <Button type="button" buttonType="secondary" disabled={isTagged}>
-            Create New Client
-          </Button>
-          <Button type="button" buttonType="secondary" disabled={isTagged}>
-            Use Existing Client
-          </Button>
-        </div>
-      </div>
     </div>
   </form>
 )

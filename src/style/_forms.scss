@@ -395,3 +395,17 @@ form {
 .form-shadow {
   box-shadow: 0 2px 4px 0 rgba(66, 118, 146, 0.1), 0 10px 40px 0 rgba(66, 118, 146, 0.1);
 }
+
+.input-text-overlay-wrapper {
+  position: relative;
+}
+.input-text-overlay-message {
+  position: absolute;
+  right: $margin-base;
+  top: $margin-base;
+  color: $kinto-white;
+  background: $kinto-grayscale-6;
+  font-size: 12px;
+  padding: 2px;
+  border-radius: 4px;
+}

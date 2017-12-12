@@ -12,7 +12,6 @@ class KintoBlockCard extends Component {
     latestVersion: PropTypes.object.isRequired,
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
-    onVersionCreate: PropTypes.func.isRequired,
     goToLatest: PropTypes.func.isRequired
   }
 

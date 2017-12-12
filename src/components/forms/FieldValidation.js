@@ -17,7 +17,8 @@ class FieldValidation extends Component {
     label: PropTypes.string,
     type: PropTypes.string,
     help: PropTypes.string,
-    close: PropTypes.bool
+    close: PropTypes.bool,
+    inputTextOverlay: PropTypes.string
   }
 
   state = {
@@ -46,7 +47,8 @@ class FieldValidation extends Component {
       close,
       id,
       disabled,
-      characterCount
+      characterCount,
+      inputTextOverlay
     } = this.props
     const { touched, submitFailed, error } = this.props.meta
     const hasError = (touched || submitFailed) && error
@@ -92,6 +94,17 @@ class FieldValidation extends Component {
             disabled={disabled}
           />
         )
+    }
+
+    if (inputTextOverlay) {
+      inputEl = (
+        <div className="input-text-overlay-wrapper">
+          {inputEl}
+          <div className="input-text-overlay-message uppercase">
+            {inputTextOverlay}
+          </div>
+        </div>
+      )
     }
 
     return (

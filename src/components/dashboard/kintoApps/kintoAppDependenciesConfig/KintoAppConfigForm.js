@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm, FieldArray } from 'redux-form'
 import KintoAppConfigParams from './kintoAppConfigForm/KintoAppConfigParams'
-import KintoAppConfigHardware from './kintoAppConfigForm/KintoAppConfigHardware'
 
 const KintoAppConfigForm = ({
   activeTab,
@@ -21,17 +20,6 @@ const KintoAppConfigForm = ({
           component={KintoAppConfigParams}
           allDependenciesInfo={allDependenciesInfo}
           shownDependenciesIds={shownDependenciesIds}
-          onChangeActive={onChangeActive}
-          itemToScrollTo={itemToScrollTo}
-        />
-      </div>
-      <div className={activeTab !== 'hardware' ? 'hide' : null}>
-        <FieldArray
-          name="data"
-          component={KintoAppConfigHardware}
-          allDependenciesInfo={allDependenciesInfo}
-          shownDependenciesIds={shownDependenciesIds}
-          resetCPUHandler={resetCPUHandler}
           onChangeActive={onChangeActive}
           itemToScrollTo={itemToScrollTo}
         />

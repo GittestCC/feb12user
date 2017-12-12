@@ -43,7 +43,7 @@ const AddNewEnvironmentModalForm = ({
   )
 }
 
-AddNewEnvironmentModalForm.PropTypes = {
+AddNewEnvironmentModalForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   addNewEnvironment: PropTypes.func.isRequired,

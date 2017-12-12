@@ -43,8 +43,6 @@ class KintoBlockManage extends Component {
       this.props.fetchKintoBlock(id, ver, type)
       this.setState({ isCreateTagErrorMessageShown: false })
     }
-
-    console.log('oldsave', this.props.canSave, 'new', canSave)
     if (
       !this.props.canSave &&
       canSave &&

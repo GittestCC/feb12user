@@ -126,19 +126,14 @@ export const fetchKintoApps = () => dispatch => {
 export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
   return axios
     .get(`/kintoapps/${id}/versions/${ver}/config/${envId}`)
-    .then(data => {
-      //TODO: remove mock data
-      data.data.forEach(d => {
-        d.params = Array(5)
-          .fill()
-          .map(i => ({
-            key: Math.random()
-              .toString(36)
-              .substring(7),
-            value: 'key'
-          }))
+    .then(response => {
+      //TODO: a server side fix for initing params to empty array
+      response.data.forEach(i => {
+        if (!i.params) {
+          i.params = []
+        }
       })
-      dispatch(kintoAppDependenciesConfigReceive(id, ver, envId, data.data))
+      dispatch(kintoAppDependenciesConfigReceive(id, ver, envId, response.data))
     })
 }
 
