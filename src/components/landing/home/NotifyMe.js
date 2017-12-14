@@ -31,6 +31,7 @@ class NotifyMe extends Component {
               name="FNAME"
               id="firstName"
               placeholder="Jonathan"
+              className="input-lg"
               required
             />
           </div>
@@ -41,6 +42,7 @@ class NotifyMe extends Component {
               name="LNAME"
               id="lastName"
               placeholder="Snow"
+              className="input-lg"
               required
             />
           </div>
@@ -52,10 +54,11 @@ class NotifyMe extends Component {
             name="EMAIL"
             id="emailAddress"
             placeholder="jsnow@thewall.com"
+            className="input-lg"
             required
           />
         </div>
-        <button className="button default" type="submit">
+        <button className="button default btn-lg" type="submit">
           Notify Me
         </button>
         <h5 className="byline bold">

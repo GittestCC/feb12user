@@ -65,6 +65,7 @@
     "e2e-tests": "wdio wdio.conf.js",
     "e2e-tests-watch": "wdio wdio.conf.js --watch",
     "test:e2e": "./e2e-tests.sh",
+    "test:e2e:cache": "./e2e-tests.sh -c",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",

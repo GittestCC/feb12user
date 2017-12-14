@@ -33,7 +33,7 @@ class MeetTheRebels extends Component {
             <h1>Meet the rebels.</h1>
             <h3>
               Programmers, designers, gamers, tech & animal lovers - all with
-              one common goal
+              one common goal.
             </h3>
           </div>
 

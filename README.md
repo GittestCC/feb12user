@@ -19,11 +19,20 @@ The following command shortcuts are available during development:
 * `npm install`: Installs all NPM dependencies.
 * `npm start`: Starts a local web server at `http://localhost:3000`.
 * `npm test`: Runs unit tests.
-* `npm run test:e2e` Runs all the e2e tests
+* `npm run test:e2e` Compile the app and runs all the e2e tests
+* `npm run test:e2e:cache` Run all the e2e tests without compiling the app
 * `npm run lint`: Runs linting
 
-
 ## FAQ
+
+### Setting up and running E2E tests
+- you need to have the client *(this project)* and server *(restful-to-grpc-gateway-service)* projects under the same directory as their sibilings (if you want to rename the server folder name to another name, you need to update the `.env` file)
+- you need to duplicate `.env.sample` and rename it to `.env`
+- remove the line that have `REACT_APP_GITHUB_CLIENT_ID` from the `.env` for now
+- good rule of practice whenever you pull run the e2e tests using `npm run test:e2e` this takes extra time because it compiles the client side code
+- after that and when writing new e2e tests it is better to run e2e tests using `npm run test:e2e:cache`
+
+> Note: whenever any code inside  `/src` changes the app needs to be recompiled (use `npm run test:e2e` to do that)
 
 ### How to add a new blog post
 

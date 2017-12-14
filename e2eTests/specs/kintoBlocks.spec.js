@@ -92,7 +92,9 @@ describe('manage kintoBlock', () => {
     KintoBlockManage.description.input.setValue('test description')
     KintoBlockManage.submitGlobal()
     browser.waitUntil(() => {
-      return !KintoBlockManage.savebar.getAttribute('class').includes('show')
+      return KintoBlockManage.savebar
+        .getAttribute('class')
+        .includes('e2e-disabled')
     }, 5000)
     KintoBlockList.open()
     KintoBlockList.getCard(0).waitForVisible()

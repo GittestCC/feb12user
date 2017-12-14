@@ -10,7 +10,9 @@ const GlobalSaveBar = ({
   hasForm
 }) => (
   <div
-    className={`global-save-bar ${hasForm ? 'show' : ''}`}
+    className={`global-save-bar ${hasForm ? 'show' : ''} ${
+      !canSave ? 'e2e-disabled' : ''
+    }`}
     data-test="savebar"
   >
     {toggleSaveButton && !canSave ? null : (
@@ -18,7 +20,6 @@ const GlobalSaveBar = ({
         {submitLabel}
       </Button>
     )}
-
     <div id="savebar-portal" />
   </div>
 )

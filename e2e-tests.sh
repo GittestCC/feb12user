@@ -5,7 +5,12 @@ export $(cat .env | grep -v ^# | xargs)
 
 echo "e2e tests..."
 echo "starting frontend server..."
-REACT_APP_SHOW_DEV_UI=true REACT_APP_SERVER_URL=http://localhost:9091 PORT=3001 npm run build
+
+if [ -z "$1" ] || [ $1 != '-c' ];
+then
+  REACT_APP_SHOW_DEV_UI=true REACT_APP_SERVER_URL=http://localhost:9091 PORT=3001 npm run build
+fi
+
 echo "frontend started"
 serve -p 5001 -s build & NODE_SERVE=$!
 echo "------starting backend server------"

@@ -63,11 +63,11 @@ const KintoAppForm = ({
 
 KintoAppForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  version: PropTypes.string.isRequired,
+  version: PropTypes.string,
   appDependencies: PropTypes.array,
   kintoApp: PropTypes.object,
   isCreate: PropTypes.bool.isRequired,
-  isDraft: PropTypes.bool.isRequired
+  isDraft: PropTypes.bool
 }
 
 export default reduxForm({
