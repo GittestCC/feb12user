@@ -61,12 +61,19 @@
 
 .breadcrumb-icon {
   background: url("/images/icon-breadcrumb.svg");
-  display: inline-block;
+  display: flex;
   width: 20px;
   height: 20px;
   border: none;
 }
 
+.breadcrumb-with-icon {
+  display: flex;
+  align-items: center;
+  h4 {
+    margin: 0 10px;
+  }
+}
 
 .draft-icon {
   height: 20px;

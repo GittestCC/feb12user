@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDown from '../../../ui/DropDown'
-import TagItem from '../../ui/TagItem'
+import KintoBlockTagAndBranchDropDownContainer from '../../../../containers/breadcrumbs/KintoBlockTagAndBranchDropDownContainer'
+import { pages, urls } from '../../../../constants/pages'
 
 class KintoBlockCard extends Component {
   static propTypes = {
     kintoBlock: PropTypes.object.isRequired,
-    versions: PropTypes.array.isRequired,
     isLatestVersionPending: PropTypes.bool.isRequired,
     latestVersion: PropTypes.object.isRequired,
     dropdownId: PropTypes.string.isRequired,
@@ -16,15 +16,15 @@ class KintoBlockCard extends Component {
   }
 
   state = {
-    isVerShown: false
+    areTagsAndBranchesShown: false
   }
 
   showVersionDropdown = () => {
-    this.setState({ isVerShown: true })
+    this.setState({ areTagsAndBranchesShown: true })
   }
 
   hideVersionDropdown = () => {
-    this.setState({ isVerShown: false })
+    this.setState({ areTagsAndBranchesShown: false })
   }
 
   render() {
@@ -34,10 +34,9 @@ class KintoBlockCard extends Component {
       latestVersion,
       dropdownId,
       dropdownVersionId,
-      versions,
-      onVersionCreate,
       goToLatest
     } = this.props
+
     return (
       <Link
         to={latestVersion.url}
@@ -70,31 +69,30 @@ class KintoBlockCard extends Component {
 
         <div className="bottom">
           <div className="icons">
-            <div className="applications">
-              {/* <div className="dependency number">+4</div>
-                <div className="dependency service" />
-                <div className="dependency application" />
-                <div className="dependency service" />
-              <div className="dependency kintoblock-dep" /> */}
-            </div>
-            <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-              <button onClick={onVersionCreate}>Create New Version</button>
-              <button onClick={goToLatest}>Edit {latestVersion.text}</button>
-              <button onClick={this.showVersionDropdown}>
-                View Other Versions
-              </button>
-            </DropDown>
             <DropDown
-              type="filter"
-              className="menu-hidden"
-              id={dropdownVersionId}
-              isShown={this.state.isVerShown}
+              type="simple"
+              dropdownClass="menu"
+              className="wide"
+              id={dropdownId}
+            >
+              <button onClick={goToLatest} className="double-line">
+                <h5>Edit Branch</h5>
+                <div className="faded">{latestVersion.text}</div>
+              </button>
+              <button onClick={this.showVersionDropdown}>
+                View All Branches & Tags
+              </button>
+              <div className="line with-padding" />
+              <button>Delete KintoBlock</button>
+            </DropDown>
+            <KintoBlockTagAndBranchDropDownContainer
               onHide={this.hideVersionDropdown}
-              list={versions}
-              component={TagItem}
-              filterField="text"
-              actionText="Create New Version"
-              actionHandler={onVersionCreate}
+              isShown={this.state.areTagsAndBranchesShown}
+              id={dropdownVersionId}
+              url={urls[pages.dashboardKintoBlocksManage]}
+              kintoBlock={kintoBlock}
+              noHighlight={true}
+              className="menu-hidden"
             />
           </div>
         </div>

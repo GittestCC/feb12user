@@ -157,7 +157,7 @@ class KintoBlockManageForm extends Component {
 
               <div className="field-input-wrapper commit-list">
                 <div className="label">recent commits</div>
-                {kintoBlock.builds.length ? (
+                {kintoBlock.builds && kintoBlock.builds.length ? (
                   kintoBlock.builds.slice(0, 5).map((b, i) => (
                     <div
                       className={`commit-details ${

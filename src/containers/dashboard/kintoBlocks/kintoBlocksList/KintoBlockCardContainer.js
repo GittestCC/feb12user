@@ -10,6 +10,7 @@ function mapStateToProps(state, { kintoBlock, index }) {
   const versions = kintoBlock.versions.map(v => {
     let result = {
       text: v.name,
+      type: v.type,
       url: getPageUrl(pages.dashboardKintoBlocksManage, {
         id: kintoBlock.id,
         version: v.name,

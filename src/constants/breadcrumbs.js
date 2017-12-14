@@ -34,9 +34,8 @@ export default {
       type: KINTOBLOCK
     },
     {
-      component: 'KintoVersionSwitcherContainer',
-      url: urls[pages.dashboardKintoBlocksManage],
-      type: KINTOBLOCK
+      component: 'KintoBlockTagAndBranchDropDownContainer',
+      url: urls[pages.dashboardKintoBlocksManage]
     }
   ],
   [pages.dashboardKintoAppsList]: [KintoAppsText],

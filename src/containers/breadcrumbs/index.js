@@ -4,6 +4,7 @@ import LinkContainer from './LinkContainer'
 import KintoAppEnvironmentSwitcherContainer from './KintoAppEnvironmentSwitcherContainer'
 import WorkspaceSwitcherContainer from './WorkspaceSwitcherContainer'
 import KintoAppTagSelectorContainer from './KintoAppTagSelectorContainer'
+import KintoBlockTagAndBranchDropDownContainer from './KintoBlockTagAndBranchDropDownContainer'
 
 export default {
   KintoSwitcherContainer,
@@ -11,5 +12,6 @@ export default {
   KintoAppEnvironmentSwitcherContainer,
   LinkContainer,
   WorkspaceSwitcherContainer,
-  KintoAppTagSelectorContainer
+  KintoAppTagSelectorContainer,
+  KintoBlockTagAndBranchDropDownContainer
 }

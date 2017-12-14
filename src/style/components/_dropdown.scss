@@ -1,15 +1,33 @@
 .dropdown {
-  position: relative;
   font-size: 14px;
-
+  position: relative;
   ul {
     list-style: none;
   }
 }
 
+.bottom .dropdown.wide {
+  font-size: 14px;
+  position: absolute;
+  right: 0;
+  top: -35px;
+}
+
 .dropdown-button {
   display: block;
   cursor: pointer;
+}
+
+.dropdown {
+  &.wide {
+    .dropdown-content {
+      min-width: 240px;
+      margin-left: -120px;
+      button {
+        padding: 10px 30px;
+      }
+    }
+  }
 }
 
 .dropdown-content {
@@ -45,6 +63,66 @@
   }
 }
 
+.dropdown-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  cursor: pointer;
+  .tab {
+    padding: 0 20px 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    border-bottom: solid 1px $kinto-tinted-grayscale-7;
+    &.active {
+      border-bottom: solid 4px $kinto-blue;
+      h3 {
+        color: $kinto-white;
+        margin-bottom: -4px;
+      }
+      .icon {
+        margin-bottom: -4px;
+      }
+    }
+    h3 {
+      font-size: 16px;
+      margin: 0;
+      font-weight: bold;
+      color: rgba($kinto-white, 0.4);
+      text-transform: uppercase;
+    }
+    .icon {
+      &.branch {
+        @include backgroundImage('/images/icon-type-branch-dark.svg', 20px, 20px)
+        position: relative;
+        left: -10px;
+      }
+      &.tag {
+        @include backgroundImage('/images/icon-type-tag-dark.svg', 20px, 20px)
+        position: relative;
+        right: -25px;
+      }
+    }
+  }
+}
+
+.breadcrumb-with-icon {
+  .icon {
+    &.branch {
+      @include backgroundImage('/images/icon-type-branch.svg', 20px, 20px)
+    }
+    &.tag {
+      @include backgroundImage('/images/icon-type-tag.svg', 20px, 20px)
+    }
+  }
+}
+
+.menu-hidden .breadcrumb-with-icon {
+  display: none;
+}
+
 .dropdown-left .dropdown-content {
   right: 0;
   left: initial;
@@ -53,6 +131,8 @@
     right: 20px;
   }
 }
+
+
 
 .dropdown-content-items {
   .line {
@@ -63,6 +143,10 @@
     &.dropdown {
       margin: 15px 30px;
       width: 140px;
+    }
+    &.with-padding {
+      margin: 10px 30px;
+      width: 180px;
     }
   }
 
@@ -80,8 +164,31 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    &.tag-item-text {
-      background-color: rgba($kinto-blue, 0.2);
+
+    &.tag-button {
+      flex-direction: column;
+      .tag-and-commit {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .date, .notes {
+        color: rgba($kinto-white, 0.4);
+        width: 100%;
+        font-weight: normal;
+      }
+      &.tag-item-text {
+        background-color: rgba($kinto-blue, 0.2);
+      }
+    }
+
+    &.double-line {
+      flex-direction: column;
+      align-items: flex-start;
+      h5 {
+        text-align: left;
+        margin-left: 0;
+      }
     }
 
     &.title {
@@ -128,6 +235,11 @@
 .dropdown-content-filter {
   padding: 0 20px 20px 20px;
   border-bottom: 1px solid $kinto-tinted-grayscale-7;
+  &.tags-and-branches {
+    border-bottom: none;
+    padding: 10px 20px 0px 20px;
+    background-color: $kinto-tinted-grayscale-9;
+  }
 }
 
 .dropdown-content-action {
@@ -165,6 +277,7 @@
   &.active {
     background: $kinto-blue-dark;
     border-left: 6px solid $kinto-blue;
+    align-items: flex-start;
 
     .tag-item-text, .date, .notes {
       margin-left: -6px;
@@ -228,4 +341,8 @@
 .draft .tag-item-text {
   color: $kinto-white;
   font-weight: bold;
+}
+
+.faded {
+  opacity: 0.4;
 }
