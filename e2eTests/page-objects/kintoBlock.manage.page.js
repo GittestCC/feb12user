@@ -45,11 +45,19 @@ class KintoBlockManage extends Page {
     return getDataTest('kb-manage-params')
   }
 
+  get createTagButton() {
+    return getDataTest('create-tag-button')
+  }
+
+  get createTagError() {
+    return getDataTest('create-tag-error')
+  }
+
   getEnvRow(index) {
-    return browser.element(`[data-test='kb-manage-env-${index}']`)
+    return $(`[data-test='kb-manage-env-${index}']`)
   }
   getParamsRow(index) {
-    return browser.element(`[data-test='kb-manage-params-${index}']`)
+    return $(`[data-test='kb-manage-params-${index}']`)
   }
 }
 

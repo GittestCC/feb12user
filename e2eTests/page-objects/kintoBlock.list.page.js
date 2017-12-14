@@ -6,7 +6,7 @@ class KintoBlockList extends Page {
   }
 
   getCard(index) {
-    return browser.element(`[data-test='kb-card-id-${index}']`)
+    return $(`[data-test='kb-card-id-${index}']`)
   }
 }
 

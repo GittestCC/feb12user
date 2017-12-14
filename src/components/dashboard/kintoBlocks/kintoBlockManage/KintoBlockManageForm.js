@@ -148,7 +148,10 @@ class KintoBlockManageForm extends Component {
                   </div>
                 </div>
                 {isCreateTagErrorMessageShown ? (
-                  <div className="errormessage-form error-message">
+                  <div
+                    data-test="create-tag-error"
+                    className="errormessage-form error-message"
+                  >
                     At least one successful commit must be made on GitHub in
                     order to create a tag.
                   </div>

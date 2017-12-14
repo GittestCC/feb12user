@@ -26,7 +26,7 @@ The following command shortcuts are available during development:
 ## FAQ
 
 ### Setting up and running E2E tests
-- you need to have the client *(this project)* and server *(restful-to-grpc-gateway-service)* projects under the same directory as their sibilings (if you want to rename the server folder name to another name, you need to update the `.env` file)
+- you need to have the client *(this project)* and server *(restful-to-grpc-gateway-service)* projects under the same directory as their siblings (if you want to rename the server folder name to another name, you need to update the `.env` file)
 - you need to duplicate `.env.sample` and rename it to `.env`
 - remove the line that have `REACT_APP_GITHUB_CLIENT_ID` from the `.env` for now
 - good rule of practice whenever you pull run the e2e tests using `npm run test:e2e` this takes extra time because it compiles the client side code

@@ -3,19 +3,19 @@ class Page {
   TEST_PASSWORD = process.env.E2E_TEST_PASSWORD
 
   get sidebar() {
-    return browser.element('[data-test=sidebar]')
+    return $('[data-test=sidebar]')
   }
 
   get navbar() {
-    return browser.element('[data-test=navbar]')
+    return $('[data-test=navbar]')
   }
 
   get savebar() {
-    return browser.element('[data-test=savebar]')
+    return $('[data-test=savebar]')
   }
 
   submitGlobal() {
-    return browser.element('[data-test=savebar] > button').click()
+    return $('[data-test=savebar] > button').click()
   }
 
   open(path) {

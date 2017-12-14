@@ -94,7 +94,11 @@ class KintoBlockManage extends Component {
 
         <SaveBarPortal>
           {canTagCommit && (
-            <Button type="button" onClick={this.onModalOpen}>
+            <Button
+              data-test="create-tag-button"
+              type="button"
+              onClick={this.onModalOpen}
+            >
               Tag Latest Commit
             </Button>
           )}

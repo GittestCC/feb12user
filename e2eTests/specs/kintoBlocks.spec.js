@@ -53,6 +53,24 @@ describe('manage kintoBlock', () => {
     expect(KintoBlockManage.title.getText()).to.eq(name)
   })
 
+  it('show an error message when clicking tag latest commit', () => {
+    KintoBlockManage.createTagButton.click()
+    expect(KintoBlockManage.createTagError.isVisible()).to.eql(true)
+  })
+
+  it('tag latest commit is only shown when the form has no unsaved changes', () => {
+    expect(KintoBlockManage.createTagButton.isVisible()).to.eql(true)
+    KintoBlockManage.name.input.setValue('test name')
+    expect(KintoBlockManage.createTagButton.isVisible()).to.eql(false)
+    KintoBlockCreate.submitGlobal()
+    browser.waitUntil(() => {
+      return KintoBlockManage.savebar
+        .getAttribute('class')
+        .includes('e2e-disabled')
+    }, 5000)
+    expect(KintoBlockManage.createTagButton.isVisible()).to.eql(true)
+  })
+
   it('env params add button should be disabled when added data is empty', () => {
     expect(
       KintoBlockManage.envInput

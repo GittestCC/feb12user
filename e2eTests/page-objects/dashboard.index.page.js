@@ -6,7 +6,7 @@ class DashboardIndex extends Page {
   }
 
   get container() {
-    return browser.element('[data-test=dashboard-index-page]')
+    return $('[data-test=dashboard-index-page]')
   }
 }
 

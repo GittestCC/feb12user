@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Button = ({
-  buttonType,
-  isSubmitted,
-  type,
-  image,
-  disabled,
-  onClick,
-  children
-}) => {
+const Button = props => {
+  let {
+    buttonType,
+    isSubmitted,
+    type,
+    image,
+    disabled,
+    onClick,
+    children
+  } = props
+
   type = type || 'submit'
   buttonType = buttonType || 'default'
 
@@ -29,6 +31,7 @@ const Button = ({
       className={`button ${buttonType} ${disabled ? 'disabled' : ''}`}
       onClick={buttonHandler}
       disabled={!!disabled}
+      data-test={props['data-test']}
     >
       {image ? <img src={image} alt="" /> : ''}
       {children}
@@ -41,7 +44,8 @@ Button.propType = {
   isSubmitted: PropTypes.bool,
   image: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  'data-test': PropTypes.string
 }
 
 export default Button

@@ -6,7 +6,7 @@ class Landing extends Page {
   }
 
   get navbar() {
-    return browser.element('[data-test=landing-navbar]')
+    return $('[data-test=landing-navbar]')
   }
 }
 

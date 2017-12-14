@@ -15,55 +15,55 @@ class Login extends Page {
   }
 
   get loginUsername() {
-    return browser.element('[data-test=loginUsername] input')
+    return $('[data-test=loginUsername] input')
   }
   get loginUsernameError() {
-    return browser.element('[data-test=loginUsername] .error-message')
+    return $('[data-test=loginUsername] .error-message')
   }
   get loginPassword() {
-    return browser.element('[data-test=loginPassword] input')
+    return $('[data-test=loginPassword] input')
   }
   get loginPasswordError() {
-    return browser.element('[data-test=loginPassword] .error-message')
+    return $('[data-test=loginPassword] .error-message')
   }
   get loginForm() {
-    return browser.element('[data-test=loginForm]')
+    return $('[data-test=loginForm]')
   }
 
   get loginFormError() {
-    return browser.element('[data-test=loginForm] [data-test=form-error]')
+    return $('[data-test=loginForm] [data-test=form-error]')
   }
 
   get signupUsername() {
-    return browser.element('[data-test=signupUsername] input')
+    return $('[data-test=signupUsername] input')
   }
 
   get signupUsernameError() {
-    return browser.element('[data-test=signupUsername] .error-message')
+    return $('[data-test=signupUsername] .error-message')
   }
 
   get signupEmail() {
-    return browser.element('[data-test=signupEmail] input')
+    return $('[data-test=signupEmail] input')
   }
 
   get signupEmailError() {
-    return browser.element('[data-test=signupEmail] .error-message')
+    return $('[data-test=signupEmail] .error-message')
   }
 
   get signupPassword() {
-    return browser.element('[data-test=signupPassword] input')
+    return $('[data-test=signupPassword] input')
   }
 
   get signupPasswordError() {
-    return browser.element('[data-test=signupPassword] .error-message')
+    return $('[data-test=signupPassword] .error-message')
   }
 
   get signupSuccess() {
-    return browser.element('[data-test=signupSuccess]')
+    return $('[data-test=signupSuccess]')
   }
 
   get signupForm() {
-    return browser.element('[data-test=signupForm]')
+    return $('[data-test=signupForm]')
   }
 
   signupSubmit() {
