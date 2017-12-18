@@ -136,11 +136,12 @@ class KintoBlockTagAndBranchDropDown extends Component {
               <div className="branch icon small" />
             )}
           </Tooltip>
-          <h4>{dropdownText}</h4>
+          <h4 data-test="breadcrumb-text">{dropdownText}</h4>
           <button
             type="button"
             onClick={this.onToggle}
             className="dropdown-button breadcrumb-icon"
+            data-test="breadcrumb-toggle-tag-and-branch"
           />
         </div>
 
@@ -151,6 +152,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
                 selectedTab === 'branch' ? 'active' : ''
               }`}
               onClick={() => this.toggleTab('branch')}
+              data-test="branch-tab"
             >
               <div className="branch icon" />
               <h3>branches</h3>
@@ -159,6 +161,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
             <div
               className={`tab tags ${selectedTab === 'tag' ? 'active' : ''}`}
               onClick={() => this.toggleTab('tag')}
+              data-test="tag-tab"
             >
               <h3>tags</h3>
               <div className="tag icon" />
@@ -167,6 +170,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
 
           <div className="dropdown-content-filter tags-and-branches">
             <input
+              data-test="dropdown-filter"
               className="dropdown-filter-input"
               onKeyUp={this.onUpdateFilter}
               ref={input => {
@@ -188,7 +192,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
             >
               <div className="dropdown-scroll-container">
                 {this.state.selectedTab === 'tag' ? (
-                  <div className="tag-list">
+                  <div className="tag-list" data-test="tag-list">
                     {this.getFilteredList(tagArray).map((item, index) => (
                       <button
                         key={index}
@@ -207,7 +211,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
                     ))}
                   </div>
                 ) : (
-                  <div className="branch-list">
+                  <div className="branch-list" data-test="branch-list">
                     {this.getFilteredList(branchArray).map((item, index) => (
                       <button
                         key={index}

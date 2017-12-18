@@ -53,11 +53,28 @@ class KintoBlockManage extends Page {
     return getDataTest('create-tag-error')
   }
 
+  get breadcrumb() {
+    return getDataTest('breadcrumb-toggle-tag-and-branch')
+  }
+
+  get breadCrumbTitle() {
+    return getDataTest('breadcrumb-text')
+  }
+
   getEnvRow(index) {
     return $(`[data-test='kb-manage-env-${index}']`)
   }
+
   getParamsRow(index) {
     return $(`[data-test='kb-manage-params-${index}']`)
+  }
+
+  getTab(index) {
+    return $(`[data-test='${index}-tab']`)
+  }
+
+  getDropdown(index) {
+    return $(`[data-test='${index}-list']`)
   }
 }
 

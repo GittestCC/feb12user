@@ -133,4 +133,16 @@ describe('manage kintoBlock', () => {
         .getValue()
     ).to.eql('value')
   })
+
+  it('should highlight the correct list when I click on the corresponding tab in the dropdown, and selected tab matches the breadcrumb', () => {
+    KintoBlockManage.breadcrumb.click()
+    KintoBlockManage.getTab('branch').click()
+    expect(KintoBlockManage.getDropdown('branch').isVisible()).to.eql(true)
+    const currentBranchName = KintoBlockManage.breadCrumbTitle.getText()
+    expect(
+      KintoBlockManage.getDropdown('branch')
+        .$('.tag-item .tag-item-text')
+        .getText()
+    ).to.eql(currentBranchName)
+  })
 })
