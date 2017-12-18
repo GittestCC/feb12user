@@ -9,7 +9,8 @@ const Button = props => {
     image,
     disabled,
     onClick,
-    children
+    children,
+    className
   } = props
 
   type = type || 'submit'
@@ -28,7 +29,9 @@ const Button = props => {
   return (
     <button
       type={type}
-      className={`button ${buttonType} ${disabled ? 'disabled' : ''}`}
+      className={`button ${buttonType} ${disabled ? 'disabled' : ''} ${
+        className ? className : ''
+      }`}
       onClick={buttonHandler}
       disabled={!!disabled}
       data-test={props['data-test']}
@@ -45,6 +48,7 @@ Button.propType = {
   image: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
   'data-test': PropTypes.string
 }
 

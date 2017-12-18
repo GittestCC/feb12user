@@ -6,7 +6,8 @@ class Password extends Component {
     input: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
     id: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    className: PropTypes.string
   }
 
   state = {
@@ -23,9 +24,9 @@ class Password extends Component {
     const { input, id, placeholder } = this.props
     const { touched, submitFailed, error } = this.props.meta
     const hasError = (touched || submitFailed) && error
-    let className = input.className || ''
+    let className = this.props.className || ''
     if (hasError) {
-      className += 'error'
+      className += ' error'
     }
 
     return (

@@ -14,6 +14,7 @@ import { required } from '../../helpers/forms/validators'
 const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
   <form data-test="loginForm" onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
+    <div className="line divider" />
     {/*
       <Button buttonType="dark" type="submit" image={githubIcon}>
       Log In with GitHub
@@ -27,6 +28,7 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
       placeholder="Enter username or email"
       component={FieldValidation}
       validate={required}
+      className="input-lg"
     />
     <Field
       id="loginPassword"
@@ -35,6 +37,7 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
       placeholder="Enter a password"
       component={Password}
       validate={required}
+      className="input-lg"
     />
     <Field
       name="KeepSignedIn"
@@ -46,6 +49,7 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
       buttonType="secondary"
       type="submit"
       disabled={pristine || submitting}
+      className="btn-lg"
     >
       Log In
     </Button>

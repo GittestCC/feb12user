@@ -69,7 +69,7 @@
   justify-content: stretch;
   cursor: pointer;
   .tab {
-    padding: 0 20px 19px;
+    padding: 0 20px 23px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,13 +77,10 @@
     height: 40px;
     border-bottom: solid 1px $kinto-tinted-grayscale-7;
     &.active {
+      padding-bottom: 20px;
       border-bottom: solid 4px $kinto-blue;
       h3 {
         color: $kinto-white;
-        margin-bottom: -4px;
-      }
-      .icon {
-        margin-bottom: -4px;
       }
     }
     h3 {

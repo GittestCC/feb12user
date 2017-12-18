@@ -17,6 +17,7 @@ const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
         placeholder="Enter username"
         component={FieldValidation}
         validate={required}
+        className="input-lg"
       />
       <Field
         id="signupEmail"
@@ -26,6 +27,7 @@ const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
         placeholder="Enter your email address"
         component={FieldValidation}
         validate={[required, email]}
+        className="input-lg"
       />
       <Field
         id="signupPassword"
@@ -33,12 +35,17 @@ const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
         placeholder="Create a password"
         component={Password}
         validate={[required, password]}
+        className="input-lg"
       />
       <div className="byline">
-        <h6>Requires 8 characters, at least 1 number and 1 letter</h6>
+        <h6>Requires 8 characters, at least 1 letter and 1 number</h6>
       </div>
       <FormError error={error} />
-      <Button type="submit" disabled={pristine || submitting}>
+      <Button
+        type="submit"
+        disabled={pristine || submitting}
+        className="btn-lg"
+      >
         Sign Up
       </Button>
       {/* <div className="byline">

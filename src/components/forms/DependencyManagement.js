@@ -34,6 +34,9 @@ class DependencyManagement extends Component {
       onSearchKintoBlocks,
       disabled
     } = this.props
+
+    const configUrl =
+      appVersion && fields.length ? `${appVersion}/config/0` : null
     return (
       <div>
         <h3>KintoBlocks & Services</h3>
@@ -56,29 +59,42 @@ class DependencyManagement extends Component {
 
               <div className="dependency-management-buttons">
                 <div className="button-group">
-                  <Link to="" className="button secondary">
+                  <a to="" className="button secondary">
                     Split All Duplicate Instances
-                  </Link>
-                  <Link to="" className="icon split-instances" />
+                  </a>
+                  <a className="icon split-instances hide-text">split</a>
                 </div>
                 <div className="button-group">
-                  <Link to="" className="button secondary">
+                  <a className="button secondary">
                     Combine All Duplicate Instances
-                  </Link>
-                  <Link to="" className="icon combine-instances" />
+                  </a>
+                  <a className="icon combine-instances hide-text">combine</a>
                 </div>
-                <div className="button-group">
-                  <Link
-                    to={`${appVersion}/config/0`}
-                    className="button secondary"
-                  >
-                    Edit KintoBlocks & Services
-                  </Link>
-                  <Link
-                    to={`${appVersion}/config/0`}
-                    className="icon edit-blocks-and-services"
-                  />
-                </div>
+                {configUrl ? (
+                  <div className="button-group">
+                    <Link to={configUrl} className="button secondary">
+                      Edit KintoBlocks & Services
+                    </Link>
+                    <Link
+                      to={configUrl}
+                      className="icon edit-blocks-and-services hide-text"
+                    >
+                      edit blocks
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="button-group">
+                    <a className="button secondary" disabled>
+                      Edit KintoBlocks & Services
+                    </a>
+                    <a
+                      className="icon edit-blocks-and-services hide-text"
+                      disabled
+                    >
+                      edit blocks
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           ) : null}
