@@ -1,0 +1,49 @@
+{
+	"login": {
+		"validUserName": "test_user",
+		"validPassword": "password1",
+		"invalidUserName": "invalid",
+		"invalidPassword": "invalid",
+		"validCAPSUserName":"TEST_USER",
+		"validCAPSEmail" : "TEST@TEST.COM"
+	},
+	"signup": {
+		"validUserName": "test",
+		"validUserNameWithNumber": "test007",
+		"validUserNameWithChar": "test_test",
+		"validUserNameWithDash":"test-test",
+		"validUserNameWithDot":"test.test",
+		"validUserNameWithAt":"test@test",
+		"validUserNameWithSpace":"test space",
+		"validUserNameWith$":"test$",
+		"validUserNameWiths":"Username*S",
+		"twoLetterUserName" : "te",
+		"maxLetterUserName" : "abcdefghijklmonpqrstuvwxyzabcdefghijklmnopkrest",
+		"allCharUserName" : "abAB109-_'.@''",
+		"validPassword": "password1",
+		"validPasswordEightChar" :"Quality2",
+		"validPasswordTwentyChar" :"Quality2Quality2Qual",
+		"validPasswordSpecialChar" :"Quality@-_'",
+		"validPasswordUC" :"QUALITY2",
+		"invalidPassword":"password",
+		"inavalidPasswordWithSpecialChar":"Qua@#$%",
+		"validEmail": "test@test.com",
+		"validEmailWithChar" : "abc_def@test.com",
+		"validEmailWithDot" : "abc.def@test.com",
+		"validEmailWithMultiChar":"testemail'01-_.''mydomain@test.com",
+		"validEmailWithdash":"testmail-test@test.com",
+		"validEmailWith$":"testmail$@test.com",
+		"validLongEmail":"unnikirandunkara@test.com",
+		"invalidEmailLength4" : "a@b.c",
+		"invalidEmailLength40" : "abcdefghijk_nairbcdefghqwertyuioop@test.com"
+			
+
+	},
+	
+	"forgotpassword":{
+		
+		
+	}
+	
+	
+}

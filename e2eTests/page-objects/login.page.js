@@ -26,6 +26,11 @@ class Login extends Page {
   get loginPasswordError() {
     return $('[data-test=loginPassword] .error-message')
   }
+
+  get loginPasswordEye() {
+    return $('[data-test=loginForm] .show-password')
+  }
+
   get loginForm() {
     return $('[data-test=loginForm]')
   }
@@ -57,6 +62,9 @@ class Login extends Page {
   get signupPasswordError() {
     return $('[data-test=signupPassword] .error-message')
   }
+  get signupPasswordEye() {
+    return $('[data-test=signupForm] .show-password')
+  }
 
   get signupSuccess() {
     return $('[data-test=signupSuccess]')
@@ -72,6 +80,14 @@ class Login extends Page {
 
   loginSubmit() {
     this.loginForm.submitForm()
+  }
+
+  get forgotPasswordLink() {
+    return $('[data-test=loginForm] .forgot-password')
+  }
+
+  get forgotPasswordUNEmail() {
+    return $('[data-test=forgotPassword] input')
   }
 }
 

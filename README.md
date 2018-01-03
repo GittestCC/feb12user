@@ -6,8 +6,9 @@ The default repo for Kintohub.com! This is gonna be one hell of a project.
 - [Contribution guidelines for this project](./CONTRIBUTION.md)
 
 ## First time setup
-- install [`java run time`](https://www.java.com/en/download/mac_download.jsp) for the e2e tests
+- *(optional)(e2e)* install [`java run time`](https://www.java.com/en/download/mac_download.jsp) for the e2e tests
 - install [`nvm`](https://github.com/creationix/nvm)
+- *(optional)(e2e)* install `allure` to be able to view allure e2e test reports using `brew install allure`
 - `nvm use`
 - create `.env` file (it is ignored) and setup all the env vars in it, you can check`~/.env.sample` for reference
   - you need to create a github OAuth App and add the client id to `.env`
@@ -22,6 +23,7 @@ The following command shortcuts are available during development:
 * `npm run test:e2e` Compile the app and runs all the e2e tests
 * `npm run test:e2e:cache` Run all the e2e tests without compiling the app
 * `npm run lint`: Runs linting
+* `npm run allure`: open the e2e test allure report *(needs allure to be installed)*
 
 ## FAQ
 

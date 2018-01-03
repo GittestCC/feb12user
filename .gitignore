@@ -1,6 +1,7 @@
 src/style/app.css
 appium.log
 /errorShots
+/allure-results
 
 # dependencies
 /node_modules
