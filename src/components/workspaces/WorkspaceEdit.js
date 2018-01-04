@@ -18,7 +18,7 @@ class WorkspaceEdit extends Component {
     return (
       <div className="edit-workspace">
         <WorkspaceFormContainer workspace={workspace} isCreate={false} />
-        <div className="form-wrapper">
+        <div className="form-wrapper github-form">
           <h3>Github Connection</h3>
           <h5>Give your baby a name, and a version number.</h5>
           <div className="form-block">
@@ -40,11 +40,9 @@ class WorkspaceEdit extends Component {
                   href={githubConnectUrl(workspace && workspace.id)}
                 >
                   <span className="icon github" />
-                  {hasLinkedAccount ? (
-                    'Link Additional Github Organization'
-                  ) : (
-                    'Link Github Organization'
-                  )}
+                  {hasLinkedAccount
+                    ? 'Link Additional Github Organization'
+                    : 'Link Github Organization'}
                 </a>
               </div>
             </div>

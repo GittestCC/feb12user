@@ -83,6 +83,9 @@
       input, select {
         margin-bottom: 0;
       }
+      .label-characters {
+        display: none;
+      }
     }
   }
 }
@@ -131,6 +134,10 @@
   width: 40px;
   background-color: $kinto-tinted-grayscale-2;
   border-radius: 20px;
+}
+
+.github-form {
+  margin-bottom: 40px;
 }
 
 
