@@ -132,10 +132,11 @@ export const updateKintoBlock = (id, ver, type, data) => dispatch => {
   return axios
     .put(`/kintoblocks/${id}/versions/${ver}?type=${type}`, data)
     .then(
-      result => {
+      () => {
         dispatch(formSubmitted())
         // TODO: make sure the server returns the updated object
-        dispatch(kintoBlockUpdate(id, result))
+        // dispatch(kintoBlockUpdate(id, response))
+        dispatch(kintoBlockUpdate(id, { name: data.name }))
       },
       err => {
         if (err.errors) {

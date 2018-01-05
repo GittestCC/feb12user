@@ -34,7 +34,7 @@
   background: $kinto-tinted-grayscale-8;
   display: none;
   position: absolute;
-  padding: 10px 0;
+  padding-top: 10px;
   left: 50%;
   top: 55px;
   margin-left: -100px;
@@ -240,9 +240,9 @@
 }
 
 .dropdown-content-action {
-  padding: 20px 20px 0 20px;
-  font-size: 14px;
+  padding: 20px;
   border-top: 1px solid $kinto-tinted-grayscale-7;
+  font-size: 14px;
 
   button {
     width: 100%;
@@ -252,13 +252,12 @@
 .dropdown-filter {
   .dropdown-content {
     padding-top: 20px;
-    padding-bottom: 20px;
     width: 340px;
     margin-left: -170px;
   }
 
   .dropdown-content-items {
-    height: 260px;
+    height: 200px;
   }
 }
 

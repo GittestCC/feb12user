@@ -32,6 +32,7 @@ const SignUp = () => <LogIn flip={true} />
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(245, 249, 255, 0.9)'
 Modal.defaultStyles.overlay.zIndex = '10'
+Modal.setAppElement('#root')
 
 ReactDOM.render(
   <Provider store={store}>

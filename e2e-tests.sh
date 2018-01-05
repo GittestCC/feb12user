@@ -12,7 +12,7 @@ then
 fi
 
 echo "frontend started"
-serve -p 5001 -s build & NODE_SERVE=$!
+./node_modules/.bin/serve -p 5001 -s build & NODE_SERVE=$!
 echo "------starting backend server------"
 docker-compose -f $E2E_TEST_SERVER_COMPOSE up -d
 

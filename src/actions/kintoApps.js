@@ -12,6 +12,7 @@ import { isRecent } from '../helpers/dateHelper'
 export const FETCH_KINTO_APPS = 'FETCH_KINTO_APPS'
 export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
+export const UPDATE_KINTO_APP = 'UPDATE_KINTO_APP'
 export const CREATE_VERSION_KINTO_APP = 'CREATE_VERSION_KINTO_APP'
 export const RECIEVE_KINTO_APP_ENVIRONMENTS = 'RECIEVE_KINTO_APP_ENVIRONMENTS'
 export const RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG =
@@ -20,6 +21,12 @@ export const NEW_ENVIRONMENT_RECEIVE = 'NEW_ENVIRONMENT_RECEIVE'
 export const KINTO_APP_ENVIRONMENT_UPDATE = 'KINTO_APP_ENVIRONMENT_UPDATE'
 export const KINTO_APP_ENVIRONMENT_LIST_REORDER =
   'KINTO_APP_ENVIRONMENT_LIST_REORDER'
+
+export const kintoAppUpdate = (id, data) => ({
+  type: UPDATE_KINTO_APP,
+  id,
+  data
+})
 
 export const kintoAppCreateVersion = (id, data) => ({
   type: CREATE_VERSION_KINTO_APP,
@@ -144,9 +151,9 @@ export const createKintoApp = data => dispatch => {
 }
 
 export const updateKintoApp = (id, ver, data) => dispatch => {
-  return axios.put(`/kintoapps/${id}/versions/${ver}`, data).then(result => {
+  return axios.put(`/kintoapps/${id}/versions/${ver}`, data).then(response => {
     dispatch(formSubmitted())
-    dispatch(push(`/app/dashboard/kintoapps/${id}/versions/${ver}`))
+    dispatch(kintoAppUpdate(id, response.data))
   })
 }
 

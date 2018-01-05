@@ -5,7 +5,7 @@ import {
   fetchKintoApps,
   getKintoAppEnvironments
 } from '../../../actions/kintoApps'
-import { asTextList, isVersionEqual } from '../../../helpers/versionHelper'
+import { isVersionEqual } from '../../../helpers/versionHelper'
 import KintoAppManage from '../../../components/dashboard/kintoApps/KintoAppManage'
 
 function mapStateToProps(state, { match }) {
@@ -22,8 +22,7 @@ function mapStateToProps(state, { match }) {
     canSave,
     version: kintoApp.version,
     isDraft: isVersionEqual(kintoApp.version, '0.0.0'),
-    isVersionMatch: isVersionEqual(kintoApp.version, ver),
-    baseVersions: asTextList(kintoApp.versions)
+    isVersionMatch: isVersionEqual(kintoApp.version, ver)
   }
 }
 

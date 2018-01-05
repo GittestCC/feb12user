@@ -59,16 +59,20 @@ class DependencyManagement extends Component {
 
               <div className="dependency-management-buttons">
                 <div className="button-group">
-                  <a to="" className="button secondary">
+                  <a to="" className="button secondary disabled">
                     Split All Duplicate Instances
                   </a>
-                  <a className="icon split-instances hide-text">split</a>
+                  <a className="icon split-instances hide-text disabled">
+                    split
+                  </a>
                 </div>
                 <div className="button-group">
-                  <a className="button secondary">
+                  <a className="button secondary disabled">
                     Combine All Duplicate Instances
                   </a>
-                  <a className="icon combine-instances hide-text">combine</a>
+                  <a className="icon combine-instances hide-text disabled">
+                    combine
+                  </a>
                 </div>
                 {configUrl ? (
                   <div className="button-group">
@@ -84,7 +88,7 @@ class DependencyManagement extends Component {
                   </div>
                 ) : (
                   <div className="button-group">
-                    <a className="button secondary" disabled>
+                    <a className="button secondary disabled">
                       Edit KintoBlocks & Services
                     </a>
                     <a

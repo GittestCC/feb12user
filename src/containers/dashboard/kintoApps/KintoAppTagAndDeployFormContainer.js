@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
-import { formValueSelector } from 'redux-form'
-import { getVersionAsText } from '../../../helpers/versionHelper'
-import TagAndDeployForm from '../../../components/dashboard/ui/TagAndDeployForm'
+import { formValueSelector, SubmissionError } from 'redux-form'
+import {
+  getVersionAsText,
+  isVersionEqual
+} from '../../../helpers/versionHelper'
+import KintoAppTagAndDeployForm from '../../../components/dashboard/kintoApps/KintoAppTagAndDeployForm'
 import { deployEnvironment } from '../../../actions/kintoApps'
 
 const selector = formValueSelector('versionCreate')
@@ -24,9 +27,14 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
   }
 }
 
-function mapDispatchToProps(dispatch, { onClose, id }) {
+function mapDispatchToProps(dispatch, { kintoApp, onClose, id }) {
   return {
     onSubmit: formValues => {
+      if (kintoApp.versions.some(v => isVersionEqual(v, formValues.version))) {
+        throw new SubmissionError({
+          _error: 'Tag with the same version is already created'
+        })
+      }
       const envName = formValues.environment
       const data = {
         notes: formValues.notes,
@@ -39,4 +47,6 @@ function mapDispatchToProps(dispatch, { onClose, id }) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagAndDeployForm)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  KintoAppTagAndDeployForm
+)

@@ -78,6 +78,11 @@ const validate = values => {
   errors.major = required(version.major)
   errors.minor = required(version.minor)
   errors.revision = required(version.revision)
+  if (version.major === 0 && version.minor === 0 && version.revision === 0) {
+    errors.major = 'Invalid Version'
+    errors.minor = 'Invalid Version'
+    errors.revision = 'Invalid Version'
+  }
   return { version: errors }
 }
 

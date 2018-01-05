@@ -13,7 +13,6 @@ class KintoAppManage extends Component {
     canSave: PropTypes.bool.isRequired,
     version: PropTypes.object,
     kintoApp: PropTypes.object.isRequired,
-    baseVersions: PropTypes.array.isRequired,
     fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
     isDraft: PropTypes.bool.isRequired,
@@ -46,14 +45,7 @@ class KintoAppManage extends Component {
   }
 
   render() {
-    const {
-      kintoApp,
-      canSave,
-      version,
-      baseVersions,
-      isDraft,
-      isVersionMatch
-    } = this.props
+    const { kintoApp, canSave, version, isDraft, isVersionMatch } = this.props
     if (!isVersionMatch) {
       return null
     }
@@ -87,7 +79,6 @@ class KintoAppManage extends Component {
           data={{
             id: kintoApp.id,
             title: kintoApp.name,
-            baseVersions: baseVersions,
             environments: kintoApp.environments,
             isDraft: isDraft,
             kintoApp: kintoApp
