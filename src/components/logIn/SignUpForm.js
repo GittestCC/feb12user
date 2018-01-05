@@ -4,7 +4,13 @@ import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password, FormError } from '../forms'
 import { required, email, password } from '../../helpers/forms/validators'
 
-const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
+const SignUpForm = ({
+  handleSubmit,
+  error,
+  submitting,
+  pristine,
+  focusHere
+}) => (
   <form data-test="signupForm" onSubmit={handleSubmit} className="sign-up-form">
     <h2>Sign Up</h2>
     <div className="line divider" />
@@ -18,6 +24,7 @@ const SignUpForm = ({ handleSubmit, error, submitting, pristine }) => (
         component={FieldValidation}
         validate={required}
         className="input-lg"
+        focusHere={focusHere}
       />
       <Field
         id="signupEmail"
@@ -62,7 +69,8 @@ SignUpForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
-  pristine: PropTypes.bool.isRequired
+  pristine: PropTypes.bool.isRequired,
+  focusHere: PropTypes.bool
 }
 
 export default reduxForm({ form: 'signUp' })(SignUpForm)

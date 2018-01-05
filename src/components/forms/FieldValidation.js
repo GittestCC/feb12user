@@ -18,7 +18,8 @@ class FieldValidation extends Component {
     type: PropTypes.string,
     help: PropTypes.string,
     close: PropTypes.bool,
-    inputTextOverlay: PropTypes.string
+    inputTextOverlay: PropTypes.string,
+    focusHere: PropTypes.bool
   }
 
   state = {
@@ -48,7 +49,8 @@ class FieldValidation extends Component {
       id,
       disabled,
       characterCount,
-      inputTextOverlay
+      inputTextOverlay,
+      focusHere
     } = this.props
     const { touched, submitFailed, error } = this.props.meta
     const hasError = (touched || submitFailed) && error
@@ -67,6 +69,7 @@ class FieldValidation extends Component {
             placeholder={placeholder}
             className={className}
             onChange={this.calculateRemainingCharacters}
+            autoFocus={!!focusHere}
           />
         )
         break
@@ -92,6 +95,7 @@ class FieldValidation extends Component {
             placeholder={placeholder}
             className={`${className} ${disabled ? 'disabled' : ''}`}
             disabled={disabled}
+            autoFocus={!!focusHere}
           />
         )
     }

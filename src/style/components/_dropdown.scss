@@ -343,3 +343,12 @@
 .faded {
   opacity: 0.4;
 }
+
+.no-tags {
+  color: rgba($kinto-white, 0.4);
+  width: 100%;
+  font-weight: normal;
+  text-align: center;
+  position: relative;
+  top: 120px;
+}

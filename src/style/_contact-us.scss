@@ -4,6 +4,9 @@
   @include desktop{
     max-width: $content-width;
     margin-top: 0;
+    .map {
+      border-radius: 16px;
+    }
   }
   @include abovetablet {
     padding: 60px 0 0;
@@ -13,6 +16,7 @@
     box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
     background-size: cover;
     background-position: center;
+
   }
 }
 .contact-form-wrapper {

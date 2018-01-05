@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import Tooltip from 'rc-tooltip'
+import isEmpty from 'lodash/isEmpty'
 import { filterArray } from '../../helpers/arrayHelper'
 
 class KintoBlockTagAndBranchDropDown extends Component {
@@ -209,6 +210,10 @@ class KintoBlockTagAndBranchDropDown extends Component {
                         <div className="notes">{item.notes}</div>
                       </button>
                     ))}
+
+                    {isEmpty(tagArray) && (
+                      <div className="no-tags">No tags added.</div>
+                    )}
                   </div>
                 ) : (
                   <div className="branch-list" data-test="branch-list">

@@ -55,12 +55,15 @@ class LogIn extends Component {
 
             {flip ? (
               <div className="log-in-and-sign-up-wrapper">
-                <SignUpFormContainer onSuccess={this.registeredSuccessfully} />
+                <SignUpFormContainer
+                  focusHere={true}
+                  onSuccess={this.registeredSuccessfully}
+                />
                 <LogInFormContainer />
               </div>
             ) : (
               <div className="log-in-and-sign-up-wrapper">
-                <LogInFormContainer />
+                <LogInFormContainer focusHere={true} />
                 <SignUpFormContainer onSuccess={this.registeredSuccessfully} />
               </div>
             )}

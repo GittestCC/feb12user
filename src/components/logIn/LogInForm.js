@@ -11,7 +11,13 @@ import {
 } from '../forms'
 import { required } from '../../helpers/forms/validators'
 
-const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
+const LogInForm = ({
+  handleSubmit,
+  error,
+  submitting,
+  pristine,
+  focusHere
+}) => (
   <form data-test="loginForm" onSubmit={handleSubmit} className="log-in-form">
     <h2>Log In</h2>
     <div className="line divider" />
@@ -29,6 +35,7 @@ const LogInForm = ({ handleSubmit, error, submitting, pristine }) => (
       component={FieldValidation}
       validate={required}
       className="input-lg"
+      focusHere={focusHere}
     />
     <Field
       id="loginPassword"
@@ -62,7 +69,8 @@ LogInForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool.isRequired,
-  pristine: PropTypes.bool.isRequired
+  pristine: PropTypes.bool.isRequired,
+  focusHere: PropTypes.bool
 }
 
 export default reduxForm({ form: 'logIn' })(LogInForm)
