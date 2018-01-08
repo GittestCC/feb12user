@@ -9,14 +9,15 @@
   position: fixed;
   height: 100vh;
   background-color: $kinto-tinted-grayscale-2;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   li {
     &.sidebar-item {
       padding-left: 20px;
       .item-sub-add {
         display: none;
       }
-      &:hover, &.selected {
+      &:hover,
+      &.selected {
         .item-sub-add {
           display: block;
         }
@@ -26,7 +27,7 @@
       margin-top: 50px;
     }
     position: relative;
-    h4{
+    h4 {
       height: 40px;
       line-height: 40px;
       margin: 0;
@@ -69,7 +70,9 @@
       &.settings:before {
         background-image: url('/images/icon-dashboard-settings.svg');
       }
-      &.kintoblocks img, &.kintoapps img, &.services img {
+      &.kintoblocks img,
+      &.kintoapps img,
+      &.services img {
         position: absolute;
         right: 20px;
         border-radius: 20px;
@@ -96,10 +99,14 @@
       margin-top: 60px;
     }
   }
+  .member-list-circles {
+    border-radius: 4px;
+  }
 }
 
 @include desktop {
-  .sidebar, .sidebar.show {
+  .sidebar,
+  .sidebar.show {
     display: block;
     left: 0px;
   }

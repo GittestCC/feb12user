@@ -27,6 +27,11 @@ const workspacesReducer = (state = defaultState, action) => {
       let allIds = []
       let byId = {}
       action.data.forEach(workspace => {
+        if (workspace.members) {
+          workspace.members = workspace.members.sort((a, b) => {
+            return a.permission > b.permission
+          })
+        }
         allIds.push(workspace.id)
         byId[workspace.id] = workspace
       })

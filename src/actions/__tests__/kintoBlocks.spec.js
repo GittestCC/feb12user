@@ -227,7 +227,9 @@ describe('KintoBlocks actions', () => {
       })
     })
     const store = mockStore()
-    await store.dispatch(actions.updateKintoBlock('1', {}))
+    await store.dispatch(
+      actions.updateKintoBlock('1', '0.1.0', 'BRANCH', { name: 'test' })
+    )
     expect(store.getActions()).toEqual([
       {
         type: FORM_SUBMITTED
@@ -236,7 +238,6 @@ describe('KintoBlocks actions', () => {
         type: actions.UPDATE_KINTO_BLOCK,
         id: '1',
         data: {
-          id: '1',
           name: 'test'
         }
       }

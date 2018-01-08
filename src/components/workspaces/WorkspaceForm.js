@@ -8,7 +8,7 @@ const WorkspaceForm = ({ workspace, isCreate, memberId, workspaceMembers }) => {
   return (
     <form className="workspace-form form-container">
       <div>
-        <h1>{workspace.name ? workspace.name : null}</h1>
+        <h2>{workspace.name}</h2>
       </div>
       <div className="form-wrapper">
         <h3>Basic Info</h3>

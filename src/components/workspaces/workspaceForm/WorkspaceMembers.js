@@ -21,19 +21,20 @@ class WorkspaceMembers extends Component {
     })
   }
 
-  isDisabled = row => {
-    if (this.props.isCreate && row.id === this.props.memberId) {
+  isDisabled = formMember => {
+    if (this.props.isCreate && formMember.id === this.props.memberId) {
       return true
     }
     if (this.props.isCreate) {
       return false
     }
     return this.props.workspaceMembers.some(
-      w => w['email'] === row.email && w.permission === 'Admin'
+      w => w.email === formMember.email && w.permission === 'Admin'
     )
   }
 
-  getDisplay = (name, email) => (name ? `${name} (${email})` : `${email}`)
+  getDisplay = member =>
+    member.name ? `${member.name} (${member.email})` : `${member.email}`
 
   updatePermissionState = event => {
     this.setState({
@@ -54,8 +55,8 @@ class WorkspaceMembers extends Component {
       <div className="form-body members-list">
         <div className="top">
           <ul className="unstyled-list">
-            {fields.map((member, index) => {
-              const thisMember = fields.get(index) || {}
+            {fields.map((field, index) => {
+              const member = fields.get(index) || {}
 
               return (
                 <li key={index} className="members-added">
@@ -63,25 +64,22 @@ class WorkspaceMembers extends Component {
                     className={`avatar image-${Math.floor(Math.random() * 6) +
                       1}`}
                   >
-                    {thisMember.permission === 'Admin' ? (
+                    {member.permission === 'Admin' ? (
                       <div className="admin-star" />
                     ) : null}
                   </div>
                   <input
                     placeholder="Enter workspace member email"
-                    value={this.getDisplay(
-                      thisMember.username,
-                      thisMember.email
-                    )}
+                    value={this.getDisplay(member)}
                     disabled="true"
                   />
                   <Field
-                    name={`${member}.permission`}
+                    name={`${field}.permission`}
                     placeholder="Select a permission level"
                     component={FieldValidation}
                     validate={required}
                     type="select"
-                    disabled={this.isDisabled(thisMember)}
+                    disabled={this.isDisabled(member)}
                   >
                     {permissions.map((level, i) => (
                       <option key={i} value={level}>
@@ -90,7 +88,7 @@ class WorkspaceMembers extends Component {
                     ))}
                   </Field>
 
-                  {this.isDisabled(thisMember) ? (
+                  {this.isDisabled(member) ? (
                     <div className="remove void" />
                   ) : (
                     <div

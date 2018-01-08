@@ -143,7 +143,7 @@ describe('KintoApps actions', () => {
     ])
   })
 
-  it('updateKintoApp should fire a form submitted action and redirect upon success', async () => {
+  it('updateKintoApp should fire a form submitted action and updateKintoApp action', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -155,31 +155,7 @@ describe('KintoApps actions', () => {
     await store.dispatch(actions.updateKintoApp('1', '1.0.0', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
-      CALL_HISTORY_METHOD
-    ])
-  })
-
-  it('updateKintoApp should fire a redirect to the correct app version url upon success', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: { id: '1', version: '1.0.0' }
-      })
-    })
-    const store = mockStore()
-    await store.dispatch(actions.updateKintoApp('1', '1.0.0', {}))
-    expect(store.getActions()).toEqual([
-      {
-        type: 'FORM_SUBMITTED'
-      },
-      {
-        type: '@@router/CALL_HISTORY_METHOD',
-        payload: {
-          method: 'push',
-          args: ['/app/dashboard/kintoapps/1/versions/1.0.0']
-        }
-      }
+      actions.UPDATE_KINTO_APP
     ])
   })
 
