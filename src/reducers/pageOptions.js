@@ -4,6 +4,7 @@ import { getActivePageKey } from '../helpers/pageHelper'
 import {
   FORM_SUBMITTED,
   SELECT_ENVIRONMENT,
+  SELECT_KINTOAPP,
   SELECT_BREADCRUMB_WORKSPACE
 } from '../actions/pageOptions'
 import {
@@ -32,6 +33,11 @@ export default function pageOptions(state = {}, action) {
       return {
         ...state,
         selectedEnvironmentId: action.id
+      }
+    case SELECT_KINTOAPP:
+      return {
+        ...state,
+        selectedKintoAppId: action.id
       }
     case SELECT_BREADCRUMB_WORKSPACE:
       return {

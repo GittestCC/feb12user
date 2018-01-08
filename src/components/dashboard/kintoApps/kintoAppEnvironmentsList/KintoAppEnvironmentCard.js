@@ -5,6 +5,8 @@ import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
 import { getVersionAsText } from '../../../../helpers/versionHelper'
+import { getPageUrl } from '../../../../helpers/urlHelper'
+import { pages } from '../../../../constants/pages'
 import DropDown from '../../../ui/DropDown'
 
 const DragHandle = SortableHandle(() => <span className="hamburger" />)
@@ -41,6 +43,13 @@ class KintoAppEnvironmentCard extends Component {
     }
 
     const buttonInfo = getEnvironmentButtonInfo(status)
+
+    const editUrl = kintoApp.id
+      ? getPageUrl(pages.dashboardKintoAppsEnvironmentEdit, {
+          id: kintoApp.id,
+          envId: environment.id
+        })
+      : ''
 
     return (
       <div
@@ -200,6 +209,14 @@ class KintoAppEnvironmentCard extends Component {
                                 className={`button secondary ${release.steps[
                                   release.steps.length - 1
                                 ].state === 'FAILED' && 'disabled'}`}
+                                onClick={() =>
+                                  buttonAction(
+                                    'new',
+                                    'deploy',
+                                    'Deploy',
+                                    environment
+                                  )
+                                }
                               >
                                 Rollback to this Build{' '}
                               </button>
@@ -233,12 +250,7 @@ class KintoAppEnvironmentCard extends Component {
             )}
           </div>
           <div className="right expanded-buttons">
-            <Link
-              to={`/app/dashboard/kintoapps/${kintoApp.id}/environment/${
-                environment.id
-              }/edit`}
-              className="button secondary"
-            >
+            <Link to={editUrl} className="button secondary">
               Edit
             </Link>
             {status ? (
@@ -267,11 +279,17 @@ class KintoAppEnvironmentCard extends Component {
             )}
 
             <DropDown type="simple" dropdownClass="menu" id={`id-${sortIndex}`}>
-              <button>Shut Down</button>
-              <button>Edit Environment</button>
-              <button>Move to Top</button>
-              <div className="dropdown line" />
-              <button>Delete Environment</button>
+              <button
+                onClick={() =>
+                  buttonAction('shutDown', 'shutDown', 'ShutDown', environment)
+                }
+              >
+                Shut Down
+              </button>
+              <Link to={editUrl}>Edit Environment</Link>
+              {/* TODO: these are commented as they're not functional yet <button>Move to Top</button> */}
+              {/* <div className="dropdown line" /> */}
+              {/* <button>Delete Environment</button> */}
             </DropDown>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import { getVersionAsText } from '../../../../../helpers/versionHelper'
 
 const ShutDown = ({
   onClose,
@@ -8,20 +9,28 @@ const ShutDown = ({
   kintoApp,
   environment
 }) => {
-  const EnvironmentShutDown = result => {
-    // shutDownEnvironment()
+  const environmentShutDown = () => {
+    shutDownEnvironment(environment.id, environment.name, environment)
     onClose()
   }
 
+  const currentRelease = environment.releases[environment.releases.length - 1]
+
   return (
     <div className="add-new-environment">
-      <div className="kh-modal-title">Shut Down - </div>
+      <div className="kh-modal-title">
+        <h4>
+          Shut Down - {environment.name} -{' '}
+          {getVersionAsText(currentRelease.version)}
+        </h4>
+      </div>
       <div className="kh-modal-body">
-        <form onSubmit={handleSubmit(EnvironmentShutDown)}>
+        <form onSubmit={handleSubmit(environmentShutDown)}>
           <div className="full-width-field">
             <h4>
-              You can deploy another build without shutting down the current
-              build and affecting your users.
+              The currently deployed application will be stopped, leaving this
+              environment empty. You can deploy another tag directly without
+              shutting down the current one and disrupting your users.
             </h4>
           </div>
           <div className="kh-modal-actions">
@@ -29,7 +38,7 @@ const ShutDown = ({
               Cancel
             </button>
             <button type="submit" className="button dark">
-              Shut Down Environment
+              Shut Down Anyway
             </button>
           </div>
         </form>

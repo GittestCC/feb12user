@@ -28,10 +28,11 @@
       font-weight: normal;
     }
     .env-item-tag {
-      // width: 40px;
-      background: $kinto-grayscale-1;
+      width: 35px;
       padding: 2px;
+      text-transform: uppercase;
       div {
+        background: $kinto-grayscale-1;
         overflow: hidden;
       }
     }

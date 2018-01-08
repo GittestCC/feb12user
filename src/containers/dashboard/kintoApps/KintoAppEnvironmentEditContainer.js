@@ -4,7 +4,7 @@ import {
   getKintoAppEnvironments,
   fetchKintoApps
 } from '../../../actions/kintoApps'
-import { environmentSelect } from '../../../actions/pageOptions'
+import { environmentSelect, kintoAppSelect } from '../../../actions/pageOptions'
 
 function mapStateToProps(state, { match }) {
   const { id, envId } = match.params
@@ -24,5 +24,6 @@ function mapStateToProps(state, { match }) {
 export default connect(mapStateToProps, {
   getKintoAppEnvironments,
   fetchKintoApps,
+  kintoAppSelect,
   environmentSelect
 })(KintoAppEnvironmentEdit)

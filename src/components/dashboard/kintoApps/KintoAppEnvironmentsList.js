@@ -53,6 +53,7 @@ class KintoAppEnvironmentsList extends Component {
     addNewEnvironment: PropTypes.func.isRequired,
     deployEnvironment: PropTypes.func.isRequired,
     cancelDeployment: PropTypes.func.isRequired,
+    shutDownEnvironment: PropTypes.func.isRequired,
     kintoApp: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     environments: PropTypes.array.isRequired
@@ -136,7 +137,8 @@ class KintoAppEnvironmentsList extends Component {
           actions={{
             addNewEnvironment: this.props.addNewEnvironment,
             deployEnvironment: this.props.deployEnvironment,
-            cancelDeployment: this.props.cancelDeployment
+            cancelDeployment: this.props.cancelDeployment,
+            shutDownEnvironment: this.props.shutDownEnvironment
           }}
         />
       </div>

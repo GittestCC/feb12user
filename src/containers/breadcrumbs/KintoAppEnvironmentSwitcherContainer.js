@@ -25,7 +25,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     text: e.name,
     active: e.id === selectedEnvironmentId,
     url: getUrl(url, {
-      id: app.id,
+      id: selectedKintoAppId,
       envId: e.id,
       version: getVersionAsText(app.version, true)
     })
@@ -37,10 +37,10 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     selectedEnvironmentName: selectedEnv.name,
     hideCreateAction: isDependencyConfig,
     selectedEnvironmentUrl:
-      app.id &&
+      selectedKintoAppId &&
       selectedEnvironmentId &&
       getUrl(url, {
-        id: app.id,
+        id: selectedKintoAppId,
         envId: selectedEnvironmentId,
         version: getVersionAsText(app.version, true)
       })

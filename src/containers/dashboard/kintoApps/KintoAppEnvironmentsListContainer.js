@@ -5,7 +5,8 @@ import {
   reorderEnvironments,
   addNewEnvironment,
   deployEnvironment,
-  cancelDeployment
+  cancelDeployment,
+  shutDownEnvironment
 } from '../../../actions/kintoApps'
 import KintoAppEnvironmentsList from '../../../components/dashboard/kintoApps/KintoAppEnvironmentsList'
 
@@ -31,7 +32,9 @@ function mapDispatchToProps(dispatch, { match }) {
     addNewEnvironment: (id, data) => dispatch(addNewEnvironment(id, data)),
     deployEnvironment: (id, data, name) =>
       dispatch(deployEnvironment(id, data, name)),
-    cancelDeployment: () => dispatch(cancelDeployment())
+    cancelDeployment: () => dispatch(cancelDeployment()),
+    shutDownEnvironment: (id, data, envName) =>
+      dispatch(shutDownEnvironment(id, data, envName))
   }
 }
 

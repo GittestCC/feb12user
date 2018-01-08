@@ -12,6 +12,7 @@ class KintoAppEnvironmentEdit extends Component {
     this.props.fetchKintoApps()
     this.props.getKintoAppEnvironments(this.props.id)
     this.props.environmentSelect(this.props.envId)
+    this.props.kintoAppSelect(this.props.id)
   }
 
   componentWillReceiveProps(nextProps) {
