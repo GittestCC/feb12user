@@ -41,6 +41,18 @@ class KintoBlockManage extends Page {
     return getDataTest('env-add-value')
   }
 
+  get addCustomKey() {
+    return getDataTest('params-add-key')
+  }
+
+  get addCustomValue() {
+    return getDataTest('params-add-value')
+  }
+
+  get customInput() {
+    return getDataTest('kb-manage-params')
+  }
+
   get paramsInput() {
     return getDataTest('kb-manage-params')
   }

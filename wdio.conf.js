@@ -9,6 +9,7 @@ exports.config = {
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
   specs: ['./e2eTests/specs/**/*.spec.js'],
+
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -131,7 +132,8 @@ exports.config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    compilers: ['js:babel-register']
+    compilers: ['js:babel-register'],
+    timeout: 20000 //Added as Create KintoBlock takes a little more than 10 seconds.
     // timeout: 24 * 60 * 60 * 10000 //TODO browser.debug()
   }
   //

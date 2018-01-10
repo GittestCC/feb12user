@@ -20,7 +20,7 @@ class Page {
 
   open(path) {
     browser.url('/' + path)
-    // TODO browser.windowHandleFullscreen()
+    //TODO browser.windowHandleFullscreen()
   }
 
   // relative path checking

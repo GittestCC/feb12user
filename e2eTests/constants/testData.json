@@ -43,6 +43,31 @@
 	"forgotpassword":{
 		
 		
+	},
+	
+    "kintoblock":{
+    	"validKintoBlockName" : "test name",
+    	"validKBDescription"  : "This microservice is for OAuth",
+    	"invalidKBDescription": "The microservice architecture is not a silver bullet. It has several drawbacks.Moreover, when using this architecture there are numerous issues that you must address. The microservicearchitecture pattern language is a collection of patterns for applying the microservice architecture",
+    	"validUpdatedKBName" : "test name 2",
+    	"validUpdatedKBDescription"  : "test description",
+    	"validRepoName"       : "repo",
+    	"validEnvironmentKey" : "name",
+    	"validEnvironmentKeyWithCaps" : "Name",
+    	"validEnvironmentKeyWithSpecialChars" : "Name*#$",
+    	"updatedEnvironmentKey" : "updatedname",
+    	"validEnvironmentValue" : "value",
+    	"validEnvironmentValueWithCaps" : "Value",
+    	"validEnvironmentValueWithSpecialChars" : "Value#*$",
+    	"updatedEnvironmentValue":"updatedvalue",
+    	"validCustomKey" : "customkey",
+    	"validCustomKeyWithSpecialChars" : "Name*#$",
+    	"validCustomValue" : "customvalue",
+    	"updatedCustomKey" : "updatedCustKey",
+    	"updatedCustomValue" : "updatedCustValue",
+    	"validCustomValueWithSpecialChars" : "Value*#$"
+    
+		
 	}
 	
 	
