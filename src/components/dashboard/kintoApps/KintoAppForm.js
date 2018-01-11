@@ -14,7 +14,11 @@ const KintoAppForm = ({
   isCreate,
   isDraft
 }) => (
-  <form className="kintoapp-create form-container" onSubmit={handleSubmit}>
+  <form
+    className="kintoapp-create form-container"
+    onSubmit={handleSubmit}
+    data-test="ka-form"
+  >
     <div className="form-wrapper workspaces">
       <WorkspaceToolbarContainer
         isKintoApp={true}

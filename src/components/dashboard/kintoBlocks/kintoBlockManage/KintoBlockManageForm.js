@@ -41,6 +41,7 @@ class KintoBlockManageForm extends Component {
       <form
         className="kintoblock-manage form-container"
         onSubmit={handleSubmit}
+        data-test="kb-manage-form"
       >
         <div className="form-wrapper workspaces full-row">
           <WorkspaceToolbarContainer

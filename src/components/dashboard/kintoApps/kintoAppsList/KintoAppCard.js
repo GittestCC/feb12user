@@ -51,7 +51,11 @@ class KintoAppCard extends Component {
       goToEnvironment
     } = this.props
     return (
-      <Link to={tagList[0].url} className="kintoapp coral">
+      <Link
+        to={tagList[0].url}
+        className="kintoapp coral"
+        data-test={`ka-card-${dropdownId}`}
+      >
         <div className="top">
           <div className="text">
             <div className="left">
