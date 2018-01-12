@@ -29,6 +29,22 @@ class KintoAppEnvironmentCard extends Component {
     }))
   }
 
+  logsUrl = releaseVersion => {
+    return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
+      id: this.props.kintoApp.id,
+      envId: this.props.environment.id,
+      releaseVersion: getVersionAsText(releaseVersion)
+    })
+  }
+
+  changelogsUrl = releaseVersion => {
+    return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
+      id: this.props.kintoApp.id,
+      envId: this.props.environment.id,
+      releaseVersion: getVersionAsText(releaseVersion)
+    })
+  }
+
   render() {
     const { environment, sortIndex, buttonAction, kintoApp } = this.props
 
@@ -224,10 +240,14 @@ class KintoAppEnvironmentCard extends Component {
                           )}
                           <div className="view">
                             <div className="changelog">
-                              <a href="/">View Changelog</a>
+                              <Link to={this.changelogsUrl(release.version)}>
+                                Changelog
+                              </Link>
                             </div>
                             <div className="logs">
-                              <a href="/">View Logs</a>
+                              <Link to={this.logsUrl(release.version)}>
+                                View Logs
+                              </Link>
                             </div>
                           </div>
                         </div>

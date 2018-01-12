@@ -2,6 +2,7 @@ import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 
 import { formSubmitted } from './pageOptions'
 import { isVersionEqual } from '../helpers/versionHelper'
@@ -19,6 +20,8 @@ export const RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG =
   'RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG'
 export const NEW_ENVIRONMENT_RECEIVE = 'NEW_ENVIRONMENT_RECEIVE'
 export const KINTO_APP_ENVIRONMENT_UPDATE = 'KINTO_APP_ENVIRONMENT_UPDATE'
+export const KINTO_APP_ENVIRONMENT_LOG_UPDATE =
+  'KINTO_APP_ENVIRONMENT_LOG_UPDATE'
 export const KINTO_APP_ENVIRONMENT_LIST_REORDER =
   'KINTO_APP_ENVIRONMENT_LIST_REORDER'
 
@@ -80,6 +83,14 @@ export const appEnvironmentUpdate = (id, result) => ({
   type: KINTO_APP_ENVIRONMENT_UPDATE,
   id,
   data: result.data
+})
+
+export const environmentLogsReceive = (id, envId, releaseVersion, data) => ({
+  type: KINTO_APP_ENVIRONMENT_LOG_UPDATE,
+  id,
+  envId,
+  releaseVersion,
+  data
 })
 
 export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
@@ -240,5 +251,55 @@ export const reorderEnvironments = (id, oldIndex, newIndex) => (
   )
   return axios.put(`/kintoapps/${id}/environments/order`, {
     data: sortedEnvironmentsIds
+  })
+}
+
+//TODO: mock call for get environment logs kintoapps.api.kintocloud.com/(ws-id)/kintoapps/(app-id)/environments/(env-name)/(app-version)/logs
+
+export const getEnvironmentLogs = (id, envId, releaseVersion) => dispatch => {
+  const dummyRows = [
+    {
+      severity: 'info',
+      responsecode: 504,
+      kintoblockName: 'KintoBlock Name',
+      timestamp: moment().subtract(2, 'days'),
+      versionInfo: 'Development #45IEDFR',
+      requestJson: "{ 'name': 'Raven' }",
+      responseJson: '{ Donec congue lorem a molestie bibendum. }'
+    },
+    {
+      severity: 'debug',
+      responsecode: 200,
+      kintoblockName: 'All The KB',
+      timestamp: moment(),
+      versionInfo: '2.0.1',
+      requestJson: "{ 'name': 'Raven' }",
+      responseJson: '{ Donec congue lorem a molestie bibendum. }'
+    },
+    {
+      severity: 'fatal',
+      responsecode: 500,
+      kintoblockName: 'All The KB',
+      timestamp: moment(),
+      versionInfo: 'Production #69E84E2',
+      requestJson: "{ 'name': 'Raven' }",
+      responseJson: '{ Donec congue lorem a molestie bibendum. }'
+    },
+    {
+      severity: 'warning',
+      responsecode: 300,
+      kintoblockName: "Nadeem's Mum",
+      timestamp: moment().add(1, 'days'),
+      versionInfo: '0.9.6',
+      requestJson: "{ 'name': 'Raven' }",
+      responseJson: '{ Donec congue lorem a molestie bibendum. }'
+    }
+  ]
+  // dispatch(kintoAppsFetch())
+
+  //check with coop whether its ok to send the id instead of the name
+  //TODO: return axos.put(`/kintoapps/${id}/environments/${envName}/${releaseVersion}/logs`)
+  return Promise.resolve({ data: dummyRows }).then(response => {
+    dispatch(environmentLogsReceive(id, envId, releaseVersion, response.data))
   })
 }

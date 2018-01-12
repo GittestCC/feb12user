@@ -5,6 +5,7 @@ import KintoAppManageContainer from '../../containers/dashboard/kintoApps/KintoA
 import KintoAppCreate from './kintoApps/KintoAppCreate'
 import KintoAppEnvironmentsListContainer from '../../containers/dashboard/kintoApps/KintoAppEnvironmentsListContainer'
 import KintoAppEnvironmentEditContainer from '../../containers/dashboard/kintoApps/KintoAppEnvironmentEditContainer'
+import KintoAppLogsContainer from '../../containers/dashboard/kintoApps/KintoAppLogsContainer'
 
 import KintoAppDependenciesConfigContainer from '../../containers/dashboard/kintoApps/KintoAppDependenciesConfigContainer'
 
@@ -28,6 +29,10 @@ const KintoApps = ({ match }) => (
     <Route
       path={`${match.url}/:id/versions/:ver/config/:env`}
       component={KintoAppDependenciesConfigContainer}
+    />
+    <Route
+      path={`${match.url}/:id/environment/:envId/logs/:releaseVersion`}
+      component={KintoAppLogsContainer}
     />
   </div>
 )

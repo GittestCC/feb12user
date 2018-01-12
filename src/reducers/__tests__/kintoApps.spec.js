@@ -325,4 +325,53 @@ describe('kintoApps Reducer', () => {
   // // TODO: I want to get what the server returns to write this test but the server is broken. going to pause here for now.
   // //   expect(newState.byId['20'].environments[1].name).toBe('PROD')
   // // }
+
+  it('environmentLogsReceive should add selectedLog to the kintoApp object', () => {
+    const environmentMockState = {
+      byId: {
+        '1': {
+          id: '1',
+          name: 'kintocloud'
+        }
+      }
+    }
+
+    const sampleResponseData = [
+      {
+        responsecode: 504
+      }
+    ]
+
+    const newState = reducer(
+      environmentMockState,
+      actions.environmentLogsReceive('1', sampleResponseData)
+    )
+    expect(newState.byId['1'].selectedLog).toBeTruthy()
+  })
+
+  it('environmentLogsReceive should populate selectedLog with the correct environmentID and releaseVersion', () => {
+    const environmentMockState = {
+      byId: {
+        '1': {
+          id: '1',
+          name: 'kintocloud'
+        }
+      }
+    }
+
+    const sampleResponseData = [
+      {
+        responsecode: 504
+      }
+    ]
+
+    const newState = reducer(
+      environmentMockState,
+      actions.environmentLogsReceive('1', '2', '3.0', sampleResponseData)
+    )
+
+    expect(newState.byId['1'].selectedLog.envId).toBe('2')
+    expect(newState.byId['1'].selectedLog.releaseVersion).toBe('3.0')
+    expect(newState.byId['1'].selectedLog.logs[0].responsecode).toBe(504)
+  })
 })

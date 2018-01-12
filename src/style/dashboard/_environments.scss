@@ -203,29 +203,6 @@
         }
       }
     }
-    .status {
-      &.testing, &.processing {
-        background-color: $kinto-orange;
-      }
-      &.success {
-        background-color: $kinto-green;
-      }
-      &.failed {
-        background-color: $kinto-coral;
-      }
-      &.shutdown {
-        background-color: $kinto-purple;
-      }
-      text-transform: uppercase;
-      color: $kinto-white;
-      font-weight: bold;
-      font-size: 12px;
-      line-height: 16px;
-      height: 20px;
-      border-radius: 4px;
-      margin-right: 10px;
-      padding: 2px 4px;
-    }
     .top {
       display: flex;
       justify-content: space-between;
@@ -302,4 +279,28 @@
         text-transform: none;
       }
     }
+  }
+
+  .status {
+    &.testing, &.processing {
+      background-color: $kinto-orange;
+    }
+    &.success {
+      background-color: $kinto-green;
+    }
+    &.failed {
+      background-color: $kinto-coral;
+    }
+    &.shutdown {
+      background-color: $kinto-purple;
+    }
+    text-transform: uppercase;
+    color: $kinto-white;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    padding: 2px 4px;
   }

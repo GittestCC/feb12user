@@ -1,0 +1,153 @@
+.logs {
+  padding: 40px;
+  background-color: $kinto-white;
+  .title {
+    padding: 10px;
+    background-color: rgba(66,118,146,1);
+    min-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px 4px 0 0;
+    align-items: center;
+    .column {
+      margin: 0 10px;
+      h5 {
+        text-transform: uppercase;
+        color: rgba(185,213,236,1);
+        margin: 0;
+        min-height: 20px;
+        line-height: 20px;
+      }
+    }
+  }
+  .row {
+    &:last-child {
+      .header {
+        border-radius: 0 0 4px 4px;
+        &.active {
+          border-radius: 0;
+        }
+      }
+      .expanded {
+        border-radius: 0 0 4px 4px;
+      }
+    }
+    .header {
+      padding: 20px 10px;
+      background-color: rgba(245,249,255,1);
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      &.active {
+        background: rgba($kinto-blue-muted,0.3);
+        border-left: solid 4px $kinto-blue;
+        padding: 20px 6px;
+      }
+      .column {
+        margin: 0 10px;
+        color: rgba(85,111,125,1);
+        .image {
+          &.branch {
+            @include backgroundImage('/images/icon-type-branch.svg', 20px, 20px);
+          }
+          &.tag {
+            @include backgroundImage('/images/icon-type-tag.svg', 20px, 20px);
+          }
+          margin-right: 10px;
+        }
+        h5 {
+          font-weight: normal;
+          text-transform: capitalize;
+          margin: 0;
+          height: 20px;
+          line-height: 20px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .expanding-details {
+      height: 0;
+      display: none;
+      button {
+        width: 180px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+      &.expanded {
+        height: inherit;
+        display: block;
+        background-color: $kinto-tinted-grayscale-2;
+        padding: 20px 30px;
+        .details {
+          width: 100%;
+          padding: 15px 20px;
+          background-color: $kinto-white;
+          margin: 20px 0;
+          box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
+          border-radius: 4px;
+          code[class*="language-"],
+          pre[class*="language-"] {
+            color: rgba(85,111,125,1);
+            text-shadow: 0 1px white;
+            font-family: $code-font;
+            font-size: 16px;
+            direction: ltr;
+            text-align: left;
+            white-space: pre;
+            word-spacing: normal;
+            word-break: normal;
+            line-height: 24px;
+
+            -moz-tab-size: 4;
+            -o-tab-size: 4;
+            tab-size: 4;
+
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+            hyphens: none;
+          }
+          code.language-json {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  .column {
+    &.one {
+      width: 100px;
+    }
+    &.two {
+      width: 120px;
+    }
+    &.three {
+      width: 260px;
+    }
+    &.four {
+      width: 170px;
+      display: flex;
+    }
+    &.five {
+      width: 180px;
+      text-align: right;
+      align-items: flex-end;
+    }
+  }
+}
+
+.status {
+  display: inline-block;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.logs-title {
+  display: flex;
+  align-items: center;
+}

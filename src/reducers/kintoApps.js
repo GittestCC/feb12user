@@ -10,7 +10,8 @@ import {
   RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG,
   KINTO_APP_ENVIRONMENT_LIST_REORDER,
   NEW_ENVIRONMENT_RECEIVE,
-  KINTO_APP_ENVIRONMENT_UPDATE
+  KINTO_APP_ENVIRONMENT_UPDATE,
+  KINTO_APP_ENVIRONMENT_LOG_UPDATE
 } from '../actions/kintoApps'
 
 const defaultState = {
@@ -137,6 +138,22 @@ const kintoAppsReducer = (state = defaultState, action) => {
         byId: {
           ...state.byId,
           [action.id]: merge(state.byId[action.id], action.data)
+        }
+      }
+
+    case KINTO_APP_ENVIRONMENT_LOG_UPDATE:
+      return {
+        ...state,
+        isFetching: false,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            selectedLog: {
+              envId: action.envId,
+              releaseVersion: action.releaseVersion,
+              logs: action.data
+            }
+          }
         }
       }
     default:

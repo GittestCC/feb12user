@@ -7,6 +7,7 @@ export const pages = {
   dashboardKintoAppsCreate: 'DASHBOARD_KINTO_APPS_CREATE',
   dashboardKintoAppsEnvironmentEdit: 'DASHBOARD_KINTO_APPS_ENVIRONMENT_EDIT',
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
+  dashboardKintoAppsEnvironmentsLogs: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS_LOGS',
   dashboardKintoAppsEnvironments: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS',
   dashboardKintoAppsDependenciesConfig:
     'DASHBOARD_KINTO_APPS_DEPENDENCIES_CONFIG',
@@ -36,6 +37,8 @@ export const urls = {
     '/app/dashboard/kintoapps/:id/environments',
   [pages.dashboardKintoAppsEnvironmentEdit]:
     '/app/dashboard/kintoapps/:id/environment/:envId/edit',
+  [pages.dashboardKintoAppsEnvironmentsLogs]:
+    '/app/dashboard/kintoapps/:id/environment/:envId/logs/:releasedVersion',
   [pages.dashboardKintoAppsDependenciesConfig]:
     '/app/dashboard/kintoapps/:id/versions/:version/config/:envId',
   [pages.dashboardHome]: '/app/dashboard',
