@@ -14,6 +14,8 @@ import {
   KINTO_APP_ENVIRONMENT_LOG_UPDATE
 } from '../actions/kintoApps'
 
+import { SELECT_WORKSPACE } from '../actions/workspaces'
+
 const defaultState = {
   isFetching: false,
   byId: {},
@@ -156,6 +158,8 @@ const kintoAppsReducer = (state = defaultState, action) => {
           }
         }
       }
+    case SELECT_WORKSPACE:
+      return defaultState
     default:
       return state
   }

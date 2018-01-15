@@ -49,7 +49,7 @@ describe('KintoApps actions', () => {
         reponse: {}
       })
     })
-    const store = mockStore()
+    const store = mockStore({ workspaces: { selectedWorkspace: '1' } })
     await store.dispatch(actions.fetchKintoApps())
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_APPS,
@@ -71,7 +71,9 @@ describe('KintoApps actions', () => {
         response: result
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.fetchKintoApps())
     expect(store.getActions()).toEqual([
       { type: actions.FETCH_KINTO_APPS },
@@ -80,7 +82,7 @@ describe('KintoApps actions', () => {
   })
 
   it('fetchKintoAppDependenciesConfig should call a receive action', async () => {
-    const result = {
+    const response = {
       data: [
         {
           id: '1',
@@ -109,7 +111,7 @@ describe('KintoApps actions', () => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
-        response: result
+        response: response
       })
     })
     const store = mockStore()
@@ -122,7 +124,7 @@ describe('KintoApps actions', () => {
         id: '1',
         envId: '1',
         ver: '0.1.0',
-        data: result.data
+        data: response.data
       }
     ])
   })
@@ -135,7 +137,9 @@ describe('KintoApps actions', () => {
         response: {}
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.createKintoApp({}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
@@ -226,7 +230,8 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} }
+      kintoApps: { byId: {} },
+      workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.getKintoAppEnvironments('1'))
     expect(store.getActions().map(a => a.type)).toEqual([
@@ -243,7 +248,9 @@ describe('KintoApps actions', () => {
         response: { data: {} }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.getKintoAppEnvironments('1'))
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_APPS,
@@ -279,13 +286,13 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} }
+      kintoApps: { byId: {} },
+      workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.deployEnvironment('1', {}, 'envName'))
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
-      actions.KINTO_APP_ENVIRONMENT_UPDATE,
       CALL_HISTORY_METHOD
     ])
   })
@@ -299,7 +306,8 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} }
+      kintoApps: { byId: {} },
+      workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.shutDownEnvironment('1', 'envName', {}))
     expect(store.getActions().map(a => a.type)).toEqual([

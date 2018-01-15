@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getInitials } from '../../helpers/stringHelper'
+import UserCircle from './UserCircle'
 
 //TODO: write tests for this component
 const MemberListCircles = ({
@@ -22,15 +22,16 @@ const MemberListCircles = ({
   }
   return (
     <div className="member-list-circles">
-      {users.slice(0, numberOfItemsShown).map((member, index) => (
-        <div className={`avatar text ${size} uppercase`} key={index}>
-          {member.permission === 'Admin' && (
-            <div className="admin-star highlight" />
-          )}
-          {member.permission === 'Owner' && <div className="owner highlight" />}
-          {getInitials(member.username)}
-        </div>
-      ))}
+      {users
+        .slice(0, numberOfItemsShown)
+        .map((member, index) => (
+          <UserCircle
+            name={member.username || member.email}
+            userType={member.role || member.permission}
+            size={size}
+            key={index}
+          />
+        ))}
       {plusCount && <div className={`avatar ${size} plus`}>+{plusCount}</div>}
       {canEdit && (
         <a className={`avatar ${size} edit hide-text`} onClick={editAction}>

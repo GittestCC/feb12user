@@ -1,16 +1,15 @@
 import { pages, urls } from './pages'
-import { getPageUrl } from '../helpers/urlHelper'
 
 const KintoAppsText = {
   component: 'Link',
   text: 'Applications',
-  url: getPageUrl(pages.dashboardKintoAppsList)
+  url: urls[pages.dashboardKintoAppsList]
 }
 
 const KintoBlocksText = {
   component: 'Link',
   text: 'KintoBlocks',
-  url: getPageUrl(pages.dashboardKintoBlocksList)
+  url: urls[pages.dashboardKintoBlocksList]
 }
 
 const KINTOAPP = 'kintoapp'

@@ -24,7 +24,8 @@ function mapStateToProps(state, { url, kintoBlock, noHighlight }) {
     return getUrl(url, {
       id: id,
       version: x.name,
-      type: getVersionType(x)
+      type: getVersionType(x),
+      workspaceId: state.workspaces.selectedWorkspace
     })
   }
 

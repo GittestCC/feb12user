@@ -88,6 +88,19 @@
       }
     }
   }
+  .auto-share-switch {
+    margin-top: 25px;
+    .switch {
+    }
+    .toggle-message {
+      color: $kinto-tinted-grayscale-7;
+      font-size: 14px;
+      text-transform: none;
+      margin-top: 7px;
+      width: 420px;
+    }
+
+  }
 }
 
 .form-body.members-list {

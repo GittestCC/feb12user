@@ -25,29 +25,32 @@ export const pages = {
 }
 
 export const urls = {
-  [pages.dashboardKintoBlocksList]: '/app/dashboard/kintoblocks/list',
-  [pages.dashboardKintoBlocksCreate]: '/app/dashboard/kintoblocks/create',
+  [pages.dashboardKintoBlocksList]:
+    '/app/dashboard/:workspaceId/kintoblocks/list',
+  [pages.dashboardKintoBlocksCreate]:
+    '/app/dashboard/:workspaceId/kintoblocks/create',
   [pages.dashboardKintoBlocksManage]:
-    '/app/dashboard/kintoblocks/:id/versions/:version/:type',
-  [pages.dashboardKintoAppsList]: '/app/dashboard/kintoapps/list',
-  [pages.dashboardKintoAppsCreate]: '/app/dashboard/kintoapps/create',
+    '/app/dashboard/:workspaceId/kintoblocks/:id/versions/:version/:type',
+  [pages.dashboardKintoAppsList]: '/app/dashboard/:workspaceId/kintoapps/list',
+  [pages.dashboardKintoAppsCreate]:
+    '/app/dashboard/:workspaceId/kintoapps/create',
   [pages.dashboardKintoAppsManage]:
-    '/app/dashboard/kintoapps/:id/versions/:version',
+    '/app/dashboard/:workspaceId/kintoapps/:id/versions/:version',
   [pages.dashboardKintoAppsEnvironments]:
-    '/app/dashboard/kintoapps/:id/environments',
+    '/app/dashboard/:workspaceId/kintoapps/:id/environments',
   [pages.dashboardKintoAppsEnvironmentEdit]:
-    '/app/dashboard/kintoapps/:id/environment/:envId/edit',
+    '/app/dashboard/:workspaceId/kintoapps/:id/environment/:envId/edit',
   [pages.dashboardKintoAppsEnvironmentsLogs]:
-    '/app/dashboard/kintoapps/:id/environment/:envId/logs/:releasedVersion',
+    '/app/dashboard/:workspaceId/kintoapps/:id/environment/:envId/logs/:releaseVersion',
   [pages.dashboardKintoAppsDependenciesConfig]:
-    '/app/dashboard/kintoapps/:id/versions/:version/config/:envId',
-  [pages.dashboardHome]: '/app/dashboard',
-  [pages.dashboardAnalytics]: '/app/dashboard/analytics',
-  [pages.dashboardSalesdata]: '/app/dashboard/salesdata',
-  [pages.dashboardServices]: '/app/dashboard/services',
-  [pages.dashboardSettings]: '/app/dashboard/settings',
-  [pages.dashboardHosting]: '/app/dashboard/hosting',
-  [pages.dashboardBilling]: '/app/dashboard/billing',
+    '/app/dashboard/:workspaceId/kintoapps/:id/versions/:version/config/:envId',
+  [pages.dashboardHome]: '/app/dashboard/:workspaceId',
+  [pages.dashboardAnalytics]: '/app/dashboard/:workspaceId/analytics',
+  [pages.dashboardSalesdata]: '/app/dashboard/:workspaceId/salesdata',
+  [pages.dashboardServices]: '/app/dashboard/:workspaceId/services',
+  [pages.dashboardSettings]: '/app/dashboard/:workspaceId/settings',
+  [pages.dashboardHosting]: '/app/dashboard/:workspaceId/hosting',
+  [pages.dashboardBilling]: '/app/dashboard/:workspaceId/billing',
   [pages.workspaceCreate]: '/app/workspaces/create',
   [pages.workspaceEdit]: '/app/workspaces/:id/edit'
 }

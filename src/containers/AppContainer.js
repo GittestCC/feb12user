@@ -1,23 +1,22 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { fetchWorkspaces, workspaceSelect } from '../actions/workspaces'
+import { fetchWorkspaces } from '../actions/workspaces'
 import App from '../components/App'
 import { isAuthenticated } from '../helpers/authHelper'
 
 function mapStateToProps(state) {
-  const isLoggedIn = isAuthenticated(state.auth)
   return {
+    isLoggedIn: isAuthenticated(state.auth),
     blockNavigate: state.pageOptions.canSave,
-    isLoggedIn,
-    isLoading: state.workspaces.isFetching
+    isLoading: state.workspaces.isFetching,
+    firstWorkspaceId: state.workspaces.allIds[0]
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     goToLogin: () => dispatch(push('/log-in')),
-    fetchWorkspaces: () => dispatch(fetchWorkspaces()),
-    workspaceSelect: id => dispatch(workspaceSelect(id))
+    fetchWorkspaces: () => dispatch(fetchWorkspaces())
   }
 }
 

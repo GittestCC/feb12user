@@ -23,9 +23,16 @@ describe('workspaces actions', () => {
     expect(store.getActions()).toEqual([{ type: FORM_SUBMITTED }])
   })
 
-  it('updateWorkspace fires  formSubmitted action', async () => {
+  it('updateWorkspace fires  formSubmitted and workspaceReceive actions', async () => {
     const store = mockStore()
-    await store.dispatch(actions.updateWorkspace())
-    expect(store.getActions()).toEqual([{ type: FORM_SUBMITTED }])
+    await store.dispatch(actions.updateWorkspace('1', { name: 'name' }))
+    expect(store.getActions()).toEqual([
+      { type: FORM_SUBMITTED },
+      {
+        type: actions.RECEIVE_WORKSPACE,
+        id: '1',
+        data: { name: 'name' }
+      }
+    ])
   })
 })

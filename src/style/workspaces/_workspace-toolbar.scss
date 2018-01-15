@@ -6,7 +6,7 @@
   margin-bottom: $margin-base*4;
   display: inline-grid;
   width: 100%;
-  grid-template-columns: $margin-base*12 1fr 1fr;
+  grid-template-columns: 130px 1fr 1fr;
   grid-column-gap: $margin-base*2;
   .user-section {
     justify-content: flex-start;

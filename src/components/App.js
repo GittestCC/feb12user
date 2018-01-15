@@ -7,15 +7,17 @@ import SideBarContainer from '../containers/app/SideBarContainer'
 import GlobalSaveBarContainer from '../containers/app/GlobalSaveBarContainer'
 import BreadcrumbContainer from '../containers/app/BreadcrumbContainer'
 
-import Dashboard from './Dashboard'
-import Workspaces from './Workspaces'
+import DashboardContainer from '../containers/DashboardContainer'
+import WorkspacesContainer from '../containers/WorkspacesContainer'
 import Market from './Market'
 
 class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     blockNavigate: PropTypes.bool.isRequired,
-    goToLogin: PropTypes.func.isRequired
+    goToLogin: PropTypes.func.isRequired,
+    fetchWorkspaces: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired
   }
 
   state = {
@@ -26,8 +28,6 @@ class App extends Component {
     window.addEventListener('beforeunload', this.onUnload)
     if (this.props.isLoggedIn) {
       this.props.fetchWorkspaces()
-      //TODO: replace with a real workspace url select
-      this.props.workspaceSelect('1')
     } else {
       this.props.goToLogin()
     }
@@ -51,6 +51,8 @@ class App extends Component {
   }
 
   render() {
+    const { isLoading, firstWorkspaceId, match } = this.props
+
     return (
       <div className="app">
         <Prompt
@@ -69,23 +71,20 @@ class App extends Component {
 
         <GlobalSaveBarContainer />
 
-        {!this.props.isLoading ? (
+        {!isLoading && firstWorkspaceId ? (
           <div className="layout-inner">
             <BreadcrumbContainer />
             <Switch>
               <Route
-                path={`${this.props.match.url}/dashboard`}
-                component={Dashboard}
+                path={`${match.url}/dashboard/:workspaceId`}
+                component={DashboardContainer}
               />
               <Route
-                path={`${this.props.match.url}/workspaces`}
-                component={Workspaces}
+                path={`${match.url}/workspaces`}
+                component={WorkspacesContainer}
               />
-              <Route
-                path={`${this.props.match.url}/market`}
-                component={Market}
-              />
-              <Redirect to={`${this.props.match.url}/dashboard`} />
+              <Route path={`${match.url}/market`} component={Market} />
+              <Redirect to={`${match.url}/dashboard/${firstWorkspaceId}`} />
             </Switch>
           </div>
         ) : null}

@@ -2,6 +2,7 @@ import keyBy from 'lodash/keyBy'
 
 import reducer from '../kintoBlocks'
 import * as actions from '../../actions/kintoBlocks'
+import { workspaceSelect } from '../../actions/workspaces'
 
 const simpleBlocks = [
   { id: '1', name: 'first', simple: true },
@@ -82,5 +83,15 @@ describe('KintoBlocks Reducer', () => {
       simple: true,
       detailed: true
     })
+  })
+
+  it('selectWorkspace removes all kintoblocks', () => {
+    const oldState = {
+      byId: { data: 'test' },
+      allIds: [1, 2, 3]
+    }
+    const newState = reducer(oldState, workspaceSelect('1'))
+    expect(newState.allIds.length).toBe(0)
+    expect(newState.byId).toEqual({})
   })
 })

@@ -2,6 +2,7 @@ import reducer from '../kintoApps'
 import isArray from 'lodash/isArray'
 
 import * as actions from '../../actions/kintoApps'
+import { workspaceSelect } from '../../actions/workspaces'
 
 const mockStore = {
   byId: {
@@ -183,22 +184,20 @@ describe('kintoApps Reducer', () => {
       }
     }
 
-    const environmentsResponse = {
-      data: [
-        {
-          id: '1',
-          name: 'EnvironmentName'
-        },
-        {
-          id: '2',
-          name: 'Sausages'
-        }
-      ]
-    }
+    const environmentsData = [
+      {
+        id: '1',
+        name: 'EnvironmentName'
+      },
+      {
+        id: '2',
+        name: 'Sausages'
+      }
+    ]
 
     const newState = reducer(
       kintoAppMockState,
-      actions.kintoAppEnvironmentsReceive('1', environmentsResponse)
+      actions.kintoAppEnvironmentsReceive('1', environmentsData)
     )
 
     expect(newState.byId['1'].environments[0].name).toBe('EnvironmentName')
@@ -229,22 +228,20 @@ describe('kintoApps Reducer', () => {
       }
     }
 
-    const environmentsResponse = {
-      data: [
-        {
-          id: '1',
-          name: 'EnvironmentName'
-        },
-        {
-          id: '2',
-          name: 'Sausages'
-        }
-      ]
-    }
+    const environmentsData = [
+      {
+        id: '1',
+        name: 'EnvironmentName'
+      },
+      {
+        id: '2',
+        name: 'Sausages'
+      }
+    ]
 
     const newState = reducer(
       environmentMockState,
-      actions.kintoAppEnvironmentsReceive('1', environmentsResponse)
+      actions.kintoAppEnvironmentsReceive('1', environmentsData)
     )
 
     expect(newState.byId['1'].environments[0].name).toBe('EnvironmentName')
@@ -312,6 +309,16 @@ describe('kintoApps Reducer', () => {
     )
 
     expect(newState.byId['20'].environments.length === 3)
+  })
+
+  it('selectWorkspace removes all kintoapps', () => {
+    const oldState = {
+      byId: { data: 'test' },
+      allIds: [1, 2, 3]
+    }
+    const newState = reducer(oldState, workspaceSelect('1'))
+    expect(newState.allIds.length).toBe(0)
+    expect(newState.byId).toEqual({})
   })
 
   // it

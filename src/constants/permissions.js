@@ -1,13 +1,12 @@
-export const ADMIN_PERMISSION = 'Admin'
-export const MEMBER_PERMISSION = 'Member'
-export const ADMIN_PROJECT_PERMISSION = 'Admin'
-export const EDITOR_PROJECT_PERMISSION = 'Editor'
-export const OWNER_PROJECT_PERMISSION = 'Owner'
+export const ADMIN_ROLE = 'ADMIN'
+export const MEMBER_ROLE = 'MEMBER'
 
-export const permissions = [ADMIN_PERMISSION, MEMBER_PERMISSION]
-export const projectPermissions = [
-  ADMIN_PROJECT_PERMISSION,
-  EDITOR_PROJECT_PERMISSION,
-  OWNER_PROJECT_PERMISSION
+export const workspaceRoles = [
+  { label: 'Member', value: MEMBER_ROLE },
+  { label: 'Admin', value: ADMIN_ROLE }
 ]
-export const projectEditorPermissions = [EDITOR_PROJECT_PERMISSION]
+
+// view only permissions (not saved)
+export const OWNER_PERMISSION = 'OWNER'
+export const ADMIN_PERMISSION = 'ADMIN'
+export const EDITOR_PERMISSION = 'EDITOR'

@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { formValueSelector, SubmissionError } from 'redux-form'
+import { pages } from '../../../constants/pages'
+import { getPageUrl } from '../../../helpers/urlHelper'
 import {
   getVersionAsText,
   isVersionEqual
@@ -10,8 +12,14 @@ import { deployEnvironment } from '../../../actions/kintoApps'
 const selector = formValueSelector('versionCreate')
 
 function mapStateToProps(state, { kintoApp, isDraft }) {
-  kintoApp = kintoApp || {}
   const versionText = getVersionAsText(selector(state, 'version'))
+  const { selectedWorkspace } = state.workspaces
+
+  const listEnvironmentsUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
+    id: kintoApp.id,
+    workspaceId: selectedWorkspace
+  })
+
   let submitLabel = isDraft ? 'Create' : 'Redeploy'
   if (versionText) {
     submitLabel += ` ${versionText}`
@@ -20,6 +28,7 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
   return {
     kintoApp,
     submitLabel,
+    listEnvironmentsUrl,
     initialValues: {
       environment: kintoApp.environments[0].name,
       version: kintoApp.version
@@ -42,7 +51,7 @@ function mapDispatchToProps(dispatch, { kintoApp, onClose, id }) {
         createNewVersion: true
       }
 
-      return dispatch(deployEnvironment(id, data, envName)).then(onClose)
+      return dispatch(deployEnvironment(id, envName, data)).then(onClose)
     }
   }
 }

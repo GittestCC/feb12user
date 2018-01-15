@@ -1,10 +1,15 @@
 import React from 'react'
 import { Field, reduxForm, FieldArray } from 'redux-form'
-import { FieldValidation } from '../forms'
+import { FieldValidation, Toggle } from '../forms'
 import { required } from '../../helpers/forms/validators'
 import WorkspaceMembers from './workspaceForm/WorkspaceMembers'
 
-const WorkspaceForm = ({ workspace, isCreate, memberId, workspaceMembers }) => {
+const WorkspaceForm = ({
+  workspace,
+  isCreate,
+  currentUserId,
+  workspaceMembers
+}) => {
   return (
     <form className="workspace-form form-container">
       <div>
@@ -14,14 +19,21 @@ const WorkspaceForm = ({ workspace, isCreate, memberId, workspaceMembers }) => {
         <h3>Basic Info</h3>
         <h5>Enter a name for your workspace.</h5>
         <div className="form-body">
-          <div className="field-wrapper">
+          <Field
+            name="name"
+            label="workspace name"
+            placeholder="Enter an name for your workspace"
+            component={FieldValidation}
+            validate={required}
+            type="text"
+          />
+          <div className="auto-share-switch">
             <Field
-              name="workspaceName"
-              label="workspace name"
-              placeholder="Enter an name for your workspace"
-              component={FieldValidation}
-              validate={required}
-              type="text"
+              name="autoShareProjects"
+              className="auto-share-projects"
+              label="Anyone in Workspace Can View and Join Projects by Default"
+              help="Turn this on to make all projects visible to every workspace member by default."
+              component={Toggle}
             />
           </div>
         </div>
@@ -44,8 +56,6 @@ const WorkspaceForm = ({ workspace, isCreate, memberId, workspaceMembers }) => {
 
         <FieldArray
           name="members"
-          memberId={memberId}
-          isCreate={isCreate}
           component={WorkspaceMembers}
           workspaceMembers={workspaceMembers}
         />

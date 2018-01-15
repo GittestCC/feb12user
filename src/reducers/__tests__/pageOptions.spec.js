@@ -1,6 +1,7 @@
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { change } from 'redux-form'
 import { pages } from '../../constants/pages'
+import { getPageUrl } from '../../helpers/urlHelper'
 import reducer from '../pageOptions'
 import * as kintoAppActions from '../../actions/kintoApps'
 import * as kintoBlockActions from '../../actions/kintoBlocks'
@@ -15,7 +16,9 @@ describe('PageOptions Reducer', () => {
   it('location change will set activePage to kintoAppsList and isDashboard true if the url was for kintoapps list', () => {
     const result = reducer(
       undefined,
-      mockRedirectAction('/app/dashboard/kintoapps/list')
+      mockRedirectAction(
+        getPageUrl(pages.dashboardKintoAppsList, { workspaceId: 1 })
+      )
     )
     expect(result).toEqual({
       isDashboard: true,
@@ -38,7 +41,9 @@ describe('PageOptions Reducer', () => {
   it('location change always sets canSave/scrollToError to false', () => {
     const result = reducer(
       { canSave: true, scrollToError: true },
-      mockRedirectAction('/app/dashboard/kintoapps/list')
+      mockRedirectAction(
+        getPageUrl(pages.dashboardKintoAppsList, { workspaceId: 1 })
+      )
     )
     expect(result).toEqual({
       isDashboard: true,

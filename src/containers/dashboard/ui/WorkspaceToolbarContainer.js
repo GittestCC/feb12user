@@ -1,138 +1,87 @@
 import { connect } from 'react-redux'
-import { formValueSelector, change } from 'redux-form'
+import { formValueSelector } from 'redux-form'
+import {
+  ADMIN_ROLE,
+  ADMIN_PERMISSION,
+  OWNER_PERMISSION,
+  EDITOR_PERMISSION
+} from '../../../constants/permissions'
 import WorkspaceToolbar from '../../../components/dashboard/ui/WorkspaceToolbar'
 
 const getFormName = (isCreate, isKintoApp) => {
   if (isKintoApp) {
     return 'kintoAppForm'
-  } else {
-    if (isCreate) {
-      return 'kintoBlockCreateForm'
-    } else {
-      return 'kintoBlockManageForm'
-    }
+  }
+  return isCreate ? 'kintoBlockCreateForm' : 'kintoBlockManageForm'
+}
+
+function getMemberInfo(member, permission, included) {
+  return {
+    id: member.id,
+    permission,
+    email: member.email,
+    username: member.username,
+    included
   }
 }
 
 function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
   const formSelector = formValueSelector(getFormName(isCreate, isKintoApp))
-  const currentWorkspace =
+  const currentUserId = state.auth.authSession.uid
+  const workspace =
     state.workspaces.byId[state.workspaces.selectedWorkspace] || {}
-  const currentUser = state.auth.authSession || {}
-  const formMembers = formSelector(state, 'members')
-  const formIsPublic = formSelector(state, 'isPublic')
+  const workspaceMembers = workspace.members || []
+  const formMembers = formSelector(state, 'members') || []
+  const isFormPublic = formSelector(state, 'isPublic') || false
   kintoItem = kintoItem || {}
 
   let currentUserInfo = {}
+  let ownerInfo = null
+
   let admins = []
   let members = []
   let allMembers = []
 
-  if (currentWorkspace.members) {
-    currentWorkspace.members.forEach(member => {
-      if (
-        member.permission === 'Admin' ||
-        member.id === kintoItem.ownerId ||
-        (member.id === currentUser.uid && isCreate)
-      ) {
-        let appPermission =
-          member.id === kintoItem.ownerId && member.id !== currentUser.uid
-            ? 'Owner'
-            : 'Admin'
-
-        if (member.id === currentUser.uid) {
-          if (isCreate) {
-            appPermission = 'Owner'
-          }
-
-          currentUserInfo = {
-            email: member.email,
-            included: true,
-            permission: appPermission,
-            username: member.username,
-            id: member.id
-          }
-        }
-
-        admins.push({
-          email: member.email,
-          included: true,
-          permission: appPermission,
-          username: member.username,
-          id: member.id
-        })
-
-        allMembers.push({
-          username: member.username,
-          permission: appPermission
-        })
+  workspaceMembers.forEach(member => {
+    if (member.id === currentUserId) {
+      const permission =
+        member.id === kintoItem.ownerId || isCreate
+          ? OWNER_PERMISSION
+          : member.role === ADMIN_ROLE ? ADMIN_PERMISSION : EDITOR_PERMISSION
+      currentUserInfo = getMemberInfo(member, permission, true)
+    } else if (member.role === ADMIN_ROLE || member.id === kintoItem.ownerId) {
+      const permission =
+        member.id === kintoItem.ownerId ? OWNER_PERMISSION : ADMIN_PERMISSION
+      const memberInfo = getMemberInfo(member, permission, true)
+      if (permission === OWNER_PERMISSION) {
+        ownerInfo = memberInfo
       } else {
-        const regularMember = formMembers
-          ? formMembers.find(kaMember => kaMember.id === member.id)
-          : null
-
-        members.push({
-          email: member.email,
-          included: !!regularMember,
-          permission: 'Editor',
-          username: member.username,
-          id: member.id
-        })
-        if (formIsPublic || regularMember) {
-          allMembers.push({
-            username: member.username,
-            permission: 'Editor'
-          })
-        }
+        allMembers.unshift(memberInfo)
+        admins.push(memberInfo)
       }
-    })
-  }
+    } else {
+      const isMember = formMembers.some(m => m === member.id)
+      const memberInfo = getMemberInfo(member, EDITOR_PERMISSION, isMember)
+      members.push(memberInfo)
+      if (isFormPublic || isMember) {
+        allMembers.push(memberInfo)
+      }
+    }
+  })
 
+  admins.unshift(currentUserInfo)
+  if (ownerInfo) {
+    admins.unshift(ownerInfo)
+    allMembers.unshift(ownerInfo)
+  }
   return {
-    isPublicValue: formIsPublic,
+    canCurrentUserManage: currentUserInfo.permission !== EDITOR_PERMISSION,
+    isFormPublic: isFormPublic,
     currentUserInfo,
     admins,
     members,
-    allMembers: allMembers.sort((a, b) => a.permission > b.permission),
-    currentWorkspace,
-    currentUser
+    allMembers
   }
 }
 
-function mapDispatchToProps(dispatch, { isKintoApp, kintoItem, isCreate }) {
-  return {
-    toggleMembers: (isPublic, workspaceMembers) => {
-      if (isPublic) {
-        let privateMembers = []
-
-        workspaceMembers.forEach(member => {
-          if (member.permission === 'Member') {
-            privateMembers.push({
-              id: member.id,
-              permission: 'Editor'
-            })
-          }
-        })
-
-        dispatch(
-          change(getFormName(isCreate, isKintoApp), 'members', privateMembers)
-        )
-      } else {
-        dispatch(change(getFormName(isCreate, isKintoApp), 'members', null))
-      }
-    }
-  }
-}
-
-function mergeProps(stateProps, dispatchProps) {
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    toggleIsPublic: isPublic =>
-      dispatchProps.toggleMembers(isPublic, stateProps.currentWorkspace.members)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  WorkspaceToolbar
-)
+export default connect(mapStateToProps)(WorkspaceToolbar)

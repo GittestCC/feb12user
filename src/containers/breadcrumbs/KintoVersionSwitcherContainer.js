@@ -16,6 +16,7 @@ function mapStateToProps(state, { type, disabled, url }) {
     selectedKintoBlockId,
     selectedEnvironmentId
   } = state.pageOptions
+  const workspaceId = state.workspaces.selectedWorkspace
   const isKintoApp = type === 'kintoapp'
   const editPage = isKintoApp
     ? pages.dashboardKintoAppsManage
@@ -29,12 +30,15 @@ function mapStateToProps(state, { type, disabled, url }) {
   if (selectedItem.versions) {
     dropdownItems = selectedItem.versions.map(v => ({
       text: isKintoApp ? getVersionAsText(v) : v.name,
-      url: getUrl(url, {
-        id: selectedItem.id,
-        version: isKintoApp ? getVersionAsText(v, true) : v.name,
-        type: getVersionType(v),
-        envId: selectedEnvironmentId || '0'
-      }),
+      url:
+        workspaceId &&
+        getUrl(url, {
+          id: selectedItem.id,
+          version: isKintoApp ? getVersionAsText(v, true) : v.name,
+          type: getVersionType(v),
+          envId: selectedEnvironmentId || '0',
+          workspaceId
+        }),
       tag: v.state,
       className: getVersionStateClassName(v),
       active: isVersionEqual(v, selectedItem.version)
@@ -50,12 +54,14 @@ function mapStateToProps(state, { type, disabled, url }) {
       : version && version.name,
     selectedVersionUrl:
       selectedItem.id &&
+      workspaceId &&
       getPageUrl(editPage, {
         id: selectedItem.id,
         version: isKintoApp
           ? getVersionAsText(selectedItem.version, true)
           : selectedItem.version.name,
-        type: getVersionType(selectedItem.version)
+        type: getVersionType(selectedItem.version),
+        workspaceId
       }),
     baseVersions: asTextList(selectedItem.versions),
     isKintoBlock: !isKintoApp

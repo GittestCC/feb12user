@@ -10,6 +10,7 @@ import KintoSwitcher from '../../components/breadcrumbs/KintoSwitcher'
 
 function mapStateToProps(state, { disabled, type }) {
   const isKintoApp = type === 'kintoapp'
+  const workspaceId = state.workspaces.selectedWorkspace
   const createPage = isKintoApp
     ? pages.dashboardKintoAppsCreate
     : pages.dashboardKintoBlocksCreate
@@ -26,27 +27,32 @@ function mapStateToProps(state, { disabled, type }) {
   const dropdownItems = list.map(i => ({
     text: i.name,
     active: selectedItem && selectedItem.id === i.id,
-    url: getPageUrl(editPage, {
-      id: i.id,
-      version: isKintoApp
-        ? getVersionAsText(i.versions[0], true)
-        : i.versions[0].name,
-      type: getVersionType(i.versions[0])
-    })
+    url:
+      workspaceId &&
+      getPageUrl(editPage, {
+        id: i.id,
+        version: isKintoApp
+          ? getVersionAsText(i.versions[0], true)
+          : i.versions[0].name,
+        type: getVersionType(i.versions[0]),
+        workspaceId
+      })
   }))
   return {
     disabled,
     selectedItemName: selectedItem.name,
     selectedItemUrl:
       selectedItem.id &&
+      workspaceId &&
       getPageUrl(editPage, {
         id: selectedItem.id,
         version: isKintoApp
           ? getVersionAsText(selectedItem.versions[0], true)
           : selectedItem.versions[0].name,
-        type: getVersionType(selectedItem.versions[0])
+        type: getVersionType(selectedItem.versions[0]),
+        workspaceId
       }),
-    createUrl: getPageUrl(createPage),
+    createUrl: workspaceId && getPageUrl(createPage, { workspaceId }),
     dropdownItems
   }
 }

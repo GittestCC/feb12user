@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
+import capitalize from 'lodash/capitalize'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { Toggle } from '../../forms'
-import { getInitials } from '../../../helpers/stringHelper'
 import MemberListCircles from '../../ui/MemberListCircles'
+import UserCircle from '../../ui/UserCircle'
 import ComplexModal from '../../dashboard/ui/ComplexModal'
 import WorkspaceToolbarModal from './workspaceToolbar/WorkspaceToolbarModal'
-import {
-  ADMIN_PROJECT_PERMISSION,
-  OWNER_PROJECT_PERMISSION
-} from '../../../constants/permissions'
 
 class WorkspaceToolbar extends Component {
   static propTypes = {
-    currentUser: PropTypes.object.isRequired,
     currentUserInfo: PropTypes.object.isRequired,
     admins: PropTypes.array.isRequired,
     members: PropTypes.array.isRequired,
     allMembers: PropTypes.array.isRequired,
-    isPublicValue: PropTypes.bool
+    isFormPublic: PropTypes.bool,
+    canCurrentUserManage: PropTypes.bool.isRequired
   }
 
   state = {
@@ -33,52 +30,43 @@ class WorkspaceToolbar extends Component {
     this.setState({ isModalOpen: false })
   }
 
-  toggleVisibility = e => {
-    setTimeout(() => this.props.toggleIsPublic(e.target.value), 0)
-  }
-
   render() {
     const {
-      currentUser,
       currentUserInfo,
       admins,
       members,
       allMembers,
-      isPublicValue
+      isFormPublic,
+      canCurrentUserManage
     } = this.props
     return (
       <div className="workspace-toolbar">
         <div className="user-section">
-          <div className="avatar owner text">
-            {currentUserInfo.permission === ADMIN_PROJECT_PERMISSION && (
-              <div className="admin-star highlight" />
-            )}
-            {currentUserInfo.permission === OWNER_PROJECT_PERMISSION && (
-              <div className="owner highlight" />
-            )}
-            {getInitials(currentUser.uname)}
-          </div>
-          <h5>{currentUserInfo.permission}</h5>
-          {/* TODO : revisit this when the API is working to check the user details */}
+          <UserCircle
+            name={currentUserInfo.username}
+            userType={currentUserInfo.permission}
+          />
+          <h5>{capitalize(currentUserInfo.permission)}</h5>
         </div>
         <div className="members">
           <MemberListCircles
             users={allMembers}
             editAction={this.openWorkspaceModal}
-            canEdit={!isPublicValue}
+            canEdit={!isFormPublic && canCurrentUserManage}
             numberOfItemsShown={7}
             size="normal"
           />
         </div>
-        <div className="toggle">
-          <Field
-            name="isPublic"
-            id="public"
-            component={Toggle}
-            onChange={this.toggleVisibility}
-            label="Everyone in this workspace is an editor of this project"
-          />
-        </div>
+        {canCurrentUserManage && (
+          <div className="toggle">
+            <Field
+              name="isPublic"
+              id="public"
+              component={Toggle}
+              label="Everyone in this workspace is an editor of this project"
+            />
+          </div>
+        )}
 
         <ComplexModal
           className="workspace-modal"
@@ -86,10 +74,8 @@ class WorkspaceToolbar extends Component {
           isOpen={this.state.isModalOpen}
           onClose={this.onModalClose}
           data={{
-            currentUser: currentUser,
-            admins: admins,
-            members: members,
-            currentUserInfo: currentUserInfo
+            admins,
+            members
           }}
         />
       </div>

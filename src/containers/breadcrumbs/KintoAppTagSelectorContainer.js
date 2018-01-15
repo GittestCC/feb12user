@@ -21,7 +21,8 @@ function mapStateToProps(state, { url }) {
         url: getUrl(url, {
           id: selectedApp.id,
           version: getVersionAsText(v),
-          envId: selectedEnvironmentId || '0'
+          envId: selectedEnvironmentId || '0',
+          workspaceId: state.workspaces.selectedWorkspace
         }),
         releases: v.environments,
         lastUpdated: moment(v.lastUpdated).format('h:mmA, DD MMM YYYY'),
@@ -44,7 +45,8 @@ function mapStateToProps(state, { url }) {
       selectedApp.id &&
       getPageUrl(pages.dashboardKintoAppsManage, {
         id: selectedApp.id,
-        version: getVersionAsText(selectedApp.version, true)
+        version: getVersionAsText(selectedApp.version, true),
+        workspaceId: state.workspaces.selectedWorkspace
       })
   }
 }

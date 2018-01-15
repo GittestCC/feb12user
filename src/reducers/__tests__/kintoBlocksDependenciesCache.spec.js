@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 
 import * as actions from '../../actions/kintoApps'
 import * as kbActions from '../../actions/kintoBlocks'
+import { workspaceSelect } from '../../actions/workspaces'
 
 const sampleResponseData = {
   metadata: {
@@ -64,5 +65,13 @@ describe('KintoBlocksDependenciesCache Reducer', () => {
       kbActions.kintoBlockReceive('1', sampleResponseData)
     )
     expect(newState['1'].name).toBe('test')
+  })
+
+  it('selectWorkspace removes all cache', () => {
+    const oldState = {
+      '1': { data: 'test' }
+    }
+    const newState = reducer(oldState, workspaceSelect('1'))
+    expect(newState).toEqual({})
   })
 })

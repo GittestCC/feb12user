@@ -6,6 +6,7 @@ import { getVersionType } from '../../../../helpers/versionHelper'
 import KintoBlockCard from '../../../../components/dashboard/kintoBlocks/kintoBlocksList/KintoBlockCard'
 
 function mapStateToProps(state, { kintoBlock, index }) {
+  const { selectedWorkspace } = state.workspaces
   const latestVersion = kintoBlock.versions[0]
   const versions = kintoBlock.versions.map(v => {
     let result = {
@@ -14,7 +15,8 @@ function mapStateToProps(state, { kintoBlock, index }) {
       url: getPageUrl(pages.dashboardKintoBlocksManage, {
         id: kintoBlock.id,
         version: v.name,
-        type: getVersionType(v)
+        type: getVersionType(v),
+        workspaceId: selectedWorkspace
       })
     }
     const isFirst = kintoBlock.versions.indexOf(v) === 0

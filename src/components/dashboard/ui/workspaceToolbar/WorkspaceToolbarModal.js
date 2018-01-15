@@ -7,10 +7,8 @@ import { SearchInput } from '../../../forms'
 class WorkspaceToolbarModal extends Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
-    currentUser: PropTypes.object.isRequired,
     members: PropTypes.array.isRequired,
-    admins: PropTypes.array.isRequired,
-    currentUserInfo: PropTypes.object.isRequired
+    admins: PropTypes.array.isRequired
   }
 
   state = {
@@ -36,13 +34,7 @@ class WorkspaceToolbarModal extends Component {
   }
 
   render() {
-    const {
-      onClose,
-      currentUser,
-      members,
-      admins,
-      currentUserInfo
-    } = this.props
+    const { onClose, members, admins } = this.props
     return (
       <div className="workspace-toolbar-modal">
         <div className="kh-modal-title">
@@ -57,9 +49,8 @@ class WorkspaceToolbarModal extends Component {
             <FieldArray
               name="members"
               component={WorkspaceToolbarForm}
-              currentUser={currentUser}
               members={this.filterMembers(members)}
-              admins={this.filterMembers([currentUserInfo, ...admins])}
+              admins={this.filterMembers(admins)}
             />
           </div>
           <button className="button dark" onClick={onClose}>

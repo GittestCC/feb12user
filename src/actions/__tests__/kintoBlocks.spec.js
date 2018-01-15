@@ -42,7 +42,9 @@ describe('KintoBlocks actions', () => {
         response: {}
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.fetchKintoBlocks())
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_BLOCKS,
@@ -63,7 +65,9 @@ describe('KintoBlocks actions', () => {
         response: result
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.fetchKintoBlocks())
     expect(store.getActions()).toEqual([
       { type: actions.FETCH_KINTO_BLOCKS },
@@ -143,7 +147,8 @@ describe('KintoBlocks actions', () => {
           otherInfo: 'otherInfo',
           lastFetch: now,
           ownerId: undefined,
-          workspaceId: '1'
+          workspaceId: '1',
+          members: ['1', '2', '3', '4', '5'] // TODO: remove mock data
         }
       }
     ])
@@ -210,7 +215,9 @@ describe('KintoBlocks actions', () => {
         response: {}
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.createKintoBlock({}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
@@ -267,7 +274,9 @@ describe('KintoBlocks actions', () => {
         }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.createKintoBlockTag(1, {}))
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.CREATE_TAG_KINTO_BLOCK,
@@ -283,7 +292,9 @@ describe('KintoBlocks actions', () => {
         response: { errors: 'error' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     const result = store.dispatch(
       actions.createKintoBlockTag('1', { errors: 'error' })
     )

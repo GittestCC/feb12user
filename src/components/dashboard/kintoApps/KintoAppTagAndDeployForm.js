@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field, Fields, reduxForm, FormSection } from 'redux-form'
 import { required } from '../../../helpers/forms/validators'
-import { getPageUrl } from '../../../helpers/urlHelper'
 import { number } from '../../../helpers/forms/parsers'
-import { pages } from '../../../constants/pages'
 import { Button, VersionInputs, FormError, FieldValidation } from '../../forms'
 
 class TagAndDeployForm extends Component {
@@ -15,7 +13,9 @@ class TagAndDeployForm extends Component {
     pristine: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    initialize: PropTypes.func.isRequired
+    initialize: PropTypes.func.isRequired,
+    listEnvironmentsUrl: PropTypes.string.isRequired,
+    environments: PropTypes.array.isRequired
   }
 
   render() {
@@ -29,7 +29,7 @@ class TagAndDeployForm extends Component {
       environments,
       title,
       isTagged,
-      kintoApp
+      listEnvironmentsUrl
     } = this.props
     return (
       <div>
@@ -51,13 +51,7 @@ class TagAndDeployForm extends Component {
                   </option>
                 ))}
               </Field>
-              <Link
-                to={getPageUrl(pages.dashboardKintoAppsEnvironments, {
-                  id: kintoApp.id
-                })}
-              >
-                Edit Environments
-              </Link>
+              <Link to={listEnvironmentsUrl}>Edit Environments</Link>
             </div>
 
             <FormSection name="version">

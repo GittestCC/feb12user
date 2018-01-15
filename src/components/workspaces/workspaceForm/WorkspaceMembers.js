@@ -2,47 +2,44 @@ import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import { FieldValidation } from '../../forms'
 import { required } from '../../../helpers/forms/validators'
-import { permissions } from '../../../constants/permissions'
+import {
+  workspaceRoles,
+  MEMBER_ROLE,
+  ADMIN_ROLE
+} from '../../../constants/permissions'
+import UserCircle from '../../ui/UserCircle'
 
 class WorkspaceMembers extends Component {
   state = {
     email: '',
-    permission: 'Admin'
+    role: MEMBER_ROLE
   }
 
   addRow = () => {
     this.props.fields.push({
-      permission: this.state.permission,
+      role: this.state.role,
       email: this.state.email
     })
     this.setState({
-      permission: 'Admin',
+      role: MEMBER_ROLE,
       email: ''
     })
   }
 
-  isDisabled = formMember => {
-    if (this.props.isCreate && formMember.id === this.props.memberId) {
-      return true
-    }
-    if (this.props.isCreate) {
-      return false
-    }
-    return this.props.workspaceMembers.some(
-      w => w.email === formMember.email && w.permission === 'Admin'
-    )
+  findMember = id => {
+    return this.props.workspaceMembers.find(m => m.id === id)
   }
 
   getDisplay = member =>
-    member.name ? `${member.name} (${member.email})` : `${member.email}`
+    member.username ? `${member.username} (${member.email})` : `${member.email}`
 
-  updatePermissionState = event => {
+  updateRole = event => {
     this.setState({
-      permission: event.target.value
+      role: event.target.value
     })
   }
 
-  updateEmailState = event => {
+  updateEmail = event => {
     this.setState({
       email: event.target.value
     })
@@ -56,39 +53,38 @@ class WorkspaceMembers extends Component {
         <div className="top">
           <ul className="unstyled-list">
             {fields.map((field, index) => {
-              const member = fields.get(index) || {}
+              const formMember = fields.get(index) || {}
+              const member = this.findMember(formMember.id) || {}
+              const isDisabled = member.role === ADMIN_ROLE
 
               return (
                 <li key={index} className="members-added">
-                  <div
-                    className={`avatar image-${Math.floor(Math.random() * 6) +
-                      1}`}
-                  >
-                    {member.permission === 'Admin' ? (
-                      <div className="admin-star" />
-                    ) : null}
-                  </div>
+                  <UserCircle
+                    name={this.getDisplay(formMember)}
+                    highlightIcon={
+                      member.role === ADMIN_ROLE ? 'admin-star' : null
+                    }
+                  />
                   <input
                     placeholder="Enter workspace member email"
-                    value={this.getDisplay(member)}
+                    value={this.getDisplay(formMember)}
                     disabled="true"
                   />
                   <Field
-                    name={`${field}.permission`}
-                    placeholder="Select a permission level"
+                    name={`${field}.role`}
                     component={FieldValidation}
                     validate={required}
                     type="select"
-                    disabled={this.isDisabled(member)}
+                    disabled={isDisabled}
                   >
-                    {permissions.map((level, i) => (
-                      <option key={i} value={level}>
-                        {level}
+                    {workspaceRoles.map((level, i) => (
+                      <option key={i} value={level.value}>
+                        {level.label}
                       </option>
                     ))}
                   </Field>
 
-                  {this.isDisabled(member) ? (
+                  {isDisabled ? (
                     <div className="remove void" />
                   ) : (
                     <div
@@ -107,19 +103,19 @@ class WorkspaceMembers extends Component {
             <input
               name="email"
               placeholder="Enter workspace member email"
-              onChange={this.updateEmailState}
+              onChange={this.updateEmail}
               value={this.state.email}
             />
           </div>
           <select
-            name="permission"
+            name="role"
             type="select"
-            onChange={this.updatePermissionState}
-            value={this.state.permission}
+            onChange={this.updateRole}
+            value={this.state.role}
           >
-            {permissions.map((level, i) => (
-              <option key={i} value={level}>
-                {level}
+            {workspaceRoles.map((role, i) => (
+              <option key={i} value={role.value}>
+                {role.label}
               </option>
             ))}
           </select>

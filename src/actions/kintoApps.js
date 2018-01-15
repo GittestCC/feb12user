@@ -39,23 +39,23 @@ export const kintoAppCreateVersion = (id, data) => ({
 
 export const kintoAppsFetch = () => ({ type: FETCH_KINTO_APPS })
 
-export const kintoAppsReceive = data => ({
+export const kintoAppsReceive = response => ({
   type: RECEIVE_KINTO_APPS,
-  data: data.data,
-  metadata: data.metadata
+  data: response.data,
+  metadata: response.metadata
 })
 
-export const kintoAppReceive = (id, data) => ({
+export const kintoAppReceive = (id, response) => ({
   type: RECEIVE_KINTO_APP,
   id,
-  data: data.data,
-  metadata: data.metadata
+  data: response.data,
+  metadata: response.metadata
 })
 
 export const kintoAppEnvironmentsReceive = (id, data) => ({
   type: RECIEVE_KINTO_APP_ENVIRONMENTS,
   id,
-  data: data.data
+  data
 })
 
 export const kintoAppDependenciesConfigReceive = (id, ver, envId, data) => ({
@@ -76,13 +76,13 @@ export const kintoAppEnvironmentListReorder = (id, oldIndex, newIndex) => ({
 export const newEnvironmentReceive = (id, data) => ({
   type: NEW_ENVIRONMENT_RECEIVE,
   id,
-  data: data.data
+  data
 })
 
-export const appEnvironmentUpdate = (id, result) => ({
+export const appEnvironmentUpdate = (id, data) => ({
   type: KINTO_APP_ENVIRONMENT_UPDATE,
   id,
-  data: result.data
+  data
 })
 
 export const environmentLogsReceive = (id, envId, releaseVersion, data) => ({
@@ -106,36 +106,31 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
     return Promise.resolve()
   }
   dispatch(kintoAppsFetch())
-  return axios.get(`/kintoapps/${id}/versions/${ver}`).then(data => {
-    if (data.data) {
-      data.data.lastFetch = new Date()
+  return axios.get(`/kintoapps/${id}/versions/${ver}`).then(response => {
+    if (response.data) {
+      response.data.lastFetch = new Date()
       // TODO: remove below mock data after API set up
-      data.data.workspaceId = '1'
-      data.data.ownerId = state.auth.authSession.uid
-      data.data.isPublic = true
-      if (data.data.isPublic === false) {
-        data.data.members = [
-          { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
-          { permission: 'Admin', id: '1' },
-          { permission: 'Editor', id: '2' },
-          { permission: 'Admin', id: '3' },
-          { permission: 'Editor', id: '4' },
-          { permission: 'Editor', id: '5' },
-          { permission: 'Editor', id: '6' }
-        ]
-      }
+      response.data.workspaceId = '1'
+      response.data.ownerId = state.auth.authSession.uid
+      response.data.isPublic = true
+      response.data.members = ['1', '2', '3', '4', '5']
     }
-    return dispatch(kintoAppReceive(id, data))
+    return dispatch(kintoAppReceive(id, response))
   })
 }
 
-export const fetchKintoApps = () => dispatch => {
+export const fetchKintoApps = () => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+
+  const kintoAppCreateUrl = getPageUrl(pages.dashboardKintoAppsCreate, {
+    workspaceId: selectedWorkspace
+  })
   dispatch(kintoAppsFetch())
-  return axios.get('/kintoapps/all').then(result => {
-    if (isEmpty(result.data)) {
-      dispatch(push('/app/dashboard/kintoapps/create'))
+  return axios.get('/kintoapps/all').then(response => {
+    if (isEmpty(response.data)) {
+      dispatch(push(kintoAppCreateUrl))
     } else {
-      dispatch(kintoAppsReceive(result))
+      dispatch(kintoAppsReceive(response))
     }
   })
 }
@@ -154,10 +149,14 @@ export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
     })
 }
 
-export const createKintoApp = data => dispatch => {
+export const createKintoApp = data => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+  const kintoAppListUrl = getPageUrl(pages.dashboardKintoAppsList, {
+    workspaceId: selectedWorkspace
+  })
   return axios.post('/kintoapps/create', data).then(() => {
     dispatch(formSubmitted())
-    dispatch(push('/app/dashboard/kintoapps/list'))
+    dispatch(push(kintoAppListUrl))
   })
 }
 
@@ -176,66 +175,88 @@ export const updateAppDependenciesConfigData = (
 ) => dispatch => {
   return axios
     .put(`/kintoapps/${id}/versions/${ver}/config/${env}`, data)
-    .then(result => {
-      if (result.errors) {
-        throw new SubmissionError(result.errors)
+    .then(response => {
+      if (response.errors) {
+        throw new SubmissionError(response.errors)
       }
       dispatch(formSubmitted())
     })
 }
 
-export const getKintoAppEnvironments = id => dispatch => {
-  dispatch(kintoAppsFetch())
-  return axios.get(`/kintoapps/${id}/environments`).then(result => {
-    if (isEmpty(result.data)) {
-      dispatch(push('/app/dashboard/kintoapps/list'))
+export const getKintoAppEnvironments = id => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+  const kintoAppListUrl = getPageUrl(pages.dashboardKintoAppsList, {
+    workspaceId: selectedWorkspace
+  })
+  return axios.get(`/kintoapps/${id}/environments`).then(response => {
+    dispatch(kintoAppsFetch())
+    if (isEmpty(response.data)) {
+      dispatch(push(kintoAppListUrl))
     } else {
-      dispatch(kintoAppEnvironmentsReceive(id, result))
+      dispatch(kintoAppEnvironmentsReceive(id, response.data))
     }
   })
 }
 
 export const addNewEnvironment = (id, data) => dispatch => {
   dispatch(kintoAppsFetch())
-  return axios.post(`/kintoapps/${id}/environments`, data).then(result => {
+  return axios.post(`/kintoapps/${id}/environments`, data).then(response => {
     dispatch(formSubmitted())
-    dispatch(newEnvironmentReceive(id, result))
+    dispatch(newEnvironmentReceive(id, response.data))
   })
 }
 
-export const deployEnvironment = (id, data, envName) => dispatch => {
+export const deployEnvironment = (id, envName, data) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
+  const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
+    id,
+    workspaceId: selectedWorkspace
+  })
   dispatch(kintoAppsFetch())
   return axios
     .put(`/kintoapps/${id}/environments/${envName}/deploy`, data)
-    .then(result => {
+    .then(response => {
       dispatch(formSubmitted())
-      dispatch(appEnvironmentUpdate(id, result))
-      dispatch(push(getPageUrl(pages.dashboardKintoAppsEnvironments, { id })))
+      //TODO: the server is not returning dispatch(appEnvironmentUpdate(id, respone.data))
+      dispatch(push(environmentsListUrl))
     })
 }
 
 export const updateAppEnvironment = (id, envId, data) => dispatch => {
   dispatch(kintoAppsFetch())
   //TODO: Add API call when ready
-  return Promise.resolve({ data: { ...data, id: envId } }).then(result => {
+  return Promise.resolve({ data: { ...data, id: envId } }).then(response => {
     dispatch(formSubmitted())
-    dispatch(appEnvironmentUpdate(id, result))
+    dispatch(appEnvironmentUpdate(id, response.data))
   })
 }
 
 export const cancelDeployment = id => dispatch => {
   // the API does not have this functionality yet
+  /*
   dispatch(kintoAppsFetch())
   dispatch(push(`/app/dashboard/kintoapps/${id}/environments`))
+  */
 }
 
-export const shutDownEnvironment = (id, envName, data) => dispatch => {
+export const shutDownEnvironment = (id, envName, data) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
+  const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
+    id,
+    workspaceId: selectedWorkspace
+  })
   dispatch(kintoAppsFetch())
   return axios
     .put(`/kintoapps/${id}/environments/${envName}/shutdown`, data)
     .then(() => {
       dispatch(formSubmitted())
-      dispatch(push(`/app/dashboard/kintoapps/${id}/environments`))
+      dispatch(push(environmentsListUrl))
     })
 }
 

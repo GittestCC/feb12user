@@ -1,33 +1,22 @@
 import React, { Component } from 'react'
+import capitalize from 'lodash/capitalize'
 import { CSSTransitionGroup } from 'react-transition-group'
 import PropTypes from 'prop-types'
-
-import {
-  projectPermissions,
-  projectEditorPermissions,
-  ADMIN_PROJECT_PERMISSION,
-  OWNER_PROJECT_PERMISSION
-} from '../../../../constants/permissions'
+import UserCircle from '../../../ui/UserCircle'
 
 class WorkspaceToolbarForm extends Component {
   static propTypes = {
     members: PropTypes.array.isRequired,
     admins: PropTypes.array.isRequired
   }
+
   addRemoveMember = (event, member) => {
-    const fieldsMembers = this.props.fields.getAll() || undefined
-
-    if (fieldsMembers !== undefined) {
-      const index = fieldsMembers.findIndex(f => f.id === member.id)
-
-      if (event.target.checked) {
-        this.props.fields.push({
-          id: member.id,
-          permission: member.permission
-        })
-      } else {
-        this.props.fields.remove(index)
-      }
+    const fieldsMembers = this.props.fields.getAll()
+    const index = fieldsMembers.findIndex(f => f === member.id)
+    if (event.target.checked) {
+      this.props.fields.push(member.id)
+    } else {
+      this.props.fields.remove(index)
     }
   }
 
@@ -50,38 +39,29 @@ class WorkspaceToolbarForm extends Component {
             admins.map((admin, index) => {
               return (
                 <li className="member-row" key={index}>
-                  <div
-                    className={`avatar image-${Math.floor(Math.random() * 6) +
-                      1}`}
-                  >
-                    {admin.permission === ADMIN_PROJECT_PERMISSION && (
-                      <div className="admin-star" />
-                    )}
-                    {admin.permission === OWNER_PROJECT_PERMISSION && (
-                      <div className="owner" />
-                    )}
-                  </div>
+                  <UserCircle
+                    name={admin.username}
+                    userType={admin.permission}
+                  />
                   <input
                     type="text"
-                    disabled="true"
-                    value={this.getDisplay(admin.username, admin.email)}
+                    disabled
+                    defaultValue={this.getDisplay(admin.username, admin.email)}
                   />
                   <select
                     name="permission"
                     id="permission"
-                    value={admin.permission}
+                    defaultValue={admin.permission}
                     disabled
                   >
-                    {projectPermissions.map((level, i) => (
-                      <option key={i} defaultValue={level}>
-                        {level}
-                      </option>
-                    ))}
+                    <option value={admin.permission}>
+                      {capitalize(admin.permission)}
+                    </option>
                   </select>
                   <input
                     type="checkbox"
                     className="checkbox"
-                    defaultChecked={admin.included}
+                    checked
                     disabled
                   />
                 </li>
@@ -94,25 +74,25 @@ class WorkspaceToolbarForm extends Component {
             members.map((member, index) => {
               return (
                 <li className="member-row" key={index}>
-                  <div
-                    className={`avatar image-${Math.floor(Math.random() * 6) +
-                      1}`}
-                  />
+                  <UserCircle name={member.username} />
+
                   <input
                     type="text"
-                    disabled="true"
-                    value={this.getDisplay(member.username, member.email)}
+                    disabled
+                    defaultValue={this.getDisplay(
+                      member.username,
+                      member.email
+                    )}
                   />
-                  <select name="editorPermissions" id="editorPermissions">
-                    {projectEditorPermissions.map((level, i) => (
-                      <option key={i} defaultValue={level}>
-                        {level}
-                      </option>
-                    ))}
+
+                  <select defaultValue={member.permission}>
+                    <option value={member.permission}>
+                      {capitalize(member.permission)}
+                    </option>
                   </select>
+
                   <input
                     type="checkbox"
-                    name={`${member}.included`}
                     className="checkbox"
                     defaultChecked={member.included}
                     onChange={e => this.addRemoveMember(e, member)}

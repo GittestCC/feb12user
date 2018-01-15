@@ -1,5 +1,6 @@
 import pathToRegexp from 'path-to-regexp'
 import { dashboardSidebar, marketSidebar, urls } from '../constants/pages'
+import { getUrl } from './urlHelper'
 
 export const getActivePageKey = (url, isDashboard) => {
   let matchedPage = null
@@ -14,19 +15,20 @@ export const getActivePageKey = (url, isDashboard) => {
 
 // returns the sidebar list with the active item marked as active
 // and also group the result by `group` key
-export const getListWithActiveItem = (key, isDashboard) => {
+export const getListWithActiveItem = (key, workspaceId, isDashboard) => {
   const list = isDashboard ? dashboardSidebar : marketSidebar
   const listWithActiveItem = list.map(item => {
+    const url = getUrl(item.url, { workspaceId: workspaceId || '0' })
     if (key && item.key === key) {
-      return { ...item, active: true }
+      return { ...item, url, active: true }
     }
     if (item.children) {
       const isChildActive = item.children.some(c => c.key === key)
       if (key && isChildActive) {
-        return { ...item, active: true }
+        return { ...item, url, active: true }
       }
     }
-    return item
+    return { ...item, url }
   })
   const groups = listWithActiveItem.reduce((all, item) => {
     if (all.indexOf(item.group) === -1) {

@@ -19,7 +19,8 @@ function mapStateToProps(state, { match }) {
   return {
     id,
     environments,
-    kintoApp
+    kintoApp,
+    selectedWorkspace: state.workspaces.selectedWorkspace
   }
 }
 

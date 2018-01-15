@@ -31,10 +31,10 @@ export const kintoBlocksReceive = data => ({
   data
 })
 
-export const kintoBlockReceiveDependencies = data => ({
+export const kintoBlockReceiveDependencies = response => ({
   type: RECEIVE_KINTO_BLOCK_DEPENDENCIES,
-  data: data.data,
-  metadata: data.metadata
+  data: response.data,
+  metadata: response.metadata
 })
 
 export const kintoBlockReceive = (id, data) => {
@@ -54,13 +54,18 @@ export const kintoBlockCreateTag = (id, data) => ({
   data
 })
 
-export const fetchKintoBlocks = () => dispatch => {
+export const fetchKintoBlocks = () => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+  const kintoBlockCreateUrl = getPageUrl(pages.dashboardKintoBlocksCreate, {
+    workspaceId: selectedWorkspace
+  })
+
   dispatch(kintoBlocksFetch())
-  return axios.get('/kintoblocks/all').then(result => {
-    if (isEmpty(result) || isEmpty(result.blocks)) {
-      dispatch(push(getPageUrl(pages.dashboardKintoBlocksCreate)))
+  return axios.get('/kintoblocks/all').then(response => {
+    if (isEmpty(response) || isEmpty(response.blocks)) {
+      dispatch(push(kintoBlockCreateUrl))
     } else {
-      dispatch(kintoBlocksReceive(result.blocks))
+      dispatch(kintoBlocksReceive(response.blocks))
     }
   })
 }
@@ -84,35 +89,27 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
   dispatch(kintoBlocksFetch())
   return axios
     .get(`/kintoblocks/${id}/versions/${ver}?type=${type}`)
-    .then(data => {
-      data.lastFetch = new Date()
+    .then(response => {
+      response.lastFetch = new Date()
       // TODO: remove below mock data after API set up
-      data.workspaceId = '1'
-      data.ownerId = state.auth.authSession.uid
-      data.isPublic = true
-      if (data.isPublic === false) {
-        data.members = [
-          { permission: 'Owner', id: '5a0be165af2b8e0001faa6de' },
-          { permission: 'Admin', id: '1' },
-          { permission: 'Editor', id: '2' },
-          { permission: 'Admin', id: '3' },
-          { permission: 'Editor', id: '4' },
-          { permission: 'Editor', id: '5' },
-          { permission: 'Editor', id: '6' }
-        ]
-      }
-      return dispatch(kintoBlockReceive(id, data))
+      response.workspaceId = '1'
+      response.ownerId = state.auth.authSession.uid
+      response.isPublic = true
+      response.members = ['1', '2', '3', '4', '5']
+      return dispatch(kintoBlockReceive(id, response))
     })
 }
 
-export const createKintoBlockTag = (id, ver, data) => dispatch => {
+export const createKintoBlockTag = (id, ver, data) => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
     .post(`/kintoblocks/${id}/versions/${ver}/tags`, data)
     .then(response => {
       const newKintoBlock = response.data
       dispatch(kintoBlockCreateTag(id, newKintoBlock))
       const url = getPageUrl(pages.dashboardKintoBlocksManage, {
-        id: id,
+        id,
+        workspaceId: selectedWorkspace,
         version: newKintoBlock.version.name,
         type: getVersionType(newKintoBlock.version)
       })
@@ -120,10 +117,14 @@ export const createKintoBlockTag = (id, ver, data) => dispatch => {
     })
 }
 
-export const createKintoBlock = data => dispatch => {
+export const createKintoBlock = data => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+  const kintoBlockListUrl = getPageUrl(pages.dashboardKintoBlocksList, {
+    workspaceId: selectedWorkspace
+  })
   return axios.post('/kintoblocks/create', data).then(() => {
     dispatch(formSubmitted())
-    dispatch(push('/app/dashboard/kintoblocks/list'))
+    dispatch(push(kintoBlockListUrl))
   })
 }
 
@@ -147,9 +148,9 @@ export const updateKintoBlock = (id, ver, type, data) => dispatch => {
 }
 
 export const searchKintoBlocks = q => () => {
-  return axios.get(`/kintoblocks/search?name=${q}&limit=10`).then(result => {
+  return axios.get(`/kintoblocks/search?name=${q}&limit=10`).then(response => {
     return {
-      options: result.results.map(k => ({
+      options: response.results.map(k => ({
         ...k,
         label: k.name
       }))
@@ -161,11 +162,11 @@ export const fetchKintoBlockDependenciesData = (id, ver, type) => dispatch => {
   type = capitalize(type)
   return axios
     .get(`/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`)
-    .then(result => {
-      dispatch(kintoBlockReceiveDependencies(result))
+    .then(response => {
+      dispatch(kintoBlockReceiveDependencies(response))
       return {
-        blockId: result.data.id,
-        version: result.data.version
+        blockId: response.data.id,
+        version: response.data.version
       }
     })
 }

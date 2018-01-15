@@ -10,6 +10,7 @@ import { pages } from '../../../../constants/pages'
 import KintoAppCard from '../../../../components/dashboard/kintoApps/kintoAppsList/KintoAppCard'
 
 function mapStateToProps(state, { kintoApp, index }) {
+  const workspaceId = state.workspaces.selectedWorkspace
   const tagList = kintoApp.versions.map(v => {
     const isDraft = isVersionEqual(v, '0.0.0')
     return {
@@ -18,7 +19,8 @@ function mapStateToProps(state, { kintoApp, index }) {
       releases: v.environments,
       url: getPageUrl(pages.dashboardKintoAppsManage, {
         id: kintoApp.id,
-        version: getVersionAsText(v)
+        version: getVersionAsText(v),
+        workspaceId
       })
     }
   })
@@ -26,28 +28,24 @@ function mapStateToProps(state, { kintoApp, index }) {
     kintoApp,
     tagList,
     envVersionsList: getEnvVersionsList(kintoApp.versions),
+    selectedWorkspace: workspaceId,
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`,
     dropdownDependencyId: `idd-${index}`
   }
 }
 
-function mapDispatchToProps(dispatch, { kintoApp }) {
-  return {
-    push: url => dispatch(push(url)),
-    goToEnvironment: () =>
-      dispatch(push(`/app/dashboard/kintoapps/${kintoApp.id}/environments`))
-  }
-}
-
 function mergeProps(stateProps, dispatchProps) {
+  const environmentUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
+    id: stateProps.kintoApp.id,
+    workspaceId: stateProps.selectedWorkspace
+  })
   return {
     ...stateProps,
     ...dispatchProps,
-    goToDraft: () => dispatchProps.push(stateProps.tagList[0].url)
+    goToDraft: () => dispatchProps.push(stateProps.tagList[0].url),
+    goToEnvironment: () => dispatchProps.push(environmentUrl)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  KintoAppCard
-)
+export default connect(mapStateToProps, { push }, mergeProps)(KintoAppCard)

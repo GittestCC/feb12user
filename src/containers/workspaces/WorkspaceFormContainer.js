@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
 import WorkspaceForm from '../../components/workspaces/WorkspaceForm'
 import { createWorkspace, updateWorkspace } from '../../actions/workspaces'
-import { ADMIN_PERMISSION } from '../../constants/permissions'
+import { ADMIN_ROLE } from '../../constants/permissions'
 
 function mapStateToProps(state, { workspace, isCreate }) {
   workspace = workspace || {}
   let workspaceMembers
-  const memberId = state.auth.authSession.uid
+  const currentUserId = state.auth.authSession.uid
   if (isCreate) {
     workspaceMembers = [
       {
-        id: state.auth.authSession.uid,
+        id: currentUserId,
         username: state.auth.authSession.uname,
         email: state.auth.authSession.email,
-        permission: ADMIN_PERMISSION
+        role: ADMIN_ROLE
       }
     ]
   } else {
@@ -21,12 +21,13 @@ function mapStateToProps(state, { workspace, isCreate }) {
   }
 
   return {
-    memberId,
+    currentUserId,
     workspace,
     workspaceMembers,
     initialValues: {
       members: workspaceMembers,
-      workspaceName: workspace.name || ''
+      name: workspace.name,
+      autoShareProjects: workspace.autoShareProjects || false
     }
   }
 }

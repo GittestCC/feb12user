@@ -8,6 +8,7 @@ import KintoAppEnvironmentSwitcher from '../../components/breadcrumbs/KintoAppEn
 
 function mapStateToProps(state, { url, isDependencyConfig }) {
   const { selectedKintoAppId, selectedEnvironmentId } = state.pageOptions
+  const workspaceId = state.workspaces.selectedWorkspace
   const app = state.kintoApps.byId[selectedKintoAppId] || {}
   let environments = app.environments || []
   if (isDependencyConfig && app.id) {
@@ -24,11 +25,14 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
   const dropdownItems = environments.map(e => ({
     text: e.name,
     active: e.id === selectedEnvironmentId,
-    url: getUrl(url, {
-      id: selectedKintoAppId,
-      envId: e.id,
-      version: getVersionAsText(app.version, true)
-    })
+    url:
+      workspaceId &&
+      getUrl(url, {
+        id: selectedKintoAppId,
+        envId: e.id,
+        version: getVersionAsText(app.version, true),
+        workspaceId
+      })
   }))
 
   return {
@@ -39,10 +43,12 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     selectedEnvironmentUrl:
       selectedKintoAppId &&
       selectedEnvironmentId &&
+      workspaceId &&
       getUrl(url, {
         id: selectedKintoAppId,
         envId: selectedEnvironmentId,
-        version: getVersionAsText(app.version, true)
+        version: getVersionAsText(app.version, true),
+        workspaceId
       })
   }
 }

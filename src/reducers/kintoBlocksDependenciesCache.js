@@ -2,7 +2,10 @@ import {
   RECEIVE_KINTO_BLOCK,
   RECEIVE_KINTO_BLOCK_DEPENDENCIES
 } from '../actions/kintoBlocks'
+
 import { RECEIVE_KINTO_APP, RECEIVE_KINTO_APPS } from '../actions/kintoApps'
+
+import { SELECT_WORKSPACE } from '../actions/workspaces'
 
 const kintoBlocksDependenciesCacheReducer = (state = {}, action) => {
   switch (action.type) {
@@ -22,6 +25,8 @@ const kintoBlocksDependenciesCacheReducer = (state = {}, action) => {
         }
       })
       return newState
+    case SELECT_WORKSPACE:
+      return {}
     default:
       return state
   }

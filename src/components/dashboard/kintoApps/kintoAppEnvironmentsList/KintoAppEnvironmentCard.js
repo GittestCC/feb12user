@@ -16,7 +16,8 @@ class KintoAppEnvironmentCard extends Component {
     environment: PropTypes.object.isRequired,
     sortIndex: PropTypes.number.isRequired,
     buttonAction: PropTypes.func.isRequired,
-    kintoApp: PropTypes.object.isRequired
+    kintoApp: PropTypes.object.isRequired,
+    selectedWorkspace: PropTypes.string.isRequired
   }
 
   state = {
@@ -30,23 +31,33 @@ class KintoAppEnvironmentCard extends Component {
   }
 
   logsUrl = releaseVersion => {
+    const { kintoApp, environment, selectedWorkspace } = this.props
     return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
-      id: this.props.kintoApp.id,
-      envId: this.props.environment.id,
-      releaseVersion: getVersionAsText(releaseVersion)
+      id: kintoApp.id,
+      envId: environment.id,
+      releaseVersion: getVersionAsText(releaseVersion),
+      workspaceId: selectedWorkspace
     })
   }
 
   changelogsUrl = releaseVersion => {
+    const { kintoApp, environment, selectedWorkspace } = this.props
     return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
-      id: this.props.kintoApp.id,
-      envId: this.props.environment.id,
-      releaseVersion: getVersionAsText(releaseVersion)
+      id: kintoApp.id,
+      envId: environment.id,
+      releaseVersion: getVersionAsText(releaseVersion),
+      workspaceId: selectedWorkspace
     })
   }
 
   render() {
-    const { environment, sortIndex, buttonAction, kintoApp } = this.props
+    const {
+      environment,
+      sortIndex,
+      buttonAction,
+      kintoApp,
+      selectedWorkspace
+    } = this.props
 
     let status = ''
     let currentRelease = {}
@@ -63,7 +74,8 @@ class KintoAppEnvironmentCard extends Component {
     const editUrl = kintoApp.id
       ? getPageUrl(pages.dashboardKintoAppsEnvironmentEdit, {
           id: kintoApp.id,
-          envId: environment.id
+          envId: environment.id,
+          workspaceId: selectedWorkspace
         })
       : ''
 

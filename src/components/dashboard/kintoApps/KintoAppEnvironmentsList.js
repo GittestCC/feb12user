@@ -11,7 +11,7 @@ import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { SortableContainer } from 'react-sortable-hoc'
 
 const SortableList = SortableContainer(
-  ({ environments, buttonAction, sortIndex, kintoApp }) => {
+  ({ environments, buttonAction, sortIndex, kintoApp, selectedWorkspace }) => {
     return (
       <div className="environments-list">
         {environments.map((environment, index) => (
@@ -22,6 +22,7 @@ const SortableList = SortableContainer(
             index={index}
             sortIndex={index}
             buttonAction={buttonAction}
+            selectedWorkspace={selectedWorkspace}
           />
         ))}
       </div>
@@ -56,7 +57,8 @@ class KintoAppEnvironmentsList extends Component {
     shutDownEnvironment: PropTypes.func.isRequired,
     kintoApp: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    environments: PropTypes.array.isRequired
+    environments: PropTypes.array.isRequired,
+    selectedWorkspace: PropTypes.string
   }
 
   state = {
@@ -103,7 +105,7 @@ class KintoAppEnvironmentsList extends Component {
   }
 
   render() {
-    const { environments, kintoApp } = this.props
+    const { environments, kintoApp, selectedWorkspace } = this.props
     return (
       <div className="kintoapp-environments-list">
         <div className="page-title">
@@ -123,6 +125,7 @@ class KintoAppEnvironmentsList extends Component {
           buttonAction={this.onCardButtonClick}
           kintoApp={kintoApp}
           useDragHandle={true}
+          selectedWorkspace={selectedWorkspace}
         />
 
         <ComplexModal

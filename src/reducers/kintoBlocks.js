@@ -6,6 +6,8 @@ import {
   UPDATE_KINTO_BLOCK
 } from '../actions/kintoBlocks'
 
+import { SELECT_WORKSPACE } from '../actions/workspaces'
+
 const defaultState = {
   isFetching: false,
   byId: {},
@@ -65,6 +67,9 @@ const kintoBlocksReducer = (state = defaultState, action) => {
           }
         }
       }
+
+    case SELECT_WORKSPACE:
+      return defaultState
 
     default:
       return state

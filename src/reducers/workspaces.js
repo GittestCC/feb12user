@@ -1,6 +1,7 @@
 import {
   FETCH_WORKSPACES,
   RECEIVE_WORKSPACES,
+  RECEIVE_WORKSPACE,
   SELECT_WORKSPACE
 } from '../actions/workspaces'
 
@@ -27,11 +28,6 @@ const workspacesReducer = (state = defaultState, action) => {
       let allIds = []
       let byId = {}
       action.data.forEach(workspace => {
-        if (workspace.members) {
-          workspace.members = workspace.members.sort((a, b) => {
-            return a.permission > b.permission
-          })
-        }
         allIds.push(workspace.id)
         byId[workspace.id] = workspace
       })
@@ -40,6 +36,21 @@ const workspacesReducer = (state = defaultState, action) => {
         isFetching: false,
         byId,
         allIds
+      }
+    }
+    case RECEIVE_WORKSPACE: {
+      const workspace = action.data
+      const members = workspace.members.concat().sort((a, b) => a.role > b.role)
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            ...workspace,
+            members
+          }
+        }
       }
     }
     default:
