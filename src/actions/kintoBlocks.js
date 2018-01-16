@@ -8,7 +8,8 @@ import { formSubmitted } from './pageOptions'
 import { pages } from '../constants/pages'
 import { isBranchVersionEqual, getVersionType } from '../helpers/versionHelper'
 import { isRecent } from '../helpers/dateHelper'
-import { getPageUrl } from '../helpers/urlHelper'
+import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
+import { KINTOBLOCKS } from '../constants/backendMicroservices'
 
 export const FETCH_KINTO_BLOCKS = 'FETCH_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
@@ -61,13 +62,15 @@ export const fetchKintoBlocks = () => (dispatch, getState) => {
   })
 
   dispatch(kintoBlocksFetch())
-  return axios.get('/kintoblocks/all').then(response => {
-    if (isEmpty(response) || isEmpty(response.blocks)) {
-      dispatch(push(kintoBlockCreateUrl))
-    } else {
-      dispatch(kintoBlocksReceive(response.blocks))
-    }
-  })
+  return axios
+    .get(getServerUrl(KINTOBLOCKS, '/kintoblocks/all'))
+    .then(response => {
+      if (isEmpty(response) || isEmpty(response.blocks)) {
+        dispatch(push(kintoBlockCreateUrl))
+      } else {
+        dispatch(kintoBlocksReceive(response.blocks))
+      }
+    })
 }
 
 // checks if the last fetched kintoblock has the same ver and is fetched recently
@@ -88,7 +91,12 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
   }
   dispatch(kintoBlocksFetch())
   return axios
-    .get(`/kintoblocks/${id}/versions/${ver}?type=${type}`)
+    .get(
+      getServerUrl(
+        KINTOBLOCKS,
+        `/kintoblocks/${id}/versions/${ver}?type=${type}`
+      )
+    )
     .then(response => {
       response.lastFetch = new Date()
       // TODO: remove below mock data after API set up
@@ -103,7 +111,10 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
 export const createKintoBlockTag = (id, ver, data) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   return axios
-    .post(`/kintoblocks/${id}/versions/${ver}/tags`, data)
+    .post(
+      getServerUrl(KINTOBLOCKS, `/kintoblocks/${id}/versions/${ver}/tags`),
+      data
+    )
     .then(response => {
       const newKintoBlock = response.data
       dispatch(kintoBlockCreateTag(id, newKintoBlock))
@@ -122,16 +133,24 @@ export const createKintoBlock = data => (dispatch, getState) => {
   const kintoBlockListUrl = getPageUrl(pages.dashboardKintoBlocksList, {
     workspaceId: selectedWorkspace
   })
-  return axios.post('/kintoblocks/create', data).then(() => {
-    dispatch(formSubmitted())
-    dispatch(push(kintoBlockListUrl))
-  })
+  return axios
+    .post(getServerUrl(KINTOBLOCKS, '/kintoblocks/create'), data)
+    .then(() => {
+      dispatch(formSubmitted())
+      dispatch(push(kintoBlockListUrl))
+    })
 }
 
 export const updateKintoBlock = (id, ver, type, data) => dispatch => {
   type = capitalize(type)
   return axios
-    .put(`/kintoblocks/${id}/versions/${ver}?type=${type}`, data)
+    .put(
+      getServerUrl(
+        KINTOBLOCKS,
+        `/kintoblocks/${id}/versions/${ver}?type=${type}`
+      ),
+      data
+    )
     .then(
       () => {
         dispatch(formSubmitted())
@@ -148,20 +167,27 @@ export const updateKintoBlock = (id, ver, type, data) => dispatch => {
 }
 
 export const searchKintoBlocks = q => () => {
-  return axios.get(`/kintoblocks/search?name=${q}&limit=10`).then(response => {
-    return {
-      options: response.results.map(k => ({
-        ...k,
-        label: k.name
-      }))
-    }
-  })
+  return axios
+    .get(getServerUrl(KINTOBLOCKS, `/kintoblocks/search?name=${q}&limit=10`))
+    .then(response => {
+      return {
+        options: response.results.map(k => ({
+          ...k,
+          label: k.name
+        }))
+      }
+    })
 }
 
 export const fetchKintoBlockDependenciesData = (id, ver, type) => dispatch => {
   type = capitalize(type)
   return axios
-    .get(`/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`)
+    .get(
+      getServerUrl(
+        KINTOBLOCKS,
+        `/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`
+      )
+    )
     .then(response => {
       dispatch(kintoBlockReceiveDependencies(response))
       return {

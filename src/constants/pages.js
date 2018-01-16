@@ -67,7 +67,7 @@ export const dashboardSidebar = [
     title: 'Applications',
     className: 'kintoapps',
     url: urls[pages.dashboardKintoAppsList],
-    addUrl: urls[pages.dashboardKintoAppsList],
+    addUrl: urls[pages.dashboardKintoAppsCreate],
     children: [
       {
         key: pages.dashboardKintoAppsList,

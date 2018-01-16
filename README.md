@@ -27,6 +27,28 @@ The following command shortcuts are available during development:
 
 ## FAQ
 
+### Setting up the backend url
+dependening on the enviornment the backend supports different url types
+
+- for example on live backend expects
+
+```
+microservice.api.kintoblock.com
+```
+
+- for localhost backend expects
+
+```
+localhost/microservice
+```
+
+we have different options for changing the schema by using the env variable `REACT_APP_URL_TYPE` you can set it to one of the following
+
+- `append` used mainly for localhost by appending the microservice name - *sample url* `localhost/microservice`
+- `subdomain` used for production by adding the microservice as a subdomain - *sample url* `microservice.localhost/`
+- `null` the microservice will be ignored in the url - *sample url* `localhost`
+
+
 ### Setting up and running E2E tests
 - you need to have the client *(this project)* and server *(restful-to-grpc-gateway-service)* projects under the same directory as their siblings (if you want to rename the server folder name to another name, you need to update the `.env` file)
 - you need to duplicate `.env.sample` and rename it to `.env`

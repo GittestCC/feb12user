@@ -5,6 +5,8 @@ import {
   setToken as localStorageSetToken,
   getTokenInfoFromLocalStorage
 } from '../helpers/authHelper'
+import { AUTH } from '../constants/backendMicroservices'
+import { getServerUrl } from '../helpers/urlHelper'
 
 export const TOKEN_UPDATE_INFO = 'TOKEN_UPDATE_INFO'
 export const LOGOUT = 'LOGOUT'
@@ -42,14 +44,14 @@ export const createNewPassword = data => dispatch => {
 }
 
 export const validatePassword = (email, token) => () => {
-  return axios.put('/auth/validate', {
+  return axios.put(getServerUrl(AUTH, '/auth/validate'), {
     email,
     token
   })
 }
 
 export const signUp = (data, callback) => dispatch => {
-  return axios.post('/auth/register', data).then(
+  return axios.post(getServerUrl(AUTH, '/auth/register'), data).then(
     result => {
       //TODO use proper email validation
       return dispatch(
@@ -67,7 +69,7 @@ export const signUp = (data, callback) => dispatch => {
 }
 
 export const logIn = data => dispatch => {
-  return axios.put('/auth/login', data).then(
+  return axios.put(getServerUrl(AUTH, '/auth/login'), data).then(
     () => {
       dispatch(push('/app'))
     },

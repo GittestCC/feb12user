@@ -12,7 +12,6 @@ class Auth extends Component {
 
   constructor(props) {
     super(props)
-    axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL
     axios.interceptors.request.use(config => {
       if (this.props.token) {
         config.headers.Authorization = `Bearer ${this.props.token}`

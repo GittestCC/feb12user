@@ -19,16 +19,21 @@ export const getListWithActiveItem = (key, workspaceId, isDashboard) => {
   const list = isDashboard ? dashboardSidebar : marketSidebar
   const listWithActiveItem = list.map(item => {
     const url = getUrl(item.url, { workspaceId: workspaceId || '0' })
+    let isActive = false
+
     if (key && item.key === key) {
-      return { ...item, url, active: true }
-    }
-    if (item.children) {
+      isActive = true
+    } else if (item.children) {
       const isChildActive = item.children.some(c => c.key === key)
       if (key && isChildActive) {
-        return { ...item, url, active: true }
+        isActive = true
       }
     }
-    return { ...item, url }
+    let result = { ...item, url, active: isActive }
+    if (item.addUrl) {
+      result.addUrl = getUrl(item.addUrl, { workspaceId: workspaceId || '0' })
+    }
+    return result
   })
   const groups = listWithActiveItem.reduce((all, item) => {
     if (all.indexOf(item.group) === -1) {

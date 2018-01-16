@@ -23,10 +23,10 @@ class WorkspaceToolbarModal extends Component {
     if (!this.state.searchedValue) return members
     else {
       return members.filter(member => {
-        const userName = member.username.toUpperCase()
+        const username = member.username.toUpperCase()
         const email = member.email.toUpperCase()
         return (
-          userName.includes(this.state.searchedValue) ||
+          username.includes(this.state.searchedValue) ||
           email.includes(this.state.searchedValue)
         )
       })
