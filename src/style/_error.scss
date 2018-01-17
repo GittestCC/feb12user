@@ -1,0 +1,32 @@
+.error-page {
+  position: absolute;
+  background: $kinto-tinted-grayscale-1;
+  height: 100%;
+  width: 100%;
+  .navigation-logo {
+    @include backgroundImage('/images/logo-full-color-horizontal.svg', 200px, 30px);
+    margin: 50px auto 160px auto;
+    display: block;
+  }
+  .error-container {
+    margin: 0 auto;
+    width: 460px;
+  }
+  .error-section {
+    background: $kinto-white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    padding: 60px;
+  }
+  h2 {
+    color: $kinto-tinted-grayscale-9;
+    margin-top: 40px;
+  }
+  .note, .note a {
+    font-size: 12px;
+    color: $kinto-grayscale-6;
+  }
+  .note a {
+    font-weight: bold;
+  }
+}

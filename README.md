@@ -27,6 +27,16 @@ The following command shortcuts are available during development:
 
 ## FAQ
 
+### Setting up google analytics
+
+you only need to assign the following env variable to enable google analytics
+
+```
+REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID=UA-xxx-1
+```
+
+> this won't affect development, you don't need to add it
+
 ### Setting up the backend url
 dependening on the enviornment the backend supports different url types
 
