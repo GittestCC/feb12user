@@ -260,7 +260,7 @@ export const updateAppEnvironment = (id, envId, data) => dispatch => {
 }
 
 export const cancelDeployment = id => dispatch => {
-  // the API does not have this functionality yet
+  // TODO: the API does not have this functionality yet
   /*
   dispatch(kintoAppsFetch())
   dispatch(push(`/app/dashboard/kintoapps/${id}/environments`))

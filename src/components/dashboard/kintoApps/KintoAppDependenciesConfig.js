@@ -124,11 +124,11 @@ class KintoAppDependenciesConfig extends Component {
                 </a>
               </li>
               {/*
-              <li>
+                <li>
                 <a
                   onClick={this.showHardwareTab}
                   className={
-                    this.state.activeTab === 'hardware' ? 'active' : ''
+                this.state.activeTab === 'hardware' ? 'active' : ''
                   }
                 >
                   Hardware Requirements

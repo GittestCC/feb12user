@@ -33,6 +33,11 @@ export const fetchWorkspace = id => (dispatch, getState) => {
     data: {
       id,
       name: `Test Workspace ${id}`,
+      organizations: [
+        { name: 'weyland-yutani', id: '1' },
+        { name: 'tyrell-corporation', id: '2' },
+        { name: 'wallace', id: '3' }
+      ],
       members: [
         {
           role: 'ADMIN',

@@ -113,3 +113,112 @@
     }
   }
 }
+
+.connect-github {
+  .repository-selection {
+    display: flex;
+    justify-content: space-between;
+    .field-wrapper {
+      &:first-child {
+        margin-right: 20px;
+      }
+      width: 50%;
+    }
+  }
+  .button.dark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .github-icon {
+      display: inline-block;
+      @include backgroundImage('/images/log-in-with-github.svg', 20px, 20px);
+      margin-right: 10px;
+    }
+  }
+  .select-wrapper {
+    flex-grow: 1;
+  }
+  .Select {
+    position: relative;
+    &.is-focused:not(.is-open) > .Select-control, &.is-focused > .Select-control {
+      border: none;
+      box-shadow: none;
+      background: $kinto-white;
+      border: 2px solid $kinto-blue-muted;
+      border-radius: 4px;
+    }
+    .Select-menu-outer {
+      box-shadow: 0 2px 4px 0 $kinto-box-shadow 0 10px 40px 0 $kinto-box-shadow;
+      border: none;
+      margin-top: 0;
+      .Select-menu {
+        cursor:pointer;
+        .Select-option {
+          color: $kinto-tinted-grayscale-7;
+          font-weight: bold;
+          font-style: $base-font;
+          &.is-selected {
+            background-color: $kinto-blue;
+            color: $kinto-white;
+            &.is-focused {
+              background-color: rgba($kinto-blue, 0.8);
+            }
+          }
+          &.is-focused {
+            background-color: rgba($kinto-blue, 0.2);
+          }
+        }
+      }
+    }
+    .Select-placeholder {
+      width: 100%;
+      font-size: 14px;
+      font-family: "Nunito", sans-serif;
+      color: $kinto-tinted-grayscale-7;
+      @include placeholder($input)
+      line-height: 37px;
+      font-weight: bold;
+    }
+    &.is-focused {
+      .Select-placeholder {
+        display: none;
+      }
+    }
+
+    .Select-input{
+      height: 37px;
+      input {
+        width: 100%;
+        border: 0 none;
+        box-shadow: none;
+        cursor: default;
+        display: inline-block;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        -webkit-appearance: none;
+      }
+    }
+    &.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+    .Select-value-label,
+    &.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+      color: $kinto-tinted-grayscale-7;
+      font-family: "Nunito", sans-serif;
+      font-weight: bold;
+    }
+  }
+  .Select-control {
+    color: #427692;
+    line-height: 24px;
+    padding-left: 0;
+    background: white;
+    border: 2px solid #cbe3f9;
+    cursor: default;
+    display: table;
+    height: 24px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+}

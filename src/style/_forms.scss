@@ -1,4 +1,4 @@
-label {
+label, .label {
   height: 24px;
   font-family: $base-font;
   font-size: $font-size-label;
@@ -15,7 +15,6 @@ select {
   width: 100%;
   font-size: $font-size-input;
   font-family: $base-font;
-  color: $kinto-tinted-grayscale-7;
   letter-spacing: 0;
   line-height: 24px;
   margin-bottom: $margin-base;
@@ -83,8 +82,6 @@ textarea, textarea.tall {
     margin-bottom: $margin-base * 3;
   }
 }
-
-
 
 .label-characters {
   display: flex;
@@ -240,6 +237,44 @@ h5.byline {
         position: absolute;
         top: 10px;
         right: 0;
+      }
+    }
+    &.with-prefill {
+      .prefill-wrapper {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        color: $kinto-tinted-grayscale-6;
+        height: 40px;
+        width: 100%;
+        font-size: $font-size-input;
+        font-family: $base-font;
+        letter-spacing: 0;
+        line-height: 24px;
+        margin-bottom: $margin-base;
+        padding-left: $margin-base;
+        background: $kinto-white;
+        border: 2px solid $input;
+        border-radius: 4px;
+        input {
+          border: none;
+          margin: 0;
+          height: 36px;
+          line-height: 36px;
+          padding: 0;
+          &.error {
+            border: 2px solid $input-error;
+          }
+          &.disabled, &:disabled {
+            border: none;
+            &:focus {
+              border: none;
+            }
+          }
+        }
+        span {
+          white-space: nowrap;
+        }
       }
     }
   }

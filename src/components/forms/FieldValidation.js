@@ -50,7 +50,8 @@ class FieldValidation extends Component {
       disabled,
       characterCount,
       inputTextOverlay,
-      focusHere
+      focusHere,
+      preFillText
     } = this.props
     const { touched, submitFailed, error } = this.props.meta
     const hasError = (touched || submitFailed) && error
@@ -134,8 +135,15 @@ class FieldValidation extends Component {
           )}
         </div>
 
-        <div className={`field-input-wrapper ${close ? 'with-close' : ''}`}>
-          {inputEl}
+        <div
+          className={`field-input-wrapper ${close ? 'with-close' : ''} ${
+            preFillText ? 'with-prefill' : ''
+          }`}
+        >
+          <div className="prefill-wrapper">
+            {inputEl}
+            {preFillText && <span>{preFillText}</span>}
+          </div>
           {close && <img src="/images/icon-red-delete.svg" alt="" />}
           {hasError && <div className="error-message">{error}</div>}
         </div>
