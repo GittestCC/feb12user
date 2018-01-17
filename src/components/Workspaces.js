@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import WorkspaceEditContainer from '../containers/workspaces/WorkspaceEditContainer'
+import GithubConnectContainer from '../containers/workspaces/GithubConnectContainer'
 import WorkspaceCreate from './workspaces/WorkspaceCreate'
 
 class Workspaces extends Component {
@@ -23,6 +24,10 @@ class Workspaces extends Component {
       <div>
         <Route path={`${url}/create`} component={WorkspaceCreate} />
         <Route path={`${url}/:id/edit`} component={WorkspaceEditContainer} />
+        <Route
+          path={`${url}/githubConnect`}
+          component={GithubConnectContainer}
+        />
       </div>
     )
   }

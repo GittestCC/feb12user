@@ -51,46 +51,40 @@ const Kintohub = () => {
           <ScrollToTop>
             <ScrollToErrorOnSubmitContainer />
             {analyticsId && <Route component={Analytics} />}
-            <div>
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={() =>
-                    isLoggedIn ? (
-                      <Redirect to="/app" />
-                    ) : (
-                      <Redirect to="/home" />
-                    )
-                  }
-                />
-                <Route path="/home" component={Home} />
-                <Route path="/about-us" component={AboutUs} />
-                <Route path="/contact-us" component={ContactUs} />
-                <Route path="/blog" component={Blog} />
-                <Route path="/app" component={AppContainer} />
+            <Route component={AuthContainer} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() =>
+                  isLoggedIn ? <Redirect to="/app" /> : <Redirect to="/home" />
+                }
+              />
+              <Route path="/home" component={Home} />
+              <Route path="/about-us" component={AboutUs} />
+              <Route path="/contact-us" component={ContactUs} />
+              <Route path="/blog" component={Blog} />
+              <Route path="/app" component={AppContainer} />
 
-                {!isProduction()
-                  ? [
-                      <Route key="1" path="/log-in" component={LogIn} />,
-                      <Route key="2" path="/sign-up" component={SignUp} />,
-                      <Route
-                        key="3"
-                        path="/forgot-password"
-                        component={ForgotPassword}
-                      />,
-                      <Route
-                        key="4"
-                        path="/create-new-password"
-                        component={CreateNewPassword}
-                      />
-                    ]
-                  : null}
+              {!isProduction()
+                ? [
+                    <Route key="1" path="/log-in" component={LogIn} />,
+                    <Route key="2" path="/sign-up" component={SignUp} />,
+                    <Route
+                      key="3"
+                      path="/forgot-password"
+                      component={ForgotPassword}
+                    />,
+                    <Route
+                      key="4"
+                      path="/create-new-password"
+                      component={CreateNewPassword}
+                    />
+                  ]
+                : null}
 
-                <Redirect to="/" />
-              </Switch>
-              <Route component={AuthContainer} />
-            </div>
+              <Redirect to="/" />
+            </Switch>
           </ScrollToTop>
         </ConnectedRouter>
       </Provider>

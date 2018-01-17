@@ -86,6 +86,15 @@ you will need to update `./constants/blog` add a new object to `posts` array wit
 
 to add a new avatar, you need to edit `_blog-gallery.scss` and add it under `.blog-gallery`
 
+### Connect github
+
+you need to make sure the `Authorize callback URL` for the github app is
+
+```
+http://clienturl.com/app/workspaces/githubConnect
+```
+
+
 ### How to hide a page/component from production
 
 in `pageHelper` there is a function `isProduction()` defined, you will need to wrap the component with an if to hide it

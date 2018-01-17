@@ -1,4 +1,8 @@
+import axios from 'axios'
+import { getServerUrl } from '../helpers/urlHelper'
+
 import { formSubmitted } from './pageOptions'
+import { WORKSPACES } from '../constants/backendMicroservices'
 
 export const FETCH_WORKSPACES = 'FETCH_WORKSPACES'
 export const RECEIVE_WORKSPACES = 'RECEIVE_WORKSPACES'
@@ -116,5 +120,11 @@ export const updateWorkspace = (id, data) => dispatch => {
   return Promise.resolve({ data }).then(res => {
     dispatch(formSubmitted())
     dispatch(workspaceReceive(id, res.data))
+  })
+}
+
+export const connectGithub = (workspaceId, githubToken) => dispatch => {
+  return axios.put(getServerUrl(WORKSPACES, `/${workspaceId}/github/connect`), {
+    tokenId: githubToken
   })
 }
