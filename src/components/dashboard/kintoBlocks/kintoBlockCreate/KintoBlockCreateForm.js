@@ -3,82 +3,42 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import isEmpty from 'lodash/isEmpty'
 import Select from 'react-select'
-import { FieldValidation, FormError } from '../../../forms'
+import { FieldValidation, FormError, ErrorOnly } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
+import { boolean } from '../../../../helpers/forms/parsers'
+import { githubConnectUrl } from '../../../../helpers/urlHelper'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
-
-// change to class so that i can use state for the number countdown
-
-// research how to change the color of characters after a certain number has passed
 
 class KintoBlockCreateForm extends Component {
   static propTypes = {
-    // isDedicatedCPU: PropTypes.bool.isRequired, TODO: removed these variables because they are not being used at the moment
-    // resetCPUHandler: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     isNewRepository: PropTypes.bool.isRequired,
     organizations: PropTypes.array.isRequired,
     selectRepository: PropTypes.func.isRequired,
     fieldCorrection: PropTypes.func.isRequired,
-    reactSelectValue: PropTypes.string.isRequired,
+    selectedRepository: PropTypes.string,
     preFillText: PropTypes.string.isRequired,
-    organizationIds: PropTypes.array.isRequired
-  }
-
-  searchRepositories = query => {
-    // return axios.get(
-    //   `/${this.props.workspaceId}/repositories?name=${query}&orgId=${
-    //     this.props.organizationIds.join(",")
-    //   }`
-    // ) TODO: use when API is ready
-
-    return Promise.resolve({
-      data: [
-        {
-          orgName: 'weyland-yutani',
-          orgId: '1',
-          repoName: 'bioweapons-division',
-          repoId: '1'
-        },
-        {
-          orgName: 'tyrell-corporation',
-          orgId: '2',
-          repoName: 'replicant-program',
-          repoId: '2'
-        },
-        {
-          orgName: 'wallace',
-          orgId: '3',
-          repoName: 'bladerunner-prototype',
-          repoId: '3'
-        }
-      ]
-    }).then(response => {
-      return {
-        options: response.data.map(r => ({
-          label: `${r.orgName} / ${r.repoName}`,
-          value: r.repoId,
-          orgId: r.orgId
-        }))
-      }
-    })
+    searchRepositories: PropTypes.func.isRequired,
+    selectedWorkspace: PropTypes.string,
+    error: PropTypes.string
   }
 
   render() {
     const {
       handleSubmit,
-      error,
       kintoBlock,
       isNewRepository,
       organizations,
       selectRepository,
       fieldCorrection,
       selectedRepository,
-      preFillText
+      preFillText,
+      searchRepositories,
+      selectedWorkspace,
+      error
     } = this.props
-    // const { isDedicatedCPU, handleSubmit, resetCPUHandler, error } = this.props TODO: removed these variables because they are not used at the moment
-    const hasOrganizations = !isEmpty(organizations)
 
+    const hasOrganizations = !isEmpty(organizations)
     return (
       <form
         className="kintoblock-create form-container"
@@ -163,6 +123,7 @@ class KintoBlockCreateForm extends Component {
                     type="select"
                     className="bold"
                     onChange={fieldCorrection}
+                    parse={boolean}
                   >
                     <option value="true">Create new repository</option>
                     <option value="false">Existing Repositories</option>
@@ -183,9 +144,16 @@ class KintoBlockCreateForm extends Component {
                       <div className="label">Repository</div>
                       <Select.Async
                         placeholder="Enter the repository"
-                        loadOptions={this.searchRepositories}
+                        loadOptions={searchRepositories}
                         onChange={selectRepository}
                         value={selectedRepository}
+                        clearable={false}
+                        backspaceRemoves={false}
+                      />
+                      <Field
+                        name="repositoryId"
+                        component={ErrorOnly}
+                        validate={required}
                       />
                     </div>
                   )}
@@ -225,11 +193,18 @@ class KintoBlockCreateForm extends Component {
                 </h5>
                 <a href="/">Learn how to create a GitHub organization.</a>
 
-                <button className="button dark">
-                  <span className="github-icon" />Link GitHub Organization
-                </button>
+                <div className="connect-button">
+                  <a
+                    className="button dark"
+                    href={githubConnectUrl(selectedWorkspace)}
+                  >
+                    <span className="icon github" />
+                    Link Github Organization
+                  </a>
+                </div>
               </div>
             )}
+            <FormError error={error} />
           </div>
         </div>
 
@@ -241,7 +216,6 @@ class KintoBlockCreateForm extends Component {
           />
           </FormSection>
         */}
-        <FormError error={error} />
       </form>
     )
   }

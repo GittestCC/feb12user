@@ -7,10 +7,8 @@ import PropTypes from 'prop-types'
  */
 const ErrorOnly = ({ meta: { touched, submitFailed, error } }) =>
   (touched || submitFailed) && error ? (
-    <span className="errorMessage">{error}</span>
-  ) : (
-    false
-  )
+    <div className="error-message error-message-only">{error}</div>
+  ) : null
 ErrorOnly.propTypes = {
   meta: PropTypes.object
 }

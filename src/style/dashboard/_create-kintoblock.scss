@@ -125,16 +125,6 @@
       width: 50%;
     }
   }
-  .button.dark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .github-icon {
-      display: inline-block;
-      @include backgroundImage('/images/log-in-with-github.svg', 20px, 20px);
-      margin-right: 10px;
-    }
-  }
   .select-wrapper {
     flex-grow: 1;
   }

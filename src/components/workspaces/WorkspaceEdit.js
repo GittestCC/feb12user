@@ -14,17 +14,29 @@ class WorkspaceEdit extends Component {
   }
 
   render() {
-    const { workspace, hasLinkedAccount } = this.props
+    const { workspace } = this.props
+    const organizations = workspace.organizations || []
     return (
       <div className="edit-workspace">
         <WorkspaceFormContainer workspace={workspace} isCreate={false} />
         <div className="form-wrapper github-form">
           <h3>Github Connection</h3>
-          <h5>Give your baby a name, and a version number.</h5>
+          <h5>Configure your GitHub organization to work with KintoHub.</h5>
           <div className="form-block">
+            <ul className="organization-list">
+              {organizations.map((organization, i) => (
+                <li key={i}>
+                  <img
+                    src="/images/avatar-color-1.jpg"
+                    alt="organization logo"
+                  />
+                  <div className="text">{organization.name}</div>
+                </li>
+              ))}
+            </ul>
             <div className="github-connect">
               <div className="intro">
-                {!hasLinkedAccount &&
+                {!organizations.length &&
                   'Linking a GitHub organization allows you to use any existing repositories within and create new ones.'}
                 <br />
                 <b>
@@ -40,7 +52,7 @@ class WorkspaceEdit extends Component {
                   href={githubConnectUrl(workspace && workspace.id)}
                 >
                   <span className="icon github" />
-                  {hasLinkedAccount
+                  {organizations.length
                     ? 'Link Additional Github Organization'
                     : 'Link Github Organization'}
                 </a>

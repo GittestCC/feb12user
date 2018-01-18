@@ -106,6 +106,9 @@ textarea, textarea.tall {
   border-radius: 4px;
   padding: $margin-base;
 }
+.error-message-only {
+  margin-top: $margin-base;
+}
 
 .error-message-form {
   margin-bottom: $margin-base * 2;

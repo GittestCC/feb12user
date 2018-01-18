@@ -8,3 +8,5 @@ export const number = value => {
   }
   return result
 }
+
+export const boolean = val => val === 'true'

@@ -128,8 +128,51 @@ export const updateWorkspace = (id, data) => dispatch => {
   })
 }
 
-export const connectGithub = (workspaceId, githubToken) => dispatch => {
+export const connectGithub = (workspaceId, githubToken) => () => {
   return axios.put(getServerUrl(WORKSPACES, `/${workspaceId}/github/connect`), {
     tokenId: githubToken
   })
+}
+
+export const searchRepositories = query => (dispatch, getState) => {
+  const workspaces = getState().workspaces
+  const organizations =
+    workspaces.byId[workspaces.selectedWorkspace].organizations || []
+  if (!organizations.length) {
+    // TODO: show error message
+    return Promise.reject()
+  }
+  /* TODO when api is done
+    const organizationIds = organizations.map(o => o.id).join(',')
+    const requestPromise = axios.get(
+    `/${workspaceId}/repositories?name=${query}&orgId=${organizationIds}`)
+   */
+  return Promise.resolve({
+    data: [
+      {
+        orgName: 'weyland-yutani',
+        orgId: '1',
+        repoName: 'bioweapons-division',
+        repoId: '1'
+      },
+      {
+        orgName: 'tyrell-corporation',
+        orgId: '2',
+        repoName: 'replicant-program',
+        repoId: '2'
+      },
+      {
+        orgName: 'wallace',
+        orgId: '3',
+        repoName: 'bladerunner-prototype',
+        repoId: '3'
+      }
+    ]
+  }).then(response => ({
+    options: response.data.map(repo => ({
+      label: `${repo.orgName} / ${repo.repoName}`,
+      value: repo.repoId,
+      orgId: repo.orgId
+    }))
+  }))
 }

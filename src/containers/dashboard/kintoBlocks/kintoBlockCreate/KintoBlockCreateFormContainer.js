@@ -1,32 +1,32 @@
 import { connect } from 'react-redux'
 import { formValueSelector, change, untouch } from 'redux-form'
 import { createKintoBlock } from '../../../../actions/kintoBlocks'
+import { searchRepositories } from '../../../../actions/workspaces'
 import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateForm'
 
 const formName = 'kintoBlockCreateForm'
 const selector = formValueSelector(formName)
 
 function mapStateToProps(state) {
+  const isNewRepository = !!selector(state, 'newRepository')
+  const selectedRepository = selector(state, 'repositoryId')
+  const selectedOrganizationId = selector(state, 'organizationId')
+
   const selectedWorkspace = state.workspaces.selectedWorkspace
   const organizations =
     state.workspaces.byId[selectedWorkspace].organizations || []
-  const selectedOrganizationId = selector(state, 'organizationId')
-  const isNewRepository = selector(state, 'newRepository') === 'true'
-  const organizationIds = organizations.map(o => o.id)
-  const selectedRepository = selector(state, 'repositoryId')
   const preFillOrg = organizations.find(o => o.id === selectedOrganizationId)
   const preFillText = preFillOrg ? preFillOrg.name : ''
-
   return {
-    organizationIds,
     selectedRepository,
     selectedOrganizationId,
     organizations,
     isNewRepository,
     preFillText: `${preFillText}/ `,
+    selectedWorkspace,
     initialValues: {
       isPublic: true,
-      newRepository: 'true',
+      newRepository: true,
       organizationId: organizations[0] ? organizations[0].id : '1'
     }
   }
@@ -35,27 +35,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onSubmit: data => dispatch(createKintoBlock(data)),
+    searchRepositories: query => dispatch(searchRepositories(query)),
     selectRepository: data => {
       dispatch(change('kintoBlockCreateForm', 'organizationId', data.orgId))
       dispatch(change('kintoBlockCreateForm', 'repositoryId', data.value))
     },
     fieldCorrection: data => {
-      if (data.target.value === 'true') {
-        dispatch(change('kintoBlockCreateForm', 'repositoryId', null))
-      } else {
-        dispatch(change('kintoBlockCreateForm', 'repositoryName', null))
-        dispatch(untouch('kintoBlockCreateForm', 'repositoryName'))
-      }
-    },
-    resetCPUHandler: () => {
-      dispatch(change('kintoBlockCreateForm', 'hardwareData.minCpu', null))
-      dispatch(change('kintoBlockCreateForm', 'hardwareData.maxCpu', null))
+      dispatch(change('kintoBlockCreateForm', 'repositoryId', null))
+      dispatch(change('kintoBlockCreateForm', 'repositoryName', null))
       dispatch(
-        untouch(
-          'kintoBlockCreateForm',
-          'hardwareData.minCpu',
-          'hardwareData.maxCpu'
-        )
+        untouch('kintoBlockCreateForm', 'repositoryName', 'repositoryId')
       )
     }
   }

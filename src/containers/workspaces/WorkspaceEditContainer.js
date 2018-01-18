@@ -4,7 +4,7 @@ import { workspaceBreadcrumbSelect } from '../../actions/pageOptions'
 
 function mapStateToProps(state, { match }) {
   const id = match.params.id
-  const workspace = state.workspaces.byId[id]
+  const workspace = state.workspaces.byId[id] || {}
 
   return {
     workspace,
