@@ -8,6 +8,7 @@ export const pages = {
   dashboardKintoAppsEnvironmentEdit: 'DASHBOARD_KINTO_APPS_ENVIRONMENT_EDIT',
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
   dashboardKintoAppsEnvironmentsLogs: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS_LOGS',
+  dashboardKintoAppsChangelogs: 'DASHBOARD_KINTO_APPS_CHANGELOGS',
   dashboardKintoAppsEnvironments: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS',
   dashboardKintoAppsDependenciesConfig:
     'DASHBOARD_KINTO_APPS_DEPENDENCIES_CONFIG',
@@ -38,6 +39,8 @@ export const urls = {
     '/app/dashboard/:workspaceId/kintoapps/:id/versions/:version',
   [pages.dashboardKintoAppsEnvironments]:
     '/app/dashboard/:workspaceId/kintoapps/:id/environments',
+  [pages.dashboardKintoAppsChangelogs]:
+    '/app/dashboard/:workspaceId/kintoapps/:id/changelogs',
   [pages.dashboardKintoAppsEnvironmentEdit]:
     '/app/dashboard/:workspaceId/kintoapps/:id/environment/:envId/edit',
   [pages.dashboardKintoAppsEnvironmentsLogs]:
@@ -92,6 +95,10 @@ export const dashboardSidebar = [
       {
         key: pages.dashboardKintoAppsDependenciesConfig,
         url: urls[pages.dashboardKintoAppsDependenciesConfig]
+      },
+      {
+        key: pages.dashboardKintoAppsChangelogs,
+        url: urls[pages.dashboardKintoAppsChangelogs]
       }
     ],
     group: 1

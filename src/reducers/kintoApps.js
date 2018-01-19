@@ -11,7 +11,8 @@ import {
   KINTO_APP_ENVIRONMENT_LIST_REORDER,
   NEW_ENVIRONMENT_RECEIVE,
   KINTO_APP_ENVIRONMENT_UPDATE,
-  KINTO_APP_ENVIRONMENT_LOG_UPDATE
+  KINTO_APP_ENVIRONMENT_LOG_UPDATE,
+  KINTO_APP_CHANGELOG_RECEIVE
 } from '../actions/kintoApps'
 
 import { SELECT_WORKSPACE } from '../actions/workspaces'
@@ -154,6 +155,22 @@ const kintoAppsReducer = (state = defaultState, action) => {
               envId: action.envId,
               releaseVersion: action.releaseVersion,
               logs: action.data
+            }
+          }
+        }
+      }
+    case KINTO_APP_CHANGELOG_RECEIVE:
+      return {
+        ...state,
+        isFetching: false,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            changelog: {
+              oldVersion: action.oldVersion,
+              newVersion: action.newVersion,
+              data: action.data
             }
           }
         }

@@ -1,0 +1,307 @@
+.changelogs {
+  .changelog-wrapper {
+    box-shadow: 0 2px 4px 0 rgba(66,118,146,0.10), 0 10px 40px 0 rgba(66,118,146,0.10);
+    background-color: $kinto-white;
+    border-radius: 12px;
+    .changelogs-title {
+      padding: 20px 0 16px;
+      border-bottom: solid 2px $kinto-tinted-grayscale-2;
+      h3 {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
+  }
+  .changelogs-body {
+    padding: 40px;
+
+    .selectors {
+      display: flex;
+      margin-bottom: 18px;
+      justify-content: space-between;
+      .old-version, .new-version {
+        flex: auto;
+        select {
+          margin-bottom: 0;
+        }
+      }
+      .old-version {
+        border-radius: 4px 0 0 4px;
+        padding: 6px 40px 30px 30px;
+        background-color: $kinto-grayscale-2;
+        position: relative;
+        height: 100px;
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-top: 50px solid transparent;
+          border-bottom: 50px solid transparent;
+          border-left: 20px solid $kinto-grayscale-2;
+          position: absolute;
+          top: 0;
+          right: -20px;
+        }
+      }
+      .new-version {
+        height: 100px;
+        border-radius: 0 4px 4px 0;
+        padding: 6px 30px 30px 40px;
+        background-color: $kinto-grayscale-1;
+      }
+    }
+
+    .modified-blocks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 8px;
+      .key {
+        display: flex;
+        align-items: center;
+        h6 {
+          color: $kinto-tinted-grayscale-7;
+          text-transform: capitalize;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+        }
+        .key-icon {
+          display: inline-block;
+          height: 20px;
+          width: 20px;
+          margin-left: 10px;
+          position: relative;
+          &.removed{
+            border-left: 10px solid $kinto-coral;
+            background-color: rgba($kinto-coral, 0.1);
+            &:after {
+              content: url('/images/icon-changelog-deletion.svg');
+              position: absolute;
+              top: -5px;
+              left: -10px;
+              display: block;
+            }
+          }
+          &.added{
+            border-left: 10px solid $kinto-green;
+            background-color: rgba($kinto-green, 0.1);
+            &:after {
+              content: url('/images/icon-changelog-addition.svg');
+              position: absolute;
+              top: -5px;
+              left: -10px;
+              display: block;
+            }
+          }
+          &.modified{
+            border-left: 10px solid $kinto-purple;
+            background-color: rgba($kinto-purple, 0.1);
+            &:after {
+              content: url('/images/icon-changelog-change.svg');
+              position: absolute;
+              top: -5px;
+              left: -10px;
+              display: block;
+            }
+          }
+        }
+      }
+      h3 {
+        font-size: 20px;
+        color: $kinto-grayscale-7;
+        font-weight: bold;
+      }
+    }
+    .section, .modified-block-details {
+      margin-bottom: 20px;
+      .header {
+        background-color: $kinto-grayscale-2;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        border-radius: 4px 4px 0 0;
+        .kintoblock-icon {
+          @include backgroundImage('/images/icon-generic-kintoblock-3.svg', 60px, 60px)
+          &.deleted {
+            opacity: 0.4;
+          }
+        }
+        h3 {
+          color: $kinto-grayscale-7;
+          margin: 0 0 0 24px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+      .details {
+        border-radius: 0 0 4px 4px;
+        background-color: $kinto-grayscale-1;
+        padding-bottom: 40px;
+        .changes {
+          .row {
+            .row-inner {
+              display: flex;
+              justify-content: space-between;
+              padding: 8px 0 6px;
+              vertical-align: middle;
+              .old, .new {
+                flex: auto;
+                width: 50%;
+                padding: 4px 20px;
+                &:after {
+                  display: none;
+                }
+                h6 {
+                  margin: 2px 0;
+                  height: 16px;
+                  line-height: 16px;
+                }
+                .key {
+                  text-transform: uppercase;
+                  font-weight: normal;
+                }
+                .value {
+                  font-weight: normal;
+                  color: $kinto-grayscale-7;
+                }
+              }
+              &.version {
+                h6 {
+                  font-weight: normal;
+                  color: $kinto-grayscale-7;
+                }
+              }
+            }
+            &.delete, &.add {
+              .row-inner {
+                .old, .new {
+                  &.no-color {
+                    border: none;
+                    background-color: transparent;
+                    padding-left: 20px;
+                    &:after {
+                      display: none;
+                    }
+                  }
+                }
+                .old {
+                  padding-left: 10px;
+                  border-left: solid 10px $kinto-coral;
+                  background-color: rgba($kinto-coral, 0.1);
+                  position: relative;
+                  &:after {
+                    content: url('/images/icon-changelog-deletion.svg');
+                    position: absolute;
+                    top: -5px;
+                    left: -10px;
+                    display: block;
+                  }
+                }
+                .new {
+                  padding-left: 10px;
+                  border-left: solid 10px $kinto-green;
+                  background-color: rgba($kinto-green, 0.1);
+                  position: relative;
+                  &:after {
+                    content: url('/images/icon-changelog-addition.svg');
+                    position: absolute;
+                    top: -5px;
+                    left: -10px;
+                    display: block;
+                  }
+                }
+              }
+            }
+            &.modified {
+              .new {
+                padding-left: 10px;
+                border-left: solid 10px $kinto-purple;
+                background-color: rgba($kinto-purple, 0.1);
+                position: relative;
+                &:after {
+                  content: url('/images/icon-changelog-change.svg');
+                  position: absolute;
+                  top: -5px;
+                  left: -10px;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+      .section-heading {
+        padding-left: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 30px - 12px;
+        padding-top: 40px - 12px;
+        h4 {
+          display: flex;
+          white-space: nowrap;
+          margin: 0 20px 0 0;
+          text-transform: uppercase;
+        }
+        .line {
+          width: 100%;
+          border-bottom: 2px solid $kinto-grayscale-3;
+        }
+        .tag-icons {
+          .icon {
+            margin: 0 10px 0 0;
+            &.branch {
+              @include backgroundImage('/images/icon-type-branch-dark.svg', 20px, 20px);
+            }
+            &.commit {
+              @include backgroundImage('/images/icon-type-commit-dark.svg', 20px, 20px);
+            }
+            &.tag {
+              @include backgroundImage('/images/icon-type-tag-dark.svg', 20px, 20px);
+            }
+          }
+          &.BRANCH {
+            .tag {
+              display: none;
+            }
+          }
+          &.TAG {
+            .commit, .branch {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .deleted-block, .new-block {
+      .header {
+        background-color: $kinto-grayscale-1;
+      }
+      h6 {
+        font-weight: normal;
+        font-size: 12px;
+        color: $kinto-tinted-grayscale-7;
+        line-height: 16px;
+        margin: 0 0 0 24px;
+      }
+    }
+  }
+
+  .no-changelog-message {
+    padding: 40px;
+    .inner {
+      background-color: $kinto-grayscale-1;
+      border-radius: 4px;
+      h4 {
+        padding: 20px 0;
+        text-align: center;
+        font-weight: normal;
+      }
+    }
+  }
+}

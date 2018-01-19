@@ -25,6 +25,7 @@ export const KINTO_APP_ENVIRONMENT_LOG_UPDATE =
   'KINTO_APP_ENVIRONMENT_LOG_UPDATE'
 export const KINTO_APP_ENVIRONMENT_LIST_REORDER =
   'KINTO_APP_ENVIRONMENT_LIST_REORDER'
+export const KINTO_APP_CHANGELOG_RECEIVE = 'KINTO_APP_CHANGELOG_RECEIVE'
 
 export const kintoAppUpdate = (id, data) => ({
   type: UPDATE_KINTO_APP,
@@ -91,6 +92,14 @@ export const environmentLogsReceive = (id, envId, releaseVersion, data) => ({
   id,
   envId,
   releaseVersion,
+  data
+})
+
+export const changeLogReceive = (id, oldVersion, newVersion, data) => ({
+  type: KINTO_APP_CHANGELOG_RECEIVE,
+  id,
+  oldVersion,
+  newVersion,
   data
 })
 
@@ -356,5 +365,344 @@ export const getEnvironmentLogs = (id, envId, releaseVersion) => dispatch => {
   //TODO: return axos.put(`/kintoapps/${id}/environments/${envName}/${releaseVersion}/logs`)
   return Promise.resolve({ data: dummyRows }).then(response => {
     dispatch(environmentLogsReceive(id, envId, releaseVersion, response.data))
+  })
+}
+
+export const getKintoAppChangelogs = (
+  id,
+  oldVersion,
+  newVersion
+) => dispatch => {
+  const response = {
+    modifiedBlocks: [
+      {
+        blockId: '1',
+        blockName: 'Super Wordpress',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        },
+        changes: [
+          {
+            type: 'VERSION',
+            oldValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: 'master',
+              note: 'No builds yet...',
+              type: 'BRANCH'
+            },
+            newValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: 'production',
+              note: 'No builds yet...',
+              type: 'BRANCH'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'modified value',
+              value: 'abc'
+            },
+            newValue: {
+              key: 'modified value',
+              value: 'def'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            newValue: {
+              key: 'Added param',
+              value: 'QW12ER'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'removed param',
+              value: 'UI12UI'
+            }
+          },
+          {
+            type: 'HARDWARE_REQUIREMENTS',
+            oldValue: {
+              key: 'memory limits',
+              value: '64MB'
+            },
+            newValue: {
+              key: 'memory limits',
+              value: '128MB'
+            }
+          },
+          {
+            type: 'HARDWARE_REQUIREMENTS',
+            oldValue: {
+              key: 'cpu limits',
+              value: '400 m'
+            }
+          },
+          {
+            type: 'HARDWARE_REQUIREMENTS',
+            newValue: {
+              key: 'dedicated cpus',
+              value: 'Yes'
+            }
+          }
+        ]
+      },
+      {
+        blockId: '1',
+        blockName: 'All The Block',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        },
+        changes: [
+          {
+            type: 'VERSION',
+            oldValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: 'master',
+              note: 'No builds yet...',
+              type: 'BRANCH'
+            },
+            newValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: '0.1.1',
+              note: 'No builds yet...', //commit message
+              type: 'TAG'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'modified value',
+              value: 'abc'
+            },
+            newValue: {
+              key: 'modified value',
+              value: 'def'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            newValue: {
+              key: 'Added param',
+              value: 'QW12ER'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'removed param',
+              value: 'UI12UI'
+            }
+          }
+        ]
+      },
+      {
+        blockId: '1',
+        blockName: 'More Marquise Please',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        },
+        changes: [
+          {
+            type: 'VERSION',
+            oldValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: 'lalalalalaitslateaf',
+              note: 'No builds yet...',
+              type: 'BRANCH'
+            },
+            newValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: '0.1.1',
+              note: 'New Commit Message', //commit message
+              type: 'TAG'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'modified value',
+              value: 'abc'
+            },
+            newValue: {
+              key: 'modified value',
+              value: 'def'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            newValue: {
+              key: 'Added param',
+              value: 'QW12ER'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'removed param',
+              value: 'UI12UI'
+            }
+          }
+        ]
+      },
+      {
+        blockId: '1',
+        blockName: 'Tag Name Change',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        },
+        changes: [
+          {
+            type: 'VERSION',
+            oldValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: '1.1.1',
+              note: 'No builds yet...',
+              type: 'TAG'
+            },
+            newValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: '1.1.2',
+              note: 'No builds yet...',
+              type: 'TAG'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'modified value',
+              value: 'abc'
+            },
+            newValue: {
+              key: 'modified value',
+              value: 'def'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            newValue: {
+              key: 'Added param',
+              value: 'QW12ER'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'removed param',
+              value: 'UI12UI'
+            }
+          }
+        ]
+      },
+      {
+        blockId: '1',
+        blockName: 'New Tag Example',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        },
+        changes: [
+          {
+            type: 'VERSION',
+            newValue: {
+              lastUpdated: '2018-01-15T10:44:53.226533200Z',
+              name: '1.1.2',
+              note: 'No builds yet...',
+              type: 'TAG'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'modified value',
+              value: 'abc'
+            },
+            newValue: {
+              key: 'modified value',
+              value: 'def'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            newValue: {
+              key: 'Added param',
+              value: 'QW12ER'
+            }
+          },
+          {
+            type: 'CUSTOM_PARAM',
+            oldValue: {
+              key: 'removed param',
+              value: 'UI12UI'
+            }
+          }
+        ]
+      }
+    ],
+    newBlocks: [
+      {
+        blockId: '123',
+        blockName: 'P5',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: '1.1.1 (4)',
+          note: 'No builds yet...',
+          type: 'TAG'
+        }
+      },
+      {
+        blockId: '456',
+        blockName: 'Nier',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: '2.3.1 (2)',
+          note: 'No builds yet...',
+          type: 'TAG'
+        }
+      }
+    ],
+    deletedBlocks: [
+      {
+        blockId: '123',
+        blockName: 'Hatoful Boyfriend',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'master',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        }
+      },
+      {
+        blockId: '234',
+        blockName: 'Overwatch',
+        blockVersion: {
+          lastUpdated: '2018-01-15T10:44:53.226533200Z',
+          name: 'dev',
+          note: 'No builds yet...',
+          type: 'BRANCH'
+        }
+      }
+    ]
+  }
+
+  //TODO: return axos.put(`/kintoapps/${id}/changelogs?oldVersion=${oldVersion}&newVersion=${newVersion}`)
+  return Promise.resolve({ data: response }).then(res => {
+    dispatch(changeLogReceive(id, oldVersion, newVersion, res.data))
   })
 }

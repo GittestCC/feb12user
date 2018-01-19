@@ -40,11 +40,16 @@ function mergeProps(stateProps, dispatchProps) {
     id: stateProps.kintoApp.id,
     workspaceId: stateProps.selectedWorkspace
   })
+  const changelogUrl = getPageUrl(pages.dashboardKintoAppsChangelogs, {
+    id: stateProps.kintoApp.id,
+    workspaceId: stateProps.selectedWorkspace
+  })
   return {
     ...stateProps,
     ...dispatchProps,
     goToDraft: () => dispatchProps.push(stateProps.tagList[0].url),
-    goToEnvironment: () => dispatchProps.push(environmentUrl)
+    goToEnvironment: () => dispatchProps.push(environmentUrl),
+    goToChangelog: () => dispatchProps.push(changelogUrl)
   }
 }
 

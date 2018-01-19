@@ -48,7 +48,8 @@ class KintoAppCard extends Component {
       dropdownVersionId,
       dropdownDependencyId,
       goToDraft,
-      goToEnvironment
+      goToEnvironment,
+      goToChangelog
     } = this.props
     return (
       <Link
@@ -143,10 +144,9 @@ class KintoAppCard extends Component {
               </button>
 
               <button onClick={this.showVersionDropdown}>View All Tags</button>
+              <button onClick={goToChangelog}>Compare Versions</button>
               <div className="dropdown line" />
               <button onClick={goToEnvironment}>View Environments</button>
-              <div className="dropdown line" />
-              <button>Delete Application</button>
             </DropDown>
             <DropDown
               id={dropdownVersionId}
