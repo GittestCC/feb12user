@@ -10,6 +10,12 @@ class LogIn extends Component {
     flip: PropTypes.bool
   }
 
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.push('/')
+    }
+  }
+
   state = {
     isSignUpSubmitted: false,
     confirmedEmail: null

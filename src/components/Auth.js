@@ -36,7 +36,7 @@ class Auth extends Component {
       },
       error => {
         // Do something with response error
-        if (error && error.response && error.response.status === 401) {
+        if (error && error.response && error.response.status === 403) {
           // remove token info
           this.props.logout()
           this.props.navigateTo('/login')

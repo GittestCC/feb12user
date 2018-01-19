@@ -1,12 +1,18 @@
 import jwtDecode from 'jwt-decode'
 
 export const getTokenInfoFromLocalStorage = () => {
-  const token = window.localStorage.getItem('kintohub:auth')
+  let token = window.localStorage.getItem('kintohub:auth')
   if (!token) return {}
-  const data = jwtDecode(token)
-  // TODO: issue with data returned from server
-  if (data && data.authSession) {
-    data.authSession = JSON.parse(data.authSession)
+  let data = {}
+  try {
+    data = jwtDecode(token)
+    if (data && data.authSession) {
+      data.authSession = JSON.parse(data.authSession)
+    }
+  } catch (e) {
+    setToken(null)
+    data = {}
+    token = null
   }
   return {
     ...data,

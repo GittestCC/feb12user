@@ -15,7 +15,6 @@ import Home from './landing/Home'
 import AboutUs from './landing/AboutUs'
 import ContactUs from './landing/ContactUs'
 import Blog from './landing/Blog'
-import LogIn from './LogIn'
 import ScrollToTop from './ScrollToTop'
 import ForgotPassword from './ForgotPassword'
 import CreateNewPassword from './CreateNewPassword'
@@ -25,6 +24,7 @@ import AppCrashErrorDisplay from './AppCrashErrorDisplay'
 import ScrollToErrorOnSubmitContainer from '../containers/ScrollToErrorOnSubmitContainer'
 import AppContainer from '../containers/AppContainer'
 import AuthContainer from '../containers/AuthContainer'
+import LogInContainer from '../containers/LogInContainer'
 import '../style/app.css'
 
 const Kintohub = () => {
@@ -37,8 +37,6 @@ const Kintohub = () => {
   const store = configureStore(history)
 
   const isLoggedIn = store.getState().auth.token
-
-  const SignUp = () => <LogIn flip={true} />
 
   Modal.defaultStyles.overlay.backgroundColor = 'rgba(245, 249, 255, 0.9)'
   Modal.defaultStyles.overlay.zIndex = '10'
@@ -68,8 +66,12 @@ const Kintohub = () => {
 
               {!isProduction()
                 ? [
-                    <Route key="1" path="/log-in" component={LogIn} />,
-                    <Route key="2" path="/sign-up" component={SignUp} />,
+                    <Route key="1" path="/log-in" component={LogInContainer} />,
+                    <Route
+                      key="2"
+                      path="/sign-up"
+                      render={() => <LogInContainer flip={true} />}
+                    />,
                     <Route
                       key="3"
                       path="/forgot-password"

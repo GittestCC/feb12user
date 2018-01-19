@@ -13,7 +13,7 @@ class SideBar extends Component {
     push: PropTypes.func.isRequired,
     selectedWorkspaceId: PropTypes.string,
     selectedWorkspaceMembers: PropTypes.array.isRequired,
-    isCurrentUserAdmin: PropTypes.bool.isRequired //TODO: pass to MemberListCircles as canEdit when we have a real api
+    isCurrentUserAdmin: PropTypes.bool.isRequired
   }
 
   navigateTo = (e, url) => {
@@ -37,7 +37,8 @@ class SideBar extends Component {
       selectedWorkspaceId,
       selectedWorkspaceMembers,
       workspaces,
-      list
+      list,
+      isCurrentUserAdmin
     } = this.props
 
     return (
@@ -60,7 +61,7 @@ class SideBar extends Component {
           <MemberListCircles
             users={selectedWorkspaceMembers}
             editAction={this.goToEditWorkspace}
-            canEdit={true}
+            canEdit={isCurrentUserAdmin}
             numberOfItemsShown={6}
             size="small"
           />
@@ -80,8 +81,9 @@ class SideBar extends Component {
                         {item.addUrl && (
                           <img
                             className="item-sub-add"
-                            src={`${process.env
-                              .PUBLIC_URL}/images/icon-blue-new.svg`}
+                            src={`${
+                              process.env.PUBLIC_URL
+                            }/images/icon-blue-new.svg`}
                             alt=""
                             onClick={e => this.navigateTo(e, item.addUrl)}
                           />

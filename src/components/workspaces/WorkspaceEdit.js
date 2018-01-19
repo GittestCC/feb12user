@@ -27,7 +27,7 @@ class WorkspaceEdit extends Component {
               {organizations.map((organization, i) => (
                 <li key={i}>
                   <img
-                    src="/images/avatar-color-1.jpg"
+                    src="/images/avatar-organization.svg"
                     alt="organization logo"
                   />
                   <div className="text">{organization.name}</div>
