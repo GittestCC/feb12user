@@ -8,10 +8,11 @@ pipeline {
             withCredentials([string(credentialsId: 'docker_registry', variable: 'SECRET')]) {
             sh '''#!/bin/bash -xe
 echo "doing the build..."
-echo "REACT_APP_SERVER_URL=http://api.dev.kintocloud.com" >> .env
+echo "REACT_APP_SERVER_URL=http://api.${GIT_BRANCH//\\//-}.kintocloud.com" >> .env
 echo "REACT_APP_SHOW_DEV_UI=true" >> .env
 docker login kintocloud.azurecr.io --username kintocloud --password ${SECRET}
-docker build -t kintocloud.azurecr.io/frontend:dev-${BUILD_NUMBER} .
+pipeline {
+docker build -t kintocloud.azurecr.io/frontend:${GIT_BRANCH//\\//-}-${BUILD_NUMBER} .
 GIT_TAG=`git describe --tags ${GIT_COMMIT}`
 if (( ${#GIT_TAG} > 8 ));
   then
@@ -37,13 +38,14 @@ fi'''
           anyOf {
             branch 'dev'
             branch 'master'
+            branch 'staging'
           }
       }
       steps {
         sh """#!/bin/bash -xe
 if [ "$ENV_PUSH" == "true" ];
 then
-  docker push kintocloud.azurecr.io/frontend:dev-${BUILD_NUMBER}
+  docker push kintocloud.azurecr.io/frontend:${GIT_BRANCH}-${BUILD_NUMBER}
 fi"""
       }
     }
@@ -52,6 +54,7 @@ fi"""
           anyOf {
             branch 'dev'
             branch 'master'
+            branch 'staging'
           }
       }
       steps {
@@ -63,9 +66,9 @@ then
   cd KintoInfra
   git checkout dev
   helm list
-  cd helm
+  cd helm/${GIT_BRANCH}
   helm lint frontend
-  helm upgrade --set kintoblock.image.tag=dev-${BUILD_NUMBER} frontendv1 frontend
+  helm upgrade --set kintoblock.image.tag=${GIT_BRANCH}-${BUILD_NUMBER} frontend-${GIT_BRANCH} frontend
 fi"""
         }
       }
