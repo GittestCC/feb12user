@@ -47,11 +47,17 @@
 	
     "kintoblock":{
     	"validKintoBlockName" : "test name",
+    	"validKintoBlockNameWithChar" : "test name#",
+    	"validKBNameWithChar" : "test_name",
+    	"validKBNameWithDollar" : "test$name",
+    	"validKBNameWithStar" : "test*name",
     	"validKBDescription"  : "This microservice is for OAuth",
+    	"validKBDescriptionWithChar"  : "This microservice is for #$%@!^&*~",
     	"invalidKBDescription": "The microservice architecture is not a silver bullet. It has several drawbacks.Moreover, when using this architecture there are numerous issues that you must address. The microservicearchitecture pattern language is a collection of patterns for applying the microservice architecture",
     	"validUpdatedKBName" : "test name 2",
     	"validUpdatedKBDescription"  : "test description",
     	"validRepoName"       : "repo",
+    	"validRepoNameWithChar":"repo/master",
     	"validEnvironmentKey" : "name",
     	"validEnvironmentKeyWithCaps" : "Name",
     	"validEnvironmentKeyWithSpecialChars" : "Name*#$",
@@ -67,6 +73,23 @@
     	"updatedCustomValue" : "updatedCustValue",
     	"validCustomValueWithSpecialChars" : "Value*#$"
     
+		
+	},
+	
+	"kintoapp":{
+		
+    	"validKintoAppName" : "test name",
+    	"validKANamewithChars": "test#name",
+    	"validKANamewithDot" :"test.name",
+    	"validKintoAppDescription"  : "This Application is for OAuth",
+    	"validKintoAppDescriptionWithChars"  : "This Application is for Inventory Management #$&*@Auth",
+   	"invalidKintoAppDescription": "The microservice architecture is not a silver bullet. It has several drawbacks.Moreover, when using this architecture there are numerous issues that you must address. The microservicearchitecture pattern language is a collection of patterns for applying the microservice architecture",
+    	"validUpdatedKintoAppName" : "test name 2",
+    	"validKANameWithDollar" : "testKA$",
+    	"validNotes" : "Deploying my first version 1.2.3"
+    		
+    	
+  
 		
 	}
 	

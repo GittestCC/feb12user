@@ -35,6 +35,14 @@ class Login extends Page {
     return $('[data-test=loginForm]')
   }
 
+  get loginH3Text() {
+    return $('.content > h3')
+  }
+
+  get loginH1Text() {
+    return $('.content > h1')
+  }
+
   get loginFormError() {
     return $('[data-test=loginForm] [data-test=form-error]')
   }
@@ -72,6 +80,10 @@ class Login extends Page {
 
   get signupForm() {
     return $('[data-test=signupForm]')
+  }
+
+  get password_rule() {
+    return $('.byline')
   }
 
   signupSubmit() {

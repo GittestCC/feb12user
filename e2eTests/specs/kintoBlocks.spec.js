@@ -19,7 +19,7 @@ describe('create kintoBlock', () => {
     expect(KintoBlockCreate.form.isVisible()).to.eq(true)
   })
 
-  it('should validate inputs and not allow  user to create a kb without invalid data', () => {
+  it('should validate inputs and not allow  user to create a kb with invalid data', () => {
     KintoBlockCreate.open()
     KintoBlockCreate.name.input.setValue(
       testData.kintoblock.validKintoBlockName
@@ -64,7 +64,30 @@ describe('create kintoBlock', () => {
     const name = KintoBlockList.getCard(0)
       .element('.name')
       .getText()
-    expect(name).to.eql('test name')
+    expect(name).to.eql(testData.kintoblock.validKintoBlockName)
+  })
+
+  it('should be able to select already existing Repo from my Github account', () => {
+    KintoBlockCreate.open()
+    KintoBlockCreate.name.input.setValue(
+      testData.kintoblock.validKintoBlockNameWithChar
+    )
+
+    KintoBlockCreate.shortDescription.input.setValue(
+      testData.kintoblock.validKBDescriptionWithChar
+    )
+    KintoBlockCreate.language.input.selectByIndex(2)
+    KintoBlockCreate.protocol.input.selectByIndex(2)
+    KintoBlockCreate.repository.input.doubleClick() //TODO Change to click after the bug to bring up the dropdown on a single click is resolved
+    KintoBlockCreate.repository.input.setValue(
+      testData.kintoblock.validRepoName
+    )
+    KintoBlockCreate.submitGlobal()
+    KintoBlockList.getCard(1).waitForVisible()
+    const name = KintoBlockList.getCard(1)
+      .element('.name')
+      .getText()
+    expect(name).to.eql(testData.kintoblock.validKintoBlockNameWithChar)
   })
 })
 
@@ -83,6 +106,9 @@ describe('manage kintoBlock', () => {
   it('show an error message when clicking tag latest commit', () => {
     KintoBlockManage.createTagButton.click()
     expect(KintoBlockManage.createTagError.isVisible()).to.eql(true)
+    expect(KintoBlockManage.createTagError.getText()).to.eql(
+      'At least one successful commit must be made on GitHub in order to create a tag.'
+    )
   })
 
   it('tag latest commit is only shown when the form has no unsaved changes', () => {
@@ -271,6 +297,18 @@ describe('manage kintoBlock', () => {
         .$('.tag-item .tag-item-text')
         .getText()
     ).to.eql(currentBranchName)
+    KintoBlockManage.getTab('tag').click()
+    expect(KintoBlockManage.activeTagSection.isVisible()).to.eql(true)
+  })
+
+  it('should reset search bar while switching tabs', () => {
+    KintoBlockManage.getTab('branch').click()
+    KintoBlockManage.dropDownfilter.setValue('test')
+    KintoBlockManage.getTab('tag').click()
+    expect(KintoBlockManage.dropDownfilter.getValue()).to.eql('')
+    KintoBlockManage.dropDownfilter.setValue('test')
+    KintoBlockManage.getTab('branch').click()
+    expect(KintoBlockManage.dropDownfilter.getValue()).to.eql('')
   })
 
   it('should be able to add multiple environmental parameters', () => {
@@ -297,31 +335,65 @@ describe('manage kintoBlock', () => {
         .element('[data-test="environmentVariables[1].value"] input')
         .getValue()
     ).to.eql(testData.kintoblock.validEnvironmentValueWithSpecialChars)
+    KintoBlockManage.submitGlobal()
+    browser.waitUntil(() => {
+      return KintoBlockManage.savebar
+        .getAttribute('class')
+        .includes('e2e-disabled')
+    }, 5000)
   })
 
-  // TODO it('should be able to add multiple custom parameters', () => {
-  //
-  //    KintoBlockList.open()
-  //    KintoBlockList.getCard(0).waitForVisible()
-  //    KintoBlockList.getCard(0).click()
-  //    KintoBlockManage.title.waitForVisible()
-  //    KintoBlockManage.addCustomKey.setValue(testData.kintoblock.validCustomKeyWithSpecialChars)
-  //    KintoBlockManage.addCustomValue.setValue(
-  //      testData.kintoblock.validCustomValueWithSpecialChars
-  //    )
-  //
-  //    KintoBlockManage.customInput.element('.bottom .icon-column button').click()
-  //
-  //    expect(
-  //      KintoBlockManage.getParamsRow(1)
-  //        .element('[data-test="configParameters[1].key"] input')
-  //        .getValue()
-  //    ).to.eql(testData.kintoblock.validCustomKeyWithSpecialChars)
-  //    expect(
-  //      KintoBlockManage.getParamsRow(1)
-  //        .element('[data-test="configParameters[1].value"] input')
-  //        .getValue()
-  //    ).to.eql(testData.kintoblock.validCustomValueWithSpecialChars)
-  //
-  //  })
+  it('it should be able to see three options - Edit Branch, View all branches and tags and  Delete kintoblock options for my KintoBlock', () => {
+    KintoBlockList.open()
+    KintoBlockList.getCard(0).waitForVisible()
+    KintoBlockManage.dropDownMenu.click()
+    KintoBlockManage.dropDownMenuOptions.waitForVisible()
+
+    expect(KintoBlockManage.editBranch.getText()).to.eql('Edit Branch\nmaster')
+    expect(KintoBlockManage.viewBranchesAndTag.getText()).to.eql(
+      'View All Branches & Tags'
+    )
+    expect(KintoBlockManage.delKB.getText()).to.eql('Delete KintoBlock')
+  })
+
+  it('it should be able to click on View all branches and tags and switch between Branches and Tags', () => {
+    KintoBlockManage.viewBranchesAndTag.click()
+    KintoBlockManage.dropDownTabs.waitForVisible()
+
+    expect(KintoBlockManage.getTab('branch').isVisible()).to.eql(true)
+    KintoBlockManage.getTab('tag').click()
+    expect(KintoBlockManage.getTab('tag').isVisible()).to.eql(true)
+  })
+
+  it('should be able to add multiple custom parameters', () => {
+    KintoBlockList.open()
+    KintoBlockList.getCard(0).waitForVisible()
+    KintoBlockList.getCard(0).click()
+    KintoBlockManage.title.waitForVisible()
+    KintoBlockManage.addCustomKey.setValue(
+      testData.kintoblock.validCustomKeyWithSpecialChars
+    )
+    KintoBlockManage.addCustomValue.setValue(
+      testData.kintoblock.validCustomValueWithSpecialChars
+    )
+
+    KintoBlockManage.customInput.element('.bottom .icon-column button').click()
+
+    expect(
+      KintoBlockManage.getParamsRow(1)
+        .element('[data-test="configParameters[1].key"] input')
+        .getValue()
+    ).to.eql(testData.kintoblock.validCustomKeyWithSpecialChars)
+    expect(
+      KintoBlockManage.getParamsRow(1)
+        .element('[data-test="configParameters[1].value"] input')
+        .getValue()
+    ).to.eql(testData.kintoblock.validCustomValueWithSpecialChars)
+    KintoBlockManage.submitGlobal()
+    browser.waitUntil(() => {
+      return KintoBlockManage.savebar
+        .getAttribute('class')
+        .includes('e2e-disabled')
+    }, 5000)
+  })
 })

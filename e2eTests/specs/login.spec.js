@@ -25,7 +25,7 @@ describe('login form', () => {
       'Invalid username or password.'
     )
 
-    //Invalid Username and Valid Password
+    //Invalid Username and Valid Passw ord
     Login.loginUsername.setValue(testData.login.invalidUserName)
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginSubmit()
@@ -52,15 +52,24 @@ describe('login form', () => {
     expect(pwdPlaceholder).to.eq('Enter a password')
   })
 
+  it('should validate the landing page text', () => {
+    expect(Login.loginH3Text.getText()).to.eql(
+      'KintoHub makes it easy to code, combine and deploy microservices. Sign up today to start building and consuming microservice-based applications in minutes'
+    )
+    expect(Login.loginH1Text.getText()).to.eql(
+      'The one-stop shop for microservices'
+    )
+  })
+
   it('should redirect the user to dashboard after he login successfully', () => {
     Login.login()
-    expect(Login.getUrl()).to.eql('/app/dashboard')
+    expect(Login.getUrl()).to.eql('/app/dashboard/1')
   })
 
   it('should redirect the user to dashboard home if he is logged in and is trying to access root', () => {
     browser.url('/')
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard')
+    expect(Login.getUrl()).to.eql('/app/dashboard/1')
   })
 
   it('should reveal the password string when clicked on the eye and hide the password if clicked again', () => {
@@ -81,7 +90,7 @@ describe('login form', () => {
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginSubmit()
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard')
+    expect(Login.getUrl()).to.eql('/app/dashboard/1')
   })
 
   it('should redirect the user to dashboard on using valid email with Upper case letters', () => {
@@ -90,7 +99,7 @@ describe('login form', () => {
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginSubmit()
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard')
+    expect(Login.getUrl()).to.eql('/app/dashboard/1')
   })
 })
 
@@ -289,6 +298,21 @@ describe('signup form', () => {
     Login.signupPasswordError.waitForVisible()
     expect(Login.signupPasswordError.getText()).to.eql(
       'Password must contain a minimum of eight characters, at least one letter and one number'
+    )
+  })
+
+  it('should check that the error message for invalid password is matching to the password rule on the UI', () => {
+    Login.open()
+    Login.signupUsername.setValue(testData.signup.validUserName)
+    Login.signupEmail.setValue(testData.signup.validEmail)
+    Login.signupPassword.setValue(testData.signup.invalidPassword)
+    Login.signupSubmit()
+    Login.signupPasswordError.waitForVisible()
+    expect(Login.signupPasswordError.getText()).to.eql(
+      'Password must contain a minimum of eight characters, at least one letter and one number'
+    )
+    expect(Login.password_rule.getText()).to.eql(
+      'Requires 8 characters, at least 1 letter and 1 number'
     )
   })
 })

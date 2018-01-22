@@ -3,7 +3,7 @@ import { getInput, getDataTest } from '../helpers/elementSelector'
 
 class KintoBlockCreate extends Page {
   open() {
-    super.open('app/dashboard/kintoblocks/create')
+    super.open('app/dashboard/1/kintoblocks/create')
   }
 
   get form() {

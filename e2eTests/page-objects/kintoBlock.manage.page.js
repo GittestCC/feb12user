@@ -3,7 +3,7 @@ import { getDataTest, getInput } from '../helpers/elementSelector'
 
 class KintoBlockManage extends Page {
   open(id, ver) {
-    super.open(`app/dashboard/kintoblocks/${id}/versions/${ver}`)
+    super.open(`app/dashboard/1/kintoblocks/${id}/versions/${ver}`)
   }
 
   get title() {
@@ -87,6 +87,38 @@ class KintoBlockManage extends Page {
 
   getDropdown(index) {
     return $(`[data-test='${index}-list']`)
+  }
+
+  get dropDownfilter() {
+    return getDataTest('dropdown-filter')
+  }
+
+  get dropDownMenu() {
+    return $('#id-0 > button')
+  }
+
+  get dropDownMenuOptions() {
+    return $('.dropdown-scroll-container')
+  }
+
+  get editBranch() {
+    return $('.dropdown-scroll-container > button.double-line')
+  }
+
+  get viewBranchesAndTag() {
+    return $('.dropdown-scroll-container > button:nth-child(2)')
+  }
+
+  get delKB() {
+    return $('.dropdown-scroll-container > button:nth-child(4)')
+  }
+
+  get dropDownTabs() {
+    return $('.dropdown-tabs')
+  }
+
+  get activeTagSection() {
+    return $('.tab.tags.active')
   }
 }
 

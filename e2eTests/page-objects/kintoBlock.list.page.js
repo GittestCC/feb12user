@@ -2,7 +2,7 @@ import Page from './page'
 
 class KintoBlockList extends Page {
   open() {
-    super.open('app/dashboard/kintoblocks/list')
+    super.open('app/dashboard/1/kintoblocks/list')
   }
 
   getCard(index) {
