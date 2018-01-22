@@ -11,7 +11,6 @@ echo "doing the build..."
 echo "REACT_APP_SERVER_URL=http://api.${GIT_BRANCH//\\//-}.kintocloud.com" >> .env
 echo "REACT_APP_SHOW_DEV_UI=true" >> .env
 docker login kintocloud.azurecr.io --username kintocloud --password ${SECRET}
-pipeline {
 docker build -t kintocloud.azurecr.io/frontend:${GIT_BRANCH//\\//-}-${BUILD_NUMBER} .
 GIT_TAG=`git describe --tags ${GIT_COMMIT}`
 if (( ${#GIT_TAG} > 8 ));
