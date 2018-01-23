@@ -1,6 +1,28 @@
-.logs {
-  padding: 40px;
-  background-color: $kinto-white;
+.logs-page {
+  margin-top: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
+  .logs-header {
+    padding: 20px 0;
+    border-bottom: 2px solid $kinto-grayscale-2;
+    border-radius: 12px 12px 0 0;
+    background-color: $kinto-white;
+    h3 {
+      font-weight: bold;
+      font-size: 16px;
+      color: $kinto-grayscale-7;
+      letter-spacing: 0;
+      line-height: 24px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+  .logs-wrapper {
+    background-color: $kinto-white;
+    padding: 0 40px 40px 40px;
+    border-radius: 0 0 12px 12px;
+  }
   .title {
     padding: 10px;
     background-color: rgba(66,118,146,1);
@@ -41,7 +63,7 @@
       &.active {
         background: rgba($kinto-blue-muted,0.3);
         border-left: solid 4px $kinto-blue;
-        padding: 20px 6px;
+        padding: 20px 10px 20px 6px;
       }
       .column {
         margin: 0 10px;

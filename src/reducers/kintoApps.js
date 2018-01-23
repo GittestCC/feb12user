@@ -151,6 +151,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
         byId: {
           ...state.byId,
           [action.id]: {
+            ...state.byId[action.id],
             selectedLog: {
               envId: action.envId,
               releaseVersion: action.releaseVersion,

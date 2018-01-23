@@ -4,12 +4,14 @@ import { getActivePageKey } from '../helpers/pageHelper'
 import {
   FORM_SUBMITTED,
   SELECT_ENVIRONMENT,
+  SELECT_ENVIRONMENT_RELEASE,
   SELECT_KINTOAPP,
   SELECT_BREADCRUMB_WORKSPACE
 } from '../actions/pageOptions'
 import {
   RECEIVE_KINTO_APP,
-  RECIEVE_KINTO_APP_ENVIRONMENTS
+  RECIEVE_KINTO_APP_ENVIRONMENTS,
+  KINTO_APP_ENVIRONMENT_LOG_UPDATE
 } from '../actions/kintoApps'
 import { RECEIVE_KINTO_BLOCK } from '../actions/kintoBlocks'
 import forms from '../constants/forms'
@@ -34,10 +36,22 @@ export default function pageOptions(state = {}, action) {
         ...state,
         selectedEnvironmentId: action.id
       }
+    case SELECT_ENVIRONMENT_RELEASE:
+      return {
+        ...state,
+        selectedReleaseVersion: action.id
+      }
     case SELECT_KINTOAPP:
       return {
         ...state,
         selectedKintoAppId: action.id
+      }
+    case KINTO_APP_ENVIRONMENT_LOG_UPDATE:
+      return {
+        ...state,
+        selectedKintoAppId: action.id,
+        selectedEnvironmentId: action.envId,
+        selectedReleaseVersion: action.releaseVersion
       }
     case SELECT_BREADCRUMB_WORKSPACE:
       return {

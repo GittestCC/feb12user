@@ -79,6 +79,7 @@ a {
 }
 // override browser default color and border
 button.dropdown-button.menu, button.dropdown-button {
+  margin-top: 3px;
   border: none;
   background-color: transparent !important;
 }

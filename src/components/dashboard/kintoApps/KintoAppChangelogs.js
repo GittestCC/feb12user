@@ -7,6 +7,7 @@ class KintoAppChangelogs extends Component {
     newBlocks: PropTypes.array,
     deletedBlocks: PropTypes.array,
     versionList: PropTypes.array.isRequired,
+    kintoApp: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired
   }
 
@@ -18,16 +19,28 @@ class KintoAppChangelogs extends Component {
   componentDidMount() {
     this.props.fetchKintoApps().then(() => {
       const { versionList } = this.props
+      this.props.kintoAppSelect(this.props.id)
       if (!versionList[1]) return
-      this.props.getKintoAppChangelogs(
-        this.props.id,
-        versionList[0],
-        versionList[1]
-      )
-      this.setState({
-        oldVersionSelect: versionList[0],
-        newVersionSelect: versionList[1]
-      })
+      this.getChangelogs(this.props)
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id !== nextProps.id) {
+      this.props.kintoAppSelect(nextProps.id)
+      this.getChangelogs(nextProps)
+    }
+  } // necessary for reload after version selection
+
+  getChangelogs = ({ id, versionList }) => {
+    this.props.getKintoAppChangelogs(
+      this.props.id,
+      versionList[0],
+      versionList[1]
+    )
+    this.setState({
+      oldVersionSelect: versionList[0],
+      newVersionSelect: versionList[1]
     })
   }
 
@@ -58,11 +71,16 @@ class KintoAppChangelogs extends Component {
       formattedBlocks,
       newBlocks,
       deletedBlocks,
-      versionList
+      versionList,
+      kintoApp
     } = this.props
     const numberOfBlocks = formattedBlocks ? formattedBlocks.length : ''
     return (
       <div className="changelogs">
+        <div className="page-title">
+          <h2>{kintoApp.name}</h2>
+        </div>
+
         <div className="changelog-wrapper">
           <div className="changelogs-title">
             <h3>Changelogs</h3>

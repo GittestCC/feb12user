@@ -5,6 +5,11 @@ import {
   getKintoAppEnvironments,
   getEnvironmentLogs
 } from '../../../actions/kintoApps'
+import {
+  kintoAppSelect,
+  environmentSelect,
+  releaseVersionSelect
+} from '../../../actions/pageOptions'
 
 function mapStateToProps(state, { match }) {
   let { id, envId, releaseVersion } = match.params
@@ -26,5 +31,8 @@ function mapStateToProps(state, { match }) {
 export default connect(mapStateToProps, {
   fetchKintoApps,
   getKintoAppEnvironments,
-  getEnvironmentLogs
+  getEnvironmentLogs,
+  kintoAppSelect,
+  environmentSelect,
+  releaseVersionSelect
 })(KintoAppLogs)

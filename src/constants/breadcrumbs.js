@@ -83,6 +83,37 @@ export default {
       url: urls[pages.dashboardKintoAppsEnvironmentEdit]
     }
   ],
+  [pages.dashboardKintoAppsChangelogs]: [
+    KintoAppsText,
+    {
+      component: 'KintoSwitcherContainer',
+      type: KINTOAPP
+    },
+    {
+      component: 'Link',
+      text: 'Changelogs'
+    }
+  ],
+  [pages.dashboardKintoAppsEnvironmentsLogs]: [
+    KintoAppsText,
+    {
+      component: 'KintoSwitcherContainer',
+      type: KINTOAPP
+    },
+    {
+      component: 'Link',
+      text: 'Environments',
+      url: urls[pages.dashboardKintoAppsEnvironments]
+    },
+    {
+      component: 'KintoAppEnvironmentSwitcherContainer',
+      url: urls[pages.dashboardKintoAppsEnvironmentEdit]
+    },
+    {
+      component: 'KintoAppEnvironmentReleaseSwitcherContainer',
+      url: urls[pages.dashboardKintoAppsEnvironmentsLogs]
+    }
+  ],
   [pages.dashboardKintoAppsDependenciesConfig]: [
     KintoAppsText,
     {

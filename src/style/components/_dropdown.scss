@@ -277,6 +277,10 @@
 
   .text-highlight {
     font-size: 12px;
+    &.live {
+      background: $kinto-green;
+      border-radius: 4px;
+    }
   }
 
 
@@ -360,4 +364,8 @@
   text-align: center;
   position: relative;
   top: 120px;
+}
+
+.dropdown-filter-input {
+  @include placeholder($input)
 }

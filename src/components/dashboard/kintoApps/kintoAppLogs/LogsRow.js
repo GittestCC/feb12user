@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { timeDayMonthYearShort } from '../../../../constants/dateFormat'
 
 class LogsRow extends Component {
   state = {
@@ -36,7 +37,7 @@ class LogsRow extends Component {
             <h5>{row.versionInfo}</h5>
           </li>
           <li className="column five">
-            <h5>{moment(row.timestamp).format('h:mmA, DD MMM YYYY')}</h5>
+            <h5>{moment(row.timestamp).format(timeDayMonthYearShort)}</h5>
           </li>
         </ul>
 

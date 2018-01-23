@@ -11,6 +11,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
   const workspaceId = state.workspaces.selectedWorkspace
   const app = state.kintoApps.byId[selectedKintoAppId] || {}
   let environments = app.environments || []
+
   if (isDependencyConfig && app.id) {
     environments = [
       {
@@ -22,18 +23,22 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
   }
   const selectedEnv =
     environments.find(e => e.id === selectedEnvironmentId) || {}
-  const dropdownItems = environments.map(e => ({
-    text: e.name,
-    active: e.id === selectedEnvironmentId,
-    url:
-      workspaceId &&
-      getUrl(url, {
-        id: selectedKintoAppId,
-        envId: e.id,
-        version: getVersionAsText(app.version, true),
-        workspaceId
-      })
-  }))
+
+  const dropdownItems = environments.map(e => {
+    return {
+      text: e.name,
+      active: e.id === selectedEnvironmentId,
+      version: getVersionAsText(e.releases[e.releases.length - 1].version),
+      url:
+        workspaceId &&
+        getUrl(url, {
+          id: selectedKintoAppId,
+          envId: e.id,
+          version: getVersionAsText(app.version),
+          workspaceId
+        })
+    }
+  })
 
   return {
     kintoApp: app,
@@ -47,7 +52,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
       getUrl(url, {
         id: selectedKintoAppId,
         envId: selectedEnvironmentId,
-        version: getVersionAsText(app.version, true),
+        version: getVersionAsText(app.version),
         workspaceId
       })
   }

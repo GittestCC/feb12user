@@ -23,7 +23,8 @@ class DropDown extends Component {
     className: PropTypes.string,
     hideAction: PropTypes.bool,
     hasDraft: PropTypes.bool,
-    draftUrl: PropTypes.string
+    draftUrl: PropTypes.string,
+    placeholderText: PropTypes.string
   }
 
   state = {
@@ -127,7 +128,8 @@ class DropDown extends Component {
       history,
       hideAction,
       hasDraft,
-      draftUrl
+      draftUrl,
+      placeholderText
     } = this.props
     const ItemComponent = this.props.component
     const isFilter = type === 'filter'
@@ -153,6 +155,7 @@ class DropDown extends Component {
           {isFilter && (
             <div className="dropdown-content-filter">
               <input
+                placeholder={placeholderText}
                 className="dropdown-filter-input"
                 onKeyUp={this.onUpdateFilter}
                 ref={input => {

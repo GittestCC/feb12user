@@ -14,7 +14,7 @@ const TagItem = ({
     onClick={() => navigateTo(url)}
   >
     <div className="tag-item-text">{text}</div>
-    <div className={`text-highlight ${className}`}>{tag}</div>
+    <div className={`text-highlight ${className} ${tag} `}>{tag}</div>
     {version && <div className="tag-item-breadcrumb-version">{version}</div>}
   </button>
 )

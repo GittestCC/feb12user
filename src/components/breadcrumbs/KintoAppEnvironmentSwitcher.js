@@ -57,11 +57,12 @@ class KintoAppEnvironmentSwitcher extends Component {
           list={dropdownItems}
           component={TagItem}
           filterField="text"
-          actionText="Create New Environment"
+          actionText="Add New Environment"
           actionHandler={this.onModalOpen}
           dropdownContentClass="short"
           className="margin-right"
           hideAction={hideCreateAction}
+          placeholderText="Search environments..."
         />
 
         <ComplexModal

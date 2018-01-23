@@ -1,16 +1,18 @@
 import { connect } from 'react-redux'
+import moment from 'moment'
 import KintoAppChangelogs from '../../../components/dashboard/kintoApps/KintoAppChangelogs'
 import {
   getKintoAppChangelogs,
   fetchKintoApps
 } from '../../../actions/kintoApps'
-import moment from 'moment'
 import { asTextList } from '../../../helpers/versionHelper'
 import {
   customParams,
   hardwareRequirements,
   version
 } from '../../../constants/changelogs'
+import { timeDayMonthYearShort } from '../../../constants/dateFormat'
+import { kintoAppSelect } from '../../../actions/pageOptions'
 
 function mapStateToProps(state, { match }) {
   let { id } = match.params
@@ -99,14 +101,14 @@ function mapStateToProps(state, { match }) {
                   name: c.oldValue.name,
                   note: c.oldValue.note,
                   tagTime: moment(c.oldValue.lastUpdated).format(
-                    'h:mmA, DD MMM YYYY'
+                    timeDayMonthYearShort
                   )
                 },
                 new: {
                   name: c.newValue.name,
                   note: c.newValue.note,
                   tagTime: moment(c.newValue.lastUpdated).format(
-                    'h:mmA, DD MMM YYYY'
+                    timeDayMonthYearShort
                   )
                 }
               })
@@ -120,7 +122,7 @@ function mapStateToProps(state, { match }) {
                   note: c.oldValue ? c.oldValue.note : '-',
                   tagTime: c.oldValue
                     ? moment(c.oldValue.lastUpdated).format(
-                        'h:mmA, DD MMM YYYY'
+                        timeDayMonthYearShort
                       )
                     : '-'
                 },
@@ -129,7 +131,7 @@ function mapStateToProps(state, { match }) {
                   note: c.newValue ? c.newValue.note : '-',
                   tagTime: c.newValue
                     ? moment(c.newValue.lastUpdated).format(
-                        'h:mmA, DD MMM YYYY'
+                        timeDayMonthYearShort
                       )
                     : '-'
                 }
@@ -153,11 +155,13 @@ function mapStateToProps(state, { match }) {
     formattedBlocks,
     newBlocks,
     deletedBlocks,
+    kintoApp,
     versionList: asTextList(versionList)
   }
 }
 
 export default connect(mapStateToProps, {
   getKintoAppChangelogs,
-  fetchKintoApps
+  fetchKintoApps,
+  kintoAppSelect
 })(KintoAppChangelogs)
