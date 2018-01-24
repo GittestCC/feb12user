@@ -33,7 +33,7 @@ class TagAndDeployForm extends Component {
     } = this.props
     return (
       <div>
-        <div className="kh-modal-title">{title}</div>
+        <div className="kh-modal-title">Tag & Deploy - {title}</div>
         <div className="kh-modal-body">
           <form onSubmit={handleSubmit}>
             <div className="full-width-field">
@@ -70,6 +70,7 @@ class TagAndDeployForm extends Component {
                 label="notes"
                 component={FieldValidation}
                 type="textarea"
+                placeholder="Enter notes here to decribe this deployment"
               />
             </div>
 

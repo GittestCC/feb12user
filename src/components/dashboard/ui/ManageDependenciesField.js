@@ -9,7 +9,8 @@ const ManageDependenciesField = ({
   dependenciesInfo,
   searchKintoBlocks,
   fetchKintoBlockDependenciesData,
-  disabled
+  disabled,
+  isKintoBlock
 }) => (
   <FieldArray
     appVersion={appVersion}
@@ -19,6 +20,7 @@ const ManageDependenciesField = ({
     onSearchKintoBlocks={searchKintoBlocks}
     fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
     disabled={disabled}
+    isKintoBlock={isKintoBlock}
   />
 )
 

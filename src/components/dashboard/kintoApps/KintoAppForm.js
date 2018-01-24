@@ -31,7 +31,7 @@ const KintoAppForm = ({
       <h3>Basic Info</h3>
       <h5>
         Choose the name for this application and give a a short description. If
-        you make the application public, they will help other people discover
+        you make the application public, this will help other people discover
         your application.
       </h5>
       <div className="form-body full-row">

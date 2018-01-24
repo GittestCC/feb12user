@@ -15,7 +15,7 @@ class KintoAppEnvironmentReleaseSwitcher extends Component {
     const { dropdownItems, selectedReleaseVersion, hideAction } = this.props
     return (
       <div className="list-container">
-        <div className="disabled text-disabled">{selectedReleaseVersion}</div>
+        <div className="text-disabled">{selectedReleaseVersion}</div>
 
         <DropDown
           type="filter"

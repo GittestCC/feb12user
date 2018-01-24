@@ -44,7 +44,8 @@ class App extends Component {
   onUnload = e => {
     if (this.props.blockNavigate) {
       // make sure future version will show the same message
-      const text = 'Changes you made may not be saved'
+      const text =
+        'There are unsaved changes on this page. What would you like to do?'
       e.returnValue = text
       return text
     }
@@ -57,7 +58,9 @@ class App extends Component {
       <div className="app">
         <Prompt
           when={this.props.blockNavigate}
-          message={() => 'Changes you made may not be saved'}
+          message={() =>
+            'There are unsaved changes on this page. What would you like to do?'
+          }
         />
 
         <NavBarContainer

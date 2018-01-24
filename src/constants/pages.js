@@ -16,7 +16,6 @@ export const pages = {
   dashboardHome: 'DASHBOARD_HOME',
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
   dashboardSalesdata: 'DASHBOARD_SALESDATA',
-  dashboardServices: 'DASHBOARD_SERVICES',
   dashboardSettings: 'DASHBOARD_SETTINGS',
   dashboardHosting: 'DASHBOARD_HOSTING',
   dashboardBilling: 'DASHBOARD_BILLING',
@@ -50,7 +49,6 @@ export const urls = {
   [pages.dashboardHome]: '/app/dashboard/:workspaceId',
   [pages.dashboardAnalytics]: '/app/dashboard/:workspaceId/analytics',
   [pages.dashboardSalesdata]: '/app/dashboard/:workspaceId/salesdata',
-  [pages.dashboardServices]: '/app/dashboard/:workspaceId/services',
   [pages.dashboardSettings]: '/app/dashboard/:workspaceId/settings',
   [pages.dashboardHosting]: '/app/dashboard/:workspaceId/hosting',
   [pages.dashboardBilling]: '/app/dashboard/:workspaceId/billing',
@@ -136,13 +134,6 @@ export const dashboardSidebar = [
     title: 'Sales Data',
     className: 'sales-data',
     url: urls[pages.dashboardSalesdata],
-    group: 1
-  },
-  {
-    key: pages.dashboardServices,
-    title: 'Services',
-    className: 'services',
-    url: urls[pages.dashboardServices],
     group: 1
   },
   {

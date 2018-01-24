@@ -55,8 +55,10 @@ class KintoBlockCreateForm extends Component {
         <div className="form-wrapper basic-info">
           <h3>Basic Info</h3>
           <h5>
-            Give your baby a name, choose which language they will speak, and
-            where they will live.
+            Choose the name for this KintoBlock and give a a short description.
+            If you make the KintoBlock public, they will help other people
+            discover your application. Let us know your preferred coding flavor
+            and connect your repo.
           </h5>
 
           <div className="form-body">
@@ -67,7 +69,6 @@ class KintoBlockCreateForm extends Component {
               component={FieldValidation}
               validate={required}
               type="text"
-              help="Choose a name for your KintoBlock"
             />
             <Field
               characterCount="200"
@@ -87,7 +88,7 @@ class KintoBlockCreateForm extends Component {
                 validate={required}
                 type="select"
                 className="bold"
-                help="Choose the programming language you would like to use for this project"
+                help="The programming language you would like to use for this project."
               >
                 <option>Choose the language</option>
                 <option value="CSHARP">C#.net</option>
@@ -103,7 +104,7 @@ class KintoBlockCreateForm extends Component {
                 validate={required}
                 type="select"
                 className="bold"
-                help="Choose the protocol you would like to communicate with"
+                help="The protocol you would like to communicate with"
               >
                 <option>Choose the protocol</option>
                 <option value="HTTP">HTTP</option>

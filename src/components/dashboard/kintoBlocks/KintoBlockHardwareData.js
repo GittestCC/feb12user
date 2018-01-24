@@ -24,8 +24,8 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
     <div className="form-wrapper hardware-requirements">
       <h3>Hardware Requirements</h3>
       <h5>
-        What does this baby need to stay healthy and kicking? You can still
-        modify these settings later.
+        What resources do your KintoBlock need? You can still modify these
+        settings later, alongside the advanced scaling options.
       </h5>
 
       <div className="form-body">
@@ -40,7 +40,7 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
               validate={[required, isBetween64]}
               normalize={lessThanFormat(262144)}
               type="number"
-              help="Starter pack is the programming language you would like to use for this project"
+              help="Minimum amount of RAM your KintoBlock will run on once deployed."
             />
           </div>
           <div className="input-container">
@@ -53,7 +53,7 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
               validate={[required, isBetween64]}
               normalize={lessThanFormat(262144)}
               type="number"
-              help="Starter pack is the programming language you would like to use for this project"
+              help="Maximum amount of memory requests your KintoBlock will perform once deployed."
             />
           </div>
         </div>
@@ -66,24 +66,24 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
               label="Dedicated CPUs"
               component={Toggle}
               normalize={allowFalse}
-              help="Starter pack is the programming language you would like to use for this project"
+              help="By default, we will allocate the chosen amount of processing power out of our shared pool so your costs stay low. But you can also decide whether your KintoBlock needs dedicated hardware."
             />
           </div>
 
           <div
-            className={`limits-requests ${isDedicatedCPU
-              ? ''
-              : 'hide-important'}`}
+            className={`limits-requests ${
+              isDedicatedCPU ? '' : 'hide-important'
+            }`}
           >
             <div className="input-container">
               <Field
                 name="maxCpu"
-                label="CPU Limits"
+                label="max # of CPU cores"
                 parse={number}
                 component={FieldValidation}
                 validate={required}
                 type="select"
-                help="Starter pack is the programming language you would like to use for this project"
+                help="Maximum processing power / dedicated cores your Kintoblock will use once deployed."
               >
                 <option>Number of cores</option>
                 {selectNumberOfCores.map((c, i) => (
@@ -96,13 +96,13 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
             <div className="input-container">
               <Field
                 name="minCpu"
-                label="CPU Requests"
+                label="min # of CPU cores"
                 parse={number}
                 placeholder="1 - 1000 m"
                 component={FieldValidation}
                 validate={required}
                 type="select"
-                help="Starter pack is the programming language you would like to use for this project"
+                help="Minimum processing power / dedicated cores your Kintoblock will use once deployed."
               >
                 <option>Number of cores</option>
                 {selectNumberOfCores.map((c, i) => (
@@ -114,9 +114,9 @@ const KintoBlockHardwareData = ({ isDedicatedCPU, resetCPUHandler }) => {
             </div>
           </div>
           <div
-            className={`limits-requests ${isDedicatedCPU
-              ? 'hide-important'
-              : ''}`}
+            className={`limits-requests ${
+              isDedicatedCPU ? 'hide-important' : ''
+            }`}
           >
             <div className="input-container">
               <Field

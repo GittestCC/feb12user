@@ -90,7 +90,9 @@ class KintoAppChangelogs extends Component {
             <div className="changelogs-body">
               <div className="selectors">
                 <div className="old-version">
-                  <label htmlFor="oldVersion">old application version</label>
+                  <label htmlFor="oldVersion">
+                    original application version
+                  </label>
                   <select
                     name="oldVersion"
                     id="oldVersion"
@@ -124,7 +126,7 @@ class KintoAppChangelogs extends Component {
               {formattedBlocks && (
                 <div>
                   <div className="modified-blocks">
-                    <h3>Modified Blocks ({numberOfBlocks})</h3>
+                    <h3>Modified KintoBlocks ({numberOfBlocks})</h3>
                     <div className="key">
                       <h6 className="removed">
                         removed <span className="key-icon removed" />
@@ -222,7 +224,7 @@ class KintoAppChangelogs extends Component {
 
               {newBlocks && (
                 <div>
-                  <h3>New Kintoblocks ({newBlocks.length})</h3>
+                  <h3>New KintoBlocks ({newBlocks.length})</h3>
 
                   {newBlocks.map((block, index) => (
                     <div key={index} className="section new-block">
@@ -239,7 +241,7 @@ class KintoAppChangelogs extends Component {
               )}
               {deletedBlocks && (
                 <div className="section removed">
-                  <h3>Removed Kintoblocks ({deletedBlocks.length})</h3>
+                  <h3>Removed KintoBlocks ({deletedBlocks.length})</h3>
 
                   {deletedBlocks.map((block, index) => (
                     <div key={index} className="section deleted-block">

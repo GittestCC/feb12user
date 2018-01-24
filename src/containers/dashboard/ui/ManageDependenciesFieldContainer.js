@@ -6,14 +6,18 @@ import {
   fetchKintoBlockDependenciesData
 } from '../../../actions/kintoBlocks'
 
-function mapStateToProps(state, { appVersion, dependencies, name, disabled }) {
+function mapStateToProps(
+  state,
+  { appVersion, dependencies, name, disabled, isKintoBlock }
+) {
   const getDependencies = getDependenciesFactory()
   const dependenciesInfo = getDependencies(state, dependencies)
   return {
     appVersion,
     name,
     dependenciesInfo,
-    disabled
+    disabled,
+    isKintoBlock
   }
 }
 

@@ -112,6 +112,10 @@ export default {
     {
       component: 'KintoAppEnvironmentReleaseSwitcherContainer',
       url: urls[pages.dashboardKintoAppsEnvironmentsLogs]
+    },
+    {
+      component: 'Link',
+      text: 'View Logs'
     }
   ],
   [pages.dashboardKintoAppsDependenciesConfig]: [

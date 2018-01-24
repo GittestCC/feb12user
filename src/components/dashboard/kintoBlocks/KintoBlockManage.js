@@ -74,7 +74,9 @@ class KintoBlockManage extends Component {
       <div className="kintoblock-manage">
         <div className="page-title">
           <h2>
-            <span data-test="title">{kintoBlock.name}</span>
+            <span data-test="title">
+              {kintoBlock.name} - {kintoBlock.version.name}
+            </span>
           </h2>
         </div>
 

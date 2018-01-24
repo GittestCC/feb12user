@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
 
 const KintoAppCreate = () => (
@@ -9,13 +8,19 @@ const KintoAppCreate = () => (
       <div className="text">
         <h5>What is an Application?</h5>
         <h5 className="body-copy">
-          KintoApp is our proprietary format of microservice. They allow you to
-          build a website and offer online services with ease and speed. Anyone
-          can use and sell their KintoApps on our website. You can{' '}
-          <Link to="/about-us">learn more here.</Link>
+          Applications are tailored back-end features packages, ready to be
+          consumed by your clients and whose feature can scale independently to
+          fit your needs. They are composed of KintoBlocks and services with
+          unique configuration parameters, and either a client or a protocol to
+          allow your clients to talk to the application. Start building an
+          application below or <a href="">learn more here</a>.
         </h5>
       </div>
-      <div className="icon" />
+      <a href="">
+        <div className="icon" />
+      </a>
+
+      {/* TODO: add links for help center here when they are available */}
     </div>
 
     <KintoAppFormContainer isCreate={true} />

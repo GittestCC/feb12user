@@ -16,7 +16,9 @@ class KintoAppManage extends Component {
     fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
     isDraft: PropTypes.bool.isRequired,
-    resetForm: PropTypes.func.isRequired
+    resetForm: PropTypes.func.isRequired,
+    goToChangelog: PropTypes.func.isRequired,
+    goToEnvironment: PropTypes.func.isRequired
   }
 
   state = {
@@ -45,7 +47,15 @@ class KintoAppManage extends Component {
   }
 
   render() {
-    const { kintoApp, canSave, version, isDraft, isVersionMatch } = this.props
+    const {
+      kintoApp,
+      canSave,
+      version,
+      isDraft,
+      isVersionMatch,
+      goToChangelog,
+      goToEnvironment
+    } = this.props
     if (!isVersionMatch) {
       return null
     }
@@ -62,6 +72,14 @@ class KintoAppManage extends Component {
               {version && version.state}
             </div>
           </h2>
+          <div className="buttons">
+            <button className="button secondary" onClick={goToChangelog}>
+              Compare Versions
+            </button>
+            <button className="button dark" onClick={goToEnvironment}>
+              View Environments
+            </button>
+          </div>
         </div>
 
         <KintoAppFormContainer

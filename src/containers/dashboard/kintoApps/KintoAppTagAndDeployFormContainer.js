@@ -20,7 +20,8 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
     workspaceId: selectedWorkspace
   })
 
-  let submitLabel = isDraft ? 'Create' : 'Redeploy'
+  let submitLabel = isDraft ? 'Create' : 'Tag and Deploy'
+
   if (versionText) {
     submitLabel += ` ${versionText}`
   }

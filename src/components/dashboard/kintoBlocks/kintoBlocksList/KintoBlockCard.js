@@ -47,8 +47,9 @@ class KintoBlockCard extends Component {
           <div className="text">
             <div className="left">
               <img
-                src={`/images/app-icon-${Math.floor(Math.random() * 6) +
-                  1}.png`}
+                src={`/images/icon-generic-kintoblock-${Math.floor(
+                  Math.random() * 6
+                ) + 1}.svg`}
                 alt=""
               />
             </div>

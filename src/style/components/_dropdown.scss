@@ -149,7 +149,7 @@
     height: 1px;
     &.dropdown {
       margin: 15px 30px;
-      width: 140px;
+      width: 180px;
     }
     &.with-padding {
       margin: 10px 30px;
@@ -164,7 +164,7 @@
     border: 0;
     background: $kinto-tinted-grayscale-8;
     color: $kinto-white;
-    padding: 10px 20px;
+    padding: 10px 30px;
     text-decoration: none;
     text-align: left;
     display: flex;
@@ -363,9 +363,24 @@
   font-weight: normal;
   text-align: center;
   position: relative;
-  top: 120px;
+  top: 90px;
 }
 
 .dropdown-filter-input {
   @include placeholder($input)
+}
+
+.kintoapp {
+  .bottom {
+    .dropdown-content {
+      left: 0%;
+      .line {
+        margin: 9px 30px;
+      }
+    }
+  }
+}
+
+.dependency-dropdown {
+
 }

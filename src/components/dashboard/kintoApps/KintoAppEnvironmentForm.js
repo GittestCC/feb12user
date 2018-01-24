@@ -9,7 +9,7 @@ const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
     <form className="kintoapp-environment-form form-container">
       <div className="form-wrapper">
         <h3>Basic Info</h3>
-        <h5>Give your baby a name, and a version number.</h5>
+        <h5>Set up the name and auto-deployment for this environment.</h5>
 
         <div className="form-body">
           <div className="field-wrapper">
@@ -28,6 +28,7 @@ const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
               name="autoDeploy"
               label="Automatically deploy application when new Kintoblock builds are available"
               component={Toggle}
+              help="To enable automated deployment of your application, activate this toggle and select a branch for any KintoBlock components inside the application."
             />
           </div>
         </div>

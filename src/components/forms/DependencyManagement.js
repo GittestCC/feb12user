@@ -11,7 +11,8 @@ class DependencyManagement extends Component {
     appDependenciesInfo: PropTypes.object.isRequired,
     onSearchKintoBlocks: PropTypes.func.isRequired,
     fetchKintoBlockDependenciesData: PropTypes.func.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    isKintoBlock: PropTypes.bool
   }
 
   onSelectKintoBlock = selectedItem => {
@@ -32,74 +33,76 @@ class DependencyManagement extends Component {
       fields,
       appDependenciesInfo,
       onSearchKintoBlocks,
-      disabled
+      disabled,
+      isKintoBlock
     } = this.props
 
     const configUrl =
       appVersion && fields.length ? `${appVersion}/config/0` : null
     return (
       <div>
-        <h3>KintoBlocks & Services</h3>
+        <h3>KintoBlocks</h3>
         <h5>
-          This is where the magic happens: add KintoBlocks and services to
-          deliver the features you need in your client - we make them all work
-          together. Because we know your application is special, you can specify
-          unique configuration parameters for each of the features you are
-          adding. You can also decide to combine or split instances of the same
-          KintoBlock or service to save on costs.
+          If your KintoBlock needs other KintoBlocks to work (like an auth
+          KintoBlock or a database service), pick and chose them here. You can
+          then configure them so they fit perfectly your use case. You can
+          specify unique configuration parameters for each of the features you
+          are adding. You can also decide to combine or split instances of the
+          same KintoBlock to save on costs.
         </h5>
         <div className="form-body simple dependency-management">
           {!disabled ? (
             <div>
               <Select.Async
-                placeholder="Search KintoBlocks or services"
+                placeholder="Search KintoBlocks"
                 loadOptions={onSearchKintoBlocks}
                 onChange={this.onSelectKintoBlock}
               />
-
-              <div className="dependency-management-buttons">
-                <div className="button-group">
-                  <a to="" className="button secondary disabled">
-                    Split All Duplicate Instances
-                  </a>
-                  <a className="icon split-instances hide-text disabled">
-                    split
-                  </a>
-                </div>
-                <div className="button-group">
-                  <a className="button secondary disabled">
-                    Combine All Duplicate Instances
-                  </a>
-                  <a className="icon combine-instances hide-text disabled">
-                    combine
-                  </a>
-                </div>
-                {configUrl ? (
+              {!isKintoBlock && (
+                <div className="dependency-management-buttons">
                   <div className="button-group">
-                    <Link to={configUrl} className="button secondary">
-                      Edit KintoBlocks & Services
-                    </Link>
-                    <Link
-                      to={configUrl}
-                      className="icon edit-blocks-and-services hide-text"
-                    >
-                      edit blocks
-                    </Link>
+                    <a to="" className="button secondary disabled">
+                      Split All Duplicate Instances
+                    </a>
+                    <a className="icon split-instances hide-text disabled">
+                      split
+                    </a>
                   </div>
-                ) : (
                   <div className="button-group">
                     <a className="button secondary disabled">
-                      Edit KintoBlocks & Services
+                      Merge All Duplicate Instances
                     </a>
-                    <a
-                      className="icon edit-blocks-and-services hide-text"
-                      disabled
-                    >
-                      edit blocks
+                    <a className="icon combine-instances hide-text disabled">
+                      combine
                     </a>
                   </div>
-                )}
-              </div>
+                  {configUrl ? (
+                    <div className="button-group">
+                      <Link to={configUrl} className="button secondary">
+                        Edit KintoBlocks & Services
+                      </Link>
+                      <Link
+                        to={configUrl}
+                        className="icon edit-blocks-and-services hide-text"
+                      >
+                        edit blocks
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="button-group">
+                      <a className="button secondary disabled">
+                        Edit KintoBlocks & Services
+                      </a>
+                      <a
+                        className="icon edit-blocks-and-services hide-text"
+                        disabled
+                      >
+                        edit blocks
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           ) : null}
 
@@ -125,7 +128,7 @@ class DependencyManagement extends Component {
                   <div className="kinto-block" />
                   <div className="service" />
                 </div>
-                <div className="text">No KintoBlocks or services added</div>
+                <div className="text">No KintoBlocks added</div>
               </div>
             )}
           </div>

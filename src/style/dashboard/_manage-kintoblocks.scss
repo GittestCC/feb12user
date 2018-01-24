@@ -229,6 +229,7 @@
       background-color: $kinto-tinted-grayscale-1;
       padding: 8px 16px;
       &.no-commit, .no-commit {
+        margin-left: -20px;
         color: $kinto-tinted-grayscale-6;
         font-size: 14px;
         text-align: center;

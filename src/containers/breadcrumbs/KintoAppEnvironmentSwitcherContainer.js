@@ -28,7 +28,9 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     return {
       text: e.name,
       active: e.id === selectedEnvironmentId,
-      version: getVersionAsText(e.releases[e.releases.length - 1].version),
+      version: e.releases
+        ? getVersionAsText(e.releases[e.releases.length - 1].version)
+        : '',
       url:
         workspaceId &&
         getUrl(url, {

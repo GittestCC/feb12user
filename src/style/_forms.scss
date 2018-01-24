@@ -302,7 +302,7 @@ form {
   text-align: right;
   width: 100%;
   transition: height 0.1s linear;
-  z-index: 3;
+  z-index: 10;
 
   &.show {
     height: 60px;

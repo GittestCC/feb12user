@@ -54,8 +54,10 @@ class KintoBlockManageForm extends Component {
 
           <h3>Basic Info</h3>
           <h5>
-            Choose the build and give your baby a number so they don’t get mixed
-            up in a sea of babies.
+            Choose the name for this KintoBlock and give a a short description.
+            If you make the KintoBlock public, they will help other people
+            discover your application. Let us know your preferred coding flavor
+            and connect your repo.
           </h5>
           <div className="form-body">
             <div className="section">
@@ -142,7 +144,7 @@ class KintoBlockManageForm extends Component {
                         </div>
                       ) : (
                         <div className="commit-details no-commit">
-                          No successful commit has been made on GitHub
+                          No commit has been made on GitHub
                         </div>
                       )}
                     </div>
@@ -200,6 +202,7 @@ class KintoBlockManageForm extends Component {
             name="dependencies"
             dependencies={dependencies}
             disabled={isVersionTag}
+            isKintoBlock={true}
           />
         </div>
 
