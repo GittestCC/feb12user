@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Button, Password, FormError } from '../forms'
-import { required, email, password } from '../../helpers/forms/validators'
+import { signup, email } from '../../helpers/forms/validationFields'
 
 const SignUpForm = ({
   handleSubmit,
@@ -22,7 +22,7 @@ const SignUpForm = ({
         label="Username"
         placeholder="Enter username"
         component={FieldValidation}
-        validate={required}
+        validate={signup.username}
         className="input-lg"
         focusHere={focusHere}
       />
@@ -33,7 +33,7 @@ const SignUpForm = ({
         label="email"
         placeholder="Enter your email address"
         component={FieldValidation}
-        validate={[required, email]}
+        validate={email}
         className="input-lg"
       />
       <Field
@@ -41,7 +41,7 @@ const SignUpForm = ({
         name="password"
         placeholder="Create a password"
         component={Password}
-        validate={[required, password]}
+        validate={signup.password}
         className="input-lg"
       />
       <div className="byline">

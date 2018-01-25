@@ -4,6 +4,7 @@ import { Field, reduxForm, FieldArray } from 'redux-form'
 import Tooltip from 'rc-tooltip'
 import { FieldValidation, FormError } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
+import { kintoName } from '../../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
 import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
@@ -66,7 +67,7 @@ class KintoBlockManageForm extends Component {
                 label="Kintoblock Name"
                 component={FieldValidation}
                 type="input"
-                validate={required}
+                validate={kintoName}
               />
               <Field
                 characterCount="200"

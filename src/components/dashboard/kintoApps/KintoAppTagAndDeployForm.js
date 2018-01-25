@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field, Fields, reduxForm, FormSection } from 'redux-form'
-import { required } from '../../../helpers/forms/validators'
+import {
+  validateRules,
+  required,
+  minValue0,
+  maxValue999
+} from '../../../helpers/forms/validators'
 import { number } from '../../../helpers/forms/parsers'
+import { isVersionEqual } from '../../../helpers/versionHelper'
+import { hasValues } from '../../../helpers/objectHelper'
+
 import { Button, VersionInputs, FormError, FieldValidation } from '../../forms'
 
 class TagAndDeployForm extends Component {
@@ -15,7 +23,8 @@ class TagAndDeployForm extends Component {
     onClose: PropTypes.func.isRequired,
     initialize: PropTypes.func.isRequired,
     listEnvironmentsUrl: PropTypes.string.isRequired,
-    environments: PropTypes.array.isRequired
+    environments: PropTypes.array.isRequired,
+    submitFailed: PropTypes.bool.isRequired
   }
 
   render() {
@@ -29,7 +38,8 @@ class TagAndDeployForm extends Component {
       environments,
       title,
       isTagged,
-      listEnvironmentsUrl
+      listEnvironmentsUrl,
+      submitFailed
     } = this.props
     return (
       <div>
@@ -74,7 +84,7 @@ class TagAndDeployForm extends Component {
               />
             </div>
 
-            <FormError error={error} />
+            <FormError error={error} submitFailed={submitFailed} />
 
             <div className="kh-modal-actions">
               <Button onClick={onClose} type="button" buttonType="secondary">
@@ -95,18 +105,37 @@ class TagAndDeployForm extends Component {
   }
 }
 
-const validate = values => {
+const validate = (values, props) => {
   let version = values.version || {}
-  let errors = {}
-  errors.major = required(version.major)
-  errors.minor = required(version.minor)
-  errors.revision = required(version.revision)
+  let versionErrors = {}
+  let errors = { version: versionErrors }
+  versionErrors.major = validateRules(version.major, [
+    required,
+    maxValue999,
+    minValue0
+  ])
+  versionErrors.minor = validateRules(version.minor, [
+    required,
+    maxValue999,
+    minValue0
+  ])
+  versionErrors.revision = validateRules(version.revision, [
+    required,
+    maxValue999,
+    minValue0
+  ])
   if (version.major === 0 && version.minor === 0 && version.revision === 0) {
-    errors.major = 'Invalid Version'
-    errors.minor = 'Invalid Version'
-    errors.revision = 'Invalid Version'
+    versionErrors.major = 'Invalid Version'
+    versionErrors.minor = 'Invalid Version'
+    versionErrors.revision = 'Invalid Version'
   }
-  return { version: errors }
+  if (
+    !hasValues(versionErrors) &&
+    props.kintoApp.versions.some(v => isVersionEqual(v, version))
+  ) {
+    errors._error = 'Tag with the same version is already created'
+  }
+  return errors
 }
 
 export default reduxForm({ form: 'versionCreate', validate })(TagAndDeployForm)

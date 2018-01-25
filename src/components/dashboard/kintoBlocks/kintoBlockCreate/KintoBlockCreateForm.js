@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty'
 import Select from 'react-select'
 import { FieldValidation, FormError, ErrorOnly } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
+import { kintoName } from '../../../../helpers/forms/validationFields'
 import { boolean } from '../../../../helpers/forms/parsers'
 import { githubConnectUrl } from '../../../../helpers/urlHelper'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
@@ -67,7 +68,7 @@ class KintoBlockCreateForm extends Component {
               label="KintoBlock Name"
               placeholder="Enter a name for your KintoBlock"
               component={FieldValidation}
-              validate={required}
+              validate={kintoName}
               type="text"
             />
             <Field

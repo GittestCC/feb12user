@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, Fields, reduxForm, FormSection } from 'redux-form'
-import { required } from '../../../../helpers/forms/validators'
+import {
+  validateRules,
+  required,
+  minValue0,
+  maxValue999
+} from '../../../../helpers/forms/validators'
 import { number } from '../../../../helpers/forms/parsers'
 import {
   Button,
@@ -75,9 +80,21 @@ class KintoBlockCreateTagModal extends Component {
 const validate = values => {
   let version = values.version || {}
   let errors = {}
-  errors.major = required(version.major)
-  errors.minor = required(version.minor)
-  errors.revision = required(version.revision)
+  errors.major = validateRules(version.major, [
+    required,
+    maxValue999,
+    minValue0
+  ])
+  errors.minor = validateRules(version.minor, [
+    required,
+    maxValue999,
+    minValue0
+  ])
+  errors.revision = validateRules(version.revision, [
+    required,
+    maxValue999,
+    minValue0
+  ])
   if (version.major === 0 && version.minor === 0 && version.revision === 0) {
     errors.major = 'Invalid Version'
     errors.minor = 'Invalid Version'

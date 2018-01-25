@@ -2,6 +2,7 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import { FieldValidation } from '../../../../forms'
+import { environments } from '../../../../../helpers/forms/validationFields'
 
 const AddNewEnvironmentModalForm = ({
   onClose,
@@ -26,6 +27,7 @@ const AddNewEnvironmentModalForm = ({
               label="Environment Name"
               placeholder="Enter a name for your environment"
               component={FieldValidation}
+              validate={environments.envName}
               type="text"
             />
           </div>

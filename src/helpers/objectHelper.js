@@ -36,6 +36,7 @@ function mergeStrategyEnchanced(options = {}) {
   }
 }
 
+export const hasValues = obj => Object.keys(obj).some(k => obj[k])
 export const merge = (orig, data, options) => {
   return mergeWith({}, orig, data, mergeStrategyEnchanced(options))
 }

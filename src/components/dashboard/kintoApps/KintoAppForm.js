@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation } from '../../forms'
 import { required, isLessThan200 } from '../../../helpers/forms/validators'
+import { kintoName } from '../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
@@ -40,7 +41,7 @@ const KintoAppForm = ({
           label="application name"
           placeholder="Enter a name for your application"
           component={FieldValidation}
-          validate={required}
+          validate={kintoName}
           type="text"
         />
         <Field

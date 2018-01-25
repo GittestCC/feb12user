@@ -1,11 +1,8 @@
 import { connect } from 'react-redux'
-import { formValueSelector, SubmissionError } from 'redux-form'
+import { formValueSelector } from 'redux-form'
 import { pages } from '../../../constants/pages'
 import { getPageUrl } from '../../../helpers/urlHelper'
-import {
-  getVersionAsText,
-  isVersionEqual
-} from '../../../helpers/versionHelper'
+import { getVersionAsText } from '../../../helpers/versionHelper'
 import KintoAppTagAndDeployForm from '../../../components/dashboard/kintoApps/KintoAppTagAndDeployForm'
 import { deployEnvironment } from '../../../actions/kintoApps'
 
@@ -40,11 +37,6 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
 function mapDispatchToProps(dispatch, { kintoApp, onClose, id }) {
   return {
     onSubmit: formValues => {
-      if (kintoApp.versions.some(v => isVersionEqual(v, formValues.version))) {
-        throw new SubmissionError({
-          _error: 'Tag with the same version is already created'
-        })
-      }
       const envName = formValues.environment
       const data = {
         notes: formValues.notes,

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import { FieldValidation, Toggle } from '../forms'
-import { required } from '../../helpers/forms/validators'
+import { required, maxLength256 } from '../../helpers/forms/validators'
+import { basicInput } from '../../helpers/forms/validationFields'
 import WorkspaceMembers from './workspaceForm/WorkspaceMembers'
 
 const WorkspaceForm = ({
@@ -21,10 +22,10 @@ const WorkspaceForm = ({
         <div className="form-body">
           <Field
             name="name"
-            label="workspace name"
+            label="Workspace name"
             placeholder="Enter an name for your workspace"
             component={FieldValidation}
-            validate={required}
+            validate={[...basicInput, required, maxLength256]}
             type="text"
           />
           <div className="auto-share-switch">

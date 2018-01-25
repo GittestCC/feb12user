@@ -1,14 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const FormError = ({ error }) =>
-  error ? (
+const FormError = ({ error, submitFailed }) =>
+  !error || (error && submitFailed === false) ? null : (
     <div data-test="form-error" className="error-message-form error-message">
       {error}
     </div>
-  ) : null
+  )
+
 FormError.propTypes = {
-  error: PropTypes.string
+  error: PropTypes.string,
+  submitFailed: PropTypes.bool
 }
 
 export default FormError

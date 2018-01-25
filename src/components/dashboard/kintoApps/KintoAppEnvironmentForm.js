@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Toggle } from '../../forms'
-import { required } from '../../../helpers/forms/validators'
+import { environments } from '../../../helpers/forms/validationFields'
 
 const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
   return (
@@ -18,7 +18,7 @@ const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
               label="environment name"
               placeholder="Please enter a name for your environment"
               component={FieldValidation}
-              validate={required}
+              validate={environments.envName}
               type="text"
             />
           </div>

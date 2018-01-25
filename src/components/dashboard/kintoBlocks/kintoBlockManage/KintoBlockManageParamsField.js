@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { FieldValidation, Toggle } from '../../../forms'
-import { required } from '../../../../helpers/forms/validators'
+import { unique } from '../../../../helpers/forms/validators'
+import { environments } from '../../../../helpers/forms/validationFields'
 import Icon from '../../../ui/Icon'
 
+const uniqueValidation = unique('configParameters', 'key')
 class KintoBlockManageParamsField extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
@@ -69,7 +71,10 @@ class KintoBlockManageParamsField extends Component {
                     name={`${field}.key`}
                     placeholder="Variable Name"
                     component={FieldValidation}
-                    validate={required}
+                    validate={[
+                      ...environments.envVariableName,
+                      uniqueValidation
+                    ]}
                     disabled={disabled}
                   />
                   <Field
