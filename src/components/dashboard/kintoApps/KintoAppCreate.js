@@ -13,10 +13,21 @@ const KintoAppCreate = () => (
           fit your needs. They are composed of KintoBlocks and services with
           unique configuration parameters, and either a client or a protocol to
           allow your clients to talk to the application. Start building an
-          application below or <a href="">learn more here</a>.
+          application below or{' '}
+          <a
+            href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-an-application"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            learn more here
+          </a>.
         </h5>
       </div>
-      <a href="">
+      <a
+        href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-an-application"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div className="icon" />
       </a>
 

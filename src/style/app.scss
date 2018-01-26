@@ -16,6 +16,8 @@
 @import 'components/breadcrumbs';
 @import 'components/member-list-circles';
 @import 'components/icons';
+@import 'components/notificatons';
+@import 'components/loading-spinner';
 @import 'title-with-lines';
 @import 'log-in-page';
 @import 'forgot-password-page';
@@ -33,6 +35,7 @@
 @import 'text-highlight';
 @import '_error';
 @import './dashboard/sidebar';
+@import './dashboard/home';
 @import './dashboard/dashboard-navbar';
 @import './dashboard/layout';
 @import './dashboard/list-kintoblocks';

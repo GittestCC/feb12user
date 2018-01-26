@@ -103,4 +103,30 @@ describe('PageOptions Reducer', () => {
     )
     expect(result.selectedKintoBlockId).toEqual('4')
   })
+
+  it('show notification should set notification object values', () => {
+    const result = reducer(
+      undefined,
+      pageOptionsActions.showNotification('error', 'message')
+    )
+    expect(result.notification.type).toEqual('error')
+    expect(result.notification.message).toEqual('message')
+    expect(result.notification.isShown).toEqual(true)
+  })
+
+  it('close notification should set the notification object isShown to false', () => {
+    const result = reducer(undefined, pageOptionsActions.closeNotificaton())
+    expect(result.notification.isShown).toEqual(false)
+  })
+
+  it('show loading spinner should set the loadingSpinner object values', () => {
+    const result = reducer(undefined, pageOptionsActions.showSpinner('message'))
+    expect(result.loadingSpinner.isShown).toEqual(true)
+    expect(result.loadingSpinner.message).toEqual('message')
+  })
+
+  it('hide loading spinner should set the loadingSpinner object isShown to false', () => {
+    const result = reducer(undefined, pageOptionsActions.hideSpinner())
+    expect(result.loadingSpinner.isShown).toEqual(false)
+  })
 })

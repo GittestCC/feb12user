@@ -14,10 +14,20 @@ const KintoBlockCreate = () => (
           off your shoulders the hassle of library configuration, deployment,
           and infrastructure so you can focus on writing exactly the features
           you need. Start building KintoBlocks below or{' '}
-          <a href="">learn more here</a>.
+          <a
+            href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-a-kintoblock"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            learn more here
+          </a>.
         </h5>
       </div>
-      <a href="">
+      <a
+        href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-a-kintoblock"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div className="icon" />
       </a>
     </div>

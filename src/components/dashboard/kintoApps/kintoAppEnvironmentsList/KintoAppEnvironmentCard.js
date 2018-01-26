@@ -140,9 +140,7 @@ class KintoAppEnvironmentCard extends Component {
                         )
                       )
                     ) : (
-                      <div>
-                        Click the blue “Deploy” button to choose a build.
-                      </div>
+                      <div>Hit the deploy button to choose a build.</div>
                     )}
                   </div>
                 </div>
@@ -246,7 +244,7 @@ class KintoAppEnvironmentCard extends Component {
                                   )
                                 }
                               >
-                                Rollback to this Build{' '}
+                                Rollback to this build{' '}
                               </button>
                             </div>
                           )}
@@ -271,9 +269,7 @@ class KintoAppEnvironmentCard extends Component {
                         <h4> No build deployed. </h4>
                       </div>
                       <div className="date">
-                        <div>
-                          Click the blue “Deploy” button to choose a build.
-                        </div>
+                        <div>Hit the deploy button to choose a build.</div>
                       </div>
                     </div>
                   )}

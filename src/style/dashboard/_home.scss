@@ -1,0 +1,18 @@
+.dashboard-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  .home-logo {
+    @include backgroundImage('/images/img-home-welcome@2x.png', 200px, 180px);
+  }
+  h4 {
+    color: $kinto-grayscale-6;
+    font-weight: normal;
+  }
+  .button {
+    width: 240px;
+    margin-top: 32px;
+  }
+}

@@ -6,7 +6,11 @@ import {
   SELECT_ENVIRONMENT,
   SELECT_ENVIRONMENT_RELEASE,
   SELECT_KINTOAPP,
-  SELECT_BREADCRUMB_WORKSPACE
+  SELECT_BREADCRUMB_WORKSPACE,
+  CLOSE_NOTIFICATION,
+  SHOW_NOTIFICATION,
+  SHOW_LOADING_SPINNER,
+  HIDE_LOADING_SPINNER
 } from '../actions/pageOptions'
 import {
   RECEIVE_KINTO_APP,
@@ -98,6 +102,37 @@ export default function pageOptions(state = {}, action) {
       return {
         ...state,
         canSave: false
+      }
+    case SHOW_NOTIFICATION:
+      return {
+        ...state,
+        notification: {
+          type: action.notificationType,
+          message: action.message,
+          isShown: true
+        }
+      }
+    case CLOSE_NOTIFICATION:
+      return {
+        ...state,
+        notification: {
+          isShown: false
+        }
+      }
+    case SHOW_LOADING_SPINNER:
+      return {
+        ...state,
+        loadingSpinner: {
+          isShown: true,
+          message: action.message
+        }
+      }
+    case HIDE_LOADING_SPINNER:
+      return {
+        ...state,
+        loadingSpinner: {
+          isShown: false
+        }
       }
     default:
       return state

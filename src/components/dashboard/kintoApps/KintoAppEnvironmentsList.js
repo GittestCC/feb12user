@@ -117,7 +117,10 @@ class KintoAppEnvironmentsList extends Component {
             Add New Environment
           </button>
         </div>
-        <h5>Drag to reorder</h5>
+        <h5>
+          Control your environments for the various deplpoyments of{' '}
+          {kintoApp.name}
+        </h5>
 
         <SortableList
           environments={environments}

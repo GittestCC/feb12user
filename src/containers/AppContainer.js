@@ -9,7 +9,10 @@ function mapStateToProps(state) {
     isLoggedIn: isAuthenticated(state.auth),
     blockNavigate: state.pageOptions.canSave,
     isLoading: state.workspaces.isFetching,
-    firstWorkspaceId: state.workspaces.allIds[0]
+    firstWorkspaceId: state.workspaces.allIds[0],
+    isNotification: state.pageOptions.notification
+      ? state.pageOptions.notification.isShown
+      : false
   }
 }
 

@@ -25,6 +25,8 @@ import ScrollToErrorOnSubmitContainer from '../containers/ScrollToErrorOnSubmitC
 import AppContainer from '../containers/AppContainer'
 import AuthContainer from '../containers/AuthContainer'
 import LogInContainer from '../containers/LogInContainer'
+import NotificationsContainer from '../containers/NotificationsContainer'
+import LoadingSpinnerContainer from '../containers/LoadingSpinnerContainer'
 import '../style/app.css'
 
 const Kintohub = () => {
@@ -49,6 +51,8 @@ const Kintohub = () => {
           <ScrollToTop>
             <ScrollToErrorOnSubmitContainer />
             {analyticsId && <Route component={Analytics} />}
+            <NotificationsContainer />
+            <LoadingSpinnerContainer />
             <Route component={AuthContainer} />
             <Switch>
               <Route

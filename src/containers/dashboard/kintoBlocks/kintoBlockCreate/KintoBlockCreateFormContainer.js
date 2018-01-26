@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { formValueSelector, change, untouch } from 'redux-form'
 import { createKintoBlock } from '../../../../actions/kintoBlocks'
 import { searchRepositories } from '../../../../actions/workspaces'
+import { showSpinner, hideSpinner } from '../../../../actions/pageOptions'
 import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateForm'
 
 const formName = 'kintoBlockCreateForm'
@@ -34,7 +35,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: data => dispatch(createKintoBlock(data)),
+    onSubmit: data => {
+      dispatch(showSpinner())
+      dispatch(createKintoBlock(data)).then(
+        () => dispatch(hideSpinner()),
+        () => dispatch(hideSpinner())
+      )
+    },
     searchRepositories: query => dispatch(searchRepositories(query)),
     selectRepository: data => {
       dispatch(change('kintoBlockCreateForm', 'organizationId', data.orgId))

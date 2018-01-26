@@ -52,10 +52,9 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, firstWorkspaceId, match } = this.props
-
+    const { isLoading, firstWorkspaceId, match, isNotification } = this.props
     return (
-      <div className="app">
+      <div className={`app ${isNotification ? 'notify' : ''}`}>
         <Prompt
           when={this.props.blockNavigate}
           message={() =>

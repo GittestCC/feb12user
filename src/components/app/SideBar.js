@@ -46,7 +46,7 @@ class SideBar extends Component {
         className={`sidebar ${isSideBarShownMobile ? 'show' : ''}`}
         data-test="sidebar"
       >
-        <div className="workspaces-select">
+        <div className="workspaces-select" data-test={selectedWorkspaceId}>
           <h3 className="uppercase">Workspace</h3>
           <select
             onChange={this.goToWorkspace}

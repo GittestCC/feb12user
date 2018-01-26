@@ -30,6 +30,12 @@ class KintoBlockManage extends Component {
     this.props.fetchKintoBlocks().then(() => {
       this.props.fetchKintoBlock(id, ver, type)
     })
+    if (!this.props.hasActiveBuild) {
+      this.props.showNotification(
+        'notification',
+        'Kudos for creating a KintoBlock! This is but the beginning of an exciting journey... head over to Github and start coding!'
+      )
+    }
   }
 
   componentWillReceiveProps(nextProps) {
