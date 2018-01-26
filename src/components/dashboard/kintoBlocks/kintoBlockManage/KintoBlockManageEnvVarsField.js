@@ -41,6 +41,7 @@ class KintoBlockManageEnvVarsField extends Component {
     return (
       <div className="form-body env" data-test="kb-manage-env">
         <div className="top">
+          <h6 className="coming">Coming</h6>
           <h4 className="title">Environmental Parameters</h4>
           {fields.length ? (
             fields.map((field, index) => (

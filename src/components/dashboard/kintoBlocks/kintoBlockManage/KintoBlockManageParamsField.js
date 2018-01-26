@@ -49,6 +49,7 @@ class KintoBlockManageParamsField extends Component {
     return (
       <div className="form-body custom-params" data-test="kb-manage-params">
         <div className="top">
+          <h6 className="coming">Coming</h6>
           <h4 className="title">Custom Parameters</h4>
           {fields.length ? (
             fields.map((field, index) => (
