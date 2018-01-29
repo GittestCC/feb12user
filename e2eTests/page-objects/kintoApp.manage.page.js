@@ -7,7 +7,7 @@ class KintoAppManage extends Page {
   }
 
   get title() {
-    return $('.page-title')
+    return $('.page-title > h2')
   }
 
   get name() {
@@ -23,11 +23,13 @@ class KintoAppManage extends Page {
   }
 
   get kbTagNDeploy() {
-    return $('#savebar-portal > div > button')
+    return $('#savebar-portal button')
   }
 
   get tagDeployModal() {
-    return $('.kh-modal-title')
+    return $(
+      'ReactModal__Content ReactModal__Content--after-open.kh-modal.tag-and-deploy-modal'
+    )
   }
 
   get majorVersion() {
@@ -56,6 +58,30 @@ class KintoAppManage extends Page {
 
   get wsSwitchDef() {
     return getDataTest('public')
+  }
+
+  get envName() {
+    return $('#environment')
+  }
+
+  get tagDeployErrMsg() {
+    return $('div.kh-modal-body > form > div:nth-child(2) > div.error-message')
+  }
+
+  get successDeployMsg() {
+    return $(
+      '.environments-list .environment-card > div.bottom > div.left > div > div.upper > div > h6'
+    )
+  }
+
+  get successDeployVersion() {
+    return $(
+      '.environments-list .environment-card > div.bottom > div.left > div > div.upper > div > h4.version'
+    )
+  }
+
+  get errorMsgDuplicateVersion() {
+    return $('div.kh-modal-body > form > div.error-message-form.error-message')
   }
 }
 

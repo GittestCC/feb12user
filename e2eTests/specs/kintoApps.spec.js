@@ -48,6 +48,7 @@ describe('create kintoApp', () => {
       testData.kintoapp.validKintoAppDescription
     )
     KintoAppCreate.submitGlobal()
+    KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     const name = KintoAppList.getCard(0)
       .element('.name')
@@ -94,10 +95,12 @@ describe('create kintoApp', () => {
   })
 
   it("should show the description for 'What is an Application?' on the right", () => {
+    KintoAppList.open()
+    KintoAppList.getCard(0).waitForVisible()
     KintoAppCreate.open()
     KintoAppCreate.form.waitForVisible()
     expect(KintoAppCreate.whatisanApp.getText()).to.eql(
-      'What is an Application?\nKintoApp is our proprietary format of microservice. They allow you to build a website and offer online services with ease and speed. Anyone can use and sell their KintoApps on our website. You can learn more here.'
+      'What is an Application?\nApplications are tailored back-end features packages, ready to be consumed by your clients and whose feature can scale independently to fit your needs. They are composed of KintoBlocks and services with unique configuration parameters, and either a client or a protocol to allow your clients to talk to the application. Start building an application below or learn more here.'
     )
   })
 
@@ -120,11 +123,12 @@ describe('create kintoApp', () => {
     KintoAppCreate.shortDescription.input.setValue(
       testData.kintoapp.validKintoAppDescriptionWithChars
     )
-    KintoAppCreate.kbdropDown.setValue('$')
+    KintoAppCreate.kbdropDown.setValue('d')
     browser.leftClick('div.Select-input > input')
     browser.keys('Return')
     KintoAppManage.kbName.waitForVisible()
     KintoAppCreate.submitGlobal()
+    KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(1).waitForVisible() //TODO  Change this to 0, after the bug to display the latest KA on top is fixed
     const kaname = KintoAppList.getCard(1) //TODO  Change this to 0, after the bug to display the latest KA on top is fixed
       .element('.name')
@@ -139,27 +143,33 @@ describe('create kintoApp', () => {
     KintoAppCreate.open()
     KintoAppCreate.form.waitForVisible()
     KintoAppCreate.name.input.setValue(testData.kintoapp.validKANamewithDot)
+
     KintoAppCreate.shortDescription.input.setValue(
       testData.kintoapp.validKintoAppDescriptionWithChars
     )
-    KintoAppCreate.kbdropDown.setValue('*')
+    KintoAppCreate.kbdropDown.setValue('z')
     browser.leftClick('div.Select-input > input')
     browser.keys('Return')
-    KintoAppCreate.kbdropDown.setValue('#')
+    KintoAppCreate.kbdropDown.setValue('d')
     browser.leftClick('div.Select-input > input')
     browser.keys('Return')
     KintoAppCreate.submitGlobal()
+    KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(2).waitForVisible()
     const name = KintoAppList.getCard(2) //TODO  Change this to 0, after the bug to display the latest KA on top is fixed
       .element('.name')
       .getText()
     expect(name).to.eql(testData.kintoapp.validKANamewithDot)
+    KintoAppList.getCard(2).click() //TODO  Change this to 0, after the bug to display the latest KA on top is fixed
+    KintoAppManage.title.waitForVisible()
+    expect(KintoAppManage.title.getText()).to.eq(name)
   })
 })
 
 describe('manage kintoApp', () => {
   it('should show ka manage when clicking on that kintoapp in list', () => {
     KintoAppList.open()
+    KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     const name = KintoAppList.getCard(0)
       .element('.name')
@@ -170,13 +180,15 @@ describe('manage kintoApp', () => {
   })
 
   it('should allow user to edit the name of the KA', () => {
+    KintoAppList.open()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.name.input.click()
     KintoAppManage.name.input.setValue(
       testData.kintoapp.validUpdatedKintoAppName
     )
     KintoAppCreate.submitGlobal()
-    expect(KintoAppManage.name.input.getText()).to.eql(
-      testData.kintoapp.validUpdatedKintoAppName
-    )
     KintoAppManage.kbTagNDeploy.waitForVisible()
     KintoAppList.open()
     KintoAppList.getCard(0).waitForVisible()
@@ -187,20 +199,61 @@ describe('manage kintoApp', () => {
     )
   })
 
-  it('should allow user to tag and deploy changes to KA', () => {
+  it('should show error messages when mandatory fields version and revision are not filled for tag and deploy ', () => {
     KintoAppList.open()
+    KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
     KintoAppManage.name.input.setValue(testData.kintoapp.validKANameWithDollar)
     KintoAppCreate.submitGlobal() // Save changes
+    KintoAppManage.kbTagNDeploy.waitForVisible()
     KintoAppManage.kbTagNDeploy.click()
-    KintoAppManage.tagDeployModal.waitForVisible()
+    KintoAppManage.majorVersion.click()
+    KintoAppManage.minorVersion.click()
+    KintoAppManage.createTagBtn.click()
+    KintoAppManage.tagDeployErrMsg.waitForVisible()
+    expect(KintoAppManage.tagDeployErrMsg.getText()).to.eql('Required')
     KintoAppManage.majorVersion.setValue('1')
+    KintoAppManage.createTagBtn.click()
+    expect(KintoAppManage.tagDeployErrMsg.getText()).to.eql('Required')
+    KintoAppManage.minorVersion.setValue('2')
+    KintoAppManage.createTagBtn.click()
+    expect(KintoAppManage.tagDeployErrMsg.getText()).to.eql('Required')
+    KintoAppManage.revision.setValue('3')
+    KintoAppManage.notes.setValue(testData.kintoapp.validNotes)
+    expect(KintoAppManage.tagDeployErrMsg.isVisible()).to.eql(false)
+  })
+
+  it('should allow user to tag and deploy changes to KA', () => {
+    KintoAppManage.createTagBtn.click()
+    KintoAppManage.envList.waitForVisible()
+    KintoAppManage.successDeployMsg.waitForVisible()
+    expect(KintoAppManage.successDeployVersion.getText()).to.eql('1.2.3')
+  })
+
+  it('should show error message if duplicate major,minor and revision values are entered', () => {
+    KintoAppList.open()
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.name.input.setValue(testData.kintoapp.validKANameWithDash)
+    KintoAppCreate.submitGlobal() // Save changes
+    KintoAppManage.kbTagNDeploy.waitForVisible()
+    KintoAppManage.kbTagNDeploy.click()
+
+    //Enter duplicate version details
+    KintoAppManage.majorVersion.click()
+    KintoAppManage.majorVersion.setValue('1')
+    KintoAppManage.minorVersion.click()
     KintoAppManage.minorVersion.setValue('2')
     KintoAppManage.revision.setValue('3')
     KintoAppManage.notes.setValue(testData.kintoapp.validNotes)
     KintoAppManage.createTagBtn.click()
-    KintoAppManage.envList.waitForVisible()
+    KintoAppManage.errorMsgDuplicateVersion.waitForVisible()
+    expect(KintoAppManage.errorMsgDuplicateVersion.getText()).to.eql(
+      'Tag with the same version is already created'
+    )
   })
 })

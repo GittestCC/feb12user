@@ -3,18 +3,20 @@ import KintoBlockList from '../page-objects/kintoBlock.list.page'
 import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import KintoBlockManage from '../page-objects/kintoBlock.manage.page'
 import Login from '../page-objects/login.page'
+import Landing from '../page-objects/landing.page'
 import testData from '../constants/testdata.json'
 
 describe('create kintoBlock', () => {
   it('should redirect the user to login  when he is trying to access list of kbs and he is not logged in', () => {
-    KintoBlockList.open()
+    KintoBlockList.open(1)
     Login.loginForm.waitForVisible()
     expect(Login.getUrl()).to.eql('/log-in')
   })
 
   it('should redirect the user to create kb when he is trying to access list kbs with no kbs created', () => {
     Login.login()
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockCreate.form.waitForVisible()
     expect(KintoBlockCreate.form.isVisible()).to.eq(true)
   })
@@ -30,6 +32,55 @@ describe('create kintoBlock', () => {
     expect(KintoBlockCreate.shortDescription.error.getText()).to.eql('Required')
     expect(KintoBlockCreate.language.error.getText()).to.eql('Required')
     expect(KintoBlockCreate.protocol.error.getText()).to.eql('Required')
+  })
+
+  it('should validate inputs and not allow  user to create a kb with name less than 3 characters', () => {
+    KintoBlockCreate.name.input.setValue(testData.kintoblock.invalidKBThreeChar)
+    KintoBlockCreate.submitGlobal()
+    KintoBlockCreate.name.error.waitForVisible()
+    expect(KintoBlockCreate.name.error.getText()).to.eql(
+      'Must be 3 characters or more'
+    )
+  })
+
+  it('should validate inputs and not allow user to create a kb with name more than 35 characters', () => {
+    KintoBlockCreate.name.input.setValue(testData.kintoblock.invalidKBFortyChar)
+    KintoBlockCreate.submitGlobal()
+    KintoBlockCreate.name.error.waitForVisible()
+    expect(KintoBlockCreate.name.error.getText()).to.eql(
+      'Must be 35 characters or less'
+    )
+  })
+
+  it('should validate inputs and not allow user to create a kb with name in Upper case', () => {
+    KintoBlockCreate.name.input.setValue(testData.kintoblock.invalidKBCAPSChar)
+    KintoBlockCreate.submitGlobal()
+    KintoBlockCreate.name.error.waitForVisible()
+    expect(KintoBlockCreate.name.error.getText()).to.eql(
+      'Only lowercase characters and digits are allowed'
+    )
+  })
+
+  it('should validate inputs and not allow user to create a kb with name containing special characters', () => {
+    KintoBlockCreate.name.input.setValue(
+      testData.kintoblock.invalidKBNameWithChar
+    )
+    KintoBlockCreate.submitGlobal()
+    KintoBlockCreate.name.error.waitForVisible()
+    expect(KintoBlockCreate.name.error.getText()).to.eql(
+      'Only lowercase characters and digits are allowed'
+    )
+  })
+
+  it('should validate inputs and not allow user to create a kb with name starting with number', () => {
+    KintoBlockCreate.name.input.setValue(
+      testData.kintoblock.invalidKBNameWithDigit
+    )
+    KintoBlockCreate.submitGlobal()
+    KintoBlockCreate.name.error.waitForVisible()
+    expect(KintoBlockCreate.name.error.getText()).to.eql(
+      "The first character can't be a digit"
+    )
   })
 
   it('should validate inputs and not allow  user to create a kb with description more than 200 characters', () => {
@@ -70,7 +121,7 @@ describe('create kintoBlock', () => {
   it('should be able to select already existing Repo from my Github account', () => {
     KintoBlockCreate.open()
     KintoBlockCreate.name.input.setValue(
-      testData.kintoblock.validKintoBlockNameWithChar
+      testData.kintoblock.validKintoBlockNameWithDigit
     )
 
     KintoBlockCreate.shortDescription.input.setValue(
@@ -87,20 +138,21 @@ describe('create kintoBlock', () => {
     const name = KintoBlockList.getCard(1)
       .element('.name')
       .getText()
-    expect(name).to.eql(testData.kintoblock.validKintoBlockNameWithChar)
+    expect(name).to.eql(testData.kintoblock.validKintoBlockNameWithDigit)
   })
 })
 
 describe('manage kintoBlock', () => {
   it('should show kb manage when clicking on that kintoblock in list', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     const name = KintoBlockList.getCard(0)
       .element('.name')
       .getText()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
-    expect(KintoBlockManage.title.getText()).to.eq(name)
+    expect(KintoBlockManage.title.getText()).to.eq(name + ' - master')
   })
 
   it('show an error message when clicking tag latest commit', () => {
@@ -197,12 +249,13 @@ describe('manage kintoBlock', () => {
         .getAttribute('class')
         .includes('e2e-disabled')
     }, 5000)
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
     expect(KintoBlockManage.title.getText()).to.eq(
-      testData.kintoblock.validUpdatedKBName
+      testData.kintoblock.validUpdatedKBName + ' - master'
     )
     expect(KintoBlockManage.description.input.getText()).to.eq(
       testData.kintoblock.validUpdatedKBDescription
@@ -220,7 +273,8 @@ describe('manage kintoBlock', () => {
   })
 
   it('should be able to edit the environmental parameter and value', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
@@ -236,7 +290,8 @@ describe('manage kintoBlock', () => {
         .getAttribute('class')
         .includes('e2e-disabled')
     }, 5000)
-    KintoBlockList.open()
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
@@ -254,7 +309,8 @@ describe('manage kintoBlock', () => {
   })
 
   it('should be able to edit the custom parameters and value', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
@@ -270,7 +326,8 @@ describe('manage kintoBlock', () => {
         .getAttribute('class')
         .includes('e2e-disabled')
     }, 5000)
-    KintoBlockList.open()
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
@@ -312,7 +369,8 @@ describe('manage kintoBlock', () => {
   })
 
   it('should be able to add multiple environmental parameters', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
@@ -343,8 +401,55 @@ describe('manage kintoBlock', () => {
     }, 5000)
   })
 
+  it('should validate and show error message when adding duplicate environmental parameters', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
+    KintoBlockList.getCard(0).waitForVisible()
+    KintoBlockList.getCard(0).click()
+    KintoBlockManage.title.waitForVisible()
+    KintoBlockManage.addEnvKey.setValue(
+      testData.kintoblock.updatedEnvironmentKey
+    )
+    KintoBlockManage.addEnvValue.setValue(
+      testData.kintoblock.validEnvironmentValueWithSpecialChars
+    )
+
+    KintoBlockManage.envInput.element('.bottom .icon-column button').click()
+
+    expect(
+      KintoBlockManage.getEnvRow(2)
+        .element('[data-test="environmentVariables[2].key"] input')
+        .getValue()
+    ).to.eql(testData.kintoblock.updatedEnvironmentKey)
+    expect(
+      KintoBlockManage.getEnvRow(2)
+        .element('[data-test="environmentVariables[2].value"] input')
+        .getValue()
+    ).to.eql(testData.kintoblock.validEnvironmentValueWithSpecialChars)
+
+    KintoBlockManage.submitGlobal()
+
+    expect(
+      KintoBlockManage.getEnvRow(0)
+        .element('[data-test="environmentVariables[0].key"] .error-message')
+        .getText()
+    ).to.eql('Must be unique')
+
+    KintoBlockManage.getEnvRow(2)
+      .element('[data-test="environmentVariables[2].key"] input')
+      .setValue(testData.kintoblock.validEnvKeyWithCAPS)
+    KintoBlockManage.submitGlobal()
+
+    browser.waitUntil(() => {
+      return KintoBlockManage.savebar
+        .getAttribute('class')
+        .includes('e2e-disabled')
+    }, 5000)
+  })
+
   it('it should be able to see three options - Edit Branch, View all branches and tags and  Delete kintoblock options for my KintoBlock', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockManage.dropDownMenu.click()
     KintoBlockManage.dropDownMenuOptions.waitForVisible()
@@ -366,7 +471,8 @@ describe('manage kintoBlock', () => {
   })
 
   it('should be able to add multiple custom parameters', () => {
-    KintoBlockList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
     KintoBlockList.getCard(0).waitForVisible()
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()

@@ -8,6 +8,10 @@ class Landing extends Page {
   get navbar() {
     return $('[data-test=landing-navbar]')
   }
+
+  get workspaceSelect() {
+    return $('.workspaces-select')
+  }
 }
 
 export default new Landing()

@@ -14,6 +14,21 @@ class Page {
     return $('[data-test=savebar]')
   }
 
+  get avatarBtn() {
+    return $('div.dropdown.direction-left button')
+  }
+
+  get logoutBtn() {
+    return $('.dropdown-scroll-container > button')
+  }
+
+  logout() {
+    if (this.avatarBtn.isVisible()) {
+      this.avatarBtn.click()
+      this.logoutBtn.click()
+    }
+  }
+
   submitGlobal() {
     return $('[data-test=savebar] > button').click()
   }

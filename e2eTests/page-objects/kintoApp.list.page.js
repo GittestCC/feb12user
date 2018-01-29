@@ -8,6 +8,10 @@ class KintoAppList extends Page {
   getCard(index) {
     return $(`[data-test='ka-card-id-${index}']`)
   }
+
+  get mykintoAppList() {
+    return $('.my-kintoapps')
+  }
 }
 
 export default new KintoAppList()

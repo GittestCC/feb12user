@@ -1,8 +1,8 @@
 import Page from './page'
 
 class KintoBlockList extends Page {
-  open() {
-    super.open('app/dashboard/1/kintoblocks/list')
+  open(wsID) {
+    super.open(`app/dashboard/${wsID}/kintoblocks/list`)
   }
 
   getCard(index) {

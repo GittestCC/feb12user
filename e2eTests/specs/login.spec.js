@@ -63,16 +63,20 @@ describe('login form', () => {
 
   it('should redirect the user to dashboard after he login successfully', () => {
     Login.login()
-    expect(Login.getUrl()).to.eql('/app/dashboard/1')
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(Login.getUrl()).to.eql('/app/dashboard/' + ws)
   })
 
   it('should redirect the user to dashboard home if he is logged in and is trying to access root', () => {
     browser.url('/')
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard/1')
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(Login.getUrl()).to.eql('/app/dashboard/' + ws)
   })
 
   it('should reveal the password string when clicked on the eye and hide the password if clicked again', () => {
+    Login.avatarBtn.click()
+    Login.logoutBtn.click()
     Login.open()
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginPasswordEye.click()
@@ -90,7 +94,8 @@ describe('login form', () => {
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginSubmit()
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard/1')
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(Login.getUrl()).to.eql('/app/dashboard/' + ws)
   })
 
   it('should redirect the user to dashboard on using valid email with Upper case letters', () => {
@@ -99,7 +104,8 @@ describe('login form', () => {
     Login.loginPassword.setValue(testData.login.validPassword)
     Login.loginSubmit()
     DashboardIndex.container.waitForExist()
-    expect(Login.getUrl()).to.eql('/app/dashboard/1')
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(Login.getUrl()).to.eql('/app/dashboard/' + ws)
   })
 })
 
@@ -113,6 +119,14 @@ describe('signup form', () => {
     expect(Login.signupPasswordError.getText()).to.eql('Required')
     Login.signupEmail.setValue(testData.signup.validUserName)
     expect(Login.signupEmailError.getText()).to.eql('Invalid email address')
+    Login.signupPassword.setValue(testData.signup.invalidPwdShort)
+    expect(Login.signupPasswordError.getText()).to.eql(
+      'Must be 8 characters or more'
+    )
+    Login.signupPassword.setValue(testData.signup.invalidPwdLong)
+    expect(Login.signupPasswordError.getText()).to.eql(
+      'Must be 20 characters or less'
+    )
     Login.signupPassword.setValue(testData.signup.invalidPassword)
     expect(Login.signupPasswordError.getText()).to.eql(
       'Password must contain a minimum of eight characters, at least one letter and one number'
@@ -160,7 +174,7 @@ describe('signup form', () => {
     Login.signupSubmit()
     Login.signupUsernameError.waitForVisible()
     expect(Login.signupUsernameError.getText()).to.eql(
-      'Username should be in the range 3 to 35  characters' //TODO Change Error message once validation is implemented.
+      'Must be 3 characters or more'
     )
   })
 
@@ -172,15 +186,21 @@ describe('signup form', () => {
     Login.signupSubmit()
     Login.signupUsernameError.waitForVisible()
     expect(Login.signupUsernameError.getText()).to.eql(
-      'Username should be in the range 3 to 35  characters' //TODO Change Error message once validation is implemented.
+      'Must be 35 characters or less'
     )
   })
 
   it('should validate that username accepts  letters (a-z, both caps), numbers (0-9), dashes, underscores, apostrophes, periods (.), at (@)', () => {
     Login.open()
-    Login.signupUsername.setValue(testData.signup.allCharUserName)
+    Login.signupUsername.setValue(testData.signup.allCharInvalidUserName)
     Login.signupEmail.setValue(testData.signup.validEmailWithDot)
     Login.signupPassword.setValue(testData.signup.validPassword)
+    Login.signupSubmit()
+    Login.signupUsernameError.waitForVisible()
+    expect(Login.signupUsernameError.getText()).to.eql(
+      "Only the following special characters @_'. are valid"
+    )
+    Login.signupUsername.setValue(testData.signup.allCharValidUserName)
     Login.signupSubmit()
     Login.signupSuccess.waitForVisible()
     expect(Login.signupSuccess.isVisible()).to.eql(true)
@@ -207,6 +227,7 @@ describe('signup form', () => {
   })
 
   it('should validate that email does not accept value less than 5 characters', () => {
+    Login.logout()
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWithChar)
     Login.signupEmail.setValue(testData.signup.invalidEmailLength4)
@@ -220,6 +241,7 @@ describe('signup form', () => {
     Login.signupUsername.setValue(testData.signup.validUserNameWithChar)
     Login.signupEmail.setValue(testData.signup.invalidEmailLength40)
     Login.signupPassword.setValue(testData.signup.validPassword)
+    Login.signupSubmit()
     Login.signupEmailError.waitForVisible()
     expect(Login.signupEmailError.getText()).to.eql('Invalid email address')
   })
@@ -257,6 +279,7 @@ describe('signup form', () => {
   })
 
   it('should validate that password accepts a password which is with 20 characters, at least 1 number and 1 letter', () => {
+    Login.logout()
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWithDot)
     Login.signupEmail.setValue(
@@ -269,6 +292,7 @@ describe('signup form', () => {
   })
 
   it('should validate that password accepts special characters @,dashes(-),underscores(_),apostrophes', () => {
+    Login.logout()
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWithAt)
     Login.signupEmail.setValue(testData.signup.validUserNameWithAt + 'test.com')
@@ -279,6 +303,7 @@ describe('signup form', () => {
   })
 
   it('should validate that password accepts with all capital letters and one number', () => {
+    Login.logout()
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWiths)
     Login.signupEmail.setValue(testData.signup.validLongEmail)
@@ -289,6 +314,7 @@ describe('signup form', () => {
   })
 
   it('should validate that password is not accepted if more than one special characters are used in the password with other conditions not applied', () => {
+    Login.logout()
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWith$)
     Login.signupPassword.setValue(
@@ -297,7 +323,7 @@ describe('signup form', () => {
     Login.signupEmail.setValue(testData.signup.validEmailWith$)
     Login.signupPasswordError.waitForVisible()
     expect(Login.signupPasswordError.getText()).to.eql(
-      'Password must contain a minimum of eight characters, at least one letter and one number'
+      "Only the following special characters @_'. are valid"
     )
   })
 
