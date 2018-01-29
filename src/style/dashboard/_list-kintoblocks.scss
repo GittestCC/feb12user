@@ -189,7 +189,7 @@
           position: absolute;
           right: 20px;
           &.dependency-dropdown{
-            left: 15px;
+            left: -46px;
             top: 1px;
             width: 340px;
             .title {
@@ -199,11 +199,16 @@
             .line {
               margin: 0;
             }
+            .dropdown-content{
+              min-width: 340px;
+            }
             button {
               padding: 10px 20px;
               .dependency.kintoblock-dep {
                 @include backgroundImage('/images/icon-generic-kintoblock-small-4.svg', 38px, 38px);
               }
+              display: flex;
+              justify-content: flex-start;
             }
           }
           .dropdown-button {

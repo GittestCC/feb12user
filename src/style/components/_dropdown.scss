@@ -139,7 +139,9 @@
   }
 }
 
-
+.dropdown-content {
+  z-index: 7;
+}
 
 .dropdown-content-items {
   .line {
@@ -155,6 +157,12 @@
       margin: 10px 30px;
       width: 180px;
     }
+  }
+
+  h4.title {
+    color: $kinto-white;
+    text-align: center;
+    cursor: default;
   }
 
   a, button {
@@ -379,8 +387,4 @@
       }
     }
   }
-}
-
-.dependency-dropdown {
-
 }

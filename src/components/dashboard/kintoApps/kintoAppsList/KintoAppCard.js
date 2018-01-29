@@ -102,9 +102,9 @@ class KintoAppCard extends Component {
               isShown={this.state.areDependenciesShown}
               onHide={this.hideDependencyDropdown}
             >
-              <button className="title">
-                <h4>Components ({kintoApp.dependencies.length})</h4>
-              </button>
+              <h4 className="title">
+                Components ({kintoApp.dependencies.length})
+              </h4>
 
               <div className="line" />
 
