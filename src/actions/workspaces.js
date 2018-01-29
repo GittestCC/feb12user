@@ -130,7 +130,7 @@ export const updateWorkspace = (id, data) => dispatch => {
 
 export const connectGithub = (workspaceId, githubToken) => () => {
   return axios.put(getServerUrl(WORKSPACES, `/${workspaceId}/github/connect`), {
-    tokenId: githubToken
+    code: githubToken
   })
 }
 

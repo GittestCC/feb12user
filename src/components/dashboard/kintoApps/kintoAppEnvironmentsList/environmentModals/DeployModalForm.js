@@ -15,9 +15,9 @@ class DeployModalForm extends Component {
     })
   }
 
-  deployEnvironmentAndClose = result => {
+  deployEnvironmentAndClose = version => {
     const id = this.props.kintoApp.id
-    this.props.deployEnvironment(id, result, this.props.environment.name)
+    this.props.deployEnvironment(id, this.props.environment.name, version)
     this.props.onClose()
   }
 

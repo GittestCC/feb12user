@@ -7,6 +7,10 @@ import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
 import { getVersionAsText } from '../../../../helpers/versionHelper'
 import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
+import {
+  timeDayMonthYear,
+  dateMonthYearTime
+} from '../../../../constants/dateFormat'
 import DropDown from '../../../ui/DropDown'
 
 const DragHandle = SortableHandle(() => <span className="hamburger" />)
@@ -131,12 +135,12 @@ class KintoAppEnvironmentCard extends Component {
                         <div className="date">
                           Shut down at{' '}
                           {moment(currentRelease.completionTime).format(
-                            'hh:mm [on the] Do MMMM[,] YYYY'
+                            timeDayMonthYear
                           )}
                         </div>
                       ) : (
                         moment(currentRelease.completionTime).format(
-                          'Do MMMM[,] YYYY, hh:mm'
+                          dateMonthYearTime
                         )
                       )
                     ) : (
@@ -162,7 +166,7 @@ class KintoAppEnvironmentCard extends Component {
                                 <div className="date">
                                   Shut down at{' '}
                                   {moment(release.completionTime).format(
-                                    'hh:mm [on the] Do MMMM[,] YYYY'
+                                    timeDayMonthYear
                                   )}
                                 </div>
                               </div>
@@ -191,7 +195,7 @@ class KintoAppEnvironmentCard extends Component {
                                     moment(
                                       release.steps[release.steps.length - 1]
                                         .completionTime
-                                    ).format('Do MMMM[,] YYYY, hh:mm')
+                                    ).format(dateMonthYearTime)
                                   ) : (
                                     <div>
                                       Click the blue “Deploy” button to choose a
@@ -219,7 +223,7 @@ class KintoAppEnvironmentCard extends Component {
                                   <div className="right">
                                     <div className="date">
                                       {moment(step.completionTime).format(
-                                        'Do MMMM[,] YYYY, hh:mm'
+                                        dateMonthYearTime
                                       )}
                                     </div>
                                   </div>
