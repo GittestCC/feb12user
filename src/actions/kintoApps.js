@@ -254,7 +254,7 @@ export const deployEnvironment = (id, envName, data) => (
     )
     .then(response => {
       dispatch(formSubmitted())
-      //TODO: the server is not returning dispatch(appEnvironmentUpdate(id, respone.data))
+      dispatch(appEnvironmentUpdate(id, response.data))
       dispatch(push(environmentsListUrl))
     })
 }
