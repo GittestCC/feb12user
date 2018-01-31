@@ -20,27 +20,6 @@ const mockStore = {
 }
 
 describe('kintoApps Reducer', () => {
-  it('kintoAppsFetch changes state isFetching from false to true', () => {
-    const newState = reducer(undefined, actions.kintoAppsFetch())
-    expect(newState.isFetching).toBe(true)
-  })
-
-  it('kintoAppsReceive changes the state is fetching to false', () => {
-    const sampleResponseData = {
-      data: [
-        {
-          id: '1'
-        }
-      ]
-    }
-
-    const newState = reducer(
-      undefined,
-      actions.kintoAppsReceive(sampleResponseData)
-    )
-    expect(newState.isFetching).toBe(false)
-  })
-
   it('kintoAppsReceive should store allIds as an array', () => {
     const sampleResponseData = {
       data: [
@@ -155,23 +134,6 @@ describe('kintoApps Reducer', () => {
       simple: true,
       detailed: true
     })
-  })
-
-  it('kintoAppEnvironmentsReceive should set isFetching to false', () => {
-    const environmentsResponse = {
-      data: [
-        {
-          id: '1'
-        }
-      ]
-    }
-
-    const newState = reducer(
-      undefined,
-      actions.kintoAppEnvironmentsReceive('1', environmentsResponse)
-    )
-
-    expect(newState.isFetching).toBe(false)
   })
 
   it('kintoAppEnvironmentsReceive should add an object containing all environments belonging to a single kintoApp to the store', () => {

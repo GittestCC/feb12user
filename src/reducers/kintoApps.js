@@ -2,7 +2,6 @@ import { arrayMove } from 'react-sortable-hoc'
 import { merge } from '../helpers/objectHelper'
 
 import {
-  FETCH_KINTO_APPS,
   RECEIVE_KINTO_APPS,
   RECEIVE_KINTO_APP,
   UPDATE_KINTO_APP,
@@ -18,25 +17,18 @@ import {
 import { SELECT_WORKSPACE } from '../actions/workspaces'
 
 const defaultState = {
-  isFetching: false,
   byId: {},
   allIds: []
 }
 
 const kintoAppsReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case FETCH_KINTO_APPS:
-      return {
-        ...state,
-        isFetching: true
-      }
     case RECEIVE_KINTO_APP: {
       const allIds =
         state.allIds.indexOf(action.id) === -1
           ? [...state.allIds, action.id]
           : state.allIds
       return {
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: merge(state.byId[action.id], action.data)
@@ -55,7 +47,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
         })
       })
       return {
-        isFetching: false,
         byId,
         allIds
       }
@@ -63,7 +54,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
     case RECIEVE_KINTO_APP_ENVIRONMENTS:
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: merge(state.byId[action.id], {
@@ -90,7 +80,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
       const oldOrder = [...state.byId[action.id].environments]
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
@@ -102,7 +91,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
     case NEW_ENVIRONMENT_RECEIVE:
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
@@ -126,7 +114,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
 
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
@@ -147,7 +134,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
     case KINTO_APP_ENVIRONMENT_LOG_UPDATE:
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
@@ -163,7 +149,6 @@ const kintoAppsReducer = (state = defaultState, action) => {
     case KINTO_APP_CHANGELOG_RECEIVE:
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {

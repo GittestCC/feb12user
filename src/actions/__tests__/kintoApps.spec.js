@@ -293,6 +293,7 @@ describe('KintoApps actions', () => {
     expect(store.getActions().map(a => a.type)).toEqual([
       actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
+      actions.KINTO_APP_ENVIRONMENT_UPDATE,
       CALL_HISTORY_METHOD
     ])
   })

@@ -1,5 +1,4 @@
 import {
-  FETCH_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK,
   CREATE_TAG_KINTO_BLOCK,
@@ -9,18 +8,12 @@ import {
 import { SELECT_WORKSPACE } from '../actions/workspaces'
 
 const defaultState = {
-  isFetching: false,
   byId: {},
   allIds: []
 }
 
 const kintoBlocksReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case FETCH_KINTO_BLOCKS:
-      return {
-        ...state,
-        isFetching: true
-      }
     case CREATE_TAG_KINTO_BLOCK:
     case RECEIVE_KINTO_BLOCK: {
       const allIds =
@@ -29,7 +22,6 @@ const kintoBlocksReducer = (state = defaultState, action) => {
           : state.allIds
       return {
         ...state,
-        isFetching: false,
         byId: {
           ...state.byId,
           [action.id]: {
@@ -51,7 +43,6 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         }
       })
       return {
-        isFetching: false,
         byId,
         allIds
       }

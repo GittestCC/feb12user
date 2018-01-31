@@ -11,7 +11,6 @@ import { KINTOAPPS } from '../constants/backendMicroservices'
 import { pages } from '../constants/pages'
 import { isRecent } from '../helpers/dateHelper'
 
-export const FETCH_KINTO_APPS = 'FETCH_KINTO_APPS'
 export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
 export const UPDATE_KINTO_APP = 'UPDATE_KINTO_APP'
@@ -38,8 +37,6 @@ export const kintoAppCreateVersion = (id, data) => ({
   id,
   data
 })
-
-export const kintoAppsFetch = () => ({ type: FETCH_KINTO_APPS })
 
 export const kintoAppsReceive = response => ({
   type: RECEIVE_KINTO_APPS,
@@ -115,7 +112,6 @@ export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
   ) {
     return Promise.resolve()
   }
-  dispatch(kintoAppsFetch())
   return axios
     .get(getServerUrl(KINTOAPPS, `/kintoapps/${id}/versions/${ver}`))
     .then(response => {
@@ -137,7 +133,6 @@ export const fetchKintoApps = () => (dispatch, getState) => {
   const kintoAppCreateUrl = getPageUrl(pages.dashboardKintoAppsCreate, {
     workspaceId: selectedWorkspace
   })
-  dispatch(kintoAppsFetch())
   return axios.get(getServerUrl(KINTOAPPS, '/kintoapps/all')).then(response => {
     if (isEmpty(response.data)) {
       dispatch(push(kintoAppCreateUrl))
@@ -215,7 +210,6 @@ export const getKintoAppEnvironments = id => (dispatch, getState) => {
   return axios
     .get(getServerUrl(KINTOAPPS, `/kintoapps/${id}/environments`))
     .then(response => {
-      dispatch(kintoAppsFetch())
       if (isEmpty(response.data)) {
         dispatch(push(kintoAppListUrl))
       } else {
@@ -225,7 +219,6 @@ export const getKintoAppEnvironments = id => (dispatch, getState) => {
 }
 
 export const addNewEnvironment = (id, data) => dispatch => {
-  dispatch(kintoAppsFetch())
   return axios
     .post(getServerUrl(KINTOAPPS, `/kintoapps/${id}/environments`), data)
     .then(response => {
@@ -243,7 +236,6 @@ export const deployEnvironment = (id, envName, data) => (
     id,
     workspaceId: selectedWorkspace
   })
-  dispatch(kintoAppsFetch())
   return axios
     .put(
       getServerUrl(
@@ -260,7 +252,6 @@ export const deployEnvironment = (id, envName, data) => (
 }
 
 export const updateAppEnvironment = (id, envId, data) => dispatch => {
-  dispatch(kintoAppsFetch())
   //TODO: Add API call when ready
   return Promise.resolve({ data: { ...data, id: envId } }).then(response => {
     dispatch(formSubmitted())
@@ -271,7 +262,6 @@ export const updateAppEnvironment = (id, envId, data) => dispatch => {
 export const cancelDeployment = id => dispatch => {
   // TODO: the API does not have this functionality yet
   /*
-  dispatch(kintoAppsFetch())
   dispatch(push(`/app/dashboard/kintoapps/${id}/environments`))
   */
 }
@@ -285,7 +275,6 @@ export const shutDownEnvironment = (id, envName, data) => (
     id,
     workspaceId: selectedWorkspace
   })
-  dispatch(kintoAppsFetch())
   return axios
     .put(
       getServerUrl(
@@ -304,7 +293,6 @@ export const reorderEnvironments = (id, oldIndex, newIndex) => (
   dispatch,
   getState
 ) => {
-  dispatch(kintoAppsFetch())
   dispatch(kintoAppEnvironmentListReorder(id, oldIndex, newIndex))
   const state = getState()
   const sortedEnvironmentsIds = state.kintoApps.byId[id].environments.map(
@@ -359,9 +347,6 @@ export const getEnvironmentLogs = (id, envId, releaseVersion) => dispatch => {
       responseJson: '{ Donec congue lorem a molestie bibendum. }'
     }
   ]
-  // dispatch(kintoAppsFetch())
-
-  //check with coop whether its ok to send the id instead of the name
   //TODO: return axos.put(`/kintoapps/${id}/environments/${envName}/${releaseVersion}/logs`)
   return Promise.resolve({ data: dummyRows }).then(response => {
     dispatch(environmentLogsReceive(id, envId, releaseVersion, response.data))

@@ -11,7 +11,6 @@ import { isRecent } from '../helpers/dateHelper'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
 import { KINTOBLOCKS } from '../constants/backendMicroservices'
 
-export const FETCH_KINTO_BLOCKS = 'FETCH_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
 export const CREATE_TAG_KINTO_BLOCK = 'CREATE_TAG_KINTO_BLOCK'
@@ -24,8 +23,6 @@ export const kintoBlockUpdate = (id, data) => ({
   id,
   data
 })
-
-export const kintoBlocksFetch = () => ({ type: FETCH_KINTO_BLOCKS })
 
 export const kintoBlocksReceive = data => ({
   type: RECEIVE_KINTO_BLOCKS,
@@ -60,8 +57,6 @@ export const fetchKintoBlocks = () => (dispatch, getState) => {
   const kintoBlockCreateUrl = getPageUrl(pages.dashboardKintoBlocksCreate, {
     workspaceId: selectedWorkspace
   })
-
-  dispatch(kintoBlocksFetch())
   return axios
     .get(getServerUrl(KINTOBLOCKS, '/kintoblocks/all'))
     .then(response => {
@@ -89,7 +84,6 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
   ) {
     return
   }
-  dispatch(kintoBlocksFetch())
   return axios
     .get(
       getServerUrl(
