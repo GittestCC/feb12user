@@ -5,18 +5,20 @@ import KintoAppManage from '../page-objects/kintoApp.manage.page'
 import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import KintoBlockList from '../page-objects/kintoBlock.list.page'
 import Login from '../page-objects/login.page'
+import Landing from '../page-objects/landing.page'
 import testData from '../constants/testdata.json'
 
 describe('create kintoApp', () => {
   it('should redirect the user to login  when he is trying to access list of kintoApps and he is not logged in', () => {
-    KintoAppList.open()
+    KintoAppList.open(1) // Default workspace ID 1 passed as user is not yet logged in in this case
     Login.loginForm.waitForVisible()
     expect(Login.getUrl()).to.eql('/log-in')
   })
 
   it('should redirect the user to create kintoapps when he is trying to access list kintoapps with no kintoapps created', () => {
     Login.login()
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppCreate.form.waitForVisible()
     expect(KintoAppCreate.form.isVisible()).to.eq(true)
   })
@@ -95,7 +97,8 @@ describe('create kintoApp', () => {
   })
 
   it("should show the description for 'What is an Application?' on the right", () => {
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.getCard(0).waitForVisible()
     KintoAppCreate.open()
     KintoAppCreate.form.waitForVisible()
@@ -168,7 +171,8 @@ describe('create kintoApp', () => {
 
 describe('manage kintoApp', () => {
   it('should show ka manage when clicking on that kintoapp in list', () => {
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     const name = KintoAppList.getCard(0)
@@ -179,8 +183,25 @@ describe('manage kintoApp', () => {
     expect(KintoAppManage.title.getText()).to.eq(name)
   })
 
+  it('should show Tag and deploy button when we open a KA', () => {
+    expect(KintoAppManage.kbTagNDeploy.isVisible()).to.eql(true)
+  })
+
+  it('should display Compare versions and View Environments for each KA', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    expect(KintoAppManage.compareVersions.getText()).to.eql('Compare Versions')
+    expect(KintoAppManage.viewEnvironments.getText()).to.eql(
+      'View Environments'
+    )
+  })
+
   it('should allow user to edit the name of the KA', () => {
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
@@ -190,7 +211,8 @@ describe('manage kintoApp', () => {
     )
     KintoAppCreate.submitGlobal()
     KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppList.open()
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
@@ -199,8 +221,43 @@ describe('manage kintoApp', () => {
     )
   })
 
+  it('should display Tag and Deploy modal with all fields required for deployment and environment as DEFAULT', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.kbTagNDeploy.waitForVisible()
+    KintoAppManage.kbTagNDeploy.click()
+    expect(KintoAppManage.majorVersion.isVisible()).to.eql(true)
+    expect(KintoAppManage.minorVersion.isVisible()).to.eql(true)
+    expect(KintoAppManage.revision.isVisible()).to.eql(true)
+    expect(KintoAppManage.notes.isVisible()).to.eql(true)
+    expect(KintoAppManage.envName.getText()).to.eql('DEFAULT')
+  })
+
+  it('should display error message if Create button is clicked after selecting environment', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.kbTagNDeploy.waitForVisible()
+    KintoAppManage.kbTagNDeploy.click()
+    expect(KintoAppManage.majorVersion.isVisible()).to.eql(true)
+    expect(KintoAppManage.minorVersion.isVisible()).to.eql(true)
+    expect(KintoAppManage.revision.isVisible()).to.eql(true)
+    expect(KintoAppManage.notes.isVisible()).to.eql(true)
+    expect(KintoAppManage.envName.getText()).to.eql('DEFAULT')
+    expect(KintoAppManage.cancelTagBtn.isVisible()).to.eql(true)
+    expect(KintoAppManage.createTagBtnDisabled.isVisible()).to.eql(true)
+  })
+
   it('should show error messages when mandatory fields version and revision are not filled for tag and deploy ', () => {
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
@@ -233,7 +290,8 @@ describe('manage kintoApp', () => {
   })
 
   it('should show error message if duplicate major,minor and revision values are entered', () => {
-    KintoAppList.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
     KintoAppList.mykintoAppList.waitForVisible()
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
@@ -255,5 +313,44 @@ describe('manage kintoApp', () => {
     expect(KintoAppManage.errorMsgDuplicateVersion.getText()).to.eql(
       'Tag with the same version is already created'
     )
+  })
+
+  it('should allow user to tag and deploy without entering Notes', () => {
+    KintoAppManage.cancelTagBtn.click()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.kbTagNDeploy.waitForVisible()
+    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.majorVersion.setValue('1')
+    KintoAppManage.minorVersion.setValue('2')
+    KintoAppManage.revision.setValue('4')
+    KintoAppManage.notes.click()
+    KintoAppManage.createTagBtn.click()
+    KintoAppManage.envList.waitForVisible()
+    KintoAppManage.successDeployMsg.waitForVisible()
+    expect(KintoAppManage.successDeployVersion.getText()).to.eql('1.2.4')
+  })
+
+  it('should allow user to view environment and add a new environment', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.title.waitForVisible()
+    KintoAppManage.viewEnvironments.click()
+    KintoAppManage.addNewEnvironment.click()
+    KintoAppManage.environmentName.setValue(testData.kintoapp.validEnvName)
+    KintoAppManage.addEnvBtn.click()
+    KintoAppManage.addNewEnvironment.waitForVisible()
+    expect(
+      KintoAppManage.envListItem(2)
+        .element('.top > h3')
+        .getText()
+    ).to.eql(testData.kintoapp.validEnvName.toUpperCase()) // Environment name is in CAPS in the listing page
   })
 })

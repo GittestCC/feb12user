@@ -96,7 +96,9 @@
    	"invalidKintoAppDescription": "The microservice architecture is not a silver bullet. It has several drawbacks.Moreover, when using this architecture there are numerous issues that you must address. The microservicearchitecture pattern language is a collection of patterns for applying the microservice architecture",
     	"validUpdatedKintoAppName" : "testname2",
     	"validKANameWithDollar" : "testka143",
-    	"validNotes" : "Deploying my first version 1.2.3"
+    	"validNotes" : "Deploying my first version 1.2.3",
+    	"validEnvName": "dev",
+    	 "validEnvNameCaps" : "DEV"
     		
     	
   

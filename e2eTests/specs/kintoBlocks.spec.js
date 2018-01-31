@@ -8,7 +8,7 @@ import testData from '../constants/testdata.json'
 
 describe('create kintoBlock', () => {
   it('should redirect the user to login  when he is trying to access list of kbs and he is not logged in', () => {
-    KintoBlockList.open(1)
+    KintoBlockList.open(1) //Default workspace ID 1 passed as user is not yet logged in in this case
     Login.loginForm.waitForVisible()
     expect(Login.getUrl()).to.eql('/log-in')
   })

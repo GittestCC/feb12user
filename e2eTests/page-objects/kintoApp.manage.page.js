@@ -52,6 +52,14 @@ class KintoAppManage extends Page {
     return $('.kh-modal-actions > button.button.dark')
   }
 
+  get createTagBtnDisabled() {
+    return $('.kh-modal-actions > button.button.dark.disabled')
+  }
+
+  get cancelTagBtn() {
+    return $('.kh-modal-actions > button.button.secondary')
+  }
+
   get envList() {
     return $('.kintoapp-environments-list')
   }
@@ -82,6 +90,30 @@ class KintoAppManage extends Page {
 
   get errorMsgDuplicateVersion() {
     return $('div.kh-modal-body > form > div.error-message-form.error-message')
+  }
+
+  get compareVersions() {
+    return $('.buttons > button.button.secondary')
+  }
+
+  get viewEnvironments() {
+    return $('.buttons > button.button.dark')
+  }
+
+  get addNewEnvironment() {
+    return $('.kintoapp-environments-list .button.button.secondary')
+  }
+
+  get environmentName() {
+    return $('#envName')
+  }
+
+  get addEnvBtn() {
+    return $('.kh-modal-actions .button.button.dark')
+  }
+
+  envListItem(index) {
+    return $(`.environments-list .environment-card:nth-child(${index})`)
   }
 }
 
