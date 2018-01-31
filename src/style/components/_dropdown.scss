@@ -141,6 +141,7 @@
 
 .dropdown-content {
   z-index: 7;
+  box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
 }
 
 .dropdown-content-items {
@@ -268,10 +269,18 @@
 }
 
 .dropdown-filter {
+  &.ka-version-switcher .dropdown-content{
+    top: 30px;
+  }
   .dropdown-content {
     padding-top: 20px;
     width: 340px;
     margin-left: -170px;
+    box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
+    &.tag-branch {
+      margin-left: -120px;
+      top: 30px;
+    }
   }
 
   .dropdown-content-items {

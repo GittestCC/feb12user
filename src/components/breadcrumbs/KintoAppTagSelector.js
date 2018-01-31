@@ -51,7 +51,7 @@ class KintoAppTagSelector extends Component {
           component={KintoAppTagItem}
           filterField="text"
           hideAction={true}
-          className="margin-right"
+          className="margin-right ka-version-switcher"
         />
       </div>
     )

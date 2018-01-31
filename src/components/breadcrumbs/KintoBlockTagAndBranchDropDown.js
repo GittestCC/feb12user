@@ -146,7 +146,9 @@ class KintoBlockTagAndBranchDropDown extends Component {
           />
         </div>
 
-        <div className={`dropdown-content ${isShown ? 'isShown' : ''}`}>
+        <div
+          className={`dropdown-content tag-branch ${isShown ? 'isShown' : ''}`}
+        >
           <div className="dropdown-tabs">
             <div
               className={`tab branches ${

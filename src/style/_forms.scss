@@ -390,7 +390,7 @@ form {
 .rc-tooltip {
   opacity: 1 !important;
   .rc-tooltip-inner {
-    box-shadow: inset 0 2px 0 0 rgba($kinto-black, 0.1);
+    box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
     border-radius: 4px;
     background: rgba($kinto-tinted-grayscale-8, 1) !important;
   }
@@ -479,6 +479,6 @@ form {
   .top {
     position: relative;
     overflow: hidden;
-    
+
   }
 }
