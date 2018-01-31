@@ -15,10 +15,7 @@ export const pages = {
 
   dashboardHome: 'DASHBOARD_HOME',
   dashboardAnalytics: 'DASHBOARD_ANALYTICS',
-  dashboardSalesdata: 'DASHBOARD_SALESDATA',
-  dashboardSettings: 'DASHBOARD_SETTINGS',
-  dashboardHosting: 'DASHBOARD_HOSTING',
-  dashboardBilling: 'DASHBOARD_BILLING',
+  dashboardServices: 'DASHBOARD_SERVICES',
 
   workspaceCreate: 'WORKSPACE_CREATE',
   workspaceEdit: 'WORKSPACE_EDIT'
@@ -48,10 +45,7 @@ export const urls = {
     '/app/dashboard/:workspaceId/kintoapps/:id/versions/:version/config/:envId',
   [pages.dashboardHome]: '/app/dashboard/:workspaceId',
   [pages.dashboardAnalytics]: '/app/dashboard/:workspaceId/analytics',
-  [pages.dashboardSalesdata]: '/app/dashboard/:workspaceId/salesdata',
-  [pages.dashboardSettings]: '/app/dashboard/:workspaceId/settings',
-  [pages.dashboardHosting]: '/app/dashboard/:workspaceId/hosting',
-  [pages.dashboardBilling]: '/app/dashboard/:workspaceId/billing',
+  [pages.dashboardServices]: '/app/dashboard/:workspaceId/services',
   [pages.workspaceCreate]: '/app/workspaces/create',
   [pages.workspaceEdit]: '/app/workspaces/:id/edit'
 }
@@ -59,7 +53,7 @@ export const urls = {
 export const dashboardSidebar = [
   {
     key: pages.dashboardHome,
-    title: 'Home',
+    title: 'Overview',
     className: 'home',
     url: urls[pages.dashboardHome],
     group: 1
@@ -104,7 +98,7 @@ export const dashboardSidebar = [
   {
     key: pages.dashboardAnalytics,
     title: 'Analytics',
-    className: 'analytics',
+    className: 'analytics dimmed',
     url: urls[pages.dashboardAnalytics],
     group: 1
   },
@@ -130,32 +124,11 @@ export const dashboardSidebar = [
     group: 1
   },
   {
-    key: pages.dashboardSalesdata,
-    title: 'Sales Data',
-    className: 'sales-data',
-    url: urls[pages.dashboardSalesdata],
+    key: pages.dashboardServices,
+    title: 'Services',
+    className: 'services dimmed',
+    url: urls[pages.dashboardServices],
     group: 1
-  },
-  {
-    key: pages.dashboardSettings,
-    title: 'App Settings',
-    className: 'settings',
-    url: urls[pages.dashboardSettings],
-    group: 2
-  },
-  {
-    key: pages.dashboardHosting,
-    title: 'Hosting',
-    className: 'hosting',
-    url: urls[pages.dashboardHosting],
-    group: 2
-  },
-  {
-    key: pages.dashboardBilling,
-    title: 'Account Billing',
-    className: 'billing',
-    url: urls[pages.dashboardBilling],
-    group: 2
   }
 ]
 

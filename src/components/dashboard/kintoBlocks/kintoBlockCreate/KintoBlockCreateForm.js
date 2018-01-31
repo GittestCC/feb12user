@@ -56,10 +56,9 @@ class KintoBlockCreateForm extends Component {
         <div className="form-wrapper basic-info">
           <h3>Basic Info</h3>
           <h5>
-            Choose the name for this KintoBlock and give a a short description.
-            If you make the KintoBlock public, they will help other people
-            discover your application. Let us know your preferred coding flavor
-            and connect your repo.
+            Choose the name for this KintoBlock and give a a short description
+            so you can easily find it back later. Let us know your preferred
+            coding flavor and connect your repo.
           </h5>
 
           <div className="form-body">
@@ -94,9 +93,6 @@ class KintoBlockCreateForm extends Component {
                 <option>Choose the language</option>
                 <option value="CSHARP">C#.net</option>
                 <option value="NODEJS">Node.js</option>
-                <option value="JAVA8">Java 8</option>
-                <option value="RUBY">Ruby</option>
-                <option value="PYTHON3">Python</option>
               </Field>
               <Field
                 name="protocol"
@@ -110,7 +106,6 @@ class KintoBlockCreateForm extends Component {
                 <option>Choose the protocol</option>
                 <option value="HTTP">HTTP</option>
                 <option value="GRPC">gRPC</option>
-                <option value="GRAPHQL">GraphQL</option>
               </Field>
             </div>
             <div className="line" />

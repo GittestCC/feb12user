@@ -32,7 +32,7 @@ const WorkspaceForm = ({
             <Field
               name="autoShareProjects"
               className="auto-share-projects"
-              label="Anyone in Workspace Can View and Join Projects by Default"
+              label="Anyone in workspace can view and join projects by default"
               help="Turn this on to make all projects visible to every workspace member by default."
               component={Toggle}
             />

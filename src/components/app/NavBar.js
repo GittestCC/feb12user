@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import DropDown from '../ui/DropDown'
 import PropTypes from 'prop-types'
+import { isProduction } from '../../helpers/pageHelper'
 
 class NavBar extends Component {
   static propTypes = {
@@ -34,32 +35,35 @@ class NavBar extends Component {
     return (
       <div className="navbar main-navigation" data-test="navbar">
         <div
-          className={`mobile-menu-toggle ${isSideBarShownMobile
-            ? 'cross'
-            : 'hamburger'}`}
+          className={`mobile-menu-toggle ${
+            isSideBarShownMobile ? 'cross' : 'hamburger'
+          }`}
           onClick={toggleNavHandler}
         />
 
         <Link to={'/'}>
           <div
-            className={`mobile-navigation-logo ${isSideBarShownMobile
-              ? 'show'
-              : ''}`}
+            className={`mobile-navigation-logo ${
+              isSideBarShownMobile ? 'show' : ''
+            }`}
           />
         </Link>
 
         <div
-          className={`left ${isSideBarShownMobile ? 'hide' : ''} ${this.state
-            .showSearch
-            ? 'hide-search'
-            : ''}`}
+          className={`left ${isSideBarShownMobile ? 'hide' : ''} ${
+            this.state.showSearch ? 'hide-search' : ''
+          }`}
         >
           <Link className="navigation-logo" to={'/'} />
 
           {isDashboard ? (
             <div className="dashboard-buttons-wrapper">
               <Link className="on-dashboard" to={'/app/dashboard'} />
-              <Link className="go-to-market" to={'/app/market'} />
+
+              {!isProduction() ? (
+                <Link className="go-to-market" to={'/app/market'} />
+              ) : null}
+
               <Link className="responsive-on dashboard" to={'/app/dashboard'} />
               <Link className="responsive-go to-market" to={'/app/market'} />
             </div>
@@ -86,18 +90,19 @@ class NavBar extends Component {
               placeholder="Search"
               onFocus={this.toggleInnerIcon}
               onBlur={this.toggleInnerIcon}
+              disabled={isProduction()}
             />
             <div
-              className={`inner-search-icon ${this.state.isIconHidden
-                ? 'hide'
-                : ''}`}
+              className={`inner-search-icon ${
+                this.state.isIconHidden ? 'hide' : ''
+              }`}
             />
             <div className="close-search" onClick={this.displaySearchBar} />
           </div>
           <div
-            className={`notifications ${this.state.showSearch
-              ? 'hide-search'
-              : ''}`}
+            className={`notifications ${
+              this.state.showSearch ? 'hide-search' : ''
+            } ${isProduction() ? 'dimmed' : ''}`}
           />
           <div className={this.state.showSearch ? 'hide-search' : ''}>
             <DropDown

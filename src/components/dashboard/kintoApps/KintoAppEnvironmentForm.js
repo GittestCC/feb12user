@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FieldValidation, Toggle } from '../../forms'
+import { isProduction } from '../../../helpers/pageHelper'
 import { environments } from '../../../helpers/forms/validationFields'
 
 const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
@@ -23,14 +24,16 @@ const KintoAppEnvironmentForm = ({ kintoApp, environment }) => {
             />
           </div>
 
-          <div className="field-wrapper toggle">
-            <Field
-              name="autoDeploy"
-              label="Automatically deploy application when new Kintoblock builds are available"
-              component={Toggle}
-              help="To enable automated deployment of your application, activate this toggle and select a branch for any KintoBlock components inside the application."
-            />
-          </div>
+          {!isProduction() ? (
+            <div className="field-wrapper toggle">
+              <Field
+                name="autoDeploy"
+                label="Automatically deploy application when new Kintoblock builds are available"
+                component={Toggle}
+                help="To enable automated deployment of your application, activate this toggle and select a branch for any KintoBlock components inside the application."
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </form>

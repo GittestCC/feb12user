@@ -1,4 +1,6 @@
 .ka-config-dependencies {
+  position: relative;
+  overflow: hidden;
   background: $kinto-white;
   border-radius: 12px 12px 0 0;
   box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;

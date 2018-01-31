@@ -83,3 +83,22 @@ button.dropdown-button.menu, button.dropdown-button {
   border: none;
   background-color: transparent !important;
 }
+
+// for items we have faded for alpha release
+.dimmed {
+  opacity: 0.2;
+}
+
+.coming {
+  position: absolute;
+  transform: rotate(-45deg);
+  top: -16px;
+  left: -50px;
+  background-color: $kinto-green-light;
+  color: $kinto-white;
+  padding-top: 36px;
+  margin: 0;
+  padding-bottom: 10px;
+  width: 135px;
+  text-align: center;
+}

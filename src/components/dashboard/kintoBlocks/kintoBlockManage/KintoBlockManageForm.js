@@ -55,10 +55,9 @@ class KintoBlockManageForm extends Component {
 
           <h3>Basic Info</h3>
           <h5>
-            Choose the name for this KintoBlock and give a a short description.
-            If you make the KintoBlock public, they will help other people
-            discover your application. Let us know your preferred coding flavor
-            and connect your repo.
+            Choose the name for this KintoBlock and give a a short description
+            so you can easily find it back later. Let us know your preferred
+            coding flavor and connect your repo.
           </h5>
           <div className="form-body">
             <div className="section">

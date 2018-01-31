@@ -41,14 +41,11 @@ class DependencyManagement extends Component {
       appVersion && fields.length ? `${appVersion}/config/0` : null
     return (
       <div>
-        <h3>KintoBlocks</h3>
+        <h3>Dependencies</h3>
         <h5>
-          If your KintoBlock needs other KintoBlocks to work (like an auth
-          KintoBlock or a database service), pick and chose them here. You can
-          then configure them so they fit perfectly your use case. You can
-          specify unique configuration parameters for each of the features you
-          are adding. You can also decide to combine or split instances of the
-          same KintoBlock to save on costs.
+          If your KintoBlock needs other KintoBlocks to work (like an Auth
+          KintoBlock or a Leaderboard KintoBlock), pick and chose them here. You
+          can then configure each of them when building your application.
         </h5>
         <div className="form-body simple dependency-management">
           {!disabled ? (
@@ -79,7 +76,7 @@ class DependencyManagement extends Component {
                   {configUrl ? (
                     <div className="button-group">
                       <Link to={configUrl} className="button secondary">
-                        Edit KintoBlocks & Services
+                        Edit Dependencies
                       </Link>
                       <Link
                         to={configUrl}
@@ -91,7 +88,7 @@ class DependencyManagement extends Component {
                   ) : (
                     <div className="button-group">
                       <a className="button secondary disabled">
-                        Edit KintoBlocks & Services
+                        Edit Dependencies
                       </a>
                       <a
                         className="icon edit-blocks-and-services hide-text"
@@ -126,9 +123,8 @@ class DependencyManagement extends Component {
               <div className="no-blocks-or-services">
                 <div className="icons">
                   <div className="kinto-block" />
-                  <div className="service" />
                 </div>
-                <div className="text">No KintoBlocks added</div>
+                <div className="text">No Dependencies added</div>
               </div>
             )}
           </div>

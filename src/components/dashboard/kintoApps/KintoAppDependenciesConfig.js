@@ -113,7 +113,9 @@ class KintoAppDependenciesConfig extends Component {
       <div className="ka-dependencies-page">
         <div className="ka-config-dependencies">
           <div className="ka-config-header">
-            <div className="left-side" />
+            <div className="left-side">
+              <h6 className="coming">Coming</h6>
+            </div>
             <ul className="right-side uppercase tab-list">
               <li>
                 <a

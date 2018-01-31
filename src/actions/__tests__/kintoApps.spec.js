@@ -35,7 +35,6 @@ describe('KintoApps actions', () => {
     const store = mockStore({ kintoApps: { byId: {} } })
     await store.dispatch(actions.fetchKintoApp('1', '1.1.0'))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       actions.RECEIVE_KINTO_APP
     ])
   })
@@ -51,10 +50,7 @@ describe('KintoApps actions', () => {
     })
     const store = mockStore({ workspaces: { selectedWorkspace: '1' } })
     await store.dispatch(actions.fetchKintoApps())
-    expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
-      CALL_HISTORY_METHOD
-    ])
+    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
   })
 
   it('fetchKintoApps should call a receive action if there are KintoApps', async () => {
@@ -76,7 +72,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.fetchKintoApps())
     expect(store.getActions()).toEqual([
-      { type: actions.FETCH_KINTO_APPS },
       { type: actions.RECEIVE_KINTO_APPS, data: result.data }
     ])
   })
@@ -235,7 +230,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.getKintoAppEnvironments('1'))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       actions.RECIEVE_KINTO_APP_ENVIRONMENTS
     ])
   })
@@ -252,10 +246,7 @@ describe('KintoApps actions', () => {
       workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.getKintoAppEnvironments('1'))
-    expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
-      CALL_HISTORY_METHOD
-    ])
+    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
   })
 
   it('addNewEnvironment should fire an action to submit a form and receive a new environment', async () => {
@@ -271,7 +262,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.addNewEnvironment('1', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
       actions.NEW_ENVIRONMENT_RECEIVE
     ])
@@ -291,7 +281,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.deployEnvironment('1', {}, 'envName'))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
       actions.KINTO_APP_ENVIRONMENT_UPDATE,
       CALL_HISTORY_METHOD
@@ -312,7 +301,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.shutDownEnvironment('1', 'envName', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       FORM_SUBMITTED,
       CALL_HISTORY_METHOD
     ])
@@ -343,7 +331,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.reorderEnvironments('1', 1, 2))
     expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_APPS,
       actions.KINTO_APP_ENVIRONMENT_LIST_REORDER
     ])
   })
@@ -355,7 +342,6 @@ describe('KintoApps actions', () => {
     })
     await store.dispatch(actions.updateAppEnvironment('1', '1', {}))
     expect(store.getActions()).toEqual([
-      { type: 'FETCH_KINTO_APPS' },
       { type: 'FORM_SUBMITTED' },
       {
         type: 'KINTO_APP_ENVIRONMENT_UPDATE',

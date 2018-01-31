@@ -52,24 +52,13 @@
       &.kintoapps:before {
         background-image: url('/images/icon-dashboard-applications.svg');
       }
-      &.billing:before {
-        background-image: url('/images/icon-dashboard-billing.svg');
-      }
-      &.hosting:before {
-        background-image: url('/images/icon-dashboard-hosting.svg');
-      }
       &.kintoblocks:before {
         background-image: url('/images/icon-dashboard-kintoblocks.svg');
-      }
-      &.sales-data:before {
-        background-image: url('/images/icon-dashboard-sales-data.svg');
       }
       &.services:before {
         background-image: url('/images/icon-dashboard-services.svg');
       }
-      &.settings:before {
-        background-image: url('/images/icon-dashboard-settings.svg');
-      }
+
       &.kintoblocks img,
       &.kintoapps img,
       &.services img {

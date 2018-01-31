@@ -46,10 +46,7 @@ describe('KintoBlocks actions', () => {
       workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.fetchKintoBlocks())
-    expect(store.getActions().map(a => a.type)).toEqual([
-      actions.FETCH_KINTO_BLOCKS,
-      CALL_HISTORY_METHOD
-    ])
+    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
   })
 
   it('fetchKintoBlocks if result is not empty fire a kintoBlockReceive action', async () => {
@@ -70,7 +67,6 @@ describe('KintoBlocks actions', () => {
     })
     await store.dispatch(actions.fetchKintoBlocks())
     expect(store.getActions()).toEqual([
-      { type: actions.FETCH_KINTO_BLOCKS },
       {
         type: actions.RECEIVE_KINTO_BLOCKS,
         data: [
@@ -109,7 +105,6 @@ describe('KintoBlocks actions', () => {
 
     await store.dispatch(actions.fetchKintoBlock('1', '1.3.1'))
     expect(store.getActions().map(t => t.type)).toEqual([
-      actions.FETCH_KINTO_BLOCKS,
       actions.RECEIVE_KINTO_BLOCK
     ])
   })
@@ -134,7 +129,6 @@ describe('KintoBlocks actions', () => {
     })
     await store.dispatch(actions.fetchKintoBlock('1', '1.3.1'))
     expect(store.getActions()).toEqual([
-      { type: actions.FETCH_KINTO_BLOCKS },
       {
         type: actions.RECEIVE_KINTO_BLOCK,
         id: '1',
@@ -202,7 +196,6 @@ describe('KintoBlocks actions', () => {
     })
     await store.dispatch(actions.fetchKintoBlock('1', 'NEW', BRANCH))
     expect(store.getActions().map(t => t.type)).toEqual([
-      actions.FETCH_KINTO_BLOCKS,
       actions.RECEIVE_KINTO_BLOCK
     ])
   })
