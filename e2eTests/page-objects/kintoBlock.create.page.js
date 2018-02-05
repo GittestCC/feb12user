@@ -29,6 +29,10 @@ class KintoBlockCreate extends Page {
   get repository() {
     return getInput('repositoryName')
   }
+
+  get createKBTitle() {
+    return $('.kintoblocks-master-container >div >h2')
+  }
 }
 
 export default new KintoBlockCreate()

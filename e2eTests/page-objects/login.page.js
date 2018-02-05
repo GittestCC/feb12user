@@ -31,6 +31,10 @@ class Login extends Page {
     return $('[data-test=loginForm] .show-password')
   }
 
+  get loginRememberMe() {
+    return $('#KeepSignedIn')
+  }
+
   get loginForm() {
     return $('[data-test=loginForm]')
   }

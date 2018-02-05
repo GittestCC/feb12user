@@ -1,4 +1,5 @@
 import Page from './page'
+import { getDataTest } from '../helpers/elementSelector'
 
 class Landing extends Page {
   open() {
@@ -6,7 +7,15 @@ class Landing extends Page {
   }
 
   get navbar() {
-    return $('[data-test=landing-navbar]')
+    return getDataTest('landing-navbar')
+  }
+
+  get sidebar() {
+    return getDataTest('sidebar')
+  }
+
+  get topbar() {
+    return getDataTest('navbar')
   }
 
   get workspaceSelect() {

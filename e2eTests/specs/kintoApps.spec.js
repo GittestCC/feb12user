@@ -4,11 +4,19 @@ import KintoAppCreate from '../page-objects/kintoApp.create.page'
 import KintoAppManage from '../page-objects/kintoApp.manage.page'
 import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import KintoBlockList from '../page-objects/kintoBlock.list.page'
+import DashboardIndex from '../page-objects/dashboard.index.page'
 import Login from '../page-objects/login.page'
 import Landing from '../page-objects/landing.page'
 import testData from '../constants/testdata.json'
 
 describe('create kintoApp', () => {
+  // TO DO let workspaceId
+  //  const wdio = require('wdio')
+  //
+  //   beforeEach(wdio.wrap( {
+  //	    workspaceId = Landing.workspaceSelect.getAttribute('data-test')
+  //  })	)
+
   it('should redirect the user to login  when he is trying to access list of kintoApps and he is not logged in', () => {
     KintoAppList.open(1) // Default workspace ID 1 passed as user is not yet logged in in this case
     Login.loginForm.waitForVisible()
@@ -19,6 +27,12 @@ describe('create kintoApp', () => {
     Login.login()
     var ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoAppList.open(ws)
+    KintoAppCreate.form.waitForVisible()
+    expect(KintoAppCreate.form.isVisible()).to.eq(true)
+  })
+
+  it('should redirect the user to create kintoapps when he clicks on kintoapps with no kintoapps created', () => {
+    DashboardIndex.applicationLeftnav.click()
     KintoAppCreate.form.waitForVisible()
     expect(KintoAppCreate.form.isVisible()).to.eq(true)
   })
@@ -166,6 +180,11 @@ describe('create kintoApp', () => {
     KintoAppList.getCard(2).click() //TODO  Change this to 0, after the bug to display the latest KA on top is fixed
     KintoAppManage.title.waitForVisible()
     expect(KintoAppManage.title.getText()).to.eq(name)
+  })
+
+  it('should not redirect the user to create kintoapps when he clicks on kintoapps with  kintoapps created', () => {
+    DashboardIndex.applicationLeftnav.click()
+    expect(KintoAppCreate.form.isVisible()).to.eq(false)
   })
 })
 

@@ -41,6 +41,10 @@ class KintoAppCreate extends Page {
   get kbdropDown() {
     return $('div.Select-input > input')
   }
+
+  get createKintoAppTitle() {
+    return $('.create-kintoapp > h2')
+  }
 }
 
 export default new KintoAppCreate()

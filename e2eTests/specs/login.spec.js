@@ -206,14 +206,15 @@ describe('signup form', () => {
     expect(Login.signupSuccess.isVisible()).to.eql(true)
   })
 
-  it('should validate that username accepts space between characters', () => {
+  it('should validate that username should not accept space between characters', () => {
     Login.open()
     Login.signupUsername.setValue(testData.signup.validUserNameWithSpace)
     Login.signupEmail.setValue(testData.signup.validEmailWithdash)
     Login.signupPassword.setValue(testData.signup.validPassword)
     Login.signupSubmit()
-    Login.signupSuccess.waitForVisible()
-    expect(Login.signupSuccess.isVisible()).to.eql(true)
+    expect(Login.signupUsernameError.getText()).to.eql(
+      "Only the following special characters @_'. are valid"
+    )
   })
 
   it('should validate that email accepts  only letters (a-z, both caps), numbers (0-9), dashes (-), underscores (_), apostrophes,periods (.), at (@)', () => {
