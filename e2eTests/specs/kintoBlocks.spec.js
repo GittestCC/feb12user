@@ -22,7 +22,8 @@ describe('create kintoBlock', () => {
   })
 
   it('should validate inputs and not allow  user to create a kb with invalid data', () => {
-    KintoBlockCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.name.input.setValue(
       testData.kintoblock.validKintoBlockName
     )
@@ -119,7 +120,8 @@ describe('create kintoBlock', () => {
   })
 
   it('should be able to select already existing Repo from my Github account', () => {
-    KintoBlockCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.name.input.setValue(
       testData.kintoblock.validKintoBlockNameWithDigit
     )

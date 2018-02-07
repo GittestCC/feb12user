@@ -2,8 +2,8 @@ import Page from './page'
 import { getInput, getDataTest } from '../helpers/elementSelector'
 
 class KintoAppCreate extends Page {
-  open() {
-    super.open('app/dashboard/1/kintoapps/create')
+  open(wsID) {
+    super.open(`app/dashboard/${wsID}/kintoapps/create`)
   }
 
   get form() {

@@ -1,4 +1,5 @@
 import Page from './page'
+import { getInput } from '../helpers/elementSelector'
 
 class DashboardIndex extends Page {
   open(wsID) {
@@ -58,7 +59,11 @@ class DashboardIndex extends Page {
   }
 
   get analyticsLeftnav() {
-    return $('.analytics')
+    return $('.analytics.dimmed')
+  }
+
+  get servicesLeftnav() {
+    return $('.services.dimmed')
   }
 
   get kaHoveraddicon() {
@@ -67,6 +72,22 @@ class DashboardIndex extends Page {
 
   get kbHoveraddicon() {
     return $('h4.kintoblocks>img')
+  }
+
+  get workSpaceTitle() {
+    return $('.workspaces-select>h3')
+  }
+
+  get workspaceSelect() {
+    return getInput('.workspaces-select>select', 'select')
+  }
+
+  get workspaceDropdown() {
+    return $('.workspaces-select>select')
+  }
+
+  getWSDropdownElement(index) {
+    return $(`.workspaces-select>select>:nth-child(${index})`)
   }
 }
 

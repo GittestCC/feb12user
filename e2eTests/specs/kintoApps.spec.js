@@ -10,7 +10,7 @@ import Landing from '../page-objects/landing.page'
 import testData from '../constants/testdata.json'
 
 describe('create kintoApp', () => {
-  // TO DO let workspaceId
+  // TODO let workspaceId
   //  const wdio = require('wdio')
   //
   //   beforeEach(wdio.wrap( {
@@ -38,7 +38,8 @@ describe('create kintoApp', () => {
   })
 
   it('should validate inputs and not allow  user to create a kintoApp without invalid data', () => {
-    KintoAppCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppCreate.open(ws)
     KintoAppCreate.name.input.setValue(testData.kintoapp.validKintoAppName)
     KintoAppCreate.submitGlobal()
 
@@ -114,7 +115,7 @@ describe('create kintoApp', () => {
     var ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoAppList.open(ws)
     KintoAppList.getCard(0).waitForVisible()
-    KintoAppCreate.open()
+    KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
     expect(KintoAppCreate.whatisanApp.getText()).to.eql(
       'What is an Application?\nApplications are tailored back-end features packages, ready to be consumed by your clients and whose feature can scale independently to fit your needs. They are composed of KintoBlocks and services with unique configuration parameters, and either a client or a protocol to allow your clients to talk to the application. Start building an application below or learn more here.'
@@ -157,7 +158,8 @@ describe('create kintoApp', () => {
   })
 
   it('should create a new KA selecting multiple KintoBlock', () => {
-    KintoAppCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
     KintoAppCreate.name.input.setValue(testData.kintoapp.validKANamewithDot)
 

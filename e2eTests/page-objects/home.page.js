@@ -2,7 +2,7 @@ import Page from './page'
 
 class Home extends Page {
   open(wsID) {
-    super.open(`home`)
+    super.open('app/home')
   }
 
   get signUpBtn() {

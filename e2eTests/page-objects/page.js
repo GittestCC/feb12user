@@ -35,7 +35,7 @@ class Page {
 
   open(path) {
     browser.url('/' + path)
-    //TODO browser.windowHandleFullscreen()
+    browser.windowHandleFullscreen()
   }
 
   // relative path checking

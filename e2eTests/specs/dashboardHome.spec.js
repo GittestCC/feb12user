@@ -5,6 +5,7 @@ import KintoAppCreate from '../page-objects/kintoApp.create.page'
 import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import Landing from '../page-objects/landing.page'
 import Home from '../page-objects/home.page'
+import WorkspaceCreate from '../page-objects/workspace.create.page'
 import testData from '../constants/testdata.json'
 
 describe('dashboard Home', () => {
@@ -67,7 +68,7 @@ describe('dashboard Home', () => {
     expect(Login.loginUsername.isVisible()).to.eql(true)
   })
 
-  it('should verify if Login button click from home page opens the dashboard if user already logged in ', () => {
+  it('should verify if navigating to home page opens the dashboard if user already logged in ', () => {
     Login.login()
     Home.open()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
@@ -93,14 +94,17 @@ describe('dashboard Home', () => {
 
   it('should redirect to dashboard page if dashboard button is clicked, when on Applications,KintoBlocks and market page', () => {
     //Navigating to dashboard from Applications
-    KintoAppCreate.open()
+
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
     DashboardIndex.dashboardButton.click()
     DashboardIndex.container.waitForVisible()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from KintoBlock
-    KintoBlockCreate.open()
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.form.waitForVisible()
     DashboardIndex.dashboardButton.click()
     DashboardIndex.container.waitForVisible()
@@ -125,13 +129,15 @@ describe('dashboard Home', () => {
 
   it('should redirect to dashboard page if kintohub logo on top left is clicked, when on Applications,KintoBlocks and market page', () => {
     //Navigating to dashboard from Applications
-    KintoAppCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
     DashboardIndex.kintoHub_Logolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from KintoBlock
-    KintoBlockCreate.open()
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.form.waitForVisible()
     DashboardIndex.kintoHub_Logolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
@@ -179,28 +185,122 @@ describe('dashboard Home', () => {
     expect(Login.loginUsername.isVisible()).to.eql(true)
   })
 
-  it('should display applications, analytics and kintoblocks on the left navigation bar', () => {
+  it('should display Overview, Applications, Analytics(Greyed out),kintoblocks and Services(Greyed out) on the left navigation bar', () => {
+    Login.login()
     DashboardIndex.applicationLeftnav.waitForVisible()
     expect(DashboardIndex.applicationLeftnav.isVisible()).to.eql(true)
+    expect(DashboardIndex.applicationLeftnav.getText()).to.eql('Applications')
     expect(DashboardIndex.kintoBlocksleftnav.isVisible()).to.eql(true)
+    expect(DashboardIndex.kintoBlocksleftnav.getText()).to.eql('KintoBlocks')
     expect(DashboardIndex.analyticsLeftnav.isVisible()).to.eql(true)
-    //TODO Overview and Services not implemented yet
+    expect(DashboardIndex.analyticsLeftnav.getText()).to.eql('Analytics')
+    expect(DashboardIndex.homeLeftnav.isVisible()).to.eql(true)
+    expect(DashboardIndex.homeLeftnav.getText()).to.eql('Overview')
+    expect(DashboardIndex.servicesLeftnav.isVisible()).to.eql(true)
+    expect(DashboardIndex.servicesLeftnav.getText()).to.eql('Services')
   })
 
   it('should display left navigation menu, when navigating to all pages of kintohub', () => {
     DashboardIndex.homeLeftnav.click()
     expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+
     DashboardIndex.applicationLeftnav.click()
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+
     DashboardIndex.kintoBlocksleftnav.click()
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
 
-    //TODO check from workspace, market,Analytics, Services, Overview
+    DashboardIndex.goTomarket.click()
+    expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+
+    //Below step Failing now for a bug as left navigation bar items go missing when we go to market
+    DashboardIndex.analyticsLeftnav.click()
+    expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+
+    DashboardIndex.servicesLeftnav.click()
+    expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+  })
+
+  it('should display title as WORKSPACE for workspace field', () => {
+    DashboardIndex.workSpaceTitle.waitForVisible()
+    expect(DashboardIndex.workSpaceTitle.getText()).to.eql('WORKSPACE')
+  })
+
+  it('should trigger expansion of dropdown on click of Dropdown box and should display create new workspace as first element in workspace dropdown list', () => {
+    DashboardIndex.workspaceDropdown.click()
+    expect(DashboardIndex.getWSDropdownElement(1).isVisible()).to.eql(true)
+    expect(DashboardIndex.getWSDropdownElement(1).getText()).to.eql(
+      'Create new workspace'
+    )
+  })
+
+  it('should check that displayed element in the dropdown should be the workspace currently used', () => {
+    var wsvalPos1 = DashboardIndex.getWSDropdownElement(2).getText()
+    DashboardIndex.workspaceDropdown.selectByValue(1)
+    var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
+
+    expect(currentWS).to.eql(wsvalPos1)
+  })
+
+  it('should navigate to overview page of new workspace,when workspaces is changed', () => {
+    DashboardIndex.workspaceDropdown.click()
+    var wsvalPos2 = DashboardIndex.getWSDropdownElement(3).getText()
+    DashboardIndex.workspaceDropdown.selectByValue(2)
+    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
+    expect(currentWS).to.eql(wsvalPos2)
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(DashboardIndex.getUrl()).to.eql('/app/dashboard/' + ws)
+
+    DashboardIndex.workspaceDropdown.selectByValue(1)
+    ws = Landing.workspaceSelect.getAttribute('data-test')
+    expect(DashboardIndex.getUrl()).to.eql('/app/dashboard/' + ws)
+  })
+
+  it('should navigate to create a new workspace page of current workspace', () => {
+    DashboardIndex.workspaceDropdown.selectByValue(0)
+    WorkspaceCreate.form.waitForVisible()
+    expect(WorkspaceCreate.createNewworkspaceTitle.getText()).to.eql(
+      'Create New Workspace'
+    )
+  })
+
+  it('should navigate to edit page of the current workspace, when click on edit icon if you are admin', () => {
+    DashboardIndex.workspaceDropdown.selectByValue(1)
+    var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
+    WorkspaceCreate.editWorkspace.click()
+    WorkspaceCreate.editWorkspaceForm.waitForVisible()
+    var editPagehead = WorkspaceCreate.editWorkspaceHeading.getText()
+    expect(editPagehead).to.eql(currentWS)
+    WorkspaceCreate.logout()
+  })
+
+  it('should navigate to overview page of switched workspace,when workspace is switched from any page of kintohub', () => {
+    Login.login()
+    //From Applications page
+    DashboardIndex.applicationLeftnav.click()
+    DashboardIndex.workspaceDropdown.waitForVisible()
+    DashboardIndex.workspaceDropdown.selectByValue(2)
+    DashboardIndex.kintoHub_Logo.waitForVisible()
+    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+
+    //From KintoBlocks page
+    DashboardIndex.kintoBlocksleftnav.click()
+    DashboardIndex.workspaceDropdown.waitForVisible()
+    DashboardIndex.workspaceDropdown.selectByValue(1)
+    DashboardIndex.kintoHub_Logo.waitForVisible()
+    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+
+    //From Market
+    DashboardIndex.goTomarket.click()
+    expect(DashboardIndex.getUrl()).to.eql('/app/market')
+    DashboardIndex.workspaceDropdown.selectByValue(2)
+    DashboardIndex.kintoHub_Logo.waitForVisible()
+    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
   })
 
   it('should verify that Center button CTA redirects opens help center in a new tab, to the relevant dedicated section - Get started', () => {
-    Login.login()
     DashboardIndex.getStartedBtn.click()
     let handles = browser.windowHandles()
     browser.switchTab(handles[1]).pause(2000)
