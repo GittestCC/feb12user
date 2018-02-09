@@ -103,6 +103,15 @@
     	
   
 		
+	},
+	
+	"workspace":{
+		
+	"validWorkSpaceName": "TestWorkspace",
+	"invalidWorkSpaceName":"`#$",
+	"allValidWorkSpaceName":"w_'. @S1",
+	"invalidWSThreeChar" : "te",
+	"invalidWSTwoFiftySixChar" : "abcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDE12345678901234567"
 	}
 	
 	

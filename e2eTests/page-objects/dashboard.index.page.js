@@ -14,11 +14,11 @@ class DashboardIndex extends Page {
     return $('a.button.default')
   }
 
-  get kintoHub_Logo() {
+  get kintoHubLogo() {
     return $('.home-logo')
   }
 
-  get kintoHub_Logolefttop() {
+  get kintoHubLogolefttop() {
     return $('.navigation-logo')
   }
 

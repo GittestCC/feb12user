@@ -11,7 +11,7 @@ import testData from '../constants/testdata.json'
 describe('dashboard Home', () => {
   it('should display Kintohub logo in the center after successfull login', () => {
     Login.login()
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
   })
 
   it('should display top bar, side bar and body of the home page after successful login', () => {
@@ -76,7 +76,7 @@ describe('dashboard Home', () => {
 
   it('should display Kintohub logo and title, dashboard and market button, searchbar, bell and user icon, logout button ', () => {
     Login.open()
-    expect(DashboardIndex.kintoHub_Logolefttop.isVisible()).to.eql(true)
+    expect(DashboardIndex.KintohubLogolefttop.isVisible()).to.eql(true)
     expect(DashboardIndex.dashboardButton.isVisible()).to.eql(true)
     expect(DashboardIndex.goTomarket.isVisible()).to.eql(true)
     expect(DashboardIndex.searchBar.isVisible()).to.eql(true)
@@ -118,7 +118,7 @@ describe('dashboard Home', () => {
   })
 
   it('should redirect to dashboard page if kintohub logo on top left is clicked, when already on dashboard page', () => {
-    DashboardIndex.kintoHub_Logolefttop.click()
+    DashboardIndex.KintohubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
   })
 
@@ -132,19 +132,19 @@ describe('dashboard Home', () => {
     var ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
-    DashboardIndex.kintoHub_Logolefttop.click()
+    DashboardIndex.KintohubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from KintoBlock
     ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoBlockCreate.open(ws)
     KintoBlockCreate.form.waitForVisible()
-    DashboardIndex.kintoHub_Logolefttop.click()
+    DashboardIndex.KintohubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from Market
     DashboardIndex.goTomarket.click()
-    DashboardIndex.kintoHub_Logolefttop.click()
+    DashboardIndex.KintohubLogolefttop.click()
     expect(DashboardIndex.getStartedBtn.isVisible()).to.eql(true)
   })
 
@@ -202,7 +202,7 @@ describe('dashboard Home', () => {
 
   it('should display left navigation menu, when navigating to all pages of kintohub', () => {
     DashboardIndex.homeLeftnav.click()
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
 
     DashboardIndex.applicationLeftnav.click()
@@ -247,7 +247,7 @@ describe('dashboard Home', () => {
     DashboardIndex.workspaceDropdown.click()
     var wsvalPos2 = DashboardIndex.getWSDropdownElement(3).getText()
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
     var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
     expect(currentWS).to.eql(wsvalPos2)
     var ws = Landing.workspaceSelect.getAttribute('data-test')
@@ -282,22 +282,22 @@ describe('dashboard Home', () => {
     DashboardIndex.applicationLeftnav.click()
     DashboardIndex.workspaceDropdown.waitForVisible()
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    DashboardIndex.kintoHub_Logo.waitForVisible()
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    DashboardIndex.KintohubLogo.waitForVisible()
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
 
     //From KintoBlocks page
     DashboardIndex.kintoBlocksleftnav.click()
     DashboardIndex.workspaceDropdown.waitForVisible()
     DashboardIndex.workspaceDropdown.selectByValue(1)
-    DashboardIndex.kintoHub_Logo.waitForVisible()
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    DashboardIndex.KintohubLogo.waitForVisible()
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
 
     //From Market
     DashboardIndex.goTomarket.click()
     expect(DashboardIndex.getUrl()).to.eql('/app/market')
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    DashboardIndex.kintoHub_Logo.waitForVisible()
-    expect(DashboardIndex.kintoHub_Logo.isVisible()).to.eql(true)
+    DashboardIndex.KintohubLogo.waitForVisible()
+    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
   })
 
   it('should verify that Center button CTA redirects opens help center in a new tab, to the relevant dedicated section - Get started', () => {
