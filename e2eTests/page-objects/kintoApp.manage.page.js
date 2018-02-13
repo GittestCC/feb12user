@@ -88,6 +88,10 @@ class KintoAppManage extends Page {
     )
   }
 
+  get switchValueForWS() {
+    return $('#public')
+  }
+
   get errorMsgDuplicateVersion() {
     return $('div.kh-modal-body > form > div.error-message-form.error-message')
   }

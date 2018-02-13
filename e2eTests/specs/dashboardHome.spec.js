@@ -6,6 +6,7 @@ import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import Landing from '../page-objects/landing.page'
 import Home from '../page-objects/home.page'
 import WorkspaceCreate from '../page-objects/workspace.create.page'
+import WorkspaceManage from '../page-objects/workspace.manage.page'
 import testData from '../constants/testdata.json'
 
 describe('dashboard Home', () => {
@@ -269,9 +270,9 @@ describe('dashboard Home', () => {
   it('should navigate to edit page of the current workspace, when click on edit icon if you are admin', () => {
     DashboardIndex.workspaceDropdown.selectByValue(1)
     var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
-    WorkspaceCreate.editWorkspace.click()
-    WorkspaceCreate.editWorkspaceForm.waitForVisible()
-    var editPagehead = WorkspaceCreate.editWorkspaceHeading.getText()
+    DashboardIndex.editWorkspace.click()
+    WorkspaceManage.form.waitForVisible()
+    var editPagehead = WorkspaceManage.editWorkspaceHeading.getText()
     expect(editPagehead).to.eql(currentWS)
     WorkspaceCreate.logout()
   })

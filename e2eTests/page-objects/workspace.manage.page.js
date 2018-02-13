@@ -1,4 +1,5 @@
 import Page from './page'
+import { getInput } from '../helpers/elementSelector'
 
 class WorkspaceManage extends Page {
   open(ws) {
@@ -9,8 +10,16 @@ class WorkspaceManage extends Page {
     return $('.edit-workspace')
   }
 
+  get name() {
+    return getInput('name')
+  }
+
   get workspaceBreadcrum() {
     return $('button.dropdown-button.breadcrumb-icon')
+  }
+
+  get editWorkspaceHeading() {
+    return $('form.workspace-form.form-container>div>h2')
   }
 
   get breadCrumbDropDown() {
@@ -40,11 +49,29 @@ class WorkspaceManage extends Page {
   }
 
   get githubTitle() {
-    return 'div.form-wrapper.github-form > h3'
+    return $('div.form-wrapper.github-form > h3')
   }
 
   get githubLink() {
     return $('a.button.dark')
+  }
+
+  get workspaceTitle() {
+    return $('form.workspace-form.form-container>div>h2')
+  }
+
+  get toggleBar() {
+    return $('#autoShareProjects')
+  }
+  get switchTogglerBtn() {
+    return $('span.toggle-slider')
+  }
+  get toggleBarToolTip() {
+    return $('span.tooltip')
+  }
+
+  get toggleBarToolTipText() {
+    return $('.rc-tooltip-content .rc-tooltip-inner')
   }
 }
 

@@ -18,18 +18,6 @@ class WorkspaceCreate extends Page {
     return $('.create-workspace > h2')
   }
 
-  get editWorkspace() {
-    return $('a.avatar.small.edit.hide-text')
-  }
-
-  get editWorkspaceForm() {
-    return $('form.workspace-form.form-container')
-  }
-
-  get editWorkspaceHeading() {
-    return $('form.workspace-form.form-container>div>h2')
-  }
-
   get createNewWorkspaceTitle() {
     return $('.create-workspace>h2')
   }
@@ -63,7 +51,7 @@ class WorkspaceCreate extends Page {
   }
 
   get workspacePermissionField() {
-    return $('.bottom > select')
+    return $('.bottom>select[name="role"]')
   }
 
   getworkspacePermissionField(index) {
@@ -84,6 +72,22 @@ class WorkspaceCreate extends Page {
 
   get workspaceCreateBtnEnabled() {
     return $('button.button.default')
+  }
+
+  get toggleBar() {
+    return $('#autoShareProjects')
+  }
+
+  get toggleBarToolTip() {
+    return $('span.tooltip')
+  }
+
+  get toggleBarToolTipText() {
+    return $('.rc-tooltip-content .rc-tooltip-inner')
+  }
+
+  get switchTogglerBtn() {
+    return $('span.toggle-slider')
   }
 }
 

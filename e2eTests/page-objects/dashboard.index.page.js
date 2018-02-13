@@ -89,6 +89,10 @@ class DashboardIndex extends Page {
   getWSDropdownElement(index) {
     return $(`.workspaces-select>select>:nth-child(${index})`)
   }
+
+  get editWorkspace() {
+    return $('a.avatar.small.edit.hide-text')
+  }
 }
 
 export default new DashboardIndex()
