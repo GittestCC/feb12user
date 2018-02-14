@@ -5,6 +5,7 @@ import pageOptions from './pageOptions'
 import kintoBlocks from './kintoBlocks'
 import kintoApps from './kintoApps'
 import workspaces from './workspaces'
+import documentation from './documentation'
 import auth from './auth'
 import kintoBlocksDependenciesCache from './kintoBlocksDependenciesCache'
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   kintoApps,
   workspaces,
   auth,
+  documentation,
   kintoBlocksDependenciesCache
 })
 export default rootReducer

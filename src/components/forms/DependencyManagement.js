@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { Link } from 'react-router-dom'
-
 import DependencyItem from './DependencyItem'
+
 class DependencyManagement extends Component {
   static propTypes = {
     appVersion: PropTypes.string,
@@ -12,7 +12,8 @@ class DependencyManagement extends Component {
     onSearchKintoBlocks: PropTypes.func.isRequired,
     fetchKintoBlockDependenciesData: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    isKintoBlock: PropTypes.bool
+    isKintoBlock: PropTypes.bool,
+    workspaceId: PropTypes.string
   }
 
   onSelectKintoBlock = selectedItem => {
@@ -32,6 +33,7 @@ class DependencyManagement extends Component {
       appVersion,
       fields,
       appDependenciesInfo,
+      workspaceId,
       onSearchKintoBlocks,
       disabled,
       isKintoBlock
@@ -114,6 +116,7 @@ class DependencyManagement extends Component {
                     field={field}
                     fields={fields}
                     appDependenciesInfo={appDependenciesInfo}
+                    workspaceId={workspaceId}
                     data={fields.get(key)}
                     disabled={disabled}
                   />

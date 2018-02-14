@@ -166,7 +166,7 @@
     cursor: default;
   }
 
-  a, button {
+  a, button, .dropdown-scroll-container > a {
     font-size: 14px;
     font-weight: bold;
     width: 100%;
@@ -396,4 +396,8 @@
       }
     }
   }
+}
+
+#endpointInfoSwitcher .dropdown-content {
+  top: 30px;
 }

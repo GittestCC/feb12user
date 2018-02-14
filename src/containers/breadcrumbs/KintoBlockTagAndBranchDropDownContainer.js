@@ -6,7 +6,10 @@ import { getUrl } from '../../helpers/urlHelper'
 import KintoBlockTagAndBranchDropDown from '../../components/breadcrumbs/KintoBlockTagAndBranchDropDown'
 import { getVersionType } from '../../helpers/versionHelper'
 
-function mapStateToProps(state, { url, kintoBlock, noHighlight }) {
+function mapStateToProps(
+  state,
+  { url, kintoBlock, noHighlight, isDocumentation }
+) {
   let selectedKintoBlock = {}
 
   if (kintoBlock) {
@@ -14,6 +17,12 @@ function mapStateToProps(state, { url, kintoBlock, noHighlight }) {
   } else {
     selectedKintoBlock =
       state.kintoBlocks.byId[state.pageOptions.selectedKintoBlockId] || {}
+  }
+
+  if (isDocumentation) {
+    selectedKintoBlock = state.documentation.selectedKintoBlock
+      ? state.documentation.selectedKintoBlock
+      : {}
   }
 
   const id = get(selectedKintoBlock, 'id', '')

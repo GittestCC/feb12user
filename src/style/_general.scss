@@ -102,3 +102,7 @@ button.dropdown-button.menu, button.dropdown-button {
   width: 135px;
   text-align: center;
 }
+
+.box-shadow-standard {
+  box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
+}

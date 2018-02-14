@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
+import { getPageUrl } from '../../helpers/urlHelper'
+import { pages } from '../../constants/pages'
 
 class DependencyItem extends Component {
   static propTypes = {
@@ -12,7 +14,8 @@ class DependencyItem extends Component {
     fields: PropTypes.object.isRequired,
     appDependenciesInfo: PropTypes.object.isRequired,
     data: PropTypes.object,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    workspaceId: PropTypes.string
   }
 
   onRemoveItem = () => {
@@ -50,6 +53,7 @@ class DependencyItem extends Component {
       appVersion,
       field,
       data,
+      workspaceId,
       appDependenciesInfo,
       disabled
     } = this.props
@@ -69,6 +73,15 @@ class DependencyItem extends Component {
           <div className="text">
             <h3 className="name">{block.name}</h3>
             <h6 className="description">{block.description}</h6>
+            <Link
+              className="information-link-icon"
+              to={getPageUrl(pages.dashboardDocumentation, {
+                workspaceId,
+                id: block.blockId,
+                version: block.version.name,
+                type: block.version.type
+              })}
+            />
           </div>
           <div className="version">
             <Field

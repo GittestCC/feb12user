@@ -94,6 +94,19 @@ export default {
       text: 'Changelogs'
     }
   ],
+  [pages.dashboardDocumentationEndpoints]: [
+    {
+      component: 'KintoBlockDocumentationNameTextContainer'
+    },
+    {
+      component: 'EndpointInfoSwitcherContainer'
+    },
+    {
+      component: 'KintoBlockTagAndBranchDropDownContainer',
+      url: urls[pages.dashboardDocumentation],
+      isDocumentation: true
+    }
+  ],
   [pages.dashboardKintoAppsEnvironmentsLogs]: [
     KintoAppsText,
     {

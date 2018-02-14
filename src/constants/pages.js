@@ -9,6 +9,7 @@ export const pages = {
   dashboardKintoAppsManage: 'DASHBOARD_KINTO_APPS_MANAGE',
   dashboardKintoAppsEnvironmentsLogs: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS_LOGS',
   dashboardKintoAppsChangelogs: 'DASHBOARD_KINTO_APPS_CHANGELOGS',
+  dashboardDocumentationEndpoints: 'DASHBOARD_DOCUMENTATION_ENDPOINTS',
   dashboardKintoAppsEnvironments: 'DASHBOARD_KINTO_APPS_ENVIRONMENTS',
   dashboardKintoAppsDependenciesConfig:
     'DASHBOARD_KINTO_APPS_DEPENDENCIES_CONFIG',
@@ -28,6 +29,10 @@ export const urls = {
     '/app/dashboard/:workspaceId/kintoblocks/create',
   [pages.dashboardKintoBlocksManage]:
     '/app/dashboard/:workspaceId/kintoblocks/:id/versions/:version/:type',
+  [pages.dashboardDocumentationEndpoints]:
+    '/app/kintoblocks/:id/versions/:version/:type/documentation/:endpointId',
+  [pages.dashboardDocumentation]:
+    '/app/kintoblocks/:id/versions/:version/:type/documentation',
   [pages.dashboardKintoAppsList]: '/app/dashboard/:workspaceId/kintoapps/list',
   [pages.dashboardKintoAppsCreate]:
     '/app/dashboard/:workspaceId/kintoapps/create',
@@ -119,6 +124,10 @@ export const dashboardSidebar = [
       {
         key: pages.dashboardKintoBlocksCreate,
         url: urls[pages.dashboardKintoBlocksCreate]
+      },
+      {
+        key: pages.dashboardDocumentationEndpoints,
+        url: urls[pages.dashboardDocumentationEndpoints]
       }
     ],
     group: 1
