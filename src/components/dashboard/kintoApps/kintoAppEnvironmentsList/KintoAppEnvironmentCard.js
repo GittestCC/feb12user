@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
+import { isProduction } from '../../../../helpers/pageHelper'
 import { getVersionAsText } from '../../../../helpers/versionHelper'
 import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
@@ -253,11 +254,13 @@ class KintoAppEnvironmentCard extends Component {
                             </div>
                           )}
                           <div className="view">
-                            <div className="changelog">
-                              <Link to={this.changelogsUrl(release.version)}>
-                                Changelog
-                              </Link>
-                            </div>
+                            {!isProduction() ? (
+                              <div className="changelog">
+                                <Link to={this.changelogsUrl(release.version)}>
+                                  Changelog
+                                </Link>
+                              </div>
+                            ) : null}
                             <div className="logs">
                               <Link to={this.logsUrl(release.version)}>
                                 View Logs
