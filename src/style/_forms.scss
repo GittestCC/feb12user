@@ -8,7 +8,8 @@ label, .label {
 
 input,
 textarea,
-select {
+select,
+.false-input {
   @include placeholder($input);
   color: $kinto-tinted-grayscale-7;
   height: 40px;
@@ -36,6 +37,9 @@ select {
       border: none;
     }
   }
+}
+.false-input {
+  padding-top: 8px;
 }
 input, select {
   &.input-lg {
@@ -480,5 +484,17 @@ form {
     position: relative;
     overflow: hidden;
 
+  }
+}
+
+.field-container.false {
+  margin-bottom: 20px;
+  &.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    .field {
+      width: 100%;
+    }
   }
 }

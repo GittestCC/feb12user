@@ -266,22 +266,18 @@ export const cancelDeployment = id => dispatch => {
   */
 }
 
-export const shutDownEnvironment = (id, envName, data) => (
-  dispatch,
-  getState
-) => {
+export const shutDownEnvironment = (id, envName) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
     id,
     workspaceId: selectedWorkspace
   })
   return axios
-    .put(
+    .post(
       getServerUrl(
         KINTOAPPS,
-        `/kintoapps/${id}/environments/${envName}/shutdown`
-      ),
-      data
+        `/${selectedWorkspace}/kintoapps/${id}/environments/${envName}/shutdown`
+      )
     )
     .then(() => {
       dispatch(formSubmitted())
