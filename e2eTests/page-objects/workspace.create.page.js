@@ -89,6 +89,18 @@ class WorkspaceCreate extends Page {
   get switchTogglerBtn() {
     return $('span.toggle-slider')
   }
+
+  get basicInfoSubtitle() {
+    return $('.workspace-form.form-container>div:nth-child(2)>h5')
+  }
+
+  get membersTitle() {
+    return $('.workspace-form.form-container>div:nth-child(3)>h3')
+  }
+
+  get membersSubtitle() {
+    return $('.workspace-form.form-container>div:nth-child(3)>h5')
+  }
 }
 
 export default new WorkspaceCreate()

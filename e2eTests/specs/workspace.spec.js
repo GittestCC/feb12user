@@ -116,14 +116,44 @@ describe('workspace create Overall', () => {
     )
   })
 
+  it('should display placeholder of email text field in members component as `Enter workspace member email` in `create workspace` page', () => {
+    expect(
+      WorkspaceCreate.workspaceEmailInputField.getAttribute('placeholder')
+    ).to.eql('Enter workspace member email')
+  })
+
+  it('should display title and subtitle for `Members` component, when user navigates to `create workspace` page', () => {
+    expect(WorkspaceCreate.membersTitle.getText()).to.eql('Members')
+    expect(WorkspaceCreate.membersSubtitle.getText()).to.eql(
+      'An admin can create and edit any project, and manage permissions for every member. A member can create new projects and edit the ones they have access to.'
+    )
+  })
+
+  it('should display placeholder text of workspace name field in `create workspace` page is `Enter an name for your workspace`', () => {
+    expect(WorkspaceCreate.name.input.getAttribute('placeholder')).to.eql(
+      'Enter an name for your workspace'
+    )
+  })
+
+  it('should not create new workspace using tspaces(` `) as workspace name', () => {
+    WorkspaceCreate.name.input.setValue(
+      testData.workspace.validWorkSpaceNameOnlyWithSpaces
+    )
+    WorkspaceCreate.submitGlobal()
+    //TODO check for error message
+  })
+
   it('should display explanation of workspace in the explanation zone of create new workspace', () => {
-    expect(WorkspaceCreate.workspaceExplanationTitle.isVisible())
-    expect(WorkspaceCreate.whatIsWorkspaceExplanation.isVisible())
-    expect(WorkspaceCreate.whatIsWorkspaceHelpLink.isVisible())
+    expect(WorkspaceCreate.workspaceExplanationTitle.isVisible()).to.eql(true)
+    expect(WorkspaceCreate.whatIsWorkspaceExplanation.isVisible()).to.eql(true)
+    expect(WorkspaceCreate.whatIsWorkspaceHelpLink.isVisible()).to.eql(true)
   })
 
   it('should display `Basic component` with title, workspace name input field and permission toggle button', () => {
     expect(WorkspaceCreate.basicInfoTitle.getText()).to.eql('Basic Info')
+    expect(WorkspaceCreate.basicInfoSubtitle.getText()).to.eql(
+      'Enter a name for your workspace.'
+    )
     expect(WorkspaceCreate.name.input.isVisible()).to.eql(true)
     expect(WorkspaceCreate.basicInfoToggleBtn.isVisible()).to.eql(true)
   })
@@ -152,7 +182,11 @@ describe('workspace create Overall', () => {
     WorkspaceCreate.name.input.setValue(testData.workspace.validWorkSpaceName)
     WorkspaceCreate.workspaceCreateBtnEnabled.waitForVisible()
     expect(WorkspaceCreate.workspaceCreateBtnEnabled.isVisible()).to.eql(true)
-    WorkspaceCreate.submitGlobal()
+  })
+
+  it('should display alert pop up message, when user try to navigate to any page of KH from `create workspace` page while `create new workspace` button is enabled', () => {
+    DashboardIndex.applicationLeftnav.click()
+    browser.alertAccept()
   })
 
   it('should display member as first option in the permission dropdown, when user is in edit page of workspace', () => {
@@ -218,6 +252,9 @@ describe('workspace edit Overall', () => {
 
   it('should display `Basic component` with title, workspace name input field and permission toggle button, when user navigates to `edit workspace` form', () => {
     expect(WorkspaceCreate.basicInfoTitle.getText()).to.eql('Basic Info')
+    expect(WorkspaceManage.basicInfoSubtitle.getText()).to.eql(
+      'Enter a name for your workspace.'
+    )
     expect(WorkspaceCreate.name.input.isVisible()).to.eql(true)
     expect(WorkspaceCreate.basicInfoToggleBtn.isVisible()).to.eql(true)
   })
@@ -227,6 +264,19 @@ describe('workspace edit Overall', () => {
     expect(WorkspaceCreate.workspaceEmailInputField.isVisible()).to.eql(true)
     expect(WorkspaceCreate.workspacePermissionField.isVisible()).to.eql(true)
     expect(WorkspaceCreate.workspaceAddIcon.isVisible()).to.eql(true)
+  })
+
+  it('should display validation error, when user duplicates members in the members list of `edit workspace` page', () => {
+    WorkspaceManage.workspaceEmailInputField.setValue(
+      testData.workspace.validWorkSpaceMemberEmail
+    )
+    WorkspaceManage.workspaceAddIcon.click()
+    WorkspaceManage.workspaceEmailInputField.setValue(
+      testData.workspace.validWorkSpaceMemberEmail
+    )
+    WorkspaceManage.workspaceAddIcon.click()
+
+    //TODO Implement Error message check when validation is implemented..
   })
 
   it('should display `Save bar` always at bottom of the `edit workspace` page', () => {
@@ -243,6 +293,10 @@ describe('workspace edit Overall', () => {
     expect(WorkspaceCreate.workspaceCreateBtnEnabled.isVisible()).to.eql(true)
     WorkspaceCreate.submitGlobal()
   })
+
+  //it('should display changes in members icon list present below workspace drop down, when user edit members list in `edit workspace` page',()=>{
+  //   TODO
+  //})
 
   // it('should display user as current member added to workspace under members list, when creating a new workspace',()=>{
   //    TODO
@@ -475,6 +529,57 @@ describe('workspace create/edit Basic Info', () => {
     WorkspaceCreate.switchTogglerBtn.click()
     expect(WorkspaceCreate.toggleBar.getAttribute('value')).to.eql('true')
     browser.moveToObject('span.toggle-slider')
-    expect(WorkspaceCreate.toggleBar.getAttribute('value')).to.eql('false')
+    // expect(WorkspaceCreate.toggleBar.getAttribute('value')).to.eql('true')
+    WorkspaceCreate.name.input.setValue(testData.workspace.validWorkSpaceName)
+    WorkspaceCreate.submitGlobal()
   })
+})
+
+describe('Workspaces edit Github connection', () => {
+  it('should display title and subtitle in the `Github component`, when user navigates to `edit workspace` page', () => {
+    WorkspaceManage.open(1)
+    WorkspaceManage.form.waitForVisible()
+    expect(WorkspaceManage.githubTitle.getText()).to.eql('Github Connection')
+    expect(WorkspaceManage.githubSubtitle.getText()).to.eql(
+      'Configure your GitHub organization to work with KintoHub.'
+    )
+  })
+
+  it('should display explanatory text, disclaimer, Github button and Link to Github tutorial under the `Github component` of `edit workspace` page, when no organisation is linked', () => {
+    expect(WorkspaceManage.githubExplanatoryText.getText()).to.eql(
+      'Please make sure every workspace member has the correct access to the GitHub organization.'
+    )
+    expect(WorkspaceManage.githubLinkBtn.isVisible()).to.eql(true)
+    //TODO Disclaimer and Link to Github tutorial
+  })
+
+  // it('should display explanatory text, disclaimer, Github button and Link to Github tutorial at the bottom of newly added organisation in the `Github component` of `edit workspace` page',()=>{
+  //   //TODO
+  // })
+
+  // it('should display default icon and Name of the organization at the top of the component, when new organisation is linked through `github connect` component',()=>{
+  //  //TODO
+  // })
+
+  it('should start the Github link flow, when user clicks on `GitHub button` in the `edit workspace` page', () => {
+    WorkspaceManage.githubLinkBtn.click()
+    WorkspaceManage.githubSignInPage.waitForVisible()
+    expect(WorkspaceManage.githubSignInPage.isVisible()).to.eql(true)
+  })
+
+  // it('should give permission for read / write access to KintoHub in the github link flow(part of flow) , when user clicks on `link Github organization` button in `edit workspace` page',()=>{
+  //   //TODO
+  // })
+
+  // it('should navigate back to `edit workspace` page of corressponding workspace, once the github link flow is completed as well as the new organization should be linked',()=>{
+  //   //TODO
+  // })
+
+  // it('should display the new organization linked in the list of linked organizations, once the github link flow is completed',()=>{
+  //   //TODO
+  // })
+
+  // it('should display the organization linked in the `github` component to the workspace in the organization dropdown of KB create page, when creating a KintoBlock in the same workspace',()=>{
+  //   //TODO
+  // })
 })

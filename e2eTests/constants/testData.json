@@ -111,7 +111,18 @@
 	"invalidWorkSpaceName":"`#$",
 	"allValidWorkSpaceName":"w_'. @S1",
 	"invalidWSThreeChar" : "te",
+	"validWorkSpaceMemberEmail" : "kintouser@gmail.com",
+	"validWorkSpaceNameOnlyWithSpaces" : "   ",
 	"invalidWSTwoFiftySixChar" : "abcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDEabcdefghijklmnopqrstuvwxyz123456789ABCDE12345678901234567"
+	},
+	
+	"Environment":{
+		"validEnvName": "default",
+		"invalidENvChar":"`#$!%^&*()",
+		"allValidEnvChar":"env1",
+		"invalidEnvThreeChar":"en",
+		"invalidEnvThirtyFiveChar":"abcdefghijklmnopqrstuvwxyz1234567890"
+	
 	}
 	
 	

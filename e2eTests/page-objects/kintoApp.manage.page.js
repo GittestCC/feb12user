@@ -6,6 +6,10 @@ class KintoAppManage extends Page {
     super.open(`app/dashboard/1/kintoapps/${id}/versions/${ver}`)
   }
 
+  get form() {
+    return getDataTest('ka-form')
+  }
+
   get title() {
     return $('.page-title > h2')
   }

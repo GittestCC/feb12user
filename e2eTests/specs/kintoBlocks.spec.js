@@ -2,6 +2,7 @@ import { expect } from 'chai'
 import KintoBlockList from '../page-objects/kintoBlock.list.page'
 import KintoBlockCreate from '../page-objects/kintoBlock.create.page'
 import KintoBlockManage from '../page-objects/kintoBlock.manage.page'
+import DashboardIndex from '../page-objects/dashboard.index.page'
 import Login from '../page-objects/login.page'
 import Landing from '../page-objects/landing.page'
 import testData from '../constants/testdata.json'
@@ -119,6 +120,16 @@ describe('create kintoBlock', () => {
     expect(name).to.eql(testData.kintoblock.validKintoBlockName)
   })
 
+  it('should display alert pop up message, when user try to navigate to any page of KH from `create new kintoblock` page while `create new kintoblock` button is enabled', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockCreate.open(ws)
+    KintoBlockCreate.form.waitForVisible()
+    KintoBlockCreate.name.input.setValue(testData.kintoapp.validKintoAppName)
+    expect(browser.isEnabled('button.button.default')).to.eql(true)
+    DashboardIndex.applicationLeftnav.click()
+    browser.alertAccept()
+  })
+
   it('should be able to select already existing Repo from my Github account', () => {
     var ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoBlockCreate.open(ws)
@@ -155,6 +166,17 @@ describe('manage kintoBlock', () => {
     KintoBlockList.getCard(0).click()
     KintoBlockManage.title.waitForVisible()
     expect(KintoBlockManage.title.getText()).to.eq(name + ' - master')
+  })
+
+  it('should display alert pop up message, when user try to navigate to any page of KH from `manage KB` page without saving the changes made', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
+    KintoBlockList.getCard(0).waitForVisible()
+    KintoBlockList.getCard(0).click()
+    KintoBlockManage.form.waitForVisible()
+    KintoBlockManage.name.input.setValue(testData.kintoapp.validKintoAppName)
+    DashboardIndex.applicationLeftnav.click()
+    browser.alertAccept()
   })
 
   it('show an error message when clicking tag latest commit', () => {

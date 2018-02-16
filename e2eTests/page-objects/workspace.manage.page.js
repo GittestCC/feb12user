@@ -22,6 +22,10 @@ class WorkspaceManage extends Page {
     return $('form.workspace-form.form-container>div>h2')
   }
 
+  get workspaceEmailInputField() {
+    return $('input[name=email]')
+  }
+
   get breadCrumbDropDown() {
     return $('div.dropdown-content.isShown.short')
   }
@@ -36,6 +40,10 @@ class WorkspaceManage extends Page {
 
   get membersSubtitle() {
     return $('.workspace-form.form-container>div:nth-child(3)>h5')
+  }
+
+  get workspaceAddIcon() {
+    return $('.form-body.members-list .add')
   }
 
   getpermissionDropDown(index) {
@@ -72,6 +80,22 @@ class WorkspaceManage extends Page {
 
   get toggleBarToolTipText() {
     return $('.rc-tooltip-content .rc-tooltip-inner')
+  }
+
+  get basicInfoSubtitle() {
+    return $('.workspace-form.form-container>div:nth-child(2)>h5')
+  }
+
+  get githubSubtitle() {
+    return $('.form-wrapper.github-form > h5')
+  }
+
+  get githubExplanatoryText() {
+    return $('.intro >b')
+  }
+
+  get githubLinkBtn() {
+    return $('.connect-button > a')
   }
 }
 

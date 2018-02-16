@@ -73,6 +73,28 @@ describe('create kintoApp', () => {
     expect(name).to.eql(testData.kintoapp.validKintoAppName)
   })
 
+  it('should display alert pop up message, when user try to navigate to any page of KH from `create new application` page while `create new application` button is enabled', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppCreate.open(ws)
+    KintoAppCreate.form.waitForVisible()
+    KintoAppCreate.name.input.setValue(testData.kintoapp.validKintoAppName)
+    expect(browser.isEnabled('button.button.default')).to.eql(true)
+    DashboardIndex.kintoBlocksleftnav.click()
+    browser.alertAccept()
+  })
+
+  it('should display alert pop up message, when user try to navigate to any page of KH from `manage KA` page without saving the changes made', () => {
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoAppList.open(ws)
+    KintoAppList.mykintoAppList.waitForVisible()
+    KintoAppList.getCard(0).waitForVisible()
+    KintoAppList.getCard(0).click()
+    KintoAppManage.form.waitForVisible()
+    KintoAppManage.name.input.setValue(testData.kintoapp.validKintoAppName)
+    DashboardIndex.kintoBlocksleftnav.click()
+    browser.alertAccept()
+  })
+
   it('should create two kbs with valid name and description ', () => {
     //Create a KB as this spec is dependent on KB.
     KintoBlockList.open()
