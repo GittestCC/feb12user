@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { formValueSelector } from 'redux-form'
+import { formValueSelector, change } from 'redux-form'
 import { updateKintoBlock } from '../../../../actions/kintoBlocks'
 import { TAG } from '../../../../constants/version'
 import KintoBlockManageForm from '../../../../components/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageForm'
@@ -8,6 +8,8 @@ import KintoBlockManageForm from '../../../../components/dashboard/kintoBlocks/k
 function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
   const formSelector = formValueSelector('kintoBlockManageForm')
   const dependencies = formSelector(state, 'dependencies')
+  const services = formSelector(state, 'services')
+
   kintoBlock = kintoBlock || {}
 
   const indexClass = index => {
@@ -33,8 +35,11 @@ function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
       environmentVariables: kintoBlock.environmentVariables,
       configParameters: kintoBlock.configParameters,
       isPublic: kintoBlock.isPublic,
-      members: kintoBlock.members
+      members: kintoBlock.members,
+      services: kintoBlock.services
     },
+    selectedServices: kintoBlock.services,
+    services,
     indexClass,
     commitDate,
     commitNo,
@@ -47,6 +52,9 @@ function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
 
 function mapDispatchToProps(dispatch, { kintoBlock }) {
   return {
+    updateServicesField: newArray =>
+      dispatch(change('kintoBlockManageForm', 'services', newArray)),
+    dispatch,
     onSubmit: data =>
       dispatch(
         updateKintoBlock(
@@ -59,6 +67,27 @@ function mapDispatchToProps(dispatch, { kintoBlock }) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+function mergeProps(stateProps, dispatchProps) {
+  let newArray = stateProps.services || []
+
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    updateServicesField: service => {
+      if (newArray.some(item => item === service)) {
+        newArray = newArray.filter(newService => {
+          return newService !== service
+        })
+      } else {
+        newArray = [...stateProps.services, service]
+      }
+      dispatchProps.dispatch(
+        change('kintoBlockManageForm', 'services', newArray)
+      )
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   KintoBlockManageForm
 )

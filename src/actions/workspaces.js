@@ -8,6 +8,7 @@ export const FETCH_WORKSPACES = 'FETCH_WORKSPACES'
 export const RECEIVE_WORKSPACES = 'RECEIVE_WORKSPACES'
 export const RECEIVE_WORKSPACE = 'RECEIVE_WORKSPACE'
 export const SELECT_WORKSPACE = 'SELECT_WORKSPACE'
+export const RECEIVE_SERVICE = 'RECEIVE_SERVICE'
 
 export const workspacesFetch = () => ({ type: FETCH_WORKSPACES })
 
@@ -24,6 +25,12 @@ export const workspaceReceive = (id, data) => ({
 
 export const workspacesReceive = data => ({
   type: RECEIVE_WORKSPACES,
+  data
+})
+
+export const serviceReceive = (id, data) => ({
+  type: RECEIVE_SERVICE,
+  id,
   data
 })
 
@@ -100,11 +107,70 @@ export const fetchWorkspaces = () => (dispatch, getState) => {
     data: [
       {
         id: '1',
-        name: 'Test Workspace 1'
+        name: 'Test Workspace 1',
+        services: [
+          {
+            service: 'MONGO_DB',
+            isActive: true
+          },
+          {
+            service: 'MESSAGE_PASSING',
+            isActive: false
+          },
+          {
+            service: 'SHARED_MEMORY',
+            isActive: false
+          },
+          {
+            service: 'KIBANA',
+            isActive: true,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'PROMETHEUS',
+            isActive: false
+          },
+          {
+            service: 'ZIPKIN',
+            isActive: false
+          }
+        ]
       },
       {
         id: '2',
-        name: 'Test Workspace 2'
+        name: 'Test Workspace 2',
+        services: [
+          {
+            service: 'MONGO_DB',
+            isActive: true,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'MESSAGE_PASSING',
+            isActive: false,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'SHARED_MEMORY',
+            isActive: false,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'KIBANA',
+            isActive: true,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'PROMETHEUS',
+            isActive: false,
+            serviceUrl: 'https://www.google.com.hk'
+          },
+          {
+            service: 'ZIPKIN',
+            isActive: false,
+            serviceUrl: 'https://www.google.com.hk'
+          }
+        ]
       }
     ]
   }
@@ -125,6 +191,27 @@ export const updateWorkspace = (id, data) => dispatch => {
   return Promise.resolve({ data }).then(res => {
     dispatch(formSubmitted())
     dispatch(workspaceReceive(id, res.data))
+  })
+}
+
+export const toggleService = (service, isActive) => (dispatch, getState) => {
+  const workspaces = getState().workspaces
+  const workspaceId = workspaces.selectedWorkspace
+  // TODO: enable comments when API is ready
+  // return axios.put(
+  //   getServerUrl(
+  //     WORKSPACES,
+  //     `/${workspaceId}/services/toggleServices/${service}`
+  //   )
+  // )
+  return Promise.resolve({
+    data: {
+      service: service,
+      isActive: isActive,
+      serviceUrl: 'https://www.google.com'
+    }
+  }).then(res => {
+    dispatch(serviceReceive(workspaceId, res.data))
   })
 }
 

@@ -1,11 +1,17 @@
 .dashboard-home {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100%;
   justify-content: center;
-  height: 80vh;
-  .home-logo {
-    @include backgroundImage('/images/img-home-welcome@2x.png', 200px, 180px);
+  position: relative;
+  margin-top: 15%;
+  img.home-logo {
+    height: 240px;
+  }
+  h1 {
+    margin-top: 0;
+    margin-bottom: 14px;
   }
   h4 {
     color: $kinto-grayscale-6;
@@ -14,5 +20,23 @@
   .button {
     width: 240px;
     margin-top: 32px;
+    margin-bottom: 30px;
+  }
+  a:not(.button) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 20px;
+    line-height: 20px;
+    .icon {
+      margin-right: 10px;
+      &.github {
+        display: inline-block;
+        @include backgroundImage('/images/icon-github-small.svg', 20px, 20px);
+      }
+      &.slack {
+        @include backgroundImage('/images/icon-slack-community-small.svg', 20px, 20px);
+      }
+    }
   }
 }

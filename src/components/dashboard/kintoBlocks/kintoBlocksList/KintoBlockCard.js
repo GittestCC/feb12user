@@ -12,7 +12,8 @@ class KintoBlockCard extends Component {
     latestVersion: PropTypes.object.isRequired,
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
-    goToLatest: PropTypes.func.isRequired
+    goToLatest: PropTypes.func.isRequired,
+    goToEndpoint: PropTypes.func.isRequired
   }
 
   state = {
@@ -34,7 +35,8 @@ class KintoBlockCard extends Component {
       latestVersion,
       dropdownId,
       dropdownVersionId,
-      goToLatest
+      goToLatest,
+      goToEndpoint
     } = this.props
 
     return (
@@ -83,8 +85,8 @@ class KintoBlockCard extends Component {
               <button onClick={this.showVersionDropdown}>
                 View All Branches & Tags
               </button>
+              <button onClick={goToEndpoint}>View Endpoints</button>
               <div className="line with-padding" />
-              <button>Delete KintoBlock</button>
             </DropDown>
             <KintoBlockTagAndBranchDropDownContainer
               onHide={this.hideVersionDropdown}

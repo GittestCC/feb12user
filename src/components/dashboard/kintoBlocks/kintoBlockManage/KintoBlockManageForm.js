@@ -8,6 +8,7 @@ import { kintoName } from '../../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
 import KintoBlockManageEnvVarsField from './KintoBlockManageEnvVarsField'
+import KintoBlockServiceFields from './KintoBlockServiceFields'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
 class KintoBlockManageForm extends Component {
@@ -205,6 +206,14 @@ class KintoBlockManageForm extends Component {
             isKintoBlock={true}
           />
         </div>
+
+        <Field
+          name="services"
+          component={KintoBlockServiceFields}
+          disabled={isVersionTag}
+          updateServicesField={this.props.updateServicesField}
+          services={this.props.services}
+        />
 
         <div className="form-wrapper custom-paramaters full-row">
           <h3>Environmental & Custom Parameters</h3>

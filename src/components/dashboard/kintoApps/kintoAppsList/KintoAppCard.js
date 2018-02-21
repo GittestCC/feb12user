@@ -103,7 +103,7 @@ class KintoAppCard extends Component {
               onHide={this.hideDependencyDropdown}
             >
               <h4 className="title">
-                Components ({kintoApp.dependencies.length})
+                Dependencies ({kintoApp.dependencies.length})
               </h4>
 
               <div className="line" />

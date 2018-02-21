@@ -2,9 +2,12 @@ import React from 'react'
 
 const Index = () => (
   <div data-test="dashboard-index-page" className="dashboard-home">
-    <div className="home-logo" />
+    <img src="/images/logo-neon-light.gif" className="home-logo" alt="" />
     <h1>Welcome to KintoHub.</h1>
-    <h4>To get started, you can read our quick guide:</h4>
+    <h4>
+      The coding adventure awaits! You can start exploring right away or read
+      our quick guide:
+    </h4>
     <a
       className="button default"
       href="https://desk.zoho.com/portal/kintohub/kb"
@@ -12,6 +15,22 @@ const Index = () => (
       rel="noopener noreferrer"
     >
       Get Started
+    </a>
+    <a
+      href="https://github.com/kintohub"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon github" />
+      Visit Our GitHub
+    </a>
+    <a
+      href="https://kintohub.slack.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="icon slack" />
+      Join Our Slack Community
     </a>
   </div>
 )

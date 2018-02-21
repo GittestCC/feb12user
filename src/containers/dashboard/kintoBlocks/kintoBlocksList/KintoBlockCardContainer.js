@@ -42,10 +42,17 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mergeProps(stateProps, dispatchProps) {
+  const endpointList = getPageUrl(pages.dashboardDocumentation, {
+    workspaceId: stateProps.selectedWorkspace,
+    id: stateProps.kintoBlock.id,
+    version: stateProps.latestVersion.text,
+    type: stateProps.latestVersion.type
+  })
   return {
     ...stateProps,
     ...dispatchProps,
-    goToLatest: () => dispatchProps.push(stateProps.latestVersion.url)
+    goToLatest: () => dispatchProps.push(stateProps.latestVersion.url),
+    goToEndpoint: () => dispatchProps.push(endpointList)
   }
 }
 

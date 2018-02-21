@@ -6,6 +6,7 @@ import { required, isLessThan200 } from '../../../helpers/forms/validators'
 import { kintoName } from '../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
+import KintoBlockServicesContainer from '../../../containers/workspaces/servicesList/KintoBlockServicesContainer'
 
 const KintoAppForm = ({
   handleSubmit,
@@ -62,6 +63,9 @@ const KintoAppForm = ({
         appVersion={version}
         disabled={!isCreate && !isDraft}
       />
+    </div>
+    <div className="form-wrapper">
+      <KintoBlockServicesContainer />
     </div>
   </form>
 )

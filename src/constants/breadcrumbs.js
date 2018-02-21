@@ -165,5 +165,11 @@ export default {
     {
       component: 'WorkspaceSwitcherContainer'
     }
+  ],
+  [pages.dashboardServices]: [
+    {
+      component: 'Link',
+      text: 'Services'
+    }
   ]
 }

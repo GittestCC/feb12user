@@ -89,6 +89,10 @@ button.dropdown-button.menu, button.dropdown-button {
   opacity: 0.2;
 }
 
+.no-click {
+  cursor: default;
+}
+
 .coming {
   position: absolute;
   transform: rotate(-45deg);

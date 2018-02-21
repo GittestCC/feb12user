@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { Button } from '../../forms'
+import { getPageUrl } from '../../../helpers/urlHelper'
+import { pages } from '../../../constants/pages'
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
 import KintoBlockCreateTagModalContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockCreateTagModalContainer'
 import SaveBarPortal from '../../ui/SaveBarPortal'
@@ -17,7 +20,8 @@ class KintoBlockManage extends Component {
     resetForm: PropTypes.func.isRequired,
     fetchKintoBlocks: PropTypes.func.isRequired,
     fetchKintoBlock: PropTypes.func.isRequired,
-    hasActiveBuild: PropTypes.bool.isRequired
+    hasActiveBuild: PropTypes.bool.isRequired,
+    selectedWorkspace: PropTypes.string.isRequired
   }
 
   state = {
@@ -33,7 +37,7 @@ class KintoBlockManage extends Component {
     if (!this.props.hasActiveBuild) {
       this.props.showNotification(
         'notification',
-        'Kudos for creating a KintoBlock! This is but the beginning of an exciting journey... head over to Github and start coding!'
+        'Kudos for creating a KintoBlock - head over to Github and start coding!'
       )
     }
   }
@@ -71,7 +75,12 @@ class KintoBlockManage extends Component {
   }
 
   render() {
-    const { kintoBlock, isVersionMatch, canTagCommit } = this.props
+    const {
+      kintoBlock,
+      isVersionMatch,
+      canTagCommit,
+      selectedWorkspace
+    } = this.props
     const { isCreateTagErrorMessageShown } = this.state
     if (!isVersionMatch) {
       return null
@@ -84,6 +93,17 @@ class KintoBlockManage extends Component {
               {kintoBlock.name} - {kintoBlock.version.name}
             </span>
           </h2>
+          <Link
+            to={getPageUrl(pages.dashboardDocumentation, {
+              selectedWorkspace,
+              id: kintoBlock.id,
+              version: kintoBlock.version.name,
+              type: kintoBlock.version.type
+            })}
+            className="button dark"
+          >
+            View Endpoints
+          </Link>
         </div>
 
         <KintoBlockManageFormContainer

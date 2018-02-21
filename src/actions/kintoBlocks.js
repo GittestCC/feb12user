@@ -98,6 +98,7 @@ export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
       response.ownerId = state.auth.authSession.uid
       response.isPublic = true
       response.members = ['1', '2', '3', '4', '5']
+      response.services = ['MONGO_DB']
       return dispatch(kintoBlockReceive(id, response))
     })
 }

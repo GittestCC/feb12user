@@ -2,7 +2,8 @@ import {
   FETCH_WORKSPACES,
   RECEIVE_WORKSPACES,
   RECEIVE_WORKSPACE,
-  SELECT_WORKSPACE
+  SELECT_WORKSPACE,
+  RECEIVE_SERVICE
 } from '../actions/workspaces'
 
 const defaultState = {
@@ -49,6 +50,23 @@ const workspacesReducer = (state = defaultState, action) => {
             ...state.byId[action.id],
             ...workspace,
             members
+          }
+        }
+      }
+    }
+    case RECEIVE_SERVICE: {
+      const service = action.data
+      const workspace = state.byId[action.id]
+      const services = workspace.services.filter(
+        item => item.service !== service.service
+      )
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            services: [...services, service]
           }
         }
       }

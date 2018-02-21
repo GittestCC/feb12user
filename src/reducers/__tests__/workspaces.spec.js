@@ -64,4 +64,42 @@ describe('workspaces reducer', () => {
     expect(newState.allIds).toEqual(['1'])
     expect(newState.byId).toEqual({ '1': { id: '1', name: 'test' } })
   })
+
+  it('servicesReceive should update the service in the correct workspace', () => {
+    const oldState = {
+      byId: {
+        '1': {
+          id: '1',
+          services: [
+            {
+              service: 'test',
+              isActive: false
+            },
+            {
+              service: 'not_test',
+              isActive: false
+            }
+          ]
+        }
+      }
+    }
+    const sampleData = {
+      service: 'test',
+      isActive: true
+    }
+    const newState = reducer(oldState, actions.serviceReceive('1', sampleData))
+    expect(newState.byId['1']).toEqual({
+      id: '1',
+      services: [
+        {
+          service: 'not_test',
+          isActive: false
+        },
+        {
+          service: 'test',
+          isActive: true
+        }
+      ]
+    })
+  })
 })
