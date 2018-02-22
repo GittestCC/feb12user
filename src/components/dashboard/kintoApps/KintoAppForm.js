@@ -28,7 +28,6 @@ const KintoAppForm = ({
         isCreate={isCreate}
       />
     </div>
-
     <div className="form-wrapper basic-info">
       <h3>Basic Info</h3>
       <h5>
@@ -67,6 +66,8 @@ const KintoAppForm = ({
     <div className="form-wrapper">
       <KintoBlockServicesContainer />
     </div>
+    {/* TODO: Fix to make the browser submit on enter */}
+    <button className="hide">Submit</button>
   </form>
 )
 
