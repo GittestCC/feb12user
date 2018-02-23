@@ -59,6 +59,7 @@
     	"invalidKBNameWithDigit" : "123testname",
     	"validKBNameWithDollar" : "testdollarname",
     	"validKBNameWithStar" : "testztarname",
+    	"validKBNameEight" :"testkb8",
     	"validKBDescription"  : "This microservice is for OAuth",
     	"validKBDescriptionWithChar"  : "This microservice is for #$%@!^&*~",
     	"invalidKBDescription": "The microservice architecture is not a silver bullet. It has several drawbacks.Moreover, when using this architecture there are numerous issues that you must address. The microservicearchitecture pattern language is a collection of patterns for applying the microservice architecture",
@@ -88,6 +89,7 @@
 	"kintoapp":{
 		
     	"validKintoAppName" : "testname",
+    	"validKintoAppNameDigit" : "testname8",
     	"validKANamewithChars": "testname01",
     	"validKANamewithDot" :"testname00",
     	"validKANameWithDash" :"testname999",
@@ -98,7 +100,7 @@
     	"validKANameWithDollar" : "testka143",
     	"validNotes" : "Deploying my first version 1.2.3",
     	"validEnvName": "dev",
-    	 "validEnvNameCaps" : "DEV"
+    	"validEnvNameCaps" : "DEV"
     		
     	
   
@@ -121,7 +123,8 @@
 		"invalidENvChar":"`#$!%^&*()",
 		"allValidEnvChar":"env1",
 		"invalidEnvThreeChar":"en",
-		"invalidEnvThirtyFiveChar":"abcdefghijklmnopqrstuvwxyz1234567890"
+		"invalidEnvThirtyFiveChar":"abcdefghijklmnopqrstuvwxyz1234567890",
+		"invalidEnvCapitals" :"ENV1"
 	
 	}
 	

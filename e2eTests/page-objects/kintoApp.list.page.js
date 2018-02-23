@@ -12,6 +12,18 @@ class KintoAppList extends Page {
   get mykintoAppList() {
     return $('.my-kintoapps')
   }
+
+  getkaListDropDown(id) {
+    return $(`#id-${id}.dropdown .dropdown-button.menu`)
+  }
+
+  get kaAppListViewEnv() {
+    return $('.dropdown .dropdown-content.isShown :nth-child(5)')
+  }
+
+  get kaListDropDown() {
+    return $('.dropdown .dropdown-content.isShown')
+  }
 }
 
 export default new KintoAppList()

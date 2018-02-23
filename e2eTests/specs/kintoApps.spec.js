@@ -42,7 +42,6 @@ describe('create kintoApp', () => {
     KintoAppCreate.open(ws)
     KintoAppCreate.name.input.setValue(testData.kintoapp.validKintoAppName)
     KintoAppCreate.submitGlobal()
-
     expect(KintoAppCreate.shortDescription.error.getText()).to.eql('Required')
   })
 
@@ -97,8 +96,9 @@ describe('create kintoApp', () => {
 
   it('should create two kbs with valid name and description ', () => {
     //Create a KB as this spec is dependent on KB.
-    KintoBlockList.open()
-    KintoBlockCreate.open()
+    var ws = Landing.workspaceSelect.getAttribute('data-test')
+    KintoBlockList.open(ws)
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.name.input.setValue(
       testData.kintoblock.validKBNameWithDollar
     )
@@ -115,7 +115,7 @@ describe('create kintoApp', () => {
     KintoBlockCreate.submitGlobal()
     KintoBlockList.getCard(0).waitForVisible()
 
-    KintoBlockCreate.open()
+    KintoBlockCreate.open(ws)
     KintoBlockCreate.name.input.setValue(
       testData.kintoblock.validKBNameWithStar
     )
@@ -227,7 +227,7 @@ describe('manage kintoApp', () => {
   })
 
   it('should show Tag and deploy button when we open a KA', () => {
-    expect(KintoAppManage.kbTagNDeploy.isVisible()).to.eql(true)
+    expect(KintoAppManage.kaTagNDeploy.isVisible()).to.eql(true)
   })
 
   it('should display Compare versions and View Environments for each KA', () => {
@@ -253,7 +253,7 @@ describe('manage kintoApp', () => {
       testData.kintoapp.validUpdatedKintoAppName
     )
     KintoAppCreate.submitGlobal()
-    KintoAppManage.kbTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
     ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoAppList.open(ws)
     KintoAppList.getCard(0).waitForVisible()
@@ -271,8 +271,8 @@ describe('manage kintoApp', () => {
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
-    KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.click()
     expect(KintoAppManage.majorVersion.isVisible()).to.eql(true)
     expect(KintoAppManage.minorVersion.isVisible()).to.eql(true)
     expect(KintoAppManage.revision.isVisible()).to.eql(true)
@@ -287,8 +287,8 @@ describe('manage kintoApp', () => {
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
-    KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.click()
     expect(KintoAppManage.majorVersion.isVisible()).to.eql(true)
     expect(KintoAppManage.minorVersion.isVisible()).to.eql(true)
     expect(KintoAppManage.revision.isVisible()).to.eql(true)
@@ -307,8 +307,8 @@ describe('manage kintoApp', () => {
     KintoAppManage.title.waitForVisible()
     KintoAppManage.name.input.setValue(testData.kintoapp.validKANameWithDollar)
     KintoAppCreate.submitGlobal() // Save changes
-    KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.click()
     KintoAppManage.majorVersion.click()
     KintoAppManage.minorVersion.click()
     KintoAppManage.createTagBtn.click()
@@ -341,8 +341,8 @@ describe('manage kintoApp', () => {
     KintoAppManage.title.waitForVisible()
     KintoAppManage.name.input.setValue(testData.kintoapp.validKANameWithDash)
     KintoAppCreate.submitGlobal() // Save changes
-    KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.click()
 
     //Enter duplicate version details
     KintoAppManage.majorVersion.click()
@@ -366,8 +366,8 @@ describe('manage kintoApp', () => {
     KintoAppList.getCard(0).waitForVisible()
     KintoAppList.getCard(0).click()
     KintoAppManage.title.waitForVisible()
-    KintoAppManage.kbTagNDeploy.waitForVisible()
-    KintoAppManage.kbTagNDeploy.click()
+    KintoAppManage.kaTagNDeploy.waitForVisible()
+    KintoAppManage.kaTagNDeploy.click()
     KintoAppManage.majorVersion.setValue('1')
     KintoAppManage.minorVersion.setValue('2')
     KintoAppManage.revision.setValue('4')

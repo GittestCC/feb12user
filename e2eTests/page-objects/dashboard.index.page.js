@@ -14,8 +14,16 @@ class DashboardIndex extends Page {
     return $('a.button.default')
   }
 
+  get visitGithubLink() {
+    return $('a:nth-child(5)')
+  }
+
+  get joinSlackLink() {
+    return $('a:nth-child(6)')
+  }
+
   get kintoHubLogo() {
-    return $('.home-logo')
+    return $('img.home-logo')
   }
 
   get kintoHubLogolefttop() {
@@ -59,11 +67,11 @@ class DashboardIndex extends Page {
   }
 
   get analyticsLeftnav() {
-    return $('.analytics.dimmed')
+    return $('.analytics.dimmed.no-click')
   }
 
   get servicesLeftnav() {
-    return $('.services.dimmed')
+    return $('.services')
   }
 
   get kaHoveraddicon() {

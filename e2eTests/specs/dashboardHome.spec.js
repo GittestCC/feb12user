@@ -12,7 +12,7 @@ import testData from '../constants/testdata.json'
 describe('dashboard Home', () => {
   it('should display Kintohub logo in the center after successfull login', () => {
     Login.login()
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
   })
 
   it('should display top bar, side bar and body of the home page after successful login', () => {
@@ -41,6 +41,11 @@ describe('dashboard Home', () => {
     expect(DashboardIndex.container.element('h4').getText()).to.eql(
       'The coding adventure awaits! You can start exploring right away or read our quick guide:'
     )
+  })
+
+  it('should display visit github link and join Slack link on the Home page', () => {
+    expect(DashboardIndex.visitGithubLink.isVisible()).to.eql(true)
+    expect(DashboardIndex.joinSlackLink.isVisible()).to.eql(true)
   })
 
   it('should verify that user can get to the home page through the dedicated url -/app/dashboard/:id ', () => {
@@ -77,7 +82,7 @@ describe('dashboard Home', () => {
 
   it('should display Kintohub logo and title, dashboard and market button, searchbar, bell and user icon, logout button ', () => {
     Login.open()
-    expect(DashboardIndex.KintohubLogolefttop.isVisible()).to.eql(true)
+    expect(DashboardIndex.kintoHubLogolefttop.isVisible()).to.eql(true)
     expect(DashboardIndex.dashboardButton.isVisible()).to.eql(true)
     expect(DashboardIndex.goTomarket.isVisible()).to.eql(true)
     expect(DashboardIndex.searchBar.isVisible()).to.eql(true)
@@ -119,7 +124,7 @@ describe('dashboard Home', () => {
   })
 
   it('should redirect to dashboard page if kintohub logo on top left is clicked, when already on dashboard page', () => {
-    DashboardIndex.KintohubLogolefttop.click()
+    DashboardIndex.kintoHubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
   })
 
@@ -133,19 +138,19 @@ describe('dashboard Home', () => {
     var ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoAppCreate.open(ws)
     KintoAppCreate.form.waitForVisible()
-    DashboardIndex.KintohubLogolefttop.click()
+    DashboardIndex.kintoHubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from KintoBlock
     ws = Landing.workspaceSelect.getAttribute('data-test')
     KintoBlockCreate.open(ws)
     KintoBlockCreate.form.waitForVisible()
-    DashboardIndex.KintohubLogolefttop.click()
+    DashboardIndex.kintoHubLogolefttop.click()
     expect(DashboardIndex.container.isVisible()).to.eql(true)
 
     //Navigating to dashboard from Market
     DashboardIndex.goTomarket.click()
-    DashboardIndex.KintohubLogolefttop.click()
+    DashboardIndex.kintoHubLogolefttop.click()
     expect(DashboardIndex.getStartedBtn.isVisible()).to.eql(true)
   })
 
@@ -203,7 +208,7 @@ describe('dashboard Home', () => {
 
   it('should display left navigation menu, when navigating to all pages of kintohub', () => {
     DashboardIndex.homeLeftnav.click()
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
 
     DashboardIndex.applicationLeftnav.click()
@@ -212,14 +217,14 @@ describe('dashboard Home', () => {
     DashboardIndex.kintoBlocksleftnav.click()
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
 
-    DashboardIndex.goTomarket.click()
-    expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
-
-    //Below step Failing now for a bug as left navigation bar items go missing when we go to market
     DashboardIndex.analyticsLeftnav.click()
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
 
     DashboardIndex.servicesLeftnav.click()
+    expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
+
+    DashboardIndex.goTomarket.click()
+    //Below step Failing now for a bug as left navigation bar items go missing when we go to market
     expect(DashboardIndex.sidebar.isVisible()).to.eql(true)
   })
 
@@ -248,7 +253,7 @@ describe('dashboard Home', () => {
     DashboardIndex.workspaceDropdown.click()
     var wsvalPos2 = DashboardIndex.getWSDropdownElement(3).getText()
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
     var currentWS = DashboardIndex.workspaceDropdown.getText('option:checked')
     expect(currentWS).to.eql(wsvalPos2)
     var ws = Landing.workspaceSelect.getAttribute('data-test')
@@ -282,23 +287,24 @@ describe('dashboard Home', () => {
     //From Applications page
     DashboardIndex.applicationLeftnav.click()
     DashboardIndex.workspaceDropdown.waitForVisible()
+    DashboardIndex.workspaceDropdown.click()
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    DashboardIndex.KintohubLogo.waitForVisible()
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    DashboardIndex.kintoHubLogo.waitForVisible()
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
 
     //From KintoBlocks page
     DashboardIndex.kintoBlocksleftnav.click()
     DashboardIndex.workspaceDropdown.waitForVisible()
     DashboardIndex.workspaceDropdown.selectByValue(1)
-    DashboardIndex.KintohubLogo.waitForVisible()
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    DashboardIndex.kintoHubLogo.waitForVisible()
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
 
     //From Market
     DashboardIndex.goTomarket.click()
     expect(DashboardIndex.getUrl()).to.eql('/app/market')
     DashboardIndex.workspaceDropdown.selectByValue(2)
-    DashboardIndex.KintohubLogo.waitForVisible()
-    expect(DashboardIndex.KintohubLogo.isVisible()).to.eql(true)
+    DashboardIndex.kintoHubLogo.waitForVisible()
+    expect(DashboardIndex.kintoHubLogo.isVisible()).to.eql(true)
   })
 
   it('should verify that Center button CTA redirects opens help center in a new tab, to the relevant dedicated section - Get started', () => {

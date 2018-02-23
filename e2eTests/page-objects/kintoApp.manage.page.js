@@ -26,7 +26,7 @@ class KintoAppManage extends Page {
     return $('div.main-icon.kintoblock')
   }
 
-  get kbTagNDeploy() {
+  get kaTagNDeploy() {
     return $('#savebar-portal button')
   }
 
@@ -122,6 +122,34 @@ class KintoAppManage extends Page {
 
   envListItem(index) {
     return $(`.environments-list .environment-card:nth-child(${index})`)
+  }
+
+  get clientIdFieldColumn() {
+    return $('.field-container.false.two-columns >div:nth-child(1)')
+  }
+
+  get clientIdFieldTitle() {
+    return $('.field-container.false.two-columns >div:nth-child(1)> .label')
+  }
+
+  get clientIdField() {
+    return $(
+      '.field-container.false.two-columns >div:nth-child(1)> .false-input'
+    )
+  }
+
+  get secretKeyFieldColumn() {
+    return $('.field-container.false.two-columns >div:nth-child(2)')
+  }
+
+  get secretKeyFieldTitle() {
+    return $('.field-container.false.two-columns >div:nth-child(2)> .label')
+  }
+
+  get secretKeyField() {
+    return $(
+      '.field-container.false.two-columns >div:nth-child(2)> .false-input'
+    )
   }
 }
 
