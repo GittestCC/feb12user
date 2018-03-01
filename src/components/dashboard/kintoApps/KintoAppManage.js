@@ -13,7 +13,6 @@ class KintoAppManage extends Component {
     canSave: PropTypes.bool.isRequired,
     version: PropTypes.object,
     kintoApp: PropTypes.object.isRequired,
-    fetchKintoApps: PropTypes.func.isRequired,
     fetchKintoApp: PropTypes.func.isRequired,
     isDraft: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired,
@@ -26,7 +25,6 @@ class KintoAppManage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps()
     this.props.fetchKintoApp(this.props.id, this.props.ver)
   }
 

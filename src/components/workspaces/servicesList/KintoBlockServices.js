@@ -80,23 +80,26 @@ class KintoBlockServices extends Component {
                 <ul>
                   <li>
                     <h5>
-                      I am thou, thou art I... Thou hast acquired a new vow.
+                      Add MongoDB to your chosen KintoBlock or Application in
+                      just 3 clicks, directly from KintoHub's interface
                     </h5>
                   </li>
                   <li>
                     <h5>
-                      It shall become the wings of rebellion that breaketh thy
-                      chains of captivity.
+                      Full-fledged hosted MongoDB 3.6 with isolated sub-domains
                     </h5>
+                  </li>
+                  <li>
+                    <h5>Autoscaling enabled</h5>
                   </li>
                   <li>
                     <h5>
-                      With the birth of the Chariot Persona, I have obtained the
-                      winds of blessing
+                      More info on MongoDB{' '}
+                      <a href="https://www.mongodb.com/">here</a>
                     </h5>
                   </li>
                   <li>
-                    <h5>that shall lead to freedom and new power...</h5>
+                    <h5>FREE to try for a limited time during alpha period</h5>
                   </li>
                 </ul>
               </div>
@@ -124,7 +127,7 @@ class KintoBlockServices extends Component {
                     )
                   }
                 >
-                  Enable This Service
+                  Enable {mongodb.title}
                 </button>
               )}
               <h5>
@@ -179,7 +182,7 @@ class KintoBlockServices extends Component {
                     )
                   }
                 >
-                  Disable This Service
+                  Disable {messagePassing.title}
                 </button>
               ) : (
                 <button
@@ -258,7 +261,7 @@ class KintoBlockServices extends Component {
                     )
                   }
                 >
-                  Enable This Service
+                  Enable {sharedMemory.title}
                 </button>
               )}
               <h5>

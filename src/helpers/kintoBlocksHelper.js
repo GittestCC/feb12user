@@ -1,4 +1,4 @@
-import { isVersionEqual } from './versionHelper'
+import { isBranchVersionEqual } from './versionHelper'
 
 export const isDependencySimple = dependency => {
   return dependency.versions || dependency.dependencies
@@ -59,7 +59,7 @@ export const findDependency = (dependencies = [], dependencyId) => {
 
 function findAssociatedDependencies(version, dependencies, cache) {
   return dependencies
-    .filter(d => d.residesIn.some(rv => isVersionEqual(rv, version)))
+    .filter(d => d.residesIn.some(rv => isBranchVersionEqual(rv, version)))
     .map(d => {
       return {
         ...d,

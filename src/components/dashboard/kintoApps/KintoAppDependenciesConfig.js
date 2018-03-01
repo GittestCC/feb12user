@@ -24,7 +24,6 @@ class KintoAppDependenciesConfig extends Component {
 
   componentDidMount() {
     const { id, ver, env, filteredDependency } = this.props
-    this.props.fetchKintoApps()
     this.loadData(id, ver, env)
     this.props.environmentSelect(env)
     if (filteredDependency) {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {
-  isVersionEqual,
+  isBranchVersionEqual,
   getVersionAsText,
   getVersionStateClassName,
   asTextList,
@@ -41,7 +41,7 @@ function mapStateToProps(state, { type, disabled, url }) {
         }),
       tag: v.state,
       className: getVersionStateClassName(v),
-      active: isVersionEqual(v, selectedItem.version)
+      active: isBranchVersionEqual(v, selectedItem.version)
     }))
   }
 

@@ -5,6 +5,10 @@ import { Field } from 'redux-form'
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
 import { getPageUrl } from '../../helpers/urlHelper'
 import { pages } from '../../constants/pages'
+import {
+  DEPENDENCY_MONGO,
+  DEPENDENCY_BLOCK
+} from '../../constants/dependenciesTypes'
 
 class DependencyItem extends Component {
   static propTypes = {
@@ -61,6 +65,9 @@ class DependencyItem extends Component {
     if (!block) {
       return null
     }
+    const blockDependencies = block.dependencies.filter(
+      d => d.type === DEPENDENCY_BLOCK
+    )
     return (
       <div className="block">
         {!disabled ? (
@@ -106,11 +113,11 @@ class DependencyItem extends Component {
           </div>
         </div>
 
-        {block.dependencies.length ? (
+        {blockDependencies.length ? (
           <div className="dependencies-exist">
             <div className="expand">
               <div className="icons">
-                {block.dependencies
+                {blockDependencies
                   .slice(0, 4)
                   .map((dep, key) => (
                     <div
@@ -118,9 +125,16 @@ class DependencyItem extends Component {
                       className={`icon ${getClassNameForType(dep.type)}`}
                     />
                   ))}
-                {block.dependencies.length > 4 && (
-                  <div className="number">+{block.dependencies.length - 4}</div>
+                {blockDependencies.length > 4 && (
+                  <div className="number">+{blockDependencies.length - 4}</div>
                 )}
+              </div>
+
+              <div className="icons">
+                {block.dependencies.filter(d => d.type === DEPENDENCY_MONGO)
+                  .length ? (
+                  <div className="mongo icon hide-text">mongo</div>
+                ) : null}
               </div>
               <div className="expand-close-indicator">
                 <h6>Expand</h6>
@@ -128,7 +142,7 @@ class DependencyItem extends Component {
               </div>
             </div>
             <div className="extra-information">
-              {block.dependencies.map((dep, key) => (
+              {blockDependencies.map((dep, key) => (
                 <div key={key} className="row">
                   <div className={`icon ${getClassNameForType(dep.type)}`} />
                   <div className="text">

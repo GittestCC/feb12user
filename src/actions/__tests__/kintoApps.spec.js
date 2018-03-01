@@ -2,23 +2,18 @@ import moxios from 'moxios'
 import thunk from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import { CALL_HISTORY_METHOD } from 'react-router-redux'
-import MockDate from 'mockdate'
 import * as actions from '../kintoApps'
 import { FORM_SUBMITTED } from '../pageOptions'
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 
-const now = new Date()
-
 describe('KintoApps actions', () => {
   beforeEach(() => {
     moxios.install()
-    MockDate.set(now.getTime())
   })
   afterEach(() => {
     moxios.uninstall()
-    MockDate.reset()
   })
 
   it('fetchKintoApp fires the kintoAppReceive action', async () => {
@@ -27,15 +22,27 @@ describe('KintoApps actions', () => {
       request.respondWith({
         status: 200,
         response: {
-          id: '1',
-          name: 'Your Mum'
+          data: {
+            id: '1',
+            name: 'test'
+          },
+          metadata: {}
         }
       })
     })
-    const store = mockStore({ kintoApps: { byId: {} } })
+    const store = mockStore({ workspaces: { selectedWorkspace: '1' } })
     await store.dispatch(actions.fetchKintoApp('1', '1.1.0'))
-    expect(store.getActions().map(a => a.type)).toEqual([
-      actions.RECEIVE_KINTO_APP
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.RECEIVE_KINTO_APP,
+        id: '1',
+        data: {
+          id: '1',
+          name: 'test'
+        },
+        metadata: {},
+        willOverwrite: false
+      }
     ])
   })
 
@@ -109,7 +116,7 @@ describe('KintoApps actions', () => {
         response: response
       })
     })
-    const store = mockStore()
+    const store = mockStore({ workspaces: { selectedWorkspace: '1' } })
     await store.dispatch(
       actions.fetchKintoAppDependenciesConfig('1', '0.1.0', '1')
     )
@@ -124,12 +131,12 @@ describe('KintoApps actions', () => {
     ])
   })
 
-  it('createKintoApp should fire a form submitted action and redirect upon success', async () => {
+  it('createKintoApp should fire a form submitted action, add kintoapp and redirect upon success', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
-        response: {}
+        response: { data: '1' }
       })
     })
     const store = mockStore({
@@ -138,6 +145,7 @@ describe('KintoApps actions', () => {
     await store.dispatch(actions.createKintoApp({}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
+      actions.ADD_KINTO_APP,
       CALL_HISTORY_METHOD
     ])
   })
@@ -150,7 +158,9 @@ describe('KintoApps actions', () => {
         response: { id: '1', version: '1.0.0' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(actions.updateKintoApp('1', '1.0.0', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
@@ -166,7 +176,9 @@ describe('KintoApps actions', () => {
         response: { errors: 'noop' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     const result = store.dispatch(actions.updateKintoApp('1', '1.0.0', {}))
     await expect(result).rejects.toEqual({ errors: 'noop' })
   })
@@ -179,7 +191,9 @@ describe('KintoApps actions', () => {
         response: {}
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(
       actions.updateAppDependenciesConfigData(
         '1',
@@ -199,7 +213,9 @@ describe('KintoApps actions', () => {
         response: { errors: 'noop' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     const result = store.dispatch(
       actions.updateAppDependenciesConfigData(
         '1',
@@ -258,7 +274,7 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} }
+      workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.addNewEnvironment('1', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
@@ -276,7 +292,6 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} },
       workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.deployEnvironment('1', {}, 'envName'))
@@ -287,7 +302,7 @@ describe('KintoApps actions', () => {
     ])
   })
 
-  it('shutDownEnvironment should fire an action to submit a form and redirect', async () => {
+  it('shutDownEnvironment should fire an action to submit a form, envUpdate and redirect', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -296,13 +311,13 @@ describe('KintoApps actions', () => {
       })
     })
     const store = mockStore({
-      kintoApps: { byId: {} },
       workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.shutDownEnvironment('1', 'envName', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
-      CALL_HISTORY_METHOD
+      CALL_HISTORY_METHOD,
+      actions.KINTO_APP_ENVIRONMENT_UPDATE
     ])
   })
 
@@ -336,9 +351,21 @@ describe('KintoApps actions', () => {
   })
 
   it('updateAppEnvironment should dispatch an action to update a kintoapp environment', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          data: {
+            id: '1',
+            name: 'env'
+          }
+        }
+      })
+    })
     // TODO add moxios request when the API is connected
     const store = mockStore({
-      kintoApps: { byId: {} }
+      workspaces: { selectedWorkspace: '1' }
     })
     await store.dispatch(actions.updateAppEnvironment('1', '1', {}))
     expect(store.getActions()).toEqual([
@@ -346,7 +373,7 @@ describe('KintoApps actions', () => {
       {
         type: 'KINTO_APP_ENVIRONMENT_UPDATE',
         id: '1',
-        data: { id: '1' }
+        data: { id: '1', name: 'env' }
       }
     ])
   })

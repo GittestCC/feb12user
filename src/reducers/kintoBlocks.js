@@ -1,6 +1,7 @@
 import {
   RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK,
+  ADD_KINTO_BLOCK,
   CREATE_TAG_KINTO_BLOCK,
   UPDATE_KINTO_BLOCK
 } from '../actions/kintoBlocks'
@@ -32,15 +33,21 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         allIds
       }
     }
+    case ADD_KINTO_BLOCK: {
+      return {
+        allIds: [...state.allIds, action.id],
+        byId: {
+          ...state.byId,
+          [action.id]: action.data
+        }
+      }
+    }
     case RECEIVE_KINTO_BLOCKS: {
       let allIds = []
       let byId = {}
       action.data.forEach(block => {
         allIds.push(block.id)
-        byId[block.id] = {
-          ...state.byId[block.id],
-          ...block
-        }
+        byId[block.id] = block
       })
       return {
         byId,

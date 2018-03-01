@@ -35,8 +35,8 @@ function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
       environmentVariables: kintoBlock.environmentVariables,
       configParameters: kintoBlock.configParameters,
       isPublic: kintoBlock.isPublic,
-      members: kintoBlock.members,
-      services: kintoBlock.services
+      memberIds: kintoBlock.memberIds || [],
+      services: kintoBlock.services || []
     },
     selectedServices: kintoBlock.services,
     services,

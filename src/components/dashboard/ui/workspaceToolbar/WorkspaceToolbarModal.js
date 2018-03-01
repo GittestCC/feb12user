@@ -23,10 +23,10 @@ class WorkspaceToolbarModal extends Component {
     if (!this.state.searchedValue) return members
     else {
       return members.filter(member => {
-        const username = member.username.toUpperCase()
+        const userName = member.userName.toUpperCase()
         const email = member.email.toUpperCase()
         return (
-          username.includes(this.state.searchedValue) ||
+          userName.includes(this.state.searchedValue) ||
           email.includes(this.state.searchedValue)
         )
       })
@@ -47,7 +47,7 @@ class WorkspaceToolbarModal extends Component {
           />
           <div className="workspace-form">
             <FieldArray
-              name="members"
+              name="memberIds"
               component={WorkspaceToolbarForm}
               members={this.filterMembers(members)}
               admins={this.filterMembers(admins)}

@@ -18,7 +18,7 @@ class App extends Component {
     blockNavigate: PropTypes.bool.isRequired,
     goToLogin: PropTypes.func.isRequired,
     fetchWorkspaces: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    isLoaded: PropTypes.bool.isRequired
   }
 
   state = {
@@ -26,11 +26,18 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const {
+      isLoggedIn,
+      fetchWorkspaces,
+      fetchCurrentUser,
+      goToLogin
+    } = this.props
     window.addEventListener('beforeunload', this.onUnload)
-    if (this.props.isLoggedIn) {
-      this.props.fetchWorkspaces()
+    if (isLoggedIn) {
+      fetchWorkspaces()
+      fetchCurrentUser()
     } else {
-      this.props.goToLogin()
+      goToLogin()
     }
   }
 
@@ -46,20 +53,20 @@ class App extends Component {
     if (this.props.blockNavigate) {
       // make sure future version will show the same message
       const text =
-        'There are unsaved changes on this page. What would you like to do?'
+        'There are unsaved changes on this page. Are you sure you want to leave?'
       e.returnValue = text
       return text
     }
   }
 
   render() {
-    const { isLoading, firstWorkspaceId, match, isNotification } = this.props
+    const { isLoaded, firstWorkspaceId, match, isNotification } = this.props
     return (
       <div className={`app ${isNotification ? 'notify' : ''}`}>
         <Prompt
           when={this.props.blockNavigate}
           message={() =>
-            'There are unsaved changes on this page. What would you like to do?'
+            'There are unsaved changes on this page. Are you sure you want to leave?'
           }
         />
 
@@ -74,7 +81,7 @@ class App extends Component {
 
         <GlobalSaveBarContainer />
 
-        {!isLoading && firstWorkspaceId ? (
+        {isLoaded && firstWorkspaceId ? (
           <div className="layout-inner">
             <BreadcrumbContainer />
             <Switch>

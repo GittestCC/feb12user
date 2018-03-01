@@ -8,28 +8,20 @@ export const normalizeVersionObject = v => ({
   build: v.build || 0
 })
 
-export const getVersionAsText = (v, isDottedBuild) => {
+export const getVersionAsText = v => {
   if (isObject(v)) {
     v = normalizeVersionObject(v)
   }
   if (!v || !isNumber(v.major) || !isNumber(v.minor) || !isNumber(v.revision)) {
     return undefined
   }
-  if (!v || !v.build) {
-    return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
-  }
-  let base = `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
-  if (isDottedBuild) {
-    return `${base}.${v.build || 0}`
-  } else {
-    return `${base} (${v.build || 0})`
-  }
+  return `${v.major || 0}.${v.minor || 0}.${v.revision || 0}`
 }
 
 export const getVersionType = v => (v && v.type ? v.type.toLowerCase() : null)
 
 export const asTextList = (versions = []) => {
-  return versions.map(v => getVersionAsText(v, true))
+  return versions.map(v => getVersionAsText(v))
 }
 
 export const getVersionStateClassName = version => {
@@ -62,36 +54,17 @@ export const textToObject = v => {
   return result
 }
 
-/**
- * does an equality between two version objects with some processing
- * if params are string convert them to version objs
- * if params are objects and has versions inside of them then select those
- * then do equality between two version
- */
-export const isVersionEqual = (a, b) => {
+export const isBranchVersionEqual = (a, b, matchNameOnly) => {
   if (!a || !b) {
     return false
   }
-  if (typeof a === 'string') {
-    a = textToObject(a)
+  // if match only can pass strings
+  if (matchNameOnly) {
+    a = a.name ? a.name : a
+    b = b.name ? b.name : b
+    return a === b
   }
-  if (typeof b === 'string') {
-    b = textToObject(b)
-  }
-  a = normalizeVersionObject(a)
-  b = normalizeVersionObject(b)
-  return (
-    a.major === b.major &&
-    a.minor === b.minor &&
-    a.revision === b.revision &&
-    a.build === b.build
-  )
-}
 
-export const isBranchVersionEqual = (a, b) => {
-  if (!a || !b) {
-    return false
-  }
   return a.type.toUpperCase() === b.type.toUpperCase() && a.name === b.name
 }
 
@@ -109,12 +82,3 @@ export const getEnvVersionsList = versions => {
   })
   return result
 }
-
-export const getUrlForAppEnvironment = id =>
-  `/app/dashboard/kintoapps/${id}/environments`
-
-export const getUrlForAppConfigDependencies = (id, version, env) =>
-  `/app/dashboard/kintoapps/${id}/versions/${version}/config/${env}`
-
-export const getUrlForAppEditEnvironment = (id, envId) =>
-  `/app/dashboard/kintoapps/${id}/environment/${envId}/edit`

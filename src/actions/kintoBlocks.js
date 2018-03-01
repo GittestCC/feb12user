@@ -1,18 +1,17 @@
 import { push } from 'react-router-redux'
-import { SubmissionError } from 'redux-form'
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 import capitalize from 'lodash/capitalize'
 
 import { formSubmitted } from './pageOptions'
 import { pages } from '../constants/pages'
-import { isBranchVersionEqual, getVersionType } from '../helpers/versionHelper'
-import { isRecent } from '../helpers/dateHelper'
+import { getVersionType } from '../helpers/versionHelper'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
 import { KINTOBLOCKS } from '../constants/backendMicroservices'
 
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
+export const ADD_KINTO_BLOCK = 'ADD_KINTO_BLOCK'
 export const CREATE_TAG_KINTO_BLOCK = 'CREATE_TAG_KINTO_BLOCK'
 export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
   'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
@@ -24,9 +23,10 @@ export const kintoBlockUpdate = (id, data) => ({
   data
 })
 
-export const kintoBlocksReceive = data => ({
+export const kintoBlocksReceive = (data, metadata) => ({
   type: RECEIVE_KINTO_BLOCKS,
-  data
+  data,
+  metadata
 })
 
 export const kintoBlockReceiveDependencies = response => ({
@@ -35,16 +35,14 @@ export const kintoBlockReceiveDependencies = response => ({
   metadata: response.metadata
 })
 
-export const kintoBlockReceive = (id, data) => {
-  const { metadata } = data
-  delete data.metadata
-  return {
-    type: RECEIVE_KINTO_BLOCK,
-    id,
-    data,
-    metadata
-  }
-}
+export const kintoBlockReceive = (id, data, metadata) => ({
+  type: RECEIVE_KINTO_BLOCK,
+  id,
+  data,
+  metadata
+})
+
+export const kintoBlockAdd = (id, data) => ({ type: ADD_KINTO_BLOCK, id, data })
 
 export const kintoBlockCreateTag = (id, data) => ({
   type: CREATE_TAG_KINTO_BLOCK,
@@ -58,48 +56,28 @@ export const fetchKintoBlocks = () => (dispatch, getState) => {
     workspaceId: selectedWorkspace
   })
   return axios
-    .get(getServerUrl(KINTOBLOCKS, '/kintoblocks/all'))
+    .get(getServerUrl(KINTOBLOCKS, `/${selectedWorkspace}/kintoblocks`))
     .then(response => {
-      if (isEmpty(response) || isEmpty(response.blocks)) {
+      if (isEmpty(response) || isEmpty(response.data)) {
         dispatch(push(kintoBlockCreateUrl))
       } else {
-        dispatch(kintoBlocksReceive(response.blocks))
+        dispatch(kintoBlocksReceive(response.data, response.metadata))
       }
     })
 }
 
-// checks if the last fetched kintoblock has the same ver and is fetched recently
-// if that is the case, then don't do anything
 export const fetchKintoBlock = (id, ver, type) => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
   type = capitalize(type)
-  const state = getState()
-  const kintoBlock = state.kintoBlocks.byId[id]
-  const version = { name: ver, type }
-  if (
-    kintoBlock &&
-    kintoBlock.version &&
-    isBranchVersionEqual(version, kintoBlock.version) &&
-    kintoBlock.lastFetch &&
-    isRecent(kintoBlock.lastFetch)
-  ) {
-    return
-  }
   return axios
     .get(
       getServerUrl(
         KINTOBLOCKS,
-        `/kintoblocks/${id}/versions/${ver}?type=${type}`
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${ver}?type=${type}`
       )
     )
     .then(response => {
-      response.lastFetch = new Date()
-      // TODO: remove below mock data after API set up
-      response.workspaceId = '1'
-      response.ownerId = state.auth.authSession.uid
-      response.isPublic = true
-      response.members = ['1', '2', '3', '4', '5']
-      response.services = ['MONGO_DB']
-      return dispatch(kintoBlockReceive(id, response))
+      return dispatch(kintoBlockReceive(id, response.data, response.metadata))
     })
 }
 
@@ -107,7 +85,10 @@ export const createKintoBlockTag = (id, ver, data) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   return axios
     .post(
-      getServerUrl(KINTOBLOCKS, `/kintoblocks/${id}/versions/${ver}/tags`),
+      getServerUrl(
+        KINTOBLOCKS,
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${ver}/tags`
+      ),
       data
     )
     .then(response => {
@@ -129,41 +110,46 @@ export const createKintoBlock = data => (dispatch, getState) => {
     workspaceId: selectedWorkspace
   })
   return axios
-    .post(getServerUrl(KINTOBLOCKS, '/kintoblocks/create'), data)
-    .then(() => {
+    .post(getServerUrl(KINTOBLOCKS, `/${selectedWorkspace}/kintoblocks`), data)
+    .then(response => {
       dispatch(formSubmitted())
+      dispatch(kintoBlockAdd(response.data.id, response.data))
       dispatch(push(kintoBlockListUrl))
     })
 }
 
-export const updateKintoBlock = (id, ver, type, data) => dispatch => {
+export const updateKintoBlock = (id, ver, type, data) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
   type = capitalize(type)
   return axios
     .put(
       getServerUrl(
         KINTOBLOCKS,
-        `/kintoblocks/${id}/versions/${ver}?type=${type}`
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${ver}?type=${type}`
       ),
       data
     )
-    .then(
-      () => {
-        dispatch(formSubmitted())
-        // TODO: make sure the server returns the updated object
-        // dispatch(kintoBlockUpdate(id, response))
-        dispatch(kintoBlockUpdate(id, { name: data.name }))
-      },
-      err => {
-        if (err.errors) {
-          throw new SubmissionError(err.errors)
-        }
-      }
-    )
+    .then(() => {
+      dispatch(formSubmitted())
+      // TODO: make sure the server returns the updated object
+      // dispatch(kintoBlockUpdate(id, response))
+      dispatch(kintoBlockUpdate(id, { name: data.name }))
+    })
 }
 
-export const searchKintoBlocks = q => () => {
+export const searchKintoBlocks = q => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
-    .get(getServerUrl(KINTOBLOCKS, `/kintoblocks/search?name=${q}&limit=10`))
+    .get(
+      getServerUrl(
+        KINTOBLOCKS,
+        `/${selectedWorkspace}/kintoblocks/search?name=${q}&limit=10`
+      ),
+      { noSpinner: true }
+    )
     .then(response => {
       return {
         options: response.results.map(k => ({
@@ -174,13 +160,17 @@ export const searchKintoBlocks = q => () => {
     })
 }
 
-export const fetchKintoBlockDependenciesData = (id, ver, type) => dispatch => {
+export const fetchKintoBlockDependenciesData = (id, ver, type) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
   type = capitalize(type)
   return axios
     .get(
       getServerUrl(
         KINTOBLOCKS,
-        `/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${ver}/dependencydata?type=${type}`
       )
     )
     .then(response => {

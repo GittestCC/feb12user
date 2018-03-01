@@ -2,23 +2,20 @@ import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import { FieldValidation } from '../../../../forms'
-import {
-  textToObject,
-  getVersionAsText,
-  asTextList
-} from '../../../../../helpers/versionHelper'
+import { TAG } from '../../../../../constants/version'
 
 class DeployModalForm extends Component {
   componentDidMount() {
     this.props.initialize({
-      version: this.props.kintoApp.versions[0]
+      version: this.props.kintoApp.versions.filter(v => v.type === TAG)[0].name
     })
   }
 
-  deployEnvironmentAndClose = version => {
-    const id = this.props.kintoApp.id
-    this.props.deployEnvironment(id, this.props.environment.name, version)
-    this.props.onClose()
+  deployEnvironmentAndClose = data => {
+    const { kintoApp, environment, onClose, deployEnvironment } = this.props
+    deployEnvironment(kintoApp.id, environment.id, {
+      version: { name: data.version }
+    }).then(onClose)
   }
 
   render() {
@@ -32,18 +29,14 @@ class DeployModalForm extends Component {
         <div className="kh-modal-body">
           <form onSubmit={handleSubmit(this.deployEnvironmentAndClose)}>
             <div className="full-width-field">
-              <Field
-                name="version"
-                component={FieldValidation}
-                parse={textToObject}
-                format={getVersionAsText}
-                type="select"
-              >
-                {asTextList(kintoApp.versions).map((version, index) => (
-                  <option key={index} value={version}>
-                    {version}
-                  </option>
-                ))}
+              <Field name="version" component={FieldValidation} type="select">
+                {kintoApp.versions
+                  .filter(v => v.type === TAG)
+                  .map((version, index) => (
+                    <option key={index} value={version.name}>
+                      {version.name}
+                    </option>
+                  ))}
               </Field>
             </div>
             <div className="kh-modal-actions">

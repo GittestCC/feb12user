@@ -13,11 +13,14 @@ class KintoBlockCard extends Component {
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
     goToLatest: PropTypes.func.isRequired,
-    goToEndpoint: PropTypes.func.isRequired
+    goToEndpoint: PropTypes.func.isRequired,
+    kintoBlockDependencies: PropTypes.array.isRequired,
+    goToDependencyManage: PropTypes.func.isRequired
   }
 
   state = {
-    areTagsAndBranchesShown: false
+    areTagsAndBranchesShown: false,
+    areDependenciesShown: false
   }
 
   showVersionDropdown = () => {
@@ -28,6 +31,15 @@ class KintoBlockCard extends Component {
     this.setState({ areTagsAndBranchesShown: false })
   }
 
+  showDependencyDropdown = e => {
+    e.preventDefault()
+    this.setState({ areDependenciesShown: true })
+  }
+
+  hideDependencyDropdown = () => {
+    this.setState({ areDependenciesShown: false })
+  }
+
   render() {
     const {
       kintoBlock,
@@ -35,8 +47,11 @@ class KintoBlockCard extends Component {
       latestVersion,
       dropdownId,
       dropdownVersionId,
+      dropdownDependencyId,
       goToLatest,
-      goToEndpoint
+      goToEndpoint,
+      kintoBlockDependencies,
+      goToDependencyManage
     } = this.props
 
     return (
@@ -49,9 +64,8 @@ class KintoBlockCard extends Component {
           <div className="text">
             <div className="left">
               <img
-                src={`/images/icon-generic-kintoblock-${Math.floor(
-                  Math.random() * 6
-                ) + 1}.svg`}
+                src={`/images/${kintoBlock.iconImageName ||
+                  'icon-generic-kintoblock-9.svg'}`}
                 alt=""
               />
             </div>
@@ -72,31 +86,87 @@ class KintoBlockCard extends Component {
 
         <div className="bottom">
           <div className="icons">
-            <DropDown
-              type="simple"
-              dropdownClass="menu"
-              className="wide"
-              id={dropdownId}
-            >
-              <button onClick={goToLatest} className="double-line">
-                <h5>Edit Branch</h5>
-                <div className="faded">{latestVersion.text}</div>
-              </button>
-              <button onClick={this.showVersionDropdown}>
-                View All Branches & Tags
-              </button>
-              <button onClick={goToEndpoint}>View Endpoints</button>
-              <div className="line with-padding" />
-            </DropDown>
-            <KintoBlockTagAndBranchDropDownContainer
-              onHide={this.hideVersionDropdown}
-              isShown={this.state.areTagsAndBranchesShown}
-              id={dropdownVersionId}
-              url={urls[pages.dashboardKintoBlocksManage]}
-              kintoBlock={kintoBlock}
-              noHighlight={true}
-              className="menu-hidden"
-            />
+            <div className="left">
+              <DropDown
+                type="dependencies"
+                dropdownClass="dependencies"
+                className="menu-hidden dependency-dropdown"
+                id={dropdownDependencyId}
+                isShown={this.state.areDependenciesShown}
+                onHide={this.hideDependencyDropdown}
+              >
+                <h4 className="title">
+                  Dependencies ({kintoBlockDependencies.length})
+                </h4>
+
+                <div className="line" />
+
+                {kintoBlockDependencies.map((d, index) => (
+                  <button
+                    onClick={() => goToDependencyManage(d.url)}
+                    key={index}
+                  >
+                    <div
+                      className={`dependency ${
+                        d.type ? d.type.toLowerCase() : ''
+                      }-dep`}
+                    />
+                    <h5>{d.name}</h5>
+                  </button>
+                ))}
+              </DropDown>
+
+              <div
+                className="applications"
+                onClick={this.showDependencyDropdown}
+              >
+                {kintoBlockDependencies
+                  .slice(0, 4)
+                  .map((d, i) => (
+                    <div
+                      key={i}
+                      className={`dependency ${
+                        d.type ? d.type.toLowerCase() : ''
+                      }-dep`}
+                    />
+                  ))}
+
+                {kintoBlockDependencies.length > 4 && (
+                  <div className="dependency number">
+                    +{kintoBlockDependencies.length - 4}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="right">
+              <DropDown
+                type="simple"
+                dropdownClass="menu"
+                className="wide"
+                id={dropdownId}
+              >
+                <button onClick={goToLatest} className="double-line">
+                  <h5>Edit Branch</h5>
+                  <div className="faded">{latestVersion.text}</div>
+                </button>
+                <button onClick={this.showVersionDropdown}>
+                  View All Branches & Tags
+                </button>
+                <button onClick={goToEndpoint}>View Endpoints</button>
+                <div className="line with-padding" />
+              </DropDown>
+
+              <KintoBlockTagAndBranchDropDownContainer
+                onHide={this.hideVersionDropdown}
+                isShown={this.state.areTagsAndBranchesShown}
+                id={dropdownVersionId}
+                url={urls[pages.dashboardKintoBlocksManage]}
+                kintoBlock={kintoBlock}
+                noHighlight={true}
+                className="menu-hidden"
+              />
+            </div>
           </div>
         </div>
       </Link>

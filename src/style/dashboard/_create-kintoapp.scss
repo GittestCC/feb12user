@@ -156,11 +156,12 @@ a.disabled {
         padding-left: 120px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         .expand-close-indicator{
           display: flex;
           align-items: center;
           margin-right: 20px;
+          margin-left: auto;
           h6{
             margin: 0;
           }
@@ -192,6 +193,9 @@ a.disabled {
             }
             &.kintoblock {
               @include backgroundImage('/images/icon-generic-kintoblock-small-border-1.svg', 40px, 40px);
+            }
+            &.mongo {
+              @include backgroundImage('/images/icon-services-kintoblocks-mongodb-small.svg', 40px, 40px);
             }
             position: absolute;
             left: 0;

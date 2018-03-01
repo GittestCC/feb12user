@@ -300,23 +300,16 @@ export const fetchKintoBlockForDocumentation = (id, version, type) => (
   dispatch,
   getState
 ) => {
+  const { selectedWorkspace } = getState().workspaces
   type = capitalize(type)
-  const state = getState()
   return axios
     .get(
       getServerUrl(
         KINTOBLOCKS,
-        `/kintoblocks/${id}/versions/${version}?type=${type}`
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${version}?type=${type}`
       )
     )
     .then(response => {
-      // TODO: remove more mock data here
-      response.lastFetch = new Date()
-      response.workspaceId = '1'
-      response.ownerId = state.auth.authSession.uid
-      response.isPublic = true
-      response.members = ['1', '2', '3', '4', '5']
-      response.version.buildId = '1'
-      return dispatch(kintoBlockForDocumentationReceive(id, response))
+      return dispatch(kintoBlockForDocumentationReceive(id, response.data))
     })
 }

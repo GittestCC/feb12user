@@ -103,7 +103,8 @@ export const dashboardSidebar = [
   {
     key: pages.dashboardAnalytics,
     title: 'Analytics',
-    className: 'analytics dimmed no-click',
+    className: 'analytics',
+    disableForProd: true,
     url: urls[pages.dashboardAnalytics],
     group: 1
   },
@@ -137,6 +138,7 @@ export const dashboardSidebar = [
     title: 'Services',
     className: 'services',
     url: urls[pages.dashboardServices],
+    disableForProd: true,
     group: 1
   }
 ]

@@ -1,18 +1,16 @@
-import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
 
 import { formSubmitted } from './pageOptions'
-import { isVersionEqual } from '../helpers/versionHelper'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
 import { KINTOAPPS } from '../constants/backendMicroservices'
 import { pages } from '../constants/pages'
-import { isRecent } from '../helpers/dateHelper'
 
 export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
+export const ADD_KINTO_APP = 'ADD_KINTO_APP'
 export const UPDATE_KINTO_APP = 'UPDATE_KINTO_APP'
 export const CREATE_VERSION_KINTO_APP = 'CREATE_VERSION_KINTO_APP'
 export const RECIEVE_KINTO_APP_ENVIRONMENTS = 'RECIEVE_KINTO_APP_ENVIRONMENTS'
@@ -32,6 +30,12 @@ export const kintoAppUpdate = (id, data) => ({
   data
 })
 
+export const kintoAppAdd = (id, data, metadata) => ({
+  type: ADD_KINTO_APP,
+  id,
+  data,
+  metadata
+})
 export const kintoAppCreateVersion = (id, data) => ({
   type: CREATE_VERSION_KINTO_APP,
   id,
@@ -44,11 +48,12 @@ export const kintoAppsReceive = response => ({
   metadata: response.metadata
 })
 
-export const kintoAppReceive = (id, response) => ({
+export const kintoAppReceive = (id, data, metadata, willOverwrite) => ({
   type: RECEIVE_KINTO_APP,
   id,
-  data: response.data,
-  metadata: response.metadata
+  data,
+  metadata,
+  willOverwrite
 })
 
 export const kintoAppEnvironmentsReceive = (id, data) => ({
@@ -100,30 +105,23 @@ export const changeLogReceive = (id, oldVersion, newVersion, data) => ({
   data
 })
 
-export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
-  const state = getState()
-  const kintoApp = state.kintoApps.byId[id]
-  if (
-    kintoApp &&
-    kintoApp.version &&
-    isVersionEqual(ver, kintoApp.version) &&
-    kintoApp.lastFetch &&
-    isRecent(kintoApp.lastFetch)
-  ) {
-    return Promise.resolve()
-  }
+//TODO try to break down into multiple reducer so we wont need merging
+export const fetchKintoApp = (id, ver, willOverwrite = false) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
-    .get(getServerUrl(KINTOAPPS, `/kintoapps/${id}/versions/${ver}`))
+    .get(
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/versions/${ver}`
+      )
+    )
     .then(response => {
-      if (response.data) {
-        response.data.lastFetch = new Date()
-        // TODO: remove below mock data after API set up
-        response.data.workspaceId = '1'
-        response.data.ownerId = state.auth.authSession.uid
-        response.data.isPublic = true
-        response.data.members = ['1', '2', '3', '4', '5']
-      }
-      return dispatch(kintoAppReceive(id, response))
+      return dispatch(
+        kintoAppReceive(id, response.data, response.metadata, willOverwrite)
+      )
     })
 }
 
@@ -133,21 +131,27 @@ export const fetchKintoApps = () => (dispatch, getState) => {
   const kintoAppCreateUrl = getPageUrl(pages.dashboardKintoAppsCreate, {
     workspaceId: selectedWorkspace
   })
-  return axios.get(getServerUrl(KINTOAPPS, '/kintoapps/all')).then(response => {
-    if (isEmpty(response.data)) {
-      dispatch(push(kintoAppCreateUrl))
-    } else {
-      dispatch(kintoAppsReceive(response))
-    }
-  })
+  return axios
+    .get(getServerUrl(KINTOAPPS, `/${selectedWorkspace}/kintoapps`))
+    .then(response => {
+      if (isEmpty(response.data)) {
+        dispatch(push(kintoAppCreateUrl))
+      } else {
+        dispatch(kintoAppsReceive(response))
+      }
+    })
 }
 
-export const fetchKintoAppDependenciesConfig = (id, ver, envId) => dispatch => {
+export const fetchKintoAppDependenciesConfig = (id, ver, envId) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
     .get(
       getServerUrl(
         KINTOAPPS,
-        `/kintoapps/${id}/versions/${ver}/config/${envId}`
+        `/${selectedWorkspace}/kintoapps/${id}/versions/${ver}/config/${envId}`
       )
     )
     .then(response => {
@@ -167,37 +171,44 @@ export const createKintoApp = data => (dispatch, getState) => {
     workspaceId: selectedWorkspace
   })
   return axios
-    .post(getServerUrl(KINTOAPPS, '/kintoapps/create'), data)
-    .then(() => {
+    .post(getServerUrl(KINTOAPPS, `/${selectedWorkspace}/kintoapps`), data)
+    .then(({ data, metadata }) => {
       dispatch(formSubmitted())
+      dispatch(kintoAppAdd(data.id, data, metadata))
       dispatch(push(kintoAppListUrl))
     })
 }
 
-export const updateKintoApp = (id, ver, data) => dispatch => {
+export const updateKintoApp = (id, ver, data) => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
-    .put(getServerUrl(KINTOAPPS, `/kintoapps/${id}/versions/${ver}`), data)
+    .put(
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/versions/${ver}`
+      ),
+      data
+    )
     .then(response => {
       dispatch(formSubmitted())
       dispatch(kintoAppUpdate(id, response.data))
     })
 }
 
-export const updateAppDependenciesConfigData = (
-  id,
-  ver,
-  env,
-  data
-) => dispatch => {
+export const updateAppDependenciesConfigData = (id, ver, env, data) => (
+  dispatch,
+  getState
+) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
     .put(
-      getServerUrl(KINTOAPPS, `/kintoapps/${id}/versions/${ver}/config/${env}`),
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/versions/${ver}/config/${env}`
+      ),
       data
     )
     .then(response => {
-      if (response.errors) {
-        throw new SubmissionError(response.errors)
-      }
       dispatch(formSubmitted())
     })
 }
@@ -208,7 +219,12 @@ export const getKintoAppEnvironments = id => (dispatch, getState) => {
     workspaceId: selectedWorkspace
   })
   return axios
-    .get(getServerUrl(KINTOAPPS, `/kintoapps/${id}/environments`))
+    .get(
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/environments`
+      )
+    )
     .then(response => {
       if (isEmpty(response.data)) {
         dispatch(push(kintoAppListUrl))
@@ -218,29 +234,52 @@ export const getKintoAppEnvironments = id => (dispatch, getState) => {
     })
 }
 
-export const addNewEnvironment = (id, data) => dispatch => {
+export const addNewEnvironment = (id, data) => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
   return axios
-    .post(getServerUrl(KINTOAPPS, `/kintoapps/${id}/environments`), data)
+    .post(
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/environments`
+      ),
+      data
+    )
     .then(response => {
       dispatch(formSubmitted())
       dispatch(newEnvironmentReceive(id, response.data))
     })
 }
 
-export const deployEnvironment = (id, envName, data) => (
+export const updateAppEnvironment = (id, envId, data) => (
   dispatch,
   getState
 ) => {
+  const { selectedWorkspace } = getState().workspaces
+  return axios
+    .put(
+      getServerUrl(
+        KINTOAPPS,
+        `/${selectedWorkspace}/kintoapps/${id}/environments/${envId}`
+      ),
+      data
+    )
+    .then(response => {
+      dispatch(formSubmitted())
+      dispatch(appEnvironmentUpdate(id, response.data))
+    })
+}
+
+export const deployEnvironment = (id, envId, data) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
     id,
     workspaceId: selectedWorkspace
   })
   return axios
-    .put(
+    .post(
       getServerUrl(
         KINTOAPPS,
-        `/kintoapps/${id}/environments/${envName}/deploy`
+        `/${selectedWorkspace}/kintoapps/${id}/environments/${envId}/deploy`
       ),
       data
     )
@@ -251,14 +290,6 @@ export const deployEnvironment = (id, envName, data) => (
     })
 }
 
-export const updateAppEnvironment = (id, envId, data) => dispatch => {
-  //TODO: Add API call when ready
-  return Promise.resolve({ data: { ...data, id: envId } }).then(response => {
-    dispatch(formSubmitted())
-    dispatch(appEnvironmentUpdate(id, response.data))
-  })
-}
-
 export const cancelDeployment = id => dispatch => {
   // TODO: the API does not have this functionality yet
   /*
@@ -266,7 +297,7 @@ export const cancelDeployment = id => dispatch => {
   */
 }
 
-export const shutDownEnvironment = (id, envName) => (dispatch, getState) => {
+export const shutDownEnvironment = (id, envId) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
     id,
@@ -276,12 +307,13 @@ export const shutDownEnvironment = (id, envName) => (dispatch, getState) => {
     .post(
       getServerUrl(
         KINTOAPPS,
-        `/${selectedWorkspace}/kintoapps/${id}/environments/${envName}/shutdown`
+        `/${selectedWorkspace}/kintoapps/${id}/environments/${envId}/shutdown`
       )
     )
-    .then(() => {
+    .then(response => {
       dispatch(formSubmitted())
       dispatch(push(environmentsListUrl))
+      dispatch(appEnvironmentUpdate(id, response.data))
     })
 }
 

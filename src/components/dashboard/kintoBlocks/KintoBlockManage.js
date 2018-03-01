@@ -18,7 +18,6 @@ class KintoBlockManage extends Component {
     canTagCommit: PropTypes.bool,
     isVersionMatch: PropTypes.bool.isRequired,
     resetForm: PropTypes.func.isRequired,
-    fetchKintoBlocks: PropTypes.func.isRequired,
     fetchKintoBlock: PropTypes.func.isRequired,
     hasActiveBuild: PropTypes.bool.isRequired,
     selectedWorkspace: PropTypes.string.isRequired
@@ -30,13 +29,17 @@ class KintoBlockManage extends Component {
   }
 
   componentDidMount() {
-    const { id, ver, type } = this.props
-    this.props.fetchKintoBlocks().then(() => {
-      this.props.fetchKintoBlock(id, ver, type)
-    })
-    if (!this.props.hasActiveBuild) {
-      this.props.showNotification(
-        'notification',
+    const {
+      id,
+      ver,
+      type,
+      fetchKintoBlock,
+      hasActiveBuild,
+      showNotification
+    } = this.props
+    fetchKintoBlock(id, ver, type)
+    if (!hasActiveBuild) {
+      showNotification(
         'Kudos for creating a KintoBlock - head over to Github and start coding!'
       )
     }

@@ -1,9 +1,14 @@
 import {
   RECEIVE_KINTO_BLOCK,
+  RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK_DEPENDENCIES
 } from '../actions/kintoBlocks'
 
-import { RECEIVE_KINTO_APP, RECEIVE_KINTO_APPS } from '../actions/kintoApps'
+import {
+  RECEIVE_KINTO_APP,
+  RECEIVE_KINTO_APPS,
+  ADD_KINTO_APP
+} from '../actions/kintoApps'
 
 import { SELECT_WORKSPACE } from '../actions/workspaces'
 
@@ -12,7 +17,9 @@ const kintoBlocksDependenciesCacheReducer = (state = {}, action) => {
     case RECEIVE_KINTO_APPS:
     case RECEIVE_KINTO_APP:
     case RECEIVE_KINTO_BLOCK:
+    case RECEIVE_KINTO_BLOCKS:
     case RECEIVE_KINTO_BLOCK_DEPENDENCIES:
+    case ADD_KINTO_APP:
       if (!action.metadata || !action.metadata.dependencies) {
         return state
       }

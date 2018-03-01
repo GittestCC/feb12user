@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ManageDependenciesField from '../../../components/dashboard/ui/ManageDependenciesField'
 import { getDependenciesFactory } from '../../../selectors/kintoDependencies'
+import { debounceSelectAsync } from '../../../helpers/objectHelper'
 import {
   searchKintoBlocks,
   fetchKintoBlockDependenciesData
@@ -23,7 +24,15 @@ function mapStateToProps(
   }
 }
 
-export default connect(mapStateToProps, {
-  searchKintoBlocks,
-  fetchKintoBlockDependenciesData
-})(ManageDependenciesField)
+function mapDispatchToProps(dispatch) {
+  const searchFunc = query => dispatch(searchKintoBlocks(query))
+  return {
+    searchKintoBlocks: debounceSelectAsync(searchFunc),
+    fetchKintoBlockDependenciesData: (id, ver, type) =>
+      dispatch(fetchKintoBlockDependenciesData(id, ver, type))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ManageDependenciesField
+)

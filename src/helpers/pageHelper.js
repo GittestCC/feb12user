@@ -16,6 +16,7 @@ export const getActivePageKey = (url, isDashboard) => {
 // returns the sidebar list with the active item marked as active
 // and also group the result by `group` key
 export const getListWithActiveItem = (key, workspaceId, isDashboard) => {
+  const isProd = isProduction()
   const list = isDashboard ? dashboardSidebar : marketSidebar
   const listWithActiveItem = list.map(item => {
     const url = getUrl(item.url, { workspaceId: workspaceId || '0' })
@@ -29,7 +30,12 @@ export const getListWithActiveItem = (key, workspaceId, isDashboard) => {
         isActive = true
       }
     }
-    let result = { ...item, url, active: isActive }
+    let result = {
+      ...item,
+      url,
+      active: isActive,
+      disabled: item.disableForProd && isProd
+    }
     if (item.addUrl) {
       result.addUrl = getUrl(item.addUrl, { workspaceId: workspaceId || '0' })
     }

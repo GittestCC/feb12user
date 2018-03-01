@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
-import { fetchKintoBlock, fetchKintoBlocks } from '../../../actions/kintoBlocks'
+import { fetchKintoBlock } from '../../../actions/kintoBlocks'
 import { showNotification } from '../../../actions/pageOptions'
 import { isBranchVersionEqual } from '../../../helpers/versionHelper'
 import { BRANCH } from '../../../constants/version'
+import { INFO } from '../../../constants/notificationTypes'
 import KintoBlockManage from '../../../components/dashboard/kintoBlocks/KintoBlockManage'
 
 function mapStateToProps(state, { match }) {
@@ -32,10 +33,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchKintoBlock: (id, ver, type) =>
       dispatch(fetchKintoBlock(id, ver, type)),
-    fetchKintoBlocks: () => dispatch(fetchKintoBlocks()),
     resetForm: () => dispatch(reset('kintoBlockManageForm')),
-    showNotification: (type, message) =>
-      dispatch(showNotification(type, message))
+    showNotification: message => dispatch(showNotification(INFO, message))
   }
 }
 

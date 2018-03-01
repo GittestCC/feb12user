@@ -23,7 +23,7 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.allIds).toEqual(['1', '2'])
   })
 
-  it('receiveKintoBlocks merges byId data for received entities', () => {
+  it('receiveKintoBlocks overwrite byId data for received entities', () => {
     const newState = reducer(
       {
         byId: { '1': { special: 'one' }, '2': { special: 'two' } },
@@ -34,14 +34,12 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual({
       id: '1',
       name: 'first',
-      simple: true,
-      special: 'one'
+      simple: true
     })
     expect(newState.byId['2']).toEqual({
       id: '2',
       name: 'second',
-      simple: true,
-      special: 'two'
+      simple: true
     })
   })
 

@@ -75,21 +75,29 @@ class SideBar extends Component {
                     className={`sidebar-item ${item.active ? 'selected' : ''}`}
                     key={key}
                   >
-                    <Link to={item.url}>
-                      <h4 className={item.className}>
-                        {item.title}
-                        {item.addUrl && (
-                          <img
-                            className="item-sub-add"
-                            src={`${
-                              process.env.PUBLIC_URL
-                            }/images/icon-blue-new.svg`}
-                            alt=""
-                            onClick={e => this.navigateTo(e, item.addUrl)}
-                          />
-                        )}
-                      </h4>
-                    </Link>
+                    {item.disabled ? (
+                      <div>
+                        <h4 className={`${item.className} dimmed`}>
+                          {item.title}
+                        </h4>
+                      </div>
+                    ) : (
+                      <Link to={item.url}>
+                        <h4 className={item.className}>
+                          {item.title}
+                          {item.addUrl && (
+                            <img
+                              className="item-sub-add"
+                              src={`${
+                                process.env.PUBLIC_URL
+                              }/images/icon-blue-new.svg`}
+                              alt=""
+                              onClick={e => this.navigateTo(e, item.addUrl)}
+                            />
+                          )}
+                        </h4>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

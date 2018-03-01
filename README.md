@@ -12,6 +12,7 @@ The default repo for Kintohub.com! This is gonna be one hell of a project.
 * _(optional)(e2e)_ install `allure` to be able to view allure e2e test reports using `brew install allure`
 * `nvm use`
 * create `.env` file (it is ignored) and setup all the env vars in it, you can check`~/.env.sample` for reference
+  * you need to fill out the app id and env name in order to connect with the backend
   * you need to create a github OAuth App and add the client id to `.env`
 
 ## Commands
@@ -92,7 +93,7 @@ to add a new avatar, you need to edit `_blog-gallery.scss` and add it under `.bl
 you need to make sure the `Authorize callback URL` for the github app is
 
 ```
-http://clienturl.com/app/workspaces/githubConnect
+http://clienturl.com/githubConnect
 ```
 
 ### How to hide a page/component from production

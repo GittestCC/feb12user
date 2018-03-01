@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { FieldValidation } from '../../forms'
 import { required, isLessThan200 } from '../../../helpers/forms/validators'
 import { kintoName } from '../../../helpers/forms/validationFields'
+import { isProduction } from '../../../helpers/pageHelper'
 import ManageDependenciesFieldContainer from '../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import WorkspaceToolbarContainer from '../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 import KintoBlockServicesContainer from '../../../containers/workspaces/servicesList/KintoBlockServicesContainer'
@@ -63,10 +64,11 @@ const KintoAppForm = ({
         disabled={!isCreate && !isDraft}
       />
     </div>
-    <div className="form-wrapper">
-      <KintoBlockServicesContainer />
-    </div>
-    {/* TODO: Fix to make the browser submit on enter */}
+    {isProduction() ? null : (
+      <div className="form-wrapper">
+        <KintoBlockServicesContainer />
+      </div>
+    )}
     <button className="hide">Submit</button>
   </form>
 )

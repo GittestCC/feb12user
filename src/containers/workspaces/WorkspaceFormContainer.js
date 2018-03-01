@@ -6,13 +6,13 @@ import { ADMIN_ROLE } from '../../constants/permissions'
 function mapStateToProps(state, { workspace, isCreate }) {
   workspace = workspace || {}
   let workspaceMembers
-  const currentUserId = state.auth.authSession.uid
+  const { currentUser } = state
   if (isCreate) {
     workspaceMembers = [
       {
-        id: currentUserId,
-        username: state.auth.authSession.uname,
-        email: state.auth.authSession.email,
+        id: currentUser.id,
+        email: currentUser.email,
+        userName: currentUser.userName,
         role: ADMIN_ROLE
       }
     ]
@@ -21,7 +21,7 @@ function mapStateToProps(state, { workspace, isCreate }) {
   }
 
   return {
-    currentUserId,
+    currentUserId: currentUser.id,
     workspace,
     workspaceMembers,
     initialValues: {
@@ -36,9 +36,9 @@ function mapDispatchToProps(dispatch, { isCreate, workspace }) {
   return {
     onSubmit: data => {
       if (isCreate) {
-        dispatch(createWorkspace(data))
+        return dispatch(createWorkspace(data))
       } else {
-        dispatch(updateWorkspace(workspace.id, data))
+        return dispatch(updateWorkspace(workspace.id, data))
       }
     }
   }

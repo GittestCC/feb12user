@@ -2,13 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
-import {
-  FieldValidation,
-  Button,
-  Password,
-  CheckBox,
-  FormError
-} from '../forms'
+import { FieldValidation, Button, Password, FormError } from '../forms'
 import { required } from '../../helpers/forms/validators'
 
 const LogInForm = ({
@@ -45,11 +39,6 @@ const LogInForm = ({
       component={Password}
       validate={required}
       className="input-lg"
-    />
-    <Field
-      name="KeepSignedIn"
-      label="Keep me logged in for two weeks"
-      component={CheckBox}
     />
     <FormError error={error} />
     <Button

@@ -28,7 +28,7 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
     submitLabel,
     listEnvironmentsUrl,
     initialValues: {
-      environment: kintoApp.environments[0].name,
+      environment: kintoApp.environments[0].id,
       version: kintoApp.version
     }
   }
@@ -37,14 +37,14 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
 function mapDispatchToProps(dispatch, { kintoApp, onClose, id }) {
   return {
     onSubmit: formValues => {
-      const envName = formValues.environment
+      const envId = formValues.environment
       const data = {
         notes: formValues.notes,
-        version: formValues.version,
+        version: { name: getVersionAsText(formValues.version) },
         createNewVersion: true
       }
 
-      return dispatch(deployEnvironment(id, envName, data)).then(onClose)
+      return dispatch(deployEnvironment(id, envId, data)).then(onClose)
     }
   }
 }

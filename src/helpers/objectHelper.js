@@ -1,6 +1,7 @@
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
+import debounce from 'lodash/debounce'
 
 function mergeStrategyEnchanced(options = {}) {
   return (objValue, srcValue) => {
@@ -39,4 +40,13 @@ function mergeStrategyEnchanced(options = {}) {
 export const hasValues = obj => Object.keys(obj).some(k => obj[k])
 export const merge = (orig, data, options) => {
   return mergeWith({}, orig, data, mergeStrategyEnchanced(options))
+}
+
+export const debounceSelectAsync = action => {
+  return debounce((searchTerm, callback) => {
+    action(searchTerm).then(
+      result => callback(null, result),
+      error => callback(error, null)
+    )
+  }, 500)
 }

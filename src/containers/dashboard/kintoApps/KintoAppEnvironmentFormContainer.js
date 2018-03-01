@@ -10,8 +10,8 @@ function mapStateToProps(state, { kintoApp, environment }) {
   environment = environment || {}
   return {
     initialValues: {
-      name: environment.name,
-      autoDeploy: environment.autoDeploy || false
+      envName: environment.name,
+      autoUpdate: !!environment.autoUpdate
     },
     kintoApp,
     environment
@@ -22,9 +22,9 @@ function mapDispatchToProps(dispatch, { isCreate, kintoApp, environment }) {
   return {
     onSubmit: data => {
       if (isCreate) {
-        dispatch(addNewEnvironment(kintoApp.id, data))
+        return dispatch(addNewEnvironment(kintoApp.id, data))
       } else {
-        dispatch(updateAppEnvironment(kintoApp.id, environment.id, data))
+        return dispatch(updateAppEnvironment(kintoApp.id, environment.id, data))
       }
     }
   }

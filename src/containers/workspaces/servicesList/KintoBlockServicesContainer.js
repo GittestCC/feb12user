@@ -3,12 +3,12 @@ import KintoBlockServices from '../../../components/workspaces/servicesList/Kint
 import { toggleService } from '../../../actions/workspaces'
 
 function mapStateToProps(state) {
-  const selectedWorkspace = state.workspaces.selectedWorkspace
-  const workspaceServices = state.workspaces.byId[selectedWorkspace]
-    ? state.workspaces.byId[selectedWorkspace].services
+  const selectedWorkspace =
+    state.workspaces.byId[state.workspaces.selectedWorkspace]
+  const workspaceServices = selectedWorkspace
+    ? selectedWorkspace.services || []
     : []
   let services = {}
-
   workspaceServices.forEach(service => {
     services[service.service] = {
       isActive: service.isActive,

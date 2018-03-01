@@ -3,22 +3,19 @@ import { reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import {
   fetchKintoApp,
-  fetchKintoApps,
   getKintoAppEnvironments
 } from '../../../actions/kintoApps'
 import { getPageUrl } from '../../../helpers/urlHelper'
 import { pages } from '../../../constants/pages'
-import { isVersionEqual } from '../../../helpers/versionHelper'
+import { BRANCH } from '../../../constants/version'
 import KintoAppManage from '../../../components/dashboard/kintoApps/KintoAppManage'
 
 function mapStateToProps(state, { match }) {
   let { id, ver } = match.params
   const workspaceId = state.workspaces.selectedWorkspace
   const kintoApp = state.kintoApps.byId[id] || {}
+  const version = kintoApp.version || {}
   const { canSave } = state.pageOptions
-  if (ver === 'draft') {
-    ver = '0.0.0'
-  }
   return {
     id,
     ver,
@@ -26,16 +23,16 @@ function mapStateToProps(state, { match }) {
     canSave,
     selectedWorkspace: workspaceId,
     version: kintoApp.version,
-    isDraft: isVersionEqual(kintoApp.version, '0.0.0'),
-    isVersionMatch: isVersionEqual(kintoApp.version, ver)
+    isDraft: version.type === BRANCH,
+    isVersionMatch: version.name === ver
   }
 }
 
 function mapDispatchToProps(dispatch, { match }) {
   return {
     push: url => dispatch(push(url)),
-    fetchKintoApp: (id, ver) => dispatch(fetchKintoApp(id, ver)),
-    fetchKintoApps: () => dispatch(fetchKintoApps()),
+    fetchKintoApp: (id, ver, willOverwrite) =>
+      dispatch(fetchKintoApp(id, ver, willOverwrite)),
     getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
     resetForm: () => dispatch(reset('kintoAppForm'))
   }

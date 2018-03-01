@@ -8,7 +8,6 @@ import Modal from 'react-modal'
 import ReactGA from 'react-ga'
 
 import configureStore from '../store/configureStore'
-import { isProduction } from '../helpers/pageHelper'
 import { getAnalyticsId } from '../helpers/analyticsHelper'
 
 import Home from './landing/Home'
@@ -26,7 +25,11 @@ import AppContainer from '../containers/AppContainer'
 import AuthContainer from '../containers/AuthContainer'
 import LogInContainer from '../containers/LogInContainer'
 import NotificationsContainer from '../containers/NotificationsContainer'
+import LoadingInterceptorContainer from '../containers/LoadingInterceptorContainer'
 import LoadingSpinnerContainer from '../containers/LoadingSpinnerContainer'
+import GithubConnectContainer from '../containers/GithubConnectContainer'
+import AccountActivateContainer from '../containers/AccountActivateContainer'
+
 import '../style/app.css'
 
 const Kintohub = () => {
@@ -38,7 +41,7 @@ const Kintohub = () => {
   const history = createHistory()
   const store = configureStore(history)
 
-  const isLoggedIn = store.getState().auth.token
+  const isLoggedIn = store.getState().auth.isLoggedIn
 
   Modal.defaultStyles.overlay.backgroundColor = 'rgba(245, 249, 255, 0.9)'
   Modal.defaultStyles.overlay.zIndex = '10'
@@ -47,52 +50,61 @@ const Kintohub = () => {
   return (
     <AppCrashErrorDisplay>
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ScrollToTop>
-            <ScrollToErrorOnSubmitContainer />
-            {analyticsId && <Route component={Analytics} />}
-            <NotificationsContainer />
-            <LoadingSpinnerContainer />
-            <Route component={AuthContainer} />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() =>
-                  isLoggedIn ? <Redirect to="/app" /> : <Redirect to="/home" />
-                }
-              />
-              <Route path="/home" component={Home} />
-              <Route path="/about-us" component={AboutUs} />
-              <Route path="/contact-us" component={ContactUs} />
-              <Route path="/blog" component={Blog} />
-              <Route path="/app" component={AppContainer} />
+        <AuthContainer>
+          <LoadingInterceptorContainer />
+          <LoadingSpinnerContainer />
+          <NotificationsContainer />
+          <ScrollToErrorOnSubmitContainer />
+          <ConnectedRouter history={history}>
+            <ScrollToTop>
+              {analyticsId && <Route component={Analytics} />}
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={() =>
+                    isLoggedIn ? (
+                      <Redirect to="/app" />
+                    ) : (
+                      <Redirect to="/home" />
+                    )
+                  }
+                />
+                <Route path="/home" component={Home} />
+                <Route path="/about-us" component={AboutUs} />
+                <Route path="/contact-us" component={ContactUs} />
+                <Route path="/blog" component={Blog} />
+                <Route path="/app" component={AppContainer} />
 
-              {!isProduction()
-                ? [
-                    <Route key="1" path="/log-in" component={LogInContainer} />,
-                    <Route
-                      key="2"
-                      path="/sign-up"
-                      render={() => <LogInContainer flip={true} />}
-                    />,
-                    <Route
-                      key="3"
-                      path="/forgot-password"
-                      component={ForgotPassword}
-                    />,
-                    <Route
-                      key="4"
-                      path="/create-new-password"
-                      component={CreateNewPassword}
-                    />
-                  ]
-                : null}
-
-              <Redirect to="/" />
-            </Switch>
-          </ScrollToTop>
-        </ConnectedRouter>
+                <Route key="1" path="/log-in" component={LogInContainer} />
+                <Route
+                  key="2"
+                  path="/sign-up"
+                  render={() => <LogInContainer flip={true} />}
+                />
+                <Route
+                  key="3"
+                  path="/forgot-password"
+                  component={ForgotPassword}
+                />
+                <Route
+                  key="4"
+                  path="/create-new-password"
+                  component={CreateNewPassword}
+                />
+                <Route
+                  path="/accountActivate/:token"
+                  component={AccountActivateContainer}
+                />
+                <Route
+                  path="/githubConnect"
+                  component={GithubConnectContainer}
+                />
+                <Redirect to="/" />
+              </Switch>
+            </ScrollToTop>
+          </ConnectedRouter>
+        </AuthContainer>
       </Provider>
     </AppCrashErrorDisplay>
   )

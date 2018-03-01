@@ -42,12 +42,10 @@ class WorkspaceToolbar extends Component {
     return (
       <div className="workspace-toolbar">
         <div className="user-section">
-          {currentUserInfo.username && (
-            <UserCircle
-              name={currentUserInfo.username}
-              userType={currentUserInfo.permission}
-            />
-          )}
+          <UserCircle
+            name={currentUserInfo.userName}
+            userType={currentUserInfo.permission}
+          />
           <h5>{capitalize(currentUserInfo.permission)}</h5>
         </div>
         <div className="members">

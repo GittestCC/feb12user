@@ -266,7 +266,7 @@
             &.queued {
               background-color: $kinto-purple;
             }
-            &.building {
+            &.building, &.processing {
               background-color: $kinto-yellow;
             }
             &.failed {

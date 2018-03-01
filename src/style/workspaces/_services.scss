@@ -1,19 +1,18 @@
-
 .kintoblock-service {
   .main-service-icon {
-    background-color:      $kinto-grayscale-1;
+    background-color: $kinto-grayscale-1;
   }
   .service-card {
-    background-color:      $kinto-white;
+    background-color: $kinto-white;
     .corner {
       @extend .coming;
       &.check {
-        background-color:  $kinto-tinted-grayscale-1;
+        background-color: $kinto-tinted-grayscale-1;
       }
     }
     .main-content {
       h4 {
-        color:             $kinto-grayscale-7;
+        color: $kinto-grayscale-7;
       }
     }
     .fake-button {
@@ -22,10 +21,10 @@
       }
     }
     .bottom {
-      background-color:    $kinto-grayscale-1;
+      background-color: $kinto-grayscale-1;
       &.enabled {
-        background-color:  rgba(94,210,162,0.20);
-        color:             $kinto-green-dark;
+        background-color: rgba(94, 210, 162, 0.2);
+        color: $kinto-green-dark;
       }
     }
   }
@@ -35,23 +34,23 @@
 }
 .analytics-services {
   .main-service-icon {
-    background-color:      $kinto-white;
+    background-color: $kinto-white;
   }
   .service-card {
-    background-color:      $kinto-tinted-grayscale-8;
+    background-color: $kinto-tinted-grayscale-8;
     .corner {
       @extend .coming;
       &.check {
-        background-color:  $kinto-tinted-grayscale-9;
+        background-color: $kinto-tinted-grayscale-9;
         .icon {
           @include backgroundImage('/images/icon-blue-new.svg', 75px, 20px);
-          transform:       rotate(45deg);
+          transform: rotate(45deg);
         }
       }
     }
     .main-content {
       h4 {
-        color:             $kinto-grayscale-5;
+        color: $kinto-grayscale-5;
       }
     }
     .fake-button {
@@ -60,218 +59,226 @@
       }
     }
     .bottom {
-      background-color:    $kinto-grayscale-9;
+      background-color: $kinto-grayscale-9;
       &.enabled {
-        background-color:  rgba(94,210,162,0.40);
-        color:             $kinto-white;
+        background-color: rgba(94, 210, 162, 0.4);
+        color: $kinto-white;
       }
     }
   }
 }
 .cards {
-  display:                 grid;
-  grid-template-columns:   1fr 1fr 1fr;
-  grid-column-gap:         20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
   .service-card {
     @extend .box-shadow-standard;
-    border-radius:         12px;
-    position:              relative;
-    overflow:              hidden;
-    height:                340px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    height: 340px;
     .coming {
       h6 {
-        font-size:         12px;
-        margin:            0;
-        color:             $kinto-white;
+        font-size: 12px;
+        margin: 0;
+        color: $kinto-white;
       }
     }
     .corner {
       @extend .coming;
-      background-color:    $kinto-blue-muted;
-      padding-top:         30px;
-      padding-bottom:      20px;
-      top:                 -18px;
-      left:                -55px;
+      background-color: $kinto-blue-muted;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      top: -18px;
+      left: -55px;
       &.plus {
         .icon {
           @include backgroundImage('/images/icon-blue-new.svg', 75px, 20px);
-          transform:       rotate(45deg);
+          transform: rotate(45deg);
         }
       }
       &.check {
         .icon {
           @include backgroundImage('/images/icon-status-success-small.svg', 75px, 20px);
-          transform:       rotate(45deg);
+          transform: rotate(45deg);
         }
       }
     }
     .open {
-      position:            absolute;
-      right:               10px;
-      top:                 10px;
-      width:               80px;
-      z-index:             3;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 80px;
+      z-index: 3;
       .button.secondary {
-        min-width:         80px;
+        min-width: 80px;
       }
     }
     .main-content {
-      padding:             0 40px;
-      h4, h5 {
-        text-align:        center;
+      padding: 0 40px;
+      h4,
+      h5 {
+        text-align: center;
       }
       h5 {
-        color:             $kinto-grayscale-6;
-        font-weight:       normal;
-        line-height:       20px;
-        margin-bottom:     0;
+        color: $kinto-grayscale-6;
+        font-weight: normal;
+        line-height: 20px;
+        margin-bottom: 0;
       }
       h4 {
-        margin-bottom:     2px;
+        margin-bottom: 2px;
       }
     }
     .fake-button {
-      padding:             0 38px 38px 38px;
-      position:            absolute;
-      margin:              0 auto;
-      bottom:              40px;
-      width:               100%;
-      left:                -2px;
+      padding: 0 38px 38px 38px;
+      position: absolute;
+      margin: 0 auto;
+      bottom: 40px;
+      width: 100%;
+      left: -2px;
     }
     .bottom {
-      position:            absolute;
-      margin-bottom:       0;
-      bottom:              0;
-      width:               100%;
-      height:              40px;
-      padding:             8px 4px 4px 4px;
-      text-align:          center;
-      text-transform:      capitalize;
-      font-weight:         bold;
+      position: absolute;
+      margin-bottom: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      padding: 8px 4px 4px 4px;
+      text-align: center;
+      text-transform: capitalize;
+      font-weight: bold;
     }
     &.selected {
-      border:              solid 4px $kinto-blue;
+      border: solid 4px $kinto-blue;
       .face {
-        overflow:          hidden;
-        padding:           0;
+        overflow: hidden;
+        padding: 0;
         .corner {
-          padding-top:     30px;
-          padding-bottom:  20px;
-          top:             -22px;
-          left:            -59px;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          top: -22px;
+          left: -59px;
         }
       }
       .bottom {
-        padding:           8px 0 0 0;
-        height:            36px;
+        padding: 8px 0 0 0;
+        height: 36px;
       }
       .fake-button {
-        padding:           0 34px 34px 34px;
-        bottom:            40px;
+        padding: 0 34px 34px 34px;
+        bottom: 40px;
       }
       .open {
-        right:             6px;
-        top:               6px;
+        right: 6px;
+        top: 6px;
       }
     }
     &.toggle-field {
-      height:              300px;
+      height: 300px;
       .fake-button {
-        bottom:            0;
+        bottom: 0;
       }
     }
     .face {
-      height:              300px;
-      overflow:            hidden;
-      padding:             4px 4px 0 4px;
+      height: 300px;
+      overflow: hidden;
+      padding: 4px 4px 0 4px;
     }
   }
 }
 .extended-information {
-  display:                 grid;
-  grid-template-columns:   2fr 1fr;
-  grid-template-rows:      1fr;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
   @extend .box-shadow-standard;
-  border-radius:           12px;
-  margin-top:              20px;
-  min-height:              450px;
-  background-color:        $kinto-white;
-  position:                relative;
+  border-radius: 12px;
+  margin-top: 20px;
+  min-height: 450px;
+  background-color: $kinto-white;
+  position: relative;
   &:after {
-    content:               "";
-    position:              absolute;
-    width:                 0;
-    top:                   -9px;
-    right:                 16.9%;
-    border-left:           10px solid transparent;
-    border-right:          10px solid transparent;
-    transition:            all 0.3s ease-in-out;
-    border-bottom:         10px solid $kinto-white;
+    content: '';
+    position: absolute;
+    width: 0;
+    top: -9px;
+    right: 16.9%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 10px solid $kinto-white;
   }
-  &.MONGO_DB:after, &.KIBANA:after {
-    left:                  15.4%;
+  &.MONGO_DB:after,
+  &.KIBANA:after {
+    left: 15.4%;
   }
-  &.MESSAGE_PASSING:after, &.PROMETHEUS:after {
-    left:                  49.3%;
+  &.MESSAGE_PASSING:after,
+  &.PROMETHEUS:after {
+    left: 49.3%;
   }
-  &.SHARED_MEMORY:after, &.ZIPKIN:after {
-    border-bottom:         10px solid $kinto-tinted-grayscale-1;
-    right:                 15.4%;
+  &.SHARED_MEMORY:after,
+  &.ZIPKIN:after {
+    border-bottom: 10px solid $kinto-tinted-grayscale-1;
+    right: 15.4%;
   }
-  h5:not(.bottom), li {
-    font-weight:           normal;
-    color:                 $kinto-grayscale-6;
+  h5:not(.bottom),
+  li {
+    font-weight: normal;
+    color: $kinto-grayscale-6;
   }
   .information-area {
-    padding:               40px;
-    display:               grid;
+    padding: 40px;
+    display: grid;
     grid-template-columns: 80px 1fr;
-    grid-column-gap:       40px;
+    grid-column-gap: 40px;
     .main-service-icon {
-      margin-top:          0;
+      margin-top: 0;
     }
     h2 {
-      margin-top:          0;
+      margin-top: 0;
+    }
+    .information-text ul li h5 a {
+      font-size: 14px;
     }
   }
   .action-area {
-    background-color:      $kinto-grayscale-1;
-    padding:               40px;
-    border-radius:         0 12px 12px 0;
+    background-color: $kinto-grayscale-1;
+    padding: 40px;
+    border-radius: 0 12px 12px 0;
     .button {
-      margin-bottom:       20px;
+      margin-bottom: 20px;
     }
   }
 }
 .main-service-icon {
-  height:                  80px;
-  width:                   80px;
-  margin:                  40px auto 14px;
-  border-radius:           40px;
-  &.MONGO_DB{
+  height: 80px;
+  width: 80px;
+  margin: 40px auto 14px;
+  border-radius: 40px;
+  &.MONGO_DB {
     @include backgroundImage('/images/icon-services-kintoblocks-mongodb-large.svg', 80px, 80px);
   }
-  &.MESSAGE_PASSING{
+  &.MESSAGE_PASSING {
     @include backgroundImage('/images/icon-services-kintoblocks-message-passing-large.svg', 80px, 80px);
   }
-  &.SHARED_MEMORY{
+  &.SHARED_MEMORY {
     @include backgroundImage('/images/icon-services-kintoblocks-shared-memory-large.svg', 80px, 80px);
   }
-  &.KIBANA{
+  &.KIBANA {
     @include backgroundImage('/images/icon-services-analytics-kibana-large.svg', 80px, 80px);
   }
-  &.PROMETHEUS{
+  &.PROMETHEUS {
     @include backgroundImage('/images/icon-services-analytics-prometheus-large.svg', 80px, 80px);
   }
-  &.ZIPKIN{
-    @include backgroundImage('/images/icon-services-analytics-zipkin-large.svg', 80px, 80px);
+  &.ZIPKIN {
+    @include backgroundImage('/images/icon-services-analytics-jaeger-large.svg', 80px, 80px);
   }
 }
 
 .service-list {
   .line {
-    border-bottom:         solid 2px $kinto-tinted-grayscale-2;
-    margin:                40px 0;
+    border-bottom: solid 2px $kinto-tinted-grayscale-2;
+    margin: 40px 0;
   }
 }
 

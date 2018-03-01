@@ -8,6 +8,7 @@ import workspaces from './workspaces'
 import documentation from './documentation'
 import auth from './auth'
 import kintoBlocksDependenciesCache from './kintoBlocksDependenciesCache'
+import currentUser from './currentUser'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   workspaces,
   auth,
   documentation,
-  kintoBlocksDependenciesCache
+  kintoBlocksDependenciesCache,
+  currentUser
 })
 export default rootReducer

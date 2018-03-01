@@ -82,23 +82,33 @@ class AnalyticsServices extends Component {
                 <ul>
                   <li>
                     <h5>
-                      I am thou, thou art I... Thou hast acquired a new vow.
+                      Access detailed logs with powerful visualisation tools for
+                      all your apps
                     </h5>
                   </li>
                   <li>
                     <h5>
-                      It shall become the wings of rebellion that breaketh thy
-                      chains of captivity.
+                      Exclusive one-click setup on KintoHub: activate and you
+                      are ready to go
                     </h5>
+                  </li>
+                  <li>
+                    <h5>Built with ElasticSearch and Kibana 6.1.1</h5>
                   </li>
                   <li>
                     <h5>
-                      With the birth of the Chariot Persona, I have obtained the
-                      winds of blessing
+                      More info on Kibana{' '}
+                      <a
+                        href="https://www.elastic.co/products/kibana"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        here
+                      </a>
                     </h5>
                   </li>
                   <li>
-                    <h5>that shall lead to freedom and new power...</h5>
+                    <h5>FREE to try for a limited time during alpha period</h5>
                   </li>
                 </ul>
               </div>
@@ -126,13 +136,14 @@ class AnalyticsServices extends Component {
                     )
                   }
                 >
-                  Enable This Service
+                  Enable {kibana.title}
                 </button>
               )}
               <h5>
-                This service is free to use during private alpha period. After
-                that, a subscription or pay-as-you-go fee will be required. You
-                will be notified before any charge is incurred.
+                This service is free to use for a limited time during alpha
+                period. In the future, fees will apply to use visualization
+                services. You will be notified of all policy changes at least
+                72h before any charge is incurred.
               </h5>
             </div>
           </div>
@@ -149,23 +160,33 @@ class AnalyticsServices extends Component {
                 <ul>
                   <li>
                     <h5>
-                      I am thou, thou art I... Thou hast acquired a new vow.
+                      Get detailed monitoring data and set tailored alert rules
+                      for all your apps
                     </h5>
                   </li>
                   <li>
                     <h5>
-                      It shall become the wings of rebellion that breaketh thy
-                      chains of captivity.
+                      Exclusive one-click setup on KintoHub: activate and you
+                      are ready to go
                     </h5>
+                  </li>
+                  <li>
+                    <h5>Built with Prometheus 2.0.0</h5>
                   </li>
                   <li>
                     <h5>
-                      With the birth of the Chariot Persona, I have obtained the
-                      winds of blessing
+                      More info on Prometheus{' '}
+                      <a
+                        href="https://prometheus.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        here
+                      </a>
                     </h5>
                   </li>
                   <li>
-                    <h5>that shall lead to freedom and new power...</h5>
+                    <h5>FREE to try for a limited time during alpha period</h5>
                   </li>
                 </ul>
               </div>
@@ -193,13 +214,14 @@ class AnalyticsServices extends Component {
                     )
                   }
                 >
-                  Enable This Service
+                  Enable {prometheus.title}
                 </button>
               )}
               <h5>
-                This service is free to use during private alpha period. After
-                that, a subscription or pay-as-you-go fee will be required. You
-                will be notified before any charge is incurred.
+                This service is free to use for a limited time during alpha
+                period. In the future, fees will apply to use monitoring &
+                alerting capabilities. You will be notified of all policy
+                changes at least 72h before any charge is incurred.
               </h5>
             </div>
           </div>
@@ -216,23 +238,32 @@ class AnalyticsServices extends Component {
                 <ul>
                   <li>
                     <h5>
-                      I am thou, thou art I... Thou hast acquired a new vow.
+                      Get dependency diagrams and timing data for all your apps
                     </h5>
                   </li>
                   <li>
                     <h5>
-                      It shall become the wings of rebellion that breaketh thy
-                      chains of captivity.
+                      Exclusive one-click setup on KintoHub: activate and you
+                      are ready to go
                     </h5>
+                  </li>
+                  <li>
+                    <h5>Built with Jaegertracing/all-in-one 1.20</h5>
                   </li>
                   <li>
                     <h5>
-                      With the birth of the Chariot Persona, I have obtained the
-                      winds of blessing
+                      More info on Jaeger{' '}
+                      <a
+                        href="https://jaeger.readthedocs.io/en/latest/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        here
+                      </a>
                     </h5>
                   </li>
                   <li>
-                    <h5>that shall lead to freedom and new power...</h5>
+                    <h5>FREE to try for a limited time during alpha period</h5>
                   </li>
                 </ul>
               </div>
@@ -260,14 +291,15 @@ class AnalyticsServices extends Component {
                     )
                   }
                 >
-                  Enable This Service
+                  Enable Jaeger
                 </button>
               )}
 
               <h5>
-                This service is free to use during private alpha period. After
-                that, a subscription or pay-as-you-go fee will be required. You
-                will be notified before any charge is incurred.
+                This service is free to use for a limited time during alpha
+                period. In the future, fees will apply to use tracing
+                capabilities. You will be notified of all policy changes at
+                least 72h before any charge is incurred.
               </h5>
             </div>
           </div>

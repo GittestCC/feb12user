@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { pages } from '../../constants/pages'
 import { getPageUrl } from '../../helpers/urlHelper'
-import { getVersionAsText, getVersionType } from '../../helpers/versionHelper'
+import { getVersionType } from '../../helpers/versionHelper'
 import { getAllKintoApps } from '../../selectors/kintoApps'
 import { getAllKintoBlocks } from '../../selectors/kintoBlocks'
 
@@ -31,9 +31,7 @@ function mapStateToProps(state, { disabled, type }) {
       workspaceId &&
       getPageUrl(editPage, {
         id: i.id,
-        version: isKintoApp
-          ? getVersionAsText(i.versions[0], true)
-          : i.versions[0].name,
+        version: i.versions[0].name,
         type: getVersionType(i.versions[0]),
         workspaceId
       })
@@ -46,9 +44,7 @@ function mapStateToProps(state, { disabled, type }) {
       workspaceId &&
       getPageUrl(editPage, {
         id: selectedItem.id,
-        version: isKintoApp
-          ? getVersionAsText(selectedItem.versions[0], true)
-          : selectedItem.versions[0].name,
+        version: selectedItem.versions[0].name,
         type: getVersionType(selectedItem.versions[0]),
         workspaceId
       }),

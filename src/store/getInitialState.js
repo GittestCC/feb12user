@@ -1,6 +1,10 @@
-import { getTokenInfoFromLocalStorage } from '../helpers/authHelper'
+import {
+  getTokenLocalStorage,
+  isUserLoggedInLocalStorage
+} from '../helpers/authHelper'
 export default () => ({
   auth: {
-    ...getTokenInfoFromLocalStorage()
+    token: getTokenLocalStorage(),
+    isLoggedIn: isUserLoggedInLocalStorage()
   }
 })

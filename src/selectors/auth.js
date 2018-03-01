@@ -2,10 +2,10 @@ import { createSelector } from 'reselect'
 import { ADMIN_ROLE } from '../constants/permissions'
 
 export const isCurrentUserAdminSelector = createSelector(
-  state => state.auth.authSession,
+  state => state.currentUser,
   state => state.workspaces,
-  (authSession = {}, workspaces) => {
-    const userId = authSession.uid
+  (currentUser, workspaces) => {
+    const userId = currentUser.id
     if (!userId || !workspaces.selectedWorkspace) {
       return false
     }

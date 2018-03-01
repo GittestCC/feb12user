@@ -25,13 +25,37 @@ function mapStateToProps(state, { kintoBlock, index }) {
     }
     return result
   })
+
+  const kintoBlockDependencies = kintoBlock.dependencies
+    ? kintoBlock.dependencies.map(d => {
+        const manageUrl =
+          d.type === 'KINTOBLOCK'
+            ? pages.dashboardKintoBlocksManage
+            : pages.dashboardKintoAppsManage
+
+        let dependency = {
+          name: state.kintoBlocks.byId[d.blockId].name,
+          url: getPageUrl(manageUrl, {
+            id: d.blockId,
+            version: d.version.name,
+            type: getVersionType(d.version),
+            workspaceId: selectedWorkspace
+          }),
+          type: d.type
+        }
+        return dependency
+      })
+    : []
+
   return {
     kintoBlock,
     versions,
     latestVersion: versions[0],
     isLatestVersionPending: latestVersion.state === 'PENDING',
     dropdownId: `id-${index}`,
-    dropdownVersionId: `idv-${index}`
+    dropdownVersionId: `idv-${index}`,
+    dropdownDependencyId: `idd-${index}`,
+    kintoBlockDependencies
   }
 }
 
@@ -52,6 +76,7 @@ function mergeProps(stateProps, dispatchProps) {
     ...stateProps,
     ...dispatchProps,
     goToLatest: () => dispatchProps.push(stateProps.latestVersion.url),
+    goToDependencyManage: url => dispatchProps.push(url),
     goToEndpoint: () => dispatchProps.push(endpointList)
   }
 }

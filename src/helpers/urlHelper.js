@@ -26,23 +26,34 @@ export const githubConnectUrl = workspaceId => {
 
 export const getServerUrl = (microservice, url) => {
   const baseUrl = process.env.REACT_APP_SERVER_URL
-  let updatedBaseUrl = null
+  let updatedBaseUrl = baseUrl
   const type = process.env.REACT_APP_URL_TYPE || 'null'
-  switch (type) {
-    case 'subdomain':
-      const http = baseUrl.match(/^(https?):\/\//)[0]
-      updatedBaseUrl = baseUrl.replace(http, `${http}${microservice}.`)
-      break
-    case 'append':
-      updatedBaseUrl = `${baseUrl}/${microservice}/`
-      break
-    case 'null':
-      updatedBaseUrl = baseUrl
-      break
-    default:
-      throw new Error('you have to set REACT_APP_URL_TYPE correctly')
+  if (microservice) {
+    switch (type) {
+      case 'subdomain':
+        const http = baseUrl.match(/^(https?):\/\//)[0]
+        updatedBaseUrl = baseUrl.replace(http, `${http}${microservice}.`)
+        break
+      case 'append':
+        updatedBaseUrl = `${baseUrl}/${microservice}/`
+        break
+      case 'null':
+        updatedBaseUrl = baseUrl
+        break
+      default:
+        throw new Error('you have to set REACT_APP_URL_TYPE correctly')
+    }
   }
   return updatedBaseUrl + url
 }
 
-export const getUrl = (url, params) => pathToRegexp.compile(url)(params)
+export const getUrl = (url, params, ignoreError) => {
+  try {
+    return pathToRegexp.compile(url)(params)
+  } catch (e) {
+    if (ignoreError) {
+      return ''
+    }
+    throw new Error(e)
+  }
+}

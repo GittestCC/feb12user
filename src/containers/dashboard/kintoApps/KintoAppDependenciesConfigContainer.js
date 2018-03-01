@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import qs from 'query-string'
 
 import {
-  fetchKintoApps,
   fetchKintoApp,
   fetchKintoAppDependenciesConfig
 } from '../../../actions/kintoApps'
@@ -28,7 +27,6 @@ function mapStateToProps(state, { match, location }) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchKintoApp: (id, ver) => dispatch(fetchKintoApp(id, ver)),
-    fetchKintoApps: () => dispatch(fetchKintoApps()),
     fetchKintoAppDependenciesConfig: (id, ver, env) =>
       dispatch(fetchKintoAppDependenciesConfig(id, ver, env)),
     goToCreatePage: () => dispatch(push('/app/dashboard/kintoapps/create')),

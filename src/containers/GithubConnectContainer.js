@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import GithubConnect from '../../components/workspaces/GithubConnect'
-import { getPageUrl } from '../../helpers/urlHelper'
-import { pages } from '../../constants/pages'
 import qs from 'query-string'
+import { getPageUrl } from '../helpers/urlHelper'
+import { pages } from '../constants/pages'
+import { connectGithub } from '../actions/workspaces'
+import GithubConnect from '../components/GithubConnect'
 
 function mapDispatchToProps(dispatch, { location }) {
   return {
@@ -12,8 +13,7 @@ function mapDispatchToProps(dispatch, { location }) {
       if (!code || !workspaceId) {
         dispatch(push('/'))
       }
-      // TODO when api is done dispatch connectGithub instead
-      Promise.resolve({ code, workspaceId }).then(() => {
+      dispatch(connectGithub(workspaceId, code)).then(() => {
         dispatch(push(getPageUrl(pages.workspaceEdit, { id: workspaceId })))
       })
     }

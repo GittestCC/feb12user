@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import isEmpty from 'lodash/isEmpty'
-import Select from 'react-select'
+import { Async } from 'react-select'
 import { FieldValidation, FormError, ErrorOnly } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import { kintoName } from '../../../../helpers/forms/validationFields'
@@ -11,17 +11,25 @@ import { githubConnectUrl } from '../../../../helpers/urlHelper'
 import WorkspaceToolbarContainer from '../../../../containers/dashboard/ui/WorkspaceToolbarContainer'
 
 class KintoBlockCreateForm extends Component {
+  state = {
+    selectedRepo: null
+  }
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     isNewRepository: PropTypes.bool.isRequired,
     organizations: PropTypes.array.isRequired,
     selectRepository: PropTypes.func.isRequired,
     fieldCorrection: PropTypes.func.isRequired,
-    selectedRepository: PropTypes.string,
     preFillText: PropTypes.string.isRequired,
     searchRepositories: PropTypes.func.isRequired,
     selectedWorkspace: PropTypes.string,
     error: PropTypes.string
+  }
+
+  onSelectRepo = data => {
+    this.setState({ selectedRepo: data })
+    this.props.selectRepository(data)
   }
 
   render() {
@@ -30,9 +38,7 @@ class KintoBlockCreateForm extends Component {
       kintoBlock,
       isNewRepository,
       organizations,
-      selectRepository,
       fieldCorrection,
-      selectedRepository,
       preFillText,
       searchRepositories,
       selectedWorkspace,
@@ -114,7 +120,7 @@ class KintoBlockCreateForm extends Component {
               <div className="connect-github">
                 <div className="repository-selection">
                   <Field
-                    name="newRepository"
+                    name="isNewRepository"
                     label="repository type"
                     component={FieldValidation}
                     type="select"
@@ -139,11 +145,11 @@ class KintoBlockCreateForm extends Component {
                   ) : (
                     <div className="select-wrapper">
                       <div className="label">Repository</div>
-                      <Select.Async
+                      <Async
                         placeholder="Enter the repository"
                         loadOptions={searchRepositories}
-                        onChange={selectRepository}
-                        value={selectedRepository}
+                        onChange={this.onSelectRepo}
+                        value={this.state.selectedRepo}
                         clearable={false}
                         backspaceRemoves={false}
                       />

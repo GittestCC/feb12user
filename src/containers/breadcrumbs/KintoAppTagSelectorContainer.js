@@ -1,37 +1,36 @@
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { pages } from '../../constants/pages'
-import { getVersionAsText, isVersionEqual } from '../../helpers/versionHelper'
+import { BRANCH } from '../../constants/version'
+import { timeDayMonthYearShort } from '../../constants/dateFormat'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
 import KintoAppTagSelector from '../../components/breadcrumbs/KintoAppTagSelector'
 
 function mapStateToProps(state, { url }) {
   const { selectedKintoAppId, selectedEnvironmentId } = state.pageOptions
   const selectedApp = state.kintoApps.byId[selectedKintoAppId] || {}
+  const version = selectedApp.version || {}
+  const isDraft = version.type === BRANCH
+  const appEnvironments = selectedApp.environments || []
+  const deployedEnvironments = appEnvironments.filter(e => e.deployedVersion)
   let dropdownItems = []
-  let selectedAppVersion = getVersionAsText(selectedApp.version) || ''
-  const isDraft =
-    selectedAppVersion && selectedAppVersion === '0.0.0' ? true : false
 
   if (selectedApp.versions) {
     dropdownItems = selectedApp.versions.map(v => {
-      const isDraft = isVersionEqual(v, '0.0.0')
       return {
-        text: isDraft ? 'Draft' : getVersionAsText(v),
+        text: v.name,
         url: getUrl(url, {
           id: selectedApp.id,
-          version: getVersionAsText(v),
+          version: v.name,
           envId: selectedEnvironmentId || '0',
           workspaceId: state.workspaces.selectedWorkspace
         }),
-        releases: v.environments,
-        lastUpdated: moment(v.lastUpdated).format('h:mmA, DD MMM YYYY'),
-        notes:
-          selectedApp.version.notes ||
-          'Here are some notes that are for this version',
-        // TODO: remove mock data when notes from builds are available
-        active: isVersionEqual(v, selectedApp.version),
-        special: isDraft
+        deployedIn: deployedEnvironments
+          .filter(e => e.deployedVersion.name === v.name)
+          .map(e => e.name),
+        lastUpdated: moment(v.lastUpdated).format(timeDayMonthYearShort),
+        notes: v.notes,
+        active: v.name === version.name
       }
     })
   }
@@ -40,12 +39,12 @@ function mapStateToProps(state, { url }) {
     isDraft,
     selectedApp,
     dropdownItems,
-    selectedTag: getVersionAsText(selectedApp.version),
+    selectedTag: version.name,
     selectedVersionUrl:
       selectedApp.id &&
       getPageUrl(pages.dashboardKintoAppsManage, {
         id: selectedApp.id,
-        version: getVersionAsText(selectedApp.version, true),
+        version: version.name,
         workspaceId: state.workspaces.selectedWorkspace
       })
   }

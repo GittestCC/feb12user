@@ -26,7 +26,7 @@ const MemberListCircles = ({
         .slice(0, numberOfItemsShown)
         .map((member, index) => (
           <UserCircle
-            name={member.username || member.email}
+            name={member.userName || member.email}
             userType={member.role || member.permission}
             size={size}
             key={index}

@@ -3,9 +3,9 @@ import reducer from '../workspaces'
 import * as actions from '../../actions/workspaces'
 
 describe('workspaces reducer', () => {
-  it('workspacesFetch changes the state isFetching from false to true', () => {
+  it('workspacesFetch changes the state isLoaded from true to false', () => {
     const newState = reducer(undefined, actions.workspacesFetch())
-    expect(newState.isFetching).toBe(true)
+    expect(newState.isLoaded).toBe(false)
   })
 
   it('workspaceSelect updates the selected workspace', () => {
@@ -42,7 +42,7 @@ describe('workspaces reducer', () => {
     expect(newState.byId['1'].members[1].name).toEqual('test 2')
   })
 
-  it('workspacesReceive changes the state is fetching to false', () => {
+  it('workspacesReceive changes the state isLoaded to true', () => {
     const sampleData = [
       {
         id: '1',
@@ -50,7 +50,7 @@ describe('workspaces reducer', () => {
       }
     ]
     const newState = reducer(undefined, actions.workspacesReceive(sampleData))
-    expect(newState.isFetching).toBe(false)
+    expect(newState.isLoaded).toBe(true)
   })
 
   it('workspacesReceive should add ids to the store under allIds, and add the object to the store under byId', () => {

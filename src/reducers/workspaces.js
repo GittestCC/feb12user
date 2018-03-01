@@ -7,7 +7,7 @@ import {
 } from '../actions/workspaces'
 
 const defaultState = {
-  isFetching: false,
+  isLoaded: false,
   selectedWorkspace: null,
   byId: {},
   allIds: []
@@ -23,7 +23,7 @@ const workspacesReducer = (state = defaultState, action) => {
     case FETCH_WORKSPACES:
       return {
         ...state,
-        isFetching: true
+        isLoaded: false
       }
     case RECEIVE_WORKSPACES: {
       let allIds = []
@@ -34,7 +34,7 @@ const workspacesReducer = (state = defaultState, action) => {
       })
       return {
         ...state,
-        isFetching: false,
+        isLoaded: true,
         byId,
         allIds
       }
@@ -42,12 +42,16 @@ const workspacesReducer = (state = defaultState, action) => {
     case RECEIVE_WORKSPACE: {
       const workspace = action.data
       const members = workspace.members.concat().sort((a, b) => a.role > b.role)
+      let { allIds } = state
+      if (action.isAdd) {
+        allIds = [...allIds, action.id]
+      }
       return {
         ...state,
+        allIds,
         byId: {
           ...state.byId,
           [action.id]: {
-            ...state.byId[action.id],
             ...workspace,
             members
           }

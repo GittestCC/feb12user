@@ -9,7 +9,7 @@ import {
   maxValue999
 } from '../../../helpers/forms/validators'
 import { number } from '../../../helpers/forms/parsers'
-import { isVersionEqual } from '../../../helpers/versionHelper'
+import { getVersionAsText } from '../../../helpers/versionHelper'
 import { hasValues } from '../../../helpers/objectHelper'
 
 import { Button, VersionInputs, FormError, FieldValidation } from '../../forms'
@@ -56,7 +56,7 @@ class TagAndDeployForm extends Component {
                 className="bold"
               >
                 {environments.map((e, index) => (
-                  <option value={e.name} key={e.id}>
+                  <option value={e.id} key={e.id}>
                     {e.name}
                   </option>
                 ))}
@@ -131,7 +131,7 @@ const validate = (values, props) => {
   }
   if (
     !hasValues(versionErrors) &&
-    props.kintoApp.versions.some(v => isVersionEqual(v, version))
+    props.kintoApp.versions.some(v => v.name === getVersionAsText(version))
   ) {
     errors._error = 'Tag with the same version is already created'
   }

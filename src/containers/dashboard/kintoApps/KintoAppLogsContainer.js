@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import KintoAppLogs from '../../../components/dashboard/kintoApps/KintoAppLogs'
 import {
-  fetchKintoApps,
   getKintoAppEnvironments,
   getEnvironmentLogs
 } from '../../../actions/kintoApps'
@@ -29,7 +28,6 @@ function mapStateToProps(state, { match }) {
 }
 
 export default connect(mapStateToProps, {
-  fetchKintoApps,
   getKintoAppEnvironments,
   getEnvironmentLogs,
   kintoAppSelect,

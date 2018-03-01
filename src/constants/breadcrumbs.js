@@ -1,13 +1,13 @@
 import { pages, urls } from './pages'
 
 const KintoAppsText = {
-  component: 'Link',
+  component: 'LinkContainer',
   text: 'Applications',
   url: urls[pages.dashboardKintoAppsList]
 }
 
 const KintoBlocksText = {
-  component: 'Link',
+  component: 'LinkContainer',
   text: 'KintoBlocks',
   url: urls[pages.dashboardKintoBlocksList]
 }

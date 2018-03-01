@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { isProduction } from '../../helpers/pageHelper'
 
 class LandingNavBar extends Component {
   state = {
@@ -15,9 +14,9 @@ class LandingNavBar extends Component {
     return (
       <nav className="landing main-navigation" data-test="landing-navbar">
         <div
-          className={`mobile-menu-toggle ${this.state.hideNav
-            ? 'hamburger'
-            : 'cross'}`}
+          className={`mobile-menu-toggle ${
+            this.state.hideNav ? 'hamburger' : 'cross'
+          }`}
           onClick={this.openCloseMobileNav}
         />
 
@@ -28,9 +27,9 @@ class LandingNavBar extends Component {
           <div className="mobile-navigation-logo" />
         </Link>
         <ul
-          className={`mobile-menu unstyled-list ${this.state.hideNav
-            ? 'hidden'
-            : ''}`}
+          className={`mobile-menu unstyled-list ${
+            this.state.hideNav ? 'hidden' : ''
+          }`}
         >
           <li>
             <a
@@ -51,20 +50,16 @@ class LandingNavBar extends Component {
               <h5>Contact Us</h5>
             </Link>
           </li>
-          {!isProduction() ? (
-            [
-              <li key="1">
-                <Link to={'/log-in'} className="button secondary">
-                  Log In
-                </Link>
-              </li>,
-              <li key="2">
-                <Link to={'/sign-up'} className="button default">
-                  Sign Up
-                </Link>
-              </li>
-            ]
-          ) : null}
+          <li key="1">
+            <Link to={'/log-in'} className="button secondary">
+              Log In
+            </Link>
+          </li>
+          <li key="2">
+            <Link to={'/sign-up'} className="button default">
+              Sign Up
+            </Link>
+          </li>
         </ul>
 
         <div className="navigation-links">
@@ -88,26 +83,22 @@ class LandingNavBar extends Component {
                 <h5>Contact Us</h5>
               </Link>
             </li>
-            {!isProduction() ? (
-              [
-                <li key="1">
-                  <Link
-                    to={'/log-in'}
-                    className="button secondary navigation-button"
-                  >
-                    Log In
-                  </Link>
-                </li>,
-                <li key="2">
-                  <Link
-                    to={'/sign-up'}
-                    className="button default navigation-button"
-                  >
-                    Sign Up
-                  </Link>
-                </li>
-              ]
-            ) : null}
+            <li key="1">
+              <Link
+                to={'/log-in'}
+                className="button secondary navigation-button"
+              >
+                Log In
+              </Link>
+            </li>
+            <li key="2">
+              <Link
+                to={'/sign-up'}
+                className="button default navigation-button"
+              >
+                Sign Up
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

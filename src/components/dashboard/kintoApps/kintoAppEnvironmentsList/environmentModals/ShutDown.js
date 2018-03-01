@@ -1,6 +1,5 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import { getVersionAsText } from '../../../../../helpers/versionHelper'
 
 const ShutDown = ({
   onClose,
@@ -10,8 +9,7 @@ const ShutDown = ({
   environment
 }) => {
   const environmentShutDown = () => {
-    shutDownEnvironment(environment.id, environment.name, environment)
-    onClose()
+    shutDownEnvironment(kintoApp.id, environment.id).then(onClose)
   }
 
   const currentRelease = environment.releases[environment.releases.length - 1]
@@ -20,8 +18,7 @@ const ShutDown = ({
     <div className="add-new-environment">
       <div className="kh-modal-title">
         <h4>
-          Shut Down - {environment.name} -{' '}
-          {getVersionAsText(currentRelease.version)}
+          Shut Down - {environment.name} - {currentRelease.version.name}
         </h4>
       </div>
       <div className="kh-modal-body">

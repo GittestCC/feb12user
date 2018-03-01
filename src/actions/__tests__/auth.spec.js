@@ -18,18 +18,11 @@ describe('Auth actions', () => {
   })
 
   it('signUp calls the callback function on success', async () => {
-    moxios.wait(() => {
+    await moxios.wait(async () => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
         response: {}
-      })
-      moxios.wait(() => {
-        const request = moxios.requests.mostRecent()
-        request.respondWith({
-          status: 200,
-          response: {}
-        })
       })
     })
     const store = mockStore()
@@ -38,8 +31,10 @@ describe('Auth actions', () => {
     expect(mockCallback.mock.calls.length).toBe(1)
   })
 
-  it('logIn fires a redirect action', async () => {
-    moxios.wait(() => {
+  it('logIn fires a redirect and login actions', async () => {
+    authHelper.setIsLoggedIn = jest.fn()
+
+    await moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
@@ -48,32 +43,30 @@ describe('Auth actions', () => {
     })
     const store = mockStore()
     await store.dispatch(actions.logIn())
-    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
-  })
-
-  it('setToken fires a update token info action if the setting was successful', async () => {
-    const setMock = jest.fn()
-    setMock.mockReturnValue(true)
-    authHelper.setToken = setMock
-
-    const getMock = jest.fn()
-    getMock.mockReturnValue({ auth: true })
-    authHelper.getTokenInfoFromLocalStorage = getMock
-
-    const store = mockStore()
-    await store.dispatch(actions.setToken())
-    expect(store.getActions()).toEqual([
-      { type: actions.TOKEN_UPDATE_INFO, data: { auth: true } }
+    expect(store.getActions().map(a => a.type)).toEqual([
+      actions.LOGIN,
+      CALL_HISTORY_METHOD
     ])
   })
 
-  it('setToken will not fire any action if setting was unsuccessful', async () => {
-    const setMock = jest.fn()
-    setMock.mockReturnValue(false)
-    authHelper.setToken = setMock
+  it('authApp fires an updateToken action if the setting was successful', async () => {
+    authHelper.setToken = jest.fn()
+
+    await moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: { data: { token: '1' } }
+      })
+    })
 
     const store = mockStore()
-    await store.dispatch(actions.setToken())
-    expect(store.getActions()).toEqual([])
+    await store.dispatch(actions.authApp())
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.UPDATE_TOKEN,
+        token: '1'
+      }
+    ])
   })
 })

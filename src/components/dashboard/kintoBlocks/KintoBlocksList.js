@@ -5,12 +5,7 @@ import KintoBlockCardContainer from '../../../containers/dashboard/kintoBlocks/k
 
 class KintoBlocksList extends Component {
   static propTypes = {
-    kintoBlocks: PropTypes.array.isRequired,
-    fetchKintoBlocks: PropTypes.func.isRequired
-  }
-
-  componentDidMount() {
-    this.props.fetchKintoBlocks()
+    kintoBlocks: PropTypes.array.isRequired
   }
 
   render() {

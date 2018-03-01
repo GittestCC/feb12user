@@ -1,18 +1,20 @@
 import { connect } from 'react-redux'
 import { getUrl } from '../../helpers/urlHelper'
-import KintoVersionSwitcher from '../../components/breadcrumbs/Link'
+import Link from '../../components/breadcrumbs/Link'
 
 function mapStateToProps(state, { url }) {
   const { pageOptions, workspaces } = state
   return {
-    url:
-      pageOptions.selectedKintoAppId &&
-      getUrl(url, {
+    url: getUrl(
+      url,
+      {
         id: pageOptions.selectedKintoAppId,
         envId: pageOptions.selectedEnvironmentId,
         workspaceId: workspaces.selectedWorkspace
-      })
+      },
+      true
+    )
   }
 }
 
-export default connect(mapStateToProps)(KintoVersionSwitcher)
+export default connect(mapStateToProps)(Link)

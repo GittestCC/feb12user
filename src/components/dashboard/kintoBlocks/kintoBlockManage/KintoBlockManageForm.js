@@ -4,6 +4,8 @@ import { Field, reduxForm, FieldArray } from 'redux-form'
 import Tooltip from 'rc-tooltip'
 import { FieldValidation, FormError } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
+import { isProduction } from '../../../../helpers/pageHelper'
+
 import { kintoName } from '../../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
 import KintoBlockManageParamsField from './KintoBlockManageParamsField'
@@ -38,6 +40,7 @@ class KintoBlockManageForm extends Component {
     } = this.props
 
     const commitHelp = 'Only a successful commit can be tagged.'
+    const isProd = isProduction()
 
     return (
       <form
@@ -207,13 +210,15 @@ class KintoBlockManageForm extends Component {
           />
         </div>
 
-        <Field
-          name="services"
-          component={KintoBlockServiceFields}
-          disabled={isVersionTag}
-          updateServicesField={this.props.updateServicesField}
-          services={this.props.services}
-        />
+        {isProd ? null : (
+          <Field
+            name="services"
+            component={KintoBlockServiceFields}
+            disabled={isVersionTag}
+            updateServicesField={this.props.updateServicesField}
+            services={this.props.services}
+          />
+        )}
 
         <div className="form-wrapper custom-paramaters full-row">
           <h3>Environmental & Custom Parameters</h3>
@@ -226,12 +231,12 @@ class KintoBlockManageForm extends Component {
           <FieldArray
             name="environmentVariables"
             component={KintoBlockManageEnvVarsField}
-            disabled={isVersionTag}
+            disabled={isVersionTag || isProd}
           />
           <FieldArray
             name="configParameters"
             component={KintoBlockManageParamsField}
-            disabled={isVersionTag}
+            disabled={isVersionTag || isProd}
           />
         </div>
       </form>

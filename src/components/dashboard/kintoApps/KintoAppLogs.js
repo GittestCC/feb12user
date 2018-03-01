@@ -10,7 +10,6 @@ class KintoAppLogs extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps()
     this.props.getKintoAppEnvironments(this.props.id)
     this.props.getEnvironmentLogs(
       this.props.id,

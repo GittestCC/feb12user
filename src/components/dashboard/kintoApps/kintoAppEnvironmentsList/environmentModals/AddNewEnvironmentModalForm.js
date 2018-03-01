@@ -12,8 +12,9 @@ const AddNewEnvironmentModalForm = ({
 }) => {
   const addNewEnvironmentandClose = result => {
     const id = kintoApp.id
-    addNewEnvironment(id, result)
-    onClose()
+    return addNewEnvironment(id, result).then(e => {
+      onClose()
+    })
   }
 
   return (
@@ -32,7 +33,11 @@ const AddNewEnvironmentModalForm = ({
             />
           </div>
           <div className="kh-modal-actions">
-            <button onClick={onClose} className="button secondary">
+            <button
+              type="button"
+              onClick={onClose}
+              className="button secondary"
+            >
               Cancel
             </button>
             <button type="submit" className="button dark">

@@ -5,12 +5,7 @@ import KintoAppCardContainer from '../../../containers/dashboard/kintoApps/kinto
 
 class KintoAppsList extends Component {
   static propTypes = {
-    fetchKintoApps: PropTypes.func.isRequired,
     kintoApps: PropTypes.array.isRequired
-  }
-
-  componentDidMount() {
-    this.props.fetchKintoApps()
   }
 
   render() {

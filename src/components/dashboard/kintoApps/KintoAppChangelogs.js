@@ -17,12 +17,10 @@ class KintoAppChangelogs extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps().then(() => {
-      const { versionList } = this.props
-      this.props.kintoAppSelect(this.props.id)
-      if (!versionList[1]) return
-      this.getChangelogs(this.props)
-    })
+    const { versionList } = this.props
+    this.props.kintoAppSelect(this.props.id)
+    if (!versionList[1]) return
+    this.getChangelogs(this.props)
   }
 
   componentWillReceiveProps(nextProps) {

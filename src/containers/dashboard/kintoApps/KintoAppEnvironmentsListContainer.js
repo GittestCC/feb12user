@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import {
-  fetchKintoApps,
   getKintoAppEnvironments,
   reorderEnvironments,
   addNewEnvironment,
@@ -26,7 +25,6 @@ function mapStateToProps(state, { match }) {
 
 function mapDispatchToProps(dispatch, { match }) {
   return {
-    fetchKintoApps: () => dispatch(fetchKintoApps()),
     getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
     reorderEnvironments: (id, oldIndex, newIndex) =>
       dispatch(reorderEnvironments(id, oldIndex, newIndex)),

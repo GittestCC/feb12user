@@ -27,11 +27,14 @@ class WorkspaceMembers extends Component {
   }
 
   findMember = id => {
-    return this.props.workspaceMembers.find(m => m.id === id)
+    if (!id) {
+      return {}
+    }
+    return this.props.workspaceMembers.find(m => m.id === id) || {}
   }
 
   getDisplay = member =>
-    member.username ? `${member.username} (${member.email})` : `${member.email}`
+    member.userName ? `${member.userName} (${member.email})` : member.email
 
   updateRole = event => {
     this.setState({
@@ -54,7 +57,7 @@ class WorkspaceMembers extends Component {
           <ul className="unstyled-list">
             {fields.map((field, index) => {
               const formMember = fields.get(index) || {}
-              const member = this.findMember(formMember.id) || {}
+              const member = this.findMember(formMember.id)
               const isDisabled = member.role === ADMIN_ROLE
 
               return (

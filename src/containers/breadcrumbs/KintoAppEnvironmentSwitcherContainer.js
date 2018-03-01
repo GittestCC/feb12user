@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
-import { getVersionAsText } from '../../helpers/versionHelper'
 import { pages } from '../../constants/pages'
 import { addNewEnvironment } from '../../actions/kintoApps'
 import KintoAppEnvironmentSwitcher from '../../components/breadcrumbs/KintoAppEnvironmentSwitcher'
@@ -28,15 +27,13 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     return {
       text: e.name,
       active: e.id === selectedEnvironmentId,
-      version: e.releases
-        ? getVersionAsText(e.releases[e.releases.length - 1].version)
-        : '',
+      version: e.releases ? e.releases[e.releases.length - 1].version.name : '',
       url:
         workspaceId &&
         getUrl(url, {
           id: selectedKintoAppId,
           envId: e.id,
-          version: getVersionAsText(app.version),
+          version: app.version.name,
           workspaceId
         })
     }
@@ -54,7 +51,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
       getUrl(url, {
         id: selectedKintoAppId,
         envId: selectedEnvironmentId,
-        version: getVersionAsText(app.version),
+        version: app.version.name,
         workspaceId
       })
   }

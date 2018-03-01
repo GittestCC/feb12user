@@ -1,13 +1,14 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import { SubmissionError } from 'redux-form'
 
 class Auth extends Component {
   static propTypes = {
     token: PropTypes.string,
-    setToken: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
-    navigateTo: PropTypes.func.isRequired
+    authApp: PropTypes.func.isRequired,
+    children: PropTypes.arrayOf(PropTypes.element.isRequired)
   }
 
   constructor(props) {
@@ -20,26 +21,42 @@ class Auth extends Component {
     })
     axios.interceptors.response.use(
       response => {
-        const token = response.headers['grpc-metadata-authorization']
         const data = response.data || {}
-        if (token) {
-          this.props.setToken(token)
-        }
         if (data.errors) {
           if (data.errors.error) {
             data.errors._error = data.errors.error
             delete data.errors.error
           }
-          return Promise.reject(data)
+          throw new SubmissionError(data.errors)
         }
         return data
       },
       error => {
         // Do something with response error
-        if (error && error.response && error.response.status === 403) {
+        if (
+          error &&
+          error.response &&
+          (error.response.status === 403 || error.response.status === 401)
+        ) {
           // remove token info
           this.props.logout()
-          this.props.navigateTo('/login')
+          // TODO: handle case infinite loop when auth fails because of incorrect clientId
+          if (window.location.pathname !== '/log-in') {
+            window.location.href = '/log-in'
+          }
+        }
+        if (
+          error &&
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          let { errors } = error.response.data
+          if (errors.error) {
+            errors._error = errors.error
+            delete errors.error
+          }
+          throw new SubmissionError(errors)
         }
         // Throw errr again (may be need for some other catch)
         return Promise.reject(error)
@@ -47,8 +64,14 @@ class Auth extends Component {
     )
   }
 
+  componentDidMount() {
+    if (!this.props.token) {
+      this.props.authApp()
+    }
+  }
+
   render() {
-    return null
+    return this.props.token ? this.props.children : null
   }
 }
 

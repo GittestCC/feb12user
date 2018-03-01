@@ -4,7 +4,6 @@ import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import SearchInput from '../../../forms/SearchInput'
 import { getClassNameForType } from '../../../../helpers/kintoBlocksHelper'
-import { getVersionAsText } from '../../../../helpers/versionHelper'
 
 class KintoAppConfigSidebar extends Component {
   static propTypes = {
@@ -58,9 +57,7 @@ class KintoAppConfigSidebar extends Component {
                         />
                         <div className="text">
                           <div className="name">{item.name}</div>
-                          <div className="version">
-                            {getVersionAsText(item.version)}
-                          </div>
+                          <div className="version">{item.version.name}</div>
                         </div>
                       </a>
                       <ul>
@@ -69,7 +66,8 @@ class KintoAppConfigSidebar extends Component {
                             <li key={index}>
                               <a
                                 onClick={() =>
-                                  this.onScrollToItem(d.dependencyId)}
+                                  this.onScrollToItem(d.dependencyId)
+                                }
                                 className={`item ${d.active ? 'active' : ''}`}
                               >
                                 <div
@@ -80,7 +78,7 @@ class KintoAppConfigSidebar extends Component {
                                 <div className="text">
                                   <div className="name">{d.name}</div>
                                   <div className="version">
-                                    {getVersionAsText(d.version)}
+                                    {d.version.name}
                                   </div>
                                 </div>
                               </a>

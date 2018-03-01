@@ -5,7 +5,6 @@ import moment from 'moment'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
 import { isProduction } from '../../../../helpers/pageHelper'
-import { getVersionAsText } from '../../../../helpers/versionHelper'
 import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
 import {
@@ -40,7 +39,7 @@ class KintoAppEnvironmentCard extends Component {
     return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
       id: kintoApp.id,
       envId: environment.id,
-      releaseVersion: getVersionAsText(releaseVersion),
+      releaseVersion: releaseVersion.name,
       workspaceId: selectedWorkspace
     })
   }
@@ -50,7 +49,7 @@ class KintoAppEnvironmentCard extends Component {
     return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
       id: kintoApp.id,
       envId: environment.id,
-      releaseVersion: getVersionAsText(releaseVersion),
+      releaseVersion: releaseVersion.name,
       workspaceId: selectedWorkspace
     })
   }
@@ -121,7 +120,8 @@ class KintoAppEnvironmentCard extends Component {
                           {status}
                         </h6>
                         <h4 className="version">
-                          {getVersionAsText(currentRelease.version)}
+                          {currentRelease.version &&
+                            currentRelease.version.name}
                         </h4>
                       </div>
                     )
@@ -189,7 +189,7 @@ class KintoAppEnvironmentCard extends Component {
                               </div>
                               <div className="right">
                                 <h4 className="version">
-                                  {getVersionAsText(release.version)}
+                                  {release.version && release.version.name}
                                 </h4>
                                 <div className="date">
                                   {release.steps ? (
@@ -314,13 +314,20 @@ class KintoAppEnvironmentCard extends Component {
             )}
 
             <DropDown type="simple" dropdownClass="menu" id={`id-${sortIndex}`}>
-              <button
-                onClick={() =>
-                  buttonAction('shutDown', 'shutDown', 'ShutDown', environment)
-                }
-              >
-                Shut Down
-              </button>
+              {status === 'SUCCESS' && (
+                <button
+                  onClick={() =>
+                    buttonAction(
+                      'shutDown',
+                      'shutDown',
+                      'ShutDown',
+                      environment
+                    )
+                  }
+                >
+                  Shut Down
+                </button>
+              )}
               <Link to={editUrl}>Edit Environment</Link>
               {/* TODO: these are commented as they're not functional yet <button>Move to Top</button> */}
               {/* <div className="dropdown line" /> */}

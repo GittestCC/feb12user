@@ -3,14 +3,16 @@ import { formValueSelector, change, untouch } from 'redux-form'
 import { createKintoBlock } from '../../../../actions/kintoBlocks'
 import { searchRepositories } from '../../../../actions/workspaces'
 import { showSpinner, hideSpinner } from '../../../../actions/pageOptions'
+import { debounceSelectAsync } from '../../../../helpers/objectHelper'
 import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateForm'
 
 const formName = 'kintoBlockCreateForm'
 const selector = formValueSelector(formName)
 
 function mapStateToProps(state) {
-  const isNewRepository = !!selector(state, 'newRepository')
-  const selectedRepository = selector(state, 'repositoryId')
+  let isNewRepository = selector(state, 'isNewRepository')
+  isNewRepository =
+    typeof isNewRepository === 'boolean' ? isNewRepository : true
   const selectedOrganizationId = selector(state, 'organizationId')
 
   const selectedWorkspace = state.workspaces.selectedWorkspace
@@ -19,22 +21,23 @@ function mapStateToProps(state) {
   const preFillOrg = organizations.find(o => o.id === selectedOrganizationId)
   const preFillText = preFillOrg ? preFillOrg.name : ''
   return {
-    selectedRepository,
-    selectedOrganizationId,
     organizations,
     isNewRepository,
     preFillText: `${preFillText}/ `,
     selectedWorkspace,
     initialValues: {
       isPublic: true,
-      newRepository: true,
+      isNewRepository: true,
+      memberIds: [],
       organizationId: organizations[0] ? organizations[0].id : '1'
     }
   }
 }
 
 function mapDispatchToProps(dispatch) {
+  const searchFunc = query => dispatch(searchRepositories(query))
   return {
+    searchRepositories: debounceSelectAsync(searchFunc),
     onSubmit: data => {
       dispatch(showSpinner())
       dispatch(createKintoBlock(data)).then(
@@ -42,7 +45,6 @@ function mapDispatchToProps(dispatch) {
         () => dispatch(hideSpinner())
       )
     },
-    searchRepositories: query => dispatch(searchRepositories(query)),
     selectRepository: data => {
       dispatch(change('kintoBlockCreateForm', 'organizationId', data.orgId))
       dispatch(change('kintoBlockCreateForm', 'repositoryId', data.value))

@@ -40,13 +40,13 @@ class WorkspaceToolbarForm extends Component {
               return (
                 <li className="member-row" key={index}>
                   <UserCircle
-                    name={admin.username}
+                    name={admin.userName}
                     userType={admin.permission}
                   />
                   <input
                     type="text"
                     disabled
-                    defaultValue={this.getDisplay(admin.username, admin.email)}
+                    defaultValue={this.getDisplay(admin.userName, admin.email)}
                   />
                   <select
                     name="permission"
@@ -74,15 +74,12 @@ class WorkspaceToolbarForm extends Component {
             members.map((member, index) => {
               return (
                 <li className="member-row" key={index}>
-                  <UserCircle name={member.username} />
+                  <UserCircle name={member.userName} />
 
                   <input
                     type="text"
                     disabled
-                    defaultValue={this.getDisplay(
-                      member.username,
-                      member.email
-                    )}
+                    value={this.getDisplay(member.userName, member.email)}
                   />
 
                   <select defaultValue={member.permission}>

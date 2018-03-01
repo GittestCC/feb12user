@@ -5,6 +5,7 @@ import {
   RECEIVE_KINTO_APPS,
   RECEIVE_KINTO_APP,
   UPDATE_KINTO_APP,
+  ADD_KINTO_APP,
   RECIEVE_KINTO_APP_ENVIRONMENTS,
   RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG,
   KINTO_APP_ENVIRONMENT_LIST_REORDER,
@@ -24,27 +25,33 @@ const defaultState = {
 const kintoAppsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case RECEIVE_KINTO_APP: {
-      const allIds =
-        state.allIds.indexOf(action.id) === -1
-          ? [...state.allIds, action.id]
-          : state.allIds
       return {
+        ...state,
         byId: {
           ...state.byId,
-          [action.id]: merge(state.byId[action.id], action.data)
-        },
-        allIds
+          [action.id]: action.willOverwrite
+            ? action.data
+            : merge(state.byId[action.id], action.data)
+        }
       }
     }
+
+    case ADD_KINTO_APP: {
+      return {
+        allIds: [...state.allIds, action.id],
+        byId: {
+          ...state.byId,
+          [action.id]: action.data
+        }
+      }
+    }
+
     case RECEIVE_KINTO_APPS: {
       let allIds = []
       let byId = {}
       action.data.forEach(app => {
         allIds.push(app.id)
-        byId[app.id] = merge(state.byId[app.id], app, {
-          // if there is already a version saved for that kintoapp we don't want to overwrite that
-          lowPriority: 'version'
-        })
+        byId[app.id] = app
       })
       return {
         byId,
@@ -56,9 +63,10 @@ const kintoAppsReducer = (state = defaultState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.id]: merge(state.byId[action.id], {
-            environments: action.data // TODO: remove missing env
-          })
+          [action.id]: {
+            ...state.byId[action.id],
+            environments: action.data
+          }
         }
       }
     case RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG:
@@ -127,7 +135,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.id]: merge(state.byId[action.id], action.data)
+          [action.id]: action.data
         }
       }
 

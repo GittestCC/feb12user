@@ -14,7 +14,9 @@ class KintoAppCard extends Component {
     dropdownVersionId: PropTypes.string.isRequired,
     dropdownDependencyId: PropTypes.string.isRequired,
     goToDraft: PropTypes.func.isRequired,
-    goToEnvironment: PropTypes.func.isRequired
+    goToEnvironment: PropTypes.func.isRequired,
+    goToDependencyManage: PropTypes.func.isRequired,
+    kintoAppDependencies: PropTypes.array.isRequired
   }
 
   state = {
@@ -48,7 +50,9 @@ class KintoAppCard extends Component {
       dropdownVersionId,
       dropdownDependencyId,
       goToDraft,
+      goToDependencyManage,
       goToEnvironment,
+      kintoAppDependencies,
       goToChangelog
     } = this.props
     return (
@@ -61,8 +65,7 @@ class KintoAppCard extends Component {
           <div className="text">
             <div className="left">
               <img
-                src={`/images/app-icon-${Math.floor(Math.random() * 6) +
-                  1}.png`}
+                src={`/images/${kintoApp.iconImageName || 'app-icon-6.png'}`}
                 alt=""
               />
             </div>
@@ -94,71 +97,84 @@ class KintoAppCard extends Component {
 
         <div className="bottom">
           <div className="icons">
-            <DropDown
-              type="dependencies"
-              dropdownClass="dependencies"
-              className="menu-hidden dependency-dropdown"
-              id={dropdownDependencyId}
-              isShown={this.state.areDependenciesShown}
-              onHide={this.hideDependencyDropdown}
-            >
-              <h4 className="title">
-                Dependencies ({kintoApp.dependencies.length})
-              </h4>
+            <div className="left">
+              <DropDown
+                type="dependencies"
+                dropdownClass="dependencies"
+                className="menu-hidden dependency-dropdown"
+                id={dropdownDependencyId}
+                isShown={this.state.areDependenciesShown}
+                onHide={this.hideDependencyDropdown}
+              >
+                <h4 className="title">
+                  Dependencies ({kintoApp.dependencies.length})
+                </h4>
 
-              <div className="line" />
+                <div className="line" />
 
-              {kintoApp.dependencies.map((k, index) => (
-                <button key={index}>
-                  <div
-                    className={`dependency ${
-                      k.type ? k.type.toLowerCase() : ''
-                    }-dep`}
-                  />
-                  <h5>{k.name}</h5>
-                </button>
-              ))}
-            </DropDown>
-            <div className="applications" onClick={this.showDependencyDropdown}>
-              {kintoApp.dependencies
-                .slice(0, 4)
-                .map((d, i) => (
-                  <div
-                    key={i}
-                    className={`dependency ${
-                      d.type ? d.type.toLowerCase() : ''
-                    }-dep`}
-                  />
+                {kintoAppDependencies.map((k, index) => (
+                  <button
+                    onClick={() => goToDependencyManage(k.url)}
+                    key={index}
+                  >
+                    <div
+                      className={`dependency ${
+                        k.type ? k.type.toLowerCase() : ''
+                      }-dep`}
+                    />
+                    <h5>{k.name}</h5>
+                  </button>
                 ))}
+              </DropDown>
+              <div
+                className="applications"
+                onClick={this.showDependencyDropdown}
+              >
+                {kintoAppDependencies
+                  .slice(0, 4)
+                  .map((d, i) => (
+                    <div
+                      key={i}
+                      className={`dependency ${
+                        d.type ? d.type.toLowerCase() : ''
+                      }-dep`}
+                    />
+                  ))}
 
-              {kintoApp.dependencies.length > 4 && (
-                <div className="dependency number">
-                  +{kintoApp.dependencies.length - 4}
-                </div>
-              )}
+                {kintoAppDependencies.length > 4 && (
+                  <div className="dependency number">
+                    +{kintoApp.dependencies.length - 4}
+                  </div>
+                )}
+              </div>
             </div>
-            <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-              <button onClick={goToDraft}>
-                Edit Draft
-                <div className="draft-icon simple" />
-              </button>
 
-              <button onClick={this.showVersionDropdown}>View All Tags</button>
-              <button onClick={goToChangelog}>Compare Versions</button>
-              <div className="dropdown line" />
-              <button onClick={goToEnvironment}>View Environments</button>
-            </DropDown>
-            <DropDown
-              id={dropdownVersionId}
-              type="filter"
-              className="menu-hidden"
-              isShown={this.state.isVerShown}
-              onHide={this.hideVersionDropdown}
-              list={tagList}
-              component={KintoAppTagItem}
-              filterField="text"
-              hideAction={true}
-            />
+            <div className="right">
+              <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
+                <button onClick={goToDraft}>
+                  Edit Draft
+                  <div className="draft-icon simple" />
+                </button>
+
+                <button onClick={this.showVersionDropdown}>
+                  View All Tags
+                </button>
+                <button onClick={goToChangelog}>Compare Versions</button>
+                <div className="dropdown line" />
+                <button onClick={goToEnvironment}>View Environments</button>
+              </DropDown>
+              <DropDown
+                id={dropdownVersionId}
+                type="filter"
+                className="menu-hidden"
+                isShown={this.state.isVerShown}
+                onHide={this.hideVersionDropdown}
+                list={tagList}
+                component={KintoAppTagItem}
+                filterField="text"
+                hideAction={true}
+              />
+            </div>
           </div>
         </div>
       </Link>

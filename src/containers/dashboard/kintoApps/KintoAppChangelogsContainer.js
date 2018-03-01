@@ -1,10 +1,7 @@
 import { connect } from 'react-redux'
 import moment from 'moment'
 import KintoAppChangelogs from '../../../components/dashboard/kintoApps/KintoAppChangelogs'
-import {
-  getKintoAppChangelogs,
-  fetchKintoApps
-} from '../../../actions/kintoApps'
+import { getKintoAppChangelogs } from '../../../actions/kintoApps'
 import { asTextList } from '../../../helpers/versionHelper'
 import {
   customParams,
@@ -162,6 +159,5 @@ function mapStateToProps(state, { match }) {
 
 export default connect(mapStateToProps, {
   getKintoAppChangelogs,
-  fetchKintoApps,
   kintoAppSelect
 })(KintoAppChangelogs)

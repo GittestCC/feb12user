@@ -3,10 +3,10 @@ import { logout } from '../../actions/auth'
 import NavBar from '../../components/app/NavBar'
 
 function mapStateToProps(state, { isSideBarShownMobile }) {
-  const authSession = state.auth.authSession || {}
+  const { currentUser } = state
   let initials = ''
-  if (authSession.uname) {
-    initials = authSession.uname.substring(0, 2)
+  if (currentUser.userName) {
+    initials = currentUser.userName.substring(0, 2)
   }
   return {
     isDashboard: state.pageOptions.isDashboard,

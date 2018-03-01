@@ -12,4 +12,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, undefined)(LoadingSpinner)
+export default connect(mapStateToProps)(LoadingSpinner)

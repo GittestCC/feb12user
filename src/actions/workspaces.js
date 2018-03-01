@@ -1,8 +1,10 @@
 import axios from 'axios'
-import { getServerUrl } from '../helpers/urlHelper'
-
+import { push } from 'react-router-redux'
 import { formSubmitted } from './pageOptions'
 import { WORKSPACES } from '../constants/backendMicroservices'
+import { pages } from '../constants/pages'
+import { getPageUrl } from '../helpers/urlHelper'
+import { getServerUrl } from '../helpers/urlHelper'
 
 export const FETCH_WORKSPACES = 'FETCH_WORKSPACES'
 export const RECEIVE_WORKSPACES = 'RECEIVE_WORKSPACES'
@@ -17,10 +19,11 @@ export const workspaceSelect = id => ({
   id
 })
 
-export const workspaceReceive = (id, data) => ({
+export const workspaceReceive = (id, data, isAdd) => ({
   type: RECEIVE_WORKSPACE,
   id,
-  data
+  data,
+  isAdd: !!isAdd
 })
 
 export const workspacesReceive = data => ({
@@ -34,191 +37,84 @@ export const serviceReceive = (id, data) => ({
   data
 })
 
-export const fetchWorkspace = id => (dispatch, getState) => {
-  const state = getState()
-  const response = {
-    data: {
-      id,
-      name: `Test Workspace ${id}`,
-      organizations: [
-        { name: 'weyland-yutani', id: '1' },
-        { name: 'tyrell-corporation', id: '2' },
-        { name: 'wallace', id: '3' }
-      ],
-      members: [
-        {
-          role: 'ADMIN',
-          username: 'Super',
-          email: 'super@gmail.com',
-          id: state.auth.authSession.uid
-        },
-        {
-          role: 'MEMBER',
-          username: 'Oranges',
-          email: 'yourOrange@gmail.com',
-          id: '1'
-        },
-        {
-          role: 'MEMBER',
-          username: 'SolidAbs92',
-          email: 'Raven@gmail.com',
-          id: '2'
-        },
-        {
-          role: 'MEMBER',
-          username: 'DisturbinG',
-          email: 'Joseph@gmail.com',
-          id: '3'
-        },
-        {
-          role: 'ADMIN',
-          username: 'FanFanSausageMan',
-          email: 'FanFan@gmail.com',
-          id: '4'
-        },
-        {
-          role: 'ADMIN',
-          username: 'Neferititi',
-          email: 'Naedeem@gmail.com',
-          id: '5'
-        },
-        {
-          role: 'ADMIN',
-          username: 'Banana',
-          email: 'Banana@gmail.com',
-          id: '6'
-        },
-        {
-          role: 'MEMBER',
-          username: 'Pineapple',
-          email: 'Pineapple@gmail.com',
-          id: '7'
+export const fetchWorkspace = id => dispatch => {
+  return axios.get(getServerUrl(WORKSPACES, `/workspaces/${id}`)).then(res => {
+    //TODO: remove when the server is returning username
+    if (res.data.members) {
+      res.data.members.forEach(m => {
+        if (!m.userName) {
+          m.userName = 'not set'
         }
-      ]
+      })
     }
-  }
-  return Promise.resolve(response).then(res => {
     dispatch(workspaceReceive(id, res.data))
   })
 }
 
-export const fetchWorkspaces = () => (dispatch, getState) => {
-  const response = {
-    data: [
-      {
-        id: '1',
-        name: 'Test Workspace 1',
-        services: [
-          {
-            service: 'MONGO_DB',
-            isActive: true
-          },
-          {
-            service: 'MESSAGE_PASSING',
-            isActive: false
-          },
-          {
-            service: 'SHARED_MEMORY',
-            isActive: false
-          },
-          {
-            service: 'KIBANA',
-            isActive: true,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'PROMETHEUS',
-            isActive: false
-          },
-          {
-            service: 'ZIPKIN',
-            isActive: false
-          }
-        ]
-      },
-      {
-        id: '2',
-        name: 'Test Workspace 2',
-        services: [
-          {
-            service: 'MONGO_DB',
-            isActive: true,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'MESSAGE_PASSING',
-            isActive: false,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'SHARED_MEMORY',
-            isActive: false,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'KIBANA',
-            isActive: true,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'PROMETHEUS',
-            isActive: false,
-            serviceUrl: 'https://www.google.com.hk'
-          },
-          {
-            service: 'ZIPKIN',
-            isActive: false,
-            serviceUrl: 'https://www.google.com.hk'
-          }
-        ]
-      }
-    ]
-  }
+export const fetchWorkspaces = () => dispatch => {
   dispatch(workspacesFetch())
-  return Promise.resolve(response).then(res => {
-    dispatch(workspacesReceive(res.data))
+  return axios.get(getServerUrl(WORKSPACES, '/workspaces')).then(response => {
+    const workspaces = response.data || []
+    workspaces.forEach(w => {
+      w.services = [
+        {
+          service: 'MONGO_DB'
+        }
+      ]
+    })
+    dispatch(workspacesReceive(response.data || []))
   })
 }
 
-export const createWorkspace = data => dispatch => {
-  //TODO: Api integration
-  return Promise.resolve().then(() => {
-    dispatch(formSubmitted())
-  })
+export const createWorkspace = data => (dispatch, getState) => {
+  // self is added automatically, remove it from members
+  const currentUserId = getState().currentUser.id
+  const updatedData = {
+    ...data,
+    members: data.members.filter(m => m.id !== currentUserId)
+  }
+  return axios
+    .post(getServerUrl(WORKSPACES, '/workspaces'), updatedData)
+    .then(response => {
+      const newWorkspaceId = response.data.id
+      dispatch(formSubmitted())
+      dispatch(workspaceReceive(response.data.id, response.data, true))
+      dispatch(push(getPageUrl(pages.workspaceEdit, { id: newWorkspaceId })))
+      dispatch(fetchWorkspaces()) //TODO: backend issue, workspaces has to be reloaded inorder to add session data
+    })
 }
 
 export const updateWorkspace = (id, data) => dispatch => {
-  return Promise.resolve({ data }).then(res => {
-    dispatch(formSubmitted())
-    dispatch(workspaceReceive(id, res.data))
-  })
+  return axios
+    .put(getServerUrl(WORKSPACES, `/workspaces/${id}`), data)
+    .then(response => {
+      dispatch(formSubmitted())
+      dispatch(workspaceReceive(id, response.data))
+    })
 }
 
 export const toggleService = (service, isActive) => (dispatch, getState) => {
-  const workspaces = getState().workspaces
-  const workspaceId = workspaces.selectedWorkspace
-  // TODO: enable comments when API is ready
-  // return axios.put(
-  //   getServerUrl(
-  //     WORKSPACES,
-  //     `/${workspaceId}/services/toggleServices/${service}`
-  //   )
-  // )
-  return Promise.resolve({
-    data: {
-      service: service,
-      isActive: isActive,
-      serviceUrl: 'https://www.google.com'
-    }
-  }).then(res => {
-    dispatch(serviceReceive(workspaceId, res.data))
-  })
+  const { selectedWorkspace } = getState().workspaces
+  return axios
+    .put(
+      getServerUrl(WORKSPACES, `/workspaces/${selectedWorkspace}/services`),
+      {
+        service,
+        isActive
+      }
+    )
+    .then(res => {
+      dispatch(serviceReceive(selectedWorkspace, res.data))
+    })
 }
 
 export const connectGithub = (workspaceId, githubToken) => () => {
-  return axios.put(getServerUrl(WORKSPACES, `/${workspaceId}/github/connect`), {
-    code: githubToken
-  })
+  return axios.put(
+    getServerUrl(WORKSPACES, `/workspaces/${workspaceId}/github/connect`),
+    {
+      code: githubToken
+    }
+  )
 }
 
 export const searchRepositories = query => (dispatch, getState) => {
@@ -229,37 +125,26 @@ export const searchRepositories = query => (dispatch, getState) => {
     // TODO: show error message
     return Promise.reject()
   }
-  /* TODO when api is done
-    const organizationIds = organizations.map(o => o.id).join(',')
-    const requestPromise = axios.get(
-    `/${workspaceId}/repositories?name=${query}&orgId=${organizationIds}`)
-   */
-  return Promise.resolve({
-    data: [
-      {
-        orgName: 'weyland-yutani',
-        orgId: '1',
-        repoName: 'bioweapons-division',
-        repoId: '1'
-      },
-      {
-        orgName: 'tyrell-corporation',
-        orgId: '2',
-        repoName: 'replicant-program',
-        repoId: '2'
-      },
-      {
-        orgName: 'wallace',
-        orgId: '3',
-        repoName: 'bladerunner-prototype',
-        repoId: '3'
-      }
-    ]
-  }).then(response => ({
-    options: response.data.map(repo => ({
-      label: `${repo.orgName} / ${repo.repoName}`,
-      value: repo.repoId,
-      orgId: repo.orgId
+  const organizationIds = organizations.map(o => o.id).join(',')
+
+  return axios
+    .get(
+      getServerUrl(
+        WORKSPACES,
+        `/workspaces/${
+          workspaces.selectedWorkspace
+        }/repositories?name=${query}&orgId=${organizationIds}&limit=10`
+      ),
+      { noSpinner: true }
+    )
+    .then(response => ({
+      options: response.data.map(repo => {
+        const organization = organizations.find(o => o.id === repo.orgId)
+        return {
+          label: `${organization.name} / ${repo.name}`,
+          value: repo.id,
+          orgId: repo.orgId
+        }
+      })
     }))
-  }))
 }

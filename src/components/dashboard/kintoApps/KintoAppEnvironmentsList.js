@@ -48,7 +48,6 @@ const getEnvironmentModal = modalType => {
 
 class KintoAppEnvironmentsList extends Component {
   static propTypes = {
-    fetchKintoApps: PropTypes.func.isRequired,
     getKintoAppEnvironments: PropTypes.func.isRequired,
     reorderEnvironments: PropTypes.func.isRequired,
     addNewEnvironment: PropTypes.func.isRequired,
@@ -69,7 +68,6 @@ class KintoAppEnvironmentsList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchKintoApps()
     this.props.getKintoAppEnvironments(this.props.id)
   }
 
@@ -109,7 +107,7 @@ class KintoAppEnvironmentsList extends Component {
     return (
       <div className="kintoapp-environments-list">
         <div className="page-title">
-          <h2>Environments</h2>
+          <h2>{kintoApp.name} - Environments</h2>
           <button
             onClick={() => this.onModalOpen('add', 'Add New Environment')}
             className="button secondary"

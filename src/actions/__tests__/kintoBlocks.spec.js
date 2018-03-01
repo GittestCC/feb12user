@@ -2,7 +2,6 @@ import moxios from 'moxios'
 import thunk from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import { CALL_HISTORY_METHOD } from 'react-router-redux'
-import MockDate from 'mockdate'
 import * as actions from '../kintoBlocks'
 import { FORM_SUBMITTED } from '../pageOptions'
 import { BRANCH } from '../../constants/version'
@@ -11,27 +10,15 @@ const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 
 const now = new Date()
-
 let secondAgo = new Date(now.getTime())
 secondAgo.setSeconds(secondAgo.getSeconds() - 1)
 
 describe('KintoBlocks actions', () => {
   beforeEach(() => {
     moxios.install()
-    MockDate.set(now.getTime())
   })
   afterEach(() => {
     moxios.uninstall()
-    MockDate.reset()
-  })
-
-  it('kintoBlockReceive extracts metadata', () => {
-    const result = actions.kintoBlockReceive(1, {
-      id: 1,
-      metadata: { name: 'test' }
-    })
-    expect(result.data.id).toBe(1)
-    expect(result.data.metadata).toBe(undefined)
   })
 
   it('fetchKintoBlocks if result is empty fire a redirect action', async () => {
@@ -50,16 +37,19 @@ describe('KintoBlocks actions', () => {
   })
 
   it('fetchKintoBlocks if result is not empty fire a kintoBlockReceive action', async () => {
-    const result = {
-      blocks: [
-        { data: 'data', versions: [], version: { name: 'name', type: BRANCH } }
-      ]
-    }
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
-        response: result
+        response: {
+          data: [
+            {
+              data: 'data',
+              versions: [],
+              version: { name: 'name', type: BRANCH }
+            }
+          ]
+        }
       })
     })
     const store = mockStore({
@@ -86,12 +76,14 @@ describe('KintoBlocks actions', () => {
       request.respondWith({
         status: 200,
         response: {
-          id: '1',
-          version: {},
-          versions: [],
-          metadata: {
-            dependencies: {
-              '1': {}
+          data: {
+            id: '1',
+            version: {},
+            versions: [],
+            metadata: {
+              dependencies: {
+                '1': {}
+              }
             }
           }
         }
@@ -99,102 +91,11 @@ describe('KintoBlocks actions', () => {
     })
 
     const store = mockStore({
-      auth: { authSession: {} },
+      workspaces: { selectedWorkspace: '1' },
       kintoBlocks: { byId: {} }
     })
 
     await store.dispatch(actions.fetchKintoBlock('1', '1.3.1'))
-    expect(store.getActions().map(t => t.type)).toEqual([
-      actions.RECEIVE_KINTO_BLOCK
-    ])
-  })
-
-  it('fetchKintoBlock add lastFetch to send in the receive action', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: {
-          id: '1',
-          version: { name: 'version', type: BRANCH },
-          versions: [],
-          otherInfo: 'otherInfo',
-          metadata: {}
-        }
-      })
-    })
-    const store = mockStore({
-      auth: { authSession: {} },
-      kintoBlocks: { byId: {} }
-    })
-    await store.dispatch(actions.fetchKintoBlock('1', '1.3.1'))
-    expect(store.getActions()).toEqual([
-      {
-        type: actions.RECEIVE_KINTO_BLOCK,
-        id: '1',
-        metadata: {},
-        data: {
-          id: '1',
-          version: { name: 'version', type: BRANCH },
-          versions: [],
-          isPublic: true,
-          otherInfo: 'otherInfo',
-          lastFetch: now,
-          ownerId: undefined,
-          workspaceId: '1',
-          members: ['1', '2', '3', '4', '5'] // TODO: remove mock data
-        }
-      }
-    ])
-  })
-
-  it('fetchKintoBlock if item was recently fetched nothing is fired', async () => {
-    const store = mockStore({
-      kintoBlocks: {
-        byId: {
-          '1': {
-            name: 'test',
-            version: { name: 'version', type: BRANCH },
-            lastFetch: secondAgo
-          }
-        }
-      }
-    })
-    await store.dispatch(actions.fetchKintoBlock('1', 'version', BRANCH))
-    expect(store.getActions()).toEqual([])
-  })
-
-  it('fetchKintoBlock if item fetched was recent with a different version, will still fetch', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: {
-          id: '1',
-          version: { name: 'NEW', type: BRANCH },
-          versions: [],
-          metadata: {
-            dependencies: {
-              '1': {}
-            }
-          }
-        }
-      })
-    })
-
-    const store = mockStore({
-      auth: { authSession: {} },
-      kintoBlocks: {
-        byId: {
-          '1': {
-            name: 'test',
-            version: { name: 'OLD', type: BRANCH },
-            lastFetch: secondAgo
-          }
-        }
-      }
-    })
-    await store.dispatch(actions.fetchKintoBlock('1', 'NEW', BRANCH))
     expect(store.getActions().map(t => t.type)).toEqual([
       actions.RECEIVE_KINTO_BLOCK
     ])
@@ -205,7 +106,7 @@ describe('KintoBlocks actions', () => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
-        response: {}
+        response: { data: { id: '1' } }
       })
     })
     const store = mockStore({
@@ -214,6 +115,7 @@ describe('KintoBlocks actions', () => {
     await store.dispatch(actions.createKintoBlock({}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
+      actions.ADD_KINTO_BLOCK,
       CALL_HISTORY_METHOD
     ])
   })
@@ -226,7 +128,9 @@ describe('KintoBlocks actions', () => {
         response: { id: '1', name: 'test' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     await store.dispatch(
       actions.updateKintoBlock('1', '0.1.0', 'BRANCH', { name: 'test' })
     )
@@ -252,7 +156,9 @@ describe('KintoBlocks actions', () => {
         response: { errors: 'error' }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     const result = store.dispatch(actions.updateKintoBlock('1', {}))
     await expect(result).rejects.toEqual({ errors: 'error' })
   })
@@ -305,7 +211,9 @@ describe('KintoBlocks actions', () => {
         }
       })
     })
-    const store = mockStore()
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
     const result = await store.dispatch(
       actions.fetchKintoBlockDependenciesData('1', '1.3.1')
     )

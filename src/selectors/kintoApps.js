@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { getDependencyInfo } from '../helpers/kintoBlocksHelper'
-import { isVersionEqual } from '../helpers/versionHelper'
+import { isBranchVersionEqual } from '../helpers/versionHelper'
 
 export const getAllKintoApps = createSelector(
   state => state.kintoApps.allIds.map(a => state.kintoApps.byId[a]),
@@ -29,7 +29,7 @@ export const getKintoAppDependenciesEnvConfig = createSelector(
     // mismatch
     if (
       dependenciesConfig.envId !== env ||
-      !isVersionEqual(dependenciesConfig.version, ver)
+      !isBranchVersionEqual(dependenciesConfig.version, ver, true)
     ) {
       return null
     }
@@ -42,7 +42,7 @@ export const getKintoAppDependencies = createSelector(
   (_, params) => params,
   state => state.kintoBlocksDependenciesCache,
   (kintoApp = {}, { ver }, dependenciesCache) => {
-    if (!isVersionEqual(kintoApp.version, ver)) {
+    if (!isBranchVersionEqual(kintoApp.version, ver, true)) {
       return []
     }
     const dependencies = kintoApp.appDependencies || []

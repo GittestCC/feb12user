@@ -22,8 +22,6 @@ class KintoAppTagSelector extends Component {
       selectedVersionUrl
     } = this.props
 
-    const displayTag = isDraft ? 'Draft' : selectedTag
-
     return (
       <div className="list-container">
         <div className={`kintoapp-tag-breadcrumb ${isDraft ? 'draft' : ''}`}>
@@ -31,14 +29,14 @@ class KintoAppTagSelector extends Component {
             <div>
               {isDraft && <div className="draft-icon" />}
               <Link className="breadcrumb-text" to={selectedVersionUrl}>
-                {displayTag}
+                {selectedTag}
               </Link>
             </div>
           ) : (
             <div>
               {isDraft && <div className="draft-icon" />}
               <div className="breadcrumb-text disabled text-disabled">
-                {displayTag}
+                {selectedTag}
               </div>
             </div>
           )}

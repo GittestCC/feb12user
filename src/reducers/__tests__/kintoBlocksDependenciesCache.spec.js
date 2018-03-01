@@ -46,7 +46,7 @@ describe('KintoBlocksDependenciesCache Reducer', () => {
   it('kintoAppReceive saves metadata if the response has it', () => {
     const newState = reducer(
       undefined,
-      actions.kintoAppReceive('1', sampleResponseData)
+      actions.kintoAppReceive('1', {}, sampleResponseData.metadata)
     )
     expect(newState['1'].name).toBe('test')
   })
@@ -62,7 +62,7 @@ describe('KintoBlocksDependenciesCache Reducer', () => {
   it('kintoBlockReceive saves metadata if the response has it', () => {
     const newState = reducer(
       undefined,
-      kbActions.kintoBlockReceive('1', sampleResponseData)
+      kbActions.kintoBlockReceive('1', {}, sampleResponseData.metadata)
     )
     expect(newState['1'].name).toBe('test')
   })

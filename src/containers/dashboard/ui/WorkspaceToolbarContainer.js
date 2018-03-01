@@ -20,18 +20,18 @@ function getMemberInfo(member, permission, included) {
     id: member.id,
     permission,
     email: member.email,
-    username: member.username,
+    userName: member.userName,
     included
   }
 }
 
 function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
   const formSelector = formValueSelector(getFormName(isCreate, isKintoApp))
-  const currentUserId = state.auth.authSession.uid
+  const currentUserId = state.currentUser.id
   const workspace =
     state.workspaces.byId[state.workspaces.selectedWorkspace] || {}
   const workspaceMembers = workspace.members || []
-  const formMembers = formSelector(state, 'members') || []
+  const formMembers = formSelector(state, 'memberIds') || []
   const isFormPublic = formSelector(state, 'isPublic') || false
   kintoItem = kintoItem || {}
 
@@ -49,7 +49,10 @@ function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
           ? OWNER_PERMISSION
           : member.role === ADMIN_ROLE ? ADMIN_PERMISSION : EDITOR_PERMISSION
       currentUserInfo = getMemberInfo(member, permission, true)
-    } else if (member.role === ADMIN_ROLE || member.id === kintoItem.ownerId) {
+    } else if (
+      member.role === ADMIN_ROLE ||
+      (member.id === kintoItem.ownerId && kintoItem.ownerId)
+    ) {
       const permission =
         member.id === kintoItem.ownerId ? OWNER_PERMISSION : ADMIN_PERMISSION
       const memberInfo = getMemberInfo(member, permission, true)
