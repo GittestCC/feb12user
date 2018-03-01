@@ -26,12 +26,8 @@ class EnvironmentManage extends Page {
 
   getbreadCrumbEnvText(index) {
     return $(
-      `.dropdown-content.isShown.short .dropdown-scroll-container>button:nth-child(${index}) .tag-item-text`
+      `.dropdown-content .dropdown-scroll-container>button:nth-child(${index}) .tag-item-text`
     )
-  }
-
-  get addnewEnv() {
-    return $('.kintoapp-environments-list .button.button.secondary')
   }
 
   get environmentName() {
@@ -110,6 +106,13 @@ class EnvironmentManage extends Page {
     return $(
       '.field-container.false.two-columns :nth-child(2) .false-input.disabled'
     )
+  }
+  get addNewEnv() {
+    return $('#env-switch-dropdown .dropdown-content-action>button')
+  }
+
+  get envNameFromBreadcrumb() {
+    return $('.unstyled-list .disabled.text-disabled')
   }
 }
 

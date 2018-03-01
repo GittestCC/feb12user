@@ -29,6 +29,10 @@ class Page {
     }
   }
 
+  get submitBtn() {
+    return $('[data-test=savebar] > button')
+  }
+
   submitGlobal() {
     return $('[data-test=savebar] > button').click()
   }

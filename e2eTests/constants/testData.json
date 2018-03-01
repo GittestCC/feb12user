@@ -119,12 +119,15 @@
 	},
 	
 	"Environment":{
-		"validEnvName": "default",
-		"invalidENvChar":"`#$!%^&*()",
-		"allValidEnvChar":"env1",
-		"invalidEnvThreeChar":"en",
-		"invalidEnvThirtyFiveChar":"abcdefghijklmnopqrstuvwxyz1234567890",
-		"invalidEnvCapitals" :"ENV1"
+	"validEnvName": "default",
+	"invalidENvChar":"`#$!%^&*()",
+	"allValidEnvChar":"env1",
+	"validEnvNameInAlphaNumeric":"e1n2v3",
+	"validEnvNameWithNumbers":"e1234",
+	"validEnvNameTen":"envenvenv1",
+	"invalidEnvThreeChar":"en",
+	"invalidEnvThirtyFiveChar":"abcdefghijklmnopqrstuvwxyz1234567890",
+	"invalidEnvCapitals" :"ENV1"
 	
 	}
 	

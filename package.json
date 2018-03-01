@@ -61,7 +61,7 @@
     "wdio-dot-reporter": "0.0.9",
     "wdio-mocha-framework": "^0.5.12",
     "wdio-selenium-standalone-service": "0.0.9",
-    "webdriverio": "^4.9.11"
+    "webdriverio": "^4.10.2"
   },
   "scripts": {
     "selenium-setup": "selenium-standalone install",

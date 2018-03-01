@@ -46,11 +46,7 @@ class EnvironmentList extends Page {
   }
 
   getEnvCardDeploySuccess(index) {
-    return $(`.environments-list :nth-child(${index}) .left .status.success`)
-  }
-
-  getEnvCardDeployBtn(index) {
-    return $(`.environments-list :nth-child(${index}) button.button`)
+    return $(`.environments-list :nth-child(${index}) .status-and-build>div>h6`)
   }
 
   get deployPopUp() {
@@ -69,11 +65,11 @@ class EnvironmentList extends Page {
     return $(`select#version :nth-child(${index})`)
   }
 
-  getEnvCardChangeLogs(index) {
-    return $(`.environments-list :nth-child(${index}) .view .changelog>a`)
+  get envCardCompareVersions() {
+    return $(`.environments-list :nth-child(1) .view .changelog>a`)
   }
 
-  getEnvCardViewLogs() {
+  get envCardViewLogs() {
     return $('.environments-list :nth-child(1) .view .logs>a')
   }
 
@@ -81,8 +77,80 @@ class EnvironmentList extends Page {
     return $('.breadcrumbs li:nth-child(3)>a')
   }
 
-  get kaFromEnvListBreadcrumb() {
-    return $('.breadcrumbs li:nth-child(2) .list-container>a')
+  get kaNameFromEnvListPage() {
+    return $('.list-container >a')
+  }
+
+  getenvCardVerNumber(index) {
+    return `.environments-list :nth-child(${index}) .left .version`
+  }
+
+  get envCardDropDown() {
+    return $('.dropdown .dropdown-content.isShown')
+  }
+
+  getenvCardShutDownBtn(index) {
+    return $(`#id-${index} .dropdown-scroll-container > button`)
+  }
+
+  getIntermediateDeployProgress(index) {
+    return $(`.environments-list :nth-child(${index}) .step h6`)
+  }
+
+  get envCardDeployRollbackBtn() {
+    return $('.release-button .button.secondary.false')
+  }
+
+  get envDeployShutDownPopUp() {
+    return $('.add-new-environment .kh-modal-body')
+  }
+
+  get envBuildViewLogsPage() {
+    return $('.logs-header >h3')
+  }
+
+  getEnvNoDeploySubText(index) {
+    return $(
+      `.environments-list :nth-child(${index}) .left .lower>div :nth-child(1)`
+    )
+  }
+
+  getDateOfEnvDeploy(index) {
+    return $(`.environments-list :nth-child(${index}) .left .lower .date`)
+  }
+
+  getEnvCardDeployBtn(index) {
+    return $(
+      `.environments-list :nth-child(${index}) .right.expanded-buttons>button`
+    )
+  }
+
+  getenvDeployDate(index) {
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .lower .date`
+    )
+  }
+
+  get shutDownAnywayBtn() {
+    return $('.kh-modal-body .button.dark')
+  }
+
+  get shutDownPopUpCancelBtn() {
+    return $('.kh-modal-body .button.secondary')
+  }
+
+  get shutDownTitle() {
+    return $('.kh-modal-title >h4')
+  }
+
+  get shutDownContent() {
+    return $('.full-width-field>h4')
+  }
+
+  getEnvNoDeployText(index) {
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .upper>h4`
+    )
   }
 }
 
