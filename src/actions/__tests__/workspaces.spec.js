@@ -45,7 +45,9 @@ describe('workspaces actions', () => {
     await store.dispatch(actions.createWorkspace({ members: [] }))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
-      CALL_HISTORY_METHOD
+      actions.RECEIVE_WORKSPACE,
+      CALL_HISTORY_METHOD,
+      actions.FETCH_WORKSPACES // TODO we call get all workspaces as a hack for backend
     ])
   })
 

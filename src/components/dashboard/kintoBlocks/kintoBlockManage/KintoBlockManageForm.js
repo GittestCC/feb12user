@@ -236,7 +236,7 @@ class KintoBlockManageForm extends Component {
           <FieldArray
             name="configParameters"
             component={KintoBlockManageParamsField}
-            disabled={isVersionTag || isProd}
+            disabled={isVersionTag}
           />
         </div>
       </form>
