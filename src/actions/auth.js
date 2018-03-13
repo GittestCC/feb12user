@@ -51,10 +51,10 @@ export const activateAccount = token => () => {
   })
 }
 
-export const signUp = (data, callback) => dispatch => {
-  return axios
-    .post(getServerUrl(AUTH, '/register'), data)
-    .then(result => callback(data.emailAddress))
+export const signUp = data => dispatch => {
+  return axios.post(getServerUrl(AUTH, '/register'), data).then(() => {
+    dispatch(push(`/register-success?email=${data.email}`))
+  })
 }
 
 export const logIn = data => dispatch => {

@@ -19,6 +19,7 @@ import ForgotPassword from './ForgotPassword'
 import CreateNewPassword from './CreateNewPassword'
 import Analytics from './Analytics'
 import AppCrashErrorDisplay from './AppCrashErrorDisplay'
+import RegisterSuccess from './RegisterSuccess'
 
 import ScrollToErrorOnSubmitContainer from '../containers/ScrollToErrorOnSubmitContainer'
 import AppContainer from '../containers/AppContainer'
@@ -82,6 +83,7 @@ const Kintohub = () => {
                   path="/sign-up"
                   render={() => <LogInContainer flip={true} />}
                 />
+                <Route path="/register-success" component={RegisterSuccess} />
                 <Route
                   key="3"
                   path="/forgot-password"

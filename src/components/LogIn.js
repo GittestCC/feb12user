@@ -33,48 +33,26 @@ class LogIn extends Component {
       <div className={`${flip ? 'sign-up-page' : 'log-in-page'}`}>
         <LandingNavBar />
 
-        {this.state.isSignUpSubmitted ? (
-          <div data-test="signupSuccess">
-            <div className="cover" />
-            <div className="content">
-              <div className="sign-up-confirmation">
-                <div className="icon" />
-                <h2>
-                  An activation link has been sent to{' '}
-                  {this.state.confirmedEmail}
-                </h2>
-                <h6>
-                  If you have trouble finding the email, make sure to check your
-                  spam inbox as well.
-                </h6>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="content">
-            <h1 className="center">The one-stop-shop for microservices</h1>
-            <h3 className="center">
-              KintoHub is a development platform that transforms you into a
-              full-stack unicorn ninja that people can’t stop talking about.
-              Sign up today and we’ll even throw in a free donut just for you.
-            </h3>
+        <div className="content">
+          <h1 className="center">The one-stop-shop for microservices</h1>
+          <h3 className="center">
+            KintoHub is a development platform that transforms you into a
+            full-stack unicorn ninja that people can’t stop talking about. Sign
+            up today and we’ll even throw in a free donut just for you.
+          </h3>
 
-            {flip ? (
-              <div className="log-in-and-sign-up-wrapper">
-                <SignUpFormContainer
-                  focusHere={true}
-                  onSuccess={this.registeredSuccessfully}
-                />
-                <LogInFormContainer />
-              </div>
-            ) : (
-              <div className="log-in-and-sign-up-wrapper">
-                <LogInFormContainer focusHere={true} />
-                <SignUpFormContainer onSuccess={this.registeredSuccessfully} />
-              </div>
-            )}
-          </div>
-        )}
+          {flip ? (
+            <div className="log-in-and-sign-up-wrapper">
+              <SignUpFormContainer focusHere={true} />
+              <LogInFormContainer />
+            </div>
+          ) : (
+            <div className="log-in-and-sign-up-wrapper">
+              <LogInFormContainer focusHere={true} />
+              <SignUpFormContainer />
+            </div>
+          )}
+        </div>
 
         <Footer />
       </div>

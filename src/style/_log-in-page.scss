@@ -1,7 +1,7 @@
 .log-in-page, .sign-up-page, .forgot-password-page, .create-new-password-page {
   background-image: linear-gradient(-180deg, rgba(159,221,242,1) 10%, rgba($kinto-white, 0) 30%);
   @include abovetablet {
-    background-image: url('/images/background@2x.jpg');
+    background-image: url('/images/background.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

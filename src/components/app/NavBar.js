@@ -9,7 +9,8 @@ class NavBar extends Component {
     isDashboard: PropTypes.bool.isRequired,
     isSideBarShownMobile: PropTypes.bool.isRequired,
     toggleNavHandler: PropTypes.func.isRequired,
-    initials: PropTypes.string.isRequired
+    initials: PropTypes.string.isRequired,
+    homeUrl: PropTypes.string.isRequired
   }
 
   state = {
@@ -30,7 +31,8 @@ class NavBar extends Component {
       isDashboard,
       isSideBarShownMobile,
       toggleNavHandler,
-      initials
+      initials,
+      homeUrl
     } = this.props
     return (
       <div className="navbar main-navigation" data-test="navbar">
@@ -41,7 +43,7 @@ class NavBar extends Component {
           onClick={toggleNavHandler}
         />
 
-        <Link to={'/'}>
+        <Link to={homeUrl}>
           <div
             className={`mobile-navigation-logo ${
               isSideBarShownMobile ? 'show' : ''
@@ -54,7 +56,7 @@ class NavBar extends Component {
             this.state.showSearch ? 'hide-search' : ''
           }`}
         >
-          <Link className="navigation-logo" to={'/'} />
+          <Link className="navigation-logo" to={homeUrl} />
 
           {isDashboard ? (
             <div className="dashboard-buttons-wrapper">
