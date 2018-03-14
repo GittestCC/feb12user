@@ -17,7 +17,7 @@ describe('Auth actions', () => {
     moxios.uninstall()
   })
 
-  it('signUp calls the callback function on success', async () => {
+  it('signUp fires a redirect when its a success', async () => {
     await moxios.wait(async () => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -26,9 +26,8 @@ describe('Auth actions', () => {
       })
     })
     const store = mockStore()
-    const mockCallback = jest.fn()
-    await store.dispatch(actions.signUp({}, mockCallback))
-    expect(mockCallback.mock.calls.length).toBe(1)
+    await store.dispatch(actions.signUp({}))
+    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
   })
 
   it('logIn fires a redirect and login actions', async () => {
