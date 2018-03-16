@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
-import moment from 'moment'
 import { formValueSelector, change } from 'redux-form'
-import { updateKintoBlock } from '../../../../actions/kintoBlocks'
+import {
+  updateKintoBlock,
+  refreshCommits
+} from '../../../../actions/kintoBlocks'
 import { TAG } from '../../../../constants/version'
 import KintoBlockManageForm from '../../../../components/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageForm'
 
@@ -9,23 +11,6 @@ function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
   const formSelector = formValueSelector('kintoBlockManageForm')
   const dependencies = formSelector(state, 'dependencies')
   const services = formSelector(state, 'services')
-
-  kintoBlock = kintoBlock || {}
-
-  const indexClass = index => {
-    if (index === 0) {
-      return 'first'
-    }
-    if (index === kintoBlock.builds.length - 1) {
-      return 'last'
-    }
-  }
-
-  const commitDate = date => {
-    return moment(date).format('h:mmA, DD MMM YYYY')
-  }
-
-  const commitNo = number => number.substring(0, 6).toUpperCase()
 
   return {
     initialValues: {
@@ -40,9 +25,6 @@ function mapStateToProps(state, { kintoBlock, isCreateTagErrorMessageShown }) {
     },
     selectedServices: kintoBlock.services,
     services,
-    indexClass,
-    commitDate,
-    commitNo,
     kintoBlock,
     dependencies,
     isVersionTag: kintoBlock.version && kintoBlock.version.type === TAG,
@@ -54,7 +36,15 @@ function mapDispatchToProps(dispatch, { kintoBlock }) {
   return {
     updateServicesField: newArray =>
       dispatch(change('kintoBlockManageForm', 'services', newArray)),
-    dispatch,
+    refreshCommits: () => {
+      dispatch(
+        refreshCommits(
+          kintoBlock.id,
+          kintoBlock.version.name,
+          kintoBlock.version.type
+        )
+      )
+    },
     onSubmit: data =>
       dispatch(
         updateKintoBlock(

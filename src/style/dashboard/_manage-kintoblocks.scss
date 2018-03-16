@@ -316,6 +316,10 @@
       &:last-child { margin-left: 10px; }
     }
   }
+  .button-refresh-commits {
+    width: 200px;
+    margin-right: 0;
+  }
 }
 
 .rc-tooltip-inner {

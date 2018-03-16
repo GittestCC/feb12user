@@ -60,24 +60,21 @@ class NavBar extends Component {
 
           {isDashboard ? (
             <div className="dashboard-buttons-wrapper">
-              <Link className="on-dashboard" to={'/app/dashboard'} />
+              <Link className="on-dashboard" to={homeUrl} />
 
               {!isProduction() ? (
                 <Link className="go-to-market" to={'/app/market'} />
               ) : null}
 
-              <Link className="responsive-on dashboard" to={'/app/dashboard'} />
+              <Link className="responsive-on dashboard" to={homeUrl} />
               <Link className="responsive-go to-market" to={'/app/market'} />
             </div>
           ) : (
             <div className="market-buttons-wrapper">
               <Link className="on-market" to={'/app/market'} />
-              <Link className="go-to-dashboard" to={'/app/dashboard'} />
+              <Link className="go-to-dashboard" to={homeUrl} />
               <Link className="responsive-on market" to={'/app/market'} />
-              <Link
-                className="responsive-go to-dashboard"
-                to={'/app/dashboard'}
-              />
+              <Link className="responsive-go to-dashboard" to={homeUrl} />
             </div>
           )}
         </div>

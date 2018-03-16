@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import Tooltip from 'rc-tooltip'
-import { FieldValidation, FormError } from '../../../forms'
+import { FieldValidation, FormError, Button } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import { isProduction } from '../../../../helpers/pageHelper'
+import { timeDayMonthYearShort } from '../../../../constants/dateFormat'
 
 import { kintoName } from '../../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
@@ -21,9 +23,24 @@ class KintoBlockManageForm extends Component {
     isVersionTag: PropTypes.bool,
     isCreateTagErrorMessageShown: PropTypes.bool.isRequired,
     error: PropTypes.string,
-    indexClass: PropTypes.func.isRequired,
-    commitDate: PropTypes.func.isRequired,
-    commitNo: PropTypes.func.isRequired
+    refreshCommits: PropTypes.func.isRequired
+  }
+
+  formatCommit(commit) {
+    return commit.substring(0, 6).toUpperCase()
+  }
+
+  formatDate(date) {
+    return moment(date).format(timeDayMonthYearShort)
+  }
+
+  getCommitClass(index, totalItems) {
+    if (index === 0) {
+      return 'first'
+    }
+    if (index === totalItems - 1) {
+      return 'last'
+    }
   }
 
   render() {
@@ -34,9 +51,7 @@ class KintoBlockManageForm extends Component {
       isVersionTag,
       isCreateTagErrorMessageShown,
       error,
-      commitDate,
-      indexClass,
-      commitNo
+      refreshCommits
     } = this.props
 
     const commitHelp = 'Only a successful commit can be tagged.'
@@ -140,8 +155,11 @@ class KintoBlockManageForm extends Component {
                       </Tooltip>
                       {kintoBlock.activeBuild ? (
                         <div>
-                          {commitNo(kintoBlock.activeBuild.commitSha)} -{' '}
-                          {commitDate(kintoBlock.activeBuild.commitTimestamp)}
+                          {this.formatCommit(kintoBlock.activeBuild.commitSha)}{' '}
+                          -{' '}
+                          {this.formatDate(
+                            kintoBlock.activeBuild.commitTimestamp
+                          )}
                           <div className="notes">
                             {kintoBlock.activeBuild.commitMessage}
                           </div>
@@ -150,6 +168,16 @@ class KintoBlockManageForm extends Component {
                         <div className="commit-details no-commit">
                           No commit has been made on GitHub
                         </div>
+                      )}
+                      {!isVersionTag && (
+                        <Button
+                          className="button-refresh-commits"
+                          type="button"
+                          buttonType="secondary"
+                          onClick={refreshCommits}
+                        >
+                          Refresh Latest Commit
+                        </Button>
                       )}
                     </div>
                   </div>
@@ -175,13 +203,13 @@ class KintoBlockManageForm extends Component {
                         b.commitSha === kintoBlock.activeBuild.commitSha
                           ? 'active'
                           : ''
-                      } ${indexClass(i)}`}
+                      } ${this.getCommitClass(i, kintoBlock.builds.length)}`}
                       key={i}
                     >
                       <div className="state-and-time">
                         <div>
-                          {commitNo(b.commitSha)} -{' '}
-                          {commitDate(b.commitTimestamp)}
+                          {this.formatCommit(b.commitSha)} -{' '}
+                          {this.formatDate(b.commitTimestamp)}
                         </div>
                         <div className="build">
                           {b.state}{' '}

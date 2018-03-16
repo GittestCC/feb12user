@@ -114,7 +114,7 @@ export default {
       type: KINTOAPP
     },
     {
-      component: 'Link',
+      component: 'LinkContainer',
       text: 'Environments',
       url: urls[pages.dashboardKintoAppsEnvironments]
     },

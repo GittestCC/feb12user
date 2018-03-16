@@ -83,6 +83,27 @@ describe('KintoBlocks Reducer', () => {
     })
   })
 
+  it('kintoBlockUpdateBuilds only updates builds property for kintoblocks', () => {
+    const oldState = {
+      byId: {
+        '1': {
+          id: '1',
+          name: 'name',
+          builds: 'old'
+        }
+      },
+      allIds: ['1']
+    }
+    const action = actions.kintoBlockUpdateBuilds('1', {
+      name: 'somethingelse',
+      builds: 'data'
+    })
+    const newState = reducer(oldState, action)
+    const updatedBlock = newState.byId['1']
+    expect(updatedBlock.name).toEqual('name')
+    expect(updatedBlock.builds).toEqual('data')
+  })
+
   it('selectWorkspace removes all kintoblocks', () => {
     const oldState = {
       byId: { data: 'test' },

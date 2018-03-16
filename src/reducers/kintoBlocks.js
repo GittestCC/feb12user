@@ -3,7 +3,8 @@ import {
   RECEIVE_KINTO_BLOCK,
   ADD_KINTO_BLOCK,
   CREATE_TAG_KINTO_BLOCK,
-  UPDATE_KINTO_BLOCK
+  UPDATE_KINTO_BLOCK,
+  UPDATE_BUILDS_KINTO_BLOCK
 } from '../actions/kintoBlocks'
 
 import { SELECT_WORKSPACE } from '../actions/workspaces'
@@ -62,6 +63,17 @@ const kintoBlocksReducer = (state = defaultState, action) => {
           [action.id]: {
             ...state.byId[action.id],
             ...action.data
+          }
+        }
+      }
+    case UPDATE_BUILDS_KINTO_BLOCK:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            builds: action.data.builds
           }
         }
       }

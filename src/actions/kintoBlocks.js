@@ -3,11 +3,13 @@ import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 import capitalize from 'lodash/capitalize'
 
-import { formSubmitted } from './pageOptions'
 import { pages } from '../constants/pages'
+import { KINTOBLOCKS } from '../constants/backendMicroservices'
+import { TAG } from '../constants/version'
 import { getVersionType } from '../helpers/versionHelper'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
-import { KINTOBLOCKS } from '../constants/backendMicroservices'
+
+import { formSubmitted } from './pageOptions'
 
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
@@ -16,9 +18,16 @@ export const CREATE_TAG_KINTO_BLOCK = 'CREATE_TAG_KINTO_BLOCK'
 export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
   'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
 export const UPDATE_KINTO_BLOCK = 'UPDATE_KINTO_BLOCK'
+export const UPDATE_BUILDS_KINTO_BLOCK = 'UPDATE_BUILDS_KINTO_BLOCK'
 
 export const kintoBlockUpdate = (id, data) => ({
   type: UPDATE_KINTO_BLOCK,
+  id,
+  data
+})
+
+export const kintoBlockUpdateBuilds = (id, data) => ({
+  type: UPDATE_BUILDS_KINTO_BLOCK,
   id,
   data
 })
@@ -179,5 +188,20 @@ export const fetchKintoBlockDependenciesData = (id, ver, type) => (
         blockId: response.data.id,
         version: response.data.version
       }
+    })
+}
+
+export const refreshCommits = (id, version, type) => (dispatch, getState) => {
+  const { selectedWorkspace } = getState().workspaces
+  if (type === TAG) return
+  return axios
+    .post(
+      getServerUrl(
+        KINTOBLOCKS,
+        `/${selectedWorkspace}/kintoblocks/${id}/versions/${version}/refreshBuilds?type=${type}`
+      )
+    )
+    .then(response => {
+      dispatch(kintoBlockUpdateBuilds(id, response.data))
     })
 }

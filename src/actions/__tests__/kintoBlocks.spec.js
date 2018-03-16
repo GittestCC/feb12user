@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store'
 import { CALL_HISTORY_METHOD } from 'react-router-redux'
 import * as actions from '../kintoBlocks'
 import { FORM_SUBMITTED } from '../pageOptions'
-import { BRANCH } from '../../constants/version'
+import { BRANCH, TAG } from '../../constants/version'
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -223,6 +223,35 @@ describe('KintoBlocks actions', () => {
         type: actions.RECEIVE_KINTO_BLOCK_DEPENDENCIES,
         data: { id: '1', name: 'test', version: '1.3.1' },
         metadata: []
+      }
+    ])
+  })
+
+  it("refreshCommits doesn't fire any action if type is TAG", async () => {
+    const store = mockStore({ workspaces: {} })
+    await store.dispatch(actions.refreshCommits('1', '1.3.1', TAG))
+    expect(store.getActions()).toEqual([])
+  })
+
+  it('refreshCommits fires kintoBlockUpdateBuilds when its successful', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          data: { id: '1' }
+        }
+      })
+    })
+    const store = mockStore({
+      workspaces: { selectedWorkspace: '1' }
+    })
+    await store.dispatch(actions.refreshCommits('1', '1.3.1', BRANCH))
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.UPDATE_BUILDS_KINTO_BLOCK,
+        id: '1',
+        data: { id: '1' }
       }
     ])
   })
