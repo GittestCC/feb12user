@@ -235,6 +235,7 @@ class KintoBlockManageForm extends Component {
             dependencies={dependencies}
             disabled={isVersionTag}
             isKintoBlock={true}
+            kintoBlock={kintoBlock}
           />
         </div>
 

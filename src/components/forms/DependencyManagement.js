@@ -13,7 +13,8 @@ class DependencyManagement extends Component {
     fetchKintoBlockDependenciesData: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     isKintoBlock: PropTypes.bool,
-    workspaceId: PropTypes.string
+    workspaceId: PropTypes.string,
+    itemsToSkip: PropTypes.array.isRequired
   }
 
   onSelectKintoBlock = selectedItem => {
@@ -26,6 +27,15 @@ class DependencyManagement extends Component {
       .then(data => {
         this.props.fields.push(data)
       })
+  }
+
+  filterDependencies = (options, filter) => {
+    return options.filter(i => {
+      return (
+        i.name.toUpperCase().startsWith(filter.toUpperCase()) &&
+        !this.props.itemsToSkip.some(s => s === i.id)
+      )
+    })
   }
 
   render() {
@@ -56,6 +66,7 @@ class DependencyManagement extends Component {
                 placeholder="Search KintoBlocks"
                 loadOptions={onSearchKintoBlocks}
                 onChange={this.onSelectKintoBlock}
+                filterOptions={this.filterDependencies}
               />
               {!isKintoBlock && (
                 <div className="dependency-management-buttons">

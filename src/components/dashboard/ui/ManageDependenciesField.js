@@ -11,7 +11,8 @@ const ManageDependenciesField = ({
   searchKintoBlocks,
   fetchKintoBlockDependenciesData,
   disabled,
-  isKintoBlock
+  isKintoBlock,
+  itemsToSkip
 }) => (
   <FieldArray
     appVersion={appVersion}
@@ -23,6 +24,7 @@ const ManageDependenciesField = ({
     fetchKintoBlockDependenciesData={fetchKintoBlockDependenciesData}
     disabled={disabled}
     isKintoBlock={isKintoBlock}
+    itemsToSkip={itemsToSkip}
   />
 )
 
@@ -30,10 +32,11 @@ ManageDependenciesField.propTypes = {
   appVersion: PropTypes.string,
   name: PropTypes.string.isRequired,
   dependenciesInfo: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
+  workspaceId: PropTypes.string,
   searchKintoBlocks: PropTypes.func.isRequired,
   fetchKintoBlockDependenciesData: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
-  workspaceId: PropTypes.string
+  itemsToSkip: PropTypes.array.isRequired
 }
 
 export default ManageDependenciesField

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import uniq from 'lodash/uniq'
 import ManageDependenciesField from '../../../components/dashboard/ui/ManageDependenciesField'
 import { getDependenciesFactory } from '../../../selectors/kintoDependencies'
 import { debounceSelectAsync } from '../../../helpers/objectHelper'
@@ -9,18 +10,33 @@ import {
 
 function mapStateToProps(
   state,
-  { appVersion, dependencies, name, disabled, isKintoBlock }
+  { appVersion, dependencies, name, disabled, isKintoBlock, kintoBlock }
 ) {
   const workspaceId = state.workspaces ? state.workspaces.selectedWorkspace : ''
   const getDependencies = getDependenciesFactory()
   const dependenciesInfo = getDependencies(state, dependencies)
+
+  let itemsToSkip = []
+  if (isKintoBlock) {
+    itemsToSkip.push(kintoBlock.id)
+  }
+  Object.keys(dependenciesInfo).forEach(k => {
+    const item = dependenciesInfo[k]
+    itemsToSkip.push(item.blockId)
+    if (item.dependencies && item.dependencies.length) {
+      itemsToSkip = itemsToSkip.concat(item.dependencies.map(i => i.blockId))
+    }
+  })
+  itemsToSkip = uniq(itemsToSkip)
+
   return {
-    workspaceId,
     appVersion,
     name,
     dependenciesInfo,
+    isKintoBlock,
+    itemsToSkip,
     disabled,
-    isKintoBlock
+    workspaceId
   }
 }
 
