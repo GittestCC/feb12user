@@ -401,3 +401,13 @@
 #endpointInfoSwitcher .dropdown-content {
   top: 30px;
 }
+
+.dropdown-content.tag-branch {
+  .dropdown-content-items-scroll {
+    .dropdown-scroll-container {
+      .tag-button {
+        align-items: stretch;
+      }
+    }
+  }
+}

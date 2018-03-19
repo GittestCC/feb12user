@@ -25,7 +25,7 @@ const Index = () => (
       Visit Our GitHub
     </a>
     <a
-      href="https://kintohub.slack.com"
+      href="https://join.slack.com/t/kintohub/shared_invite/enQtMzIxNDU2OTE4NTYyLWJmNWM1ZTQ3YTFlMzJkYWUzMWE2ZTlmZjk3ZGQ1NWFlMDRkYzhhODNmNDZlMDZmNjhlMzBhNWRiYWIxMTVjMmU"
       target="_blank"
       rel="noopener noreferrer"
     >

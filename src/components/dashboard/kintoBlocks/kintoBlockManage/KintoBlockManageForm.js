@@ -138,11 +138,11 @@ class KintoBlockManageForm extends Component {
           <h5>
             The latest successful commit and other recent commits from GitHub.
           </h5>
-          <div className="form-body simple">
+          <div className={`form-body simple ${isVersionTag ? 'tagged' : ''}`}>
             <div className="section">
               <div className="field-input-wrapper">
                 <div className="label">
-                  latest commit
+                  {isVersionTag ? 'tagged commit' : 'latest commit'}
                   <Tooltip placement="top" overlay={commitHelp} trigger="click">
                     <span className="tooltip" />
                   </Tooltip>
@@ -193,38 +193,40 @@ class KintoBlockManageForm extends Component {
                 ) : null}
               </div>
 
-              <div className="field-input-wrapper commit-list">
-                <div className="label">recent commits</div>
-                {kintoBlock.builds && kintoBlock.builds.length ? (
-                  kintoBlock.builds.slice(0, 5).map((b, i) => (
-                    <div
-                      className={`commit-details ${
-                        kintoBlock.activeBuild &&
-                        b.commitSha === kintoBlock.activeBuild.commitSha
-                          ? 'active'
-                          : ''
-                      } ${this.getCommitClass(i, kintoBlock.builds.length)}`}
-                      key={i}
-                    >
-                      <div className="state-and-time">
-                        <div>
-                          {this.formatCommit(b.commitSha)} -{' '}
-                          {this.formatDate(b.commitTimestamp)}
+              {!isVersionTag && (
+                <div className="field-input-wrapper commit-list">
+                  <div className="label">recent commits</div>
+                  {kintoBlock.builds && kintoBlock.builds.length ? (
+                    kintoBlock.builds.slice(0, 5).map((b, i) => (
+                      <div
+                        className={`commit-details ${
+                          kintoBlock.activeBuild &&
+                          b.commitSha === kintoBlock.activeBuild.commitSha
+                            ? 'active'
+                            : ''
+                        } ${this.getCommitClass(i, kintoBlock.builds.length)}`}
+                        key={i}
+                      >
+                        <div className="state-and-time">
+                          <div>
+                            {this.formatCommit(b.commitSha)} -{' '}
+                            {this.formatDate(b.commitTimestamp)}
+                          </div>
+                          <div className="build">
+                            {b.state}{' '}
+                            <div className={`dot ${b.state.toLowerCase()}`} />
+                          </div>
                         </div>
-                        <div className="build">
-                          {b.state}{' '}
-                          <div className={`dot ${b.state.toLowerCase()}`} />
-                        </div>
+                        <div className="notes">{b.commitMessage}</div>
                       </div>
-                      <div className="notes">{b.commitMessage}</div>
+                    ))
+                  ) : (
+                    <div className="commit-details no-commit">
+                      No commit has been made on GitHub
                     </div>
-                  ))
-                ) : (
-                  <div className="commit-details no-commit">
-                    No commit has been made on GitHub
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

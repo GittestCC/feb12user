@@ -13,8 +13,10 @@ const WorkspaceCreate = () => {
           <h5 className="body-copy">
             A workspace is like a folder where you put all your projects in.
             They can be shared with other people to collaborate on every project
-            inside, or just selected projects. You can {' '}
-            <Link to="/about-us">learn more here.</Link>
+            inside, or just selected projects. You can{' '}
+            <Link to="https://help.kintohub.com/portal/kb/kintohub/workspaces-1">
+              learn more here.
+            </Link>
           </h5>
         </div>
         <div className="icon" />

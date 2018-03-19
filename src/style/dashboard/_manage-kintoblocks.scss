@@ -124,6 +124,15 @@
       .form-body {
         width: 100%;
         min-height: 230px;
+        &.simple {
+          padding: 40px;
+        }
+        &.tagged {
+          min-height: 180px;
+          &.simple {
+            padding: 30px 40px 60px;
+          }
+        }
         box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
         border-radius: 12px;
         background-color: $kinto-white;
@@ -149,9 +158,6 @@
         }
         .line {
           margin: 15px 0 25px;
-        }
-        &.simple {
-          padding: 40px;
         }
         .top {
           background-color: $kinto-white;
