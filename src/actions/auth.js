@@ -31,18 +31,23 @@ export const logout = () => {
   return { type: LOGOUT }
 }
 
-export const forgotPassword = (data, callback) => () => {
-  // TODO Ajax party hurr!
-  return Promise.resolve('forgot password success').then(() => {
-    return callback()
-  })
+export const forgotPassword = (data, onSuccess) => dispatch => {
+  return axios
+    .post(getServerUrl(AUTH, '/requestResetPassword'), {
+      userName: data.forgotPassword
+    })
+    .then(onSuccess)
 }
 
-export const createNewPassword = data => dispatch => {
-  // TODO Ajax was invited to this party too!
-  return Promise.resolve('new password created').then(() => {
-    dispatch(push('/'))
-  })
+export const createNewPassword = (data, token) => dispatch => {
+  return axios
+    .put(getServerUrl(AUTH, '/resetPassword'), {
+      token: token,
+      newPassword: data.createNewPassword
+    })
+    .then(() => {
+      dispatch(push('/login'))
+    })
 }
 
 export const activateAccount = token => () => {

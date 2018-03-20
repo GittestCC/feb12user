@@ -17,7 +17,7 @@ const ForgotPasswordForm = ({ handleSubmit }) => (
         validate={required}
       />
       <h6 className="byline">
-        A confirmation link will be sent to your email address.
+        A confirmation link will be sent to the corresponding email address
       </h6>
       <Button type="submit" buttonType="secondary">
         Reset Password

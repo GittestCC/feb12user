@@ -16,7 +16,6 @@ import ContactUs from './landing/ContactUs'
 import Blog from './landing/Blog'
 import ScrollToTop from './ScrollToTop'
 import ForgotPassword from './ForgotPassword'
-import CreateNewPassword from './CreateNewPassword'
 import Analytics from './Analytics'
 import AppCrashErrorDisplay from './AppCrashErrorDisplay'
 import RegisterSuccess from './RegisterSuccess'
@@ -30,6 +29,7 @@ import LoadingInterceptorContainer from '../containers/LoadingInterceptorContain
 import LoadingSpinnerContainer from '../containers/LoadingSpinnerContainer'
 import GithubConnectContainer from '../containers/GithubConnectContainer'
 import AccountActivateContainer from '../containers/AccountActivateContainer'
+import CreateNewPasswordContainer from '../containers/CreateNewPasswordContainer'
 
 import '../style/app.css'
 
@@ -91,8 +91,8 @@ const Kintohub = () => {
                 />
                 <Route
                   key="4"
-                  path="/create-new-password"
-                  component={CreateNewPassword}
+                  path="/create-new-password/:token"
+                  component={CreateNewPasswordContainer}
                 />
                 <Route
                   path="/accountActivate/:token"

@@ -23,10 +23,10 @@ class ForgotPassword extends Component {
             <div className="content forgot-password-wrapper">
               <div className="forgot-password-confirmation">
                 <div className="icon" />
-                <h2>An activation link has been sent to your email.</h2>
+                <h2>A confirmation link has been sent to your email.</h2>
                 <h6>
-                  If you have trouble finding the email, make sure to check your
-                  spam inbox as well.
+                  Trouble finding the email? Have a look in your spam folder,
+                  just in case.
                 </h6>
               </div>
             </div>

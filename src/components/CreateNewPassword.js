@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CreateNewPasswordFormContainer from '../containers/landing/createNewPassword/CreateNewPasswordFormContainer'
 import Footer from './ui/Footer'
 import LandingNavBar from './ui/LandingNavBar'
 
-const CreateNewPassword = () => (
-  <div className="create-new-password-page">
-    <LandingNavBar />
-    <CreateNewPasswordFormContainer />
-    <Footer />
-  </div>
-)
+class CreateNewPassword extends Component {
+  render() {
+    const { token } = this.props
+    return (
+      <div className="create-new-password-page">
+        <LandingNavBar />
+        <CreateNewPasswordFormContainer token={token} />
+        <Footer />
+      </div>
+    )
+  }
+}
 
 export default CreateNewPassword

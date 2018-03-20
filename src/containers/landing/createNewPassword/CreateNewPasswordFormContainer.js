@@ -2,10 +2,21 @@ import { connect } from 'react-redux'
 import CreateNewPasswordForm from '../../../components/logIn/CreateNewPasswordForm'
 import { createNewPassword } from '../../../actions/auth'
 
-function mapDispatchToProps(dispatch, { onSuccess }) {
+function mapStateToProps(state, { token }) {
   return {
-    onSubmit: data => dispatch(createNewPassword(data, onSuccess))
+    token
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(CreateNewPasswordForm)
+function mergeProps(stateProps, dispatchProps) {
+  const token = stateProps.token
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    onSubmit: data => dispatchProps.createNewPassword(data, token)
+  }
+}
+
+export default connect(mapStateToProps, { createNewPassword }, mergeProps)(
+  CreateNewPasswordForm
+)
