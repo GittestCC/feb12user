@@ -33,7 +33,7 @@ function mapStateToProps(state, { kintoBlock, index }) {
             ? pages.dashboardKintoBlocksManage
             : pages.dashboardKintoAppsManage
 
-        let dependency = {
+        return {
           name: state.kintoBlocks.byId[d.blockId].name,
           url: getPageUrl(manageUrl, {
             id: d.blockId,
@@ -43,7 +43,6 @@ function mapStateToProps(state, { kintoBlock, index }) {
           }),
           type: d.type
         }
-        return dependency
       })
     : []
 
@@ -55,7 +54,8 @@ function mapStateToProps(state, { kintoBlock, index }) {
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`,
     dropdownDependencyId: `idd-${index}`,
-    kintoBlockDependencies
+    kintoBlockDependencies,
+    selectedWorkspace
   }
 }
 
@@ -66,18 +66,23 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mergeProps(stateProps, dispatchProps) {
-  const endpointList = getPageUrl(pages.dashboardDocumentation, {
-    workspaceId: stateProps.selectedWorkspace,
-    id: stateProps.kintoBlock.id,
-    version: stateProps.latestVersion.text,
-    type: stateProps.latestVersion.type
-  })
+  const endpointUrl = getPageUrl(
+    pages.dashboardDocumentation,
+    {
+      workspaceId: stateProps.selectedWorkspace,
+      id: stateProps.kintoBlock.id,
+      version: stateProps.latestVersion.text,
+      type: stateProps.latestVersion.type
+    },
+    null,
+    true
+  )
   return {
     ...stateProps,
     ...dispatchProps,
     goToLatest: () => dispatchProps.push(stateProps.latestVersion.url),
     goToDependencyManage: url => dispatchProps.push(url),
-    goToEndpoint: () => dispatchProps.push(endpointList)
+    goToEndpoint: () => dispatchProps.push(endpointUrl)
   }
 }
 

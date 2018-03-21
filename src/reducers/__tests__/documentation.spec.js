@@ -7,11 +7,10 @@ describe('documentation reducer', () => {
     const sampleResponseData = {
       name: 'YourPersona',
       id: '1',
-      version: {
-        buildId: '666'
+      activeBuild: {
+        id: '666'
       }
     }
-
     const newState = reducer(
       undefined,
       actions.kintoBlockForDocumentationReceive('1', sampleResponseData)
@@ -19,6 +18,20 @@ describe('documentation reducer', () => {
     expect(newState.selectedKintoBlockId).toBe('1')
     expect(newState.selectedBuildId).toBe('666')
     expect(newState.selectedKintoBlock.name).toBe('YourPersona')
+  })
+
+  it('kintoBlockForDocumentationReceive sets activeBuildId to false if its not received', () => {
+    const sampleResponseData = {
+      name: 'YourPersona',
+      id: '1'
+    }
+    const newState = reducer(
+      undefined,
+      actions.kintoBlockForDocumentationReceive('1', sampleResponseData)
+    )
+    expect(newState.selectedKintoBlockId).toBe('1')
+    expect(newState.selectedKintoBlock.name).toBe('YourPersona')
+    expect(newState.selectedBuildId).toBe(false)
   })
 
   it('documentationReceive should store all endpoints in allIds', () => {

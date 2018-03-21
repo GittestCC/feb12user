@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import KintoBlocksContainer from '../containers/dashboard/KintoBlocksContainer'
 import KintoAppsContainer from '../containers/dashboard/KintoAppsContainer'
+import KintoBlockEndpointsContainer from '../containers/dashboard/documentation/KintoBlockEndpointsContainer'
 import Index from './dashboard/Index'
 
 class Dashboard extends Component {
@@ -32,6 +33,12 @@ class Dashboard extends Component {
     return selectedWorkspace ? (
       <div>
         <Switch>
+          <Route
+            path={`${
+              match.url
+            }/kintoblocks/:id/versions/:version/:type/documentation`}
+            component={KintoBlockEndpointsContainer}
+          />
           <Route
             path={`${match.url}/kintoblocks`}
             component={KintoBlocksContainer}

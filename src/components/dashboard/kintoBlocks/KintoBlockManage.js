@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { Button } from '../../forms'
 import { getPageUrl } from '../../../helpers/urlHelper'
+import { getVersionType } from '../../../helpers/versionHelper'
 import { pages } from '../../../constants/pages'
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
 import KintoBlockCreateTagModalContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockCreateTagModalContainer'
@@ -97,12 +98,17 @@ class KintoBlockManage extends Component {
             </span>
           </h2>
           <Link
-            to={getPageUrl(pages.dashboardDocumentation, {
-              selectedWorkspace,
-              id: kintoBlock.id,
-              version: kintoBlock.version.name,
-              type: kintoBlock.version.type
-            })}
+            to={getPageUrl(
+              pages.dashboardDocumentation,
+              {
+                workspaceId: selectedWorkspace,
+                id: kintoBlock.id,
+                version: kintoBlock.version.name,
+                type: getVersionType(kintoBlock.version)
+              },
+              null,
+              true
+            )}
             className="button dark"
           >
             View Endpoints

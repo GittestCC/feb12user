@@ -27,7 +27,6 @@ const kintoBlocksReducer = (state = defaultState, action) => {
         byId: {
           ...state.byId,
           [action.id]: {
-            ...state.byId[action.id],
             ...action.data
           }
         },

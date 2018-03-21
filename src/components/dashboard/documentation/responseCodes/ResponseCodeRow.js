@@ -49,7 +49,7 @@ class ResponseCodeRow extends Component {
             <div className="bottom">
               <div className="inner">
                 <DocumentationDisplay
-                  response={response.response}
+                  response={response.responseFields}
                   showTitle={true}
                 />
               </div>

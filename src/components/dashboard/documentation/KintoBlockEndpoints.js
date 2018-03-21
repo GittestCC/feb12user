@@ -15,21 +15,40 @@ class KintoBlockEndpoints extends Component {
     type: PropTypes.string.isRequired,
     match: PropTypes.object.isRequired,
     endpointList: PropTypes.array.isRequired,
-    isLoaded: PropTypes.bool.isRequired,
     firstEndpointId: PropTypes.string
   }
 
   state = {
-    filterText: null
+    filterText: null,
+    isLoaded: false,
+    showNoBuildError: false
   }
 
   componentDidMount() {
-    this.props.fetchKintoBlockForDocumentation(
-      this.props.id,
-      this.props.version,
-      this.props.type
-    )
-    this.props.fetchKintoBlockDocumentation(this.props.id, this.props.buildId)
+    const { id, version, type } = this.props
+    this.loadDocs(id, version, type)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { version, type } = this.props
+    if (nextProps.version !== version || nextProps.type !== type) {
+      this.loadDocs(this.props.id, nextProps.version, nextProps.type)
+    }
+  }
+
+  loadDocs = async (id, version, type) => {
+    this.setState({
+      isLoaded: false,
+      showNoBuildError: false
+    })
+    await this.props.fetchKintoBlockForDocumentation(id, version, type)
+    const { selectedBuildId } = this.props
+    if (selectedBuildId === false) {
+      this.setState({ showNoBuildError: true })
+    } else {
+      await this.props.fetchKintoBlockDocumentation(id, selectedBuildId)
+      this.setState({ isLoaded: true })
+    }
   }
 
   updateFilter = e => {
@@ -41,7 +60,21 @@ class KintoBlockEndpoints extends Component {
   }
 
   render() {
-    const { match, endpointList, isLoaded, firstEndpointId } = this.props
+    const { match, endpointList, firstEndpointId } = this.props
+
+    if (this.state.showNoBuildError) {
+      return (
+        <div className="endpoints-container">
+          <div className="endpoint-title">
+            <h3>endpoint documentation</h3>
+          </div>
+          <h4 className="nobuild-message">
+            We couldn't find a successful build for this branch
+          </h4>
+        </div>
+      )
+    }
+    if (!this.state.isLoaded) return null
     return (
       <div className="endpoints-container">
         <div className="endpoint-title">
@@ -103,16 +136,13 @@ class KintoBlockEndpoints extends Component {
               </ReactIScroll>
             </div>
           </div>
-
-          {isLoaded && (
-            <Switch>
-              <Route
-                path={`${match.url}/:endpointId`}
-                component={KintoBlockEndpointDetailsContainer}
-              />
-              <Redirect to={`${match.url}/${firstEndpointId}`} />
-            </Switch>
-          )}
+          <Switch>
+            <Route
+              path={`${match.url}/:endpointId`}
+              component={KintoBlockEndpointDetailsContainer}
+            />
+            <Redirect to={`${match.url}/${firstEndpointId}`} />
+          </Switch>
         </div>
       </div>
     )

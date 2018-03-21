@@ -30,9 +30,9 @@ export const urls = {
   [pages.dashboardKintoBlocksManage]:
     '/app/dashboard/:workspaceId/kintoblocks/:id/versions/:version/:type',
   [pages.dashboardDocumentationEndpoints]:
-    '/app/kintoblocks/:id/versions/:version/:type/documentation/:endpointId',
+    '/app/dashboard/:workspaceId/kintoblocks/:id/versions/:version/:type/documentation/:endpointId',
   [pages.dashboardDocumentation]:
-    '/app/kintoblocks/:id/versions/:version/:type/documentation',
+    '/app/dashboard/:workspaceId/kintoblocks/:id/versions/:version/:type/documentation',
   [pages.dashboardKintoAppsList]: '/app/dashboard/:workspaceId/kintoapps/list',
   [pages.dashboardKintoAppsCreate]:
     '/app/dashboard/:workspaceId/kintoapps/create',

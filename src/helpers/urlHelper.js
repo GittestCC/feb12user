@@ -1,12 +1,12 @@
 import pathToRegexp from 'path-to-regexp'
 import { urls } from '../constants/pages'
 
-export const getPageUrl = (page, urlParams, queryParams) => {
+export const getPageUrl = (page, urlParams, queryParams, ignoreError) => {
   let url = urls[page]
   if (!url) {
     throw new Error('there is no url defined for that page')
   }
-  url = getUrl(url, urlParams)
+  url = getUrl(url, urlParams, ignoreError)
   if (!queryParams) {
     return url
   }

@@ -7,7 +7,6 @@ import KintoAppTagSelectorContainer from './KintoAppTagSelectorContainer'
 import KintoBlockTagAndBranchDropDownContainer from './KintoBlockTagAndBranchDropDownContainer'
 import KintoAppEnvironmentReleaseSwitcherContainer from './KintoAppEnvironmentReleaseSwitcherContainer'
 import KintoBlockDocumentationNameTextContainer from './KintoBlockDocumentationNameTextContainer'
-import EndpointInfoSwitcherContainer from './EndpointInfoSwitcherContainer'
 
 export default {
   KintoSwitcherContainer,
@@ -18,6 +17,5 @@ export default {
   KintoAppTagSelectorContainer,
   KintoBlockTagAndBranchDropDownContainer,
   KintoAppEnvironmentReleaseSwitcherContainer,
-  KintoBlockDocumentationNameTextContainer,
-  EndpointInfoSwitcherContainer
+  KintoBlockDocumentationNameTextContainer
 }

@@ -2,29 +2,25 @@ import {
   KINTO_BLOCK_DOCUMENTATION_RECEIVE,
   KINTO_BLOCK_DOCUMENTATION_ENDPOINT_RECEIVE,
   KINTO_BLOCK_DOCUMENTATION_PROTOCOL_RECEIVE,
-  KINTO_BLOCK_FOR_DOCUMENTATION_RECEIVE,
-  FETCH_DOCUMENTATION
+  KINTO_BLOCK_FOR_DOCUMENTATION_RECEIVE
 } from '../actions/documentation'
 
 const defaultState = {
   byId: {},
   allIds: [],
-  isLoaded: false
+  selectedKintoBlock: {}
 }
 
 const documentationReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case FETCH_DOCUMENTATION:
-      return {
-        ...state,
-        isLoaded: false
-      }
     case KINTO_BLOCK_FOR_DOCUMENTATION_RECEIVE: {
       return {
         ...state,
         selectedKintoBlockId: action.id,
         selectedKintoBlock: action.data,
-        selectedBuildId: action.data.version.buildId,
+        selectedBuildId: action.data.activeBuild
+          ? action.data.activeBuild.id
+          : false,
         isEndpoint: true
       }
     }
@@ -40,9 +36,7 @@ const documentationReducer = (state = defaultState, action) => {
         ...state,
         byId,
         allIds,
-        selectedKintoBlockId: action.id,
-        selectedBuildId: action.buildId,
-        isLoaded: true
+        selectedKintoBlockId: action.id
       }
     }
     case KINTO_BLOCK_DOCUMENTATION_ENDPOINT_RECEIVE: {
@@ -58,9 +52,7 @@ const documentationReducer = (state = defaultState, action) => {
           [action.endpointId]: action.data
         },
         allIds,
-        selectedKintoBlockId: action.id,
-        selectedBuildId: action.buildId,
-        isLoaded: true
+        selectedKintoBlockId: action.id
       }
     }
     case KINTO_BLOCK_DOCUMENTATION_PROTOCOL_RECEIVE: {

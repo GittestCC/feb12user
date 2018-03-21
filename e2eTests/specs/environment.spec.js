@@ -34,7 +34,6 @@ describe('Environment Create/Edit page ', () => {
 
   it('should navigate to `edit` page of any environment, when user enters url of edit page of any environment in the browser', () => {
     var url = EnvironmentManage.getUrl().split('/')
-    console.log('Url[3] is' + url[3])
     var ws = url[3]
     var kintoAppId = url[5]
     var envId = url[7]

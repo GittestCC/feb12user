@@ -94,12 +94,28 @@ export default {
       text: 'Changelogs'
     }
   ],
+  //TODO hack to show same breadcrumb on parent and child
+  [pages.dashboardDocumentations]: [
+    {
+      component: 'KintoBlockDocumentationNameTextContainer'
+    },
+    {
+      component: 'Link',
+      text: 'Endpoints'
+    },
+    {
+      component: 'KintoBlockTagAndBranchDropDownContainer',
+      url: urls[pages.dashboardDocumentation],
+      isDocumentation: true
+    }
+  ],
   [pages.dashboardDocumentationEndpoints]: [
     {
       component: 'KintoBlockDocumentationNameTextContainer'
     },
     {
-      component: 'EndpointInfoSwitcherContainer'
+      component: 'Link',
+      text: 'Endpoints'
     },
     {
       component: 'KintoBlockTagAndBranchDropDownContainer',

@@ -425,7 +425,6 @@ describe('workspace create/edit Basic Info', () => {
     WorkspaceManage.open(ws)
     WorkspaceManage.form.waitForVisible()
     var toggleState = WorkspaceCreate.toggleBar.getAttribute('value')
-    console.log('Toggle state' + toggleState)
     if (toggleState === 'true') {
       var elemProperties = WorkspaceCreate.switchTogglerBtn.getCssProperty(
         'background-color'

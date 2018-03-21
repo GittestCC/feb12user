@@ -51,7 +51,7 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual(detailedBlock)
   })
 
-  it('receiveKintoBlock merges existing kintoblock with the new one', () => {
+  it('receiveKintoBlock overwrites existing kintoblock with the new one', () => {
     const newState = reducer(
       {
         byId: keyBy(simpleBlocks, 'id'),
@@ -62,7 +62,6 @@ describe('KintoBlocks Reducer', () => {
     expect(newState.byId['1']).toEqual({
       id: '1',
       name: 'first',
-      simple: true,
       detailed: true
     })
   })

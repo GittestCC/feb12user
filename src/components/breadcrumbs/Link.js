@@ -12,7 +12,7 @@ const LinkComponent = ({ disabled, text, url }) => {
 
 LinkComponent.propTypes = {
   disabled: PropTypes.bool,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   url: PropTypes.string
 }
 
