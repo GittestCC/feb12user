@@ -1,7 +1,7 @@
 export default [
   {
     label: 'Node.js (8.9.4)',
-    value: 'dotnet200debianstretch'
+    value: 'nodejs894alpine36'
   },
   {
     label: 'C#.net (.NET Core 2.0)',
