@@ -4,6 +4,7 @@ import { createKintoBlock } from '../../../../actions/kintoBlocks'
 import { searchRepositories } from '../../../../actions/workspaces'
 import { showSpinner, hideSpinner } from '../../../../actions/pageOptions'
 import { debounceSelectAsync } from '../../../../helpers/objectHelper'
+import languages from '../../../../constants/supportedLanguages'
 import KintoBlockCreateForm from '../../../../components/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateForm'
 
 const formName = 'kintoBlockCreateForm'
@@ -25,6 +26,7 @@ function mapStateToProps(state) {
     isNewRepository,
     preFillText: `${preFillText}/ `,
     selectedWorkspace,
+    languages,
     initialValues: {
       isPublic: true,
       isNewRepository: true,

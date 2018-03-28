@@ -24,7 +24,8 @@ class KintoBlockCreateForm extends Component {
     preFillText: PropTypes.string.isRequired,
     searchRepositories: PropTypes.func.isRequired,
     selectedWorkspace: PropTypes.string,
-    error: PropTypes.string
+    error: PropTypes.string,
+    languages: PropTypes.array.isRequired
   }
 
   onSelectRepo = data => {
@@ -42,6 +43,7 @@ class KintoBlockCreateForm extends Component {
       preFillText,
       searchRepositories,
       selectedWorkspace,
+      languages,
       error
     } = this.props
 
@@ -97,8 +99,7 @@ class KintoBlockCreateForm extends Component {
                 help="The programming language you would like to use for this project."
               >
                 <option>Choose the language</option>
-                <option value="CSHARP">C#.net</option>
-                <option value="NODEJS">Node.js</option>
+                {languages.map(l => <option value={l.value}>{l.label}</option>)}
               </Field>
               <Field
                 name="protocol"
