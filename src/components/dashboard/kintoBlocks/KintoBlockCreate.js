@@ -15,7 +15,7 @@ const KintoBlockCreate = () => (
           and infrastructure so you can focus on writing exactly the features
           you need. Start building KintoBlocks below or{' '}
           <a
-            href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-a-kintoblock"
+            href="https://help.kintohub.com/docs/getting-started.html/articles/creating-a-kintoblock"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +24,7 @@ const KintoBlockCreate = () => (
         </h5>
       </div>
       <a
-        href="https://desk.zoho.com/portal/kintohub/kb/articles/creating-a-kintoblock"
+        href="https://help.kintohub.com/docs/getting-started.html/articles/creating-a-kintoblock"
         target="_blank"
         rel="noopener noreferrer"
       >

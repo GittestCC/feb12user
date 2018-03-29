@@ -26,6 +26,13 @@ class WorkspaceMembers extends Component {
     })
   }
 
+  handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this.addRow()
+    }
+  }
+
   findMember = id => {
     if (!id) {
       return {}
@@ -108,6 +115,7 @@ class WorkspaceMembers extends Component {
               placeholder="Enter workspace member email"
               onChange={this.updateEmail}
               value={this.state.email}
+              onKeyPress={this.handleKeyPress}
             />
           </div>
           <select

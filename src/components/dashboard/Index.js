@@ -10,7 +10,7 @@ const Index = () => (
     </h4>
     <a
       className="button default"
-      href="https://desk.zoho.com/portal/kintohub/kb"
+      href="https://help.kintohub.com/docs/getting-started.html"
       target="_blank"
       rel="noopener noreferrer"
     >

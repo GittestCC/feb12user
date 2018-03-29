@@ -15,12 +15,16 @@ const GlobalSaveBar = ({
     }`}
     data-test="savebar"
   >
-    {toggleSaveButton && !canSave ? null : (
-      <Button disabled={!canSave} onClick={onSubmit}>
-        {submitLabel}
-      </Button>
-    )}
-    <div id="savebar-portal" />
+    <div className="dashboard-inner">
+      <div className="dashboard-content">
+        {toggleSaveButton && !canSave ? null : (
+          <Button disabled={!canSave} onClick={onSubmit}>
+            {submitLabel}
+          </Button>
+        )}
+        <div id="savebar-portal" />
+      </div>
+    </div>
   </div>
 )
 

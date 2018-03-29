@@ -21,6 +21,7 @@ class Icon extends Component {
     const { icon, disabled } = this.props
     return (
       <button
+        type="button"
         onClick={this.onClick}
         disabled={disabled}
         className={`icon ${icon}`}

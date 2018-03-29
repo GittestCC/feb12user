@@ -44,6 +44,11 @@
       min-height: 500px;
       margin-bottom: 0;
     }
+    .build-states {
+      text-transform: uppercase;
+      position: absolute;
+      right: 0;
+    }
     .form-wrapper {
       margin-bottom: 40px;
       min-width: 520px;
@@ -238,7 +243,6 @@
       background-color: $kinto-tinted-grayscale-1;
       padding: 8px 16px;
       &.no-commit, .no-commit {
-        margin-left: -20px;
         color: $kinto-tinted-grayscale-6;
         font-size: 14px;
         text-align: center;

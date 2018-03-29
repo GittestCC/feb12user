@@ -11,22 +11,26 @@ const Breadcrumb = ({ isShown, info }) => {
   }
   return (
     <div className="breadcrumbs">
-      <ul className="unstyled-list">
-        {info.map((i, key) => {
-          const BreadcrumbSection = allComponents[i.component]
-          if (!BreadcrumbSection) {
-            throw new Error(
-              `${i.component} Breadcrumb component section is not found`
-            )
-          }
-          const isDisabled = info.length - 1 === key
-          return (
-            <li key={key}>
-              <BreadcrumbSection disabled={isDisabled} {...i} />
-            </li>
-          )
-        })}
-      </ul>
+      <div className="dashboard-inner">
+        <div className="dashboard-content">
+          <ul className="unstyled-list">
+            {info.map((i, key) => {
+              const BreadcrumbSection = allComponents[i.component]
+              if (!BreadcrumbSection) {
+                throw new Error(
+                  `${i.component} Breadcrumb component section is not found`
+                )
+              }
+              const isDisabled = info.length - 1 === key
+              return (
+                <li key={key}>
+                  <BreadcrumbSection disabled={isDisabled} {...i} />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { isProduction } from '../../../../helpers/pageHelper'
 import { getVersionAsText } from '../../../../helpers/versionHelper'
 import DropDown from '../../../ui/DropDown'
 import KintoAppTagItem from '../../ui/KintoAppTagItem'
@@ -159,7 +160,11 @@ class KintoAppCard extends Component {
                 <button onClick={this.showVersionDropdown}>
                   View All Tags
                 </button>
-                <button onClick={goToChangelog}>Compare Versions</button>
+
+                {!isProduction() ? (
+                  <button onClick={goToChangelog}>Compare Versions</button>
+                ) : null}
+
                 <div className="dropdown line" />
                 <button onClick={goToEnvironment}>View Environments</button>
               </DropDown>

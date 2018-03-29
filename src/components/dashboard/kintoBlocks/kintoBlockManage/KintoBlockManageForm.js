@@ -135,17 +135,18 @@ class KintoBlockManageForm extends Component {
 
         <div className="form-wrapper full-row commits">
           <h3>Commits</h3>
-          <h5>
-            The latest successful commit and other recent commits from GitHub.
-          </h5>
+          <h5>The latest successfully built commit and other recent builds.</h5>
           <div className={`form-body simple ${isVersionTag ? 'tagged' : ''}`}>
             <div className="section">
               <div className="field-input-wrapper">
                 <div className="label">
-                  {isVersionTag ? 'tagged commit' : 'latest commit'}
+                  {isVersionTag
+                    ? 'tagged commit'
+                    : 'latest successfully built commit'}
                   <Tooltip placement="top" overlay={commitHelp} trigger="click">
                     <span className="tooltip" />
                   </Tooltip>
+                  <span className="build-states">build state</span>
                 </div>
                 <div className="commit-details main">
                   <div className="state-and-time">
@@ -166,19 +167,20 @@ class KintoBlockManageForm extends Component {
                         </div>
                       ) : (
                         <div className="commit-details no-commit">
-                          No commit has been made on GitHub
+                          No commit was built successfully yet.
                         </div>
                       )}
-                      {!isVersionTag && (
-                        <Button
-                          className="button-refresh-commits"
-                          type="button"
-                          buttonType="secondary"
-                          onClick={refreshCommits}
-                        >
-                          Refresh Latest Commit
-                        </Button>
-                      )}
+                      {!isVersionTag &&
+                        !isProd && (
+                          <Button
+                            className="button-refresh-commits"
+                            type="button"
+                            buttonType="secondary"
+                            onClick={refreshCommits}
+                          >
+                            Refresh Latest Commit
+                          </Button>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -187,8 +189,8 @@ class KintoBlockManageForm extends Component {
                     data-test="create-tag-error"
                     className="errormessage-form error-message"
                   >
-                    At least one successful commit must be made on GitHub in
-                    order to create a tag.
+                    At least one commit must be built successfully in order to
+                    create a tag
                   </div>
                 ) : null}
               </div>

@@ -4,6 +4,7 @@ label, .label {
   font-size: $font-size-label;
   text-transform: uppercase;
   color: $input-label;
+  position: relative;
 }
 
 input,
@@ -296,17 +297,22 @@ form {
 }
 
 .global-save-bar {
-  display: flex;
-  flex-direction: row-reverse;
   background: $kinto-tinted-grayscale-8;
   border-left: 320px solid $kinto-tinted-grayscale-9;
   position: fixed;
   bottom: 0;
   height: 0;
-  text-align: right;
   width: 100%;
   transition: height 0.1s linear;
   z-index: 10;
+
+  .dashboard-inner {
+    width: 100%;
+    .dashboard-content {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
 
   &.show {
     height: 60px;
@@ -316,7 +322,7 @@ form {
     height: 40px;
     line-height: 40px;
     font-size: 14px;
-    margin: 10px 30px 10px 0;
+    margin: 10px 0px 10px 0;
     width: auto;
   }
 }

@@ -43,6 +43,13 @@ class KintoBlockManageParamsField extends Component {
     })
   }
 
+  handleKeyPress = e => {
+    if (e.key === 'Enter' && this.state.key) {
+      e.preventDefault()
+      this.onAdd()
+    }
+  }
+
   render() {
     const { fields, disabled } = this.props
     const { key, value } = this.state
@@ -119,6 +126,7 @@ class KintoBlockManageParamsField extends Component {
                 id="add-key"
                 value={key}
                 onChange={this.onChangeKey}
+                onKeyPress={this.handleKeyPress}
               />
             </div>
             <div className="field-wrapper">
@@ -128,6 +136,7 @@ class KintoBlockManageParamsField extends Component {
                 id="add-value"
                 value={value}
                 onChange={this.onChangeValue}
+                onKeyPress={this.handleKeyPress}
               />
             </div>
 

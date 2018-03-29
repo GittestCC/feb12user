@@ -41,7 +41,7 @@ REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID=UA-xxx-1
 
 ### Setting up the backend url
 
-dependening on the enviornment the backend supports different url types
+depending on the environment the backend supports different url types
 
 * for example on live backend expects
 
@@ -88,9 +88,9 @@ you will need to update `./constants/blog` add a new object to `posts` array wit
 
 to add a new avatar, you need to edit `_blog-gallery.scss` and add it under `.blog-gallery`
 
-### Connect github
+### Connect GitHub
 
-you need to make sure the `Authorize callback URL` for the github app is
+you need to make sure the `Authorise callback URL` for the GitHub app is
 
 ```
 http://clienturl.com/githubConnect

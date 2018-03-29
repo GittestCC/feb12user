@@ -38,11 +38,8 @@
     @media (min-width: 1171px) and (max-width: 1440px) {
       grid-template-columns: repeat(3, 1fr [col-start]);
     }
-    @media (min-width: 1441px) and (max-width: 1800px) {
+    @media (min-width: 1441px) {
       grid-template-columns: repeat(4, 1fr [col-start]);
-    }
-    @media (min-width: 1801px) {
-      grid-template-columns: repeat(5, 1fr [col-start]);
     }
     grid-gap: 20px;
     justify-content: stretch;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { isProduction } from '../../../helpers/pageHelper'
 import { getVersionStateClassName } from '../../../helpers/versionHelper'
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
 import KintoAppTagAndDeployFormContainer from '../../../containers/dashboard/kintoApps/KintoAppTagAndDeployFormContainer'
@@ -71,9 +72,12 @@ class KintoAppManage extends Component {
             </div>
           </h2>
           <div className="buttons">
-            <button className="button secondary" onClick={goToChangelog}>
-              Compare Versions
-            </button>
+            {!isProduction() ? (
+              <button className="button secondary" onClick={goToChangelog}>
+                Compare Versions
+              </button>
+            ) : null}
+
             <button className="button dark" onClick={goToEnvironment}>
               View Environments
             </button>

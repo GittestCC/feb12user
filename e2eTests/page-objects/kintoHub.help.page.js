@@ -2,7 +2,7 @@ import Page from './page'
 
 class KintoHubHelp extends Page {
   open() {
-    super.open('https://desk.zoho.com/portal/kintohub/kb')
+    super.open('https://help.kintohub.com/docs/getting-started.html')
   }
 
   get companyName() {

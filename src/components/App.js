@@ -82,18 +82,20 @@ class App extends Component {
         {isLoaded && firstWorkspaceId ? (
           <div className="layout-inner">
             <BreadcrumbContainer />
-            <Switch>
-              <Route
-                path={`${match.url}/dashboard/:workspaceId`}
-                component={DashboardContainer}
-              />
-              <Route
-                path={`${match.url}/workspaces`}
-                component={WorkspacesContainer}
-              />
-              <Route path={`${match.url}/market`} component={Market} />
-              <Redirect to={`${match.url}/dashboard/${firstWorkspaceId}`} />
-            </Switch>
+            <div className="dashboard-content">
+              <Switch>
+                <Route
+                  path={`${match.url}/dashboard/:workspaceId`}
+                  component={DashboardContainer}
+                />
+                <Route
+                  path={`${match.url}/workspaces`}
+                  component={WorkspacesContainer}
+                />
+                <Route path={`${match.url}/market`} component={Market} />
+                <Redirect to={`${match.url}/dashboard/${firstWorkspaceId}`} />
+              </Switch>
+            </div>
           </div>
         ) : null}
       </div>
