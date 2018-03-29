@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ComplexModal from '../../dashboard/ui/ComplexModal'
 import { Button } from '../../forms'
 import { getPageUrl } from '../../../helpers/urlHelper'
+import { scrollToError } from '../../../helpers/domHelper'
 import { getVersionType } from '../../../helpers/versionHelper'
 import { pages } from '../../../constants/pages'
 import KintoBlockManageFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockManage/KintoBlockManageFormContainer'
@@ -74,7 +75,9 @@ class KintoBlockManage extends Component {
     if (this.props.hasActiveBuild) {
       this.setState({ isModalOpen: true })
     } else {
-      this.setState({ isCreateTagErrorMessageShown: true })
+      this.setState({ isCreateTagErrorMessageShown: true }, () => {
+        scrollToError()
+      })
     }
   }
 
