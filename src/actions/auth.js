@@ -63,9 +63,15 @@ export const signUp = data => dispatch => {
 }
 
 export const logIn = data => dispatch => {
-  return axios.post(getServerUrl(AUTH, '/login'), data).then(result => {
-    dispatch(login())
-    dispatch(push('/app'))
+  return pureLogin(data, dispatch).then(null, async r => {
+    //TODO: change the backend to send a flag instead of an error message
+    if (
+      r.response.data &&
+      r.response.data.error === 'Cannot login when already logged in!'
+    ) {
+      await dispatch(authApp())
+      return pureLogin(data, dispatch)
+    }
   })
 }
 
@@ -75,4 +81,11 @@ export const authApp = () => dispatch => {
     .then(response => {
       dispatch(tokenUpdate(response.data.token))
     })
+}
+
+const pureLogin = (data, dispatch) => {
+  return axios.post(getServerUrl(AUTH, '/login'), data).then(() => {
+    dispatch(login())
+    dispatch(push('/app'))
+  })
 }

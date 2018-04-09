@@ -32,7 +32,6 @@ describe('Auth actions', () => {
 
   it('logIn fires a redirect and login actions', async () => {
     authHelper.setIsLoggedIn = jest.fn()
-
     await moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
@@ -43,6 +42,31 @@ describe('Auth actions', () => {
     const store = mockStore()
     await store.dispatch(actions.logIn())
     expect(store.getActions().map(a => a.type)).toEqual([
+      actions.LOGIN,
+      CALL_HISTORY_METHOD
+    ])
+  })
+
+  it('logIn user got an error that he is logged in will auth and login again ', async () => {
+    authHelper.setToken = jest.fn()
+    authHelper.setIsLoggedIn = jest.fn()
+    await moxios.wait(() => {
+      const request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 400,
+        response: {
+          error: 'Cannot login when already logged in!'
+        }
+      })
+      moxios.stubRequest(/.+\/auth/, {
+        status: 200,
+        response: { data: { token: '1' } }
+      })
+    })
+    const store = mockStore()
+    await store.dispatch(actions.logIn())
+    expect(store.getActions().map(a => a.type)).toEqual([
+      actions.UPDATE_TOKEN,
       actions.LOGIN,
       CALL_HISTORY_METHOD
     ])
