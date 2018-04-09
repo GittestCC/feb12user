@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Route } from 'react-router-dom'
 import KintoBlocksListContainer from '../../containers/dashboard/kintoBlocks/KintoBlocksListContainer'
 import KintoBlockManageContainer from '../../containers/dashboard/kintoBlocks/KintoBlockManageContainer'
-import KintoBlockCreate from './kintoBlocks/KintoBlockCreate'
+import KintoBlockCreateContainer from '../../containers/dashboard/kintoBlocks/KintoBlockCreateContainer'
 
 class Kintoblocks extends Component {
   static propTypes = {
@@ -29,7 +29,10 @@ class Kintoblocks extends Component {
           path={`${match.url}/list`}
           component={KintoBlocksListContainer}
         />
-        <Route path={`${match.url}/create`} component={KintoBlockCreate} />
+        <Route
+          path={`${match.url}/create`}
+          component={KintoBlockCreateContainer}
+        />
         <Route
           path={`${match.url}/:id/versions/:ver/:type`}
           component={KintoBlockManageContainer}

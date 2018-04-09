@@ -30,17 +30,19 @@ function mapStateToProps(state, { isSideBarShownMobile }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mergeProps(stateProps, dispatchProps) {
   return {
-    push: url => dispatch(push(url)),
+    ...stateProps,
+    ...dispatchProps,
     selectWorkspace: id => {
       if (id === '0') {
-        dispatch(push(getPageUrl(pages.workspaceCreate)))
+        dispatchProps.push(getPageUrl(pages.workspaceCreate))
       } else {
-        dispatch(push(getPageUrl(pages.dashboardHome, { workspaceId: id })))
+        dispatchProps.push(getPageUrl(pages.dashboardHome, { workspaceId: id }))
+        stateProps.selectedWorkspaceId = id
       }
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar)
+export default connect(mapStateToProps, { push }, mergeProps)(SideBar)

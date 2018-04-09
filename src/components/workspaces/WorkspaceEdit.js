@@ -16,6 +16,7 @@ class WorkspaceEdit extends Component {
   render() {
     const { workspace } = this.props
     const organizations = workspace.organizations || []
+
     return (
       <div className="edit-workspace">
         <WorkspaceFormContainer workspace={workspace} isCreate={false} />
@@ -46,17 +47,17 @@ class WorkspaceEdit extends Component {
                 <br />
                 Once it’s been linked you cannot unlink it.
               </div>
-              <div className="connect-button">
-                <a
-                  className="button dark"
-                  href={githubConnectUrl(workspace && workspace.id)}
-                >
-                  <span className="icon github" />
-                  {organizations.length
-                    ? 'Link Additional Github Organization'
-                    : 'Link Github Organization'}
-                </a>
-              </div>
+              {!organizations.length && (
+                <div className="connect-button">
+                  <a
+                    className="button dark"
+                    href={githubConnectUrl(workspace && workspace.id)}
+                  >
+                    <span className="icon github" />
+                    Link Github Organization
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

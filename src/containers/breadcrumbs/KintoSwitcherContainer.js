@@ -37,6 +37,7 @@ function mapStateToProps(state, { disabled, type }) {
       })
   }))
   return {
+    isKintoApp,
     disabled,
     selectedItemName: selectedItem.name,
     selectedItemUrl:

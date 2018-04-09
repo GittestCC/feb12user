@@ -22,8 +22,18 @@ class DependencyItem extends Component {
     workspaceId: PropTypes.string
   }
 
+  state = {
+    isExpanded: false
+  }
+
   onRemoveItem = () => {
     this.props.fields.remove(this.props.index)
+  }
+
+  toggleExpand = () => {
+    this.setState(prevState => ({
+      isExpanded: !prevState.isExpanded
+    }))
   }
 
   dependencySelectFormat = item => {
@@ -136,22 +146,32 @@ class DependencyItem extends Component {
                   <div className="mongo icon hide-text">mongo</div>
                 ) : null}
               </div>
-              <div className="expand-close-indicator">
-                <h6>Expand</h6>
-                <div className="expand-close" />
+              <div
+                className="expand-close-indicator"
+                onClick={this.toggleExpand}
+              >
+                <h6>{this.state.isExpanded ? 'Collapse' : 'Expand'}</h6>
+                <div
+                  className={`expand-close ${
+                    this.state.isExpanded ? 'expanded' : ''
+                  }`}
+                />
               </div>
             </div>
-            <div className="extra-information">
-              {blockDependencies.map((dep, key) => (
-                <div key={key} className="row">
-                  <div className={`icon ${getClassNameForType(dep.type)}`} />
-                  <div className="text">
-                    <h3>{dep.name}</h3>
-                    <h6>{dep.description}</h6>
+
+            {this.state.isExpanded && (
+              <div className="extra-information">
+                {blockDependencies.map((dep, key) => (
+                  <div key={key} className="row">
+                    <div className={`icon ${getClassNameForType(dep.type)}`} />
+                    <div className="text">
+                      <h3>{dep.name}</h3>
+                      <h6>{dep.description}</h6>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         ) : null}
       </div>

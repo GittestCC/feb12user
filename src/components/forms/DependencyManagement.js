@@ -61,31 +61,37 @@ class DependencyManagement extends Component {
         </h5>
         <div className="form-body simple dependency-management">
           {!disabled ? (
-            <div>
+            <div
+              className={`search-and-buttons ${
+                isKintoBlock ? 'kintoblock' : 'kintoapp'
+              }`}
+            >
               <Select.Async
                 placeholder="Search KintoBlocks"
                 loadOptions={onSearchKintoBlocks}
                 onChange={this.onSelectKintoBlock}
                 filterOptions={this.filterDependencies}
               />
+
               {!isKintoBlock && (
                 <div className="dependency-management-buttons">
-                  <div className="button-group">
-                    <a to="" className="button secondary disabled">
+                  {/* <div className="button-group">
+                      <a to="" className="button secondary disabled">
                       Split All Duplicate Instances
-                    </a>
-                    <a className="icon split-instances hide-text disabled">
+                      </a>
+                      <a className="icon split-instances hide-text disabled">
                       split
-                    </a>
-                  </div>
-                  <div className="button-group">
-                    <a className="button secondary disabled">
+                      </a>
+                      </div>
+                      <div className="button-group">
+                      <a className="button secondary disabled">
                       Merge All Duplicate Instances
-                    </a>
-                    <a className="icon combine-instances hide-text disabled">
+                      </a>
+                      <a className="icon combine-instances hide-text disabled">
                       combine
-                    </a>
-                  </div>
+                      </a>
+                  </div> */}
+
                   {configUrl ? (
                     <div className="button-group">
                       <Link to={configUrl} className="button secondary">
@@ -93,7 +99,7 @@ class DependencyManagement extends Component {
                       </Link>
                       <Link
                         to={configUrl}
-                        className="icon edit-blocks-and-services hide-text"
+                        className="icon edit-blocks-and-services glyph hide-text"
                       >
                         edit blocks
                       </Link>
@@ -104,7 +110,7 @@ class DependencyManagement extends Component {
                         Edit Dependencies
                       </a>
                       <a
-                        className="icon edit-blocks-and-services hide-text"
+                        className="icon edit-blocks-and-services glyph hide-text"
                         disabled
                       >
                         edit blocks

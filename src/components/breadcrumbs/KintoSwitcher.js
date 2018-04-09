@@ -10,7 +10,8 @@ const KintoSwitcher = ({
   selectedItemName,
   selectedItemUrl,
   dropdownItems,
-  actionHandler
+  actionHandler,
+  isKintoApp
 }) => (
   <div className="list-container">
     {selectedItemUrl && !disabled ? (
@@ -25,7 +26,9 @@ const KintoSwitcher = ({
       list={dropdownItems}
       component={TagItem}
       filterField="text"
-      actionText="Create New Application"
+      actionText={
+        isKintoApp ? 'Create New Application' : 'Create New KintoBlock'
+      }
       actionHandler={actionHandler}
       dropdownContentClass="short"
       className="margin-right"
@@ -38,7 +41,8 @@ KintoSwitcher.propTypes = {
   selectedItemName: PropTypes.string,
   selectedItemUrl: PropTypes.string,
   dropdownItems: PropTypes.array.isRequired,
-  actionHandler: PropTypes.func.isRequired
+  actionHandler: PropTypes.func.isRequired,
+  isKintoApp: PropTypes.bool.isRequired
 }
 
 export default KintoSwitcher

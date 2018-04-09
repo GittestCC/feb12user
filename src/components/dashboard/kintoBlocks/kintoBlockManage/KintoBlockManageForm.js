@@ -146,7 +146,7 @@ class KintoBlockManageForm extends Component {
                   <Tooltip placement="top" overlay={commitHelp} trigger="click">
                     <span className="tooltip" />
                   </Tooltip>
-                  <span className="build-states">build state</span>
+                  <span className="build-states">build status</span>
                 </div>
                 <div className="commit-details main">
                   <div className="state-and-time">

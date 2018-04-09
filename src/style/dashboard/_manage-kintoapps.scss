@@ -34,7 +34,7 @@
     .button-group {
       width: 32%;
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       align-items: center;
       justify-content: center;
       .icon {
@@ -47,7 +47,10 @@
           @include backgroundImage('/images/icon-combine.svg', 40px, 40px)
         }
         &.edit-blocks-and-services {
-          @include backgroundImage('/images/icon-gray-edit-double.svg', 40px, 40px)
+          @include backgroundImage('/images/icon-gray-edit-double-glyph.svg', 40px, 40px)
+          &.glyph {
+            @include backgroundImage('/images/icon-gray-edit-double-glyph.svg', 40px, 40px)
+          }
         }
       }
       .button {
@@ -79,6 +82,9 @@
       }
       &.edit-blocks-and-services {
         @include backgroundImage('/images/icon-gray-edit-double.svg', 40px, 40px)
+        &.glyph {
+          @include backgroundImage('/images/icon-gray-edit-double-glyph.svg', 40px, 40px)
+        }
       }
     }
     .button {
@@ -93,4 +99,41 @@
   display: block;
   border-radius: 50%;
   background-color: $kinto-grayscale-2;
+}
+
+.dependency-management {
+  .search-and-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-grow: auto;
+    margin-bottom: 40px;
+    &.kintoapp {
+      .Select {
+        width: 50%;
+      }
+      .button-group {
+        flex-direction: row-reverse;
+        width: 100%;
+        align-items: center;
+        .button {
+          width: 220px;
+          margin-left: 20px;
+        }
+        .icon {
+          margin: 0;
+        }
+      }
+    }
+    &.kintoblock {
+      .Select {
+        width: 100%;
+      }
+    }
+
+    .dependency-management-buttons {
+      margin-top: 0;
+    }
+  }
 }

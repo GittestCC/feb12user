@@ -8,6 +8,10 @@ import { isProduction } from '../../../../helpers/pageHelper'
 import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
 import {
+  deploymentState,
+  deploymentStepName
+} from '../../../../constants/deploymentStates'
+import {
   timeDayMonthYear,
   dateMonthYearTime
 } from '../../../../constants/dateFormat'
@@ -52,6 +56,23 @@ class KintoAppEnvironmentCard extends Component {
       releaseVersion: releaseVersion.name,
       workspaceId: selectedWorkspace
     })
+  }
+
+  getClassForStep = step => {
+    switch (step) {
+      case deploymentStepName.shutdown:
+        return 'shutdown'
+      case deploymentStepName.deploy:
+        return 'deploying'
+      case deploymentStepName.testing:
+        return 'testing'
+      case deploymentStepName.processing:
+        return 'processing'
+      case deploymentStepName.success:
+        return 'success'
+      default:
+        throw new Error('step not found')
+    }
   }
 
   render() {
@@ -216,9 +237,13 @@ class KintoAppEnvironmentCard extends Component {
                                   <div className="left">
                                     <h6
                                       className={`${step.state &&
-                                        step.state.toLowerCase()}`}
+                                        this.getClassForStep(step.state)}`}
                                     >
-                                      {step.stepName}ING
+                                      {step.stepName}
+                                      {step.stepName ===
+                                      deploymentState.shutdown
+                                        ? ''
+                                        : 'ING'}
                                     </h6>
                                   </div>
                                   <div className="right">
@@ -239,7 +264,8 @@ class KintoAppEnvironmentCard extends Component {
                               <button
                                 className={`button secondary ${release.steps[
                                   release.steps.length - 1
-                                ].state === 'FAILED' && 'disabled'}`}
+                                ].state === deploymentState.failed &&
+                                  'disabled'}`}
                                 onClick={() =>
                                   buttonAction(
                                     'new',
@@ -314,7 +340,7 @@ class KintoAppEnvironmentCard extends Component {
             )}
 
             <DropDown type="simple" dropdownClass="menu" id={`id-${sortIndex}`}>
-              {status === 'SUCCESS' && (
+              {status === deploymentState.success && (
                 <button
                   onClick={() =>
                     buttonAction(
