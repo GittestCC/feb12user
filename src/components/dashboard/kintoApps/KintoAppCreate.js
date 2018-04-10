@@ -15,7 +15,7 @@ const KintoAppCreate = () => (
           allow your clients to talk to the application. Start building an
           application below or{' '}
           <a
-            href="https://help.kintohub.com/docs/getting-started.html/articles/creating-an-application"
+            href="https://docs.kintohub.com/docs/getting-started.html"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +24,7 @@ const KintoAppCreate = () => (
         </h5>
       </div>
       <a
-        href="https://help.kintohub.com/docs/getting-started.html/articles/creating-an-application"
+        href="https://docs.kintohub.com/docs/creating-an-application.html"
         target="_blank"
         rel="noopener noreferrer"
       >

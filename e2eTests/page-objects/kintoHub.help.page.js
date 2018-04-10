@@ -2,7 +2,7 @@ import Page from './page'
 
 class KintoHubHelp extends Page {
   open() {
-    super.open('https://help.kintohub.com/docs/getting-started.html')
+    super.open('https://docs.kintohub.com/docs/getting-started.html')
   }
 
   get companyName() {

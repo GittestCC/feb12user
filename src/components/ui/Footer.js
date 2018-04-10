@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import twitterIcon from '../../images/footer-socials-twitter.svg'
 import githubIcon from '../../images/footer-socials-github.svg'
 import linkedinIcon from '../../images/footer-socials-linkedin.svg'
@@ -17,7 +16,13 @@ const Footer = ({ className }) => (
               <Link to={'/about-us'}>Service Status</Link>
             </li> */}
             <li className="list-item">
-              <Link to={'/contact-us'}>Contact Us</Link>
+              <a
+                href="https://www.kintohub.com/contactus/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact Us
+              </a>
             </li>
             {/* <li className="list-item">
               <Link to={'/about-us'}>Privacy Policy</Link>
@@ -76,11 +81,15 @@ const Footer = ({ className }) => (
             </li> */}
           </ul>
 
-          <Link to={'/'}>
+          <a
+            href="https://kintohub.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div className="footer-logo">
               <img src={greyKintoLogo} alt="" />
             </div>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

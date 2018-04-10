@@ -14,7 +14,7 @@ const WorkspaceCreate = () => {
             A workspace is like a folder where you put all your projects in.
             They can be shared with other people to collaborate on every project
             inside, or just selected projects. You can{' '}
-            <Link to="https://help.kintohub.com/portal/kb/kintohub/workspaces-1">
+            <Link to="https://docs.kintohub.com/docs/creating-a-workspace.html">
               learn more here.
             </Link>
           </h5>

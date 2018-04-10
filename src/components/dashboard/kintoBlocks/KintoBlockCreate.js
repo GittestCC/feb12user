@@ -24,7 +24,7 @@ class KintoBlockCreate extends Component {
           <div className="text">
             <h5>What is a KintoBlock?</h5>
             <h5 className="body-copy">
-              KIntoBlocks are the new standard format for microservices. They
+              KintoBlocks are the new standard format for microservices. They
               are self-contained, containerized, universally compatible,
               language agnostic, combineable and shareable bricks of back-end
               logic. We take off your shoulders the hassle of library
@@ -32,7 +32,7 @@ class KintoBlockCreate extends Component {
               writing exactly the features you need. Start building KintoBlocks
               below or{' '}
               <a
-                href="https://help.kintohub.com/docs/getting-started.html/articles/creating-a-kintoblock"
+                href="https://docs.kintohub.com/docs/getting-started.html"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -41,7 +41,7 @@ class KintoBlockCreate extends Component {
             </h5>
           </div>
           <a
-            href="https://help.kintohub.com/docs/getting-started.html/articles/creating-a-kintoblock"
+            href="https://docs.kintohub.com/docs/creating-a-kintoblock.html"
             target="_blank"
             rel="noopener noreferrer"
           >

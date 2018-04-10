@@ -10,10 +10,6 @@ import ReactGA from 'react-ga'
 import configureStore from '../store/configureStore'
 import { getAnalyticsId } from '../helpers/analyticsHelper'
 
-import Home from './landing/Home'
-import AboutUs from './landing/AboutUs'
-import ContactUs from './landing/ContactUs'
-import Blog from './landing/Blog'
 import ScrollToTop from './ScrollToTop'
 import ForgotPassword from './ForgotPassword'
 import Analytics from './Analytics'
@@ -67,14 +63,11 @@ const Kintohub = () => {
                     isLoggedIn ? (
                       <Redirect to="/app" />
                     ) : (
-                      <Redirect to="/home" />
+                      <Redirect to="/log-in" />
                     )
                   }
                 />
-                <Route path="/home" component={Home} />
-                <Route path="/about-us" component={AboutUs} />
-                <Route path="/contact-us" component={ContactUs} />
-                <Route path="/blog" component={Blog} />
+
                 <Route path="/app" component={AppContainer} />
 
                 <Route key="1" path="/log-in" component={LogInContainer} />
