@@ -20,7 +20,7 @@ export const getPageUrl = (page, urlParams, queryParams, ignoreError) => {
 export const githubConnectUrl = workspaceId => {
   const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID
   return workspaceId
-    ? `https://github.com/login/oauth/authorize?scope=repo&state=${workspaceId}&client_id=${clientId}`
+    ? `https://github.com/login/oauth/authorize?scope=repo%20write:repo_hook&state=${workspaceId}&client_id=${clientId}`
     : ''
 }
 
