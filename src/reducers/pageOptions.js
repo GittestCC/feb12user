@@ -10,7 +10,8 @@ import {
   CLOSE_NOTIFICATION,
   SHOW_NOTIFICATION,
   SHOW_LOADING_SPINNER,
-  HIDE_LOADING_SPINNER
+  HIDE_LOADING_SPINNER,
+  SHOW_ERROR_REFRESH
 } from '../actions/pageOptions'
 import {
   RECEIVE_KINTO_APP,
@@ -22,8 +23,6 @@ import forms from '../constants/forms'
 
 export default function pageOptions(state = {}, action) {
   switch (action.type) {
-    // TODO: fix caching requests (not firing a request, this will not update)
-    // TODO: fix when a request is happening hide the old data
     case RECEIVE_KINTO_APP:
     case RECIEVE_KINTO_APP_ENVIRONMENTS:
       return {
@@ -133,6 +132,11 @@ export default function pageOptions(state = {}, action) {
         loadingSpinner: {
           isShown: false
         }
+      }
+    case SHOW_ERROR_REFRESH:
+      return {
+        ...state,
+        isErrorRefreshPageShown: true
       }
     default:
       return state

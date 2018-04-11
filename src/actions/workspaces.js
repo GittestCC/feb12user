@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { push } from 'react-router-redux'
-import { formSubmitted } from './pageOptions'
+import { formSubmitted, showErrorRefreshPage } from './pageOptions'
 import { WORKSPACES } from '../constants/backendMicroservices'
 import { pages } from '../constants/pages'
 import { getPageUrl } from '../helpers/urlHelper'
@@ -53,17 +53,22 @@ export const fetchWorkspace = id => dispatch => {
 
 export const fetchWorkspaces = () => dispatch => {
   dispatch(workspacesFetch())
-  return axios.get(getServerUrl(WORKSPACES, '/workspaces')).then(response => {
-    const workspaces = response.data || []
-    workspaces.forEach(w => {
-      w.services = [
-        {
-          service: 'MONGO_DB'
-        }
-      ]
-    })
-    dispatch(workspacesReceive(response.data || []))
-  })
+  return axios.get(getServerUrl(WORKSPACES, '/workspaces')).then(
+    response => {
+      const workspaces = response.data || []
+      workspaces.forEach(w => {
+        w.services = [
+          {
+            service: 'MONGO_DB'
+          }
+        ]
+      })
+      dispatch(workspacesReceive(response.data || []))
+    },
+    () => {
+      dispatch(showErrorRefreshPage())
+    }
+  )
 }
 
 export const createWorkspace = data => (dispatch, getState) => {

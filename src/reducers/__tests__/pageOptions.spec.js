@@ -129,4 +129,9 @@ describe('PageOptions Reducer', () => {
     const result = reducer(undefined, pageOptionsActions.hideSpinner())
     expect(result.loadingSpinner.isShown).toEqual(false)
   })
+
+  it('showErrorRefreshPage should set isErrorRefreshPageShown to true', () => {
+    const result = reducer(undefined, pageOptionsActions.showErrorRefreshPage())
+    expect(result.isErrorRefreshPageShown).toEqual(true)
+  })
 })

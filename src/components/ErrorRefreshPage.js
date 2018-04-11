@@ -2,24 +2,20 @@ import React, { Component } from 'react'
 import { isAnalyticsActive, trackException } from '../helpers/analyticsHelper'
 import { Button } from './forms'
 
-class AppCrashErrorDisplay extends Component {
-  state = {
-    hasError: false
-  }
-
+class ErrorRefreshPage extends Component {
   refreshPage() {
     window.location.reload()
   }
 
   componentDidCatch(error, info) {
-    this.setState({ hasError: true })
     if (isAnalyticsActive()) {
       trackException(error, info)
     }
+    this.props.showErrorRefreshPage()
   }
 
   render() {
-    if (this.state.hasError) {
+    if (this.props.isErrorRefreshPageShown) {
       return (
         <div className="error-page">
           <div className="error-container">
@@ -52,4 +48,4 @@ class AppCrashErrorDisplay extends Component {
   }
 }
 
-export default AppCrashErrorDisplay
+export default ErrorRefreshPage

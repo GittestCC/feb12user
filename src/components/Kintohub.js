@@ -13,9 +13,9 @@ import { getAnalyticsId } from '../helpers/analyticsHelper'
 import ScrollToTop from './ScrollToTop'
 import ForgotPassword from './ForgotPassword'
 import Analytics from './Analytics'
-import AppCrashErrorDisplay from './AppCrashErrorDisplay'
 import RegisterSuccess from './RegisterSuccess'
 
+import ErrorRefreshPageContainer from '../containers/ErrorRefreshPageContainer'
 import ScrollToErrorOnSubmitContainer from '../containers/ScrollToErrorOnSubmitContainer'
 import AppContainer from '../containers/AppContainer'
 import AuthContainer from '../containers/AuthContainer'
@@ -45,8 +45,8 @@ const Kintohub = () => {
   Modal.setAppElement('#root')
 
   return (
-    <AppCrashErrorDisplay>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ErrorRefreshPageContainer>
         <AuthContainer>
           <LoadingInterceptorContainer />
           <LoadingSpinnerContainer />
@@ -100,8 +100,8 @@ const Kintohub = () => {
             </ScrollToTop>
           </ConnectedRouter>
         </AuthContainer>
-      </Provider>
-    </AppCrashErrorDisplay>
+      </ErrorRefreshPageContainer>
+    </Provider>
   )
 }
 
