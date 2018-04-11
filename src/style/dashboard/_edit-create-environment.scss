@@ -22,7 +22,20 @@
 }
 
 .environment-edit-page {
+  h5 {
+    font-weight: normal;
+  }
   .page-title {
     margin-bottom: 40px;
+  }
+  p {
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  h4 {
+    margin-top: 40px;
+  }
+  form {
+    margin-bottom: 0;
   }
 }

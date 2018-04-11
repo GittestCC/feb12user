@@ -164,12 +164,6 @@
     &.overlay {
     }
   }
-  .code {
-    font-family: $code-font;
-    font-size: 16px;
-    color: $kinto-grayscale-7;
-    font-weight: bold;
-  }
   .nobuild-message {
     padding: 50px;
   }
@@ -431,61 +425,6 @@
   }
 }
 
-.endpoint-example .message-box {
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 1fr 80px;
-  grid-column-gap: 20px;
-  height: 140px;
-  align-items: stretch;
-  .left {
-    align-self: stretch;
-    .endpoint-name.box {
-      display: flex;
-    }
-    .code {
-      display: inline-block;
-      height: 80px;
-      overflow: hidden;
-      text-overflow: clip;
-      font-weight: normal;
-    }
-    height: 80px;
-  }
-  .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .toggle-expand {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    h6 {
-      margin: 0;
-      .collapse-icon {
-        position: absolute;
-      }
-    }
-    button.button.secondary {
-      min-width: 80px;
-      width: 80px;
-    }
-  }
-  &.expanded {
-    height: auto;
-    .left {
-      height: auto;
-      .code {
-        height: auto;
-      }
-    }
-    .right {
-      min-height: 80px;
-    }
-  }
-}
 
 .endpoint-details-scroll {
   border-left: 2px solid $kinto-tinted-grayscale-2;

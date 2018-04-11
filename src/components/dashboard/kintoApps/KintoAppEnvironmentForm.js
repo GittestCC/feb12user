@@ -1,17 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import Tooltip from 'rc-tooltip'
 import { FieldValidation, Toggle } from '../../forms'
 import { isProduction } from '../../../helpers/pageHelper'
 import { environments } from '../../../helpers/forms/validationFields'
 
-const KintoAppEnvironmentForm = ({
-  kintoApp,
-  environment,
-  isCreate,
-  handleSubmit
-}) => {
+const KintoAppEnvironmentForm = ({ kintoApp, environment, handleSubmit }) => {
   return (
     <form
       className="kintoapp-environment-form form-container"
@@ -33,39 +27,6 @@ const KintoAppEnvironmentForm = ({
             />
           </div>
 
-          {!isCreate && (
-            <div className="field-container false two-columns">
-              <div className="field">
-                <div className="label environment">
-                  client id
-                  <Tooltip
-                    placement="top"
-                    overlay="This is your client ID"
-                    trigger="click"
-                  >
-                    <span className="tooltip" />
-                  </Tooltip>
-                </div>
-                <div className="false-input disabled">
-                  {environment.clientId}
-                </div>
-              </div>
-              <div className="field">
-                <div className="label environment">
-                  secret key
-                  <Tooltip
-                    placement="top"
-                    overlay="This is your secret key"
-                    trigger="click"
-                  >
-                    <span className="tooltip" />
-                  </Tooltip>
-                </div>
-                <div className="false-input disabled">{environment.secret}</div>
-              </div>
-            </div>
-          )}
-
           {!isProduction() ? (
             <div className="field-wrapper toggle">
               <Field
@@ -85,7 +46,6 @@ const KintoAppEnvironmentForm = ({
 KintoAppEnvironmentForm.propTypes = {
   kintoApp: PropTypes.object.isRequired,
   environment: PropTypes.object.isRequired,
-  isCreate: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired
 }
 

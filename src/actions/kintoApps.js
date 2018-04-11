@@ -271,10 +271,14 @@ export const updateAppEnvironment = (id, envId, data) => (
 
 export const deployEnvironment = (id, envId, data) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
-  const environmentsListUrl = getPageUrl(pages.dashboardKintoAppsEnvironments, {
-    id,
-    workspaceId: selectedWorkspace
-  })
+  const environmentEditUrl = getPageUrl(
+    pages.dashboardKintoAppsEnvironmentEdit,
+    {
+      id,
+      workspaceId: selectedWorkspace,
+      envId
+    }
+  )
   return axios
     .post(
       getServerUrl(
@@ -286,7 +290,7 @@ export const deployEnvironment = (id, envId, data) => (dispatch, getState) => {
     .then(response => {
       dispatch(formSubmitted())
       dispatch(appEnvironmentUpdate(id, response.data))
-      dispatch(push(environmentsListUrl))
+      dispatch(push(environmentEditUrl))
     })
 }
 
