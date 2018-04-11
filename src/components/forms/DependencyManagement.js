@@ -136,6 +136,7 @@ class DependencyManagement extends Component {
                     workspaceId={workspaceId}
                     data={fields.get(key)}
                     disabled={disabled}
+                    isKintoBlock={isKintoBlock}
                   />
                 ))}
               </div>

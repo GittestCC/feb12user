@@ -2,9 +2,11 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import moment from 'moment'
 import get from 'lodash/get'
+
 import { getUrl } from '../../helpers/urlHelper'
-import KintoBlockTagAndBranchDropDown from '../../components/breadcrumbs/KintoBlockTagAndBranchDropDown'
+import KintoBlockTagAndBranchDropDown from '../../components/dashboard/ui/KintoBlockTagAndBranchDropDown'
 import { getVersionType } from '../../helpers/versionHelper'
+import { timeDayMonthYearShort } from '../../constants/dateFormat'
 
 function mapStateToProps(
   state,
@@ -58,7 +60,7 @@ function mapStateToProps(
             notes: x.note,
             url: itemUrl(x),
             lastUpdated: x.lastUpdated
-              ? moment(x.lastUpdated).format('h:mmA, DD MMM YYYY')
+              ? moment(x.lastUpdated).format(timeDayMonthYearShort)
               : ''
           })
         }
@@ -77,6 +79,14 @@ function mapStateToProps(
   }
 }
 
-export default connect(mapStateToProps, { push })(
+function mapDispatchToProps(dispatch) {
+  return {
+    onClickHandler: item => {
+      dispatch(push(item.url))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
   KintoBlockTagAndBranchDropDown
 )

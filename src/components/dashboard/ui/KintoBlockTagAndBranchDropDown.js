@@ -5,7 +5,7 @@ import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import Tooltip from 'rc-tooltip'
 import isEmpty from 'lodash/isEmpty'
-import { filterArray } from '../../helpers/arrayHelper'
+import { filterArray } from '../../../helpers/arrayHelper'
 
 class KintoBlockTagAndBranchDropDown extends Component {
   static propTypes = {
@@ -14,7 +14,9 @@ class KintoBlockTagAndBranchDropDown extends Component {
     branchArray: PropTypes.array.isRequired,
     tagArray: PropTypes.array.isRequired,
     dropdownText: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    onClickHandler: PropTypes.func.isRequired,
+    isForm: PropTypes.bool
   }
 
   state = {
@@ -114,9 +116,10 @@ class KintoBlockTagAndBranchDropDown extends Component {
       branchArray,
       tagArray,
       dropdownText,
-      history,
       kintoBlockType,
-      className
+      className,
+      onClickHandler,
+      isForm
     } = this.props
 
     return (
@@ -125,29 +128,47 @@ class KintoBlockTagAndBranchDropDown extends Component {
         className={`dropdown dropdown-filter ${className ? className : ''}`}
         onClick={this.onPreventDefault}
       >
-        <div className="breadcrumb-with-icon">
-          <Tooltip
-            placement="top"
-            overlay={selectedTab === 'tag' ? 'Tag' : 'Branch'}
-            trigger="click"
-          >
-            {kintoBlockType === 'tag' ? (
-              <div className="tag icon small" />
-            ) : (
-              <div className="branch icon small" />
-            )}
-          </Tooltip>
-          <h4 data-test="breadcrumb-text">{dropdownText}</h4>
-          <button
-            type="button"
-            onClick={this.onToggle}
-            className="dropdown-button breadcrumb-icon"
-            data-test="breadcrumb-toggle-tag-and-branch"
-          />
-        </div>
+        {isForm ? (
+          <div className="tag-and-branch-input">
+            <input
+              data-test="dropdown-filter"
+              className="dropdown-filter-input tag-and-branch-dropdown"
+              onKeyUp={this.onUpdateFilter}
+              placeholder={dropdownText}
+              onClick={this.onToggle}
+              ref={input => {
+                this.filterInput = input
+              }}
+            />
+            <span className={`icon ${isShown ? 'search' : ''}`} />
+          </div>
+        ) : (
+          <div className="breadcrumb-with-icon">
+            <Tooltip
+              placement="top"
+              overlay={selectedTab === 'tag' ? 'Tag' : 'Branch'}
+              trigger="click"
+            >
+              {kintoBlockType === 'tag' ? (
+                <div className="tag icon small" />
+              ) : (
+                <div className="branch icon small" />
+              )}
+            </Tooltip>
+            <h4 data-test="breadcrumb-text">{dropdownText}</h4>
+            <button
+              type="button"
+              onClick={this.onToggle}
+              className="dropdown-button breadcrumb-icon"
+              data-test="breadcrumb-toggle-tag-and-branch"
+            />
+          </div>
+        )}
 
         <div
-          className={`dropdown-content tag-branch ${isShown ? 'isShown' : ''}`}
+          className={`dropdown-content tag-branch ${isShown ? 'isShown' : ''} ${
+            isForm ? 'form-dropdown' : ''
+          }`}
         >
           <div className="dropdown-tabs">
             <div
@@ -171,16 +192,18 @@ class KintoBlockTagAndBranchDropDown extends Component {
             </div>
           </div>
 
-          <div className="dropdown-content-filter tags-and-branches">
-            <input
-              data-test="dropdown-filter"
-              className="dropdown-filter-input"
-              onKeyUp={this.onUpdateFilter}
-              ref={input => {
-                this.filterInput = input
-              }}
-            />
-          </div>
+          {!isForm && (
+            <div className="dropdown-content-filter tags-and-branches">
+              <input
+                data-test="dropdown-filter"
+                className="dropdown-filter-input"
+                onKeyUp={this.onUpdateFilter}
+                ref={input => {
+                  this.filterInput = input
+                }}
+              />
+            </div>
+          )}
 
           <div className="dropdown-content-items dropdown-content-items-scroll">
             <IScroll
@@ -193,7 +216,11 @@ class KintoBlockTagAndBranchDropDown extends Component {
                 interactiveScrollbars: true
               }}
             >
-              <div className="dropdown-scroll-container">
+              <div
+                className={`dropdown-scroll-container ${
+                  isForm ? 'form-scroll-container' : ''
+                }`}
+              >
                 {this.state.selectedTab === 'tag' ? (
                   <div className="tag-list" data-test="tag-list">
                     {this.getFilteredList(tagArray).map((item, index) => (
@@ -202,13 +229,13 @@ class KintoBlockTagAndBranchDropDown extends Component {
                         className={`tag-item tag-button ${
                           this.isActive(item.name) ? 'active' : ''
                         }`}
-                        onClick={() => history.push(item.url)}
+                        onClick={() => onClickHandler(item)}
                       >
                         <div className="tag-and-commit">
                           <div className="tag-item-text">{item.name}</div>
                           <div className="tag-item-text">{item.commitSha}</div>
                         </div>
-                        <div className="date">{item.lastUpdated}</div>
+                        <div className="date">Tag time: {item.lastUpdated}</div>
                         <div className="notes">{item.notes}</div>
                       </button>
                     ))}
@@ -225,7 +252,7 @@ class KintoBlockTagAndBranchDropDown extends Component {
                         className={`tag-item ${
                           this.isActive(item.name) ? 'active' : ''
                         }`}
-                        onClick={() => history.push(item.url)}
+                        onClick={() => onClickHandler(item)}
                       >
                         <div className="tag-item-text">{item.name}</div>
                       </button>

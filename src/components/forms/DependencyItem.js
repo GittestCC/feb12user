@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Field } from 'redux-form'
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
+import KintoBlockVersionSelectorContainer from '../../containers/dashboard/ui/KintoBlockVersionSelectorContainer'
 import { getPageUrl } from '../../helpers/urlHelper'
 import { pages } from '../../constants/pages'
 import {
@@ -69,7 +69,8 @@ class DependencyItem extends Component {
       data,
       workspaceId,
       appDependenciesInfo,
-      disabled
+      disabled,
+      isKintoBlock
     } = this.props
     const block = appDependenciesInfo[data.blockId]
     if (!block) {
@@ -101,19 +102,12 @@ class DependencyItem extends Component {
             />
           </div>
           <div className="version">
-            <Field
-              name={`${field}.version`}
-              component="select"
-              parse={this.dependencySelectParse}
-              format={this.dependencySelectFormat}
-              disabled={disabled}
-            >
-              {block.versions.map((v, index) => (
-                <option key={index} value={index}>
-                  {v.name}
-                </option>
-              ))}
-            </Field>
+            <KintoBlockVersionSelectorContainer
+              isKintoBlock={isKintoBlock}
+              field={field}
+              kintoBlock={block}
+              isForm={true}
+            />
             {appVersion && (
               <Link
                 className="pen-edit"

@@ -51,6 +51,56 @@
     display: block;
   }
 
+  &.form-dropdown.tag-branch {
+    left: -70px;
+    top: 40px;
+    background-color: $kinto-white;
+    &:before {
+      display: none;
+    }
+    .dropdown-tabs {
+      margin-bottom: 20px;
+      .tab {
+        border-bottom: solid 2px $kinto-tinted-grayscale-2;
+        .icon {
+          opacity: 0.5;
+        }
+        h3 {
+          color: rgba($kinto-grayscale-7, 0.4);
+        }
+        &.active {
+          border-bottom: solid 4px $kinto-blue;
+          .icon {
+            opacity: 1;
+          }
+          h3 {
+            color: $kinto-grayscale-7;
+          }
+        }
+      }
+    }
+    .form-scroll-container {
+      .tag-item {
+        background: $kinto-white;
+        .tag-item-text {
+          color: $kinto-tinted-grayscale-7;
+        }
+        .date, .notes {
+          color: rgba($kinto-tinted-grayscale-7, 0.4);
+        }
+        &.active {
+          background: rgba($kinto-blue, 0.2);
+          &:hover {
+            background: rgba($kinto-blue, 0.2);
+          }
+        }
+        &:hover {
+          background: rgba($kinto-blue, 0.1);
+        }
+      }
+    }
+  }
+
   &:before {
     content: '';
     display: block;
@@ -280,6 +330,9 @@
     &.tag-branch {
       margin-left: -120px;
       top: 30px;
+      &.form-dropdown {
+        top: 40px;
+      }
     }
   }
 
@@ -385,7 +438,24 @@
 }
 
 .dropdown-filter-input {
-  @include placeholder($input)
+  @include placeholder($input);
+  &.tag-and-branch-dropdown {
+    @include placeholder($kinto-tinted-grayscale-7);
+  }
+}
+
+.tag-and-branch-input {
+  position: relative;
+  .icon {
+    transition: all 0.2s ease-in-out;
+    @include backgroundImage("/images/icon-searchfield-search.svg", 30px, 30px);
+    &.search {
+      @include backgroundImage("/images/icon-searchfield-search-active.svg", 30px, 30px);
+    }
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
 }
 
 .kintoapp {
