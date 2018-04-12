@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import get from 'lodash/get'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
 import { pages } from '../../constants/pages'
 import { addNewEnvironment } from '../../actions/kintoApps'
@@ -33,7 +34,7 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
         getUrl(url, {
           id: selectedKintoAppId,
           envId: e.id,
-          version: app.version.name,
+          version: get(app, 'version.name'),
           workspaceId
         })
     }
@@ -44,29 +45,47 @@ function mapStateToProps(state, { url, isDependencyConfig }) {
     dropdownItems,
     selectedEnvironmentName: selectedEnv.name,
     hideCreateAction: isDependencyConfig,
-    selectedEnvironmentUrl:
-      selectedKintoAppId &&
-      selectedEnvironmentId &&
-      workspaceId &&
-      getUrl(url, {
+    workspaceId,
+    selectedEnvironmentUrl: getUrl(
+      url,
+      {
         id: selectedKintoAppId,
         envId: selectedEnvironmentId,
-        version: app.version.name,
+        version: get(app, 'version.name'),
         workspaceId
-      })
+      },
+      true
+    )
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addNewEnvironment: (id, data) => {
-      dispatch(addNewEnvironment(id, data)).then(() => {
-        dispatch(push(getPageUrl(pages.dashboardKintoAppsEnvironments, { id })))
+    addNewEnvironment: (id, data, workspaceId) => {
+      return dispatch(addNewEnvironment(id, data)).then(() => {
+        dispatch(
+          push(
+            getPageUrl(pages.dashboardKintoAppsEnvironments, {
+              id,
+              workspaceId
+            })
+          )
+        )
       })
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    addNewEnvironment: (id, data) =>
+      dispatchProps.addNewEnvironment(id, data, stateProps.workspaceId)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   KintoAppEnvironmentSwitcher
 )
