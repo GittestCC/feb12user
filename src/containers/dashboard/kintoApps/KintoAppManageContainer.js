@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import { push } from 'react-router-redux'
+import isEmpty from 'lodash/isEmpty'
 import {
   fetchKintoApp,
   getKintoAppEnvironments
@@ -16,11 +17,14 @@ function mapStateToProps(state, { match }) {
   const kintoApp = state.kintoApps.byId[id] || {}
   const version = kintoApp.version || {}
   const { canSave } = state.pageOptions
+  const hasDependencies = !isEmpty(kintoApp.appDependencies)
+
   return {
     id,
     ver,
     kintoApp,
     canSave,
+    hasDependencies,
     selectedWorkspace: workspaceId,
     version: kintoApp.version,
     isDraft: version.type === BRANCH,

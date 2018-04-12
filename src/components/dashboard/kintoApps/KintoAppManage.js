@@ -53,7 +53,8 @@ class KintoAppManage extends Component {
       isDraft,
       isVersionMatch,
       goToChangelog,
-      goToEnvironment
+      goToEnvironment,
+      hasDependencies
     } = this.props
     if (!isVersionMatch) {
       return null
@@ -111,6 +112,7 @@ class KintoAppManage extends Component {
               type="button"
               onClick={this.onVersionModalOpen}
               className="button default tag-deploy"
+              disabled={!hasDependencies}
             >
               {isDraft ? 'Tag and Deploy' : 'Deploy'}
             </button>
