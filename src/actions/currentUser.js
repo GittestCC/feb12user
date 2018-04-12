@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { getServerUrl } from '../helpers/urlHelper'
 import { AUTH } from '../constants/backendMicroservices'
-import { showErrorRefreshPage } from './pageOptions'
+import { REFRESH_PAGE } from '../constants/errorPageTypes'
+import { showErrorPage } from './pageOptions'
 
 export const RECEIVE_CURRENT_USER_INFO = 'RECEIVE_CURRENT_USER_INFO'
 
@@ -16,7 +17,7 @@ export const fetchCurrentUser = () => dispatch => {
       dispatch(currentUserReceiveInfo(response.data))
     },
     () => {
-      dispatch(showErrorRefreshPage())
+      dispatch(showErrorPage(REFRESH_PAGE))
     }
   )
 }

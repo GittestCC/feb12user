@@ -1,6 +1,7 @@
 import { actionTypes } from 'redux-form'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { getActivePageKey } from '../helpers/pageHelper'
+import forms from '../constants/forms'
 import {
   FORM_SUBMITTED,
   SELECT_ENVIRONMENT,
@@ -11,7 +12,7 @@ import {
   SHOW_NOTIFICATION,
   SHOW_LOADING_SPINNER,
   HIDE_LOADING_SPINNER,
-  SHOW_ERROR_REFRESH
+  SHOW_ERROR_PAGE
 } from '../actions/pageOptions'
 import {
   RECEIVE_KINTO_APP,
@@ -19,7 +20,6 @@ import {
   KINTO_APP_ENVIRONMENT_LOG_UPDATE
 } from '../actions/kintoApps'
 import { RECEIVE_KINTO_BLOCK } from '../actions/kintoBlocks'
-import forms from '../constants/forms'
 
 export default function pageOptions(state = {}, action) {
   switch (action.type) {
@@ -133,10 +133,10 @@ export default function pageOptions(state = {}, action) {
           isShown: false
         }
       }
-    case SHOW_ERROR_REFRESH:
+    case SHOW_ERROR_PAGE:
       return {
         ...state,
-        isErrorRefreshPageShown: true
+        errorPageType: action.errorType
       }
     default:
       return state

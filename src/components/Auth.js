@@ -2,6 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { SubmissionError } from 'redux-form'
+import { NOT_FOUND } from '../constants/errorPageTypes'
 
 class Auth extends Component {
   static propTypes = {
@@ -33,6 +34,9 @@ class Auth extends Component {
       },
       error => {
         // Do something with response error
+        if (error && error.response && error.response.status === 404) {
+          this.props.showErrorPage(NOT_FOUND)
+        }
         if (
           error &&
           error.response &&

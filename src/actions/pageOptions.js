@@ -7,9 +7,9 @@ export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
 export const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION'
 export const SHOW_LOADING_SPINNER = 'SHOW_LOADING_SPINNER'
 export const HIDE_LOADING_SPINNER = 'HIDE_LOADING_SPINNER'
-export const SHOW_ERROR_REFRESH = 'SHOW_ERROR_REFRESH'
+export const SHOW_ERROR_PAGE = 'SHOW_ERROR_PAGE'
 
-export const showErrorRefreshPage = () => ({ type: SHOW_ERROR_REFRESH })
+export const showErrorPage = errorType => ({ type: SHOW_ERROR_PAGE, errorType })
 
 export const formSubmitted = () => ({ type: FORM_SUBMITTED })
 

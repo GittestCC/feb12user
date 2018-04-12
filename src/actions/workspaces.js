@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { push } from 'react-router-redux'
-import { formSubmitted, showErrorRefreshPage } from './pageOptions'
+import { formSubmitted, showErrorPage } from './pageOptions'
 import { WORKSPACES } from '../constants/backendMicroservices'
+import { REFRESH_PAGE } from '../constants/errorPageTypes'
 import { pages } from '../constants/pages'
 import { getPageUrl } from '../helpers/urlHelper'
 import { getServerUrl } from '../helpers/urlHelper'
@@ -66,7 +67,7 @@ export const fetchWorkspaces = () => dispatch => {
       dispatch(workspacesReceive(response.data || []))
     },
     () => {
-      dispatch(showErrorRefreshPage())
+      dispatch(showErrorPage(REFRESH_PAGE))
     }
   )
 }

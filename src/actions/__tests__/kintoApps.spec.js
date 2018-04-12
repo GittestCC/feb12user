@@ -294,7 +294,7 @@ describe('KintoApps actions', () => {
     const store = mockStore({
       workspaces: { selectedWorkspace: '1' }
     })
-    await store.dispatch(actions.deployEnvironment('1', {}, 'envName'))
+    await store.dispatch(actions.deployEnvironment('1', 'envName', {}))
     expect(store.getActions().map(a => a.type)).toEqual([
       FORM_SUBMITTED,
       actions.KINTO_APP_ENVIRONMENT_UPDATE,
@@ -363,7 +363,6 @@ describe('KintoApps actions', () => {
         }
       })
     })
-    // TODO add moxios request when the API is connected
     const store = mockStore({
       workspaces: { selectedWorkspace: '1' }
     })

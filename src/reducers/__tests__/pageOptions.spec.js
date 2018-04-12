@@ -131,7 +131,7 @@ describe('PageOptions Reducer', () => {
   })
 
   it('showErrorRefreshPage should set isErrorRefreshPageShown to true', () => {
-    const result = reducer(undefined, pageOptionsActions.showErrorRefreshPage())
-    expect(result.isErrorRefreshPageShown).toEqual(true)
+    const result = reducer(undefined, pageOptionsActions.showErrorPage('ERROR'))
+    expect(result.errorPageType).toEqual('ERROR')
   })
 })

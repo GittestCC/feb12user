@@ -31,7 +31,7 @@ class LogIn extends Component {
 
     return (
       <div className={`${flip ? 'sign-up-page' : 'log-in-page'}`}>
-        <LandingNavBar />
+        <LandingNavBar url="https://kintohub.com" />
 
         <div className="content">
           <h1 className="center">The one-stop-shop for microservices</h1>

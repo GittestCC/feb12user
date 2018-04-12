@@ -15,7 +15,7 @@ import ForgotPassword from './ForgotPassword'
 import Analytics from './Analytics'
 import RegisterSuccess from './RegisterSuccess'
 
-import ErrorRefreshPageContainer from '../containers/ErrorRefreshPageContainer'
+import ErrorPageContainer from '../containers/ErrorPageContainer'
 import ScrollToErrorOnSubmitContainer from '../containers/ScrollToErrorOnSubmitContainer'
 import AppContainer from '../containers/AppContainer'
 import AuthContainer from '../containers/AuthContainer'
@@ -46,7 +46,7 @@ const Kintohub = () => {
 
   return (
     <Provider store={store}>
-      <ErrorRefreshPageContainer>
+      <ErrorPageContainer>
         <AuthContainer>
           <LoadingInterceptorContainer />
           <LoadingSpinnerContainer />
@@ -100,7 +100,7 @@ const Kintohub = () => {
             </ScrollToTop>
           </ConnectedRouter>
         </AuthContainer>
-      </ErrorRefreshPageContainer>
+      </ErrorPageContainer>
     </Provider>
   )
 }
