@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
+import AdminRoute from './app/AdminRoute'
 import WorkspaceEditContainer from '../containers/workspaces/WorkspaceEditContainer'
 import { isProduction } from '../helpers/pageHelper'
 import ServicesList from './workspaces/ServicesList'
@@ -20,16 +21,24 @@ class Workspaces extends Component {
   }
 
   render() {
-    const { url } = this.props.match
-    return (
+    const { match, selectedWorkspace } = this.props
+    return selectedWorkspace ? (
       <div>
-        <Route path={`${url}/create`} component={WorkspaceCreate} />
-        <Route path={`${url}/:id/edit`} component={WorkspaceEditContainer} />
+        <Route path={`${match.url}/create`} component={WorkspaceCreate} />
+        <AdminRoute
+          path={`${match.url}/:id/edit`}
+          component={WorkspaceEditContainer}
+          workspaceUrl="id"
+        />
         {isProduction() ? null : (
-          <Route path={`${url}/:id/services`} component={ServicesList} />
+          <AdminRoute
+            path={`${match.url}/:id/services`}
+            component={ServicesList}
+            workspaceUrl="id"
+          />
         )}
       </div>
-    )
+    ) : null
   }
 }
 
