@@ -117,7 +117,7 @@ class KintoAppEnvironmentsList extends Component {
           </button>
         </div>
         <h5>
-          Control your environments for the various deplpoyments of{' '}
+          Control your environments for the various deployments of{' '}
           {kintoApp.name}
         </h5>
 

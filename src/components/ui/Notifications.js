@@ -16,8 +16,8 @@ class Notifications extends Component {
 
     return isShown ? (
       <div className={`notification-message ${this.getClassNameForType(type)}`}>
-        <div className="close" onClick={closeNotificaton} />
         <h4> {message} </h4>
+        <div className="close" onClick={closeNotificaton} />
       </div>
     ) : null
   }

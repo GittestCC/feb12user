@@ -60,7 +60,7 @@ class KintoBlockCreateForm extends Component {
         <div className="form-wrapper basic-info">
           <h3>Basic Info</h3>
           <h5>
-            Choose the name for this KintoBlock and give a a short description
+            Choose the name for this KintoBlock and give it a short description
             so you can easily find it back later. Let us know your preferred
             coding flavor and connect your repo.
           </h5>
