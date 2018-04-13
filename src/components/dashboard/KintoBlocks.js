@@ -12,22 +12,26 @@ class Kintoblocks extends Component {
   }
 
   state = {
-    isLoaded: false
+    isLoaded: false,
+    lastFetched: null
   }
 
   componentDidMount() {
     this.props.fetchKintoBlocks().then(() => {
-      this.setState({ isLoaded: true })
+      this.setState({ isLoaded: true, lastFetched: new Date() })
     })
   }
 
   render() {
     const { match } = this.props
-    return this.state.isLoaded ? (
+    const { isLoaded, lastFetched } = this.state
+    return isLoaded ? (
       <div className="kintoblocks-master-container">
         <Route
           path={`${match.url}/list`}
-          component={KintoBlocksListContainer}
+          render={props => (
+            <KintoBlocksListContainer lastFetched={lastFetched} {...props} />
+          )}
         />
         <Route
           path={`${match.url}/create`}

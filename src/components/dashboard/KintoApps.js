@@ -18,20 +18,27 @@ class KintoApps extends Component {
   }
 
   state = {
-    isLoaded: false
+    isLoaded: false,
+    lastFetched: null
   }
 
   componentDidMount() {
     this.props.fetchKintoApps().then(() => {
-      this.setState({ isLoaded: true })
+      this.setState({ isLoaded: true, lastFetched: new Date() })
     })
   }
 
   render() {
     const { url } = this.props.match
-    return this.state.isLoaded ? (
+    const { isLoaded, lastFetched } = this.state
+    return isLoaded ? (
       <div>
-        <Route path={`${url}/list`} component={KintoAppsListContainer} />
+        <Route
+          path={`${url}/list`}
+          render={props => (
+            <KintoAppsListContainer lastFetched={lastFetched} {...props} />
+          )}
+        />
         <Route path={`${url}/create`} component={KintoAppCreate} />
         <Route
           exact

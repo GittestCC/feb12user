@@ -7,6 +7,7 @@ import { FieldValidation, FormError, Button } from '../../../forms'
 import { required, isLessThan200 } from '../../../../helpers/forms/validators'
 import { isProduction } from '../../../../helpers/pageHelper'
 import { timeDayMonthYearShort } from '../../../../constants/dateFormat'
+import supportedLanguages from '../../../../constants/supportedLanguages'
 
 import { kintoName } from '../../../../helpers/forms/validationFields'
 import ManageDependenciesFieldContainer from '../../../../containers/dashboard/ui/ManageDependenciesFieldContainer'
@@ -41,6 +42,11 @@ class KintoBlockManageForm extends Component {
     if (index === totalItems - 1) {
       return 'last'
     }
+  }
+
+  getLanguageLabel(lang) {
+    const language = supportedLanguages.find(l => l.value === lang)
+    return language ? language.label : ''
   }
 
   render() {
@@ -104,7 +110,9 @@ class KintoBlockManageForm extends Component {
                 <label>Language</label>
                 <div className="field-input-wrapper">
                   <select data-test="language" name="language" disabled>
-                    <option>{kintoBlock.language}</option>
+                    <option>
+                      {this.getLanguageLabel(kintoBlock.language)}
+                    </option>
                   </select>
                 </div>
               </div>

@@ -5,7 +5,15 @@ import KintoAppCardContainer from '../../../containers/dashboard/kintoApps/kinto
 
 class KintoAppsList extends Component {
   static propTypes = {
-    kintoApps: PropTypes.array.isRequired
+    kintoApps: PropTypes.array.isRequired,
+    lastFetched: PropTypes.instanceOf(Date)
+  }
+
+  componentDidMount() {
+    const { lastFetched, fetchKintoApps } = this.props
+    if (new Date() - lastFetched > 1000) {
+      fetchKintoApps()
+    }
   }
 
   render() {

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { getAllKintoApps } from '../../../selectors/kintoApps'
+import { fetchKintoApps } from '../../../actions/kintoApps'
 import KintoAppsList from '../../../components/dashboard/kintoApps/KintoAppsList'
 
 function mapStateToProps(state) {
@@ -8,4 +9,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(KintoAppsList)
+export default connect(mapStateToProps, { fetchKintoApps })(KintoAppsList)

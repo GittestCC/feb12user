@@ -5,7 +5,15 @@ import KintoBlockCardContainer from '../../../containers/dashboard/kintoBlocks/k
 
 class KintoBlocksList extends Component {
   static propTypes = {
-    kintoBlocks: PropTypes.array.isRequired
+    kintoBlocks: PropTypes.array.isRequired,
+    lastFetched: PropTypes.instanceOf(Date)
+  }
+
+  componentDidMount() {
+    const { lastFetched, fetchKintoBlocks } = this.props
+    if (new Date() - lastFetched > 1000) {
+      fetchKintoBlocks()
+    }
   }
 
   render() {
