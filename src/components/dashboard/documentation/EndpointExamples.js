@@ -44,7 +44,9 @@ class EndpointExamples extends Component {
           </div>
           <div className="right">
             <CopyToClipboard text={text}>
-              <button className="button secondary">Copy</button>
+              <button className="button secondary" type="button">
+                Copy
+              </button>
             </CopyToClipboard>
             {!isDefinition && (
               <div className="toggle-expand" onClick={this.toggleExpand}>

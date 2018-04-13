@@ -104,6 +104,7 @@ class KintoBlockCard extends Component {
                 {kintoBlockDependencies.map((d, index) => (
                   <button
                     onClick={() => goToDependencyManage(d.url)}
+                    type="button"
                     key={index}
                   >
                     <div
@@ -146,14 +147,20 @@ class KintoBlockCard extends Component {
                 className="wide"
                 id={dropdownId}
               >
-                <button onClick={goToLatest} className="double-line">
+                <button
+                  onClick={goToLatest}
+                  className="double-line"
+                  type="button"
+                >
                   <h5>Edit Branch</h5>
                   <div className="faded">{latestVersion.text}</div>
                 </button>
-                <button onClick={this.showVersionDropdown}>
+                <button onClick={this.showVersionDropdown} type="button">
                   View All Branches & Tags
                 </button>
-                <button onClick={goToEndpoint}>View Endpoints</button>
+                <button onClick={goToEndpoint} type="button">
+                  View Endpoints
+                </button>
                 <div className="line with-padding" />
               </DropDown>
 

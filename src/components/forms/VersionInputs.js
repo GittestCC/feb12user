@@ -1,73 +1,94 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-// TODO need optimization, alot of nested defined functions
-const VersionInputs = fields => {
-  const getError = fieldKey => {
-    const field = fields[fieldKey]
+class VersionInputs extends Component {
+  getError = fieldKey => {
+    const field = this.props[fieldKey]
     const { touched, submitFailed, error } = field.meta
     const hasError = (touched || submitFailed) && error
     return hasError ? error : null
   }
 
-  const getFieldClassName = fieldKey => {
-    const hasError = getError(fieldKey)
-    let className = fields[fieldKey].input.className || ''
+  getFieldClassName = fieldKey => {
+    const hasError = this.getError(fieldKey)
+    let className = this.props[fieldKey].input.className || ''
     if (hasError) {
       className += ' error'
     }
     return className
   }
 
-  const formError =
-    getError('major') || getError('minor') || getError('revision')
+  onKeyPress = (e, ref) => {
+    if (e.key === '.') {
+      e.preventDefault()
+      const inputOrders = ['majorRef', 'minorRef', 'revisionRef']
+      const index = inputOrders.indexOf(ref)
+      if (index < 2) {
+        this[inputOrders[index + 1]].focus()
+      }
+    }
+  }
 
-  const majorInput = fields.major.input
-  const minorInput = fields.minor.input
-  const revisionInput = fields.revision.input
+  render() {
+    const fields = this.props
+    const formError =
+      this.getError('major') ||
+      this.getError('minor') ||
+      this.getError('revision')
 
-  return (
-    <div>
-      <div className="input-group version-inputs">
-        <div>
-          <label className="uppercase" htmlFor={majorInput.name}>
-            Major Version
-          </label>
-          <input
-            {...majorInput}
-            type="number"
-            className={getFieldClassName('major')}
-            disabled={fields.isTagged}
-          />
+    const majorInput = fields.major.input
+    const minorInput = fields.minor.input
+    const revisionInput = fields.revision.input
+
+    return (
+      <div>
+        <div className="input-group version-inputs">
+          <div>
+            <label className="uppercase" htmlFor={majorInput.name}>
+              Major Version
+            </label>
+            <input
+              {...majorInput}
+              type="number"
+              className={this.getFieldClassName('major')}
+              disabled={fields.isTagged}
+              ref={ref => (this.majorRef = ref)}
+              onKeyPress={e => this.onKeyPress(e, 'majorRef')}
+            />
+          </div>
+          <div className="dot">.</div>
+          <div>
+            <label className="uppercase" htmlFor={minorInput.name}>
+              Minor Version
+            </label>
+            <input
+              {...minorInput}
+              type="number"
+              className={this.getFieldClassName('minor')}
+              disabled={fields.isTagged}
+              ref={ref => (this.minorRef = ref)}
+              onKeyPress={e => this.onKeyPress(e, 'minorRef')}
+            />
+          </div>
+          <div className="dot">.</div>
+          <div>
+            <label className="uppercase" htmlFor={revisionInput.name}>
+              Revision
+            </label>
+            <input
+              {...revisionInput}
+              type="number"
+              className={this.getFieldClassName('revision')}
+              disabled={fields.isTagged}
+              ref={ref => (this.revisionRef = ref)}
+              onKeyPress={e => this.onKeyPress(e, 'revisionRef')}
+            />
+          </div>
         </div>
-        <div className="dot">.</div>
-        <div>
-          <label className="uppercase" htmlFor={minorInput.name}>
-            Minor Version
-          </label>
-          <input
-            {...minorInput}
-            type="number"
-            className={getFieldClassName('minor')}
-            disabled={fields.isTagged}
-          />
-        </div>
-        <div className="dot">.</div>
-        <div>
-          <label className="uppercase" htmlFor={revisionInput.name}>
-            Revision
-          </label>
-          <input
-            {...revisionInput}
-            type="number"
-            className={getFieldClassName('revision')}
-            disabled={fields.isTagged}
-          />
-        </div>
+
+        {formError && <div className="error-message">{formError}</div>}
       </div>
-
-      {formError && <div className="error-message">{formError}</div>}
-    </div>
-  )
+    )
+  }
 }
 
 export default VersionInputs

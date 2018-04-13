@@ -18,7 +18,7 @@ const GlobalSaveBar = ({
     <div className="dashboard-inner">
       <div className="dashboard-content">
         {toggleSaveButton && !canSave ? null : (
-          <Button disabled={!canSave} onClick={onSubmit}>
+          <Button disabled={!canSave} onClick={onSubmit} buttonType="secondary">
             {submitLabel}
           </Button>
         )}

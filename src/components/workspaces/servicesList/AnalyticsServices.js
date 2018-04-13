@@ -117,6 +117,7 @@ class AnalyticsServices extends Component {
               {this.getServiceStatus(kibana.type) ? (
                 <button
                   className="button destructive"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       kibana.type,
@@ -129,6 +130,7 @@ class AnalyticsServices extends Component {
               ) : (
                 <button
                   className="button default"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       kibana.type,
@@ -195,6 +197,7 @@ class AnalyticsServices extends Component {
               {this.getServiceStatus(prometheus.type) ? (
                 <button
                   className="button destructive"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       prometheus.type,
@@ -207,6 +210,7 @@ class AnalyticsServices extends Component {
               ) : (
                 <button
                   className="button default"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       prometheus.type,
@@ -272,6 +276,7 @@ class AnalyticsServices extends Component {
               {this.getServiceStatus(zipkin.type) ? (
                 <button
                   className="button destructive"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       zipkin.type,
@@ -284,6 +289,7 @@ class AnalyticsServices extends Component {
               ) : (
                 <button
                   className="button default"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       zipkin.type,

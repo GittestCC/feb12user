@@ -262,7 +262,7 @@ class KintoBlockManageForm extends Component {
         )}
 
         <div className="form-wrapper custom-paramaters full-row">
-          <h3>Environmental & Custom Parameters</h3>
+          <h3>Environment Variables & Custom Parameters</h3>
           <h5>
             Parameters are variables you decide to expose for your KintoBlock,
             for which you should set default values. Users can override the

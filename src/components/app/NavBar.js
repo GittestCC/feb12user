@@ -110,7 +110,9 @@ class NavBar extends Component {
               dropdownClass="user-avatar uppercase"
               dropdownText={initials}
             >
-              <button onClick={this.props.logout}>Logout</button>
+              <button type="button" onClick={this.props.logout}>
+                Logout
+              </button>
             </DropDown>
           </div>
         </div>

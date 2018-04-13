@@ -31,7 +31,11 @@ const ShutDown = ({
             </h4>
           </div>
           <div className="kh-modal-actions">
-            <button onClick={onClose} className="button secondary">
+            <button
+              type="button"
+              onClick={onClose}
+              className="button secondary"
+            >
               Cancel
             </button>
             <button type="submit" className="button dark">

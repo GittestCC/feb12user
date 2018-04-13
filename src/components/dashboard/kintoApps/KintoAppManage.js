@@ -74,12 +74,20 @@ class KintoAppManage extends Component {
           </h2>
           <div className="buttons">
             {!isProduction() ? (
-              <button className="button secondary" onClick={goToChangelog}>
+              <button
+                className="button secondary"
+                onClick={goToChangelog}
+                type="button"
+              >
                 Compare Versions
               </button>
             ) : null}
 
-            <button className="button dark" onClick={goToEnvironment}>
+            <button
+              className="button dark"
+              onClick={goToEnvironment}
+              type="button"
+            >
               View Environments
             </button>
           </div>

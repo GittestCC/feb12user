@@ -27,19 +27,20 @@ const ConfirmModal = ({ options }) => {
 
         <div className="kh-modal-actions">
           <button
+            type="button"
             onClick={() => options.onClose}
-            className={`button secondary ${options.text.cancelClass
-              ? options.text.cancelClass
-              : ''}`}
+            className={`button secondary ${
+              options.text.cancelClass ? options.text.cancelClass : ''
+            }`}
           >
             Cancel
           </button>
 
           <button
             onClick={() => options.onConfirm}
-            className={`button ${options.text.confirmClass
-              ? options.text.confirmClass
-              : ''}`}
+            className={`button ${
+              options.text.confirmClass ? options.text.confirmClass : ''
+            }`}
           >
             Add New Environment
           </button>

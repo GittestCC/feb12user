@@ -109,6 +109,7 @@ class KintoAppEnvironmentsList extends Component {
         <div className="page-title">
           <h2>{kintoApp.name} - Environments</h2>
           <button
+            type="button"
             onClick={() => this.onModalOpen('add', 'Add New Environment')}
             className="button secondary"
           >

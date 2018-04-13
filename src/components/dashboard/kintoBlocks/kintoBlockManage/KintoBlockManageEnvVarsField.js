@@ -42,7 +42,7 @@ class KintoBlockManageEnvVarsField extends Component {
       <div className="form-body env" data-test="kb-manage-env">
         <div className="top">
           <h6 className="coming">Coming</h6>
-          <h4 className="title">Environmental Parameters</h4>
+          <h4 className="title">Environment Variables</h4>
           {fields.length ? (
             fields.map((field, index) => (
               <ul
@@ -83,9 +83,7 @@ class KintoBlockManageEnvVarsField extends Component {
               </ul>
             ))
           ) : (
-            <div className="empty-message">
-              No environmental parameters added
-            </div>
+            <div className="empty-message">No environment variables added</div>
           )}
         </div>
         {!disabled ? (

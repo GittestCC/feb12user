@@ -15,6 +15,7 @@ const TagItem = ({
 }) => (
   <button
     className={`tag-item ${active ? 'active' : ''}`}
+    type="button"
     onClick={() => navigateTo(url)}
   >
     {special ? (

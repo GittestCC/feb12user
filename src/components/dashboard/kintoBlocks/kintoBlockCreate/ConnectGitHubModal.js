@@ -17,7 +17,11 @@ class ConnectGitHubModal extends Component {
             Once it’s been linked you cannot unlink it.
           </h4>
           <div className="kh-modal-actions">
-            <button onClick={onClose} className="button secondary">
+            <button
+              type="button"
+              onClick={onClose}
+              className="button secondary"
+            >
               Cancel
             </button>
             <a href={connectGithubLink} className="button default">

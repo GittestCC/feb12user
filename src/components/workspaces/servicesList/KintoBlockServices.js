@@ -108,6 +108,7 @@ class KintoBlockServices extends Component {
               {this.getServiceStatus(mongodb.type) ? (
                 <button
                   className="button destructive"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       mongodb.type,
@@ -120,6 +121,7 @@ class KintoBlockServices extends Component {
               ) : (
                 <button
                   className="button default"
+                  type="button"
                   onClick={() =>
                     this.props.toggleService(
                       mongodb.type,

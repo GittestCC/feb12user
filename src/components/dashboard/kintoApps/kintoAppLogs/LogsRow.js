@@ -60,7 +60,9 @@ class LogsRow extends Component {
             </pre>
           </div>
 
-          <button className="button secondary">Report An Issue</button>
+          <button className="button secondary" type="button">
+            Report An Issue
+          </button>
         </div>
       </div>
     )

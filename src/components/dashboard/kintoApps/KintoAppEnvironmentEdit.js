@@ -100,7 +100,9 @@ class KintoAppEnvironmentEdit extends Component {
                 </div>
                 <div className="right">
                   <CopyToClipboard text={authCurl}>
-                    <button className="button secondary">Copy</button>
+                    <button className="button secondary" type="button">
+                      Copy
+                    </button>
                   </CopyToClipboard>
                 </div>
               </div>

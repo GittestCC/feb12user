@@ -116,6 +116,7 @@ class KintoAppCard extends Component {
                 {kintoAppDependencies.map((k, index) => (
                   <button
                     onClick={() => goToDependencyManage(k.url)}
+                    type="button"
                     key={index}
                   >
                     <div
@@ -152,21 +153,25 @@ class KintoAppCard extends Component {
 
             <div className="right">
               <DropDown type="simple" dropdownClass="menu" id={dropdownId}>
-                <button onClick={goToDraft}>
+                <button onClick={goToDraft} type="button">
                   Edit Draft
                   <div className="draft-icon simple" />
                 </button>
 
-                <button onClick={this.showVersionDropdown}>
+                <button onClick={this.showVersionDropdown} type="button">
                   View All Tags
                 </button>
 
                 {!isProduction() ? (
-                  <button onClick={goToChangelog}>Compare Versions</button>
+                  <button onClick={goToChangelog} type="button">
+                    Compare Versions
+                  </button>
                 ) : null}
 
                 <div className="dropdown line" />
-                <button onClick={goToEnvironment}>View Environments</button>
+                <button onClick={goToEnvironment} type="button">
+                  View Environments
+                </button>
               </DropDown>
               <DropDown
                 id={dropdownVersionId}

@@ -145,6 +145,7 @@ class KintoBlockEndpointDetails extends Component {
 
                 <div className="documentation-tabs">
                   <button
+                    type="button"
                     className={`tab GRPC ${
                       this.state.selectedTab === protocols.grpc ? 'active' : ''
                     }`}
@@ -153,6 +154,7 @@ class KintoBlockEndpointDetails extends Component {
                     <h5>gRPC</h5>
                   </button>
                   <button
+                    type="button"
                     className={`tab GRAPHQL ${
                       this.state.selectedTab === protocols.graphql
                         ? 'active'
@@ -163,6 +165,7 @@ class KintoBlockEndpointDetails extends Component {
                     <h5>GraphQL</h5>
                   </button>
                   <button
+                    type="button"
                     className={`tab restful ${
                       this.state.selectedTab === protocols.restful
                         ? 'active'
