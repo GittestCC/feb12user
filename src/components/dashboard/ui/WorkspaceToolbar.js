@@ -7,6 +7,8 @@ import MemberListCircles from '../../ui/MemberListCircles'
 import UserCircle from '../../ui/UserCircle'
 import ComplexModal from '../../dashboard/ui/ComplexModal'
 import WorkspaceToolbarModal from './workspaceToolbar/WorkspaceToolbarModal'
+import { getPageUrl } from '../../../helpers/urlHelper'
+import { pages } from '../../../constants/pages'
 
 class WorkspaceToolbar extends Component {
   static propTypes = {
@@ -28,6 +30,12 @@ class WorkspaceToolbar extends Component {
 
   onModalClose = () => {
     this.setState({ isModalOpen: false })
+  }
+
+  goToEditWorkspace = () => {
+    this.props.push(
+      getPageUrl(pages.workspaceEdit, { id: this.props.selectedWorkspaceId })
+    )
   }
 
   render() {
@@ -73,6 +81,7 @@ class WorkspaceToolbar extends Component {
           component={WorkspaceToolbarModal}
           isOpen={this.state.isModalOpen}
           onClose={this.onModalClose}
+          actions={{ goToEdit: this.goToEditWorkspace }}
           data={{
             admins,
             members

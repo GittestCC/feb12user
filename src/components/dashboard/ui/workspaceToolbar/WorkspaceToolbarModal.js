@@ -34,7 +34,7 @@ class WorkspaceToolbarModal extends Component {
   }
 
   render() {
-    const { onClose, members, admins } = this.props
+    const { onClose, members, admins, goToEdit } = this.props
     return (
       <div className="workspace-toolbar-modal">
         <div className="kh-modal-title">
@@ -45,6 +45,9 @@ class WorkspaceToolbarModal extends Component {
             onChange={this.searchMembers}
             placeholder="Search teams and members."
           />
+          <h5>
+            Select ( &#10003; ) the members who have access to this project:
+          </h5>
           <div className="workspace-form">
             <FieldArray
               name="memberIds"
@@ -53,8 +56,11 @@ class WorkspaceToolbarModal extends Component {
               admins={this.filterMembers(admins)}
             />
           </div>
-          <button className="button dark" onClick={onClose}>
+          <button className="button dark" type="button" onClick={onClose}>
             Ok
+          </button>
+          <button className="button secondary" type="button" onClick={goToEdit}>
+            Invite New Members
           </button>
         </div>
       </div>

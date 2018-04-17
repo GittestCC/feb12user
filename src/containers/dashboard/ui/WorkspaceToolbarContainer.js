@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
+import { push } from 'react-router-redux'
 import {
   ADMIN_ROLE,
   ADMIN_PERMISSION,
@@ -28,6 +29,7 @@ function getMemberInfo(member, permission, included) {
 function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
   const formSelector = formValueSelector(getFormName(isCreate, isKintoApp))
   const currentUserId = state.currentUser.id
+  const selectedWorkspaceId = state.workspaces.selectedWorkspace
   const workspace =
     state.workspaces.byId[state.workspaces.selectedWorkspace] || {}
   const workspaceMembers = workspace.members || []
@@ -83,8 +85,9 @@ function mapStateToProps(state, { isKintoApp, kintoItem, isCreate }) {
     currentUserInfo,
     admins,
     members,
-    allMembers
+    allMembers,
+    selectedWorkspaceId
   }
 }
 
-export default connect(mapStateToProps)(WorkspaceToolbar)
+export default connect(mapStateToProps, { push })(WorkspaceToolbar)

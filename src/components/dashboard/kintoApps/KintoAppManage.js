@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Button } from '../../forms'
 import { isProduction } from '../../../helpers/pageHelper'
 import { getVersionStateClassName } from '../../../helpers/versionHelper'
 import KintoAppFormContainer from '../../../containers/dashboard/kintoApps/KintoAppFormContainer'
@@ -116,14 +117,14 @@ class KintoAppManage extends Component {
 
         {!canSave && (
           <SaveBarPortal>
-            <button
+            <Button
               type="button"
               onClick={this.onVersionModalOpen}
               className="button default tag-deploy"
               disabled={!hasDependencies}
             >
               {isDraft ? 'Tag and Deploy' : 'Deploy'}
-            </button>
+            </Button>
           </SaveBarPortal>
         )}
       </div>

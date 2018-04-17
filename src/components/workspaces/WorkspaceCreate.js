@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import WorkspaceFormContainer from '../../containers/workspaces/WorkspaceFormContainer'
 
 const WorkspaceCreate = () => {
@@ -14,9 +13,13 @@ const WorkspaceCreate = () => {
             A workspace is like a folder where you put all your projects in.
             They can be shared with other people to collaborate on every project
             inside, or just selected projects. You can{' '}
-            <Link to="https://docs.kintohub.com/docs/creating-a-workspace.html">
+            <a
+              href="https://docs.kintohub.com/docs/creating-a-workspace.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               learn more here.
-            </Link>
+            </a>
           </h5>
         </div>
         <div className="icon" />

@@ -24,8 +24,13 @@ select,
   background-color: $kinto-white;
   border: 2px solid $input;
   border-radius: 4px;
+  outline: 0;
   &:focus{
     border: 2px solid $input-focus;
+    outline: 0;
+  }
+  &:active {
+    outline: 0;
   }
   &.error {
     border: 2px solid $input-error;
@@ -121,6 +126,8 @@ textarea, textarea.tall {
   border-radius: 4px;
   padding: $margin-base;
   margin-bottom: $margin-base * 2;
+  font-size: 12px;
+  font-weight: bold;
 }
 .error-message-only {
   margin-top: $margin-base;
@@ -145,7 +152,9 @@ h5.byline {
 
 .checkbox {
   width: 30px;
-  &:disabled {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;  &:disabled {
     width: 30px;
   }
   height: 30px;

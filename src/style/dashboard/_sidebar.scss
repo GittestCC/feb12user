@@ -13,6 +13,9 @@
   li {
     &.sidebar-item {
       padding-left: 20px;
+      a {
+        outline: 0;
+      }
       .item-sub-add {
         display: none;
       }

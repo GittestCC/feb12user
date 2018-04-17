@@ -79,15 +79,20 @@
           margin-bottom: 0;
         }
         input.checkbox {
+          @extend .checkbox;
           margin: 0;
           width: 20px;
         }
       }
     }
-    button.dark {
+    button, {
       width: 213px;
       margin: $margin-base*3 0;
       float: right;
+      display: inline-block;
+      &.secondary {
+        margin-right: 20px;
+      }
     }
   }
 }
