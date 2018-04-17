@@ -16,8 +16,7 @@ class ForgotPassword extends Component {
   render() {
     return (
       <div className="forgot-password-page">
-        <LandingNavBar />
-
+        <LandingNavBar url="/" />
         {this.state.isForgotPasswordSubmitted ? (
           <div>
             <div className="content forgot-password-wrapper">

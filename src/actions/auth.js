@@ -66,12 +66,14 @@ export const logIn = data => dispatch => {
   return pureLogin(data, dispatch).then(null, async r => {
     //TODO: change the backend to send a flag instead of an error message
     if (
+      r.response &&
       r.response.data &&
       r.response.data.error === 'Cannot login when already logged in!'
     ) {
       await dispatch(authApp())
       return pureLogin(data, dispatch)
     }
+    return Promise.reject(r)
   })
 }
 

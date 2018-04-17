@@ -7,7 +7,7 @@ const RegisterSuccess = ({ location }) => {
   const query = qs.parse(location.search)
   return (
     <div className="log-in-page">
-      <LandingNavBar />
+      <LandingNavBar url="/" />
       <div data-test="signupSuccess">
         <div className="cover" />
         <div className="content">

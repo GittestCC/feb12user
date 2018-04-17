@@ -8,7 +8,7 @@ class CreateNewPassword extends Component {
     const { token } = this.props
     return (
       <div className="create-new-password-page">
-        <LandingNavBar />
+        <LandingNavBar url="/" />
         <CreateNewPasswordFormContainer token={token} />
         <Footer />
       </div>
