@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import isEmpty from 'lodash/isEmpty'
 import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { getEnvironmentButtonInfo } from '../../../../helpers/environmentHelper'
 import { isProduction } from '../../../../helpers/pageHelper'
 import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
+import { TAG } from '../../../../constants/version'
+import { Button } from '../../../forms'
 import {
   deploymentState,
   deploymentStepName
@@ -103,6 +106,8 @@ class KintoAppEnvironmentCard extends Component {
           workspaceId: selectedWorkspace
         })
       : ''
+
+    const hasTags = !isEmpty(kintoApp.versions.filter(v => v.type === TAG))
 
     return (
       <div
@@ -329,14 +334,15 @@ class KintoAppEnvironmentCard extends Component {
                 {buttonInfo.title}
               </button>
             ) : (
-              <button
+              <Button
                 className="button"
+                disabled={!hasTags}
                 onClick={() =>
                   buttonAction('new', 'deploy', 'Deploy', environment)
                 }
               >
                 Deploy
-              </button>
+              </Button>
             )}
 
             <DropDown type="simple" dropdownClass="menu" id={`id-${sortIndex}`}>

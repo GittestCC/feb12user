@@ -7,6 +7,7 @@ import { formSubmitted } from './pageOptions'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
 import { KINTOAPPS } from '../constants/backendMicroservices'
 import { pages } from '../constants/pages'
+import { TAG } from '../constants/version'
 
 export const RECEIVE_KINTO_APPS = 'RECEIVE_KINTO_APPS'
 export const RECEIVE_KINTO_APP = 'RECEIVE_KINTO_APP'
@@ -18,6 +19,7 @@ export const RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG =
   'RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG'
 export const NEW_ENVIRONMENT_RECEIVE = 'NEW_ENVIRONMENT_RECEIVE'
 export const KINTO_APP_ENVIRONMENT_UPDATE = 'KINTO_APP_ENVIRONMENT_UPDATE'
+export const ADD_TAG = 'ADD_TAG'
 export const KINTO_APP_ENVIRONMENT_LOG_UPDATE =
   'KINTO_APP_ENVIRONMENT_LOG_UPDATE'
 export const KINTO_APP_ENVIRONMENT_LIST_REORDER =
@@ -81,6 +83,13 @@ export const newEnvironmentReceive = (id, data) => ({
   type: NEW_ENVIRONMENT_RECEIVE,
   id,
   data
+})
+
+export const addNewTag = (id, name, versionType) => ({
+  type: ADD_TAG,
+  name,
+  versionType,
+  id
 })
 
 export const appEnvironmentUpdate = (id, data) => ({
@@ -288,6 +297,9 @@ export const deployEnvironment = (id, envId, data) => (dispatch, getState) => {
       data
     )
     .then(response => {
+      if (data.createNewVersion) {
+        dispatch(addNewTag(id, data.version.name, TAG))
+      }
       dispatch(formSubmitted())
       dispatch(appEnvironmentUpdate(id, response.data))
       dispatch(push(environmentEditUrl))

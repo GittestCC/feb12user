@@ -10,6 +10,7 @@ import {
   RECEIVE_KINTO_APP_DEPENDENCIES_CONFIG,
   KINTO_APP_ENVIRONMENT_LIST_REORDER,
   NEW_ENVIRONMENT_RECEIVE,
+  ADD_TAG,
   KINTO_APP_ENVIRONMENT_UPDATE,
   KINTO_APP_ENVIRONMENT_LOG_UPDATE,
   KINTO_APP_CHANGELOG_RECEIVE
@@ -104,6 +105,20 @@ const kintoAppsReducer = (state = defaultState, action) => {
           [action.id]: {
             ...state.byId[action.id],
             environments: [...state.byId[action.id].environments, action.data]
+          }
+        }
+      }
+
+    case ADD_TAG:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            versions: [
+              ...state.byId[action.id].versions,
+              { name: action.name, type: action.versionType }
+            ]
           }
         }
       }
