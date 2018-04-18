@@ -163,24 +163,25 @@ describe('KintoBlocks actions', () => {
     await expect(result).rejects.toEqual({ errors: 'error' })
   })
 
-  it('createKintoBlockTag fires a create version and redirect actions on success', async () => {
+  it('createKintoBlockTag fires a redirect actions on success', async () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
         response: {
-          data: { id: 1, name: 'test', version: { name: 'new', type: BRANCH } }
+          data: { id: 1, name: 'test', version: { name: 'new', type: TAG } }
         }
       })
     })
     const store = mockStore({
       workspaces: { selectedWorkspace: '1' }
     })
-    await store.dispatch(actions.createKintoBlockTag(1, {}))
-    expect(store.getActions().map(a => a.type)).toEqual([
-      actions.CREATE_TAG_KINTO_BLOCK,
-      CALL_HISTORY_METHOD
-    ])
+    await store.dispatch(
+      actions.createKintoBlockTag(1, 'master', {
+        tag: '1'
+      })
+    )
+    expect(store.getActions().map(a => a.type)).toEqual([CALL_HISTORY_METHOD])
   })
 
   it('createKintoBlockTag throws if result has errors', async () => {

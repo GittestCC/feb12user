@@ -2,7 +2,6 @@ import {
   RECEIVE_KINTO_BLOCKS,
   RECEIVE_KINTO_BLOCK,
   ADD_KINTO_BLOCK,
-  CREATE_TAG_KINTO_BLOCK,
   UPDATE_KINTO_BLOCK,
   UPDATE_BUILDS_KINTO_BLOCK
 } from '../actions/kintoBlocks'
@@ -16,7 +15,6 @@ const defaultState = {
 
 const kintoBlocksReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CREATE_TAG_KINTO_BLOCK:
     case RECEIVE_KINTO_BLOCK: {
       const allIds =
         state.allIds.indexOf(action.id) === -1

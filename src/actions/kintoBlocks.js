@@ -6,7 +6,6 @@ import capitalize from 'lodash/capitalize'
 import { pages } from '../constants/pages'
 import { KINTOBLOCKS } from '../constants/backendMicroservices'
 import { TAG } from '../constants/version'
-import { getVersionType } from '../helpers/versionHelper'
 import { getPageUrl, getServerUrl } from '../helpers/urlHelper'
 
 import { formSubmitted } from './pageOptions'
@@ -14,7 +13,6 @@ import { formSubmitted } from './pageOptions'
 export const RECEIVE_KINTO_BLOCKS = 'RECEIVE_KINTO_BLOCKS'
 export const RECEIVE_KINTO_BLOCK = 'RECEIVE_KINTO_BLOCK'
 export const ADD_KINTO_BLOCK = 'ADD_KINTO_BLOCK'
-export const CREATE_TAG_KINTO_BLOCK = 'CREATE_TAG_KINTO_BLOCK'
 export const RECEIVE_KINTO_BLOCK_DEPENDENCIES =
   'RECEIVE_KINTO_BLOCK_DEPENDENCIES'
 export const UPDATE_KINTO_BLOCK = 'UPDATE_KINTO_BLOCK'
@@ -52,12 +50,6 @@ export const kintoBlockReceive = (id, data, metadata) => ({
 })
 
 export const kintoBlockAdd = (id, data) => ({ type: ADD_KINTO_BLOCK, id, data })
-
-export const kintoBlockCreateTag = (id, data) => ({
-  type: CREATE_TAG_KINTO_BLOCK,
-  id,
-  data
-})
 
 export const fetchKintoBlocks = () => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
@@ -101,13 +93,11 @@ export const createKintoBlockTag = (id, ver, data) => (dispatch, getState) => {
       data
     )
     .then(response => {
-      const newKintoBlock = response.data
-      dispatch(kintoBlockCreateTag(id, newKintoBlock))
       const url = getPageUrl(pages.dashboardKintoBlocksManage, {
         id,
         workspaceId: selectedWorkspace,
-        version: newKintoBlock.version.name,
-        type: getVersionType(newKintoBlock.version)
+        version: data.tag,
+        type: TAG
       })
       dispatch(push(url))
     })
