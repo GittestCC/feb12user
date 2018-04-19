@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { isProduction } from '../../../../helpers/pageHelper'
-import { getVersionAsText } from '../../../../helpers/versionHelper'
 import DropDown from '../../../ui/DropDown'
 import KintoAppTagItem from '../../ui/KintoAppTagItem'
 
@@ -10,7 +9,7 @@ class KintoAppCard extends Component {
   static propTypes = {
     kintoApp: PropTypes.object.isRequired,
     tagList: PropTypes.array.isRequired,
-    envVersionsList: PropTypes.array.isRequired,
+    liveEnvironments: PropTypes.array.isRequired,
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
     dropdownDependencyId: PropTypes.string.isRequired,
@@ -46,7 +45,7 @@ class KintoAppCard extends Component {
     const {
       kintoApp,
       tagList,
-      envVersionsList,
+      liveEnvironments,
       dropdownId,
       dropdownVersionId,
       dropdownDependencyId,
@@ -71,21 +70,19 @@ class KintoAppCard extends Component {
               />
             </div>
             <div className="right">
-              {envVersionsList.slice(0, 2).map((env, key) => (
+              {liveEnvironments.slice(0, 2).map((env, key) => (
                 <div className="env-item" key={key}>
-                  <div className="env-item-ver">
-                    {getVersionAsText(env.version)}
-                  </div>
+                  <div className="env-item-ver">{env.tag}</div>
                   <div className="env-item-tag">
-                    <div>{env.envName}</div>
+                    <div>{env.name}</div>
                   </div>
                 </div>
               ))}
-              {envVersionsList.length > 2 ? (
+              {liveEnvironments.length > 2 ? (
                 <div className="env-item">
                   <div className="env-item-ver">-</div>
                   <div className="env-item-tag">
-                    <div>+{envVersionsList.length - 2}</div>
+                    <div>+{liveEnvironments.length - 2}</div>
                   </div>
                 </div>
               ) : null}

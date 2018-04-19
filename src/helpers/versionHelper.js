@@ -67,18 +67,3 @@ export const isBranchVersionEqual = (a, b, matchNameOnly) => {
 
   return a.type.toUpperCase() === b.type.toUpperCase() && a.name === b.name
 }
-
-export const getEnvVersionsList = versions => {
-  const result = []
-  versions.forEach(v => {
-    if (v.environments) {
-      v.environments.forEach(e => {
-        result.push({
-          envName: e,
-          version: v
-        })
-      })
-    }
-  })
-  return result
-}

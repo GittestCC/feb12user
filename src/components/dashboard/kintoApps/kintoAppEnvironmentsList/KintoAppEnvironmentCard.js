@@ -51,16 +51,6 @@ class KintoAppEnvironmentCard extends Component {
     })
   }
 
-  changelogsUrl = releaseVersion => {
-    const { kintoApp, environment, selectedWorkspace } = this.props
-    return getPageUrl(pages.dashboardKintoAppsEnvironmentsLogs, {
-      id: kintoApp.id,
-      envId: environment.id,
-      releaseVersion: releaseVersion.name,
-      workspaceId: selectedWorkspace
-    })
-  }
-
   getClassForStep = step => {
     switch (step) {
       case deploymentStepName.shutdown:
@@ -109,6 +99,8 @@ class KintoAppEnvironmentCard extends Component {
 
     const hasTags = !isEmpty(kintoApp.versions.filter(v => v.type === TAG))
 
+    const isProd = isProduction()
+
     return (
       <div
         className={`environment-card ${
@@ -117,7 +109,7 @@ class KintoAppEnvironmentCard extends Component {
       >
         <div className="top">
           <h3>
-            <DragHandle />
+            {!isProd && <DragHandle />}
             {environment.name}
           </h3>
           {environment.releases && (
@@ -285,18 +277,13 @@ class KintoAppEnvironmentCard extends Component {
                             </div>
                           )}
                           <div className="view">
-                            {!isProduction() ? (
-                              <div className="changelog">
-                                <Link to={this.changelogsUrl(release.version)}>
-                                  Changelog
+                            {!isProd && (
+                              <div className="logs">
+                                <Link to={this.logsUrl(release.version)}>
+                                  View Logs
                                 </Link>
                               </div>
-                            ) : null}
-                            <div className="logs">
-                              <Link to={this.logsUrl(release.version)}>
-                                View Logs
-                              </Link>
-                            </div>
+                            )}
                           </div>
                         </div>
                       ))}

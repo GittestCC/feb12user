@@ -4,6 +4,7 @@ import { pages } from '../../constants/pages'
 import { BRANCH } from '../../constants/version'
 import { timeDayMonthYearShort } from '../../constants/dateFormat'
 import { getUrl, getPageUrl } from '../../helpers/urlHelper'
+import { getLiveEnvironmentListForTag } from '../../helpers/environmentHelper'
 import KintoAppTagSelector from '../../components/breadcrumbs/KintoAppTagSelector'
 
 function mapStateToProps(state, { url }) {
@@ -11,8 +12,6 @@ function mapStateToProps(state, { url }) {
   const selectedApp = state.kintoApps.byId[selectedKintoAppId] || {}
   const version = selectedApp.version || {}
   const isDraft = version.type === BRANCH
-  const appEnvironments = selectedApp.environments || []
-  const deployedEnvironments = appEnvironments.filter(e => e.deployedVersion)
   let dropdownItems = []
 
   if (selectedApp.versions) {
@@ -25,9 +24,10 @@ function mapStateToProps(state, { url }) {
           envId: selectedEnvironmentId || '0',
           workspaceId: state.workspaces.selectedWorkspace
         }),
-        deployedIn: deployedEnvironments
-          .filter(e => e.deployedVersion.name === v.name)
-          .map(e => e.name),
+        liveEnvironments: getLiveEnvironmentListForTag(
+          v.name,
+          selectedApp.environments
+        ),
         lastUpdated: moment(v.lastUpdated).format(timeDayMonthYearShort),
         notes: v.notes,
         active: v.name === version.name

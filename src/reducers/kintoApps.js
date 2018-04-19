@@ -115,6 +115,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
         byId: {
           ...state.byId,
           [action.id]: {
+            ...state.byId[action.id],
             versions: [
               ...state.byId[action.id].versions,
               { name: action.name, type: action.versionType }

@@ -11,10 +11,8 @@ import KintoAppEnvironmentsList from '../../../components/dashboard/kintoApps/Ki
 
 function mapStateToProps(state, { match }) {
   const { id } = match.params
-
   const kintoApp = state.kintoApps.byId[id] || {}
   const environments = kintoApp.environments || []
-
   return {
     id,
     environments,

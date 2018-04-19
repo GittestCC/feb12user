@@ -8,7 +8,7 @@ const TagItem = ({
   navigateTo,
   active,
   version,
-  deployedIn,
+  liveEnvironments,
   lastUpdated,
   notes,
   special
@@ -28,11 +28,11 @@ const TagItem = ({
         <div className="tag-name-and-environments">
           <div className="tag-item-text">{text}</div>
           <div className={`text-highlight ${className}`}>{tag}</div>
-          {deployedIn.length ? (
+          {liveEnvironments && liveEnvironments.length ? (
             <div className="environments">
-              <h6 className="main">{deployedIn[0]}</h6>
-              {deployedIn.length > 1 && (
-                <h6 className="extra">+{deployedIn.length - 1}</h6>
+              <h6 className="main">{liveEnvironments[0]}</h6>
+              {liveEnvironments.length > 1 && (
+                <h6 className="extra">+{liveEnvironments.length - 1}</h6>
               )}
             </div>
           ) : null}
@@ -64,7 +64,7 @@ TagItem.propTypes = {
   navigateTo: PropTypes.func.isRequired,
   active: PropTypes.bool,
   version: PropTypes.string,
-  deployedIn: PropTypes.array,
+  liveEnvironments: PropTypes.array,
   lastUpdated: PropTypes.string,
   notes: PropTypes.string
 }

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getEnvVersionsList } from '../../../../helpers/versionHelper'
-import { getPageUrl } from '../../../../helpers/urlHelper'
 import { pages } from '../../../../constants/pages'
 import { BRANCH } from '../../../../constants/version'
+import { getPageUrl } from '../../../../helpers/urlHelper'
 import { getVersionType } from '../../../../helpers/versionHelper'
+import { getLiveEnvironmentsForApp } from '../../../../helpers/environmentHelper'
 import KintoAppCard from '../../../../components/dashboard/kintoApps/kintoAppsList/KintoAppCard'
 
 function mapStateToProps(state, { kintoApp, index }) {
@@ -54,11 +54,11 @@ function mapStateToProps(state, { kintoApp, index }) {
     kintoApp,
     kintoAppDependencies,
     tagList,
-    envVersionsList: getEnvVersionsList(kintoApp.versions),
     selectedWorkspace: workspaceId,
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`,
-    dropdownDependencyId: `idd-${index}`
+    dropdownDependencyId: `idd-${index}`,
+    liveEnvironments: getLiveEnvironmentsForApp(kintoApp.environments)
   }
 }
 
