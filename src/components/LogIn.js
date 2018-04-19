@@ -34,7 +34,7 @@ class LogIn extends Component {
         <LandingNavBar url="https://kintohub.com" />
 
         <div className="content">
-          <h1 className="center">The one-stop-shop for microservices</h1>
+          <h1 className="center">The one-stop shop for microservices</h1>
           <h3 className="center">
             KintoHub is a development platform that transforms you into a
             full-stack unicorn ninja that people can’t stop talking about. Sign

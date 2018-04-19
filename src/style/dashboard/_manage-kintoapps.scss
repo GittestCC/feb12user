@@ -25,6 +25,9 @@
     display: block;
     border-radius: 50%;
     background-color: $kinto-grayscale-2;
+    position: absolute;
+    margin-top: 10px;
+    right: 0;
   }
 
   .dependency-management-buttons {

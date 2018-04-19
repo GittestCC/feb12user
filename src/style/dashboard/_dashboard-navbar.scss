@@ -13,9 +13,9 @@
     justify-content: center;
   }
   .user-avatar {
-    @include backgroundImage('/images/avatar-color-1.jpg', 40px, 40px);
-    min-width: 40px;
-    border-radius: 20px;
+    @include backgroundImage('/images/avatar-color-1.jpg', 38px, 38px);
+    min-width: 38px;
+    border-radius: 50%;
     cursor: pointer;
     text-align: center;
     display: flex;
@@ -24,7 +24,8 @@
     color: $kinto-tinted-grayscale-11;
     font-size: 16px;
     font-weight: bold;
-    border: none;
+    background-origin: border-box;
+    border: solid rgba(0,0,0,0.1) 1px;
 }
 
   .mobile-navigation-logo {
@@ -208,7 +209,7 @@
       border-right: solid 2px $kinto-tinted-grayscale-3;
     }
     .on-dashboard, .on-market {
-      margin-left: 30px;
+      margin-left: 24px;
       margin-right: 17px;
       margin-bottom: 0;
       background-size: contain;

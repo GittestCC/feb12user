@@ -41,6 +41,11 @@
     border-radius: 15px;
     line-height: 30px;
     font-size: 14px;
+    &:first-child {
+      background-origin: border-box;
+      border: solid rgba(0,0,0,0.1) 1px;
+      line-height: 28px;
+    }
     .highlight {
       height: 12px;
       width: 12px;
@@ -74,9 +79,11 @@
     left: -6px;
     &.admin-star {
       @include backgroundImage('/images/icon-status-admin.svg')
+      line-height: 18px;
     }
     &.owner {
       @include backgroundImage('/images/icon-status-owner.svg')
+      line-height: 18px;
     }
   }
 }

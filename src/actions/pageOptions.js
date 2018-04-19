@@ -40,10 +40,16 @@ export const closeNotificaton = () => ({
   type: CLOSE_NOTIFICATION
 })
 
-export const showSpinner = (message = 'Loading') => ({
-  type: SHOW_LOADING_SPINNER,
-  message
-})
+export const showSpinner = message => {
+  if (!message) {
+    message = ['hello world', 'KintoHub']
+  }
+
+  return {
+    type: SHOW_LOADING_SPINNER,
+    message
+  }
+}
 
 export const hideSpinner = () => ({
   type: HIDE_LOADING_SPINNER

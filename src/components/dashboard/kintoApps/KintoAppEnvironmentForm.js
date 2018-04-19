@@ -13,7 +13,10 @@ const KintoAppEnvironmentForm = ({ kintoApp, environment, handleSubmit }) => {
     >
       <div className="form-wrapper">
         <h3>Basic Info</h3>
-        <h5>Set up the name for this environment.</h5>
+        <h5>
+          Set up the name and get the client ID and Secret Key for this
+          environment.
+        </h5>
 
         <div className="form-body">
           <div className="field-wrapper">

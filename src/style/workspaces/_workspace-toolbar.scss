@@ -16,6 +16,9 @@
     align-items: center;
     .avatar {
       position: relative;
+      background-origin: border-box;
+      border: solid rgba(0,0,0,0.1) 1px;
+      line-height: 39px;
     }
     h5 {
       display: inline-block;

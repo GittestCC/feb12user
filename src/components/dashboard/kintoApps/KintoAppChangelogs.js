@@ -81,7 +81,7 @@ class KintoAppChangelogs extends Component {
 
         <div className="changelog-wrapper">
           <div className="changelogs-title">
-            <h3>Changelogs</h3>
+            <h3>Compare Versions</h3>
           </div>
 
           {versionList[1] ? (

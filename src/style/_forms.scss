@@ -237,7 +237,7 @@ h5.byline {
 
   .show-password {
     position: absolute;
-    top: 16px;
+    top: 20px;
     right: 16px;
 
     @include backgroundImage('/images/icon-entry-masked.svg', 20px, 10px);
@@ -495,8 +495,9 @@ form {
   color: $kinto-white;
   background: $kinto-grayscale-6;
   font-size: 12px;
-  padding: 2px;
+  padding: 2px 3px;
   border-radius: 4px;
+  font-weight: bold;
 }
 
 .form-wrapper {
