@@ -178,17 +178,16 @@ class KintoBlockManageForm extends Component {
                           No commit was built successfully yet.
                         </div>
                       )}
-                      {!isVersionTag &&
-                        !isProd && (
-                          <Button
-                            className="button-refresh-commits"
-                            type="button"
-                            buttonType="secondary"
-                            onClick={refreshCommits}
-                          >
-                            Refresh Latest Commit
-                          </Button>
-                        )}
+                      {!isVersionTag && (
+                        <Button
+                          className="button-refresh-commits"
+                          type="button"
+                          buttonType="secondary"
+                          onClick={refreshCommits}
+                        >
+                          Refresh Latest Commit
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -251,7 +250,7 @@ class KintoBlockManageForm extends Component {
           />
         </div>
 
-        {isProd ? null : (
+        {!isProd && (
           <Field
             name="services"
             component={KintoBlockServiceFields}

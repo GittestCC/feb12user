@@ -58,7 +58,7 @@ class KintoAppEnvironmentEdit extends Component {
                   Client ID
                   <Tooltip
                     placement="top"
-                    overlay="This environment's Client ID"
+                    overlay="This environment's Client ID used for authenticating requests"
                     trigger="click"
                   >
                     <span className="tooltip" />
@@ -73,7 +73,7 @@ class KintoAppEnvironmentEdit extends Component {
                   Secret Key
                   <Tooltip
                     placement="top"
-                    overlay="This environment's Secret Key"
+                    overlay="This environment's Secret Key used for authenticating requests"
                     trigger="click"
                   >
                     <span className="tooltip" />
