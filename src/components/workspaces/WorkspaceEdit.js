@@ -22,7 +22,7 @@ class WorkspaceEdit extends Component {
         <WorkspaceFormContainer workspace={workspace} isCreate={false} />
         <div className="form-wrapper github-form">
           <h3>Github Connection</h3>
-          <h5>Configure your GitHub organization to work with KintoHub.</h5>
+          <h5>Choose a GitHub organization to link to this workspace.</h5>
           <div className="form-block">
             <ul className="organization-list">
               {organizations.map((organization, i) => (
@@ -45,7 +45,14 @@ class WorkspaceEdit extends Component {
                   to the GitHub organization.
                 </b>
                 <br />
-                Once it’s been linked you cannot unlink it.
+                <br />
+                Linking a GitHub organization allows you to use any of its
+                already existing repositories and create new ones directly from
+                KintoHub.
+                <br />
+                <br />
+                Note that only one GitHub organization can be linked per
+                workspace.
               </div>
               {!organizations.length && (
                 <div className="connect-button">

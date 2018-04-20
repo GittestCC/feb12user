@@ -56,8 +56,8 @@ class DependencyManagement extends Component {
         <h3>Dependencies</h3>
         <h5>
           If your KintoBlock needs other KintoBlocks to work (like an Auth
-          KintoBlock or a Leaderboard KintoBlock), pick and chose them here. You
-          can then configure each of them when building your application.
+          KintoBlock or a Leaderboard KintoBlock), pick and choose them here.
+          You can then configure each of them when building your application.
         </h5>
         <div className="form-body simple dependency-management">
           {!disabled ? (

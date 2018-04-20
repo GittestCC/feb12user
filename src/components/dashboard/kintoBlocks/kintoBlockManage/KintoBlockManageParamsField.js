@@ -107,7 +107,7 @@ class KintoBlockManageParamsField extends Component {
         </div>
         {!disabled ? (
           <div className="bottom row">
-            <div className="switch-container">
+            <div className="toggle-content">
               <label className="switch">
                 <input
                   type="checkbox"
@@ -116,8 +116,8 @@ class KintoBlockManageParamsField extends Component {
                   onChange={this.onToggleRequired}
                 />
                 <span className="toggle-slider" />
-                <h6 className="toggle-message">This is required</h6>
               </label>
+              <h6 className="toggle-message">This is required</h6>
             </div>
             <div className="field-wrapper">
               <label htmlFor="add-key">Name</label>

@@ -1,14 +1,18 @@
 .what-is-a-kintoblock {
-  background-color: rgba( $kinto-tinted-grayscale-3, 0.2);
+  background-color: rgba( $kinto-tinted-grayscale-5, 0.2);
   display: flex;
   justify-content: space-between;
   padding: 30px;
   margin-bottom: $margin-base*4;
+  border-radius: 12px;
   .body-copy{
     font-weight: normal;
     a {
       font-size: 14px;
       color: $kinto-grayscale-7;
+      &:hover {
+        color: $text-link-focus;
+      }
     }
   }
   .icon {

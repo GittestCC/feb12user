@@ -54,7 +54,7 @@ class WorkspaceToolbar extends Component {
             name={currentUserInfo.userName}
             userType={currentUserInfo.permission}
           />
-          <h5>{capitalize(currentUserInfo.permission)}</h5>
+          <h5 className="bold">{capitalize(currentUserInfo.permission)}</h5>
         </div>
         <div className="members">
           <MemberListCircles

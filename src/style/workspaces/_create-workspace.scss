@@ -118,8 +118,6 @@
       color: $kinto-tinted-grayscale-7;
       font-size: 14px;
       text-transform: none;
-      margin-top: 7px;
-      width: 420px;
     }
 
   }
@@ -173,6 +171,9 @@
 
 .github-form {
   margin-bottom: 40px;
+  h5 {
+    font-weight: normal;
+  }
 }
 
 

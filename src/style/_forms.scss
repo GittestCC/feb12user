@@ -209,6 +209,17 @@ h5.byline {
   }
 }
 
+.toggle-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+}
+
 .checkbox-message,
 .toggle-message {
   display: inline-block;
@@ -227,9 +238,14 @@ h5.byline {
 
 .toggle-message {
   float: none;
-  overflow: hidden;
-  margin-left: 70px;
-  width: 200px;
+  margin: 0;
+  margin-left: 10px;
+  display: flex;
+  left: 70px;
+  height: inherit;
+  color: $kinto-tinted-grayscale-7;
+  font-weight: bold;
+  align-items: center;
 }
 
 .input-with-image-wrapper {
@@ -350,7 +366,8 @@ form {
 .switch {
   position: relative;
   display: inline-block;
-  width: 56px;
+  min-width: 56px;
+  max-width: 56px;
   height: 30px;
 
   input {

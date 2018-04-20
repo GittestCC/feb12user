@@ -32,7 +32,7 @@ const WorkspaceForm = ({
             <Field
               name="autoShareProjects"
               className="auto-share-projects"
-              label="Anyone in workspace can view and join projects by default"
+              label="Anyone in this workspace will view and join all projects automatically. Permissions can still be manually changed at project level."
               help="Turn this on to make all projects visible to every workspace member by default."
               component={Toggle}
             />
@@ -50,8 +50,8 @@ const WorkspaceForm = ({
           </h5>
         ) : (
           <h5>
-            Invite workspace members (they will receive an email invite and a
-            notification)
+            Invite new members to your workspace (they will receive an email
+            invite and a notification)
           </h5>
         )}
 

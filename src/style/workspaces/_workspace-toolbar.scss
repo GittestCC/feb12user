@@ -20,25 +20,11 @@
       border: solid rgba(0,0,0,0.1) 1px;
       line-height: 39px;
     }
-    h5 {
+    h5.bold {
       display: inline-block;
       margin: 0 0 0 $margin-base;
       line-height: 50px;
-    }
-  }
-  .toggle {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .switch {
-      display: flex;
-      flex-direction: row-reverse;
-    }
-    .toggle-message {
-      margin: 5px 64px 0 0;
-      min-width: $margin-base*35;
-      text-transform: none;
-      color: $kinto-tinted-grayscale-7;
+      font-weight: bold;
     }
   }
 }
