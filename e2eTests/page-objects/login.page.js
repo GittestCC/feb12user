@@ -1,5 +1,7 @@
 import Page from './page'
 import DashboardIndex from './dashboard.index.page'
+import testData from '../constants/testdata.json'
+import { expect } from 'chai'
 
 class Login extends Page {
   open() {
@@ -12,6 +14,29 @@ class Login extends Page {
     this.loginPassword.setValue(this.TEST_PASSWORD)
     this.loginSubmit()
     DashboardIndex.container.waitForExist()
+  }
+
+  //This method is only for Staging run
+  registerAndLogin() {
+    var username
+    this.open()
+    this.signupUsername.waitForVisible()
+    var currentDate = new Date()
+    username = testData.signup.validUserName + currentDate.getTime()
+    this.signupUsername.setValue(username)
+    this.signupEmail.setValue(
+      username + currentDate.getTime() + '@kintohub.com'
+    )
+    this.signupPassword.setValue(testData.signup.validPassword)
+    this.signupSubmit()
+    this.signupSuccess.waitForVisible()
+    expect(this.signupSuccess.isVisible()).to.eql(true)
+    this.logout()
+    this.open()
+    this.loginUsername.setValue(username)
+    this.loginPassword.setValue(testData.signup.validPassword)
+    this.loginSubmit()
+    return username
   }
 
   get loginUsername() {

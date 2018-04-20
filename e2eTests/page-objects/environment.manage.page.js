@@ -76,10 +76,6 @@ class EnvironmentManage extends Page {
     return $('.breadcrumbs  .unstyled-list>li:nth-child(3)>a')
   }
 
-  getenvNameFromList(index) {
-    return $(`.environments-list .top>h3:nth-child(${index})`)
-  }
-
   get clientIdFieldColumn() {
     return $('.field-container.false.two-columns >div:nth-child(1)')
   }

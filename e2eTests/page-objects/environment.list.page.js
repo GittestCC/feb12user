@@ -6,7 +6,9 @@ class EnvironmentList extends Page {
   }
 
   getEditEnv(index) {
-    return $(`.environment-card:nth-child(${index}) .button.secondary`)
+    return $(
+      `.environment-card:nth-child(${index}) .right.expanded-buttons .button.secondary`
+    )
   }
 
   getCardDropDownInEnvList(id) {
@@ -42,11 +44,15 @@ class EnvironmentList extends Page {
   }
 
   getEnvCardTitle(index) {
-    return $(`.environments-list :nth-child(${index}) .top >h3`)
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .top >h3`
+    )
   }
 
   getEnvCardDeploySuccess(index) {
-    return $(`.environments-list :nth-child(${index}) .status-and-build>div>h6`)
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .status.success`
+    )
   }
 
   get deployPopUp() {
@@ -69,20 +75,23 @@ class EnvironmentList extends Page {
     return $(`.environments-list :nth-child(1) .view .changelog>a`)
   }
 
-  get envCardViewLogs() {
-    return $('.environments-list :nth-child(1) .view .logs>a')
-  }
-
   get envListFromViewLogs() {
     return $('.breadcrumbs li:nth-child(3)>a')
   }
 
-  get kaNameFromEnvListPage() {
-    return $('.list-container >a')
+  getenvCardViewLogs(index) {
+    return $(
+      `.environments-list > .environment-card.expanded > .bottom > .left > div > div > div:nth-child(${index}) > div.view > div.logs > a`
+    )
   }
 
+  //commented as it is duplicated
+  //  get kaNameFromEnvListPage() {
+  //    return $('.list-container >a')
+  //  }
+
   getenvCardVerNumber(index) {
-    return `.environments-list :nth-child(${index}) .left .version`
+    return $(`.environments-list :nth-child(${index}) .left .version`)
   }
 
   get envCardDropDown() {
@@ -105,7 +114,7 @@ class EnvironmentList extends Page {
     return $('.add-new-environment .kh-modal-body')
   }
 
-  get envBuildViewLogsPage() {
+  get envBuildViewLogsPageTitle() {
     return $('.logs-header >h3')
   }
 
@@ -121,7 +130,7 @@ class EnvironmentList extends Page {
 
   getEnvCardDeployBtn(index) {
     return $(
-      `.environments-list :nth-child(${index}) .right.expanded-buttons>button`
+      `.environments-list .environment-card:nth-child(${index}) .right.expanded-buttons>button.button`
     )
   }
 
@@ -151,6 +160,139 @@ class EnvironmentList extends Page {
     return $(
       `.environments-list .environment-card:nth-child(${index}) .upper>h4`
     )
+  }
+
+  //1/3
+  get kaFromEnvListBreadcrumb() {
+    return $('.breadcrumbs li:nth-child(2) .list-container>a')
+  }
+
+  getEnvCardDeployAnotherVersion(index) {
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .right.expanded-buttons>button.button.default`
+    )
+  }
+
+  //2/3
+  get simpleDeployDropDown() {
+    return $('select#version')
+  }
+
+  getEnvCardDeployAnotherVersionBtn(index) {
+    return $(
+      `.environments-list .environment-card:nth-child(${index}) .right.expanded-buttons>button.default`
+    )
+  }
+
+  get simpleDeployPopUpTitle() {
+    return $('.add-new-environment .kh-modal-title')
+  }
+
+  get tagsDropDownIsShown() {
+    return $('.dropdown-content.isShown.short')
+  }
+
+  get toEnvEditPageFromLogsPage() {
+    return $('.breadcrumbs .unstyled-list>:nth-child(4) .list-container>a')
+  }
+
+  get tagsDropDownInLogsPage() {
+    return $(
+      '#env-release-switch-dropdown.dropdown.dropdown-filter.margin-right>button'
+    )
+  }
+
+  getTagsFromTagsDropDownList(index) {
+    return $(
+      `#env-release-switch-dropdown .dropdown-scroll-container>button:nth-child(${index}) .tag-item-text`
+    )
+  }
+
+  get logsTableTitle() {
+    return $('.logs-title>h2')
+  }
+
+  //6/3
+  get envVersionNumFromBreadcrumbLogsPage() {
+    return $(
+      '.breadcrumbs .unstyled-list>:nth-child(5) .list-container .text-disabled'
+    )
+  }
+
+  get columnOneFromLogsTable() {
+    return $('.title.unstyled-list .column.one>h5')
+  }
+
+  get columnTwoFromLogsTable() {
+    return $('.title.unstyled-list .column.two>h5')
+  }
+
+  get columnThreeFromLogsTable() {
+    return $('.title.unstyled-list .column.three>h5')
+  }
+
+  get columnFourFromLogsTable() {
+    return $('.title.unstyled-list .column.four>h5')
+  }
+
+  get columnFiveFromLogsTable() {
+    return $('.title.unstyled-list .column.five>h5')
+  }
+
+  get viewLogsDisabledInLogsPage() {
+    return $('.breadcrumbs .unstyled-list>:nth-child(6)>span')
+  }
+
+  //7/3/18
+  get tagsSearchField() {
+    return $(
+      '.breadcrumbs .unstyled-list>:nth-child(5) .dropdown-content-filter>input'
+    )
+  }
+
+  get tagIsLive() {
+    return $('.text-highlight.undefined.live')
+  }
+
+  get logsTableRowExpanded() {
+    return $('.logs-wrapper .expanding-details.expanded')
+  }
+
+  //13/3
+  getsimpleDeployDropDownOptions(index) {
+    return $(`select#version>option:nth-child(${index})`)
+  }
+
+  get logsTableEnvStatus() {
+    return $('.logs-title>h6')
+  }
+
+  getSeverityColumnInLogsTable(index) {
+    return $(`.unstyled-list.container>li:nth-child(${index}) .column.one>h5`)
+  }
+
+  getResponseCodeColumnInLogsTable(index) {
+    return $(`.unstyled-list.container>li:nth-child(${index}) .column.two>h5`)
+  }
+
+  get requestFieldTitleInLogsTable() {
+    return $('div.expanding-details.expanded>h3:nth-child(1)')
+  }
+
+  get requestFieldTextInLogsTable() {
+    return $('div.expanding-details.expanded :nth-child(2)')
+  }
+
+  get responseFieldTitleInLogsTable() {
+    return $('div.expanding-details.expanded>h3:nth-child(3)')
+  }
+
+  get responseFieldTextInLogsTable() {
+    return $('div.expanding-details.expanded :nth-child(4)')
+  }
+
+  get reportAnErrorBtnInLogsTable() {
+    return $('.expanding-details.expanded .button.secondary')
   }
 }
 

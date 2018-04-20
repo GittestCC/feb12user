@@ -1,4 +1,5 @@
 import Page from './page'
+import DashboardIndex from '../page-objects/dashboard.index.page'
 import { getInput } from '../helpers/elementSelector'
 
 class WorkspaceManage extends Page {
@@ -95,7 +96,35 @@ class WorkspaceManage extends Page {
   }
 
   get githubLinkBtn() {
-    return $('.connect-button > a')
+    return $('.connect-button .button')
+  }
+
+  get githubLoginField() {
+    return $('input#login_field')
+  }
+
+  get githubPasswordField() {
+    return $('input#password')
+  }
+
+  get githubLoginBtn() {
+    return $('.btn.btn-primary.btn-block')
+  }
+
+  linkGithub() {
+    //Click on edit workspace
+    DashboardIndex.editWorkspace.waitForVisible()
+    DashboardIndex.editWorkspace.click()
+    this.form.waitForVisible()
+    //Click on Link
+    this.githubLinkBtn.waitForVisible()
+    var href = this.githubLinkBtn.getAttribute('href')
+    browser.url(href)
+    this.githubLoginField.setValue('seema@calibrecode.com')
+    this.githubPasswordField.setValue('calibre@2017')
+    this.githubLoginBtn.click()
+    this.form.waitForVisible()
+    DashboardIndex.kintoHubLogolefttop.click()
   }
 }
 

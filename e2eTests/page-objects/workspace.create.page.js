@@ -62,16 +62,12 @@ class WorkspaceCreate extends Page {
     return $('.add')
   }
 
-  get workspaceSaveBar() {
+  get workspaceCreateBtnDisabled() {
     return $('.global-save-bar.show.e2e-disabled')
   }
 
-  get workspaceCreateBtnDisabled() {
-    return $('button.button.default.disabled')
-  }
-
   get workspaceCreateBtnEnabled() {
-    return $('button.button.default')
+    return $('.global-save-bar.show')
   }
 
   get toggleBar() {

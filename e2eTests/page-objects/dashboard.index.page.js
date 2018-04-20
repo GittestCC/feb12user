@@ -67,7 +67,7 @@ class DashboardIndex extends Page {
   }
 
   get analyticsLeftnav() {
-    return $('.analytics.dimmed.no-click')
+    return $('.analytics.dimmed')
   }
 
   get servicesLeftnav() {
