@@ -92,7 +92,7 @@ class KintoBlockCreateForm extends Component {
                 validate={required}
                 type="select"
                 className="bold"
-                help="The programming language you would like to use for this project."
+                help="The programming language you would like to use for this microservice."
               >
                 <option value="">Choose the language</option>
                 {languages.map((l, index) => (
@@ -108,7 +108,7 @@ class KintoBlockCreateForm extends Component {
                 validate={required}
                 type="select"
                 className="bold"
-                help="The protocol you would like to communicate with"
+                help="The protocol you would like this microservice to communicate with"
               >
                 <option value="">Choose the protocol</option>
                 <option value="HTTP">HTTP</option>

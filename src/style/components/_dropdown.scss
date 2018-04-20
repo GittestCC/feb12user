@@ -80,6 +80,11 @@
       }
     }
     .form-scroll-container {
+      .temporary-message {
+        margin: 20px;
+        color: $kinto-coral;
+        text-align: center;
+      }
       .tag-item {
         background: $kinto-white;
         .tag-item-text {

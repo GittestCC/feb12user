@@ -5,6 +5,7 @@ import iscroll from 'iscroll'
 import IScroll from 'react-iscroll'
 import Tooltip from 'rc-tooltip'
 import isEmpty from 'lodash/isEmpty'
+import { isProduction } from '../../../helpers/pageHelper'
 import { filterArray } from '../../../helpers/arrayHelper'
 
 class KintoBlockTagAndBranchDropDown extends Component {
@@ -111,6 +112,8 @@ class KintoBlockTagAndBranchDropDown extends Component {
 
   render() {
     const { isShown, selectedTab } = this.state
+    const isProd = isProduction()
+
     const {
       id,
       branchArray,
@@ -246,17 +249,24 @@ class KintoBlockTagAndBranchDropDown extends Component {
                   </div>
                 ) : (
                   <div className="branch-list" data-test="branch-list">
-                    {this.getFilteredList(branchArray).map((item, index) => (
-                      <button
-                        key={index}
-                        className={`tag-item ${
-                          this.isActive(item.name) ? 'active' : ''
-                        }`}
-                        onClick={() => onClickHandler(item)}
-                      >
-                        <div className="tag-item-text">{item.name}</div>
-                      </button>
-                    ))}
+                    {!isForm || !isProd ? (
+                      this.getFilteredList(branchArray).map((item, index) => (
+                        <button
+                          key={index}
+                          className={`tag-item ${
+                            this.isActive(item.name) ? 'active' : ''
+                          }`}
+                          onClick={() => onClickHandler(item)}
+                        >
+                          <div className="tag-item-text">{item.name}</div>
+                        </button>
+                      ))
+                    ) : (
+                      <h4 className="temporary-message">
+                        It is not possible to deploy from a branch in this
+                        release, please create a tag.
+                      </h4>
+                    )}
                   </div>
                 )}
               </div>
