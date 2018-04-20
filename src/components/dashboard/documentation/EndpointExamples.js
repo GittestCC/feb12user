@@ -39,12 +39,16 @@ class EndpointExamples extends Component {
           <div className="left">
             <div className="endpoint-name box">
               {isDefinition && <span className={`type ${type}`}>{type}</span>}
-              <span className="code">{text}</span>
+              {/* <span className="code">{text}</span> */}
             </div>
           </div>
           <div className="right">
             <CopyToClipboard text={text}>
-              <button className="button secondary" type="button">
+              <button
+                className="button secondary disabled"
+                type="button"
+                disabled
+              >
                 Copy
               </button>
             </CopyToClipboard>

@@ -140,7 +140,20 @@
       margin-left: 15px;
     }
   }
-
+  .mobile-menu-toggle{
+    &.hamburger {
+      @include backgroundImage('/images/icon-menu.svg', 20px, 20px);
+    }
+    &.cross {
+      @include backgroundImage('/images/icon-menu-close.svg', 20px, 20px);
+    }
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    @include abovetablet {
+      display: none;
+    }
+  }
 
 @include tablet {
   .search {

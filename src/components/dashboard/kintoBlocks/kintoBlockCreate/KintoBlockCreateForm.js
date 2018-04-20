@@ -62,7 +62,8 @@ class KintoBlockCreateForm extends Component {
           <h5>
             Choose the name for this KintoBlock and give it a short description
             so you can easily find it back later. Let us know your preferred
-            coding flavor and connect your repo.
+            coding flavor and connect your repo. Only lowercase characters and
+            digits are allowed - no spaces and no caps for now please.
           </h5>
 
           <div className="form-body">

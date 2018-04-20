@@ -32,9 +32,9 @@ const KintoAppForm = ({
     <div className="form-wrapper basic-info">
       <h3>Basic Info</h3>
       <h5>
-        Choose the name for this application and give it a short description. If
-        you make the application public, this will help other people discover
-        your application.
+        Choose the name for this application and give it a short description.
+        Only lowercase characters and digits are allowed in the name - no spaces
+        and no caps for now please.
       </h5>
       <div className="form-body full-row">
         <Field

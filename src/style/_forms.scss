@@ -137,6 +137,10 @@ textarea, textarea.tall {
   margin-bottom: $margin-base * 2;
 }
 
+.commits .error-message {
+  margin-top: $margin-base;
+}
+
 h5.byline {
   font-weight: normal;
   font-family: $base-font;

@@ -149,16 +149,16 @@
     margin-right: 10px;
     font-weight: bold;
     font-size: 16px;
-    &.GET {
+    &.GET, &.get {
       color: $kinto-lapis-muted;
     }
-    &.POST {
+    &.POST, &.post {
       color: $kinto-green;
     }
-    &.PUT {
+    &.PUT, &.put {
       color: $kinto-purple-muted;
     }
-    &.DELETE {
+    &.DELETE, &.delete {
       color: $kinto-coral-muted;
     }
     &.overlay {
@@ -173,16 +173,16 @@
   span.type {
     font-family: $code-font;
     font-size: 16px;
-    &.GET {
+    &.GET, &.get {
       color: $kinto-lapis-muted;
     }
-    &.POST {
+    &.POST, &.post {
       color: $kinto-green;
     }
-    &.PUT {
+    &.PUT, &.put {
       color: $kinto-purple-muted;
     }
-    &.DELETE {
+    &.DELETE, &.delete {
       color: $kinto-coral-muted;
     }
     span {
@@ -320,6 +320,7 @@
     position: relative;
     display: inline-block;
     border: solid 2px $kinto-grayscale-2;
+    background-color: $kinto-white;
     height: 40px;
     display: flex;
     align-items: center;
@@ -329,6 +330,9 @@
     &.active {
       background-color: rgba($kinto-blue, .2);
       border: solid 2px $kinto-blue;
+      h5 {
+        color: $kinto-grayscale-7;
+      }
     }
     &.restful {
       cursor: pointer;
@@ -336,6 +340,7 @@
     h5 {
       text-align: center;
       margin: 0;
+      color: rgba($kinto-grayscale-7, 0.4);
     }
   }
 }
