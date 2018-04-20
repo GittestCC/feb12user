@@ -10,7 +10,8 @@ const KintoAppConfigForm = ({
   allDependenciesInfo,
   shownDependenciesIds,
   resetCPUHandler,
-  onChangeActive
+  onChangeActive,
+  isTag
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -22,6 +23,7 @@ const KintoAppConfigForm = ({
           shownDependenciesIds={shownDependenciesIds}
           onChangeActive={onChangeActive}
           itemToScrollTo={itemToScrollTo}
+          isDisabled={isTag}
         />
       </div>
     </form>
@@ -35,7 +37,8 @@ KintoAppConfigForm.propTypes = {
   shownDependenciesIds: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetCPUHandler: PropTypes.func.isRequired,
-  onChangeActive: PropTypes.func.isRequired
+  onChangeActive: PropTypes.func.isRequired,
+  isTag: PropTypes.bool
 }
 
 export default reduxForm({

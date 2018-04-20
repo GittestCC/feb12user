@@ -18,7 +18,8 @@ class KintoAppConfigParams extends Component {
     allDependenciesInfo: PropTypes.array.isRequired,
     itemToScrollTo: PropTypes.string,
     shownDependenciesIds: PropTypes.array.isRequired,
-    onChangeActive: PropTypes.func.isRequired
+    onChangeActive: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool.isRequired
   }
 
   state = {
@@ -53,7 +54,8 @@ class KintoAppConfigParams extends Component {
       fields,
       allDependenciesInfo,
       itemToScrollTo,
-      shownDependenciesIds
+      shownDependenciesIds,
+      isDisabled
     } = this.props
 
     const visibleParams = this.getVisibleParams()
@@ -90,6 +92,7 @@ class KintoAppConfigParams extends Component {
                   <FieldArray
                     name={`${field}.params`}
                     component={KintoAppConfigParamsItem}
+                    isDisabled={isDisabled}
                     visibleParams={
                       visibleParams[dependencyConfigRow.dependencyId]
                     }

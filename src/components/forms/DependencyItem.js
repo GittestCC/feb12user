@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { getClassNameForType } from '../../helpers/kintoBlocksHelper'
+import { isProduction } from '../../helpers/pageHelper'
 import KintoBlockVersionSelectorContainer from '../../containers/dashboard/ui/KintoBlockVersionSelectorContainer'
 import { getPageUrl } from '../../helpers/urlHelper'
 import { pages } from '../../constants/pages'
@@ -108,12 +109,13 @@ class DependencyItem extends Component {
               kintoBlock={block}
               isForm={true}
             />
-            {appVersion && (
-              <Link
-                className="pen-edit"
-                to={`${appVersion}/config/0?dependency=${data.dependencyId}`}
-              />
-            )}
+            {appVersion &&
+              !isProduction() && (
+                <Link
+                  className="pen-edit"
+                  to={`${appVersion}/config/0?dependency=${data.dependencyId}`}
+                />
+              )}
           </div>
         </div>
 

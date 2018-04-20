@@ -7,7 +7,7 @@ function getIsShownClass(visibleParams, key) {
   return !visibleParams.some(p => p.key === key) ? 'hide' : ''
 }
 
-const KintoAppConfigParamsItem = ({ fields, visibleParams }) => {
+const KintoAppConfigParamsItem = ({ fields, visibleParams, isDisabled }) => {
   return (
     <div className="form-body">
       {fields.length && visibleParams.length ? (
@@ -28,6 +28,7 @@ const KintoAppConfigParamsItem = ({ fields, visibleParams }) => {
                   type="text"
                   component={FieldValidation}
                   inputTextOverlay={data.required ? 'Required' : null}
+                  disabled={isDisabled}
                 />
               </div>
             )
@@ -45,7 +46,8 @@ const KintoAppConfigParamsItem = ({ fields, visibleParams }) => {
 }
 KintoAppConfigParamsItem.propTypes = {
   fields: PropTypes.object.isRequired,
-  visibleParams: PropTypes.array.isRequired
+  visibleParams: PropTypes.array.isRequired,
+  isDisabled: PropTypes.bool.isRequired
 }
 
 export default KintoAppConfigParamsItem

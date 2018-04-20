@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { Link } from 'react-router-dom'
+import { isProduction } from '../../helpers/pageHelper'
 import DependencyItem from './DependencyItem'
 
 class DependencyManagement extends Component {
@@ -73,9 +74,10 @@ class DependencyManagement extends Component {
                 filterOptions={this.filterDependencies}
               />
 
-              {!isKintoBlock && (
-                <div className="dependency-management-buttons">
-                  {/* <div className="button-group">
+              {!isKintoBlock &&
+                !isProduction() && (
+                  <div className="dependency-management-buttons">
+                    {/* <div className="button-group">
                       <a to="" className="button secondary disabled">
                       Split All Duplicate Instances
                       </a>
@@ -92,33 +94,33 @@ class DependencyManagement extends Component {
                       </a>
                   </div> */}
 
-                  {configUrl ? (
-                    <div className="button-group">
-                      <Link to={configUrl} className="button secondary">
-                        Edit Dependencies
-                      </Link>
-                      <Link
-                        to={configUrl}
-                        className="icon edit-blocks-and-services glyph hide-text"
-                      >
-                        edit blocks
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="button-group">
-                      <a className="button secondary disabled">
-                        Edit Dependencies
-                      </a>
-                      <a
-                        className="icon edit-blocks-and-services glyph hide-text"
-                        disabled
-                      >
-                        edit blocks
-                      </a>
-                    </div>
-                  )}
-                </div>
-              )}
+                    {configUrl ? (
+                      <div className="button-group">
+                        <Link to={configUrl} className="button secondary">
+                          Edit Dependencies
+                        </Link>
+                        <Link
+                          to={configUrl}
+                          className="icon edit-blocks-and-services glyph hide-text"
+                        >
+                          edit blocks
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="button-group">
+                        <a className="button secondary disabled">
+                          Edit Dependencies
+                        </a>
+                        <a
+                          className="icon edit-blocks-and-services glyph hide-text"
+                          disabled
+                        >
+                          edit blocks
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                )}
             </div>
           ) : null}
 

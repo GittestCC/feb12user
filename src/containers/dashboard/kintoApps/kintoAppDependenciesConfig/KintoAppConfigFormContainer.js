@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { change, untouch } from 'redux-form'
+import { TAG } from '../../../../constants/version'
 import { getKintoAppDependenciesEnvConfig } from '../../../../selectors/kintoApps'
 import { updateAppDependenciesConfigData } from '../../../../actions/kintoApps'
 import KintoAppConfigForm from '../../../../components/dashboard/kintoApps/kintoAppDependenciesConfig/KintoAppConfigForm'
@@ -21,12 +22,15 @@ function mapStateToProps(
     env
   })
 
+  const kintoApp = state.kintoApps.byId[id]
+
   return {
     initialValues: {
       data
     },
     allDependenciesInfo,
-    shownDependenciesIds
+    shownDependenciesIds,
+    isTag: kintoApp.version.type === TAG
   }
 }
 
