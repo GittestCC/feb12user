@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import qs from 'query-string'
 import LandingNavBar from './ui/LandingNavBar'
 import Footer from './ui/Footer'
@@ -18,6 +19,9 @@ const RegisterSuccess = ({ location }) => {
               If you have trouble finding the email, make sure to check your
               spam inbox as well.
             </h6>
+            <Link to="/log-in" className="button secondary">
+              Log In
+            </Link>
           </div>
         </div>
       </div>

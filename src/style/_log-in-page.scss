@@ -156,6 +156,9 @@
   box-shadow: 0 2px 4px 0 rgba($kinto-tinted-grayscale-7,0.10), 0 10px 40px 0 rgba($kinto-tinted-grayscale-7,0.10);
   position: relative;
   z-index: 2;
+  .button {
+    margin-top: 20px;
+  }
 }
 
 .cover {

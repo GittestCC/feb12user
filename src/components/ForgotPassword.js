@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import ForgotPasswordFormContainer from '../containers/landing/forgotPassword/ForgotPasswordFormContainer'
 import Footer from './ui/Footer'
 import LandingNavBar from './ui/LandingNavBar'
@@ -27,6 +28,9 @@ class ForgotPassword extends Component {
                   Trouble finding the email? Have a look in your spam folder,
                   just in case.
                 </h6>
+                <Link to="/log-in" className="button secondary">
+                  Log In
+                </Link>
               </div>
             </div>
           </div>
