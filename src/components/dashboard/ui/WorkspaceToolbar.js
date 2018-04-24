@@ -34,7 +34,9 @@ class WorkspaceToolbar extends Component {
 
   goToEditWorkspace = () => {
     this.props.push(
-      getPageUrl(pages.workspaceEdit, { id: this.props.selectedWorkspaceId })
+      getPageUrl(pages.workspaceEdit, {
+        workspaceId: this.props.selectedWorkspaceId
+      })
     )
   }
 

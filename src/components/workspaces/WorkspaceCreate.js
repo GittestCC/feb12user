@@ -25,7 +25,7 @@ const WorkspaceCreate = () => {
         <div className="icon" />
       </div>
 
-      <WorkspaceFormContainer isCreate={true} />
+      <WorkspaceFormContainer isCreate={true} form="WorkspaceFormCreate" />
     </div>
   )
 }

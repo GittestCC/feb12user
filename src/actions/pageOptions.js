@@ -2,7 +2,6 @@ export const FORM_SUBMITTED = 'FORM_SUBMITTED'
 export const SELECT_ENVIRONMENT = 'SELECT_ENVIRONMENT'
 export const SELECT_ENVIRONMENT_RELEASE = 'SELECT_ENVIRONMENT_RELEASE'
 export const SELECT_KINTOAPP = 'SELECT_KINTOAPP'
-export const SELECT_BREADCRUMB_WORKSPACE = 'SELECT_BREADCRUMB_WORKSPACE'
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
 export const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION'
 export const SHOW_LOADING_SPINNER = 'SHOW_LOADING_SPINNER'
@@ -22,11 +21,6 @@ export const releaseVersionSelect = id => ({
 
 export const kintoAppSelect = id => ({
   type: SELECT_KINTOAPP,
-  id
-})
-
-export const workspaceBreadcrumbSelect = id => ({
-  type: SELECT_BREADCRUMB_WORKSPACE,
   id
 })
 

@@ -65,7 +65,4 @@ const WorkspaceForm = ({
   )
 }
 
-export default reduxForm({
-  form: 'WorkspaceForm',
-  enableReinitialize: true
-})(WorkspaceForm)
+export default reduxForm({ enableReinitialize: true })(WorkspaceForm)

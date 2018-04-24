@@ -29,10 +29,10 @@ export default {
   },
   [pages.workspaceCreate]: {
     submitLabel: 'Create New Workspace',
-    formName: 'WorkspaceForm'
+    formName: 'WorkspaceFormCreate'
   },
   [pages.workspaceEdit]: {
     submitLabel: 'Save Changes',
-    formName: 'WorkspaceForm'
+    formName: 'WorkspaceFormEdit'
   }
 }

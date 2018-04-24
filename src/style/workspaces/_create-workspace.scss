@@ -63,12 +63,24 @@
     height: 40px;
     width: 40px;
     background-color: $kinto-tinted-grayscale-2;
-    &.image-1 { @include backgroundImage('/images/team-raven-yu.png', 40px, 40px)}
-    &.image-2 { @include backgroundImage('/images/team-nadeem-khedr.png', 40px, 40px)}
-    &.image-3 { @include backgroundImage('/images/team-joseph-cooper.png', 40px, 40px)}
-    &.image-4 { @include backgroundImage('/images/team-guillaume-dury.png', 40px, 40px)}
-    &.image-5 { @include backgroundImage('/images/team-laura-ambrose.png', 40px, 40px)}
-    &.image-6 { @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px)}
+    &.image-1 {
+      @include backgroundImage('/images/team-raven-yu.png', 40px, 40px);
+    }
+    &.image-2 {
+      @include backgroundImage('/images/team-nadeem-khedr.png', 40px, 40px);
+    }
+    &.image-3 {
+      @include backgroundImage('/images/team-joseph-cooper.png', 40px, 40px);
+    }
+    &.image-4 {
+      @include backgroundImage('/images/team-guillaume-dury.png', 40px, 40px);
+    }
+    &.image-5 {
+      @include backgroundImage('/images/team-laura-ambrose.png', 40px, 40px);
+    }
+    &.image-6 {
+      @include backgroundImage('/images/team-francois-courtin.png', 40px, 40px);
+    }
     border-radius: 20px;
     position: relative;
 
@@ -78,7 +90,7 @@
       position: absolute;
       top: -6px;
       left: -6px;
-      @include backgroundImage('/images/icon-status-admin.svg', 20px, 20px)
+      @include backgroundImage('/images/icon-status-admin.svg', 20px, 20px);
     }
     .owner {
       background-color: $kinto-yellow;
@@ -86,7 +98,7 @@
       position: absolute;
       top: -6px;
       left: -6px;
-      @include backgroundImage('/images/icon-status-owner.svg', 20px, 20px)
+      @include backgroundImage('/images/icon-status-owner.svg', 20px, 20px);
     }
   }
   .members-added {
@@ -99,10 +111,11 @@
     border-radius: 8px;
     margin-bottom: 15px;
     .field-wrapper {
-      &:first-child{
+      &:first-child {
         margin-right: 20px;
       }
-      input, select {
+      input,
+      select {
         margin-bottom: 0;
       }
       .label-characters {
@@ -119,12 +132,11 @@
       font-size: 14px;
       text-transform: none;
     }
-
   }
 }
 
 .form-body.members-list {
-  padding: 0;
+  padding: 0 0 40px 0;
   background-color: transparent;
   .top {
     background-color: $kinto-white;
@@ -133,10 +145,9 @@
     input {
       margin-bottom: 0;
     }
-
   }
-  .bottom{
-    padding: 50px 40px;
+  .bottom {
+    padding: 50px 40px 10px 40px;
     display: inline-grid;
     justify-items: stretch;
     align-items: center;
@@ -148,17 +159,22 @@
     input {
       width: 100% !important;
     }
-    input, select {
+    input,
+    select {
       margin-bottom: 0;
     }
     .field-wrapper {
-      &:first-child{
+      &:first-child {
         margin-right: 20px;
       }
-      input, select {
+      input,
+      select {
         margin-bottom: 0;
       }
     }
+  }
+  .error-email {
+    grid-column: 2/3;
   }
 }
 
@@ -175,7 +191,6 @@
     font-weight: normal;
   }
 }
-
 
 // TODO: remove after update branch
 .connect-button .icon {

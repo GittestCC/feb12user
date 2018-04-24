@@ -36,7 +36,11 @@ function mergeProps(stateProps, dispatchProps) {
     ...dispatchProps,
     selectWorkspace: id => {
       if (id === '0') {
-        dispatchProps.push(getPageUrl(pages.workspaceCreate))
+        dispatchProps.push(
+          getPageUrl(pages.workspaceCreate, {
+            workspaceId: stateProps.selectedWorkspaceId
+          })
+        )
       } else {
         dispatchProps.push(getPageUrl(pages.dashboardHome, { workspaceId: id }))
         stateProps.selectedWorkspaceId = id

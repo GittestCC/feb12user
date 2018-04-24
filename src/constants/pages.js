@@ -50,9 +50,9 @@ export const urls = {
     '/app/dashboard/:workspaceId/kintoapps/:id/versions/:version/config/:envId',
   [pages.dashboardHome]: '/app/dashboard/:workspaceId',
   [pages.dashboardAnalytics]: '/app/dashboard/:workspaceId/analytics',
-  [pages.dashboardServices]: '/app/workspaces/:workspaceId/services',
-  [pages.workspaceCreate]: '/app/workspaces/create',
-  [pages.workspaceEdit]: '/app/workspaces/:id/edit'
+  [pages.dashboardServices]: '/app/dashboard/:workspaceId/services',
+  [pages.workspaceCreate]: '/app/dashboard/:workspaceId/create',
+  [pages.workspaceEdit]: '/app/dashboard/:workspaceId/edit'
 }
 
 export const dashboardSidebar = [

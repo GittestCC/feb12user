@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
+import AdminRoute from './app/AdminRoute'
+import { isProduction } from '../helpers/pageHelper'
+import WorkspaceEditContainer from '../containers/workspaces/WorkspaceEditContainer'
 import KintoBlocksContainer from '../containers/dashboard/KintoBlocksContainer'
 import KintoAppsContainer from '../containers/dashboard/KintoAppsContainer'
 import KintoBlockEndpointsContainer from '../containers/dashboard/documentation/KintoBlockEndpointsContainer'
+import WorkspaceCreate from './workspaces/WorkspaceCreate'
+import ServicesList from './workspaces/ServicesList'
 import Index from './dashboard/Index'
 
 class Dashboard extends Component {
@@ -33,6 +38,18 @@ class Dashboard extends Component {
     return selectedWorkspace ? (
       <div>
         <Switch>
+          <Route path={`${match.url}/create`} component={WorkspaceCreate} />
+          <AdminRoute
+            path={`${match.url}/edit`}
+            component={WorkspaceEditContainer}
+          />
+          {isProduction() ? null : (
+            <AdminRoute
+              path={`${match.url}/services`}
+              component={ServicesList}
+              workspaceUrl="id"
+            />
+          )}
           <Route
             path={`${
               match.url

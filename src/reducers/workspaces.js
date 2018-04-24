@@ -41,7 +41,12 @@ const workspacesReducer = (state = defaultState, action) => {
     }
     case RECEIVE_WORKSPACE: {
       const workspace = action.data
-      const members = workspace.members.concat().sort((a, b) => a.role > b.role)
+      const members = workspace.members.concat().sort((a, b) => {
+        if (a.role !== b.role) {
+          return a.role > b.role
+        }
+        return a.userName > b.userName
+      })
       let { allIds } = state
       if (action.isAdd) {
         allIds = [...allIds, action.id]

@@ -1,25 +1,23 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import WorkspaceFormContainer from '../../containers/workspaces/WorkspaceFormContainer'
 import { githubConnectUrl } from '../../helpers/urlHelper'
 
 class WorkspaceEdit extends Component {
-  componentDidMount() {
-    this.props.workspaceBreadcrumbSelect(this.props.id)
+  static propTypes = {
+    workspace: PropTypes.object.isRequired
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.id !== this.props.id) {
-      this.props.workspaceBreadcrumbSelect(nextProps.id)
-    }
-  }
-
   render() {
     const { workspace } = this.props
     const organizations = workspace.organizations || []
 
     return (
       <div className="edit-workspace">
-        <WorkspaceFormContainer workspace={workspace} isCreate={false} />
+        <WorkspaceFormContainer
+          workspace={workspace}
+          isCreate={false}
+          form="WorkspaceFormEdit"
+        />
         <div className="form-wrapper github-form">
           <h3>Github Connection</h3>
           <h5>Choose a GitHub organization to link to this workspace.</h5>

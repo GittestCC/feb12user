@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import { FieldValidation } from '../../forms'
-import { required } from '../../../helpers/forms/validators'
+import {
+  required,
+  email as emailValidation
+} from '../../../helpers/forms/validators'
 import {
   workspaceRoles,
   MEMBER_ROLE,
@@ -12,17 +15,29 @@ import UserCircle from '../../ui/UserCircle'
 class WorkspaceMembers extends Component {
   state = {
     email: '',
-    role: MEMBER_ROLE
+    role: MEMBER_ROLE,
+    error: null
   }
 
   addRow = () => {
-    this.props.fields.push({
-      role: this.state.role,
-      email: this.state.email
-    })
+    const { role, email } = this.state
+    const { fields } = this.props
+    const emailError = emailValidation(email)
+    if (emailError) {
+      return this.setState({ error: emailError })
+    }
+    const emailExist = fields
+      .getAll()
+      .some(f => f.email.toUpperCase() === email.toUpperCase())
+    if (emailExist) {
+      return this.setState({ error: 'Email already exists for this workspace' })
+    }
+    fields.push({ role, email })
+
     this.setState({
       role: MEMBER_ROLE,
-      email: ''
+      email: '',
+      error: null
     })
   }
 
@@ -57,6 +72,7 @@ class WorkspaceMembers extends Component {
 
   render() {
     const { fields } = this.props
+    const { error, email, role } = this.state
 
     return (
       <div className="form-body members-list">
@@ -114,7 +130,7 @@ class WorkspaceMembers extends Component {
               name="email"
               placeholder="Enter workspace member email"
               onChange={this.updateEmail}
-              value={this.state.email}
+              value={email}
               onKeyPress={this.handleKeyPress}
             />
           </div>
@@ -122,7 +138,8 @@ class WorkspaceMembers extends Component {
             name="role"
             type="select"
             onChange={this.updateRole}
-            value={this.state.role}
+            value={role}
+            onKeyPress={this.handleKeyPress}
           >
             {workspaceRoles.map((role, i) => (
               <option key={i} value={role.value}>
@@ -131,6 +148,11 @@ class WorkspaceMembers extends Component {
             ))}
           </select>
           <div className="add" onClick={this.addRow} />
+          {error && (
+            <div className="error-message error-message-only error-email">
+              {error}
+            </div>
+          )}
         </div>
       </div>
     )

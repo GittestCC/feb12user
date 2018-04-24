@@ -85,7 +85,9 @@ export const createWorkspace = data => (dispatch, getState) => {
       const newWorkspaceId = response.data.id
       dispatch(formSubmitted())
       dispatch(workspaceReceive(response.data.id, response.data, true))
-      dispatch(push(getPageUrl(pages.workspaceEdit, { id: newWorkspaceId })))
+      dispatch(
+        push(getPageUrl(pages.workspaceEdit, { workspaceId: newWorkspaceId }))
+      )
       dispatch(fetchWorkspaces()) //TODO: backend issue, workspaces has to be reloaded inorder to add session data
     })
 }

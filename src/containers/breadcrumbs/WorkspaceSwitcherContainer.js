@@ -6,14 +6,15 @@ import { getPageUrl } from '../../helpers/urlHelper'
 import WorkspaceSwitcher from '../../components/breadcrumbs/WorkspaceSwitcher'
 
 function mapStateToProps(state) {
-  const selectedItem =
-    state.workspaces.byId[state.pageOptions.selectedEditingWorkspaceId] || {}
-  const dropdownItems = state.workspaces.allIds.map(w => {
-    const workspace = state.workspaces.byId[w]
+  const { selectedWorkspace, byId, allIds } = state.workspaces
+  const selectedItem = byId[selectedWorkspace] || {}
+
+  const dropdownItems = allIds.map(w => {
+    const workspace = byId[w]
     return {
       text: workspace.name,
       active: selectedItem && selectedItem.id === workspace.id,
-      url: getPageUrl(pages.workspaceEdit, { id: workspace.id })
+      url: getPageUrl(pages.workspaceEdit, { workspaceId: workspace.id })
     }
   })
 

@@ -14,7 +14,9 @@ function mapDispatchToProps(dispatch, { location }) {
         dispatch(push('/'))
       }
       dispatch(connectGithub(workspaceId, code)).then(() => {
-        dispatch(push(getPageUrl(pages.workspaceEdit, { id: workspaceId })))
+        dispatch(
+          push(getPageUrl(pages.workspaceEdit, { workspaceId: workspaceId }))
+        )
       })
     }
   }

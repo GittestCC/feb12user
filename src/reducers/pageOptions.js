@@ -7,7 +7,6 @@ import {
   SELECT_ENVIRONMENT,
   SELECT_ENVIRONMENT_RELEASE,
   SELECT_KINTOAPP,
-  SELECT_BREADCRUMB_WORKSPACE,
   CLOSE_NOTIFICATION,
   SHOW_NOTIFICATION,
   SHOW_LOADING_SPINNER,
@@ -55,11 +54,6 @@ export default function pageOptions(state = {}, action) {
         selectedKintoAppId: action.id,
         selectedEnvironmentId: action.envId,
         selectedReleaseVersion: action.releaseVersion
-      }
-    case SELECT_BREADCRUMB_WORKSPACE:
-      return {
-        ...state,
-        selectedEditingWorkspaceId: action.id
       }
     case actionTypes.CHANGE:
     case actionTypes.ARRAY_REMOVE:

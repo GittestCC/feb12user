@@ -7,7 +7,6 @@ import SideBarContainer from '../containers/app/SideBarContainer'
 import GlobalSaveBarContainer from '../containers/app/GlobalSaveBarContainer'
 import BreadcrumbContainer from '../containers/app/BreadcrumbContainer'
 import DashboardContainer from '../containers/DashboardContainer'
-import WorkspacesContainer from '../containers/WorkspacesContainer'
 import Market from './Market'
 
 class App extends Component {
@@ -87,10 +86,6 @@ class App extends Component {
                 <Route
                   path={`${match.url}/dashboard/:workspaceId`}
                   component={DashboardContainer}
-                />
-                <Route
-                  path={`${match.url}/workspaces`}
-                  component={WorkspacesContainer}
                 />
                 <Route path={`${match.url}/market`} component={Market} />
                 <Redirect to={`${match.url}/dashboard/${firstWorkspaceId}`} />
