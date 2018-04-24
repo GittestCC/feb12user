@@ -3,6 +3,7 @@
   background-color: $kinto-white;
   border-radius: 12px;
   box-shadow: 0 2px 4px 0 $kinto-box-shadow, 0 10px 40px 0 $kinto-box-shadow;
+  height: calc(100vh - 223px);
   .endpoint-title {
     padding: 20px 0 16px 0;
     border-bottom: 2px solid $kinto-tinted-grayscale-2;
@@ -17,6 +18,7 @@
     display: grid;
     display: grid;
     grid-template-columns: 320px auto;
+    height: calc(100vh - 285px);
     .select-endpoint {
       .top {
         input {
@@ -435,6 +437,5 @@
   border-left: 2px solid $kinto-tinted-grayscale-2;
   position: relative;
   overflow: hidden;
-  height: 74.5vh;
   border-radius: 0 0 12px 0;
 }

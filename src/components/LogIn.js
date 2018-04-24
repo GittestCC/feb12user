@@ -36,9 +36,9 @@ class LogIn extends Component {
         <div className="content">
           <h1 className="center">The one-stop shop for microservices</h1>
           <h3 className="center">
-            KintoHub is a development platform that transforms you into a
-            full-stack unicorn ninja that people can’t stop talking about. Sign
-            up today and we’ll even throw in a free donut just for you.
+            KintoHub makes it easy to code, combine and deploy microservices.
+            Sign up today to start building and consuming microservice-based
+            applications in minutes
           </h3>
 
           {flip ? (

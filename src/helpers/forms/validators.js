@@ -23,7 +23,7 @@ export const number = value =>
 export const email = match(emailRegex, 'Invalid email address')
 export const password = match(
   passwordRegex,
-  'Password must contain a at least one letter and one number'
+  'Password must contain at least one letter and one number'
 )
 export const allCharactersAndBasicSymbols = match(
   allCharactersAndBasicSymbolsRegex,
