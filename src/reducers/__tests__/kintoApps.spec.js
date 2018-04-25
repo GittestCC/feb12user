@@ -75,7 +75,7 @@ describe('kintoApps Reducer', () => {
     expect(newState.byId['2'].name).toBe('OriginalStore2')
   })
 
-  it('kintoAppReceive merges existing kintoApp with the received entity', () => {
+  it('kintoAppReceive overwrites existing kintoApp with the received entity', () => {
     const oldState = {
       byId: {
         '1': {
@@ -97,7 +97,6 @@ describe('kintoApps Reducer', () => {
     expect(newState.byId['1']).toEqual({
       id: '1',
       name: 'app',
-      simple: true,
       detailed: true
     })
   })

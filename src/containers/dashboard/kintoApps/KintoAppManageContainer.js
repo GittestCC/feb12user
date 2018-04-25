@@ -35,8 +35,7 @@ function mapStateToProps(state, { match }) {
 function mapDispatchToProps(dispatch, { match }) {
   return {
     push: url => dispatch(push(url)),
-    fetchKintoApp: (id, ver, willOverwrite) =>
-      dispatch(fetchKintoApp(id, ver, willOverwrite)),
+    fetchKintoApp: (id, ver) => dispatch(fetchKintoApp(id, ver)),
     getKintoAppEnvironments: id => dispatch(getKintoAppEnvironments(id)),
     resetForm: () => dispatch(reset('kintoAppForm'))
   }

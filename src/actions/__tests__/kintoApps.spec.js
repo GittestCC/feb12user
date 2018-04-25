@@ -40,8 +40,7 @@ describe('KintoApps actions', () => {
           id: '1',
           name: 'test'
         },
-        metadata: {},
-        willOverwrite: false
+        metadata: {}
       }
     ])
   })

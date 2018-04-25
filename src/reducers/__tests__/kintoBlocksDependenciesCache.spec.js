@@ -30,19 +30,6 @@ describe('KintoBlocksDependenciesCache Reducer', () => {
     expect(isEmpty(newState)).toBe(true)
   })
 
-  it('kintoAppsReceive merges existing cache with new metadata from response', () => {
-    const newState = reducer(
-      {
-        '1': {
-          special: true
-        }
-      },
-      actions.kintoAppsReceive(sampleResponseData)
-    )
-    expect(newState['1'].name).toBe('test')
-    expect(newState['1'].special).toBe(true)
-  })
-
   it('kintoAppReceive saves metadata if the response has it', () => {
     const newState = reducer(
       undefined,

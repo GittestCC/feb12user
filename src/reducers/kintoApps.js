@@ -1,5 +1,4 @@
 import { arrayMove } from 'react-sortable-hoc'
-import { merge } from '../helpers/objectHelper'
 
 import {
   RECEIVE_KINTO_APPS,
@@ -30,9 +29,7 @@ const kintoAppsReducer = (state = defaultState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.id]: action.willOverwrite
-            ? action.data
-            : merge(state.byId[action.id], action.data)
+          [action.id]: action.data
         }
       }
     }

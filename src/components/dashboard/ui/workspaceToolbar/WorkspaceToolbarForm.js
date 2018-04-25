@@ -46,12 +46,12 @@ class WorkspaceToolbarForm extends Component {
                   <input
                     type="text"
                     disabled
-                    defaultValue={this.getDisplay(admin.userName, admin.email)}
+                    value={this.getDisplay(admin.userName, admin.email)}
                   />
                   <select
                     name="permission"
                     id="permission"
-                    defaultValue={admin.permission}
+                    value={admin.permission}
                     disabled
                   >
                     <option value={admin.permission}>

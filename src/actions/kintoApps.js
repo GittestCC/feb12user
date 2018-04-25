@@ -50,12 +50,11 @@ export const kintoAppsReceive = response => ({
   metadata: response.metadata
 })
 
-export const kintoAppReceive = (id, data, metadata, willOverwrite) => ({
+export const kintoAppReceive = (id, data, metadata) => ({
   type: RECEIVE_KINTO_APP,
   id,
   data,
-  metadata,
-  willOverwrite
+  metadata
 })
 
 export const kintoAppEnvironmentsReceive = (id, data) => ({
@@ -114,11 +113,7 @@ export const changeLogReceive = (id, oldVersion, newVersion, data) => ({
   data
 })
 
-//TODO try to break down into multiple reducer so we wont need merging
-export const fetchKintoApp = (id, ver, willOverwrite = false) => (
-  dispatch,
-  getState
-) => {
+export const fetchKintoApp = (id, ver) => (dispatch, getState) => {
   const { selectedWorkspace } = getState().workspaces
   return axios
     .get(
@@ -128,9 +123,7 @@ export const fetchKintoApp = (id, ver, willOverwrite = false) => (
       )
     )
     .then(response => {
-      return dispatch(
-        kintoAppReceive(id, response.data, response.metadata, willOverwrite)
-      )
+      return dispatch(kintoAppReceive(id, response.data, response.metadata))
     })
 }
 
