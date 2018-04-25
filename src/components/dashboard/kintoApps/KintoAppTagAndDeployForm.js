@@ -18,7 +18,6 @@ class TagAndDeployForm extends Component {
   static propTypes = {
     submitLabel: PropTypes.string.isRequired,
     submitting: PropTypes.bool.isRequired,
-    pristine: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     initialize: PropTypes.func.isRequired,
@@ -31,7 +30,6 @@ class TagAndDeployForm extends Component {
     const {
       submitLabel,
       submitting,
-      pristine,
       handleSubmit,
       onClose,
       error,
@@ -90,11 +88,7 @@ class TagAndDeployForm extends Component {
               <Button onClick={onClose} type="button" buttonType="secondary">
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                buttonType="dark"
-                disabled={submitting || pristine}
-              >
+              <Button type="submit" buttonType="dark" disabled={submitting}>
                 {submitLabel}
               </Button>
             </div>

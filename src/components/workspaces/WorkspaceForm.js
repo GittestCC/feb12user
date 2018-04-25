@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import { FieldValidation, Toggle } from '../forms'
 import { required, maxLength256 } from '../../helpers/forms/validators'
+import { isProduction } from '../../helpers/pageHelper'
 import { basicInput } from '../../helpers/forms/validationFields'
 import WorkspaceMembers from './workspaceForm/WorkspaceMembers'
 
@@ -28,15 +29,17 @@ const WorkspaceForm = ({
             validate={[...basicInput, required, maxLength256]}
             type="text"
           />
-          <div className="auto-share-switch">
-            <Field
-              name="autoShareProjects"
-              className="auto-share-projects"
-              label="Anyone in this workspace will view and join all projects automatically. Permissions can still be manually changed at project level."
-              help="Turn this on to make all projects visible to every workspace member by default."
-              component={Toggle}
-            />
-          </div>
+          {!isProduction && (
+            <div className="auto-share-switch">
+              <Field
+                name="autoShareProjects"
+                className="auto-share-projects"
+                label="Anyone in this workspace will view and join all projects automatically. Permissions can still be manually changed at project level."
+                help="Turn this on to make all projects visible to every workspace member by default."
+                component={Toggle}
+              />
+            </div>
+          )}
         </div>
       </div>
 

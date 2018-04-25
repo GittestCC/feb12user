@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 import { pages } from '../../../constants/pages'
 import { getPageUrl } from '../../../helpers/urlHelper'
-import { getVersionAsText } from '../../../helpers/versionHelper'
+import { getVersionAsText, textToObject } from '../../../helpers/versionHelper'
 import KintoAppTagAndDeployForm from '../../../components/dashboard/kintoApps/KintoAppTagAndDeployForm'
 import { deployEnvironment } from '../../../actions/kintoApps'
 
@@ -23,13 +23,19 @@ function mapStateToProps(state, { kintoApp, isDraft }) {
     submitLabel += ` ${versionText}`
   }
 
+  const lastVersion = kintoApp.versions[kintoApp.versions.length - 1].name
+  const editedVersion = textToObject(lastVersion)
+  if (editedVersion) {
+    editedVersion.revision += 1
+  }
+
   return {
     kintoApp,
     submitLabel,
     listEnvironmentsUrl,
     initialValues: {
       environment: kintoApp.environments[0].id,
-      version: kintoApp.version
+      version: editedVersion
     }
   }
 }

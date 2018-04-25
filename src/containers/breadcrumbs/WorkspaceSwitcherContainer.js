@@ -20,14 +20,28 @@ function mapStateToProps(state) {
 
   return {
     dropdownItems,
+    selectedWorkspace,
     selectedItemName: selectedItem.name || ''
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actionHandler: () => dispatch(push(getPageUrl(pages.workspaceCreate)))
+    actionHandler: workspaceId =>
+      dispatch(push(getPageUrl(pages.workspaceCreate, { workspaceId })))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkspaceSwitcher)
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    actionHandler: () =>
+      dispatchProps.actionHandler(stateProps.selectedWorkspace)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  WorkspaceSwitcher
+)

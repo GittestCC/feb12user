@@ -39,19 +39,14 @@ export const getVersionStateClassName = version => {
 }
 
 export const textToObject = v => {
-  const regex = /(\d+)\.(\d+)\.(\d+)\.?\s?(\d+)?(?:\((\d+)\))?/
+  const regex = /(\d+)\.(\d+)\.(\d+)/
   const match = regex.exec(v)
   if (!match) return null
-  let result = {
+  return {
     major: parseInt(match[1], 10),
     minor: parseInt(match[2], 10),
     revision: parseInt(match[3], 10)
   }
-  const build = match[4] || match[5]
-  if (build) {
-    result.build = parseInt(build, 10)
-  }
-  return result
 }
 
 export const isBranchVersionEqual = (a, b, matchNameOnly) => {

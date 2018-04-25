@@ -7,24 +7,18 @@ import KintoBlockCard from '../../../../components/dashboard/kintoBlocks/kintoBl
 
 function mapStateToProps(state, { kintoBlock, index }) {
   const { selectedWorkspace } = state.workspaces
-  const latestVersion = kintoBlock.versions[0]
-  const versions = kintoBlock.versions.map(v => {
-    let result = {
-      text: v.name,
-      type: v.type,
-      url: getPageUrl(pages.dashboardKintoBlocksManage, {
-        id: kintoBlock.id,
-        version: v.name,
-        type: getVersionType(v),
-        workspaceId: selectedWorkspace
-      })
-    }
-    const isFirst = kintoBlock.versions.indexOf(v) === 0
-    if (isFirst) {
-      result.active = true
-    }
-    return result
-  })
+  const v = kintoBlock.version
+
+  const latestVersion = {
+    name: v.name,
+    type: getVersionType(v),
+    url: getPageUrl(pages.dashboardKintoBlocksManage, {
+      id: kintoBlock.id,
+      version: v.name,
+      type: getVersionType(v),
+      workspaceId: selectedWorkspace
+    })
+  }
 
   const kintoBlockDependencies = kintoBlock.dependencies
     ? kintoBlock.dependencies.map(d => {
@@ -48,20 +42,13 @@ function mapStateToProps(state, { kintoBlock, index }) {
 
   return {
     kintoBlock,
-    versions,
-    latestVersion: versions[0],
-    isLatestVersionPending: latestVersion.state === 'PENDING',
+    latestVersion,
+    //TODO isLatestVersionPending: latestVersion.state === 'PENDING', // changed figure out the logic
     dropdownId: `id-${index}`,
     dropdownVersionId: `idv-${index}`,
     dropdownDependencyId: `idd-${index}`,
     kintoBlockDependencies,
     selectedWorkspace
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    push: url => dispatch(push(url))
   }
 }
 
@@ -71,7 +58,7 @@ function mergeProps(stateProps, dispatchProps) {
     {
       workspaceId: stateProps.selectedWorkspace,
       id: stateProps.kintoBlock.id,
-      version: stateProps.latestVersion.text,
+      version: stateProps.latestVersion.name,
       type: stateProps.latestVersion.type
     },
     null,
@@ -86,6 +73,4 @@ function mergeProps(stateProps, dispatchProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  KintoBlockCard
-)
+export default connect(mapStateToProps, { push }, mergeProps)(KintoBlockCard)

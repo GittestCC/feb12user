@@ -26,8 +26,7 @@ function mapStateToProps(state, { workspace, isCreate }) {
     workspaceMembers,
     initialValues: {
       members: workspaceMembers,
-      name: workspace.name,
-      autoShareProjects: isCreate ? true : !!workspace.autoShareProjects
+      name: workspace.name
     }
   }
 }

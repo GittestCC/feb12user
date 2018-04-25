@@ -8,7 +8,6 @@ import { pages, urls } from '../../../../constants/pages'
 class KintoBlockCard extends Component {
   static propTypes = {
     kintoBlock: PropTypes.object.isRequired,
-    isLatestVersionPending: PropTypes.bool.isRequired,
     latestVersion: PropTypes.object.isRequired,
     dropdownId: PropTypes.string.isRequired,
     dropdownVersionId: PropTypes.string.isRequired,
@@ -43,7 +42,6 @@ class KintoBlockCard extends Component {
   render() {
     const {
       kintoBlock,
-      isLatestVersionPending,
       latestVersion,
       dropdownId,
       dropdownVersionId,
@@ -70,16 +68,16 @@ class KintoBlockCard extends Component {
               />
             </div>
             <div className="right">
-              <h4 className="version">{latestVersion.text}</h4>
+              <h4 className="version">{latestVersion.name}</h4>
             </div>
             <div className="name-and-tag">
               <h3 className="name">{kintoBlock.name}</h3>
 
-              {isLatestVersionPending && (
+              {/* TODO isLatestVersionPending && (
                 <div className={`text-highlight ${latestVersion.className}`}>
                   PENDING
                 </div>
-              )}
+                )*/}
             </div>
           </div>
         </div>
@@ -153,7 +151,7 @@ class KintoBlockCard extends Component {
                   type="button"
                 >
                   <h5>Edit Branch</h5>
-                  <div className="faded">{latestVersion.text}</div>
+                  <div className="faded">{latestVersion.name}</div>
                 </button>
                 <button onClick={this.showVersionDropdown} type="button">
                   View All Branches & Tags
