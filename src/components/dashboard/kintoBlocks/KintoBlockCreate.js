@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import KintoBlockCreateFormContainer from '../../../containers/dashboard/kintoBlocks/kintoBlockCreate/KintoBlockCreateFormContainer'
 import { githubConnectUrl } from '../../../helpers/urlHelper'
+import { pageTypes } from '../../../constants/github'
 import ComplexModal from '../ui/ComplexModal'
 import ConnectGitHubModal from './kintoBlockCreate/ConnectGitHubModal'
 
@@ -53,7 +54,10 @@ class KintoBlockCreate extends Component {
           isOpen={this.state.isConnectModalOpen}
           onClose={goToRedirectLink}
           data={{
-            connectGithubLink: githubConnectUrl(workspaceId)
+            connectGithubLink: githubConnectUrl(
+              workspaceId,
+              pageTypes.KB_CREATE
+            )
           }}
         />
       </div>

@@ -1,4 +1,5 @@
 import pathToRegexp from 'path-to-regexp'
+import { githubUrl } from '../constants/github'
 import { urls } from '../constants/pages'
 
 export const getPageUrl = (page, urlParams, queryParams, ignoreError) => {
@@ -17,11 +18,9 @@ export const getPageUrl = (page, urlParams, queryParams, ignoreError) => {
   return url
 }
 
-export const githubConnectUrl = workspaceId => {
+export const githubConnectUrl = (workspaceId, pageType) => {
   const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID
-  return workspaceId
-    ? `https://github.com/login/oauth/authorize?scope=repo%20write:repo_hook&state=${workspaceId}&client_id=${clientId}`
-    : ''
+  return workspaceId ? githubUrl(clientId, workspaceId, pageType || '') : ''
 }
 
 export const getServerUrl = (microservice, url) => {
